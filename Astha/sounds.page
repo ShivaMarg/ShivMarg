@@ -1,0 +1,37 @@
+<div id="player" style="width:0;height:0;overflow:hidden;"></div>
+<button id="playBtn" class="play-btn">▶</button>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+  let player;
+  let isPlaying = false;
+
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player("player", {
+      videoId: "SPra9UgnS5M",
+      playerVars: {
+        controls: 0,
+        modestbranding: 1,
+        rel: 0
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const btn = document.getElementById("playBtn");
+
+    btn.onclick = function () {
+      if (!player) return;
+
+      if (!isPlaying) {
+        player.playVideo();
+        btn.innerHTML = "⏸";
+        isPlaying = true;
+      } else {
+        player.pauseVideo();
+        btn.innerHTML = "▶";
+        isPlaying = false;
+      }
+    };
+  });
+</script>

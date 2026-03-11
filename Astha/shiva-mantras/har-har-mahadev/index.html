@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>हर हर महादेव — Har Har Mahadev Bhajan | ShivaMarg</title>
+  <link rel="icon" type="image/png" href="/images/ShivMarg.png" />
+  <meta name="description" content="हर हर महादेव, बम बम भोले — लोकप्रिय शिव भजन अर्थ सहित। जय जय शम्भो, नीलकंठ देव। शिव की महिमा का सरल, भावपूर्ण भजन-संग्रह।">
+  <meta name="keywords" content="Har Har Mahadev, हर हर महादेव, Bam Bam Bhole, भजन, Shiv Bhajan, ShivaMarg, Neelkanth Dev, शिव भजन">
+  <meta name="author" content="ShivaMarg">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://saurabhjha.live/Astha/har-har-mahadev-bhajan/">
+
+  <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --violet:      #7C4DFF;
+      --violet-d:    #512DA8;
+      --violet-pale: #B39DDB;
+      --indigo:      #3949AB;
+      --cosmic:      #9575CD;
+      --cosmos:      #CE93D8;
+      --neel:        #26C6DA;
+      --neel-pale:   #80DEEA;
+      --gold:        #C9A84C;
+      --gold-light:  #E8C96A;
+      --night:       #030209;
+      --night2:      #060314;
+      --night3:      #08041A;
+      --deep:        #0A051E;
+      --cream:       #F3EEFF;
+      --soft:        rgba(243,238,255,0.72);
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { background:var(--night); color:var(--cream); font-family:'Playfair Display',serif; overflow-x:hidden; }
+
+    /* ── COSMIC BG ── */
+    .bg-fixed {
+      position:fixed; inset:0; z-index:0;
+      background:
+        radial-gradient(ellipse 80% 55% at 50% -5%,  #1A0535 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 8%  65%,  #0A0225 0%, transparent 55%),
+        radial-gradient(ellipse 60% 50% at 92% 30%,  #080220 0%, transparent 55%),
+        linear-gradient(175deg, #030209 0%, #0A051E 50%, #030209 100%);
+    }
+
+    /* Sound wave / music bars pattern */
+    .wave-bg {
+      position:fixed; inset:0; z-index:0; opacity:0.025;
+      background-image:repeating-linear-gradient(
+        90deg,
+        transparent 0px, transparent 18px,
+        rgba(124,77,255,0.6) 18px, rgba(124,77,255,0.6) 19px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px, transparent 28px,
+        rgba(124,77,255,0.3) 28px, rgba(124,77,255,0.3) 29px
+      );
+    }
+
+    /* Cosmic mandala */
+    .mandala-bg {
+      position:fixed; inset:0; z-index:0; opacity:0.045;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Ccircle cx='250' cy='250' r='240' fill='none' stroke='%237C4DFF' stroke-width='0.6'/%3E%3Ccircle cx='250' cy='250' r='200' fill='none' stroke='%23C9A84C' stroke-width='0.4'/%3E%3Ccircle cx='250' cy='250' r='160' fill='none' stroke='%237C4DFF' stroke-width='0.6'/%3E%3Ccircle cx='250' cy='250' r='120' fill='none' stroke='%23C9A84C' stroke-width='0.4'/%3E%3Ccircle cx='250' cy='250' r='80' fill='none' stroke='%237C4DFF' stroke-width='0.8'/%3E%3Ccircle cx='250' cy='250' r='40' fill='none' stroke='%23C9A84C' stroke-width='0.6'/%3E%3Ccircle cx='250' cy='250' r='12' fill='none' stroke='%23F3EEFF' stroke-width='1'/%3E%3Cline x1='10' y1='250' x2='490' y2='250' stroke='%237C4DFF' stroke-width='0.25'/%3E%3Cline x1='250' y1='10' x2='250' y2='490' stroke='%237C4DFF' stroke-width='0.25'/%3E%3Cline x1='80' y1='80' x2='420' y2='420' stroke='%237C4DFF' stroke-width='0.2'/%3E%3Cline x1='420' y1='80' x2='80' y2='420' stroke='%237C4DFF' stroke-width='0.2'/%3E%3Cpolygon points='250,30 293,120 390,120 316,180 344,270 250,215 156,270 184,180 110,120 207,120' fill='none' stroke='%23C9A84C' stroke-width='0.45'/%3E%3C/svg%3E");
+      background-size:500px 500px;
+    }
+
+    /* Floating cosmic notes */
+    #notes { position:fixed; inset:0; z-index:0; pointer-events:none; }
+    .note {
+      position:absolute; opacity:0; font-size:1rem;
+      animation:note-rise linear infinite;
+      filter:drop-shadow(0 0 6px rgba(124,77,255,0.8));
+    }
+    @keyframes note-rise {
+      0%  { transform:translateY(108vh) rotate(-15deg); opacity:0; }
+      8%  { opacity:0.8; }
+      85% { opacity:0.25; }
+      100%{ transform:translateY(-8vh) rotate(25deg); opacity:0; }
+    }
+
+    /* Violet glow */
+    .cosmic-glow {
+      position:fixed; top:-200px; left:50%; transform:translateX(-50%);
+      width:800px; height:800px; border-radius:50%;
+      background:radial-gradient(circle, rgba(124,77,255,0.07) 0%, rgba(57,73,171,0.04) 40%, transparent 70%);
+      animation:cosmic-breathe 6s ease-in-out infinite; z-index:0; pointer-events:none;
+    }
+    @keyframes cosmic-breathe {
+      0%,100%{ transform:translateX(-50%) scale(1);   opacity:0.7; }
+      50%    { transform:translateX(-50%) scale(1.18); opacity:1; }
+    }
+
+    /* ── HEADER ── */
+    header {
+      position:relative; z-index:10;
+      padding:14px 5vw 0;
+      border-bottom:1px solid rgba(124,77,255,0.18);
+      background:rgba(3,2,9,0.35); backdrop-filter:blur(8px);
+    }
+    .site-nav { display:flex; justify-content:space-between; align-items:center; max-width:1200px; margin:0 auto 12px; }
+    .logo { font-family:'Cinzel Decorative',serif; font-size:1.28rem; color:var(--gold); text-decoration:none; letter-spacing:1px; }
+    .logo em { color:var(--violet-pale); font-style:normal; }
+    nav a { color:rgba(243,238,255,0.5); text-decoration:none; margin-left:18px; font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; transition:color .3s; }
+    nav a:hover { color:var(--gold-light); }
+    .breadcrumb { max-width:1200px; margin:0 auto; font-family:'Cinzel',serif; font-size:0.64rem; letter-spacing:2px; color:rgba(243,238,255,0.3); padding-bottom:11px; }
+    .breadcrumb span { color:var(--violet-pale); margin:0 8px; }
+
+    /* ── HERO ── */
+    .hero {
+      position:relative; z-index:10;
+      text-align:center; padding:70px 20px 55px;
+      overflow:hidden;
+    }
+
+    /* Music note symbol + pulsar rings */
+    .music-wrap { display:inline-block; margin-bottom:24px; position:relative; }
+    .music-sym {
+      font-size:5.5rem; display:block; line-height:1;
+      animation:music-glow 4s ease-in-out infinite;
+      filter:drop-shadow(0 0 22px rgba(124,77,255,0.95)) drop-shadow(0 0 60px rgba(38,198,218,0.5));
+    }
+    @keyframes music-glow {
+      0%,100%{ filter:drop-shadow(0 0 22px rgba(124,77,255,0.9)) drop-shadow(0 0 55px rgba(38,198,218,0.4)); transform:scale(1) rotate(-3deg); }
+      33%    { filter:drop-shadow(0 0 50px rgba(149,117,205,1))   drop-shadow(0 0 100px rgba(124,77,255,0.6)); transform:scale(1.07) rotate(3deg); }
+      66%    { filter:drop-shadow(0 0 38px rgba(38,198,218,0.9))  drop-shadow(0 0 80px rgba(206,147,216,0.5)); transform:scale(1.03) rotate(-1deg); }
+    }
+
+    /* Sound pulse rings */
+    .pulse-ring {
+      position:absolute; top:50%; left:50%; border-radius:50%;
+      border:1px solid; transform:translate(-50%,-50%);
+      pointer-events:none;
+      animation:pulse-out 3s ease-out infinite;
+    }
+    .pulse-ring:nth-child(1){ width:120px; height:120px; border-color:rgba(124,77,255,0.5); animation-delay:0s; }
+    .pulse-ring:nth-child(2){ width:120px; height:120px; border-color:rgba(38,198,218,0.4); animation-delay:1s; }
+    .pulse-ring:nth-child(3){ width:120px; height:120px; border-color:rgba(206,147,216,0.35); animation-delay:2s; }
+    @keyframes pulse-out {
+      0%  { transform:translate(-50%,-50%) scale(1);   opacity:0.8; }
+      100%{ transform:translate(-50%,-50%) scale(2.8); opacity:0; }
+    }
+
+    .hero-tag   { font-family:'Cinzel',serif; font-size:0.67rem; letter-spacing:7px; color:var(--violet-pale); text-transform:uppercase; margin-bottom:16px; animation:fadeUp 0.9s ease both; }
+    .hero h1    { font-family:'Cinzel Decorative',serif; font-size:clamp(2rem,5vw,3.8rem); color:var(--gold-light); line-height:1.15; margin-bottom:6px; text-shadow:0 0 40px rgba(124,77,255,0.35), 0 0 80px rgba(38,198,218,0.2); animation:fadeUp 1s ease both; }
+    .hero-deva  { font-family:'Tiro Devanagari Sanskrit',serif; font-size:clamp(1.8rem,4.5vw,3rem); color:rgba(179,157,219,0.8); margin-bottom:14px; animation:fadeUp 1.1s ease both; }
+    .hero-orn   { color:rgba(201,168,76,0.4); font-size:1rem; letter-spacing:14px; margin:12px 0; animation:fadeUp 1.2s ease both; }
+    .hero-desc  { font-size:1.06rem; color:var(--soft); max-width:580px; margin:0 auto 14px; line-height:1.85; animation:fadeUp 1.3s ease both; font-style:italic; }
+    .composer-tag { display:inline-block; font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:3px; color:rgba(201,168,76,0.6); border:1px solid rgba(201,168,76,0.2); padding:5px 18px; margin-top:6px; animation:fadeUp 1.4s ease both; }
+
+    /* Opening refrain — glowing */
+    .hero-refrain-card {
+      max-width:680px; margin:26px auto 0;
+      padding:26px 32px; position:relative;
+      animation:fadeUp 1.5s ease both;
+      background:rgba(124,77,255,0.07);
+      border:1px solid rgba(124,77,255,0.22);
+    }
+    .hero-refrain-card::before {
+      content:''; position:absolute; top:0;left:0;right:0; height:2px;
+      background:linear-gradient(90deg, transparent, var(--violet), var(--neel), var(--violet-pale), var(--neel), var(--violet), transparent);
+    }
+    .refrain-label { font-family:'Cinzel',serif; font-size:0.58rem; letter-spacing:5px; color:rgba(124,77,255,0.6); text-transform:uppercase; margin-bottom:14px; }
+    .refrain-text {
+      font-family:'Tiro Devanagari Sanskrit',serif;
+      font-size:clamp(1.15rem,2.8vw,1.75rem); line-height:2.1; text-align:center;
+      color:var(--cosmos); letter-spacing:0.5px;
+      text-shadow:0 0 22px rgba(124,77,255,0.7), 0 0 50px rgba(38,198,218,0.3);
+    }
+    .refrain-sub {
+      font-family:'Tiro Devanagari Sanskrit',serif; font-size:clamp(0.9rem,1.8vw,1.15rem);
+      color:rgba(179,157,219,0.65); text-align:center; margin-top:10px; font-style:italic;
+    }
+
+    /* Bhajan stat row */
+    .bhajan-stats {
+      display:flex; justify-content:center; gap:0; margin-top:24px;
+      animation:fadeUp 1.7s ease both; border:1px solid rgba(124,77,255,0.18);
+      display:inline-flex;
+    }
+    .bstat { padding:10px 24px; text-align:center; border-right:1px solid rgba(124,77,255,0.15); }
+    .bstat:last-child{ border-right:none; }
+    .bstat-n { font-family:'Cinzel Decorative',serif; font-size:1.4rem; color:var(--violet-pale); display:block; }
+    .bstat-l { font-family:'Cinzel',serif; font-size:0.56rem; letter-spacing:3px; color:rgba(243,238,255,0.4); text-transform:uppercase; }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── WAVEFORM VISUALIZER (decorative) ── */
+    .wave-vis {
+      position:relative; z-index:10; display:flex; align-items:center; justify-content:center;
+      gap:3px; padding:14px 0; background:rgba(0,0,0,0.28);
+      border-top:1px solid rgba(124,77,255,0.12);
+      border-bottom:1px solid rgba(124,77,255,0.12);
+      overflow:hidden;
+    }
+    .bar {
+      width:3px; border-radius:2px;
+      background:linear-gradient(180deg, var(--neel), var(--violet), var(--cosmos));
+      animation:bar-dance ease-in-out infinite;
+    }
+    @keyframes bar-dance {
+      0%,100%{ height:6px; opacity:0.4; }
+      50%    { height:var(--h); opacity:1; }
+    }
+
+    /* ── TICKER ── */
+    .ticker-wrap { position:relative; z-index:10; overflow:hidden; padding:11px 0; background:rgba(0,0,0,0.3); border-bottom:1px solid rgba(124,77,255,0.1); }
+    .ticker-track { display:flex; width:max-content; animation:ticker 36s linear infinite; }
+    @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .tick-item { font-family:'Tiro Devanagari Sanskrit',serif; font-size:1rem; color:rgba(124,77,255,0.55); padding:0 34px; white-space:nowrap; }
+    .tick-dot { color:var(--cosmos); opacity:0.5; padding:0 6px; }
+
+    /* ── LAYOUT ── */
+    .container {
+      position:relative; z-index:10;
+      max-width:1200px; margin:0 auto;
+      padding:0 20px 70px;
+      display:grid; grid-template-columns:1fr 308px; gap:34px;
+      align-items:start;
+    }
+    @media(max-width:860px){ .container{ grid-template-columns:1fr; } }
+
+    /* ── BHAJAN CARD ── */
+    .bhajan-card {
+      background:linear-gradient(145deg, rgba(12,5,30,0.68) 0%, rgba(3,2,9,0.9) 100%);
+      border:1px solid rgba(124,77,255,0.2);
+      border-radius:2px; padding:46px 42px;
+      position:relative; overflow:hidden;
+    }
+    .bhajan-card::before { content:''; position:absolute; top:0;left:0;right:0; height:3px; background:linear-gradient(90deg, transparent, var(--violet), var(--neel), var(--cosmos), var(--neel), var(--violet), transparent); }
+    .bhajan-card::after  { content:''; position:absolute; bottom:0;left:0;right:0; height:3px; background:linear-gradient(90deg, transparent, var(--gold), var(--violet), var(--gold), transparent); }
+    .corner { position:absolute; font-size:1.1rem; color:rgba(124,77,255,0.18); }
+    .corner.tl{top:12px;left:14px} .corner.tr{top:12px;right:14px}
+    .corner.bl{bottom:12px;left:14px} .corner.br{bottom:12px;right:14px}
+    .card-label { font-family:'Cinzel',serif; font-size:0.63rem; letter-spacing:5px; color:var(--violet-pale); text-transform:uppercase; text-align:center; margin-bottom:32px; }
+
+    /* ── VERSE / STANZA ── */
+    .stanza { margin-bottom:28px; }
+    .stanza-head { display:flex; align-items:center; gap:12px; margin-bottom:14px; flex-wrap:wrap; }
+    .stanza-num {
+      font-family:'Cinzel',serif; font-size:0.67rem; letter-spacing:3px;
+      color:rgba(179,157,219,0.65); background:rgba(124,77,255,0.07);
+      border:1px solid rgba(124,77,255,0.22); padding:4px 13px; flex-shrink:0;
+    }
+    .stanza-tag { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:2px; color:rgba(201,168,76,0.55); font-style:italic; }
+
+    /* Bhajan lines */
+    .bhajan-lines {
+      font-family:'Tiro Devanagari Sanskrit',serif;
+      font-size:clamp(1.1rem,2.4vw,1.52rem); line-height:2.15; text-align:center;
+      color:var(--gold-light); text-shadow:0 0 14px rgba(201,168,76,0.2);
+      margin-bottom:10px;
+    }
+
+    /* CHORUS — the glowing refrain block */
+    .chorus-glow {
+      background:rgba(124,77,255,0.07); border:1px solid rgba(124,77,255,0.18);
+      padding:16px 22px; margin:14px 0; position:relative;
+      text-align:center;
+    }
+    .chorus-glow::before {
+      content:''; position:absolute; left:0;top:0;bottom:0; width:3px;
+      background:linear-gradient(180deg, var(--violet), var(--neel), var(--cosmos));
+    }
+    .chorus-glow::after {
+      content:''; position:absolute; right:0;top:0;bottom:0; width:3px;
+      background:linear-gradient(180deg, var(--cosmos), var(--neel), var(--violet));
+    }
+    .chorus-label { font-family:'Cinzel',serif; font-size:0.56rem; letter-spacing:4px; color:rgba(124,77,255,0.55); text-transform:uppercase; margin-bottom:8px; }
+    .chorus-line {
+      font-family:'Tiro Devanagari Sanskrit',serif;
+      font-size:clamp(1rem,2.2vw,1.42rem); line-height:2;
+      color:var(--cosmos);
+      text-shadow:0 0 20px rgba(124,77,255,0.8), 0 0 50px rgba(38,198,218,0.35);
+      letter-spacing:0.5px;
+    }
+
+    /* Meaning */
+    .stanza-meaning {
+      font-size:0.92rem; color:rgba(243,238,255,0.58); text-align:center;
+      line-height:1.82; font-style:italic;
+      border-top:1px solid rgba(124,77,255,0.1); padding-top:10px; margin-top:10px;
+    }
+
+    .vdivider { text-align:center; color:rgba(124,77,255,0.25); font-size:0.9rem; letter-spacing:10px; margin:16px 0; }
+
+    .sec-div { display:flex; align-items:center; gap:14px; margin:28px 0 22px; }
+    .sec-div-line { flex:1; height:1px; background:linear-gradient(90deg, transparent, rgba(124,77,255,0.3), transparent); }
+    .sec-div-txt { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:4px; color:rgba(124,77,255,0.6); text-transform:uppercase; white-space:nowrap; }
+
+    /* About */
+    .about-card {
+      background:linear-gradient(145deg, rgba(12,5,30,0.5), rgba(3,2,9,0.72));
+      border:1px solid rgba(124,77,255,0.14); border-radius:2px; padding:26px 32px; margin-top:24px;
+    }
+    .about-card h3 { font-family:'Cinzel',serif; color:var(--gold); font-size:1.06rem; margin-bottom:12px; letter-spacing:2px; }
+    .about-card p { font-size:0.96rem; line-height:1.92; color:var(--soft); margin-bottom:12px; }
+    .sig-list { display:grid; gap:10px; margin-top:12px; }
+    .sig-item { display:flex; gap:12px; align-items:flex-start; padding:12px 13px; background:rgba(124,77,255,0.05); border-left:2px solid var(--violet); }
+    .sig-icon { font-size:1.25rem; flex-shrink:0; }
+    .sig-text { font-size:0.88rem; color:var(--soft); line-height:1.65; }
+    .sig-text strong { color:var(--cream); display:block; font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:1px; margin-bottom:2px; }
+
+    /* ── SIDEBAR ── */
+    .sidebar { display:flex; flex-direction:column; gap:20px; }
+    .widget {
+      background:linear-gradient(145deg, rgba(12,5,30,0.62), rgba(3,2,9,0.84));
+      border:1px solid rgba(124,77,255,0.14); border-radius:2px; padding:20px; position:relative;
+    }
+    .widget::before { content:''; position:absolute; top:0;left:0;right:0; height:2px; background:linear-gradient(90deg, transparent, var(--violet), var(--neel), var(--violet), transparent); opacity:0.6; }
+    .widget-title { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:4px; color:var(--violet-pale); text-transform:uppercase; margin-bottom:14px; padding-bottom:9px; border-bottom:1px solid rgba(124,77,255,0.1); }
+
+    /* Mini Waveform inside widget */
+    .mini-wave { display:flex; align-items:center; justify-content:center; gap:2px; padding:8px 0; }
+    .mini-bar {
+      width:2px; border-radius:1px;
+      background:linear-gradient(180deg, var(--neel), var(--violet));
+      animation:mini-dance ease-in-out infinite;
+    }
+    @keyframes mini-dance {
+      0%,100%{ height:4px; opacity:0.4; }
+      50%    { height:var(--mh); opacity:0.9; }
+    }
+
+    /* Lyric quick links */
+    .lyric-nav { display:flex; flex-wrap:wrap; gap:6px; }
+    .lyric-btn {
+      font-family:'Cinzel',serif; font-size:0.58rem; letter-spacing:1px;
+      padding:5px 10px; background:rgba(124,77,255,0.06); border:1px solid rgba(124,77,255,0.18);
+      color:rgba(243,238,255,0.55); cursor:pointer; transition:all .25s; border-radius:1px;
+      text-decoration:none; display:inline-block;
+    }
+    .lyric-btn:hover { background:rgba(124,77,255,0.2); border-color:var(--violet-pale); color:var(--cream); }
+
+    .q-m { padding:9px 0; border-bottom:1px solid rgba(124,77,255,0.07); }
+    .q-m:last-child { border-bottom:none; }
+    .q-mt { font-family:'Tiro Devanagari Sanskrit',serif; font-size:0.95rem; color:var(--gold-light); margin-bottom:3px; }
+    .q-ms { font-size:0.71rem; color:rgba(243,238,255,0.4); font-family:'Cinzel',serif; letter-spacing:1px; }
+
+    .benefit-grid { display:flex; flex-direction:column; gap:8px; }
+    .benefit-item { display:flex; align-items:center; gap:10px; padding:9px 11px; background:rgba(124,77,255,0.06); border:1px solid rgba(124,77,255,0.14); border-radius:1px; }
+    .benefit-icon { font-size:1.1rem; flex-shrink:0; }
+    .benefit-text { font-size:0.83rem; color:var(--soft); line-height:1.4; }
+
+    .names-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+    .name-chip { font-family:'Tiro Devanagari Sanskrit',serif; font-size:0.82rem; color:var(--gold-light); background:rgba(124,77,255,0.06); border:1px solid rgba(124,77,255,0.18); padding:5px 6px; text-align:center; border-radius:1px; cursor:pointer; transition:all .3s; }
+    .name-chip:hover { background:rgba(124,77,255,0.2); border-color:var(--violet-pale); color:var(--cosmos); }
+
+    .rel-post { display:flex; gap:10px; padding:10px 0; border-bottom:1px solid rgba(124,77,255,0.07); text-decoration:none; transition:padding-left .3s; }
+    .rel-post:last-child { border-bottom:none; }
+    .rel-post:hover { padding-left:5px; }
+    .rel-icon { font-size:1.5rem; flex-shrink:0; }
+    .rel-name { font-family:'Tiro Devanagari Sanskrit',serif; font-size:0.93rem; color:var(--gold-light); line-height:1.3; margin-bottom:2px; }
+    .rel-sub  { font-size:0.71rem; color:rgba(243,238,255,0.4); font-family:'Cinzel',serif; letter-spacing:1px; }
+
+    /* Mood tags */
+    .mood-tags { display:flex; flex-wrap:wrap; gap:7px; }
+    .mood-tag {
+      font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:2px; text-transform:uppercase;
+      padding:6px 14px; border-radius:20px; border:1px solid; transition:all .3s; cursor:default;
+    }
+    .mood-tag.violet { border-color:rgba(124,77,255,0.4); color:var(--violet-pale); background:rgba(124,77,255,0.07); }
+    .mood-tag.teal   { border-color:rgba(38,198,218,0.4); color:var(--neel-pale); background:rgba(38,198,218,0.06); }
+    .mood-tag.cosmos { border-color:rgba(206,147,216,0.4); color:var(--cosmos); background:rgba(206,147,216,0.06); }
+    .mood-tag.gold   { border-color:rgba(201,168,76,0.4); color:var(--gold-light); background:rgba(201,168,76,0.06); }
+    .mood-tag:hover { transform:scale(1.04); }
+
+    /* comments */
+    .comments-section { position:relative; z-index:10; max-width:800px; margin:0 auto; padding:0 20px 80px; }
+    .comments-heading { font-family:'Cinzel',serif; font-size:1.28rem; color:var(--gold); letter-spacing:3px; margin-bottom:26px; padding-bottom:13px; border-bottom:1px solid rgba(124,77,255,0.15); }
+    .comment-card { background:linear-gradient(145deg, rgba(12,5,30,0.5), rgba(3,2,9,0.7)); border:1px solid rgba(124,77,255,0.1); padding:20px 24px; margin-bottom:13px; border-radius:1px; position:relative; }
+    .comment-card::before { content:'"'; position:absolute; top:-8px; left:16px; font-size:3.8rem; color:rgba(124,77,255,0.08); font-family:'Playfair Display',serif; line-height:1; }
+    .c-hdr { display:flex; align-items:center; gap:11px; margin-bottom:11px; }
+    .avatar { width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#1A0840,#0A0320); display:flex; align-items:center; justify-content:center; font-family:'Cinzel',serif; font-size:0.95rem; color:#fff; font-weight:700; flex-shrink:0; border:1px solid rgba(124,77,255,0.25); }
+    .c-name { font-family:'Cinzel',serif; font-size:0.81rem; color:var(--gold-light); letter-spacing:1px; }
+    .c-date { font-size:0.71rem; color:rgba(243,238,255,0.33); }
+    .c-txt  { font-size:0.96rem; color:var(--soft); line-height:1.85; font-style:italic; }
+    .c-like { margin-top:10px; font-size:0.74rem; color:rgba(243,238,255,0.34); cursor:pointer; transition:color .3s; display:inline-block; }
+    .c-like:hover { color:var(--violet-pale); }
+
+    .c-form { background:linear-gradient(145deg, rgba(12,5,30,0.5), rgba(3,2,9,0.7)); border:1px solid rgba(124,77,255,0.15); padding:26px; margin-top:26px; }
+    .c-form-title { font-family:'Cinzel',serif; font-size:0.88rem; color:var(--gold); letter-spacing:2px; margin-bottom:16px; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
+    @media(max-width:500px){ .form-row{ grid-template-columns:1fr; } }
+    input, textarea { width:100%; background:rgba(0,0,0,0.55); border:1px solid rgba(124,77,255,0.2); color:var(--cream); padding:10px 14px; font-family:'Playfair Display',serif; font-size:0.97rem; outline:none; transition:border-color .3s; border-radius:1px; }
+    input::placeholder, textarea::placeholder { color:rgba(243,238,255,0.28); }
+    input:focus, textarea:focus { border-color:var(--violet-pale); }
+    textarea { height:110px; resize:vertical; margin-bottom:12px; }
+    .submit-btn { background:linear-gradient(135deg,#100530,#060218); border:1px solid rgba(124,77,255,0.38); color:var(--cream); padding:12px 32px; font-family:'Cinzel',serif; font-size:0.78rem; letter-spacing:3px; text-transform:uppercase; cursor:pointer; transition:all .3s; position:relative; overflow:hidden; }
+    .submit-btn::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg, rgba(124,77,255,0.3), rgba(57,73,171,0.3)); opacity:0; transition:opacity .3s; }
+    .submit-btn:hover::before { opacity:1; }
+    .submit-btn span { position:relative; z-index:1; }
+
+    footer { position:relative; z-index:10; text-align:center; padding:36px 20px; border-top:1px solid rgba(124,77,255,0.1); }
+    .foot-sym { font-size:2.8rem; color:rgba(124,77,255,0.22); display:block; margin-bottom:11px; }
+    .foot-txt { font-family:'Cinzel',serif; font-size:0.63rem; letter-spacing:4px; color:rgba(243,238,255,0.22); text-transform:uppercase; }
+
+    .audio-widget { position:fixed; bottom:22px; right:22px; z-index:100; background:linear-gradient(135deg, rgba(8,3,18,0.97), rgba(3,1,9,0.99)); border:1px solid rgba(124,77,255,0.28); padding:13px 17px; display:flex; align-items:center; gap:13px; backdrop-filter:blur(12px); box-shadow:0 10px 40px rgba(0,0,0,0.7), 0 0 28px rgba(124,77,255,0.18); }
+    .play-btn { width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg,var(--violet),var(--violet-d)); border:none; cursor:pointer; font-size:0.9rem; color:#fff; display:flex; align-items:center; justify-content:center; transition:transform .2s; }
+    .play-btn:hover { transform:scale(1.12); }
+    .audio-title { font-family:'Cinzel',serif; font-size:0.7rem; color:var(--gold); letter-spacing:1px; }
+    .audio-sub   { font-size:0.67rem; color:rgba(243,238,255,0.42); }
+
+    .reveal { opacity:0; transform:translateY(22px); transition:opacity .75s ease, transform .75s ease; }
+    .reveal.on { opacity:1; transform:none; }
+    @media(max-width:700px){ nav{display:none;} .bhajan-card{padding:28px 18px;} }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org","@type":"Article",
+    "headline":"हर हर महादेव — Har Har Mahadev Bhajan",
+    "description":"हर हर महादेव, बम बम भोले — लोकप्रिय शिव भजन अर्थ सहित।",
+    "publisher":{"@type":"Organization","name":"ShivaMarg"},
+    "inLanguage":"hi",
+    "mainEntityOfPage":{"@type":"WebPage","@id":"https://saurabhjha.live/Astha/har-har-mahadev-bhajan/"}
+  }
+  </script>
+  <script>
+	window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+	</script>
+	<script defer src="/_vercel/insights/script.js"></script>
+
+		<script>
+	window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+	</script>
+	<script defer src="/_vercel/speed-insights/script.js"></script>
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3572576129639558"
+		crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="bg-fixed"></div>
+<div class="wave-bg"></div>
+<div class="mandala-bg"></div>
+<div class="cosmic-glow"></div>
+<div id="notes"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="site-nav">
+    <a href="/Astha/" class="logo">Shiva<em>Marg</em></a>
+    <nav>
+      <a href="#">शिव मंत्र</a><a href="#">स्तोत्र</a><a href="#">आरती</a><a href="#">भजन</a>
+    </nav>
+  </div>
+  <div class="breadcrumb">मुख्य पृष्ठ <span>🎵</span> भजन <span>🎵</span> हर हर महादेव</div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="music-wrap">
+    <div class="pulse-ring"></div>
+    <div class="pulse-ring"></div>
+    <div class="pulse-ring"></div>
+    <span class="music-sym">🎵</span>
+  </div>
+  <div class="hero-tag">✦ लोकप्रिय शिव भजन — भक्ति-संगीत ✦</div>
+  <h1>Har Har Mahadev</h1>
+  <div class="hero-deva">हर हर महादेव</div>
+  <div class="hero-orn">✦ ✦ ✦</div>
+  <p class="hero-desc">जब भक्ति संगीत बन जाती है — तब जन्म होता है भजन का। हर हर महादेव — तीन शब्द, असीमित शक्ति। प्रत्येक "हर" में शिव की एक लीला, प्रत्येक स्वर में अनंत ब्रह्माण्ड।</p>
+  <div class="composer-tag">शिव भक्ति परम्परा • लोकप्रिय भजन • भावपूर्ण</div>
+
+  <div class="hero-refrain-card">
+    <div class="refrain-label">✦ मुखड़ा — Opening Refrain ✦</div>
+    <div class="refrain-text">
+      हर हर महादेव, बम बम भोले।<br>
+      जय जय शम्भो, नीलकंठ देव॥
+    </div>
+    <div class="refrain-sub">बोलो हर हर महादेव — बोलो बम बम भोले</div>
+  </div>
+
+  <div style="margin-top:22px; animation:fadeUp 1.8s ease both; display:inline-block;">
+    <div class="bhajan-stats">
+      <div class="bstat"><span class="bstat-n">🎵</span><div class="bstat-l">भजन</div></div>
+      <div class="bstat"><span class="bstat-n">७</span><div class="bstat-l">अंतरा</div></div>
+      <div class="bstat"><span class="bstat-n">हर</span><div class="bstat-l">नामोच्चार</div></div>
+      <div class="bstat"><span class="bstat-n">∞</span><div class="bstat-l">भाव</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- WAVEFORM VISUAL -->
+<div class="wave-vis" id="waveVis"></div>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="tick-item">हर हर महादेव</span><span class="tick-dot">🎵</span>
+    <span class="tick-item">बम बम भोले</span><span class="tick-dot">🎵</span>
+    <span class="tick-item">जय जय शम्भो</span><span class="tick-dot">🎵</span>
+    <span class="tick-item">नीलकंठ देव</span><span class="tick-dot">🎵</span>
+    <span class="tick-item">ॐ नमः शिवाय</span><span class="tick-dot">🎵</span>
+    <span class="tick-item">जय भोलेनाथ</span><span class="tick-dot">🎵</span>
+    <span class="tick-item">बम बम बम बम भोले शंकर</span><span class="tick-dot">🎵</span>
+    <span class="tick-item">हर हर महादेव</span><span class="tick-dot">🎵</span>
+    <span class="tick-item">बम बम भोले</span><span class="tick-dot">🎵</span>
+    <span class="tick-item">जय जय शम्भो</span><span class="tick-dot">🎵</span>
+    <span class="tick-item">नीलकंठ देव</span><span class="tick-dot">🎵</span>
+    <span class="tick-item">ॐ नमः शिवाय</span><span class="tick-dot">🎵</span>
+    <span class="tick-item">जय भोलेनाथ</span><span class="tick-dot">🎵</span>
+    <span class="tick-item">बम बम बम बम भोले शंकर</span><span class="tick-dot">🎵</span>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="container" style="padding-top:50px;">
+
+  <!-- LEFT -->
+  <div>
+    <div class="bhajan-card reveal">
+      <span class="corner tl">🎵</span><span class="corner tr">🎵</span>
+      <span class="corner bl">🎵</span><span class="corner br">🎵</span>
+      <div class="card-label">✦ हर हर महादेव — सम्पूर्ण भजन ✦</div>
+
+      <!-- MUKHDA — CHORUS -->
+      <div class="chorus-glow" id="mukhda" style="margin-bottom:28px;">
+        <div class="chorus-label">✦ मुखड़ा — हर बार दोहराएँ ✦</div>
+        <div class="chorus-line">
+          हर हर महादेव, बम बम भोले।<br>
+          जय जय शम्भो, नीलकंठ देव॥<br>
+          <span style="font-size:0.85em; opacity:0.75;">बोलो हर हर हर महादेव।</span>
+        </div>
+      </div>
+
+      <div class="sec-div"><div class="sec-div-line"></div><div class="sec-div-txt">✦ अंतरा १ — शिव का स्वरूप ✦</div><div class="sec-div-line"></div></div>
+
+      <!-- ANTARA 1 -->
+      <div class="stanza" id="a1">
+        <div class="stanza-head">
+          <div class="stanza-num">॥ अंतरा १ ॥</div>
+          <div class="stanza-tag">जटा में गंगा, माथे चंद्र</div>
+        </div>
+        <div class="bhajan-lines">
+          जटा में गंगा, माथे चंद्रमा सोहे।<br>
+          तन भस्म लगाए, नयन तीन मोहे।<br>
+          डमरू बजाए, त्रिशूल धारी।<br>
+          भोले भंडारी, भव-दुख-हारी॥
+        </div>
+        <div class="chorus-glow">
+          <div class="chorus-line">हर हर महादेव, बम बम भोले।</div>
+        </div>
+        <div class="stanza-meaning">जटाओं में गंगा और माथे पर चंद्रमा सुशोभित है। शरीर पर भस्म लगाए, तीन नेत्रों वाले शिव मन मोह लेते हैं। डमरू बजाते, त्रिशूल धारी — भोले भंडारी भव-दुख हरने वाले हैं।</div>
+      </div>
+      <div class="vdivider">~ 🎵 ~</div>
+
+      <div class="sec-div"><div class="sec-div-line"></div><div class="sec-div-txt">✦ अंतरा २ — कैलाश-निवासी ✦</div><div class="sec-div-line"></div></div>
+
+      <!-- ANTARA 2 -->
+      <div class="stanza" id="a2">
+        <div class="stanza-head">
+          <div class="stanza-num">॥ अंतरा २ ॥</div>
+          <div class="stanza-tag">कैलाश — शिव का धाम</div>
+        </div>
+        <div class="bhajan-lines">
+          कैलाश पे बैठे, गणों संग खेले।<br>
+          नंदी संग झूमे, भवानी संग मेले।<br>
+          पार्वती की प्रीति, शिव की रीति।<br>
+          अर्धनारी ईश्वर, जग की नीति॥
+        </div>
+        <div class="chorus-glow">
+          <div class="chorus-line">हर हर महादेव, बम बम भोले।</div>
+        </div>
+        <div class="stanza-meaning">कैलाश पर विराजकर गणों के साथ खेलते हैं, नंदी संग झूमते हैं, भवानी के साथ उत्सव मनाते हैं। पार्वती की प्रीति और शिव की रीति — अर्धनारीश्वर — यही जगत् की नीति है।</div>
+      </div>
+      <div class="vdivider">~ 🎵 ~</div>
+
+      <div class="sec-div"><div class="sec-div-line"></div><div class="sec-div-txt">✦ अंतरा ३ — नीलकंठ की कथा ✦</div><div class="sec-div-line"></div></div>
+
+      <!-- ANTARA 3 -->
+      <div class="stanza" id="a3">
+        <div class="stanza-head">
+          <div class="stanza-num">॥ अंतरा ३ ॥</div>
+          <div class="stanza-tag">नीलकंठ — विष-पान की महिमा</div>
+        </div>
+        <div class="bhajan-lines">
+          सागर मंथन में, जब विष उठा भारी।<br>
+          देव-दानव सब मिल, भए बेकारी।<br>
+          तब नीलकंठ ने, विष को पिया।<br>
+          जग को बचाकर, उपकार किया॥
+        </div>
+        <div class="chorus-glow">
+          <div class="chorus-line">हर हर महादेव, बम बम भोले।</div>
+        </div>
+        <div class="stanza-meaning">समुद्र-मंथन में जब भारी विष निकला, देव और दानव सब व्याकुल हो गए। तब नीलकंठ ने स्वयं विष पीकर संसार को बचाया — यह परम उपकार था।</div>
+      </div>
+      <div class="vdivider">~ 🎵 ~</div>
+
+      <div class="sec-div"><div class="sec-div-line"></div><div class="sec-div-txt">✦ अंतरा ४ — भोले का भाव ✦</div><div class="sec-div-line"></div></div>
+
+      <!-- ANTARA 4 -->
+      <div class="stanza" id="a4">
+        <div class="stanza-head">
+          <div class="stanza-num">॥ अंतरा ४ ॥</div>
+          <div class="stanza-tag">भोलेनाथ — सरल भक्ति से प्रसन्न</div>
+        </div>
+        <div class="bhajan-lines">
+          एक बेल-पत्र से, भोले प्रसन्न होते।<br>
+          जल की धार से, पाप सब धोते।<br>
+          न चाहिए सोना, न चाहिए रत्न।<br>
+          सच्चे भाव से, मिलते भव-तारण॥
+        </div>
+        <div class="chorus-glow">
+          <div class="chorus-line">हर हर महादेव, बम बम भोले।</div>
+        </div>
+        <div class="stanza-meaning">एक बेल-पत्र से ही भोलेनाथ प्रसन्न हो जाते हैं, जल की धार से पाप धुल जाते हैं। सोना-रत्न नहीं चाहिए — सच्चे भाव से भव-सागर के तारक मिल जाते हैं।</div>
+      </div>
+      <div class="vdivider">~ 🎵 ~</div>
+
+      <div class="sec-div"><div class="sec-div-line"></div><div class="sec-div-txt">✦ अंतरा ५ — तांडव नृत्य ✦</div><div class="sec-div-line"></div></div>
+
+      <!-- ANTARA 5 -->
+      <div class="stanza" id="a5">
+        <div class="stanza-head">
+          <div class="stanza-num">॥ अंतरा ५ ॥</div>
+          <div class="stanza-tag">नटराज — सृष्टि का नृत्य</div>
+        </div>
+        <div class="bhajan-lines">
+          नटराज की मुद्रा, ब्रह्माण्ड थरथराए।<br>
+          तांडव के ताल पर, सृष्टि नाच जाए।<br>
+          सृष्टि भी उनकी, संहार भी उनका।<br>
+          हर-हर में समाया, सारा जहाँ उनका॥
+        </div>
+        <div class="chorus-glow">
+          <div class="chorus-line">हर हर महादेव, बम बम भोले।</div>
+        </div>
+        <div class="stanza-meaning">नटराज की मुद्रा से ब्रह्माण्ड थरथरा जाता है, तांडव की ताल पर सम्पूर्ण सृष्टि नाचने लगती है। सृष्टि भी उन्हीं की, संहार भी उन्हीं का — "हर हर" में सारा जहाँ समाया है।</div>
+      </div>
+      <div class="vdivider">~ 🎵 ~</div>
+
+      <div class="sec-div"><div class="sec-div-line"></div><div class="sec-div-txt">✦ अंतरा ६ — भक्त की पुकार ✦</div><div class="sec-div-line"></div></div>
+
+      <!-- ANTARA 6 -->
+      <div class="stanza" id="a6">
+        <div class="stanza-head">
+          <div class="stanza-num">॥ अंतरा ६ ॥</div>
+          <div class="stanza-tag">भक्त — शिव की शरण में</div>
+        </div>
+        <div class="bhajan-lines">
+          दीन हूँ, हीन हूँ, तेरे द्वार आया।<br>
+          भोले भंडारी, तेरी शरण में आया।<br>
+          कर दो उद्धार, महादेव मेरे।<br>
+          जीवन-नैया, लग जाए तेरे॥
+        </div>
+        <div class="chorus-glow">
+          <div class="chorus-line">हर हर महादेव, बम बम भोले।</div>
+        </div>
+        <div class="stanza-meaning">मैं दीन-हीन होकर तेरे द्वार आया हूँ, हे भोले भंडारी — तेरी शरण में आया हूँ। मेरा उद्धार करो, हे महादेव — मेरी जीवन-नैया तेरे किनारे लग जाए।</div>
+      </div>
+      <div class="vdivider">~ 🎵 ~</div>
+
+      <div class="sec-div"><div class="sec-div-line"></div><div class="sec-div-txt">✦ अंतरा ७ — ॐकार का नाद ✦</div><div class="sec-div-line"></div></div>
+
+      <!-- ANTARA 7 -->
+      <div class="stanza" id="a7">
+        <div class="stanza-head">
+          <div class="stanza-num">॥ अंतरा ७ ॥</div>
+          <div class="stanza-tag">ॐकार — शिव की सर्वोच्च महिमा</div>
+        </div>
+        <div class="bhajan-lines">
+          ॐकार में रहते, ॐकार में खोते।<br>
+          शिव-शिव शिव-शिव, जप में रोते।<br>
+          ब्रह्म-विष्णु-महेश एक ही सत्य।<br>
+          हर-हर के नाद में, मिले परम तत्व॥
+        </div>
+        <div class="chorus-glow">
+          <div class="chorus-line">हर हर महादेव, बम बम भोले।</div>
+        </div>
+        <div class="stanza-meaning">ॐकार में निवास करते हैं, ॐकार में ही खो जाते हैं। शिव-शिव जप में भक्त आँसुओं से भर जाते हैं। ब्रह्मा-विष्णु-महेश एक ही सत्य हैं — "हर हर" के नाद में परम तत्व की प्राप्ति होती है।</div>
+      </div>
+
+      <!-- FINAL GRAND CHORUS -->
+      <div class="sec-div"><div class="sec-div-line"></div><div class="sec-div-txt">✦ समापन — Grand Finale ✦</div><div class="sec-div-line"></div></div>
+      <div class="chorus-glow" style="padding:22px 28px; margin:0;">
+        <div class="chorus-label">✦ समापन मुखड़ा ✦</div>
+        <div class="chorus-line" style="font-size:clamp(1.15rem,2.6vw,1.6rem);">
+          हर हर महादेव, बम बम भोले।<br>
+          जय जय शम्भो, नीलकंठ देव॥<br>
+          बोलो हर हर, बोलो हर हर।<br>
+          <span style="color:var(--neel-pale); font-size:0.88em;">ॐ नमः शिवाय, ॐ नमः शिवाय॥</span>
+        </div>
+      </div>
+
+    </div><!-- /bhajan-card -->
+
+    <!-- ABOUT -->
+    <div class="about-card reveal">
+      <h3>🎵 भजन — भक्ति का संगीत-रूप</h3>
+      <p>भजन शब्द की उत्पत्ति "भज्" धातु से है — अर्थात् सेवा करना, ध्यान करना, भक्ति करना। भजन वह विधा है जहाँ भक्ति और संगीत का अभेद्य मिलन होता है। "हर हर महादेव" — यह केवल गीत नहीं, यह एक नाद-साधना है।</p>
+      <p>"हर" शब्द का अर्थ है — हरण करने वाला। शिव हमारे पाप, दुःख, अज्ञान सब "हर" लेते हैं। "हर हर" — दो बार कहने से भाव दोगुना हो जाता है। "बम बम" — शिव का बीज-स्वरूप, डमरू का नाद।</p>
+      <div class="sig-list">
+        <div class="sig-item"><div class="sig-icon">🎵</div><div class="sig-text"><strong>हर — नाम का अर्थ</strong>"हर" = हरण करने वाले। शिव हमारे समस्त दुःखों, पापों और बंधनों को "हर" लेते हैं। "हर हर" — दोहराव में आनंद और शक्ति दोनों बढ़ते हैं।</div></div>
+        <div class="sig-item"><div class="sig-icon">🔔</div><div class="sig-text"><strong>बम बम — डमरू-नाद</strong>"बम" शिव का बीज-मंत्र है — डमरू की आवाज़। यह प्रणव ॐ का एक स्वरूप है। "बम बम भोले" में भक्त शिव को उनके ही नाद से पुकारता है।</div></div>
+        <div class="sig-item"><div class="sig-icon">💙</div><div class="sig-text"><strong>नीलकंठ देव</strong>नीलकंठ — नीले कंठ वाले शिव। विष-पान के बाद कंठ नीला पड़ गया — यह नाम शिव की परोपकारी करुणा का प्रतीक है। देव-जगत् की रक्षा का सबूत।</div></div>
+        <div class="sig-item"><div class="sig-icon">🌟</div><div class="sig-text"><strong>भजन की शक्ति</strong>भजन में जब स्वर, लय और भाव एक हो जाते हैं — तब भक्त और भगवान के बीच की दूरी मिट जाती है। "हर हर महादेव" इसीलिए हर युग में गाया जाता है।</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <!-- Mini waveform + nav -->
+    <div class="widget reveal">
+      <div class="widget-title">✦ अंतरा नेविगेशन ✦</div>
+      <div class="mini-wave" id="miniWave"></div>
+      <div class="lyric-nav" style="margin-top:12px;">
+        <a href="#mukhda" class="lyric-btn">मुखड़ा</a>
+        <a href="#a1" class="lyric-btn">अंतरा १</a>
+        <a href="#a2" class="lyric-btn">अंतरा २</a>
+        <a href="#a3" class="lyric-btn">अंतरा ३</a>
+        <a href="#a4" class="lyric-btn">अंतरा ४</a>
+        <a href="#a5" class="lyric-btn">अंतरा ५</a>
+        <a href="#a6" class="lyric-btn">अंतरा ६</a>
+        <a href="#a7" class="lyric-btn">अंतरा ७</a>
+      </div>
+    </div>
+
+    <!-- Mood Tags -->
+    <div class="widget reveal">
+      <div class="widget-title">✦ भजन का भाव ✦</div>
+      <div class="mood-tags">
+        <div class="mood-tag violet">भक्ति</div>
+        <div class="mood-tag teal">शान्ति</div>
+        <div class="mood-tag cosmos">करुणा</div>
+        <div class="mood-tag gold">आनंद</div>
+        <div class="mood-tag violet">वैराग्य</div>
+        <div class="mood-tag teal">नाद</div>
+        <div class="mood-tag cosmos">प्रेम</div>
+        <div class="mood-tag gold">शक्ति</div>
+      </div>
+    </div>
+
+    <!-- "हर" meaning breakdown -->
+    <div class="widget reveal">
+      <div class="widget-title">✦ "हर हर महादेव" — शब्दार्थ ✦</div>
+      <div class="q-m"><div class="q-mt">हर</div><div class="q-ms">हरण करने वाले — दुःख, पाप नाशक</div></div>
+      <div class="q-m"><div class="q-mt">हर हर</div><div class="q-ms">द्विगुणित भाव — अनंत हरण-शक्ति</div></div>
+      <div class="q-m"><div class="q-mt">महादेव</div><div class="q-ms">महान् देव — देवाधिदेव शिव</div></div>
+      <div class="q-m"><div class="q-mt">बम</div><div class="q-ms">शिव का बीज-मंत्र, डमरू-नाद</div></div>
+      <div class="q-m"><div class="q-mt">भोले</div><div class="q-ms">सरल, निश्छल — भक्त का प्रिय नाम</div></div>
+      <div class="q-m"><div class="q-mt">शम्भो</div><div class="q-ms">शं (मंगल) + भो — मंगलकारी शिव</div></div>
+      <div class="q-m"><div class="q-mt">नीलकंठ</div><div class="q-ms">नीले कंठ वाले — विष-पायी परोपकारी</div></div>
+    </div>
+
+    <!-- Benefits of Bhajan -->
+    <div class="widget reveal">
+      <div class="widget-title">✦ भजन गायन के लाभ ✦</div>
+      <div class="benefit-grid">
+        <div class="benefit-item"><div class="benefit-icon">🎵</div><div class="benefit-text">मन की शांति और नकारात्मकता का नाश</div></div>
+        <div class="benefit-item"><div class="benefit-icon">💜</div><div class="benefit-text">हृदय में भक्ति-भाव और प्रेम की वृद्धि</div></div>
+        <div class="benefit-item"><div class="benefit-icon">✨</div><div class="benefit-text">वातावरण में सकारात्मक ऊर्जा का संचार</div></div>
+        <div class="benefit-item"><div class="benefit-icon">🧘</div><div class="benefit-text">ध्यान में गहराई — नाद से चित्त-एकाग्रता</div></div>
+        <div class="benefit-item"><div class="benefit-icon">🛡️</div><div class="benefit-text">शिव-नाम-स्मरण से सुरक्षा और बल</div></div>
+        <div class="benefit-item"><div class="benefit-icon">🌟</div><div class="benefit-text">परम आनंद और शिव-कृपा की प्राप्ति</div></div>
+      </div>
+    </div>
+
+    <!-- Shiva Names in Bhajan -->
+    <div class="widget reveal">
+      <div class="widget-title">✦ भजन में शिव-नाम ✦</div>
+      <div class="names-grid">
+        <div class="name-chip">महादेव</div><div class="name-chip">भोलेनाथ</div>
+        <div class="name-chip">शम्भो</div><div class="name-chip">नीलकंठ</div>
+        <div class="name-chip">नटराज</div><div class="name-chip">भंडारी</div>
+        <div class="name-chip">भव-हारी</div><div class="name-chip">ॐकार</div>
+      </div>
+    </div>
+
+    <!-- Related -->
+    <div class="widget reveal">
+      <div class="widget-title">✦ संबंधित स्तोत्र ✦</div>
+      <a href="/Astha/shiva-mantras/Shiv-aarti/" class="rel-post"><div class="rel-icon">🪔</div><div><div class="rel-name">शिव आरती</div><div class="rel-sub">Om Jai Shiv Onkara</div></div></a>
+      <a href="/Astha/shiva-mantras/Shiv-chalisa/" class="rel-post"><div class="rel-icon">📿</div><div><div class="rel-name">शिव चालीसा</div><div class="rel-sub">40 Chaupai</div></div></a>
+      <a href="/Astha/shiva-mantras/shiva-tandav-stotram/" class="rel-post"><div class="rel-icon">💃</div><div><div class="rel-name">शिव तांडव स्तोत्र</div><div class="rel-sub">Ravana Krit</div></div></a>
+      <a href="/Astha/shiva-mantras/Shiv-kavacham/" class="rel-post"><div class="rel-icon">🛡️</div><div><div class="rel-name">शिव कवचम्</div><div class="rel-sub">Sarvaang Raksha</div></div></a>
+      <a href="/Astha/shiva-mantras/shiva-gayatri-mantra/" class="rel-post"><div class="rel-icon">🌅</div><div><div class="rel-name">शिव गायत्री</div><div class="rel-sub">Gayatri Chhand</div></div></a>
+    </div>
+
+    <!-- Auspicious Times -->
+    <div class="widget reveal">
+      <div class="widget-title">✦ भजन का शुभ समय ✦</div>
+      <div class="q-m"><div class="q-mt">🌅 प्रातःकाल</div><div class="q-ms">ब्रह्म-मुहूर्त में भजन — परम फल</div></div>
+      <div class="q-m"><div class="q-mt">🌙 संध्या-काल</div><div class="q-ms">प्रदोष-काल में गायन विशेष</div></div>
+      <div class="q-m"><div class="q-mt">🔱 सोमवार</div><div class="q-ms">शिव का प्रिय दिन</div></div>
+      <div class="q-m"><div class="q-mt">🌿 श्रावण</div><div class="q-ms">पूरे माह भजन — अत्यंत शुभ</div></div>
+      <div class="q-m"><div class="q-mt">⚡ महाशिवरात्रि</div><div class="q-ms">रात्रि-जागरण भजन-संध्या</div></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- COMMENTS -->
+<div class="comments-section">
+  <div class="comments-heading reveal">🎵 भक्तों के विचार</div>
+    <h3>Please Login/Register for writing comments</h3>
+ 
+</div>
+<div id="sm-comments" data-page-id="har-har-mahadev"></div>
+<!-- FOOTER -->
+<footer>
+  <span class="foot-sym">🎵</span>
+  <div class="foot-txt">॥ हर हर महादेव ॥ बम बम भोले ॥ जय जय शम्भो ॥ नीलकंठ देव ॥ © ShivaMarg 2026 ∥ saurabhjha.live</div>
+</footer>
+
+<!-- Audio Widget -->
+<div class="audio-widget">
+  <button class="play-btn" id="mainPlay" onclick="togglePlay(this)">▶</button>
+  <div>
+    <div class="audio-title">HAR HAR MAHADEV</div>
+    <div class="audio-sub">हर हर महादेव भजन</div>
+  </div>
+</div>
+
+<script>
+  /* ── Floating music notes ── */
+  const noteEmojis = ['♪','♫','🎵','🎶','ॐ','🕉️'];
+  const nc = document.getElementById('notes');
+  for (let i = 0; i < 45; i++) {
+    const n = document.createElement('div'); n.className = 'note';
+    n.textContent = noteEmojis[Math.floor(Math.random() * noteEmojis.length)];
+    const sz = 0.7 + Math.random() * 0.8;
+    n.style.cssText = `left:${Math.random()*100}%;font-size:${sz}rem;animation-duration:${10+Math.random()*20}s;animation-delay:${Math.random()*26}s;color:rgba(${Math.random()>0.5?'124,77,255':'38,198,218'},${0.4+Math.random()*0.4});`;
+    nc.appendChild(n);
+  }
+
+  /* ── Waveform bars ── */
+  const wv = document.getElementById('waveVis');
+  const heights = [8,14,24,18,32,12,28,22,16,38,20,44,26,36,18,50,32,24,42,16,34,22,46,28,18,38,12,32,20,44,16,28,24,36,14,42,20,30,16,48,22,34,18,28,12,40,24,36,20,32];
+  heights.forEach((h, i) => {
+    const b = document.createElement('div'); b.className = 'bar';
+    b.style.cssText = `--h:${h}px; height:${Math.random()*h*0.5+4}px; animation-duration:${0.6+Math.random()*1.2}s; animation-delay:${Math.random()*1.5}s;`;
+    wv.appendChild(b);
+  });
+
+  /* ── Mini wave in sidebar ── */
+  const mw = document.getElementById('miniWave');
+  [6,12,18,10,24,8,16,20,12,28,14,22,10,18,8,26,12,20,16,10,24,8,18,12].forEach((h, i) => {
+    const b = document.createElement('div'); b.className = 'mini-bar';
+    b.style.cssText = `--mh:${h}px; height:${Math.random()*h*0.4+2}px; animation-duration:${0.5+Math.random()*1}s; animation-delay:${Math.random()*1.2}s;`;
+    mw.appendChild(b);
+  });
+
+  /* Reveal */
+  const rv = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) { setTimeout(() => e.target.classList.add('on'), i * 30); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.06 });
+  rv.forEach(el => obs.observe(el));
+
+  /* Audio */
+  let playing = false;
+  function togglePlay(btn) {
+    playing = !playing;
+    btn.textContent = playing ? '⏸' : '▶';
+    // Animate waveform faster when "playing"
+    document.querySelectorAll('.bar').forEach(b => {
+      b.style.animationDuration = playing ? (0.3 + Math.random()*0.7)+'s' : (0.6 + Math.random()*1.2)+'s';
+    });
+  }
+
+  /* Likes */
+  document.querySelectorAll('.c-like').forEach(el => {
+    el.addEventListener('click', function() { this.style.color = 'var(--violet-pale)'; });
+  });
+</script>
+</script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/s-comments.js"></script>
+  <script>
+    const SM_API = 'https://shivamargbackend.onrender.com'; // ← change to your server URL in prod
+    SmAuth.init({ apiBase: SM_API });
+    SmComments.init({ apiBase: SM_API });
+  </script>
+</body>
+</html>

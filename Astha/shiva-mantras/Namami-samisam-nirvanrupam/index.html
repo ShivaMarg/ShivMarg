@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>रुद्राष्टकम् | Namami Shamishan Nirvan Roopam (Rudra Ashtakam) Lyrics | ShivaMarg</title>
+
+  <link rel="icon" type="image/png" href="/images/ShivMarg.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --saffron: #FF6B00;
+      --deep-saffron: #E05000;
+      --gold: #D4A017;
+      --gold-light: #F5C842;
+      --crimson: #8B0000;
+      --deep-maroon: #4A0000;
+      --cream: #FDF5E6;
+      --ivory: #FFFFF0;
+      --smoke: #F8F0E3;
+      --dark: #1A0A00;
+      --text-dark: #2D1500;
+      --text-mid: #5C2D00;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: var(--dark);
+      color: var(--cream);
+      font-family: 'Crimson Pro', serif;
+      overflow-x: hidden;
+    }
+
+    .bg-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse at 50% 0%, #5C1A00 0%, transparent 60%),
+        radial-gradient(ellipse at 0% 100%, #2A0A00 0%, transparent 50%),
+        radial-gradient(ellipse at 100% 50%, #3A1200 0%, transparent 50%),
+        linear-gradient(180deg, #0A0400 0%, #1A0800 40%, #0D0400 100%);
+    }
+
+    .mandala-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.06;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Ccircle cx='200' cy='200' r='180' fill='none' stroke='%23D4A017' stroke-width='1'/%3E%3Ccircle cx='200' cy='200' r='140' fill='none' stroke='%23D4A017' stroke-width='0.5'/%3E%3Ccircle cx='200' cy='200' r='100' fill='none' stroke='%23D4A017' stroke-width='1'/%3E%3Ccircle cx='200' cy='200' r='60' fill='none' stroke='%23D4A017' stroke-width='0.5'/%3E%3Ccircle cx='200' cy='200' r='20' fill='none' stroke='%23D4A017' stroke-width='1'/%3E%3Cline x1='20' y1='200' x2='380' y2='200' stroke='%23D4A017' stroke-width='0.3'/%3E%3Cline x1='200' y1='20' x2='200' y2='380' stroke='%23D4A017' stroke-width='0.3'/%3E%3Cline x1='73' y1='73' x2='327' y2='327' stroke='%23D4A017' stroke-width='0.3'/%3E%3Cline x1='327' y1='73' x2='73' y2='327' stroke='%23D4A017' stroke-width='0.3'/%3E%3Cpolygon points='200,30 230,110 315,110 248,160 272,240 200,192 128,240 152,160 85,110 170,110' fill='none' stroke='%23D4A017' stroke-width='0.5'/%3E%3C/svg%3E");
+      background-size: 400px 400px;
+    }
+
+    .particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .spark {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: var(--gold-light);
+      border-radius: 50%;
+      animation: float-up linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes float-up {
+      0% { transform: translateY(100vh) scale(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 0.5; }
+      100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+
+    header {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 20px 20px 0;
+      border-bottom: 1px solid rgba(212,160,23,0.2);
+    }
+
+    .site-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto 16px;
+    }
+
+    .logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      letter-spacing: 3px;
+      text-decoration: none;
+    }
+
+    .logo span { color: var(--saffron); }
+
+    nav a {
+      color: rgba(253,245,230,0.7);
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-family: 'Cinzel', serif;
+      transition: color 0.3s;
+    }
+
+    nav a:hover { color: var(--gold); }
+
+    .hero {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 60px 20px 50px;
+      overflow: hidden;
+    }
+
+    .om-symbol {
+      font-size: 5rem;
+      color: var(--gold);
+      display: block;
+      animation: pulse-glow 3s ease-in-out infinite;
+      text-shadow: 0 0 30px rgba(212,160,23,0.8), 0 0 60px rgba(212,160,23,0.4);
+      margin-bottom: 20px;
+      font-family: 'Tiro Devanagari Sanskrit', serif;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { text-shadow: 0 0 30px rgba(212,160,23,0.8), 0 0 60px rgba(212,160,23,0.4); transform: scale(1); }
+      50% { text-shadow: 0 0 50px rgba(255,107,0,1), 0 0 100px rgba(212,160,23,0.6); transform: scale(1.05); }
+    }
+
+    .hero-tag {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 5px;
+      color: var(--saffron);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-family: 'Tiro Devanagari Sanskrit', serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      color: var(--gold-light);
+      line-height: 1.2;
+      text-shadow: 0 0 40px rgba(212,160,23,0.5);
+      margin-bottom: 8px;
+      animation: fadeInDown 1.2s ease both;
+    }
+
+    .hero h2 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.1rem, 3vw, 1.8rem);
+      color: rgba(245,200,66,0.7);
+      letter-spacing: 8px;
+      font-weight: 400;
+      margin-bottom: 24px;
+      animation: fadeInDown 1.4s ease both;
+    }
+
+    .divider-ornament {
+      color: var(--gold);
+      font-size: 1.4rem;
+      letter-spacing: 12px;
+      opacity: 0.7;
+      margin: 12px 0;
+      animation: fadeIn 2s ease both;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .shiv-desc {
+      font-size: 1rem;
+      color: rgba(253,245,230,0.6);
+      font-style: italic;
+      margin-top: 4px;
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 40px;
+      align-items: start;
+    }
+
+    @media (max-width: 768px) {
+      .container { grid-template-columns: 1fr; }
+    }
+
+    .mantra-card {
+      background: linear-gradient(135deg, rgba(90,20,0,0.4) 0%, rgba(30,10,0,0.6) 100%);
+      border: 1px solid rgba(212,160,23,0.3);
+      border-radius: 2px;
+      padding: 50px 50px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mantra-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--saffron), var(--gold), transparent);
+    }
+
+    .mantra-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--saffron), var(--gold), transparent);
+    }
+
+    .corner-ornament {
+      position: absolute;
+      font-size: 1.8rem;
+      color: rgba(212,160,23,0.3);
+    }
+
+    .corner-ornament.tl { top: 10px; left: 14px; }
+    .corner-ornament.tr { top: 10px; right: 14px; }
+    .corner-ornament.bl { bottom: 10px; left: 14px; }
+    .corner-ornament.br { bottom: 10px; right: 14px; }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 5px;
+      color: var(--saffron);
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .verse-number {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 4px;
+      color: rgba(212,160,23,0.5);
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .mantra-verse {
+      margin-bottom: 36px;
+      animation: fadeIn 1s ease both;
+    }
+
+    .mantra-verse:nth-child(2) { animation-delay: 0.2s; }
+    .mantra-verse:nth-child(3) { animation-delay: 0.4s; }
+    .mantra-verse:nth-child(4) { animation-delay: 0.6s; }
+    .mantra-verse:nth-child(5) { animation-delay: 0.8s; }
+
+    .mantra-text {
+      font-family: 'Tiro Devanagari Sanskrit', serif;
+      font-size: clamp(1.3rem, 3vw, 1.7rem);
+      color: var(--gold-light);
+      line-height: 1.9;
+      text-align: center;
+      text-shadow: 0 0 20px rgba(212,160,23,0.3);
+      margin-bottom: 12px;
+    }
+
+    .mantra-transliteration {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      color: rgba(245,200,66,0.6);
+      letter-spacing: 2px;
+      text-align: center;
+      margin-bottom: 10px;
+      line-height: 1.8;
+    }
+
+    .mantra-meaning {
+      font-size: 0.95rem;
+      color: rgba(253,245,230,0.65);
+      text-align: center;
+      line-height: 1.7;
+      font-style: italic;
+      border-top: 1px solid rgba(212,160,23,0.15);
+      padding-top: 10px;
+    }
+
+    .verse-divider {
+      text-align: center;
+      color: rgba(212,160,23,0.4);
+      font-size: 1.2rem;
+      letter-spacing: 8px;
+      margin: 20px 0;
+    }
+
+    .phala-shruti {
+      background: linear-gradient(135deg, rgba(139,0,0,0.25), rgba(20,5,0,0.4));
+      border: 1px solid rgba(212,160,23,0.35);
+      border-radius: 2px;
+      padding: 28px 32px;
+      margin-top: 16px;
+      text-align: center;
+    }
+
+    .phala-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 5px;
+      color: var(--saffron);
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .about-shiv {
+      background: linear-gradient(135deg, rgba(139,0,0,0.2), rgba(20,5,0,0.5));
+      border: 1px solid rgba(212,160,23,0.2);
+      border-radius: 2px;
+      padding: 30px 36px;
+      margin-top: 30px;
+    }
+
+    .about-shiv h3 {
+      font-family: 'Cinzel', serif;
+      color: var(--gold);
+      font-size: 1.2rem;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+
+    .about-shiv p {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: rgba(253,245,230,0.75);
+      margin-bottom: 14px;
+    }
+
+    .significance-list {
+      margin-top: 16px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .sig-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 14px 16px;
+      background: rgba(255,107,0,0.05);
+      border-left: 2px solid var(--saffron);
+    }
+
+    .sig-icon { font-size: 1.4rem; flex-shrink: 0; }
+
+    .sig-text {
+      font-size: 0.92rem;
+      color: rgba(253,245,230,0.75);
+      line-height: 1.6;
+    }
+
+    .sig-text strong {
+      color: var(--gold-light);
+      display: block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      margin-bottom: 3px;
+    }
+
+    .sidebar { display: flex; flex-direction: column; gap: 24px; }
+
+    .sidebar-widget {
+      background: linear-gradient(135deg, rgba(70,15,0,0.4), rgba(20,5,0,0.6));
+      border: 1px solid rgba(212,160,23,0.25);
+      border-radius: 2px;
+      padding: 24px;
+      position: relative;
+    }
+
+    .sidebar-widget::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--saffron), transparent);
+    }
+
+    .widget-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      color: var(--saffron);
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(212,160,23,0.2);
+    }
+
+    .related-post {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(212,160,23,0.1);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .related-post:last-child { border-bottom: none; }
+    .related-post:hover { background: rgba(212,160,23,0.05); }
+
+    .post-icon { font-size: 1.8rem; flex-shrink: 0; }
+
+    .post-name {
+      font-family: 'Tiro Devanagari Sanskrit', serif;
+      font-size: 1rem;
+      color: var(--gold-light);
+      margin-bottom: 2px;
+      line-height: 1.3;
+    }
+
+    .post-sub {
+      font-size: 0.78rem;
+      color: rgba(253,245,230,0.5);
+      font-family: 'Cinzel', serif;
+      letter-spacing: 1px;
+    }
+
+    .quick-mantra {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(212,160,23,0.1);
+    }
+
+    .quick-mantra:last-child { border-bottom: none; }
+
+    .quick-mantra-text {
+      font-family: 'Tiro Devanagari Sanskrit', serif;
+      font-size: 1.05rem;
+      color: var(--gold-light);
+      margin-bottom: 4px;
+    }
+
+    .quick-mantra-name {
+      font-size: 0.78rem;
+      color: rgba(253,245,230,0.5);
+      font-family: 'Cinzel', serif;
+      letter-spacing: 1px;
+    }
+
+    .names-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .name-chip {
+      font-family: 'Tiro Devanagari Sanskrit', serif;
+      font-size: 0.9rem;
+      color: var(--gold-light);
+      background: rgba(212,160,23,0.08);
+      border: 1px solid rgba(212,160,23,0.2);
+      padding: 6px 8px;
+      text-align: center;
+      border-radius: 1px;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .name-chip:hover {
+      background: rgba(212,160,23,0.2);
+      border-color: var(--gold);
+    }
+
+    .comments-section {
+      position: relative;
+      z-index: 10;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    .comments-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      letter-spacing: 3px;
+      margin-bottom: 30px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(212,160,23,0.3);
+    }
+
+    .comment-form {
+      background: linear-gradient(135deg, rgba(80,20,0,0.35), rgba(20,5,0,0.5));
+      border: 1px solid rgba(212,160,23,0.2);
+      padding: 30px;
+      margin-top: 30px;
+    }
+
+    .form-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      color: var(--gold);
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    @media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
+
+    input, textarea {
+      width: 100%;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(212,160,23,0.25);
+      color: var(--cream);
+      padding: 12px 16px;
+      font-family: 'Crimson Pro', serif;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s;
+      border-radius: 1px;
+    }
+
+    input::placeholder, textarea::placeholder { color: rgba(253,245,230,0.35); }
+    input:focus, textarea:focus { border-color: var(--gold); }
+
+    textarea { height: 120px; resize: vertical; margin-bottom: 14px; }
+
+    .submit-btn {
+      background: linear-gradient(135deg, var(--saffron), var(--deep-saffron));
+      border: none;
+      color: white;
+      padding: 14px 36px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submit-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--gold), var(--saffron));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .submit-btn:hover::before { opacity: 1; }
+    .submit-btn span { position: relative; z-index: 1; }
+
+    footer {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid rgba(212,160,23,0.2);
+    }
+
+    .footer-om {
+      font-family: 'Tiro Devanagari Sanskrit', serif;
+      font-size: 2.5rem;
+      color: rgba(212,160,23,0.4);
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .footer-text {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 4px;
+      color: rgba(253,245,230,0.3);
+      text-transform: uppercase;
+    }
+
+    .audio-widget {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 100;
+      background: linear-gradient(135deg, rgba(90,20,0,0.9), rgba(30,5,0,0.95));
+      border: 1px solid rgba(212,160,23,0.4);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    }
+
+    .play-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--saffron), var(--crimson));
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: transform 0.2s;
+    }
+
+    .play-btn:hover { transform: scale(1.1); }
+
+    .audio-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+
+    .audio-sub {
+      font-size: 0.72rem;
+      color: rgba(253,245,230,0.5);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+<div class="mandala-bg"></div>
+<div class="particles" id="particles"></div>
+
+<header>
+  <div class="site-nav">
+    <a href="/Astha/" class="logo">शिव<span>मार्ग</span></a>
+    <nav>
+      <a href="#">भजन</a>
+      <a href="#">मंत्र</a>
+      <a href="#">आरती</a>
+      <a href="#">चालीसा</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <span class="om-symbol">ॐ</span>
+  <div class="hero-tag">शिव स्तोत्रम् • Shiv Stotram</div>
+  <h1>नमामि शमीशान</h1>
+  <h2>NAMAMI SHAMISHAN</h2>
+  <div class="divider-ornament">✦ ✦ ✦</div>
+  <div class="shiv-desc">श्री रुद्राष्टकम् — महादेव की दिव्य स्तुति</div>
+</div>
+
+<div class="container">
+  <div>
+    <div class="mantra-card reveal">
+      <span class="corner-ornament tl">꩜</span>
+      <span class="corner-ornament tr">꩜</span>
+      <span class="corner-ornament bl">꩜</span>
+      <span class="corner-ornament br">꩜</span>
+
+      <div class="section-title">✦ श्री रुद्राष्टकम् — पूर्ण पाठ ✦</div>
+
+      <!-- VERSE 1 -->
+      <div class="mantra-verse">
+        <div class="verse-number">✦ प्रथम श्लोक ✦</div>
+        <div class="mantra-text">
+          नमामि शमीशान निर्वाण रूपं,<br>
+          विभुं व्यापकं ब्रह्म वेदस्वरूपम्।<br>
+          निजं निर्गुणं निर्विकल्पं निरीहं,<br>
+          चिदाकाश माकाशवासं भजेऽहम्॥ १॥
+        </div>
+        <div class="mantra-transliteration">
+          Namami Shamishan Nirvana Rupam, Vibhum Vyaapakam Brahma Vedaswarupam।<br>
+          Nijam Nirgunam Nirvikalpam Nireeham, Chidaakasham Aakashaavaasam Bhajeham॥
+        </div>
+        <div class="mantra-meaning">मैं उन शमीशान को नमस्कार करता हूँ जो निर्वाण के स्वरूप हैं, जो विभु, व्यापक, ब्रह्म और वेदों के स्वरूप हैं। जो स्वयं निर्गुण, निर्विकल्प और निरीह हैं, जो चिदाकाश और आकाश में निवास करते हैं, उनका मैं भजन करता हूँ।</div>
+      </div>
+
+      <div class="verse-divider">~ ✦ ~</div>
+
+      <!-- VERSE 2 -->
+      <div class="mantra-verse">
+        <div class="verse-number">✦ द्वितीय श्लोक ✦</div>
+        <div class="mantra-text">
+          निराकारमोंकार मूलं तुरीयं,<br>
+          गिराज्ञान गोतीतमीशं गिरीशम्।<br>
+          करालं महाकाल कालं कृपालं,<br>
+          गुणागार संसारपारं नतोऽहम्॥ २॥
+        </div>
+        <div class="mantra-transliteration">
+          Niraakaaramonkara Mulam Turiyam, Giraagyaan Goteetameesham Gireesham।<br>
+          Karaalam Mahakaala Kaalam Kripalam, Gunaagaara Samsaarapaaram Natoham॥
+        </div>
+        <div class="mantra-meaning">जो निराकार, ओंकार के मूल और तुरीय अवस्था में हैं, वाणी और ज्ञान से परे गिरीश को मैं प्रणाम करता हूँ। जो करालरूप महाकाल, कालों के काल और कृपालु हैं, जो गुणों के आगार और संसार से परे हैं, उन्हें मैं नमन करता हूँ।</div>
+      </div>
+
+      <div class="verse-divider">~ ✦ ~</div>
+
+      <!-- VERSE 3 -->
+      <div class="mantra-verse">
+        <div class="verse-number">✦ तृतीय श्लोक ✦</div>
+        <div class="mantra-text">
+          तुषाराद्रि संकाश गौरं गभीरं,<br>
+          मनोभूत कोटि प्रभा श्री शरीरम्।<br>
+          स्फुरन्मौलि कल्लोलिनी चारु गङ्गा,<br>
+          लसद्भाल बालेन्दु कण्ठे भुजङ्गा॥ ३॥
+        </div>
+        <div class="mantra-transliteration">
+          Tushaadri Sankaasha Gauram Gabhiram, Manobhuta Koti Prabha Shri Shariram।<br>
+          Sphuranmauli Kallolini Chaaru Ganga, Lasadbhala Balendu Kanthe Bhujanga॥
+        </div>
+        <div class="mantra-meaning">जो हिमाचल के समान श्वेत और गौरवर्ण, गंभीर और करोड़ों प्रभाओं से युक्त सुंदर शरीरवाले हैं। जिनके मस्तक पर चंचल गंगा प्रवाहित है, ललाट पर बाल चंद्रमा और कंठ में सर्प विराजमान है।</div>
+      </div>
+
+      <div class="verse-divider">~ ✦ ~</div>
+
+      <!-- VERSE 4 -->
+      <div class="mantra-verse">
+        <div class="verse-number">✦ चतुर्थ श्लोक ✦</div>
+        <div class="mantra-text">
+          चलत्कुण्डलं भ्रू सुनेत्रं विशालं,<br>
+          प्रसन्नाननं नीलकण्ठं दयालम्।<br>
+          मृगाधीश चर्माम्बरं मुण्डमालं,<br>
+          प्रिय शंकरं सर्वनाथं भजामि॥ ४॥
+        </div>
+        <div class="mantra-transliteration">
+          Chalatkuṇḍalam Bhru Sunetram Vishalam, Prasannaananam Nilakantham Dayaalam।<br>
+          Mrigaadheesha Charmaambaram Mundamalam, Priya Shankaram Sarvanaaatham Bhajaami॥
+        </div>
+        <div class="mantra-meaning">हिलते हुए कुण्डल, सुंदर भौहें, विशाल नेत्र, प्रसन्न मुख और नीलकंठ करुणामय रूपवाले हैं। जो सिंह की खाल पहने और मुंडमाला धारण किए हैं, ऐसे प्रिय शंकर और सर्वनाथ का मैं भजन करता हूँ।</div>
+      </div>
+
+      <div class="verse-divider">~ ✦ ~</div>
+
+      <!-- VERSE 5 -->
+      <div class="mantra-verse">
+        <div class="verse-number">✦ पञ्चम श्लोक ✦</div>
+        <div class="mantra-text">
+          प्रचण्डं प्रकृष्टं प्रगल्भं परेशं,<br>
+          अखण्डं अजं भानुकोटिप्रकाशम्।<br>
+          त्रयः शूल निर्मूलनं शूलपाणिं,<br>
+          भजेऽहं भवानीपतिं भावगम्यम्॥ ५॥
+        </div>
+        <div class="mantra-transliteration">
+          Prachandam Prakrushtam Pragalbham Paresham, Akhandam Ajam Bhaanukotiprakaasham।<br>
+          Trayah Shoola Nirmoolanam Shoolapanim, Bhajeham Bhavaanipatim Bhaavagamyam॥
+        </div>
+        <div class="mantra-meaning">जो प्रचण्ड, प्रकृष्ट, प्रगल्भ और परेश (परमेश्वर) हैं, अखण्ड, अजन्मे और करोड़ों सूर्यों के समान प्रकाशित हैं। जो त्रिताप (आध्यात्मिक, आधिभौतिक, आधिदैविक) का नाश करते हैं, ऐसे शूलपाणि भवानीपति का मैं भजन करता हूँ।</div>
+      </div>
+
+      <div class="verse-divider">~ ✦ ~</div>
+
+      <!-- VERSE 6 -->
+      <div class="mantra-verse">
+        <div class="verse-number">✦ षष्ठ श्लोक ✦</div>
+        <div class="mantra-text">
+          कलातीत कल्याण कल्पान्तकारी,<br>
+          सदा सज्जनानन्द दाता पुरारी।<br>
+          चिदानन्द संदोह मोहापहारी,<br>
+          प्रसीद प्रसीद प्रभो मन्मथारी॥ ६॥
+        </div>
+        <div class="mantra-transliteration">
+          Kalaateet Kalyaan Kalpaantakaari, Sadaa Sajjanaananda Daataa Puraaree।<br>
+          Chidaananda Sandoha Mohaapahaaree, Praseeda Praseeda Prabho Manmathaari॥
+        </div>
+        <div class="mantra-meaning">जो कला से परे, कल्याणकारी और कल्पान्त (प्रलय) के करनेवाले हैं, जो सदा सज्जनों को आनन्द देने वाले पुरारी (त्रिपुर विनाशक) हैं। जो चिदानन्द से पूर्ण और मोह का नाश करनेवाले हैं — हे प्रभो मन्मथारी (कामदेव को जीतनेवाले), प्रसन्न हों, प्रसन्न हों।</div>
+      </div>
+
+      <div class="verse-divider">~ ✦ ~</div>
+
+      <!-- VERSE 7 -->
+      <div class="mantra-verse">
+        <div class="verse-number">✦ सप्तम श्लोक ✦</div>
+        <div class="mantra-text">
+          न यावद् उमानाथपादारविन्दं,<br>
+          भजन्तीह लोके परे वा नराणाम्।<br>
+          न तावत् सुखं शान्ति सन्तापनाशं,<br>
+          प्रसीद प्रभो सर्वभूताधिवासम्॥ ७॥
+        </div>
+        <div class="mantra-transliteration">
+          Na Yaavad Umanaathapaadaaravindam, Bhajanteeha Loke Pare Vaa Naraanaam।<br>
+          Na Taavat Sukham Shaanti Santaapanaasham, Praseeda Prabho Sarvabhootaadhivaasam॥
+        </div>
+        <div class="mantra-meaning">जब तक मनुष्य इस लोक में या परलोक में उमानाथ (पार्वतीपति) के चरणकमलों का भजन नहीं करते, तब तक उन्हें न सुख मिलता है, न शांति, न ताप-नाश। हे प्रभो, जो सभी प्राणियों में निवास करते हैं, प्रसन्न हों।</div>
+      </div>
+
+      <div class="verse-divider">~ ✦ ~</div>
+
+      <!-- VERSE 8 -->
+      <div class="mantra-verse">
+        <div class="verse-number">✦ अष्टम श्लोक ✦</div>
+        <div class="mantra-text">
+          न जानामि योगं जपं नैव पूजां,<br>
+          नतोऽहं सदा सर्वदा शम्भु तुभ्यम्।<br>
+          जरा जन्म दुःखौघ तातप्यमानं,<br>
+          प्रभो पाहि आपन्नमामीश शंभो॥ ८॥
+        </div>
+        <div class="mantra-transliteration">
+          Na Jaanaami Yogam Japam Naiva Puujaam, Natoham Sadaa Sarvadaa Shambhu Tubhyam।<br>
+          Jaraa Janma Duhkhaugha Taatapyamanam, Prabho Paahi Aapannamaameesh Shambho॥
+        </div>
+        <div class="mantra-meaning">हे शम्भो! मैं न योग जानता हूँ, न जप, न पूजा — परन्तु मैं सदा-सर्वदा आपको नमस्कार करता हूँ। वृद्धावस्था, जन्म और दुःखों के समूह से संतप्त इस दास की रक्षा करें। हे शंभो! मुझ शरणागत की रक्षा करें।</div>
+      </div>
+
+      <!-- PHALA SHRUTI -->
+      <div class="phala-shruti">
+        <div class="phala-title">✦ फलश्रुति ✦</div>
+        <div class="mantra-text" style="font-size: clamp(1.1rem, 2.5vw, 1.4rem);">
+          रुद्राष्टकमिदं प्रोक्तं विप्रेण हरतोषये।<br>
+          ये पठन्ति नरा भक्त्या तेषां शम्भुः प्रसीदति॥
+        </div>
+        <div class="mantra-transliteration" style="margin-top: 10px;">
+          Rudrashtakamidaam Proktam Viprena Haratoshaye।<br>
+          Ye Pathanti Naraa Bhaktyaa Teshaam Shambhuh Praseeda॥
+        </div>
+        <div class="mantra-meaning">यह रुद्राष्टकम् एक ब्राह्मण द्वारा भगवान हर की प्रसन्नता के लिए रचा गया है। जो मनुष्य इसे भक्तिपूर्वक पढ़ते हैं, उन पर शम्भु (भगवान शिव) प्रसन्न होते हैं।</div>
+      </div>
+
+    </div>
+
+    <!-- About -->
+    <div class="about-shiv reveal">
+      <h3>✦ महादेव — शिव की महिमा</h3>
+      <p>भगवान शिव हिंदू त्रिदेव में संहार और कल्याण के देवता हैं। "शमीशान" उनका एक नाम है जिसका अर्थ है शम (शांति) के ईशान (स्वामी)। वे महाकाल, आदियोगी, नीलकंठ और महादेव के नाम से भी जाने जाते हैं।</p>
+      <p>श्री रुद्राष्टकम् गोस्वामी तुलसीदास द्वारा रचित भगवान शिव का एक अत्यंत पवित्र स्तोत्र है, जो रामचरितमानस के उत्तरकांड में वर्णित है। इस स्तोत्र का नित्य पाठ करने से जीवन में शांति, समृद्धि और मोक्ष की प्राप्ति होती है।</p>
+
+      <div class="significance-list">
+        <div class="sig-item">
+          <div class="sig-icon">🔱</div>
+          <div class="sig-text"><strong>शांति प्राप्ति</strong>इस स्तोत्र के नित्य पाठ से मन की शांति और आत्मिक सुख की प्राप्ति होती है।</div>
+        </div>
+        <div class="sig-item">
+          <div class="sig-icon">🕉️</div>
+          <div class="sig-text"><strong>पापनाश</strong>भगवान शिव की कृपा से समस्त पाप और कष्टों का नाश होता है।</div>
+        </div>
+        <div class="sig-item">
+          <div class="sig-icon">🪔</div>
+          <div class="sig-text"><strong>ज्ञान प्रकाश</strong>महादेव आदियोगी हैं — उनकी उपासना से ज्ञान और विवेक की प्राप्ति होती है।</div>
+        </div>
+        <div class="sig-item">
+          <div class="sig-icon">🌙</div>
+          <div class="sig-text"><strong>मोक्ष मार्ग</strong>यह स्तोत्र मोक्ष प्राप्ति का सर्वोत्तम मार्ग बताता है — निर्गुण, निराकार ब्रह्म की उपासना।</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-widget reveal">
+      <div class="widget-title">✦ संबंधित भजन ✦</div>
+
+      <div class="related-post">
+        <div class="post-icon">🔱</div>
+        <div class="post-info">
+          <div class="post-name">महामृत्युंजय मंत्र</div>
+          <div class="post-sub">Mahamrityunjaya Mantra</div>
+        </div>
+      </div>
+
+      <div class="related-post">
+        <div class="post-icon">🕉️</div>
+        <div class="post-info">
+          <div class="post-name">शिव तांडव स्तोत्रम्</div>
+          <div class="post-sub">Shiv Tandav Stotram</div>
+        </div>
+      </div>
+
+      <div href="/Astha/shiva-mantras/shiv-chalisa/" class="related-post">
+        <div class="post-icon">🪔</div>
+        <div class="post-info">
+          <div class="post-name">शिव चालीसा</div>
+          <div class="post-sub">Shiv Chalisa</div>
+        </div>
+      </div>
+
+      <div class="related-post">
+        <div class="post-icon">🌙</div>
+        <div class="post-info">
+          <div class="post-name">हर हर महादेव</div>
+          <div class="post-sub">Har Har Mahadev Bhajan</div>
+        </div>
+      </div>
+
+      <div class="related-post">
+        <div class="post-icon">🌺</div>
+        <div class="post-info">
+          <div class="post-name">ओम नमः शिवाय</div>
+          <div class="post-sub">Om Namah Shivaya</div>
+        </div>
+      </div>
+
+      <div class="related-post">
+        <div class="post-icon">⚡</div>
+        <div class="post-info">
+          <div class="post-name">रुद्राष्टाध्यायी</div>
+          <div class="post-sub">Rudraashtadhyayi</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-widget reveal">
+      <div class="widget-title">✦ लघु मंत्र ✦</div>
+
+      <div class="quick-mantra">
+        <div class="quick-mantra-text">ॐ नमः शिवाय</div>
+        <div class="quick-mantra-name">Panchakshara Mantra</div>
+      </div>
+
+      <div class="quick-mantra">
+        <div class="quick-mantra-text">ॐ त्र्यम्बकं यजामहे</div>
+        <div class="quick-mantra-name">Mahamrityunjaya</div>
+      </div>
+
+      <div class="quick-mantra">
+        <div class="quick-mantra-text">शिवाय नमः</div>
+        <div class="quick-mantra-name">Shiva Namah</div>
+      </div>
+
+      <div class="quick-mantra">
+        <div class="quick-mantra-text">हर हर महादेव</div>
+        <div class="quick-mantra-name">Har Har Mahadev</div>
+      </div>
+
+      <div class="quick-mantra">
+        <div class="quick-mantra-text">जय शम्भो</div>
+        <div class="quick-mantra-name">Jai Shambho</div>
+      </div>
+    </div>
+
+    <div class="sidebar-widget reveal">
+      <div class="widget-title">✦ शिव के नाम ✦</div>
+      <div class="names-grid">
+        <div class="name-chip">महादेव</div>
+        <div class="name-chip">शंकर</div>
+        <div class="name-chip">महेश</div>
+        <div class="name-chip">नीलकंठ</div>
+        <div class="name-chip">रुद्र</div>
+        <div class="name-chip">त्रिनेत्र</div>
+        <div class="name-chip">भोलेनाथ</div>
+        <div class="name-chip">पशुपति</div>
+        <div class="name-chip">गिरीश</div>
+        <div class="name-chip">उमापति</div>
+        <div class="name-chip">कालेश्वर</div>
+        <div class="name-chip">विश्वेश</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="comments-section">
+  <div class="comments-title reveal">🕉️ भक्तों के विचार</div>
+  <h3>Please Login/Register for writing comments 🙏</h3>
+</div>
+<div id="sm-comments" data-page-id="namami-samisam-nirvanrupam"></div>
+<footer>
+  <span class="footer-om">ॐ</span>
+  <div class="footer-text">॥ हर हर महादेव ॥ बम बम भोले ॥ © ShivaMarg 2026</div>
+</footer>
+
+<div class="audio-widget">
+  <button class="play-btn" onclick="togglePlay(this)">▶</button>
+  <div class="audio-info">
+    <div class="audio-title">NAMAMI SHAMISHAN</div>
+    <div class="audio-sub">Shiv Stotram Paath</div>
+  </div>
+  <audio src="/audio/namami-shamisham.mp3"></audio>
+</div>
+
+<script>
+  const particles = document.getElementById('particles');
+  for (let i = 0; i < 40; i++) {
+    const spark = document.createElement('div');
+    spark.className = 'spark';
+    spark.style.left = Math.random() * 100 + '%';
+    spark.style.animationDuration = (6 + Math.random() * 12) + 's';
+    spark.style.animationDelay = (Math.random() * 15) + 's';
+    spark.style.width = spark.style.height = (1 + Math.random() * 3) + 'px';
+    spark.style.opacity = 0;
+    particles.appendChild(spark);
+  }
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.transitionDelay = (i * 0.05) + 's';
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  function togglePlay(btn) {
+    const widget = btn.closest('.audio-widget');
+    const audio = widget.querySelector('audio');
+    if (audio.paused) {
+      audio.play();
+      btn.textContent = '⏸';
+    } else {
+      audio.pause();
+      btn.textContent = '▶';
+    }
+  }
+
+  document.querySelectorAll('.audio-widget audio').forEach(audio => {
+    audio.addEventListener('ended', function () {
+      const btn = this.closest('.audio-widget').querySelector('.play-btn');
+      btn.textContent = '▶';
+    });
+  });
+</script>
+</script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/s-comments.js"></script>
+  <script>
+    const SM_API = 'https://shivamargbackend.onrender.com'; // ← change to your server URL in prod
+    SmAuth.init({ apiBase: SM_API });
+    SmComments.init({ apiBase: SM_API });
+  </script>
+</body>
+</html>

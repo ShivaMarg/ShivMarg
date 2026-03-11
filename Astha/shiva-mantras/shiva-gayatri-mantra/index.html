@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>शिव गायत्री — Shiv Gayatri | ShivaMarg</title><link rel="icon" type="image/png" href="/images/ShivMarg.png" />
+  <meta name="description" content="शिव गायत्री मंत्र (Shiv Gayatri) — सम्पूर्ण अर्थ एवं महिमा सहित। ॐ तत्पुरुषाय विद्महे महादेवाय धीमहि। तन्नो रुद्रः प्रचोदयात्॥ गायत्री छंद।">
+  <meta name="keywords" content="Shiv Gayatri, शिव गायत्री, Om Tatpurushaya Vidmahe, Mahadevaya Dhimahi, Rudra Prachodayat, ShivaMarg, Gayatri Mantra">
+  <meta name="author" content="ShivaMarg">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://saurabhjha.live/Astha/shiv-gayatri/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="शिव गायत्री — Shiv Gayatri | ShivaMarg">
+  <meta property="og:description" content="ॐ तत्पुरुषाय विद्महे महादेवाय धीमहि। तन्नो रुद्रः प्रचोदयात्॥">
+  <meta property="og:locale" content="hi_IN">
+
+  <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --dawn-rose:    #FFB6A3;
+      --dawn-gold:    #FFD4A0;
+      --aurora-1:     #FF8C69;
+      --aurora-2:     #FFB347;
+      --aurora-3:     #FFF0C0;
+      --sun-core:     #FFF3CD;
+      --horizon:      #FF6B35;
+      --horizon-d:    #CC3D00;
+      --sky-deep:     #1A0E00;
+      --sky-mid:      #0E0800;
+      --sky-dark:     #060400;
+      --vedic-gold:   #C9A84C;
+      --vedic-pale:   #E8C96A;
+      --vedic-cream:  #FFFBF0;
+      --soft:         rgba(255,251,240,0.72);
+      --mantra-glow:  rgba(255,210,160,0.9);
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { background:var(--sky-dark); color:var(--vedic-cream); font-family:'Cormorant Garamond',serif; overflow-x:hidden; cursor:default; }
+
+    /* ── DAWN SKY BACKGROUND ── */
+    .sky-bg {
+      position:fixed; inset:0; z-index:0;
+      background:
+        radial-gradient(ellipse 110% 55% at 50% -10%, #4A1E00 0%, #2A0E00 30%, transparent 60%),
+        radial-gradient(ellipse 70% 40% at 50% 0%,    #FF6B35 0%, transparent 45%),
+        radial-gradient(ellipse 100% 70% at 20% 80%,  #0A0500 0%, transparent 60%),
+        radial-gradient(ellipse 100% 70% at 80% 80%,  #080400 0%, transparent 60%),
+        linear-gradient(180deg, #0A0500 0%, #060400 50%, #040200 100%);
+    }
+
+    /* Horizon glow strip */
+    .horizon-strip {
+      position:fixed; top:0; left:0; right:0; height:4px; z-index:1;
+      background:linear-gradient(90deg, transparent 0%, #FF8C69 20%, #FFD4A0 50%, #FF8C69 80%, transparent 100%);
+      animation:horizon-pulse 5s ease-in-out infinite;
+    }
+    @keyframes horizon-pulse {
+      0%,100%{ opacity:0.5; }
+      50%    { opacity:1; }
+    }
+
+    /* Sun rising effect */
+    .sun-rise {
+      position:fixed; top:-280px; left:50%; transform:translateX(-50%);
+      width:560px; height:560px; border-radius:50%; z-index:0;
+      background:radial-gradient(circle,
+        rgba(255,243,205,0.18) 0%,
+        rgba(255,211,80,0.1) 20%,
+        rgba(255,140,80,0.07) 40%,
+        rgba(255,107,53,0.04) 60%,
+        transparent 72%);
+      animation:sun-breathe 7s ease-in-out infinite;
+    }
+    @keyframes sun-breathe {
+      0%,100%{ transform:translateX(-50%) scale(1);   opacity:0.8; }
+      50%    { transform:translateX(-50%) scale(1.18); opacity:1; }
+    }
+
+    /* Light ray beams from top */
+    .rays {
+      position:fixed; top:0; left:50%; transform:translateX(-50%);
+      width:800px; height:600px; z-index:0; pointer-events:none; opacity:0.04;
+    }
+    .ray {
+      position:absolute; top:0; left:50%; width:1px; height:100%;
+      background:linear-gradient(180deg, #FFD080 0%, transparent 100%);
+      transform-origin:top center;
+      animation:ray-spin 30s linear infinite;
+    }
+    .ray:nth-child(1) { transform:rotate(0deg);  animation-delay:0s; }
+    .ray:nth-child(2) { transform:rotate(15deg); animation-delay:-3s; }
+    .ray:nth-child(3) { transform:rotate(30deg); animation-delay:-6s; }
+    .ray:nth-child(4) { transform:rotate(45deg); animation-delay:-9s; }
+    .ray:nth-child(5) { transform:rotate(60deg); animation-delay:-12s; }
+    .ray:nth-child(6) { transform:rotate(-15deg);animation-delay:-1.5s; }
+    .ray:nth-child(7) { transform:rotate(-30deg);animation-delay:-4.5s; }
+    .ray:nth-child(8) { transform:rotate(-45deg);animation-delay:-7.5s; }
+    @keyframes ray-spin { from{opacity:0.04} 50%{opacity:0.12} to{opacity:0.04} }
+
+    /* Floating light motes */
+    #motes { position:fixed; inset:0; z-index:0; pointer-events:none; }
+    .mote {
+      position:absolute; border-radius:50%; opacity:0;
+      animation:mote-float linear infinite;
+    }
+    @keyframes mote-float {
+      0%  { transform:translateY(108vh) scale(0.3); opacity:0; }
+      8%  { opacity:1; }
+      85% { opacity:0.4; }
+      100%{ transform:translateY(-8vh) scale(1.4); opacity:0; }
+    }
+
+    /* ── HEADER ── */
+    header {
+      position:relative; z-index:10;
+      padding:14px 5vw 0;
+      border-bottom:1px solid rgba(255,180,100,0.15);
+      background:rgba(4,2,0,0.3); backdrop-filter:blur(8px);
+    }
+    .site-nav { display:flex; justify-content:space-between; align-items:center; max-width:1200px; margin:0 auto 12px; }
+    .logo { font-family:'Cinzel Decorative',serif; font-size:1.28rem; color:var(--vedic-gold); text-decoration:none; letter-spacing:1px; }
+    .logo em { color:var(--aurora-1); font-style:normal; }
+    nav a { color:rgba(255,251,240,0.5); text-decoration:none; margin-left:18px; font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; transition:color .3s; }
+    nav a:hover { color:var(--dawn-gold); }
+    .breadcrumb { max-width:1200px; margin:0 auto; font-family:'Cinzel',serif; font-size:0.64rem; letter-spacing:2px; color:rgba(255,251,240,0.3); padding-bottom:11px; }
+    .breadcrumb span { color:var(--aurora-1); margin:0 8px; }
+
+    /* ── HERO ── */
+    .hero {
+      position:relative; z-index:10;
+      text-align:center; padding:70px 20px 55px;
+      overflow:hidden;
+    }
+
+    /* OM symbol — large, sunrise-lit */
+    .om-wrap { display:inline-block; margin-bottom:24px; position:relative; }
+    .om-sym {
+      font-family:'Tiro Devanagari Sanskrit',serif;
+      font-size:7rem; display:block; line-height:1;
+      color:transparent;
+      background:linear-gradient(160deg, var(--sun-core) 0%, var(--aurora-3) 20%, var(--dawn-gold) 50%, var(--aurora-1) 80%, var(--horizon) 100%);
+      -webkit-background-clip:text; background-clip:text;
+      animation:om-glow 5s ease-in-out infinite;
+      filter:drop-shadow(0 0 30px rgba(255,180,80,0.9)) drop-shadow(0 0 80px rgba(255,107,53,0.5));
+    }
+    @keyframes om-glow {
+      0%,100%{ filter:drop-shadow(0 0 28px rgba(255,180,80,0.9)) drop-shadow(0 0 70px rgba(255,107,53,0.45)); transform:scale(1); }
+      50%    { filter:drop-shadow(0 0 55px rgba(255,220,130,1))  drop-shadow(0 0 130px rgba(255,150,60,0.7)); transform:scale(1.05); }
+    }
+
+    /* Concentric sunrise rings */
+    .ring {
+      position:absolute; top:50%; left:50%; border-radius:50%;
+      border:1px solid; transform:translate(-50%,-50%);
+      pointer-events:none;
+    }
+    .ring-1 { width:160px; height:160px; border-color:rgba(255,180,80,0.22); animation:ring-expand 6s ease-in-out infinite; }
+    .ring-2 { width:215px; height:215px; border-color:rgba(255,140,60,0.14); animation:ring-expand 6s ease-in-out infinite 1.5s; }
+    .ring-3 { width:270px; height:270px; border-color:rgba(255,107,53,0.09); animation:ring-expand 6s ease-in-out infinite 3s; }
+    @keyframes ring-expand {
+      0%    { opacity:0.3; transform:translate(-50%,-50%) scale(0.95); }
+      50%   { opacity:1;   transform:translate(-50%,-50%) scale(1.05); }
+      100%  { opacity:0.3; transform:translate(-50%,-50%) scale(0.95); }
+    }
+
+    .hero-tag   { font-family:'Cinzel',serif; font-size:0.67rem; letter-spacing:7px; color:var(--dawn-rose); text-transform:uppercase; margin-bottom:16px; animation:fadeUp 0.9s ease both; }
+    .hero h1    { font-family:'Cinzel Decorative',serif; font-size:clamp(2rem,5.2vw,4rem); color:var(--dawn-gold); line-height:1.15; margin-bottom:8px; text-shadow:0 0 40px rgba(255,180,80,0.45), 0 0 80px rgba(255,107,53,0.25); animation:fadeUp 1s ease both; }
+    .hero-deva  { font-family:'Tiro Devanagari Sanskrit',serif; font-size:clamp(1.5rem,3.8vw,2.6rem); color:rgba(255,200,130,0.75); margin-bottom:18px; animation:fadeUp 1.1s ease both; }
+    .hero-orn   { color:rgba(201,168,76,0.4); font-size:1rem; letter-spacing:14px; margin:12px 0; animation:fadeUp 1.2s ease both; }
+    .hero-desc  { font-size:1.1rem; color:var(--soft); max-width:580px; margin:0 auto 14px; line-height:1.85; animation:fadeUp 1.3s ease both; font-style:italic; }
+    .composer-tag { display:inline-block; font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:3px; color:rgba(201,168,76,0.6); border:1px solid rgba(201,168,76,0.2); padding:5px 18px; margin-top:6px; animation:fadeUp 1.4s ease both; }
+
+    /* THE mantra — hero display */
+    .mantra-hero {
+      max-width:780px; margin:30px auto 0;
+      padding:32px 36px; position:relative;
+      animation:fadeUp 1.5s ease both;
+    }
+    .mantra-hero::before {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(135deg, rgba(255,140,60,0.08), rgba(255,200,100,0.05), rgba(255,107,53,0.06));
+      border:1px solid rgba(255,160,80,0.2);
+    }
+    .mantra-hero::after {
+      content:''; position:absolute;
+      top:0; left:0; right:0; height:2px;
+      background:linear-gradient(90deg, transparent, var(--aurora-1), var(--dawn-gold), var(--aurora-3), var(--dawn-gold), var(--aurora-1), transparent);
+    }
+    .mantra-full {
+      font-family:'Tiro Devanagari Sanskrit',serif;
+      font-size:clamp(1.1rem,2.8vw,1.8rem);
+      line-height:2.2; text-align:center; position:relative; z-index:1;
+      background:linear-gradient(160deg, var(--sun-core) 0%, var(--dawn-gold) 40%, var(--aurora-1) 100%);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      text-shadow:none;
+      filter:drop-shadow(0 0 12px rgba(255,180,80,0.4));
+      letter-spacing:1px;
+    }
+    .mantra-roman {
+      font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:2px;
+      color:rgba(255,200,130,0.45); text-align:center; margin-top:10px;
+      line-height:1.9; font-style:italic; position:relative; z-index:1;
+    }
+
+    /* 3-part Gayatri pills */
+    .gayatri-parts {
+      display:flex; justify-content:center; gap:0; margin-top:24px;
+      animation:fadeUp 1.7s ease both;
+    }
+    .g-part {
+      flex:1; max-width:240px; padding:14px 16px; text-align:center;
+      border:1px solid rgba(255,160,80,0.18); background:rgba(255,107,53,0.05);
+      border-right:none; transition:background .3s;
+    }
+    .g-part:last-child { border-right:1px solid rgba(255,160,80,0.18); }
+    .g-part:hover { background:rgba(255,140,60,0.14); }
+    .g-part-word { font-family:'Tiro Devanagari Sanskrit',serif; font-size:1.05rem; color:var(--dawn-gold); display:block; margin-bottom:4px; }
+    .g-part-label { font-family:'Cinzel',serif; font-size:0.56rem; letter-spacing:3px; color:rgba(255,200,130,0.5); text-transform:uppercase; display:block; margin-bottom:6px; }
+    .g-part-meaning { font-size:0.82rem; color:rgba(255,251,240,0.55); font-style:italic; line-height:1.4; }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── TICKER ── */
+    .ticker-wrap { position:relative; z-index:10; overflow:hidden; border-top:1px solid rgba(255,140,60,0.12); border-bottom:1px solid rgba(255,140,60,0.12); background:rgba(0,0,0,0.35); padding:11px 0; }
+    .ticker-track { display:flex; width:max-content; animation:ticker 34s linear infinite; }
+    @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .tick-item { font-family:'Tiro Devanagari Sanskrit',serif; font-size:0.97rem; color:rgba(255,180,80,0.52); padding:0 34px; white-space:nowrap; }
+    .tick-dot { color:var(--dawn-rose); opacity:0.5; padding:0 6px; }
+
+    /* ── LAYOUT ── */
+    .container {
+      position:relative; z-index:10;
+      max-width:1200px; margin:0 auto;
+      padding:0 20px 70px;
+      display:grid; grid-template-columns:1fr 308px; gap:34px;
+      align-items:start;
+    }
+    @media(max-width:860px){ .container{ grid-template-columns:1fr; } }
+
+    /* ── MANTRA CARD ── */
+    .mantra-card {
+      background:linear-gradient(155deg, rgba(30,12,0,0.65) 0%, rgba(10,5,0,0.9) 100%);
+      border:1px solid rgba(255,140,60,0.18);
+      border-radius:2px; padding:46px 42px;
+      position:relative; overflow:hidden;
+    }
+    .mantra-card::before { content:''; position:absolute; top:0;left:0;right:0; height:3px; background:linear-gradient(90deg, transparent, var(--aurora-1), var(--dawn-gold), var(--aurora-3), var(--dawn-gold), var(--aurora-1), transparent); }
+    .mantra-card::after  { content:''; position:absolute; bottom:0;left:0;right:0; height:3px; background:linear-gradient(90deg, transparent, var(--vedic-gold), var(--aurora-1), var(--vedic-gold), transparent); }
+    .corner { position:absolute; font-size:1.1rem; color:rgba(255,140,60,0.18); }
+    .corner.tl{top:12px;left:14px} .corner.tr{top:12px;right:14px}
+    .corner.bl{bottom:12px;left:14px} .corner.br{bottom:12px;right:14px}
+    .card-label { font-family:'Cinzel',serif; font-size:0.63rem; letter-spacing:5px; color:var(--dawn-rose); text-transform:uppercase; text-align:center; margin-bottom:34px; }
+
+    /* ── SECTION HEADER ── */
+    .sec-div { display:flex; align-items:center; gap:14px; margin:32px 0 24px; }
+    .sec-div-line { flex:1; height:1px; background:linear-gradient(90deg, transparent, rgba(255,140,60,0.3), transparent); }
+    .sec-div-txt { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:4px; color:rgba(255,160,80,0.6); text-transform:uppercase; white-space:nowrap; }
+
+    /* ── MANTRA DISPLAY BLOCK ── */
+    .mantra-display {
+      text-align:center; padding:32px 24px;
+      background:rgba(255,107,53,0.04); border:1px solid rgba(255,140,60,0.12);
+      position:relative; margin-bottom:24px;
+    }
+    .mantra-display::before {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,180,80,0.06), transparent);
+    }
+    .md-label { font-family:'Cinzel',serif; font-size:0.58rem; letter-spacing:5px; color:rgba(255,160,80,0.55); text-transform:uppercase; margin-bottom:18px; }
+    .md-mantra {
+      font-family:'Tiro Devanagari Sanskrit',serif;
+      font-size:clamp(1.2rem,2.8vw,1.85rem); line-height:2.15;
+      background:linear-gradient(160deg, var(--sun-core) 0%, var(--dawn-gold) 50%, var(--aurora-1) 100%);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      filter:drop-shadow(0 0 10px rgba(255,180,80,0.3));
+      letter-spacing:0.5px; position:relative; z-index:1;
+    }
+    .md-roman {
+      font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:2px;
+      color:rgba(255,200,130,0.42); margin-top:10px; font-style:italic; line-height:1.9;
+      position:relative; z-index:1;
+    }
+
+    /* Meaning block — dawn-lit */
+    .meaning-block {
+      background:rgba(255,140,60,0.04); border-left:3px solid; padding:16px 22px;
+      margin:14px 0;
+      border-image:linear-gradient(180deg, var(--aurora-1), var(--dawn-gold), var(--aurora-1)) 1;
+    }
+    .meaning-label { font-family:'Cinzel',serif; font-size:0.58rem; letter-spacing:4px; color:rgba(255,160,80,0.55); text-transform:uppercase; margin-bottom:8px; }
+    .meaning-text { font-size:0.96rem; color:var(--soft); line-height:1.88; font-style:italic; }
+
+    /* Word-by-word breakdown */
+    .word-breakdown { margin:20px 0; }
+    .wb-title { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:4px; color:rgba(255,160,80,0.55); text-transform:uppercase; margin-bottom:14px; text-align:center; }
+    .wb-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(170px, 1fr)); gap:10px; }
+    .wb-item {
+      background:rgba(255,107,53,0.05); border:1px solid rgba(255,140,60,0.15);
+      padding:12px 14px; text-align:center; transition:background .3s;
+    }
+    .wb-item:hover { background:rgba(255,140,60,0.12); }
+    .wb-word { font-family:'Tiro Devanagari Sanskrit',serif; font-size:1.05rem; color:var(--dawn-gold); display:block; margin-bottom:4px; }
+    .wb-roman { font-family:'Cinzel',serif; font-size:0.58rem; letter-spacing:2px; color:rgba(255,200,130,0.45); display:block; margin-bottom:5px; font-style:italic; }
+    .wb-meaning { font-size:0.8rem; color:rgba(255,251,240,0.58); line-height:1.4; }
+
+    /* Three-part Gayatri explanation */
+    .gayatri-parts-card { margin:28px 0; }
+    .gp-part {
+      display:grid; grid-template-columns:auto 1fr; gap:0;
+      margin-bottom:16px; overflow:hidden;
+    }
+    .gp-num {
+      width:52px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+      background:linear-gradient(180deg, var(--aurora-1), var(--dawn-gold));
+      color:var(--sky-dark); font-family:'Cinzel Decorative',serif; font-size:1.05rem; font-weight:900;
+      padding:14px 8px; flex-shrink:0;
+    }
+    .gp-num-label { font-family:'Cinzel',serif; font-size:0.42rem; letter-spacing:2px; text-transform:uppercase; margin-top:3px; }
+    .gp-body {
+      background:rgba(255,140,60,0.04); border:1px solid rgba(255,140,60,0.14);
+      border-left:none; padding:14px 18px;
+    }
+    .gp-sanskrit { font-family:'Tiro Devanagari Sanskrit',serif; font-size:1.08rem; color:var(--dawn-gold); margin-bottom:4px; }
+    .gp-english  { font-family:'Cinzel',serif; font-size:0.62rem; letter-spacing:2px; color:rgba(255,200,130,0.45); margin-bottom:6px; font-style:italic; }
+    .gp-meaning  { font-size:0.88rem; color:rgba(255,251,240,0.62); line-height:1.65; }
+
+    /* Japa guide */
+    .japa-guide {
+      background:rgba(255,107,53,0.05); border:1px solid rgba(255,140,60,0.14);
+      padding:24px 28px; margin:28px 0;
+    }
+    .jg-title { font-family:'Cinzel',serif; color:var(--dawn-gold); font-size:0.78rem; letter-spacing:3px; text-transform:uppercase; margin-bottom:18px; text-align:center; }
+    .jg-row {
+      display:flex; align-items:flex-start; gap:14px; padding:10px 0;
+      border-bottom:1px solid rgba(255,140,60,0.08);
+    }
+    .jg-row:last-child { border-bottom:none; }
+    .jg-icon { font-size:1.4rem; flex-shrink:0; width:30px; text-align:center; }
+    .jg-text { font-size:0.9rem; color:var(--soft); line-height:1.7; }
+    .jg-text strong { color:var(--dawn-gold); font-style:normal; display:block; font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:1px; text-transform:uppercase; margin-bottom:2px; }
+
+    /* About card */
+    .about-card {
+      background:linear-gradient(155deg, rgba(30,12,0,0.5), rgba(10,5,0,0.72));
+      border:1px solid rgba(255,140,60,0.14); border-radius:2px; padding:26px 32px; margin-top:24px;
+    }
+    .about-card h3 { font-family:'Cinzel',serif; color:var(--vedic-gold); font-size:1.06rem; margin-bottom:12px; letter-spacing:2px; }
+    .about-card p { font-size:0.96rem; line-height:1.92; color:var(--soft); margin-bottom:12px; }
+    .sig-list { display:grid; gap:10px; margin-top:12px; }
+    .sig-item { display:flex; gap:12px; align-items:flex-start; padding:12px 13px; background:rgba(255,107,53,0.05); border-left:2px solid var(--horizon); }
+    .sig-icon { font-size:1.25rem; flex-shrink:0; }
+    .sig-text { font-size:0.88rem; color:var(--soft); line-height:1.65; }
+    .sig-text strong { color:var(--vedic-cream); display:block; font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:1px; margin-bottom:2px; }
+
+    /* ── SIDEBAR ── */
+    .sidebar { display:flex; flex-direction:column; gap:20px; }
+    .widget {
+      background:linear-gradient(155deg, rgba(30,12,0,0.62), rgba(10,5,0,0.84));
+      border:1px solid rgba(255,140,60,0.14); border-radius:2px; padding:20px; position:relative;
+    }
+    .widget::before { content:''; position:absolute; top:0;left:0;right:0; height:2px; background:linear-gradient(90deg, transparent, var(--aurora-1), var(--dawn-gold), var(--aurora-1), transparent); opacity:0.6; }
+    .widget-title { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:4px; color:var(--dawn-rose); text-transform:uppercase; margin-bottom:14px; padding-bottom:9px; border-bottom:1px solid rgba(255,140,60,0.1); }
+
+    .q-m { padding:9px 0; border-bottom:1px solid rgba(255,140,60,0.07); }
+    .q-m:last-child { border-bottom:none; }
+    .q-mt { font-family:'Tiro Devanagari Sanskrit',serif; font-size:0.95rem; color:var(--dawn-gold); margin-bottom:3px; }
+    .q-ms { font-size:0.71rem; color:rgba(255,251,240,0.4); font-family:'Cinzel',serif; letter-spacing:1px; }
+
+    /* Japa counter widget */
+    .japa-counter {
+      text-align:center; padding:16px 0;
+    }
+    .counter-display {
+      font-family:'Cinzel Decorative',serif; font-size:3.5rem;
+      background:linear-gradient(160deg, var(--sun-core), var(--dawn-gold), var(--aurora-1));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      filter:drop-shadow(0 0 10px rgba(255,180,80,0.4));
+      line-height:1; margin-bottom:6px;
+    }
+    .counter-label { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:3px; color:rgba(255,200,130,0.5); text-transform:uppercase; margin-bottom:16px; }
+    .counter-btns { display:flex; gap:8px; justify-content:center; }
+    .cnt-btn {
+      font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:2px;
+      padding:8px 16px; border:1px solid rgba(255,140,60,0.3);
+      background:rgba(255,107,53,0.07); color:var(--dawn-gold);
+      cursor:pointer; transition:all .25s;
+    }
+    .cnt-btn:hover { background:rgba(255,107,53,0.2); border-color:var(--aurora-1); }
+    .cnt-btn.reset { color:rgba(255,251,240,0.4); border-color:rgba(255,140,60,0.15); }
+    .cnt-btn.reset:hover { color:var(--dawn-rose); border-color:rgba(255,140,60,0.3); }
+    .japa-targets { display:flex; justify-content:center; gap:10px; margin-top:12px; }
+    .target-pill {
+      font-family:'Cinzel',serif; font-size:0.58rem; letter-spacing:2px;
+      padding:4px 12px; border:1px solid rgba(255,140,60,0.18);
+      color:rgba(255,200,130,0.5); cursor:pointer; transition:all .25s;
+    }
+    .target-pill.done { border-color:var(--aurora-1); color:var(--dawn-gold); background:rgba(255,107,53,0.12); }
+    .japa-progress { margin-top:10px; height:3px; background:rgba(255,140,60,0.15); border-radius:2px; overflow:hidden; }
+    .japa-prog-fill { height:100%; background:linear-gradient(90deg, var(--aurora-1), var(--dawn-gold)); width:0%; transition:width .3s; border-radius:2px; }
+
+    .benefit-grid { display:flex; flex-direction:column; gap:8px; }
+    .benefit-item { display:flex; align-items:center; gap:10px; padding:9px 11px; background:rgba(255,107,53,0.05); border:1px solid rgba(255,140,60,0.13); border-radius:1px; }
+    .benefit-icon { font-size:1.1rem; flex-shrink:0; }
+    .benefit-text { font-size:0.83rem; color:var(--soft); line-height:1.4; }
+
+    .names-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+    .name-chip { font-family:'Tiro Devanagari Sanskrit',serif; font-size:0.82rem; color:var(--dawn-gold); background:rgba(255,107,53,0.05); border:1px solid rgba(255,160,80,0.18); padding:5px 6px; text-align:center; border-radius:1px; cursor:pointer; transition:all .3s; }
+    .name-chip:hover { background:rgba(255,140,60,0.18); border-color:var(--aurora-1); color:var(--sun-core); }
+
+    .rel-post { display:flex; gap:10px; padding:10px 0; border-bottom:1px solid rgba(255,140,60,0.07); text-decoration:none; transition:padding-left .3s; }
+    .rel-post:last-child { border-bottom:none; }
+    .rel-post:hover { padding-left:5px; }
+    .rel-icon { font-size:1.5rem; flex-shrink:0; }
+    .rel-name { font-family:'Tiro Devanagari Sanskrit',serif; font-size:0.93rem; color:var(--dawn-gold); line-height:1.3; margin-bottom:2px; }
+    .rel-sub  { font-size:0.71rem; color:rgba(255,251,240,0.4); font-family:'Cinzel',serif; letter-spacing:1px; }
+
+    /* comments */
+    .comments-section { position:relative; z-index:10; max-width:800px; margin:0 auto; padding:0 20px 80px; }
+    .comments-heading { font-family:'Cinzel',serif; font-size:1.28rem; color:var(--vedic-gold); letter-spacing:3px; margin-bottom:26px; padding-bottom:13px; border-bottom:1px solid rgba(255,140,60,0.15); }
+    .comment-card { background:linear-gradient(155deg, rgba(30,12,0,0.5), rgba(10,5,0,0.7)); border:1px solid rgba(255,140,60,0.1); padding:20px 24px; margin-bottom:13px; border-radius:1px; position:relative; }
+    .comment-card::before { content:'"'; position:absolute; top:-8px; left:16px; font-size:3.8rem; color:rgba(255,140,60,0.07); font-family:'Cormorant Garamond',serif; line-height:1; }
+    .c-hdr { display:flex; align-items:center; gap:11px; margin-bottom:11px; }
+    .avatar { width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#3A1800,#180C00); display:flex; align-items:center; justify-content:center; font-family:'Cinzel',serif; font-size:0.95rem; color:#fff; font-weight:700; flex-shrink:0; border:1px solid rgba(255,160,80,0.25); }
+    .c-name { font-family:'Cinzel',serif; font-size:0.81rem; color:var(--dawn-gold); letter-spacing:1px; }
+    .c-date { font-size:0.71rem; color:rgba(255,251,240,0.33); }
+    .c-txt  { font-size:0.96rem; color:var(--soft); line-height:1.85; font-style:italic; }
+    .c-like { margin-top:10px; font-size:0.74rem; color:rgba(255,251,240,0.34); cursor:pointer; transition:color .3s; display:inline-block; }
+    .c-like:hover { color:var(--dawn-rose); }
+
+    .c-form { background:linear-gradient(155deg, rgba(30,12,0,0.5), rgba(10,5,0,0.7)); border:1px solid rgba(255,140,60,0.14); padding:26px; margin-top:26px; }
+    .c-form-title { font-family:'Cinzel',serif; font-size:0.88rem; color:var(--vedic-gold); letter-spacing:2px; margin-bottom:16px; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
+    @media(max-width:500px){ .form-row{ grid-template-columns:1fr; } }
+    input, textarea { width:100%; background:rgba(0,0,0,0.55); border:1px solid rgba(255,140,60,0.18); color:var(--vedic-cream); padding:10px 14px; font-family:'Cormorant Garamond',serif; font-size:0.97rem; outline:none; transition:border-color .3s; border-radius:1px; }
+    input::placeholder, textarea::placeholder { color:rgba(255,251,240,0.28); }
+    input:focus, textarea:focus { border-color:var(--aurora-1); }
+    textarea { height:110px; resize:vertical; margin-bottom:12px; }
+    .submit-btn { background:linear-gradient(135deg,#280C00,#140600); border:1px solid rgba(255,140,60,0.38); color:var(--vedic-cream); padding:12px 32px; font-family:'Cinzel',serif; font-size:0.78rem; letter-spacing:3px; text-transform:uppercase; cursor:pointer; transition:all .3s; position:relative; overflow:hidden; }
+    .submit-btn::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg, rgba(255,107,53,0.3), rgba(200,80,0,0.3)); opacity:0; transition:opacity .3s; }
+    .submit-btn:hover::before { opacity:1; }
+    .submit-btn span { position:relative; z-index:1; }
+
+    footer { position:relative; z-index:10; text-align:center; padding:36px 20px; border-top:1px solid rgba(255,140,60,0.1); }
+    .foot-sym { font-size:2.8rem; color:rgba(201,168,76,0.22); display:block; margin-bottom:11px; }
+    .foot-txt { font-family:'Cinzel',serif; font-size:0.63rem; letter-spacing:4px; color:rgba(255,251,240,0.22); text-transform:uppercase; }
+
+    .audio-widget { position:fixed; bottom:22px; right:22px; z-index:100; background:linear-gradient(135deg, rgba(16,6,0,0.97), rgba(8,3,0,0.99)); border:1px solid rgba(255,140,60,0.25); padding:13px 17px; display:flex; align-items:center; gap:13px; backdrop-filter:blur(12px); box-shadow:0 10px 40px rgba(0,0,0,0.7), 0 0 28px rgba(255,107,53,0.15); }
+    .play-btn { width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg,var(--horizon),var(--horizon-d)); border:none; cursor:pointer; font-size:0.9rem; color:#fff; display:flex; align-items:center; justify-content:center; transition:transform .2s; }
+    .play-btn:hover { transform:scale(1.12); }
+    .audio-title { font-family:'Cinzel',serif; font-size:0.7rem; color:var(--vedic-gold); letter-spacing:1px; }
+    .audio-sub   { font-size:0.67rem; color:rgba(255,251,240,0.42); }
+
+    .reveal { opacity:0; transform:translateY(22px); transition:opacity .75s ease, transform .75s ease; }
+    .reveal.on { opacity:1; transform:none; }
+    @media(max-width:700px){ nav{display:none;} .mantra-card{padding:28px 18px;} .gayatri-parts{flex-direction:column; align-items:center;} .g-part{border-right:1px solid rgba(255,160,80,0.18); border-bottom:none; max-width:100%;} }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"शिव गायत्री — Shiv Gayatri",
+    "description":"ॐ तत्पुरुषाय विद्महे महादेवाय धीमहि। तन्नो रुद्रः प्रचोदयात्॥",
+    "publisher":{"@type":"Organization","name":"ShivaMarg"},
+    "inLanguage":"hi",
+    "mainEntityOfPage":{"@type":"WebPage","@id":"https://saurabhjha.live/Astha/shiv-gayatri/"}
+  }
+  </script>
+  <script>
+	window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+	</script>
+	<script defer src="/_vercel/insights/script.js"></script>
+
+		<script>
+	window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+	</script>
+	<script defer src="/_vercel/speed-insights/script.js"></script>
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3572576129639558"
+		crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="sky-bg"></div>
+<div class="horizon-strip"></div>
+<div class="sun-rise"></div>
+<div class="rays">
+  <div class="ray"></div><div class="ray"></div><div class="ray"></div><div class="ray"></div>
+  <div class="ray"></div><div class="ray"></div><div class="ray"></div><div class="ray"></div>
+</div>
+<div id="motes"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="site-nav">
+    <a href="/Astha/" class="logo">Shiva<em>Marg</em></a>
+    <nav>
+      <a href="#">शिव मंत्र</a>
+      <a href="#">स्तोत्र</a>
+      <a href="#">आरती</a>
+      <a href="#">चालीसा</a>
+    </nav>
+  </div>
+  <div class="breadcrumb">मुख्य पृष्ठ <span>🌅</span> गायत्री मंत्र <span>🌅</span> शिव गायत्री</div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="om-wrap">
+    <div class="ring ring-1"></div>
+    <div class="ring ring-2"></div>
+    <div class="ring ring-3"></div>
+    <span class="om-sym">ॐ</span>
+  </div>
+  <div class="hero-tag">✦ गायत्री छंद — शिव-मंत्र-राज ✦</div>
+  <h1>Shiv Gayatri</h1>
+  <div class="hero-deva">शिव गायत्री</div>
+  <div class="hero-orn">✦ ✦ ✦</div>
+  <p class="hero-desc">वेद का सर्वोच्च छंद — गायत्री — जब शिव के लिए प्रकट होता है तब बनता है शिव गायत्री। तत्पुरुष (परम पुरुष), महादेव (देवाधिदेव) और रुद्र (ज्ञान-प्रेरक) — एक ही मंत्र में त्रिविध शिव।</p>
+  <div class="composer-tag">गायत्री छंद • २४ अक्षर • त्रिपद</div>
+
+  <!-- THE MANTRA in hero -->
+  <div class="mantra-hero">
+    <div class="mantra-full">
+      ॐ तत्पुरुषाय विद्महे<br>
+      महादेवाय धीमहि।<br>
+      तन्नो रुद्रः प्रचोदयात्॥
+    </div>
+    <div class="mantra-roman">Oṃ Tatpuruṣāya Vidmahe | Mahādevāya Dhīmahi | Tanno Rudraḥ Pracodayāt</div>
+  </div>
+
+  <!-- Three-part pills -->
+  <div class="gayatri-parts">
+    <div class="g-part">
+      <span class="g-part-label">पद १ — ध्यान</span>
+      <span class="g-part-word">विद्महे</span>
+      <span class="g-part-meaning">हम जानते हैं, हम ध्यान करते हैं</span>
+    </div>
+    <div class="g-part">
+      <span class="g-part-label">पद २ — उपासना</span>
+      <span class="g-part-word">धीमहि</span>
+      <span class="g-part-meaning">हम धारण करते हैं, ध्यान में लीन हैं</span>
+    </div>
+    <div class="g-part">
+      <span class="g-part-label">पद ३ — प्रार्थना</span>
+      <span class="g-part-word">प्रचोदयात्</span>
+      <span class="g-part-meaning">वह हमें प्रेरित करें, जागृत करें</span>
+    </div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="tick-item">ॐ तत्पुरुषाय विद्महे</span><span class="tick-dot">🌅</span>
+    <span class="tick-item">महादेवाय धीमहि</span><span class="tick-dot">🌅</span>
+    <span class="tick-item">तन्नो रुद्रः प्रचोदयात्</span><span class="tick-dot">🌅</span>
+    <span class="tick-item">ॐ नमः शिवाय</span><span class="tick-dot">🌅</span>
+    <span class="tick-item">Oṃ Tatpuruṣāya Vidmahe</span><span class="tick-dot">🌅</span>
+    <span class="tick-item">Mahādevāya Dhīmahi</span><span class="tick-dot">🌅</span>
+    <span class="tick-item">Tanno Rudraḥ Pracodayāt</span><span class="tick-dot">🌅</span>
+    <span class="tick-item">ॐ तत्पुरुषाय विद्महे</span><span class="tick-dot">🌅</span>
+    <span class="tick-item">महादेवाय धीमहि</span><span class="tick-dot">🌅</span>
+    <span class="tick-item">तन्नो रुद्रः प्रचोदयात्</span><span class="tick-dot">🌅</span>
+    <span class="tick-item">ॐ नमः शिवाय</span><span class="tick-dot">🌅</span>
+    <span class="tick-item">Oṃ Tatpuruṣāya Vidmahe</span><span class="tick-dot">🌅</span>
+    <span class="tick-item">Mahādevāya Dhīmahi</span><span class="tick-dot">🌅</span>
+    <span class="tick-item">Tanno Rudraḥ Pracodayāt</span><span class="tick-dot">🌅</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="container" style="padding-top:52px;">
+
+  <!-- LEFT COLUMN -->
+  <div>
+    <div class="mantra-card reveal">
+      <span class="corner tl">🌅</span><span class="corner tr">🌅</span>
+      <span class="corner bl">🌅</span><span class="corner br">🌅</span>
+      <div class="card-label">✦ शिव गायत्री — सम्पूर्ण विवेचन ✦</div>
+
+      <!-- FULL MANTRA DISPLAY -->
+      <div class="mantra-display">
+        <div class="md-label">✦ सम्पूर्ण मंत्र ✦</div>
+        <div class="md-mantra">
+          ॐ तत्पुरुषाय विद्महे<br>
+          महादेवाय धीमहि।<br>
+          तन्नो रुद्रः प्रचोदयात्॥
+        </div>
+        <div class="md-roman">Oṃ Tatpuruṣāya Vidmahe | Mahādevāya Dhīmahi | Tanno Rudraḥ Pracodayāt</div>
+      </div>
+
+      <!-- FULL MEANING -->
+      <div class="meaning-block">
+        <div class="meaning-label">✦ सम्पूर्ण अर्थ ✦</div>
+        <div class="meaning-text">ॐ — हम तत्पुरुष (परम पुरुष, सर्वोच्च चेतना) को जानते हैं, ध्यान करते हैं। हम महादेव (देवों के देव, शिव) का ध्यान धारण करते हैं। वह रुद्र (ज्ञान का प्रकाश देने वाले, रोलाने वाले) हमें प्रेरित करें — हमारी बुद्धि, मन और आत्मा को जागृत और प्रकाशित करें।</div>
+      </div>
+
+      <div class="sec-div"><div class="sec-div-line"></div><div class="sec-div-txt">✦ शब्द-शब्द विश्लेषण ✦</div><div class="sec-div-line"></div></div>
+
+      <!-- WORD BY WORD -->
+      <div class="word-breakdown">
+        <div class="wb-title">✦ प्रत्येक शब्द का अर्थ ✦</div>
+        <div class="wb-grid">
+          <div class="wb-item">
+            <span class="wb-word">ॐ</span>
+            <span class="wb-roman">Om</span>
+            <div class="wb-meaning">प्रणव — ब्रह्म का प्रतीक, सर्वव्यापी नाद</div>
+          </div>
+          <div class="wb-item">
+            <span class="wb-word">तत्पुरुषाय</span>
+            <span class="wb-roman">Tatpuruṣāya</span>
+            <div class="wb-meaning">उस परम पुरुष के लिए — सर्वोच्च चेतना, शिव का पञ्चवक्र नाम</div>
+          </div>
+          <div class="wb-item">
+            <span class="wb-word">विद्महे</span>
+            <span class="wb-roman">Vidmahe</span>
+            <div class="wb-meaning">हम जानते हैं, हम ध्यान करते हैं — विद् धातु से (ज्ञान)</div>
+          </div>
+          <div class="wb-item">
+            <span class="wb-word">महादेवाय</span>
+            <span class="wb-roman">Mahādevāya</span>
+            <div class="wb-meaning">महान् देव के लिए — देवाधिदेव, सर्वोच्च देवता</div>
+          </div>
+          <div class="wb-item">
+            <span class="wb-word">धीमहि</span>
+            <span class="wb-roman">Dhīmahi</span>
+            <div class="wb-meaning">हम ध्यान धारण करें — धी (बुद्धि) + माहि (धारण)</div>
+          </div>
+          <div class="wb-item">
+            <span class="wb-word">तन्नो</span>
+            <span class="wb-roman">Tanno</span>
+            <div class="wb-meaning">तत् + नः — वह हमारे लिए, हमारे लाभ के लिए</div>
+          </div>
+          <div class="wb-item">
+            <span class="wb-word">रुद्रः</span>
+            <span class="wb-roman">Rudraḥ</span>
+            <div class="wb-meaning">रुद्र — रोलाने वाले, दुःख-नाशक, ज्ञान-दाता शिव</div>
+          </div>
+          <div class="wb-item">
+            <span class="wb-word">प्रचोदयात्</span>
+            <span class="wb-roman">Pracodayāt</span>
+            <div class="wb-meaning">प्रेरित करें, जागृत करें, प्रकाशित करें — बुद्धि को</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-div"><div class="sec-div-line"></div><div class="sec-div-txt">✦ त्रिपद गायत्री — तीन भाग ✦</div><div class="sec-div-line"></div></div>
+
+      <!-- THREE PARTS DEEP -->
+      <div class="gayatri-parts-card">
+
+        <div class="gp-part">
+          <div class="gp-num">१<span class="gp-num-label">पद</span></div>
+          <div class="gp-body">
+            <div class="gp-sanskrit">ॐ तत्पुरुषाय विद्महे</div>
+            <div class="gp-english">Om Tatpuruṣāya Vidmahe</div>
+            <div class="gp-meaning">यह प्रथम पद ध्यान-बीज है। "तत्पुरुष" शिव के पञ्चमुखों में से एक है — पूर्व-मुख, ज्ञान और बुद्धि का प्रतीक। "विद्महे" का अर्थ है — हम जानते हैं, हम साक्षात्कार करते हैं। यह पद उपासक के ज्ञान-प्रयास को व्यक्त करता है।</div>
+          </div>
+        </div>
+
+        <div class="gp-part">
+          <div class="gp-num">२<span class="gp-num-label">पद</span></div>
+          <div class="gp-body">
+            <div class="gp-sanskrit">महादेवाय धीमहि।</div>
+            <div class="gp-english">Mahādevāya Dhīmahi</div>
+            <div class="gp-meaning">"महादेव" — महान् देव, देवताओं में सर्वश्रेष्ठ। "धीमहि" में धी शब्द गायत्री का हृदय है — बुद्धि, विवेक, प्रज्ञा। यह पद उपासना का शिखर है जहाँ साधक महादेव को अपनी बुद्धि में धारण करता है।</div>
+          </div>
+        </div>
+
+        <div class="gp-part">
+          <div class="gp-num">३<span class="gp-num-label">पद</span></div>
+          <div class="gp-body">
+            <div class="gp-sanskrit">तन्नो रुद्रः प्रचोदयात्॥</div>
+            <div class="gp-english">Tanno Rudraḥ Pracodayāt</div>
+            <div class="gp-meaning">"रुद्र" — रोलाने वाले, संसार के दुःखों को नष्ट करने वाले। "प्रचोदयात्" — प्रेरित करें, जागृत करें। यह तृतीय पद प्रार्थना है — रुद्र से याचना कि वे हमारी बुद्धि को प्रेरित और प्रकाशित करें।</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-div"><div class="sec-div-line"></div><div class="sec-div-txt">✦ जप विधि ✦</div><div class="sec-div-line"></div></div>
+
+      <!-- JAPA GUIDE -->
+      <div class="japa-guide">
+        <div class="jg-title">✦ शिव गायत्री जप विधि ✦</div>
+        <div class="jg-row">
+          <div class="jg-icon">🌅</div>
+          <div class="jg-text"><strong>ब्रह्म-मुहूर्त</strong>सूर्योदय से ४८ मिनट पहले — जब आकाश में प्रथम प्रकाश आए, तब इस मंत्र का जप सर्वाधिक फलदायी है। उगते सूर्य की दिशा में मुख करें।</div>
+        </div>
+        <div class="jg-row">
+          <div class="jg-icon">📿</div>
+          <div class="jg-text"><strong>रुद्राक्ष माला</strong>१०८ दाने की रुद्राक्ष माला पर जप करें। प्रतिदिन न्यूनतम ३ माला (३२४ जप) — विशेष साधना में १०८ माला (११,६६४ जप)।</div>
+        </div>
+        <div class="jg-row">
+          <div class="jg-icon">🧘</div>
+          <div class="jg-text"><strong>आसन और मुद्रा</strong>पद्मासन या सुखासन में बैठें। ज्ञान-मुद्रा (अँगूठा-तर्जनी मिलाएँ) — यह बुद्धि-प्रेरणा की मुद्रा है, गायत्री के "धी" के अनुकूल।</div>
+        </div>
+        <div class="jg-row">
+          <div class="jg-icon">🌬️</div>
+          <div class="jg-text"><strong>श्वास-लय</strong>प्रत्येक पद पर एक गहरी श्वास — तत्पुरुषाय विद्महे (श्वास लेते हुए), महादेवाय धीमहि (थामते हुए), तन्नो रुद्रः प्रचोदयात् (छोड़ते हुए)।</div>
+        </div>
+        <div class="jg-row">
+          <div class="jg-icon">🔥</div>
+          <div class="jg-text"><strong>भावना</strong>जप करते समय भावना करें — शिव का सूर्य-मंडल-स्वरूप उगते सूर्य की तरह आपकी बुद्धि को प्रकाशित कर रहा है। रुद्र की रोशनी आपके मस्तक में प्रवेश कर रही है।</div>
+        </div>
+      </div>
+
+      <!-- PHALA SHRUTI -->
+      <div class="sec-div"><div class="sec-div-line"></div><div class="sec-div-txt">✦ फलश्रुति — मंत्र का फल ✦</div><div class="sec-div-line"></div></div>
+      <div class="mantra-display" style="margin-top:0;">
+        <div class="md-label">✦ फलश्रुति ✦</div>
+        <div class="md-mantra" style="font-size:clamp(1rem,2.2vw,1.45rem);">
+          शिवगायत्रीं जपेन्नित्यं शिवभक्तिपरायणः।<br>
+          सर्वपापविनिर्मुक्तः शिवलोकं स गच्छति॥<br>
+          गायत्रीं शिवरूपां च यो जपेत् नियतेन्द्रियः।<br>
+          तस्य बुद्धिर्महायोगी रुद्रतेजसि लीयते॥
+        </div>
+        <div class="md-roman">Śivagāyatrīṃ japen nityaṃ śivabhaktiparāyaṇaḥ | Sarvapāpavinirmuktaḥ śivalokaṃ sa gacchati | Gāyatrīṃ śivarūpāṃ ca yo japet niyatendriyaḥ | Tasya buddhir mahāyogī rudratejasi līyate</div>
+        <div class="meaning-text" style="margin-top:14px; font-size:0.88rem; color:rgba(255,251,240,0.6); text-align:center; font-style:italic;">जो शिव-भक्त नित्य शिव गायत्री का जप करता है, वह सब पापों से मुक्त होकर शिवलोक जाता है। जो जितेन्द्रिय होकर शिव-रूप गायत्री का जप करता है, उसकी बुद्धि रुद्र-तेज में विलीन हो जाती है — महायोगी बन जाता है।</div>
+      </div>
+
+    </div><!-- /mantra-card -->
+
+    <!-- ABOUT -->
+    <div class="about-card reveal">
+      <h3>🌅 शिव गायत्री — वेद का सूर्य</h3>
+      <p>गायत्री छंद को वेदों का माँ कहा जाता है — यह ३ पंक्तियों में ८-८-८ (कुल २४) अक्षरों का दिव्य छंद है। सामान्यतः सवित्र-गायत्री (ॐ भूर्भुवः स्वः...) प्रसिद्ध है, किंतु प्रत्येक देवता की गायत्री होती है।</p>
+      <p>शिव गायत्री में "तत्पुरुष" शिव के पञ्चमुखों में से एक है (तत्पुरुष, अघोर, सद्योजात, वामदेव, ईशान)। यह मंत्र शिव के ज्ञान-स्वरूप की स्तुति है। रुद्र यहाँ संहार-शक्ति नहीं — ज्ञान-प्रेरक शक्ति के रूप में है।</p>
+      <div class="sig-list">
+        <div class="sig-item"><div class="sig-icon">🌅</div><div class="sig-text"><strong>गायत्री छंद — २४ अक्षर</strong>ॐ तत्पुरुषाय विद्महे (८) | महादेवाय धीमहि (८) | तन्नो रुद्रः प्रचोदयात् (८) — तीन पद, प्रत्येक में ८ अक्षर। यही गायत्री छंद का नियम है।</div></div>
+        <div class="sig-item"><div class="sig-icon">🧠</div><div class="sig-text"><strong>धी — बुद्धि का मंत्र</strong>"धीमहि" शब्द में "धी" (बुद्धि/विवेक) है — गायत्री मंत्र का यही हृदय है। शिव गायत्री बुद्धि-वर्धन के लिए सर्वश्रेष्ठ मंत्र है। विद्यार्थियों के लिए विशेष फलदायी।</div></div>
+        <div class="sig-item"><div class="sig-icon">🕉️</div><div class="sig-text"><strong>तत्पुरुष — पञ्चवक्र शिव</strong>तत्पुरुष शिव के पाँच मुखों में पूर्व-मुख है — पीत-वर्ण, ज्ञान का प्रतीक। तत्पुरुष के मंत्र "ॐ नमस्ते तत्पुरुषाय" की यह गायत्री रूप है।</div></div>
+        <div class="sig-item"><div class="sig-icon">⚡</div><div class="sig-text"><strong>रुद्र-तेज — ज्ञान का प्रकाश</strong>अंतिम पद में "रुद्रः प्रचोदयात्" — रुद्र प्रेरित करें। यहाँ रुद्र संहार-रूप नहीं, बल्कि ज्ञान-प्रकाश-रूप में हैं। जैसे सूर्य अंधकार नष्ट करता है, रुद्र-तेज अज्ञान नष्ट करता है।</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <!-- Interactive Japa Counter -->
+    <div class="widget reveal">
+      <div class="widget-title">✦ जप गणना ✦</div>
+      <div class="japa-counter">
+        <div class="counter-display" id="japaCount">0</div>
+        <div class="counter-label">मंत्र जप</div>
+        <div class="counter-btns">
+          <button class="cnt-btn" id="japaBtn" onclick="addJapa()">+ जप</button>
+          <button class="cnt-btn reset" onclick="resetJapa()">रीसेट</button>
+        </div>
+        <div class="japa-targets">
+          <div class="target-pill" id="t11" data-target="11">११</div>
+          <div class="target-pill" id="t108" data-target="108">१०८</div>
+          <div class="target-pill" id="t1008" data-target="1008">१००८</div>
+        </div>
+        <div class="japa-progress"><div class="japa-prog-fill" id="jpFill"></div></div>
+      </div>
+    </div>
+
+    <!-- Gayatri Structure -->
+    <div class="widget reveal">
+      <div class="widget-title">✦ गायत्री छंद संरचना ✦</div>
+      <div class="q-m"><div class="q-mt">ॐ तत्पुरुषाय विद्महे</div><div class="q-ms">पद १ — ८ अक्षर — ध्यान-पद</div></div>
+      <div class="q-m"><div class="q-mt">महादेवाय धीमहि</div><div class="q-ms">पद २ — ८ अक्षर — उपासना-पद</div></div>
+      <div class="q-m"><div class="q-mt">तन्नो रुद्रः प्रचोदयात्</div><div class="q-ms">पद ३ — ८ अक्षर — प्रार्थना-पद</div></div>
+      <div class="q-m" style="border-top:1px solid rgba(255,140,60,0.1); margin-top:6px; padding-top:12px;"><div class="q-mt" style="color:var(--aurora-1);">कुल = २४ अक्षर</div><div class="q-ms">गायत्री छंद का नियम</div></div>
+    </div>
+
+    <!-- Benefits -->
+    <div class="widget reveal">
+      <div class="widget-title">✦ जप के लाभ ✦</div>
+      <div class="benefit-grid">
+        <div class="benefit-item"><div class="benefit-icon">🧠</div><div class="benefit-text">बुद्धि, स्मरण-शक्ति और विवेक में वृद्धि</div></div>
+        <div class="benefit-item"><div class="benefit-icon">☀️</div><div class="benefit-text">आत्म-ज्ञान और आध्यात्मिक जागृति</div></div>
+        <div class="benefit-item"><div class="benefit-icon">🎓</div><div class="benefit-text">विद्यार्थियों के लिए विशेष — परीक्षा में सफलता</div></div>
+        <div class="benefit-item"><div class="benefit-icon">🌟</div><div class="benefit-text">रुद्र-तेज से अज्ञान और भय का नाश</div></div>
+        <div class="benefit-item"><div class="benefit-icon">🕉️</div><div class="benefit-text">मंत्र-सिद्धि और योग में प्रगति</div></div>
+        <div class="benefit-item"><div class="benefit-icon">🙏</div><div class="benefit-text">शिवलोक प्राप्ति — फलश्रुति</div></div>
+      </div>
+    </div>
+
+    <!-- Key words -->
+    <div class="widget reveal">
+      <div class="widget-title">✦ मंत्र के मुख्य शब्द ✦</div>
+      <div class="names-grid">
+        <div class="name-chip">तत्पुरुष</div><div class="name-chip">महादेव</div>
+        <div class="name-chip">विद्महे</div><div class="name-chip">धीमहि</div>
+        <div class="name-chip">रुद्र</div><div class="name-chip">प्रचोदयात्</div>
+        <div class="name-chip">धी</div><div class="name-chip">ॐकार</div>
+      </div>
+    </div>
+
+    <!-- Auspicious Times -->
+    <div class="widget reveal">
+      <div class="widget-title">✦ जप का शुभ काल ✦</div>
+      <div class="q-m"><div class="q-mt">🌅 ब्रह्म-मुहूर्त</div><div class="q-ms">सूर्योदय से पूर्व — सर्वश्रेष्ठ</div></div>
+      <div class="q-m"><div class="q-mt">☀️ सूर्योदय-काल</div><div class="q-ms">उगते सूर्य की ओर मुख करके</div></div>
+      <div class="q-m"><div class="q-mt">🔱 सोमवार</div><div class="q-ms">विशेष फलदायी</div></div>
+      <div class="q-m"><div class="q-mt">🌿 श्रावण</div><div class="q-ms">मास भर नित्य जप</div></div>
+      <div class="q-m"><div class="q-mt">⚡ महाशिवरात्रि</div><div class="q-ms">रात्रि-जागरण में जप</div></div>
+    </div>
+
+    <!-- Related -->
+    <div class="widget reveal">
+      <div class="widget-title">✦ संबंधित स्तोत्र ✦</div>
+      <a href="/Astha/shiv-aarti/" class="rel-post"><div class="rel-icon">🪔</div><div><div class="rel-name">शिव आरती</div><div class="rel-sub">Om Jai Shiv Onkara</div></div></a>
+      <a href="/Astha/shiv-chalisa/" class="rel-post"><div class="rel-icon">📿</div><div><div class="rel-name">शिव चालीसा</div><div class="rel-sub">40 Chaupai</div></div></a>
+      <a href="/Astha/shiv-kavacham/" class="rel-post"><div class="rel-icon">🛡️</div><div><div class="rel-name">शिव कवचम्</div><div class="rel-sub">Sarvaang Raksha</div></div></a>
+      <a href="/Astha/Shiva-lingashtakam/" class="rel-post"><div class="rel-icon">🏛️</div><div><div class="rel-name">लिंगाष्टकम्</div><div class="rel-sub">Lingashtakam</div></div></a>
+      <div class="rel-post"><div class="rel-icon">🌙</div><div><div class="rel-name">शिवाष्टकम्</div><div class="rel-sub">Shivashtakam</div></div></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- COMMENTS -->
+<div class="comments-section">
+  <div class="comments-heading reveal">🌅 भक्तों के विचार</div>
+
+  <h3>Please Login/Register for writing comments 🙏</h3>
+</div>
+<div id="sm-comments" data-page-id="shiva-gayatri-mantra"></div>
+<!-- FOOTER -->
+<footer>
+  <span class="foot-sym">🌅</span>
+  <div class="foot-txt">॥ ॐ तत्पुरुषाय विद्महे ॥ महादेवाय धीमहि ॥ तन्नो रुद्रः प्रचोदयात् ॥ © ShivaMarg 2026 ∥ saurabhjha.live</div>
+</footer>
+
+<!-- Audio Widget -->
+<div class="audio-widget">
+  <button id="playBtn" class="play-btn">▶</button>
+  <div>
+    <div class="audio-title">SHIV GAYATRI</div>
+    <div class="audio-sub">ॐ तत्पुरुषाय विद्महे</div>
+  </div>
+</div>
+<div id="player" style="width:0;height:0;overflow:hidden;"></div>
+
+<script>
+  /* Light motes */
+  const mc = document.getElementById('motes');
+  const moteColors = [
+    'rgba(255,180,80,0.85)',
+    'rgba(255,220,130,0.8)',
+    'rgba(255,140,60,0.75)',
+    'rgba(255,243,200,0.7)',
+  ];
+  for (let i = 0; i < 60; i++) {
+    const m = document.createElement('div'); m.className = 'mote';
+    const sz = 1 + Math.random() * 2.5;
+    const c = moteColors[Math.floor(Math.random() * moteColors.length)];
+    m.style.cssText = `left:${Math.random()*100}%;width:${sz}px;height:${sz}px;background:radial-gradient(circle, ${c} 0%, transparent 70%);animation-duration:${10+Math.random()*18}s;animation-delay:${Math.random()*24}s;`;
+    mc.appendChild(m);
+  }
+
+  /* ── JAPA COUNTER ── */
+  const targets = [11, 108, 1008];
+  const targetLabels = { 11:'११', 108:'१०८', 1008:'१००८' };
+  let japaCount = 0;
+  let currentTarget = 108;
+
+  const toDevanagari = n => String(n).split('').map(d => ['०','१','२','३','४','५','६','७','८','९'][+d]).join('');
+
+  function updateCounter() {
+    document.getElementById('japaCount').textContent = toDevanagari(japaCount);
+    const pct = Math.min((japaCount / currentTarget) * 100, 100);
+    document.getElementById('jpFill').style.width = pct + '%';
+    document.querySelectorAll('.target-pill').forEach(p => {
+      const t = parseInt(p.dataset.target);
+      p.classList.toggle('done', japaCount >= t);
+    });
+  }
+
+  function addJapa() {
+    japaCount++;
+    updateCounter();
+    const btn = document.getElementById('japaBtn');
+    btn.style.transform = 'scale(0.92)';
+    btn.style.borderColor = 'var(--aurora-1)';
+    setTimeout(() => { btn.style.transform = ''; btn.style.borderColor = ''; }, 120);
+  }
+
+  function resetJapa() {
+    japaCount = 0;
+    updateCounter();
+  }
+
+  document.querySelectorAll('.target-pill').forEach(p => {
+    p.addEventListener('click', function() {
+      currentTarget = parseInt(this.dataset.target);
+      updateCounter();
+    });
+  });
+
+  /* Reveal */
+  const rv = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) { setTimeout(() => e.target.classList.add('on'), i * 30); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.06 });
+  rv.forEach(el => obs.observe(el));
+
+  /* Audio */
+  let playing = false;
+  function togglePlay(btn) { playing = !playing; btn.textContent = playing ? '⏸' : '▶'; }
+
+  /* Likes */
+  document.querySelectorAll('.c-like').forEach(el => {
+    el.addEventListener('click', function() { this.style.color = 'var(--dawn-rose)'; });
+  });
+</script>
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+  let player;
+  let isPlaying = false;
+
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player("player", {
+      videoId: "5o3d9L4G25s",
+      playerVars: {
+        controls: 0,
+        modestbranding: 1,
+        rel: 0
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const btn = document.getElementById("playBtn");
+
+    btn.onclick = function () {
+      if (!player) return;
+
+      if (!isPlaying) {
+        player.playVideo();
+        btn.innerHTML = "⏸";
+        isPlaying = true;
+      } else {
+        player.pauseVideo();
+        btn.innerHTML = "▶";
+        isPlaying = false;
+      }
+    };
+  });
+</script>
+
+<script src="/js/auth.js"></script>
+  <script src="/js/s-comments.js"></script>
+  <script>
+    const SM_API = 'https://shivamargbackend.onrender.com'; // ← change to your server URL in prod
+    SmAuth.init({ apiBase: SM_API });
+    SmComments.init({ apiBase: SM_API });
+  </script>
+</body>
+</html>
