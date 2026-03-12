@@ -150,7 +150,9 @@
     .count-dot { width:4px; height:4px; border-radius:50%; background:var(--gold); flex-shrink:0; }
     .card-arrow { position:absolute; bottom:18px; right:18px; width:30px; height:30px; border-radius:50%; border:1px solid rgba(212,172,13,0.25); display:flex; align-items:center; justify-content:center; font-size:0.75rem; color:rgba(212,172,13,0.4); transition:all 0.3s; z-index:2; }
     .card:hover .card-arrow { background:var(--gold); border-color:var(--gold); color:#000; transform:rotate(45deg); }
-
+    .foot-links{display:flex;justify-content:center;gap:24px;margin-top:14px;flex-wrap:wrap}
+    .foot-links a{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:2px;color:rgba(255,251,242,.32);text-decoration:none;text-transform:uppercase;transition:color .3s}
+    .foot-links a:hover{color:var(--gold-lt)}
     /* ── CARD COLOR THEMES ── */
     /* Aigiri — crimson red */
     .d1 .card-bg { background:linear-gradient(140deg,rgba(80,0,30,0.92),rgba(10,0,4,0.96)); }
@@ -611,6 +613,13 @@
 <footer>
   <span class="foot-sym">🌺</span>
   <div class="foot-txt">॥ जय जय हे महिषासुरमर्दिनि ॥ नमस्तस्यै नमो नमः ॥ © ShivaMarg 2026</div>
+  <div class="foot-links">
+    <a href="/">Home</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
+    <a href="/privacy-policy/">Privacy Policy</a>
+    <a href="/disclaimer/">Disclaimer</a>
+  </div>
 </footer>
 
 <script>
