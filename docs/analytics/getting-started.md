@@ -152,7 +152,7 @@ export default function RootLayout({
       <body>
         {children}
         <Analytics />
-      <script src="/search.js"></script>\n</body>
+      <script src="/js/search.js"></script>\n</body>
     </html>
   );
 }
@@ -171,7 +171,7 @@ export default function RootLayout({ children }) {
       <body>
         {children}
         <Analytics />
-      <script src="/search.js"></script>\n</body>
+      <script src="/js/search.js"></script>\n</body>
     </html>
   );
 }
@@ -236,7 +236,7 @@ export default function App() {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
-      <script src="/search.js"></script>\n</body>
+      <script src="/js/search.js"></script>\n</body>
     </html>
   );
 }
@@ -269,7 +269,7 @@ export default function App() {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
-      <script src="/search.js"></script>\n</body>
+      <script src="/js/search.js"></script>\n</body>
     </html>
   );
 }
@@ -426,7 +426,7 @@ import Analytics from '@vercel/analytics/astro';
 	</head>
 	<body>
 		<slot />
-  <script src="/search.js"></script>\n</body>
+  <script src="/js/search.js"></script>\n</body>
 </html>
 ```
 
@@ -445,7 +445,7 @@ import Analytics from '@vercel/analytics/astro';
 	</head>
 	<body>
 		<slot />
-  <script src="/search.js"></script>\n</body>
+  <script src="/js/search.js"></script>\n</body>
 </html>
 ```
 
