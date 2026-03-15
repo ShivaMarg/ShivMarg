@@ -171,7 +171,7 @@
       <div style="background:rgba(230,81,0,.06);border:1px solid rgba(230,81,0,.16);padding:22px 18px;text-align:center">
         <div style="font-size:2rem;margin-bottom:10px">✉️</div>
         <div style="font-family:Cinzel,serif;font-size:.7rem;letter-spacing:3px;color:var(--saff-p);text-transform:uppercase;margin-bottom:8px">Email</div>
-        <a href="mailto:hello@shivmarg.live" style="font-size:.95rem;color:var(--teal-s);text-decoration:none;border-bottom:1px solid rgba(77,208,225,.25)">hello@shivmarg.live</a>
+        <a href="mailto:saurav.jha@zohomail.in" style="font-size:.95rem;color:var(--teal-s);text-decoration:none;border-bottom:1px solid rgba(77,208,225,.25)">saurav.jha@zohomail.in</a>
       </div>
       <div style="background:rgba(230,81,0,.06);border:1px solid rgba(230,81,0,.16);padding:22px 18px;text-align:center">
         <div style="font-size:2rem;margin-bottom:10px">🌐</div>
@@ -266,12 +266,12 @@
         btn.style.color = '#fff'; btn.style.opacity = '1';
       } else {
         var d = await res.json();
-        msg.textContent = 'Error: '+(d.errors?d.errors.map(function(x){return x.message}).join(', '):'Unknown')+'. Email hello@shivmarg.live';
+        msg.textContent = 'Error: '+(d.errors?d.errors.map(function(x){return x.message}).join(', '):'Unknown')+'. Email saurav.jha@zohomail.in';
         msg.style.color = 'rgba(255,100,80,.9)'; msg.style.display = 'block';
         btn.textContent = '🙏 Send Message'; btn.disabled = false; btn.style.opacity = '1';
       }
     } catch(err){
-      msg.textContent = 'Network error. Please email hello@shivmarg.live directly.';
+      msg.textContent = 'Network error. Please email saurav.jha@zohomail.in directly.';
       msg.style.color = 'rgba(255,100,80,.9)'; msg.style.display = 'block';
       btn.textContent = '🙏 Send Message'; btn.disabled = false; btn.style.opacity = '1';
     }
