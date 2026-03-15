@@ -230,15 +230,33 @@
   }
 
   /* ─── API CALLS ─── */
-  async function apiPost(path, body) {
-    const res = await fetch(API_BASE + path, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.detail || 'Request failed');
-    return data;
+  const RETRY_DELAYS = [2000, 5000]; // ms before retry 1 and retry 2 (Render cold-start)
+
+  async function apiPost(path, body, attempt = 0) {
+    try {
+      const res = await fetch(API_BASE + path, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.detail || 'Request failed');
+      return data;
+    } catch (e) {
+      // Network-level failure (ERR_CONNECTION_CLOSED, fetch failed, etc.)
+      // Likely a Render free-tier cold start — retry automatically
+      if (attempt < RETRY_DELAYS.length && !(e instanceof SyntaxError)) {
+        const delay = RETRY_DELAYS[attempt];
+        toast('\u23F3 \u0938\u0930\u094D\u0935\u0930 \u091C\u093E\u0917 \u0930\u0939\u093E \u0939\u0948\u2026 (' + Math.round(delay / 1000) + 's \u092E\u0947\u0902 \u092A\u0941\u0928\u0903 \u092A\u094D\u0930\u092F\u093E\u0938)');
+        await new Promise(r => setTimeout(r, delay));
+        return apiPost(path, body, attempt + 1);
+      }
+      // All retries exhausted — surface a friendly message
+      if (e.name === 'TypeError' || e.message === 'Failed to fetch') {
+        throw new Error('\u0938\u0930\u094D\u0935\u0930 \u0938\u0947 \u0938\u0902\u092A\u0930\u094D\u0915 \u0928\u0939\u0940\u0902 \u0939\u094B \u092A\u093E\u092F\u093E\u0964 \u0915\u0943\u092A\u092F\u093E \u0915\u0941\u091B \u0938\u0947\u0915\u0902\u0921 \u092C\u093E\u0926 \u092A\u0941\u0928\u0903 \u092A\u094D\u0930\u092F\u093E\u0938 \u0915\u0930\u0947\u0902\u0964');
+      }
+      throw e;
+    }
   }
 
   async function verifyToken() {
