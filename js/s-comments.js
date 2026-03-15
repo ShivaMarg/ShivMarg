@@ -30,6 +30,60 @@
   let loading   = false;
   let editingId = null;
 
+  /* ─── AVATAR COLOR ─── */
+  // Mirrors the same map as auth.js — keep both in sync
+  const AVATAR_COLORS = {
+    A: 'linear-gradient(135deg,#E53935,#B71C1C)',
+    B: 'linear-gradient(135deg,#D81B60,#880E4F)',
+    C: 'linear-gradient(135deg,#8E24AA,#4A148C)',
+    D: 'linear-gradient(135deg,#5E35B1,#311B92)',
+    E: 'linear-gradient(135deg,#3949AB,#1A237E)',
+    F: 'linear-gradient(135deg,#1E88E5,#0D47A1)',
+    G: 'linear-gradient(135deg,#039BE5,#01579B)',
+    H: 'linear-gradient(135deg,#00ACC1,#006064)',
+    I: 'linear-gradient(135deg,#00897B,#004D40)',
+    J: 'linear-gradient(135deg,#43A047,#1B5E20)',
+    K: 'linear-gradient(135deg,#7CB342,#33691E)',
+    L: 'linear-gradient(135deg,#C0CA33,#827717)',
+    M: 'linear-gradient(135deg,#F9A825,#F57F17)',
+    N: 'linear-gradient(135deg,#FB8C00,#E65100)',
+    O: 'linear-gradient(135deg,#F4511E,#BF360C)',
+    P: 'linear-gradient(135deg,#8D6E63,#4E342E)',
+    Q: 'linear-gradient(135deg,#546E7A,#263238)',
+    R: 'linear-gradient(135deg,#EC407A,#AD1457)',
+    S: 'linear-gradient(135deg,#7C4DFF,#4527A0)',
+    T: 'linear-gradient(135deg,#00BCD4,#00838F)',
+    U: 'linear-gradient(135deg,#FF7043,#BF360C)',
+    V: 'linear-gradient(135deg,#26A69A,#00695C)',
+    W: 'linear-gradient(135deg,#AB47BC,#6A1B9A)',
+    X: 'linear-gradient(135deg,#EF5350,#C62828)',
+    Y: 'linear-gradient(135deg,#FDD835,#F9A825)',
+    Z: 'linear-gradient(135deg,#29B6F6,#0277BD)',
+  };
+
+  /**
+   * Returns a CSS `background` value for a given avatar letter.
+   * Prefers SmAuth.getAvatarBg() if auth.js is loaded (single source of truth),
+   * otherwise falls back to the local map above.
+   */
+  function getAvatarBg(letter) {
+    if (window.SmAuth && typeof window.SmAuth.getAvatarBg === 'function') {
+      return window.SmAuth.getAvatarBg(letter);
+    }
+    const key = (letter || '?').toUpperCase();
+    return AVATAR_COLORS[key] || 'linear-gradient(135deg,#7C4DFF,#512DA8)';
+  }
+
+  /**
+   * Returns the display letter for an avatar.
+   * Uses a stored single-char avatar field if present, else the first letter of username.
+   */
+  function avatarChar(obj) {
+    return (obj.avatar && obj.avatar.length === 1)
+      ? obj.avatar.toUpperCase()
+      : (obj.username || '?')[0].toUpperCase();
+  }
+
   /* ─── STYLES ─── */
   function injectStyles() {
     if (document.getElementById('sm-comments-styles')) return;
@@ -146,7 +200,6 @@
       }
       .sm-c-avatar {
         width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
-        background: linear-gradient(135deg, #7C4DFF, #512DA8);
         display: flex; align-items: center; justify-content: center;
         font-family: 'Cinzel', serif; font-size: 0.9rem; color: #fff; font-weight: 700;
         border: 1px solid rgba(124,77,255,0.3);
@@ -351,6 +404,8 @@
           <button class="sm-login-prompt-btn" onclick="SmAuth.requireLogin()">🔱 लॉगिन / खाता बनाएँ</button>
         </div>`;
     }
+    const char = avatarChar(user);
+    const bg   = getAvatarBg(char);
     return `
       <div class="sm-write-box">
         <div class="sm-write-title">✦ टिप्पणी लिखें ✦</div>
@@ -362,7 +417,7 @@
           <button class="sm-post-btn" id="sm-post-btn" onclick="SmComments._submit()">
             <span>🙏 टिप्पणी भेजें</span>
           </button>
-          <div class="sm-c-avatar" style="font-size:0.75rem">${user.avatar || user.username[0].toUpperCase()}</div>
+          <div class="sm-c-avatar" style="background:${bg};font-size:0.75rem">${char}</div>
           <span style="font-family:'Cinzel',serif;font-size:0.65rem;color:#B39DDB;letter-spacing:1px;">${user.username}</span>
         </div>
         <div id="sm-post-error" class="sm-msg" style="display:none"></div>
@@ -370,14 +425,15 @@
   }
 
   function renderCard(c, uid) {
-    const isOwn     = uid === c.user_id;
-    const isEditing = editingId === c.id;
-    const isLoggedIn = !!uid;
+    const isOwn      = uid === c.user_id;
+    const isEditing  = editingId === c.id;
+    const char       = avatarChar(c);
+    const bg         = getAvatarBg(char);
 
     return `
       <div class="sm-comment-card${isEditing ? ' editing' : ''}" id="sm-card-${c.id}">
         <div class="sm-comment-hdr">
-          <div class="sm-c-avatar">${c.avatar || c.username[0].toUpperCase()}</div>
+          <div class="sm-c-avatar" style="background:${bg}">${char}</div>
           <div class="sm-c-meta">
             <div class="sm-c-name">${escapeHtml(c.username)}</div>
             <div class="sm-c-date">
