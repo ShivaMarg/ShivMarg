@@ -1,0 +1,128 @@
+[
+  {
+    "title": "भगवान शिव मंत्र",
+    "titleEng": "Shiva Mantras",
+    "url": "/shiva-mantras",
+    "category": "शिव",
+    "symbol": "🔱",
+    "preview": "नमामि शमीशान निर्वाण रूपं, विभुं व्यापकं ब्रह्म वेदस्वरूपम्",
+    "keywords": ["शिव", "shiv", "shiva", "महादेव", "om namah shivay", "शंकर"]
+  },
+  {
+    "title": "माँ दुर्गा मंत्र",
+    "titleEng": "Durga Mantras",
+    "url": "/durga-mantras",
+    "category": "शक्ति",
+    "symbol": "🌺",
+    "preview": "या देवी सर्वभूतेषु शक्तिरूपेण संस्थिता",
+    "keywords": ["दुर्गा", "durga", "shakti", "mata", "देवी"]
+  },
+  {
+    "title": "श्री कृष्ण महामंत्र",
+    "titleEng": "Krishna Mantras",
+    "url": "/Krishna-Mahamantras",
+    "category": "कृष्ण",
+    "symbol": "🪈",
+    "preview": "हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे",
+    "keywords": ["कृष्ण", "krishna", "hare krishna", "गोविन्द", "माखन चोर"]
+  },
+  {
+    "title": "श्री गणेश मंत्र",
+    "titleEng": "Ganesh Mantras",
+    "url": "/ganesh-mantras",
+    "category": "गणेश",
+    "symbol": "🐘",
+    "preview": "ॐ गं गणपतये नमः",
+    "keywords": ["गणेश", "ganesh", "गणपति", "विघ्नहर्ता", "ganapati"]
+  },
+  {
+    "title": "माँ लक्ष्मी मंत्र",
+    "titleEng": "Lakshmi Mantras",
+    "url": "/Lakshmi-mantras",
+    "category": "शक्ति",
+    "symbol": "🪷",
+    "preview": "ॐ श्रीं ह्रीं श्रीं महालक्ष्म्यै नमः",
+    "keywords": ["लक्ष्मी", "lakshmi", "धन", "समृद्धि", "wealth"]
+  },
+  {
+    "title": "श्री राम मंत्र",
+    "titleEng": "Shri Ram Mantras",
+    "url": "/Shri-ram-mantra",
+    "category": "राम",
+    "symbol": "🏹",
+    "preview": "श्री राम जय राम जय जय राम",
+    "keywords": ["राम", "ram", "rama", "सिया राम", "जय राम"]
+  },
+  {
+    "title": "हनुमान जी मंत्र",
+    "titleEng": "Hanuman Mantras",
+    "url": "/hanumanji",
+    "category": "राम",
+    "symbol": "🙏",
+    "preview": "जय हनुमान ज्ञान गुण सागर, जय कपीस तिहु लोक उजागर",
+    "keywords": ["हनुमान", "hanuman", "बजरंग", "bajrang", "पवनपुत्र"]
+  },
+  {
+    "title": "माँ सरस्वती मंत्र",
+    "titleEng": "Saraswati Mantras",
+    "url": "/Sharaswati-mantra",
+    "category": "शक्ति",
+    "symbol": "🎵",
+    "preview": "या कुन्देन्दु तुषार हार धवला",
+    "keywords": ["सरस्वती", "saraswati", "विद्या", "ज्ञान", "vidya"]
+  },
+  {
+    "title": "भगवान विष्णु मंत्र",
+    "titleEng": "Vishnu Mantras",
+    "url": "/bhagvan-vishnu-mantra",
+    "category": "विष्णु",
+    "symbol": "🌀",
+    "preview": "ॐ नमो भगवते वासुदेवाय",
+    "keywords": ["विष्णु", "vishnu", "नारायण", "narayan", "वासुदेव"]
+  },
+  {
+    "title": "माँ काली मंत्र",
+    "titleEng": "Kali Mantras",
+    "url": "/maha-kali-mantra",
+    "category": "शक्ति",
+    "symbol": "⚡",
+    "preview": "क्रीं काली क्रीं महाकाल्यै नमः",
+    "keywords": ["काली", "kali", "महाकाली", "mahakali", "shakti"]
+  },
+  {
+    "title": "भगवान सूर्य मंत्र",
+    "titleEng": "Surya Mantras",
+    "url": "/surya-dev",
+    "category": "अन्य",
+    "symbol": "☀️",
+    "preview": "ॐ ह्रां ह्रीं ह्रौं सः सूर्याय नमः",
+    "keywords": ["सूर्य", "surya", "sun", "आदित्य", "aditya"]
+  },
+  {
+    "title": "गायत्री मंत्र",
+    "titleEng": "Gayatri Mantra",
+    "url": "/Gayatri-mantra",
+    "category": "अन्य",
+    "symbol": "🌅",
+    "preview": "ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यम् भर्गो देवस्य धीमहि",
+    "keywords": ["गायत्री", "gayatri", "सावित्री", "savitri", "mantra"]
+  },
+  {
+    "title": "श्री कार्तिकेय मंत्र",
+    "titleEng": "Kartikeya Mantras",
+    "url": "/kumar-kartikey-mantras",
+    "category": "अन्य",
+    "symbol": "🦚",
+    "preview": "ॐ सरवण भव षण्मुखाय नमः",
+    "keywords": ["कार्तिकेय", "kartikeya", "मुरुगन", "murugan", "षण्मुख"]
+  },
+  {
+    "title": "महामृत्युंजय मंत्र",
+    "titleEng": "Mahamrityunjaya Mantra",
+    "url": "/shiva-mantras/Shiva-mahamrityunjaya-mantra",
+    "category": "शिव",
+    "symbol": "🕉️",
+    "preview": "ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्",
+    "keywords": ["महामृत्युंजय", "mahamrityunjaya", "mrityu", "maha mantra", "tryambak"]
+  }
+]

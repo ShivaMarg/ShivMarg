@@ -243,5 +243,5 @@
   const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*40);obs.unobserve(e.target)}})},{threshold:.06});
   rv.forEach(el=>obs.observe(el));
 </script>
-</body>
+<script src="/search.js"></script>\n</body>
 </html>
