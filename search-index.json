@@ -124,5 +124,178 @@
     "symbol": "🕉️",
     "preview": "ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्",
     "keywords": ["महामृत्युंजय", "mahamrityunjaya", "mrityu", "maha mantra", "tryambak"]
+  },
+  
+  {
+    "title": "नमामि शमीशान — रुद्राष्टकम्",
+    "titleEng": "Namami Shamishan - Rudrashtakam",
+    "url": "/shiva-mantras/Namami-samisam-nirvanrupam/",
+    "category": "शिव",
+    "symbol": "🔱",
+    "preview": "नमामि शमीशान निर्वाण रूपं, विभुं व्यापकं ब्रह्म वेदस्वरूपम्",
+    "keywords": ["रुद्राष्टकम्", "rudrashtakam", "namami shamishan", "तुलसीदास", "shiv stotra"]
+  },
+  {
+    "title": "महामृत्युंजय मंत्र",
+    "titleEng": "Mahamrityunjaya Mantra",
+    "url": "/shiva-mantras/Shiva-mahamrityunjaya-mantra/",
+    "category": "शिव",
+    "symbol": "☽",
+    "preview": "ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्",
+    "keywords": ["महामृत्युंजय", "mahamrityunjaya", "tryambakam", "mrityu", "death mantra", "shiv maha mantra"]
+  },
+  {
+    "title": "ॐ नमः शिवाय — पञ्चाक्षर मंत्र",
+    "titleEng": "Om Namah Shivaya - Panchakshara",
+    "url": "/shiva-mantras/Shiva-panchakshara-stotram/",
+    "category": "शिव",
+    "symbol": "🕉️",
+    "preview": "ॐ नमः शिवाय। शिव के पाँच तत्वों को नमन — पृथ्वी, जल, अग्नि, वायु, आकाश",
+    "keywords": ["om namah shivay", "पञ्चाक्षर", "panchakshara", "नमः शिवाय", "five elements"]
+  },
+  {
+    "title": "शिव तांडव स्तोत्रम्",
+    "titleEng": "Shiv Tandav Stotram",
+    "url": "/shiva-mantras/shiva-tandav-stotram/",
+    "category": "शिव",
+    "symbol": "💃",
+    "preview": "जटाटवीगलज्जलप्रवाहपावितस्थले गलेऽवलम्ब्य लम्बितां भुजंगतुंगमालिकाम्",
+    "keywords": ["तांडव", "tandav", "shiv tandav", "रावण", "ravan", "tandava stotram"]
+  },
+  {
+    "title": "शिव चालीसा",
+    "titleEng": "Shiv Chalisa",
+    "url": "/shiva-mantras/Shiv-chalisa",
+    "category": "शिव",
+    "symbol": "📿",
+    "preview": "जय गणेश गिरिजा सुवन, मंगल करण कृपाल। दीनन के दुख दूर करि कीजे नाथ निहाल",
+    "keywords": ["चालीसा", "chalisa", "shiv chalisa", "40 chaupai", "shiva prayer"]
+  },
+  {
+    "title": "शिव पञ्चाक्षर स्तोत्रम्",
+    "titleEng": "Shiva Panchakshara Stotram",
+    "url": "/shiva-mantras/Shiva-panchakshara-stotram",
+    "category": "शिव",
+    "symbol": "✴️",
+    "preview": "नागेन्द्रहाराय त्रिलोचनाय भस्मांगरागाय महेश्वराय",
+    "keywords": ["पञ्चाक्षर स्तोत्र", "panchakshara stotram", "shankaracharya", "nagendra haraya", "trilochanaya"]
+  },
+  {
+    "title": "रुद्राष्टकम्",
+    "titleEng": "Rudra Ashtakam",
+    "url": "/shiva-mantras/Namami-samisam-nirvanrupam/",
+    "category": "शिव",
+    "symbol": "⚡",
+    "preview": "नमामीशमीशान निर्वाणरूपम् विभुं व्यापकं ब्रह्म वेदस्वरूपम्",
+    "keywords": ["रुद्राष्टकम्", "rudra ashtakam", "rudra", "8 shloka", "tulasidas"]
+  },
+  {
+    "title": "शिव सहस्रनाम",
+    "titleEng": "Shiv Sahasranama",
+    "url": "/shiva-mantras/Shiva-sahasranama/",
+    "category": "शिव",
+    "symbol": "🌿",
+    "preview": "स्थिरः स्थाणुः प्रभुर्भानुः प्रवरो वरदो वरः",
+    "keywords": ["सहस्रनाम", "sahasranama", "1000 names", "शिव नाम", "shiva names"]
+  },
+  {
+    "title": "बिल्वाष्टकम्",
+    "titleEng": "Bilvashtakam",
+    "url": "/shiva-mantras/bilvashtakam-बिल्वाष्टकम्/",
+    "category": "शिव",
+    "symbol": "🍃",
+    "preview": "त्रिदलं त्रिगुणाकारं त्रिनेत्रं च त्रयायुधम्",
+    "keywords": ["बिल्वाष्टकम्", "bilvashtakam", "bel patra", "बेल पत्र", "bilva"]
+  },
+  {
+    "title": "लिंगाष्टकम्",
+    "titleEng": "Lingashtakam",
+    "url": "/shiva-mantras/Shiva-lingashtakam/",
+    "category": "शिव",
+    "symbol": "🏛️",
+    "preview": "ब्रह्ममुरारिसुरार्चितलिंगं निर्मलभासितशोभितलिंगम्",
+    "keywords": ["लिंगाष्टकम्", "lingashtakam", "shivling", "शिवलिंग", "linga stotra"]
+  },
+  {
+    "title": "शिव आरती",
+    "titleEng": "Shiv Aarti",
+    "url": "/shiva-mantras/Shiv-aarti/",
+    "category": "शिव",
+    "symbol": "🪔",
+    "preview": "ॐ जय शिव ओंकारा स्वामी जय शिव ओंकारा। ब्रह्मा विष्णु सदाशिव अर्द्धांगी धारा",
+    "keywords": ["आरती", "aarti", "shiv aarti", "om jai shiv omkara", "शिव पूजा"]
+  },
+  {
+    "title": "शिव कवचम्",
+    "titleEng": "Shiv Kavacham",
+    "url": "/shiva-mantras/Shiv-kavacham",
+    "category": "शिव",
+    "symbol": "🛡️",
+    "preview": "रुद्रो मे मस्तकं पातु ललाटं चन्द्रशेखरः",
+    "keywords": ["कवच", "kavach", "shiv kavach", "protection mantra", "रक्षा मंत्र"]
+  },
+  {
+    "title": "हर हर महादेव भजन",
+    "titleEng": "Har Har Mahadev Bhajan",
+    "url": "/shiva-mantras/har-har-mahadev",
+    "category": "शिव",
+    "symbol": "🎵",
+    "preview": "हर हर महादेव बम बम भोले। जय जय शम्भो नीलकंठ देव",
+    "keywords": ["हर हर महादेव", "har har mahadev", "bam bam bhole", "bhajan", "भजन"]
+  },
+  {
+    "title": "शिव महिम्नः स्तोत्र",
+    "titleEng": "Shiv Mahimna Stotra",
+    "url": "/shiva-mantras/Shiva-mahimna-stotra",
+    "category": "शिव",
+    "symbol": "📖",
+    "preview": "महिम्नः पारं ते परमविदुषो यद्यसदृशी स्तुतिर्ब्रह्मादीनामपि",
+    "keywords": ["महिम्नः स्तोत्र", "mahimna stotra", "pushpadanta", "पुष्पदंत", "43 shloka"]
+  },
+  {
+    "title": "शिवाष्टकम्",
+    "titleEng": "Shivashtakam",
+    "url": "/shiva-mantras/Shivashtakam",
+    "category": "शिव",
+    "symbol": "🌙",
+    "preview": "प्रभुं प्राणनाथं विभुं विश्वनाथं जगन्नाथनाथं सदानन्दभाजम्",
+    "keywords": ["शिवाष्टकम्", "shivashtakam", "8 shloka", "shiva ashtakam"]
+  },
+  {
+    "title": "शिव बीज मंत्र",
+    "titleEng": "Shiv Beej Mantra",
+    "url": "/shiva-mantras/Shiva-beej-mantra",
+    "category": "शिव",
+    "symbol": "🌀",
+    "preview": "ॐ नमः शिवाय। ॐ ह्रौं जूं सः",
+    "keywords": ["बीज मंत्र", "beej mantra", "hroun", "joon", "shiv shakti mantra"]
+  },
+  {
+    "title": "द्वादश ज्योतिर्लिंग स्तोत्रम्",
+    "titleEng": "Jyotirlinga Stotram",
+    "url": "/shiva-mantras/Shiva-jyotirlinga-stotram",
+    "category": "शिव",
+    "symbol": "✨",
+    "preview": "सौराष्ट्रे सोमनाथं च श्रीशैले मल्लिकार्जुनम् उज्जयिन्यां महाकालम्",
+    "keywords": ["ज्योतिर्लिंग", "jyotirlinga", "12 jyotirlinga", "somnath", "mahakaleshwar"]
+  },
+  {
+    "title": "शिव गायत्री मंत्र",
+    "titleEng": "Shiv Gayatri Mantra",
+    "url": "/shiva-mantras/shiva-gayatri-mantra",
+    "category": "शिव",
+    "symbol": "🌅",
+    "preview": "ॐ तत्पुरुषाय विद्महे महादेवाय धीमहि तन्नो रुद्रः प्रचोदयात्",
+    "keywords": ["शिव गायत्री", "shiv gayatri", "tatpurushaya", "mahadevaya", "rudra"]
+  },
+  {
+    "title": "शिव मानस पूजा",
+    "titleEng": "Shiv Manasa Puja",
+    "url": "/shiva-mantras/shiva-manasa-puja",
+    "category": "शिव",
+    "symbol": "🙏",
+    "preview": "रत्नैः कल्पितमासनं हिमजलैः स्नानं च दिव्याम्बरं",
+    "keywords": ["मानस पूजा", "manasa puja", "shankaracharya", "mental worship", "शंकराचार्य"]
   }
+
 ]
