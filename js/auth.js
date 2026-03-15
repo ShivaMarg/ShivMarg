@@ -137,7 +137,6 @@
       }
       .sm-avatar {
         width:28px; height:28px; border-radius:50%;
-        background:linear-gradient(135deg,#7C4DFF,#512DA8);
         display:flex; align-items:center; justify-content:center;
         font-family:'Cinzel',serif; font-size:0.75rem; color:#fff; font-weight:700;
       }
@@ -188,6 +187,46 @@
     _token = null; _user = null;
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(USER_KEY);
+  }
+
+  /* ─── AVATAR COLOR ─── */
+  // Each letter A–Z gets its own distinct gradient background
+  const AVATAR_COLORS = {
+    A: 'linear-gradient(135deg,#E53935,#B71C1C)',   // Deep Red
+    B: 'linear-gradient(135deg,#D81B60,#880E4F)',   // Pink
+    C: 'linear-gradient(135deg,#8E24AA,#4A148C)',   // Purple
+    D: 'linear-gradient(135deg,#5E35B1,#311B92)',   // Deep Purple
+    E: 'linear-gradient(135deg,#3949AB,#1A237E)',   // Indigo
+    F: 'linear-gradient(135deg,#1E88E5,#0D47A1)',   // Blue
+    G: 'linear-gradient(135deg,#039BE5,#01579B)',   // Light Blue
+    H: 'linear-gradient(135deg,#00ACC1,#006064)',   // Cyan
+    I: 'linear-gradient(135deg,#00897B,#004D40)',   // Teal
+    J: 'linear-gradient(135deg,#43A047,#1B5E20)',   // Green
+    K: 'linear-gradient(135deg,#7CB342,#33691E)',   // Light Green
+    L: 'linear-gradient(135deg,#C0CA33,#827717)',   // Lime
+    M: 'linear-gradient(135deg,#F9A825,#F57F17)',   // Amber
+    N: 'linear-gradient(135deg,#FB8C00,#E65100)',   // Orange
+    O: 'linear-gradient(135deg,#F4511E,#BF360C)',   // Deep Orange
+    P: 'linear-gradient(135deg,#8D6E63,#4E342E)',   // Brown
+    Q: 'linear-gradient(135deg,#546E7A,#263238)',   // Blue Grey
+    R: 'linear-gradient(135deg,#EC407A,#AD1457)',   // Hot Pink
+    S: 'linear-gradient(135deg,#7C4DFF,#4527A0)',   // Violet (ShivaMarg brand)
+    T: 'linear-gradient(135deg,#00BCD4,#00838F)',   // Aqua
+    U: 'linear-gradient(135deg,#FF7043,#BF360C)',   // Burnt Orange
+    V: 'linear-gradient(135deg,#26A69A,#00695C)',   // Sea Green
+    W: 'linear-gradient(135deg,#AB47BC,#6A1B9A)',   // Orchid
+    X: 'linear-gradient(135deg,#EF5350,#C62828)',   // Crimson
+    Y: 'linear-gradient(135deg,#FDD835,#F9A825)',   // Yellow
+    Z: 'linear-gradient(135deg,#29B6F6,#0277BD)',   // Sky Blue
+  };
+
+  /**
+   * Returns a CSS `background` value for a given avatar letter.
+   * Falls back to the ShivaMarg brand violet for non-alpha characters.
+   */
+  function getAvatarBg(letter) {
+    const key = (letter || '?').toUpperCase();
+    return AVATAR_COLORS[key] || 'linear-gradient(135deg,#7C4DFF,#512DA8)';
   }
 
   /* ─── API CALLS ─── */
@@ -288,9 +327,15 @@
     const w = document.getElementById('sm-auth-widget');
     if (!w) return;
     if (_user) {
+      // Derive the avatar letter: use stored avatar if it's a single char, else first letter of username
+      const avatarChar = (_user.avatar && _user.avatar.length === 1)
+        ? _user.avatar
+        : _user.username[0];
+      const avatarBg = getAvatarBg(avatarChar);
+
       w.innerHTML = `
         <div class="sm-user-chip">
-          <div class="sm-avatar">${_user.avatar || _user.username[0].toUpperCase()}</div>
+          <div class="sm-avatar" style="background:${avatarBg}">${avatarChar.toUpperCase()}</div>
           <span class="sm-uname">${_user.username}</span>
           <button class="sm-logout" onclick="SmAuth.logout()">लॉगआउट</button>
         </div>`;
@@ -400,6 +445,8 @@
       document.addEventListener('sm-auth-changed', handler);
       return false;
     },
+    /** Exposed utility so other modules can reuse the same color logic */
+    getAvatarBg,
     _openModal, _closeModal, _switchTab, _doLogin, _doRegister,
   };
 })();
