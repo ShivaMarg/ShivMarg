@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>काली चालीसा — Kali Chalisa | ShivaMarg</title>
+  <link rel="icon" type="image/png" href="/images/ShivMarg.png" />
+  <meta name="description" content="काली चालीसा — सम्पूर्ण ४० चौपाई। माँ काली की स्तुति। जय काली जय जगदम्बे। जय माँ काली।">
+  <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root{--void:#060003;--violet:#5C0A98;--violet-mid:#7A18B0;--violet-soft:#9040C0;--violet-pale:#C090D8;--crimson:#800010;--blood:#AA0020;--blood-bright:#D42040;--gold:#C4A000;--gold-light:#E8CC18;--gold-pale:#FFF090;--cream:#F2ECF8;--soft:rgba(242,236,248,0.72);}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--void);color:var(--cream);font-family:'EB Garamond',serif;overflow-x:hidden;}
+    .bg-fixed{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse 90% 60% at 50% -5%,#1E0030 0%,transparent 65%),radial-gradient(ellipse 55% 50% at 0% 70%,#100020 0%,transparent 55%),radial-gradient(ellipse 55% 50% at 100% 20%,#08001A 0%,transparent 55%),radial-gradient(ellipse 45% 40% at 50% 105%,#150010 0%,transparent 50%),linear-gradient(175deg,#060003 0%,#0E0018 55%,#060003 100%);}
+    .trishul-bg{position:fixed;inset:0;z-index:0;opacity:0.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cline x1='60' y1='10' x2='60' y2='110' stroke='%235C0A98' stroke-width='1'/%3E%3Cline x1='40' y1='30' x2='80' y2='30' stroke='%23800010' stroke-width='0.8'/%3E%3Cline x1='42' y1='20' x2='42' y2='45' stroke='%235C0A98' stroke-width='0.8'/%3E%3Cline x1='78' y1='20' x2='78' y2='45' stroke='%235C0A98' stroke-width='0.8'/%3E%3Ccircle cx='60' cy='60' r='28' fill='none' stroke='%23C4A000' stroke-width='0.4'/%3E%3C/svg%3E");background-size:120px 120px;}
+    #embers{position:fixed;inset:0;z-index:0;pointer-events:none;}
+    .ember{position:absolute;border-radius:50%;animation:ember-rise linear infinite;opacity:0;}
+    @keyframes ember-rise{0%{transform:translateY(108vh) scale(0.2) rotate(0deg);opacity:0;}8%{opacity:1;}88%{opacity:0.25;}100%{transform:translateY(-8vh) scale(1.3) rotate(180deg);opacity:0;}}
+    .crown-aura{position:fixed;top:-180px;left:50%;transform:translateX(-50%);width:1000px;height:600px;border-radius:50%;background:radial-gradient(ellipse,rgba(92,10,152,0.09) 0%,rgba(128,0,16,0.05) 40%,transparent 70%);animation:crown-breathe 7s ease-in-out infinite;pointer-events:none;z-index:0;}
+    @keyframes crown-breathe{0%,100%{transform:translateX(-50%) scale(1);opacity:0.6;}50%{transform:translateX(-50%) scale(1.15);opacity:1;}}
+    header{position:relative;z-index:10;padding:16px 5vw 0;border-bottom:1px solid rgba(92,10,152,0.15);}
+    .site-nav{display:flex;justify-content:space-between;align-items:center;max-width:1100px;margin:0 auto 13px;}
+    .logo{font-family:'Cinzel Decorative',serif;font-size:1.28rem;color:var(--gold);text-decoration:none;letter-spacing:1px;}
+    .logo em{color:var(--violet-soft);font-style:normal;}
+    nav a{color:rgba(242,236,248,0.45);text-decoration:none;margin-left:18px;font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;transition:color .3s;}
+    nav a:hover{color:var(--gold-light);}
+    .breadcrumb{max-width:1100px;margin:0 auto;font-family:'Cinzel',serif;font-size:0.64rem;letter-spacing:2px;color:rgba(242,236,248,0.28);padding-bottom:13px;}
+    .breadcrumb span{color:var(--violet-soft);margin:0 8px;}
+    .hero{position:relative;z-index:10;text-align:center;padding:86px 20px 68px;overflow:hidden;}
+    .hero::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:850px;height:850px;border-radius:50%;background:radial-gradient(circle,rgba(92,10,152,0.08) 0%,transparent 68%);}
+    .crown-wrap{display:inline-block;margin-bottom:26px;position:relative;}
+    .crown-sym{font-size:6rem;display:block;line-height:1;filter:drop-shadow(0 0 28px rgba(92,10,152,0.95)) drop-shadow(0 0 75px rgba(128,0,16,0.6));animation:crown-glow 5s ease-in-out infinite;}
+    @keyframes crown-glow{0%,100%{filter:drop-shadow(0 0 28px rgba(92,10,152,0.9)) drop-shadow(0 0 75px rgba(128,0,16,0.55));transform:scale(1);}50%{filter:drop-shadow(0 0 55px rgba(120,24,176,1)) drop-shadow(0 0 120px rgba(196,160,0,0.45));transform:scale(1.08);}}
+    .orbit-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:175px;height:175px;border:1px dashed rgba(92,10,152,0.28);border-radius:50%;animation:orbit-spin 22s linear infinite;}
+    .orbit-ring::before,.orbit-ring::after{content:'⚡';position:absolute;font-size:0.8rem;animation:orbit-counter 22s linear infinite;}
+    .orbit-ring::before{top:-11px;left:50%;transform:translateX(-50%);}
+    .orbit-ring::after{bottom:-11px;left:50%;transform:translateX(-50%);}
+    @keyframes orbit-spin{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+    @keyframes orbit-counter{from{transform:translateX(-50%) rotate(0)}to{transform:translateX(-50%) rotate(-360deg)}}
+    .hero-tag{font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:7px;color:var(--violet-soft);text-transform:uppercase;margin-bottom:18px;animation:fadeUp .9s ease both;}
+    .hero h1{font-family:'Cinzel Decorative',serif;font-size:clamp(2.2rem,5.5vw,4.2rem);color:var(--gold-light);line-height:1.15;margin-bottom:8px;text-shadow:0 0 40px rgba(196,160,0,0.35),0 0 90px rgba(92,10,152,0.2);animation:fadeUp 1s ease both;}
+    .hero-deva{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1.6rem,4vw,2.8rem);color:rgba(192,144,216,0.8);margin-bottom:20px;animation:fadeUp 1.1s ease both;}
+    .hero-orn{color:rgba(196,160,0,0.4);font-size:1.1rem;letter-spacing:14px;margin:14px 0;animation:fadeUp 1.2s ease both;}
+    .hero-desc{font-size:1.04rem;color:var(--soft);max-width:620px;margin:0 auto 16px;line-height:1.82;animation:fadeUp 1.3s ease both;}
+    .composer-tag{display:inline-block;font-family:'Cinzel',serif;font-size:0.67rem;letter-spacing:3px;color:rgba(196,160,0,0.6);border:1px solid rgba(196,160,0,0.18);padding:6px 22px;margin-top:8px;animation:fadeUp 1.4s ease both;}
+    .hero-refrain{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1rem,2.2vw,1.4rem);color:rgba(192,144,216,0.75);letter-spacing:2px;margin-top:24px;animation:fadeUp 1.5s ease both;line-height:1.9;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+    .ticker-wrap{position:relative;z-index:10;overflow:hidden;border-top:1px solid rgba(92,10,152,0.14);border-bottom:1px solid rgba(92,10,152,0.14);background:rgba(0,0,0,0.4);padding:12px 0;}
+    .ticker-track{display:flex;width:max-content;animation:ticker 38s linear infinite;}
+    @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .tick-item{font-family:'Tiro Devanagari Sanskrit',serif;font-size:1rem;color:rgba(196,160,0,0.5);padding:0 36px;white-space:nowrap;}
+    .tick-dot{color:var(--violet-soft);opacity:0.6;padding:0 6px;}
+    .container{position:relative;z-index:10;max-width:1100px;margin:0 auto;padding:52px 20px 70px;display:grid;grid-template-columns:1fr 300px;gap:32px;align-items:start;}
+    @media(max-width:800px){.container{grid-template-columns:1fr;}}
+
+    /* CHALISA CARD — special layout */
+    .chalisa-card{background:linear-gradient(142deg,rgba(22,0,38,0.68) 0%,rgba(6,0,10,0.92) 100%);border:1px solid rgba(92,10,152,0.24);border-radius:2px;padding:46px 42px;position:relative;overflow:hidden;}
+    .chalisa-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--violet-soft),var(--gold),var(--blood-bright),var(--gold),var(--violet-soft),transparent);}
+    .chalisa-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--blood),var(--gold),var(--blood),transparent);}
+    .corner{position:absolute;font-size:1.1rem;color:rgba(196,160,0,0.18);}
+    .corner.tl{top:12px;left:14px}.corner.tr{top:12px;right:14px}.corner.bl{bottom:12px;left:14px}.corner.br{bottom:12px;right:14px}
+    .card-label{font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:5px;color:var(--violet-soft);text-transform:uppercase;text-align:center;margin-bottom:32px;}
+
+    /* DOHA block */
+    .doha-block{background:rgba(92,10,152,0.08);border:1px solid rgba(92,10,152,0.2);padding:22px 28px;margin-bottom:18px;text-align:center;}
+    .doha-block::before{content:'— दोहा —';display:block;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:4px;color:var(--violet-soft);margin-bottom:14px;}
+    .doha-text{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1.05rem,2.2vw,1.4rem);color:var(--gold-light);line-height:2.15;text-shadow:0 0 18px rgba(196,160,0,0.2);}
+    .doha-meaning{font-size:0.9rem;color:var(--soft);font-style:italic;line-height:1.8;margin-top:10px;}
+
+    /* CHAUPAI */
+    .section-head{font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:5px;color:var(--gold);text-transform:uppercase;text-align:center;margin:28px 0 20px;padding:10px 0;border-top:1px solid rgba(196,160,0,0.14);border-bottom:1px solid rgba(196,160,0,0.14);}
+    .chaupai{margin-bottom:22px;padding:16px 20px;background:rgba(92,10,152,0.05);border-left:2px solid rgba(92,10,152,0.25);}
+    .chaupai:hover{background:rgba(92,10,152,0.1);border-left-color:var(--violet-soft);}
+    .chaupai-num{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:3px;color:rgba(192,144,216,0.55);margin-bottom:8px;text-transform:uppercase;}
+    .chaupai-text{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1.05rem,2.2vw,1.38rem);color:var(--gold-light);line-height:2.1;text-align:center;text-shadow:0 0 16px rgba(196,160,0,0.15);}
+    .chaupai-meaning{font-size:0.88rem;color:var(--soft);font-style:italic;line-height:1.78;text-align:center;margin-top:8px;padding-top:8px;border-top:1px solid rgba(92,10,152,0.12);}
+    .refrain{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1rem,2vw,1.32rem);color:rgba(192,144,216,0.88);text-align:center;line-height:2;margin:18px 0;text-shadow:0 0 22px rgba(92,10,152,0.7),0 0 50px rgba(128,0,16,0.35);letter-spacing:0.5px;}
+    .vdivider{text-align:center;color:rgba(92,10,152,0.35);font-size:0.95rem;letter-spacing:10px;margin:20px 0;}
+
+    /* PHALA */
+    .phala-card{margin-top:32px;background:linear-gradient(135deg,rgba(22,0,38,0.75),rgba(6,0,10,0.93));border:1px solid rgba(196,160,0,0.22);border-radius:2px;padding:30px 36px;text-align:center;position:relative;}
+    .phala-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+    .phala-label{font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:5px;color:var(--gold);text-transform:uppercase;margin-bottom:16px;}
+    .phala-text{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1rem,2.1vw,1.26rem);color:var(--violet-pale);line-height:2.1;text-shadow:0 0 14px rgba(192,144,216,0.28);}
+    .phala-meaning{font-size:0.93rem;color:var(--soft);font-style:italic;line-height:1.82;border-top:1px solid rgba(196,160,0,0.12);padding-top:14px;margin-top:14px;}
+
+    /* SIDEBAR */
+    .sidebar{display:flex;flex-direction:column;gap:20px;}
+    .widget{background:linear-gradient(142deg,rgba(22,0,38,0.55),rgba(6,0,10,0.78));border:1px solid rgba(92,10,152,0.18);border-radius:2px;padding:20px;position:relative;}
+    .widget::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--violet-soft),transparent);opacity:0.55;}
+    .widget-title{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:4px;color:var(--violet-soft);text-transform:uppercase;margin-bottom:14px;padding-bottom:9px;border-bottom:1px solid rgba(92,10,152,0.15);}
+    .progress-wrap{margin-bottom:8px;}
+    .progress-label{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:2px;color:rgba(192,144,216,0.55);text-transform:uppercase;margin-bottom:6px;display:flex;justify-content:space-between;}
+    .progress-bar{height:4px;background:rgba(92,10,152,0.2);border-radius:2px;overflow:hidden;}
+    .progress-fill{height:100%;background:linear-gradient(90deg,var(--violet),var(--gold));border-radius:2px;width:0%;transition:width .5s ease;}
+    .chaupai-nav{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;}
+    .cnav-btn{font-family:'Cinzel',serif;font-size:0.58rem;padding:5px 3px;background:rgba(92,10,152,0.08);border:1px solid rgba(92,10,152,0.2);color:rgba(242,236,248,0.5);cursor:pointer;transition:all .25s;text-decoration:none;display:inline-block;text-align:center;}
+    .cnav-btn:hover{background:rgba(92,10,152,0.25);border-color:var(--violet-soft);color:var(--violet-pale);}
+    .q-m{padding:9px 0;border-bottom:1px solid rgba(92,10,152,0.1);}
+    .q-m:last-child{border-bottom:none;}
+    .q-mt{font-family:'Tiro Devanagari Sanskrit',serif;font-size:0.96rem;color:var(--gold-light);margin-bottom:3px;}
+    .q-ms{font-size:0.71rem;color:rgba(242,236,248,0.38);font-family:'Cinzel',serif;letter-spacing:1px;}
+    .rel-post{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid rgba(92,10,152,0.1);text-decoration:none;color:inherit;transition:padding-left .3s;}
+    .rel-post:last-child{border-bottom:none;}
+    .rel-post:hover{padding-left:5px;}
+    .rel-icon{font-size:1.5rem;flex-shrink:0;}
+    .rel-name{font-family:'Tiro Devanagari Sanskrit',serif;font-size:0.9rem;color:var(--gold-light);margin-bottom:2px;}
+    .rel-sub{font-size:0.71rem;color:rgba(242,236,248,0.38);font-family:'Cinzel',serif;letter-spacing:1px;}
+    footer{position:relative;z-index:10;text-align:center;padding:38px 20px;border-top:1px solid rgba(92,10,152,0.12);}
+    .foot-sym{font-size:2.8rem;color:rgba(196,160,0,0.2);display:block;margin-bottom:12px;}
+    .foot-txt{font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:4px;color:rgba(242,236,248,0.2);text-transform:uppercase;}
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+    .reveal.on{opacity:1;transform:none;}
+    @media(max-width:700px){nav{display:none;}.chalisa-card{padding:28px 16px;}}
+  </style>
+</head>
+<body>
+<div class="bg-fixed"></div>
+<div class="trishul-bg"></div>
+<div class="crown-aura"></div>
+<div id="embers"></div>
+
+<header>
+  <div class="site-nav">
+    <a href="/" class="logo">Shiva<em>Marg</em></a>
+    <nav><a href="/kali-mantras/">काली मंत्र</a><a href="#">चालीसा</a><a href="#">आरती</a><a href="#">महाविद्या</a></nav>
+  </div>
+  <div class="breadcrumb">मुख्य पृष्ठ <span>⚡</span> काली मंत्र <span>⚡</span> काली चालीसा</div>
+</header>
+
+<div class="hero">
+  <div class="crown-wrap">
+    <div class="orbit-ring"></div>
+    <span class="crown-sym">📿</span>
+  </div>
+  <div class="hero-tag">✦ सम्पूर्ण ४० चौपाई • काली-स्तुति ✦</div>
+  <h1>Kali Chalisa</h1>
+  <div class="hero-deva">काली चालीसा</div>
+  <div class="hero-orn">✦ ✦ ✦</div>
+  <p class="hero-desc">माँ काली की महिमा में रचित सम्पूर्ण काली चालीसा — ४० चौपाई, दोहा और ध्यान सहित। जय काली जय जगदम्बे, शिव की प्रिय हे जगत की अम्बे।</p>
+  <div class="composer-tag">सम्पूर्ण चालीसा • ४० चौपाई • दोहा सहित</div>
+  <div class="hero-refrain">जय काली जय जगदम्बे • शिव की प्रिय हे जगत की अम्बे</div>
+</div>
+
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="tick-item">जय काली जय जगदम्बे</span><span class="tick-dot">📿</span>
+    <span class="tick-item">शिव की प्रिय हे जगत की अम्बे</span><span class="tick-dot">📿</span>
+    <span class="tick-item">जय श्याम काली महाकाली</span><span class="tick-dot">📿</span>
+    <span class="tick-item">ॐ क्रीं काली क्रीं नमः</span><span class="tick-dot">📿</span>
+    <span class="tick-item">जय जय माँ काली</span><span class="tick-dot">📿</span>
+    <span class="tick-item">जय काली जय जगदम्बे</span><span class="tick-dot">📿</span>
+    <span class="tick-item">शिव की प्रिय हे जगत की अम्बे</span><span class="tick-dot">📿</span>
+    <span class="tick-item">जय श्याम काली महाकाली</span><span class="tick-dot">📿</span>
+    <span class="tick-item">ॐ क्रीं काली क्रीं नमः</span><span class="tick-dot">📿</span>
+    <span class="tick-item">जय जय माँ काली</span><span class="tick-dot">📿</span>
+  </div>
+</div>
+
+<div class="container">
+  <div>
+    <div class="chalisa-card reveal">
+      <span class="corner tl">⚡</span><span class="corner tr">⚡</span>
+      <span class="corner bl">📿</span><span class="corner br">📿</span>
+      <div class="card-label">✦ काली चालीसा — सम्पूर्ण पाठ ✦</div>
+
+      <!-- DOHA 1 - DHYAN -->
+      <div class="doha-block">
+        <div class="doha-text">
+          श्री काली ध्यानम् — श्याम वर्ण तन काली की, मुण्डमाल गल डाल।<br>
+          शव के ऊपर खड़ी हैं, महाकाल की बाल॥
+        </div>
+        <div class="doha-meaning">ध्यान — श्याम शरीर वाली काली जिनके गले में मुण्डों की माला है, जो शव के ऊपर खड़ी हैं — वे महाकाल की प्रिया हैं।</div>
+      </div>
+
+      <div class="section-head">✦ चौपाई — प्रथम भाग ✦</div>
+
+      <div class="chaupai" id="c1">
+        <div class="chaupai-num">॥ चौपाई १ ॥</div>
+        <div class="chaupai-text">जय काली जय जगदम्बे। शिव की प्रिय हे जगत की अम्बे॥</div>
+        <div class="chaupai-meaning">माँ काली की जय! माँ जगदम्बे की जय! हे शिव की प्रिया! हे जगत की माता!</div>
+      </div>
+      <div class="chaupai" id="c2">
+        <div class="chaupai-num">॥ चौपाई २ ॥</div>
+        <div class="chaupai-text">काली काली महाकाली। भव भय हरनी कृपा वाली॥</div>
+        <div class="chaupai-meaning">काली, महाकाली — संसार के भय का नाश करने वाली, अत्यन्त कृपालु माता।</div>
+      </div>
+      <div class="chaupai" id="c3">
+        <div class="chaupai-num">॥ चौपाई ३ ॥</div>
+        <div class="chaupai-text">नील वर्ण तव रूप विशाला। शीश सुशोभित मुण्डमाला॥</div>
+        <div class="chaupai-meaning">आपका रूप नील वर्ण विशाल है और शीश पर मुण्डमाला सुशोभित है।</div>
+      </div>
+      <div class="chaupai" id="c4">
+        <div class="chaupai-num">॥ चौपाई ४ ॥</div>
+        <div class="chaupai-text">चार भुजा तव शोभा पाती। खड्ग त्रिशूल लिए माँ ताती॥</div>
+        <div class="chaupai-meaning">आपकी चार भुजाएँ अत्यन्त शोभायमान हैं जिनमें खड्ग और त्रिशूल सुशोभित हैं।</div>
+      </div>
+      <div class="chaupai" id="c5">
+        <div class="chaupai-num">॥ चौपाई ५ ॥</div>
+        <div class="chaupai-text">नर मुण्ड धारिणि भव भामा। जग से ऊँची तेरी धामा॥</div>
+        <div class="chaupai-meaning">नर-मुण्ड धारण करने वाली माँ का धाम इस जगत से परे और श्रेष्ठ है।</div>
+      </div>
+
+      <div class="refrain">जय काली जय जगदम्बे। शिव की प्रिय हे जगत की अम्बे॥</div>
+      <div class="vdivider">~ 📿 ~</div>
+
+      <div class="chaupai" id="c6">
+        <div class="chaupai-num">॥ चौपाई ६ ॥</div>
+        <div class="chaupai-text">शव के ऊपर खड़ी महारानी। महाकाल की शक्ति भवानी॥</div>
+        <div class="chaupai-meaning">शव के ऊपर खड़ी महारानी काली महाकाल की शक्ति-स्वरूपा भवानी हैं।</div>
+      </div>
+      <div class="chaupai" id="c7">
+        <div class="chaupai-num">॥ चौपाई ७ ॥</div>
+        <div class="chaupai-text">त्रिनयनी तुम त्रिभुवन माई। अष्टभुजी महाशक्ति आई॥</div>
+        <div class="chaupai-meaning">त्रिनेत्रों वाली, तीनों लोकों की माता, अष्टभुजाधारिणी महाशक्ति का आगमन हुआ।</div>
+      </div>
+      <div class="chaupai" id="c8">
+        <div class="chaupai-num">॥ चौपाई ८ ॥</div>
+        <div class="chaupai-text">लाल जिह्वा लपलपाती। घोर घोर ध्वनि गरजाती॥</div>
+        <div class="chaupai-meaning">जिनकी लाल जिह्वा लपलपाती है और जो घोर-घोर ध्वनि से गर्जना करती हैं।</div>
+      </div>
+      <div class="chaupai" id="c9">
+        <div class="chaupai-num">॥ चौपाई ९ ॥</div>
+        <div class="chaupai-text">दानव दल को नाश किया। भक्त जनों को मोक्ष दिया॥</div>
+        <div class="chaupai-meaning">दानवों के समूह का नाश करने वाली, भक्तजनों को मोक्ष देने वाली माँ काली।</div>
+      </div>
+      <div class="chaupai" id="c10">
+        <div class="chaupai-num">॥ चौपाई १० ॥</div>
+        <div class="chaupai-text">चण्ड मुण्ड का संहार किया। रक्तबीज को मार दिया॥</div>
+        <div class="chaupai-meaning">चण्ड-मुण्ड का संहार और रक्तबीज का वध करके जगत की रक्षा की।</div>
+      </div>
+
+      <div class="refrain">जय काली जय जगदम्बे। शिव की प्रिय हे जगत की अम्बे॥</div>
+      <div class="vdivider">~ 📿 ~</div>
+
+      <div class="section-head">✦ चौपाई — द्वितीय भाग ✦</div>
+
+      <div class="chaupai" id="c11">
+        <div class="chaupai-num">॥ चौपाई ११ ॥</div>
+        <div class="chaupai-text">शुम्भ निशुम्भ को मार गिराया। जग में माया जाल फैलाया॥</div>
+        <div class="chaupai-meaning">शुम्भ-निशुम्भ दानवों का वध करके जगत में अपनी माया फैलाई।</div>
+      </div>
+      <div class="chaupai" id="c12">
+        <div class="chaupai-num">॥ चौपाई १२ ॥</div>
+        <div class="chaupai-text">देवों की तुमने रक्षा की। दानवों की करी परीक्षा की॥</div>
+        <div class="chaupai-meaning">देवताओं की रक्षा की और दानवों की शक्ति की परीक्षा करके उनका नाश किया।</div>
+      </div>
+      <div class="chaupai" id="c13">
+        <div class="chaupai-num">॥ चौपाई १३ ॥</div>
+        <div class="chaupai-text">ब्रह्मा विष्णु महेश पुकारें। काली माँ की जय जयकारें॥</div>
+        <div class="chaupai-meaning">ब्रह्मा, विष्णु और महेश सभी माँ काली की जय-जयकार करते हैं।</div>
+      </div>
+      <div class="chaupai" id="c14">
+        <div class="chaupai-num">॥ चौपाई १४ ॥</div>
+        <div class="chaupai-text">श्मशान में तव वास है माई। तांत्रिकों की परम सहाई॥</div>
+        <div class="chaupai-meaning">श्मशान में आपका निवास है, तांत्रिक साधकों की परम सहायिका हैं।</div>
+      </div>
+      <div class="chaupai" id="c15">
+        <div class="chaupai-num">॥ चौपाई १५ ॥</div>
+        <div class="chaupai-text">रामकृष्ण तेरे भक्त महाना। जिन्होंने तेरा रूप पहचाना॥</div>
+        <div class="chaupai-meaning">रामकृष्ण परमहंस जैसे महान भक्त थे जिन्होंने माँ काली का साक्षात् दर्शन किया।</div>
+      </div>
+
+      <div class="refrain">जय काली जय जगदम्बे। शिव की प्रिय हे जगत की अम्बे॥</div>
+      <div class="vdivider">~ 📿 ~</div>
+
+      <div class="chaupai" id="c16">
+        <div class="chaupai-num">॥ चौपाई १६ ॥</div>
+        <div class="chaupai-text">दस महाविद्या में तुम अग्रा। काली रूप धरे जगदम्बा॥</div>
+        <div class="chaupai-meaning">दस महाविद्याओं में आप प्रथम हैं — काली रूप में जगदम्बा प्रकट हैं।</div>
+      </div>
+      <div class="chaupai" id="c17">
+        <div class="chaupai-num">॥ चौपाई १७ ॥</div>
+        <div class="chaupai-text">कालीघाट में रूप विराजे। दक्षिणेश्वर में महिमा गाजे॥</div>
+        <div class="chaupai-meaning">कालीघाट में आपका दिव्य रूप विराजमान है और दक्षिणेश्वर में आपकी महिमा गूँजती है।</div>
+      </div>
+      <div class="chaupai" id="c18">
+        <div class="chaupai-num">॥ चौपाई १८ ॥</div>
+        <div class="chaupai-text">काशी में तुम विश्वेश्वरी। भक्त की मनोकामना हरी॥</div>
+        <div class="chaupai-meaning">काशी में आप विश्वेश्वरी हैं और भक्तों की सभी मनोकामनाएँ पूर्ण करती हैं।</div>
+      </div>
+      <div class="chaupai" id="c19">
+        <div class="chaupai-num">॥ चौपाई १९ ॥</div>
+        <div class="chaupai-text">सिद्धिदात्री सर्व कामनी। जन्म मृत्यु की तुम सुहागनी॥</div>
+        <div class="chaupai-meaning">सिद्धि देने वाली, सर्व-कामनाएँ पूर्ण करने वाली, जन्म-मृत्यु की स्वामिनी।</div>
+      </div>
+      <div class="chaupai" id="c20">
+        <div class="chaupai-num">॥ चौपाई २० ॥</div>
+        <div class="chaupai-text">क्रोध में तुम भैरवी भारी। शान्त में तुम आनन्दकारी॥</div>
+        <div class="chaupai-meaning">क्रोध में आप भयंकर भैरवी हैं और शान्त होने पर आनन्द की वर्षा करने वाली।</div>
+      </div>
+
+      <div class="refrain">जय काली जय जगदम्बे। शिव की प्रिय हे जगत की अम्बे॥</div>
+      <div class="vdivider">~ 📿 ~</div>
+
+      <div class="section-head">✦ चौपाई — तृतीय भाग ✦</div>
+
+      <div class="chaupai" id="c21">
+        <div class="chaupai-num">॥ चौपाई २१ ॥</div>
+        <div class="chaupai-text">अभय मुद्रा से भय हरती। वरद हस्त से सुख भरती॥</div>
+        <div class="chaupai-meaning">अभय-मुद्रा से भय दूर करती हैं और वरद हस्त से सुख-समृद्धि प्रदान करती हैं।</div>
+      </div>
+      <div class="chaupai" id="c22">
+        <div class="chaupai-num">॥ चौपाई २२ ॥</div>
+        <div class="chaupai-text">पाप ताप और कष्ट मिटाती। भव बन्धन से मुक्त कराती॥</div>
+        <div class="chaupai-meaning">पाप, ताप और कष्ट मिटाती हैं तथा भव-बन्धन से मुक्त कराती हैं।</div>
+      </div>
+      <div class="chaupai" id="c23">
+        <div class="chaupai-num">॥ चौपाई २३ ॥</div>
+        <div class="chaupai-text">भक्त जो तुमको ध्याता है। वो तेरा आशीर्वाद पाता है॥</div>
+        <div class="chaupai-meaning">जो भक्त आपका ध्यान करता है उसे आपका आशीर्वाद अवश्य प्राप्त होता है।</div>
+      </div>
+      <div class="chaupai" id="c24">
+        <div class="chaupai-num">॥ चौपाई २४ ॥</div>
+        <div class="chaupai-text">निर्धन को तुम धन देती हो। रोगी को आरोग्य देती हो॥</div>
+        <div class="chaupai-meaning">निर्धनों को धन, रोगियों को स्वास्थ्य और दुखियों को सुख प्रदान करती हैं।</div>
+      </div>
+      <div class="chaupai" id="c25">
+        <div class="chaupai-num">॥ चौपाई २५ ॥</div>
+        <div class="chaupai-text">विद्यार्थी को विद्या देती। सन्तानहीन को सन्तान देती॥</div>
+        <div class="chaupai-meaning">विद्यार्थियों को विद्या और सन्तानहीनों को सन्तान-सुख प्रदान करने वाली।</div>
+      </div>
+
+      <div class="refrain">जय काली जय जगदम्बे। शिव की प्रिय हे जगत की अम्बे॥</div>
+      <div class="vdivider">~ 📿 ~</div>
+
+      <div class="chaupai" id="c26">
+        <div class="chaupai-num">॥ चौपाई २६ ॥</div>
+        <div class="chaupai-text">शत्रु को तुम नाश करती। प्रेत पिशाच दूर करती॥</div>
+        <div class="chaupai-meaning">शत्रुओं का नाश और प्रेत-पिशाच जैसी बाधाओं को दूर करने वाली।</div>
+      </div>
+      <div class="chaupai" id="c27">
+        <div class="chaupai-num">॥ चौपाई २७ ॥</div>
+        <div class="chaupai-text">तन्त्र मन्त्र तव नाम से सिद्धे। साधक को होती सब सिद्धे॥</div>
+        <div class="chaupai-meaning">तंत्र-मंत्र आपके नाम से ही सिद्ध होते हैं और साधक को सभी सिद्धियाँ प्राप्त होती हैं।</div>
+      </div>
+      <div class="chaupai" id="c28">
+        <div class="chaupai-num">॥ चौपाई २८ ॥</div>
+        <div class="chaupai-text">क्रीं बीज तव जाप कराया। साधक ने सब कुछ पाया॥</div>
+        <div class="chaupai-meaning">जो क्रीं-बीज का जाप करता है उस साधक ने सब कुछ पा लिया।</div>
+      </div>
+      <div class="chaupai" id="c29">
+        <div class="chaupai-num">॥ चौपाई २९ ॥</div>
+        <div class="chaupai-text">अष्टमी को तव पूजन होता। भक्त का मन प्रफुल्लित होता॥</div>
+        <div class="chaupai-meaning">अष्टमी को आपकी पूजा होती है और भक्त का मन अत्यन्त प्रफुल्लित हो जाता है।</div>
+      </div>
+      <div class="chaupai" id="c30">
+        <div class="chaupai-num">॥ चौपाई ३० ॥</div>
+        <div class="chaupai-text">दीपावली में काली पूजा होती। तमस हटे जग में ज्योति होती॥</div>
+        <div class="chaupai-meaning">दीपावली की रात काली पूजन से अन्धकार मिटता है और जगत में प्रकाश होता है।</div>
+      </div>
+
+      <div class="refrain">जय काली जय जगदम्बे। शिव की प्रिय हे जगत की अम्बे॥</div>
+      <div class="vdivider">~ 📿 ~</div>
+
+      <div class="section-head">✦ चौपाई — चतुर्थ भाग ✦</div>
+
+      <div class="chaupai" id="c31">
+        <div class="chaupai-num">॥ चौपाई ३१ ॥</div>
+        <div class="chaupai-text">बंगाल में तुम्हारी पूजा होती। महाकाली की जय-जय होती॥</div>
+        <div class="chaupai-meaning">बंगाल में आपकी पूजा विशेष रूप से होती है और महाकाली की जय-जयकार होती है।</div>
+      </div>
+      <div class="chaupai" id="c32">
+        <div class="chaupai-num">॥ चौपाई ३२ ॥</div>
+        <div class="chaupai-text">सती के अंग जहाँ-जहाँ गिरे। शक्तिपीठ वहाँ-वहाँ बिखरे॥</div>
+        <div class="chaupai-meaning">जहाँ-जहाँ सती माँ के अंग गिरे वहाँ-वहाँ शक्तिपीठ स्थापित हुए।</div>
+      </div>
+      <div class="chaupai" id="c33">
+        <div class="chaupai-num">॥ चौपाई ३३ ॥</div>
+        <div class="chaupai-text">एकावन पीठ में काली विराजे। भक्त आएँ माँ महिमा गाजे॥</div>
+        <div class="chaupai-meaning">इक्यावन शक्तिपीठों में काली विराजमान हैं, भक्त आते हैं और महिमा गाते हैं।</div>
+      </div>
+      <div class="chaupai" id="c34">
+        <div class="chaupai-num">॥ चौपाई ३४ ॥</div>
+        <div class="chaupai-text">तारापीठ में तारा स्वरूपा। भैरवी रूप में सर्व अनूपा॥</div>
+        <div class="chaupai-meaning">तारापीठ में तारा स्वरूप और भैरवी रूप में — आप अनुपम और अद्वितीय हैं।</div>
+      </div>
+      <div class="chaupai" id="c35">
+        <div class="chaupai-num">॥ चौपाई ३५ ॥</div>
+        <div class="chaupai-text">जय जय जय माँ काली भारी। जग की हो तुम नाथ हमारी॥</div>
+        <div class="chaupai-meaning">जय-जय-जय माँ काली! आप इस जगत की और हमारी नाथ हैं।</div>
+      </div>
+
+      <div class="refrain">जय काली जय जगदम्बे। शिव की प्रिय हे जगत की अम्बे॥</div>
+      <div class="vdivider">~ 📿 ~</div>
+
+      <div class="chaupai" id="c36">
+        <div class="chaupai-num">॥ चौपाई ३६ ॥</div>
+        <div class="chaupai-text">भव-सागर से पार लगाओ। मोह-माया से मुक्त कराओ॥</div>
+        <div class="chaupai-meaning">हे माँ! भवसागर से पार लगाओ और मोह-माया से मुक्त कराओ।</div>
+      </div>
+      <div class="chaupai" id="c37">
+        <div class="chaupai-num">॥ चौपाई ३७ ॥</div>
+        <div class="chaupai-text">तुम्हारे चरण शरण में आया। कर अपना ले माँ दिखाया॥</div>
+        <div class="chaupai-meaning">आपके चरणों की शरण में आया हूँ, मुझे अपना लो माँ — यही विनती है।</div>
+      </div>
+      <div class="chaupai" id="c38">
+        <div class="chaupai-num">॥ चौपाई ३८ ॥</div>
+        <div class="chaupai-text">पाप ताप जन्मों के हरना। माँ मेरे हृदय में तू भरना॥</div>
+        <div class="chaupai-meaning">जन्म-जन्मों के पाप-ताप हरो और माँ मेरे हृदय में बस जाओ।</div>
+      </div>
+      <div class="chaupai" id="c39">
+        <div class="chaupai-num">॥ चौपाई ३९ ॥</div>
+        <div class="chaupai-text">तेरे दर से कोई न जाए खाली। जय जय माँ दक्षिण काली॥</div>
+        <div class="chaupai-meaning">आपके दरबार से कोई भी खाली हाथ न जाए। जय हो माँ दक्षिण काली।</div>
+      </div>
+      <div class="chaupai" id="c40">
+        <div class="chaupai-num">॥ चौपाई ४० ॥</div>
+        <div class="chaupai-text">काली चालीसा जो नित पढ़े। माँ काली के चरणों में पड़े॥</div>
+        <div class="chaupai-meaning">जो नित्य काली चालीसा पढ़ता है वह माँ काली के चरणों में समर्पित हो जाता है।</div>
+      </div>
+
+      <div class="refrain">जय काली जय जगदम्बे। शिव की प्रिय हे जगत की अम्बे॥</div>
+      <div class="vdivider">~ 📿 ~</div>
+
+      <!-- DOHA 2 - PHALA -->
+      <div class="doha-block">
+        <div class="doha-text">
+          काली चालीसा पाठ से, होती सर्व मनोकाम।<br>
+          माँ की कृपा से मिलत है, मोक्ष सहित आराम॥
+        </div>
+        <div class="doha-meaning">काली चालीसा के पाठ से सभी मनोकामनाएँ पूर्ण होती हैं और माँ की कृपा से मोक्ष सहित सुख-शान्ति प्राप्त होती है।</div>
+      </div>
+
+    </div><!-- /chalisa-card -->
+
+    <div class="phala-card reveal">
+      <div class="phala-label">✦ काली चालीसा फल ✦</div>
+      <div class="phala-text">
+        काली चालीसा नित्य पढ़े जो, सो सब सुख पाई।<br>
+        शत्रु भय रहित होई, दुर्घटना न आई॥<br>
+        शुक्रवार को पाठ करे, विशेष फल पाई।<br>
+        माँ काली प्रसन्न होती, सब कष्ट मिटाई॥
+      </div>
+      <div class="phala-meaning">जो नित्य काली चालीसा का पाठ करता है उसे सभी सुख मिलते हैं। शत्रु-भय दूर होता है, दुर्घटना नहीं होती। शुक्रवार को पाठ करने से विशेष फल मिलता है और माँ काली प्रसन्न होकर सब कष्ट मिटाती हैं।</div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="widget reveal">
+      <div class="widget-title">✦ पाठ प्रगति ✦</div>
+      <div class="progress-wrap">
+        <div class="progress-label"><span>चौपाई पढ़ी</span><span id="progressText">0 / 40</span></div>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
+      <div style="text-align:center;margin:12px 0;font-family:'Tiro Devanagari Sanskrit',serif;font-size:1.4rem;color:var(--gold);" id="readCount">०</div>
+      <div style="text-align:center;font-family:'Cinzel',serif;font-size:0.59rem;letter-spacing:2px;color:rgba(192,144,216,0.5);">CHAUPAI READ</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:11px;">
+        <button onclick="incrementRead()" style="font-family:'Cinzel',serif;font-size:0.66rem;letter-spacing:1.5px;padding:8px 5px;background:rgba(92,10,152,0.09);border:1px solid rgba(192,144,216,0.2);color:var(--violet-pale);cursor:pointer;text-transform:uppercase;">📿 + १</button>
+        <button onclick="resetRead()" style="font-family:'Cinzel',serif;font-size:0.66rem;letter-spacing:1.5px;padding:8px 5px;background:rgba(196,160,0,0.06);border:1px solid rgba(196,160,0,0.2);color:var(--gold);cursor:pointer;text-transform:uppercase;">↺ रीसेट</button>
+      </div>
+    </div>
+    <div class="widget reveal">
+      <div class="widget-title">✦ चौपाई सूची ✦</div>
+      <div class="chaupai-nav" id="chaupaiNav"></div>
+    </div>
+    <div class="widget reveal">
+      <div class="widget-title">✦ पाठ विधि ✦</div>
+      <div class="q-m"><div class="q-mt">🌑 प्रातः या सायं</div><div class="q-ms">पवित्र होकर पाठ करें</div></div>
+      <div class="q-m"><div class="q-mt">🕯️ दीप जलाएँ</div><div class="q-ms">सरसों तेल का दीपक</div></div>
+      <div class="q-m"><div class="q-mt">🌺 गुड़हल पुष्प</div><div class="q-ms">लाल हिबिस्कस पुष्प अर्पण</div></div>
+      <div class="q-m"><div class="q-mt">📿 जप सहित</div><div class="q-ms">ॐ क्रीं काली क्रीं जप</div></div>
+      <div class="q-m"><div class="q-mt">🌊 शुक्रवार</div><div class="q-ms">विशेष महत्व — अष्टमी भी</div></div>
+    </div>
+    <div class="widget reveal">
+      <div class="widget-title">✦ संबंधित पाठ ✦</div>
+      <a href="/kali-mantras/kalika-ashtakam/" class="rel-post"><div class="rel-icon">🌑</div><div><div class="rel-name">कालिकाष्टकम्</div><div class="rel-sub">Kalika Ashtakam</div></div></a>
+      <a href="/kali-mantras/kali-aarti/" class="rel-post"><div class="rel-icon">🪔</div><div><div class="rel-name">काली माँ आरती</div><div class="rel-sub">Kali Aarti</div></div></a>
+      <a href="/kali-mantras/mahakali-stotra/" class="rel-post"><div class="rel-icon">💀</div><div><div class="rel-name">महाकाली स्तोत्र</div><div class="rel-sub">Mahakali Stotra</div></div></a>
+      <a href="/kali-mantras/kali-beej-mantra/" class="rel-post"><div class="rel-icon">⚡</div><div><div class="rel-name">काली बीज मंत्र</div><div class="rel-sub">Kali Beej Mantra</div></div></a>
+    </div>
+    <div class="widget reveal">
+      <div class="widget-title">✦ चालीसा पाठ लाभ ✦</div>
+      <div class="q-m"><div class="q-mt">⚡ शत्रु-नाश</div><div class="q-ms">शत्रुओं से सम्पूर्ण सुरक्षा</div></div>
+      <div class="q-m"><div class="q-mt">🛡️ दुर्घटना-मुक्ति</div><div class="q-ms">अनिष्ट की आशंका नष्ट</div></div>
+      <div class="q-m"><div class="q-mt">💰 धन-सम्पदा</div><div class="q-ms">निर्धनता का नाश</div></div>
+      <div class="q-m"><div class="q-mt">🌟 सर्व-सिद्धि</div><div class="q-ms">मनोकामना पूर्ति</div></div>
+      <div class="q-m"><div class="q-mt">🌊 मोक्ष-मार्ग</div><div class="q-ms">भव-बन्धन से मुक्ति</div></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="foot-sym">📿</span>
+  <div class="foot-txt">॥ जय माँ काली ॥ काली चालीसा ॥ © ShivaMarg 2025 || saurabhjha.live</div>
+</footer>
+
+<script>
+  /* Embers */
+  const ec=document.getElementById('embers');
+  const ecols=['rgba(92,10,152,0.7)','rgba(128,0,16,0.6)','rgba(196,160,0,0.4)','rgba(192,144,216,0.5)','rgba(212,32,64,0.45)'];
+  for(let i=0;i<60;i++){const e=document.createElement('div');e.className='ember';const w=2+Math.random()*7;e.style.cssText=`left:${Math.random()*100}%;width:${w}px;height:${w}px;background:${ecols[Math.floor(Math.random()*ecols.length)]};animation-duration:${10+Math.random()*22}s;animation-delay:${Math.random()*28}s;`;ec.appendChild(e);}
+  /* Reveal */
+  const rv=document.querySelectorAll('.reveal');
+  const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*30);obs.unobserve(e.target);}});},{threshold:0.06});
+  rv.forEach(el=>obs.observe(el));
+  /* Chaupai Nav */
+  const nav=document.getElementById('chaupaiNav');
+  for(let i=1;i<=40;i++){const a=document.createElement('a');a.href=`#c${i}`;a.className='cnav-btn';a.textContent=i;nav.appendChild(a);}
+  /* Progress */
+  let readCount=0;
+  const digits=['०','१','२','३','४','५','६','७','८','९','१०','११','१२','१३','१४','१५','१६','१७','१८','१९','२०','२१','२२','२३','२४','२५','२६','२७','२८','२९','३०','३१','३२','३३','३४','३५','३६','३७','३८','३९','४०'];
+  function updateProgress(){document.getElementById('progressText').textContent=`${readCount} / 40`;document.getElementById('progressFill').style.width=`${(readCount/40)*100}%`;document.getElementById('readCount').textContent=digits[readCount]||readCount;}
+  function incrementRead(){if(readCount<40){readCount++;updateProgress();}}
+  function resetRead(){readCount=0;updateProgress();}
+</script>
+</body>
+</html>

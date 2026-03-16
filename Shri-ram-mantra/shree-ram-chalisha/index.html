@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>श्री राम चालीसा — Shri Ram Chalisa | ShivaMarg</title>
+  <link rel="icon" type="image/png" href="/images/ShivMarg.png" />
+  <meta name="description" content="श्री राम चालीसा — ४० चौपाइयाँ सम्पूर्ण अर्थ सहित। श्री हरिदास कृत मर्यादापुरुषोत्तम राम की स्तुति। नित्य पाठ से समस्त मनोकामनाएँ पूर्ण होती हैं।">
+  <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --amber:#E07800; --amber-soft:#FF9A30; --amber-lt:#FFBB66;
+      --gold:#C9963A; --gold-light:#E8B84B; --gold-pale:#FFF0C0;
+      --saffron:#CC4400; --blue:#1A3A6E;
+      --cream:#FFF8EE; --soft:rgba(255,248,238,0.74);
+      --dark:#07030E; --dark2:#0E0600;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--dark);color:var(--cream);font-family:'Crimson Pro',serif;overflow-x:hidden;}
+    .bg-fixed{position:fixed;inset:0;z-index:0;
+      background:radial-gradient(ellipse 90% 45% at 50% 100%,#180600 0%,transparent 58%),
+        radial-gradient(ellipse 60% 50% at 10% 60%,#0A0300 0%,transparent 55%),
+        radial-gradient(ellipse 60% 50% at 90% 30%,#0C0400 0%,transparent 55%),
+        linear-gradient(170deg,#07030E 0%,#0E0600 60%,#07030E 100%);}
+    .mandala-bg{position:fixed;inset:0;z-index:0;opacity:0.03;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='480'%3E%3Ccircle cx='240' cy='240' r='220' fill='none' stroke='%23E07800' stroke-width='0.6'/%3E%3Ccircle cx='240' cy='240' r='175' fill='none' stroke='%23C9963A' stroke-width='0.4'/%3E%3Ccircle cx='240' cy='240' r='130' fill='none' stroke='%231A3A6E' stroke-width='0.5'/%3E%3Ccircle cx='240' cy='240' r='85' fill='none' stroke='%23E07800' stroke-width='0.4'/%3E%3Ccircle cx='240' cy='240' r='40' fill='none' stroke='%23C9963A' stroke-width='0.8'/%3E%3Cpolygon points='240,25 285,145 405,145 310,218 345,338 240,265 135,338 170,218 75,145 195,145' fill='none' stroke='%23C9963A' stroke-width='0.55'/%3E%3C/svg%3E");
+      background-size:480px 480px;}
+    #particles{position:fixed;inset:0;z-index:0;pointer-events:none;}
+    .particle{position:absolute;font-family:'Tiro Devanagari Sanskrit',serif;animation:p-rise linear infinite;opacity:0;}
+    @keyframes p-rise{0%{transform:translateY(106vh) scale(0.4);opacity:0}8%{opacity:0.7}90%{opacity:0.2}100%{transform:translateY(-5vh) scale(1.1);opacity:0}}
+
+    nav{position:sticky;top:0;z-index:200;background:rgba(7,3,14,0.93);backdrop-filter:blur(18px);border-bottom:1px solid rgba(224,120,0,0.2);padding:0 5vw;display:flex;align-items:center;justify-content:space-between;height:62px;}
+    .logo{font-family:'Cinzel Decorative',serif;font-size:1.25rem;color:var(--gold);text-decoration:none;letter-spacing:1px;}
+    .logo em{color:var(--amber-lt);font-style:normal;}
+    .nav-back{font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:2px;color:var(--gold);background:rgba(201,150,58,0.1);border:1px solid rgba(201,150,58,0.25);padding:6px 14px;text-decoration:none;transition:all 0.3s;}
+    .nav-back:hover{background:rgba(201,150,58,0.2);}
+    .breadcrumb-bar{font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:2px;color:rgba(255,248,238,0.3);}
+    .breadcrumb-bar span{color:var(--amber-lt);margin:0 6px;}
+
+    .hero{position:relative;z-index:10;text-align:center;padding:80px 20px 60px;}
+    .hero::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(224,120,0,0.07) 0%,transparent 68%);}
+    .book-sym{font-size:6rem;display:block;margin-bottom:24px;animation:book-glow 4s ease-in-out infinite;filter:drop-shadow(0 0 28px rgba(224,120,0,0.95)) drop-shadow(0 0 70px rgba(201,150,58,0.5));}
+    @keyframes book-glow{0%,100%{filter:drop-shadow(0 0 28px rgba(224,120,0,0.9)) drop-shadow(0 0 65px rgba(201,150,58,0.5));transform:scale(1);}50%{filter:drop-shadow(0 0 55px rgba(255,154,48,1)) drop-shadow(0 0 110px rgba(201,150,58,0.65));transform:scale(1.07);}}
+    .hero-tag{font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:7px;color:var(--amber-lt);text-transform:uppercase;margin-bottom:18px;animation:fadeUp 0.9s ease both;}
+    .hero h1{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,5.5vw,4rem);color:var(--gold-light);line-height:1.15;margin-bottom:8px;text-shadow:0 0 40px rgba(201,150,58,0.35);animation:fadeUp 1s ease both;}
+    .hero-deva{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1.6rem,3.5vw,2.6rem);color:rgba(255,187,102,0.72);margin-bottom:20px;animation:fadeUp 1.1s ease both;}
+    .hero-orn{color:rgba(201,150,58,0.42);font-size:1.1rem;letter-spacing:14px;margin:14px 0;animation:fadeUp 1.2s ease both;}
+    .hero-desc{font-size:1.05rem;color:var(--soft);max-width:620px;margin:0 auto 16px;line-height:1.78;animation:fadeUp 1.3s ease both;}
+    .composer-tag{display:inline-block;font-family:'Cinzel',serif;font-size:0.67rem;letter-spacing:3px;color:rgba(201,150,58,0.62);border:1px solid rgba(201,150,58,0.2);padding:6px 20px;margin-top:8px;animation:fadeUp 1.4s ease both;}
+    .hero-mantra{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(0.95rem,2vw,1.3rem);color:rgba(255,187,102,0.6);margin-top:22px;animation:fadeUp 1.5s ease both;line-height:1.9;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+    .ticker-wrap{position:relative;z-index:10;overflow:hidden;border-top:1px solid rgba(224,120,0,0.15);border-bottom:1px solid rgba(224,120,0,0.15);background:rgba(0,0,0,0.28);padding:12px 0;}
+    .ticker-track{display:flex;width:max-content;animation:ticker 38s linear infinite;}
+    @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .tick-item{font-family:'Tiro Devanagari Sanskrit',serif;font-size:1rem;color:rgba(201,150,58,0.5);padding:0 34px;white-space:nowrap;}
+    .tick-dot{color:var(--amber-lt);opacity:0.6;padding:0 6px;}
+
+    .container{position:relative;z-index:10;max-width:1100px;margin:0 auto;padding:52px 22px 80px;display:grid;grid-template-columns:1fr 300px;gap:34px;align-items:start;}
+    @media(max-width:820px){.container{grid-template-columns:1fr;}}
+
+    .stotra-card{background:linear-gradient(142deg,rgba(18,6,0,0.62),rgba(5,2,0,0.9));border:1px solid rgba(224,120,0,0.22);border-radius:2px;padding:46px 42px;position:relative;overflow:hidden;}
+    .stotra-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--amber-soft),var(--gold),var(--amber),var(--gold),var(--amber-soft),transparent);}
+    .stotra-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),var(--amber-soft),var(--gold),transparent);}
+    .corner{position:absolute;font-size:1.1rem;color:rgba(201,150,58,0.18);}
+    .corner.tl{top:12px;left:14px}.corner.tr{top:12px;right:14px}.corner.bl{bottom:12px;left:14px}.corner.br{bottom:12px;right:14px}
+    .card-label{font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:5px;color:var(--amber-lt);text-transform:uppercase;text-align:center;margin-bottom:32px;}
+
+    .doha-block{background:rgba(224,120,0,0.07);border:1px solid rgba(224,120,0,0.18);padding:22px 26px;margin-bottom:36px;text-align:center;}
+    .doha-block::before,.doha-block::after{content:'';display:block;width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto;}
+    .doha-block::before{margin-bottom:16px;}.doha-block::after{margin-top:16px;}
+    .doha-label{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:4px;color:var(--amber-lt);text-transform:uppercase;margin-bottom:10px;}
+    .doha-text{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1rem,2.2vw,1.35rem);color:var(--gold-light);line-height:2.1;margin-bottom:8px;}
+    .doha-meaning{font-size:0.9rem;color:var(--soft);font-style:italic;line-height:1.8;}
+
+    .verse{margin-bottom:28px;}
+    .verse-head{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+    .verse-num{font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:3px;color:rgba(255,187,102,0.7);white-space:nowrap;background:rgba(224,120,0,0.09);border:1px solid rgba(224,120,0,0.22);padding:4px 13px;flex-shrink:0;}
+    .verse-title-text{font-family:'Cinzel',serif;font-size:0.64rem;letter-spacing:2px;color:rgba(201,150,58,0.55);font-style:italic;}
+    .verse-text{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1.05rem,2.2vw,1.42rem);color:var(--gold-light);line-height:2.15;text-align:center;text-shadow:0 0 18px rgba(201,150,58,0.18);margin-bottom:9px;}
+    .verse-roman{font-family:'Cinzel',serif;font-size:0.7rem;color:rgba(255,187,102,0.42);letter-spacing:1.5px;text-align:center;margin-bottom:10px;font-style:italic;line-height:1.9;}
+    .verse-meaning{font-size:0.92rem;color:var(--soft);text-align:center;line-height:1.85;font-style:italic;border-top:1px solid rgba(224,120,0,0.1);padding-top:10px;}
+    .vdivider{text-align:center;color:rgba(224,120,0,0.3);font-size:0.9rem;letter-spacing:10px;margin:18px 0;}
+
+    .chaupai-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px 0;}
+    @media(max-width:500px){.chaupai-grid{grid-template-columns:1fr;}}
+    .chaupai-card{background:rgba(224,120,0,0.05);border:1px solid rgba(224,120,0,0.14);padding:16px;border-radius:1px;}
+    .chaupai-num{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:2px;color:rgba(255,187,102,0.5);margin-bottom:6px;}
+    .chaupai-text{font-family:'Tiro Devanagari Sanskrit',serif;font-size:0.95rem;color:var(--gold-light);line-height:1.85;}
+    .chaupai-meaning{font-size:0.8rem;color:rgba(255,248,238,0.5);font-style:italic;margin-top:6px;line-height:1.5;}
+
+    .phala-card{margin-top:30px;background:linear-gradient(135deg,rgba(20,8,0,0.72),rgba(5,2,0,0.92));border:1px solid rgba(201,150,58,0.25);border-radius:2px;padding:28px 36px;text-align:center;position:relative;}
+    .phala-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+    .phala-label{font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:5px;color:var(--gold);text-transform:uppercase;margin-bottom:16px;}
+    .phala-text{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1rem,2vw,1.28rem);color:rgba(255,200,100,0.85);line-height:2.1;}
+    .phala-meaning{font-size:0.93rem;color:var(--soft);font-style:italic;line-height:1.82;border-top:1px solid rgba(201,150,58,0.12);padding-top:14px;margin-top:12px;}
+
+    .about-card{background:linear-gradient(142deg,rgba(18,6,0,0.45),rgba(5,2,0,0.65));border:1px solid rgba(224,120,0,0.15);border-radius:2px;padding:26px 32px;margin-top:24px;}
+    .about-card h3{font-family:'Cinzel',serif;color:var(--gold);font-size:1.08rem;margin-bottom:12px;letter-spacing:2px;}
+    .about-card p{font-size:0.94rem;line-height:1.9;color:var(--soft);margin-bottom:12px;}
+    .sig-list{display:grid;gap:10px;margin-top:12px;}
+    .sig-item{display:flex;gap:12px;align-items:flex-start;padding:12px 13px;background:rgba(224,120,0,0.05);border-left:2px solid var(--amber);}
+    .sig-icon{font-size:1.2rem;flex-shrink:0;}
+    .sig-text{font-size:0.88rem;color:var(--soft);line-height:1.65;}
+    .sig-text strong{color:var(--amber-lt);display:block;font-family:'Cinzel',serif;font-size:0.73rem;letter-spacing:1px;margin-bottom:2px;}
+
+    .sidebar{display:flex;flex-direction:column;gap:20px;}
+    .widget{background:linear-gradient(142deg,rgba(18,6,0,0.55),rgba(5,2,0,0.78));border:1px solid rgba(224,120,0,0.18);border-radius:2px;padding:20px;position:relative;}
+    .widget::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--amber-soft),transparent);opacity:0.5;}
+    .widget-title{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:4px;color:var(--amber-lt);text-transform:uppercase;margin-bottom:14px;padding-bottom:9px;border-bottom:1px solid rgba(224,120,0,0.14);}
+    .jap-ring{width:110px;height:110px;border-radius:50%;border:2px solid rgba(224,120,0,0.28);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;background:rgba(224,120,0,0.07);position:relative;}
+    .jap-ring::before{content:'';position:absolute;inset:6px;border-radius:50%;border:1px dashed rgba(201,150,58,0.25);animation:spin-slow 28s linear infinite;}
+    @keyframes spin-slow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    .jap-count{font-family:'Cinzel Decorative',serif;font-size:2rem;color:var(--gold);position:relative;z-index:1;}
+    .jap-label{font-family:'Cinzel',serif;font-size:0.59rem;letter-spacing:3px;color:rgba(255,187,102,0.5);text-transform:uppercase;text-align:center;}
+    .jap-btns{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:11px;}
+    .jbtn{font-family:'Cinzel',serif;font-size:0.66rem;letter-spacing:1.5px;padding:8px 5px;background:rgba(224,120,0,0.08);border:1px solid rgba(224,120,0,0.22);color:rgba(255,200,100,0.85);cursor:pointer;transition:all .25s;border-radius:1px;text-transform:uppercase;}
+    .jbtn:hover{background:rgba(224,120,0,0.25);border-color:var(--amber-lt);color:var(--cream);}
+    .jbtn.reset{grid-column:1/-1;background:rgba(201,150,58,0.06);border-color:rgba(201,150,58,0.2);color:var(--gold);}
+    .jbtn.reset:hover{background:rgba(201,150,58,0.18);}
+    .jap-status{margin-top:11px;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:2px;color:rgba(255,187,102,0.45);text-align:center;}
+
+    .verse-index{display:flex;flex-wrap:wrap;gap:6px;}
+    .idx-btn{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:1px;padding:5px 10px;background:rgba(201,150,58,0.07);border:1px solid rgba(201,150,58,0.2);color:rgba(255,248,238,0.58);cursor:pointer;transition:all .25s;border-radius:1px;text-decoration:none;display:inline-block;}
+    .idx-btn:hover{background:rgba(224,120,0,0.2);border-color:var(--amber-lt);color:rgba(255,200,100,0.9);}
+
+    .rel-post{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid rgba(224,120,0,0.08);text-decoration:none;color:inherit;transition:padding-left .3s;}
+    .rel-post:last-child{border-bottom:none;}.rel-post:hover{padding-left:5px;}
+    .rel-icon{font-size:1.5rem;flex-shrink:0;}
+    .rel-name{font-family:'Tiro Devanagari Sanskrit',serif;font-size:0.9rem;color:var(--gold-light);margin-bottom:2px;}
+    .rel-sub{font-size:0.71rem;color:rgba(255,248,238,0.4);font-family:'Cinzel',serif;letter-spacing:1px;}
+
+    .q-m{padding:9px 0;border-bottom:1px solid rgba(224,120,0,0.08);}
+    .q-m:last-child{border-bottom:none;}
+    .q-mt{font-family:'Tiro Devanagari Sanskrit',serif;font-size:0.96rem;color:var(--gold-light);margin-bottom:3px;}
+    .q-ms{font-size:0.71rem;color:rgba(255,248,238,0.4);font-family:'Cinzel',serif;letter-spacing:1px;}
+
+    footer{position:relative;z-index:10;text-align:center;padding:36px 20px;border-top:1px solid rgba(224,120,0,0.1);}
+    .foot-sym{font-size:2.8rem;color:rgba(201,150,58,0.22);display:block;margin-bottom:11px;}
+    .foot-txt{font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:4px;color:rgba(255,248,238,0.22);text-transform:uppercase;}
+    .foot-links{display:flex;justify-content:center;gap:24px;margin-top:14px;flex-wrap:wrap;}
+    .foot-links a{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:2px;color:rgba(255,248,238,0.28);text-decoration:none;text-transform:uppercase;transition:color .3s;}
+    .foot-links a:hover{color:var(--gold-light);}
+
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+    .reveal.on{opacity:1;transform:none;}
+    @media(max-width:700px){.stotra-card{padding:28px 16px;}}
+  </style>
+</head>
+<body>
+<div class="bg-fixed"></div>
+<div class="mandala-bg"></div>
+<div id="particles"></div>
+
+<nav>
+  <a href="/" class="logo">Shiva<em>Marg</em></a>
+  <div class="breadcrumb-bar">राम मंत्र <span>📿</span> राम चालीसा</div>
+  <a href="/ram-mantras/" class="nav-back">← राम मंत्र</a>
+</nav>
+
+<section class="hero">
+  <span class="book-sym">📿</span>
+  <div class="hero-tag">✦ श्री हरिदास कृत • ४० चौपाई ✦</div>
+  <h1>Shri Ram Chalisa</h1>
+  <div class="hero-deva">श्री राम चालीसा</div>
+  <div class="hero-orn">✦ ✦ ✦</div>
+  <p class="hero-desc">मर्यादापुरुषोत्तम श्री राम की स्तुति में रचित चालीस चौपाइयाँ। नित्य पाठ से समस्त मनोकामनाएँ पूर्ण होती हैं और वैकुण्ठ-धाम की प्राप्ति होती है।</p>
+  <div class="composer-tag">रचयिता: श्री हरिदास • ४० चौपाई + ३ दोहा</div>
+  <div class="hero-mantra">श्री रघुवीर भक्त हितकारी।<br>सुन लीजै प्रभु अरज हमारी॥</div>
+</section>
+
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="tick-item">श्री रघुवीर भक्त हितकारी सुन लीजै प्रभु</span><span class="tick-dot">📿</span>
+    <span class="tick-item">जय जय जय रघुनाथ कृपाला</span><span class="tick-dot">📿</span>
+    <span class="tick-item">राम नाम है अपरम्पारा</span><span class="tick-dot">📿</span>
+    <span class="tick-item">राम चालीसा जो पढ़े राम शरण चित लाय</span><span class="tick-dot">📿</span>
+    <span class="tick-item">श्री रघुवीर भक्त हितकारी सुन लीजै प्रभु</span><span class="tick-dot">📿</span>
+    <span class="tick-item">जय जय जय रघुनाथ कृपाला</span><span class="tick-dot">📿</span>
+    <span class="tick-item">राम नाम है अपरम्पारा</span><span class="tick-dot">📿</span>
+    <span class="tick-item">राम चालीसा जो पढ़े राम शरण चित लाय</span><span class="tick-dot">📿</span>
+  </div>
+</div>
+
+<div class="container">
+  <div>
+    <div class="stotra-card reveal">
+      <span class="corner tl">📿</span><span class="corner tr">📿</span>
+      <span class="corner bl">📿</span><span class="corner br">📿</span>
+      <div class="card-label">✦ श्री राम चालीसा — ४० चौपाई सम्पूर्ण ✦</div>
+
+      <!-- DOHA 1 - MANGALACHARANA -->
+      <div class="doha-block" id="doha1">
+        <div class="doha-label">✦ दोहा — मंगलाचरण ✦</div>
+        <div class="doha-text">
+          आदौ राम तपोवनादि गमनम्<br>
+          हत्वा मृगं काञ्चनम्।<br>
+          वैदेही हरणं जटायु मरणं<br>
+          सुग्रीव सम्भाषणम्॥<br>
+          बाली निर्दलनं समुद्र तरणं<br>
+          लङ्कापुरी दाहनम्।<br>
+          पश्चाद्रावण कुम्भकर्ण हननम्<br>
+          एतद्धि रामायणम्॥
+        </div>
+        <div class="doha-meaning">आदि में राम का वनगमन, सोने के हिरण का वध, सीता-हरण, जटायु का मरण, सुग्रीव से मिलन, बाली का वध, समुद्र को पार करना, लंका-दहन और अन्त में रावण-कुम्भकर्ण का संहार — यही रामायण है।</div>
+      </div>
+
+      <!-- CHAUPAI SECTION 1 -->
+      <div class="verse" id="ch1">
+        <div class="verse-head"><div class="verse-num">॥ चौपाई १-४ ॥</div><div class="verse-title-text">राम-स्तुति आरम्भ</div></div>
+        <div class="verse-text">
+          श्री रघुवीर भक्त हितकारी। सुन लीजै प्रभु अरज हमारी॥<br>
+          निशिदिन ध्यान धरै जो कोई। ता सम भक्त और नहिं होई॥<br>
+          ध्यान धरे शिवजी मन माहीं। ब्रह्म इन्द्र पार नहिं पाहीं॥<br>
+          जय जय जय रघुनाथ कृपाला। सदा करो सन्तन प्रतिपाला॥
+        </div>
+        <div class="verse-meaning">हे श्री रघुवीर, भक्तों के हितकारी! हमारी प्रार्थना सुनिए। जो दिन-रात आपका ध्यान धरता है, उसके समान कोई भक्त नहीं। शिवजी मन में आपका ध्यान धरते हैं, ब्रह्मा और इन्द्र भी आपकी पार नहीं पाते। जय-जय रघुनाथ! सदा सन्तों का पालन करते रहें।</div>
+      </div>
+      <div class="vdivider">~ 📿 ~</div>
+
+      <div class="verse" id="ch2">
+        <div class="verse-head"><div class="verse-num">॥ चौपाई ५-१२ ॥</div><div class="verse-title-text">राम के परिवार और सेवक</div></div>
+        <div class="verse-text">
+          दूत तुम्हार वीर हनुमाना। जासु प्रभाव तिहूँ पुर जाना॥<br>
+          तव भुजदण्ड प्रचण्ड कृपाला। रावण मारि सुरन प्रतिपाला॥<br>
+          तुम अनाथ के नाथ गुँसाईं। दीनन के हो सदा सहाई॥<br>
+          ब्रह्मादिक तव पार न पावैं। सदा ईश तुम्हरो यश गावैं॥<br>
+          चारिउ वेद भरत हैं साखी। तुम भक्तन की लज्जा राखी॥<br>
+          गुण गावत शारद मन माहीं। सुरपति ताको पार न पाहीं॥<br>
+          नाम तुम्हार लेत जो कोई। ता सम धन्य और नहिं होई॥<br>
+          राम नाम है अपरम्पारा। चारिहु वेदन जाहि पुकारा॥
+        </div>
+        <div class="verse-meaning">आपके दूत वीर हनुमान हैं जिनका प्रभाव तीनों लोकों में विख्यात है। आपकी प्रचण्ड भुजाओं ने रावण को मारकर देवताओं का पालन किया। आप अनाथों के नाथ और दीनों के सहायक हैं। ब्रह्मा आदि भी आपकी पार नहीं पा सकते। चारों वेद भरत-बन्धु साक्षी हैं। आपके नाम से बढ़कर कोई नहीं — राम नाम अपरम्पार है।</div>
+      </div>
+      <div class="vdivider">~ 📿 ~</div>
+
+      <div class="verse" id="ch3">
+        <div class="verse-head"><div class="verse-num">॥ चौपाई १३-२० ॥</div><div class="verse-title-text">राम के चरित्र और भाइयों की भक्ति</div></div>
+        <div class="verse-text">
+          गणपति नाम तुम्हारो लीन्हो। तिनको प्रथम पूज्य तुम कीन्हो॥<br>
+          शेष रटत नित नाम तुम्हारा। महि को भार शीश पर धारा॥<br>
+          फूल समान रहत सो भारा। पावत कोउ न तुम्हरो पारा॥<br>
+          भरत नाम तुम्हरो उर धारो। तासों कबहुँ न रण में हारो॥<br>
+          नाम शत्रुहन हृदय प्रकाशा। सुमिरत होत सकल भव नाशा॥<br>
+          लखन नाम सुन राखत ध्यानू। सदा चरण रज उर में मानू॥<br>
+          राम भरोसे जो नर जीवे। ता कहँ सुख कर कहा न लीवे॥<br>
+          तुम करुणा के सागर स्वामी। चरण पकरि भज अन्तरयामी॥
+        </div>
+        <div class="verse-meaning">गणपति ने आपका नाम लेकर प्रथम पूज्य स्थान पाया। शेषनाग नित्य आपका नाम रटते हैं और पृथ्वी का भार वहन करते हैं। भरत जी के हृदय में आपका नाम है इसीलिए वे कभी रण में नहीं हारे। लक्ष्मण जी सदा आपके चरण-रज को हृदय में रखते हैं। आप करुणा के सागर हैं — आपके चरण पकड़कर भजन करें।</div>
+      </div>
+      <div class="vdivider">~ 📿 ~</div>
+
+      <div class="verse" id="ch4">
+        <div class="verse-head"><div class="verse-num">॥ चौपाई २१-३२ ॥</div><div class="verse-title-text">राम की विशेषताएँ और महिमा</div></div>
+        <div class="verse-text">
+          राम रामपति रघुपति जय जय। महालोकपति जगपति जय जय॥<br>
+          राजत जनक दुलारी जय जय। महानन्दिनी प्रभु जय जय॥<br>
+          रतिहुँ दिवस राम धुन जाही। मगन रहत मन, तन दुख नाहीं॥<br>
+          राम सने जासु उर होई। महा भाग्यशाली नर सोई॥<br>
+          रक्षस दल संहारि जय जय। महापतित तनु तारि जय जय॥<br>
+          राम नाम जो निशदिन गावत। मन वाञ्छित फल निश्चे पावत॥<br>
+          रामयुद्धसार जेहि कर साजत। मन मनोज लखि कोटि लाजत॥<br>
+          राखु लाज हमारी जय जय। महिमा अगम तुम्हारी जय जय॥<br>
+          राजीव नयन मुनिन मन मोहे। मुकुट मनोहर शिर पर सोहे॥<br>
+          राजित मृदुल गात शुचि आनन। मकरकृत कुण्डल दुहु कानन॥<br>
+          रामचन्द्र सर्वोत्तम जय जय। मर्यादा पुरुषोत्तम जय जय॥<br>
+          राम नाम गुण agan अनन्ता। मनन करत शारद सुर सन्ता॥
+        </div>
+        <div class="verse-meaning">राम-रामपति-रघुपति की जय हो! महालोकपति जगपति की जय! जानकी राजत हैं। दिन-रात राम धुन में जो मगन रहते हैं, उन्हें तन का दुख नहीं। जो राम नाम दिन-रात गाते हैं, मनोवाञ्छित फल पाते हैं। कमल-नेत्र राम का मनोहर मुकुट — रामचन्द्र सर्वोत्तम, मर्यादा-पुरुषोत्तम की जय!</div>
+      </div>
+      <div class="vdivider">~ 📿 ~</div>
+
+      <div class="verse" id="ch5">
+        <div class="verse-head"><div class="verse-num">॥ चौपाई ३३-४० ॥</div><div class="verse-title-text">अन्तिम चौपाइयाँ — भक्त-वात्सल्य</div></div>
+        <div class="verse-text">
+          राम की महिमा कहाँ लौं गाऊँ। मति मलिन मन पार न पाऊँ॥<br>
+          रामवली यों लिखि चालीसा। मति अनुसार ध्यान गुरुईसा॥<br>
+          रामहिं सुन्दर रचि रस पागा। मठ दुर्वासा निकट प्रयागा॥<br>
+          राम भगत जो नित यह ध्यावे। मन वाञ्छित फल निश्चे पावे॥<br>
+          अन्त समय रघुबरपुर जाई। जहाँ जन्म हरिभक्त कहाई॥<br>
+          श्री हरिदास कहे अरु गावे। सो वैकुण्ठ धाम को पावे॥<br>
+          सात दिवस जो नेम कर। पाठ करे चित लाय॥<br>
+          हरिदास हरि कृपा से। अवसि भक्ति को पाय॥
+        </div>
+        <div class="verse-meaning">राम की महिमा का वर्णन कहाँ तक करूँ — मेरी मति मलिन है। श्री हरिदास ने इस रामचालीसा को यहाँ रचा। जो राम-भक्त नित्य इसका ध्यान करता है, उसे मनोवाञ्छित फल मिलता है। अन्त में रघुबर-धाम जाता है और हरिभक्त कहलाता है। सात दिन नियम से पाठ करने से हरि की कृपा से भक्ति अवश्य मिलती है।</div>
+      </div>
+
+      <div class="doha-block" id="doha3" style="margin-top:28px">
+        <div class="doha-label">✦ फल-दोहा ✦</div>
+        <div class="doha-text">
+          राम चालीसा जो पढ़े, राम चरण चित लाय।<br>
+          जो इच्छा मन में करे, सकल सिद्ध हो जाय॥
+        </div>
+        <div class="doha-meaning">जो राम के चरणों में चित लगाकर राम चालीसा पढ़ता है, उसकी मन में जो भी इच्छा है वह सब सिद्ध हो जाती है।</div>
+      </div>
+
+      <!-- CHAUPAI HIGHLIGHTS GRID -->
+      <div class="chaupai-grid reveal">
+        <div class="chaupai-card"><div class="chaupai-num">चौपाई ८</div><div class="chaupai-text">राम नाम है अपरम्पारा। चारिहु वेदन जाहि पुकारा॥</div><div class="chaupai-meaning">चारों वेदों में राम नाम की घोषणा है</div></div>
+        <div class="chaupai-card"><div class="chaupai-num">चौपाई १६</div><div class="chaupai-text">राम सने जासु उर होई। महा भाग्यशाली नर सोई॥</div><div class="chaupai-meaning">जिसके हृदय में राम हैं वह परम भाग्यशाली है</div></div>
+        <div class="chaupai-card"><div class="chaupai-num">चौपाई १७</div><div class="chaupai-text">राम नाम जो निशदिन गावत। मन वाञ्छित फल निश्चे पावत॥</div><div class="chaupai-meaning">दिन-रात रामनाम से मनोकामना पूर्ण होती है</div></div>
+        <div class="chaupai-card"><div class="chaupai-num">चौपाई ३९</div><div class="chaupai-text">अन्त समय रघुबरपुर जाई। जहाँ जन्म हरिभक्त कहाई॥</div><div class="chaupai-meaning">अन्त में रामधाम की प्राप्ति होती है</div></div>
+      </div>
+    </div><!-- /stotra-card -->
+
+    <div class="phala-card reveal">
+      <div class="phala-label">✦ राम चालीसा फल — Phala Shruti ✦</div>
+      <div class="phala-text">
+        राम चालीसा जो पढ़े, राम चरण चित लाय।<br>
+        जो इच्छा मन में करे, सकल सिद्ध हो जाय॥<br>
+        सात दिवस जो नेम कर, पाठ करे चित लाय।<br>
+        हरिदास हरि कृपा से, अवसि भक्ति को पाय॥
+      </div>
+      <div class="phala-meaning">जो राम चालीसा का नित्य पाठ करता है, उसकी समस्त मनोकामनाएँ पूर्ण होती हैं। सात दिन नियम से पाठ करने पर हरि की कृपा से भक्ति अवश्य प्राप्त होती है। अन्तकाल में रामधाम मिलता है।</div>
+    </div>
+
+    <div class="about-card reveal">
+      <h3>📿 श्री राम चालीसा — परिचय</h3>
+      <p>श्री राम चालीसा श्री हरिदास जी द्वारा रचित ४० चौपाइयों की स्तुति है जो मर्यादापुरुषोत्तम भगवान श्री राम को समर्पित है। 'राम' शब्द के आगे 'श्री' लगाना इस बात का प्रतीक है कि राम सदा चारों वेदों के सार से युक्त हैं।</p>
+      <div class="sig-list">
+        <div class="sig-item"><div class="sig-icon">👑</div><div class="sig-text"><strong>मर्यादापुरुषोत्तम</strong>राम को 'मर्यादा पुरुषोत्तम' — आदर्श पुरुष — माना जाता है। पिता की आज्ञा पालन, पत्नी-व्रत, न्यायप्रिय शासन — सब उनके गुण हैं।</div></div>
+        <div class="sig-item"><div class="sig-icon">🏹</div><div class="sig-text"><strong>विष्णु का सातवाँ अवतार</strong>राम भगवान विष्णु के सातवें अवतार हैं जिन्होंने त्रेतायुग में अवतरण लेकर रावण का वध किया।</div></div>
+        <div class="sig-item"><div class="sig-icon">📿</div><div class="sig-text"><strong>नित्य पाठ का महत्व</strong>प्रतिदिन प्रातः भगवान राम के सामने यह चालीसा पढ़ने से मनोकामनाएँ पूर्ण होती हैं। सात दिन नियम से पाठ विशेष फलदायी है।</div></div>
+        <div class="sig-item"><div class="sig-icon">✨</div><div class="sig-text"><strong>रामनाम = सहस्रनाम</strong>भगवान शिव के अनुसार एक बार रामनाम का उच्चारण विष्णु सहस्रनाम के तुल्य है।</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="widget reveal">
+      <div class="widget-title">✦ पाठ काउंटर ✦</div>
+      <div style="text-align:center;padding:8px 0">
+        <div class="jap-ring"><div class="jap-count" id="japCount">0</div></div>
+        <div class="jap-label">पाठ संख्या</div>
+        <div class="jap-btns">
+          <button class="jbtn" onclick="addJap(1)">📿 + १</button>
+          <button class="jbtn" onclick="addJap(7)">📅 + ७</button>
+          <button class="jbtn" onclick="addJap(40)">🏆 + ४०</button>
+          <button class="jbtn reset" onclick="resetJap()">↺ रीसेट</button>
+        </div>
+        <div class="jap-status" id="japStatus">लक्ष्य: ४० दिन नित्य पाठ</div>
+      </div>
+    </div>
+
+    <div class="widget reveal">
+      <div class="widget-title">✦ चौपाई सूची ✦</div>
+      <div class="verse-index">
+        <a href="#doha1" class="idx-btn">दोहा</a>
+        <a href="#ch1" class="idx-btn">१-४</a>
+        <a href="#ch2" class="idx-btn">५-१२</a>
+        <a href="#ch3" class="idx-btn">१३-२०</a>
+        <a href="#ch4" class="idx-btn">२१-३२</a>
+        <a href="#ch5" class="idx-btn">३३-४०</a>
+        <a href="#doha3" class="idx-btn">फल-दोहा</a>
+      </div>
+    </div>
+
+    <div class="widget reveal">
+      <div class="widget-title">✦ पाठ विधि ✦</div>
+      <div class="q-m"><div class="q-mt">🌅 प्रातः स्नान</div><div class="q-ms">स्वच्छ होकर पूजाघर में</div></div>
+      <div class="q-m"><div class="q-mt">🪔 दीपक</div><div class="q-ms">घी का दीपक जलाएँ</div></div>
+      <div class="q-m"><div class="q-mt">🌺 पूजन</div><div class="q-ms">राम-सीता-हनुमान की पूजा</div></div>
+      <div class="q-m"><div class="q-mt">📿 माला</div><div class="q-ms">तुलसी माला से जप</div></div>
+      <div class="q-m"><div class="q-mt">🎵 पाठ</div><div class="q-ms">भाव सहित सस्वर पाठ</div></div>
+      <div class="q-m"><div class="q-mt">🙏 अन्त</div><div class="q-ms">राम-नाम का मानसिक जप</div></div>
+    </div>
+
+    <div class="widget reveal">
+      <div class="widget-title">✦ संबंधित स्तोत्र ✦</div>
+      <a href="/ram-mantras/ram-raksha-stotram/" class="rel-post"><div class="rel-icon">🛡️</div><div><div class="rel-name">रामरक्षा स्तोत्रम्</div><div class="rel-sub">Ram Raksha Stotram</div></div></a>
+      <a href="/ram-mantras/ram-aarti/" class="rel-post"><div class="rel-icon">🪔</div><div><div class="rel-name">श्री राम आरती</div><div class="rel-sub">Shri Ram Aarti</div></div></a>
+      <a href="/ram-mantras/sundarkand/" class="rel-post"><div class="rel-icon">🌿</div><div><div class="rel-name">सुन्दरकाण्ड</div><div class="rel-sub">Sundarkand</div></div></a>
+      <a href="/ram-mantras/ramchandra-kripalu/" class="rel-post"><div class="rel-icon">🌺</div><div><div class="rel-name">रामचन्द्र कृपालु</div><div class="rel-sub">Ramchandra Kripalu</div></div></a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="foot-sym">📿</span>
+  <div class="foot-txt">॥ जय श्री राम ॥ मर्यादापुरुषोत्तम ॥ © ShivaMarg 2026</div>
+  <div class="foot-links">
+    <a href="/">Home</a><a href="/ram-mantras/">राम मंत्र</a><a href="/about/">About</a><a href="/privacy-policy/">Privacy</a>
+  </div>
+</footer>
+
+<script>
+  const pc=document.getElementById('particles');
+  const syms=['📿','ॐ','राम','जय राम','🏹','✦','राम नाम','🌺'];
+  const cols=['rgba(224,120,0,0.5)','rgba(255,154,48,0.4)','rgba(201,150,58,0.38)','rgba(255,187,102,0.35)'];
+  for(let i=0;i<45;i++){const p=document.createElement('div');p.className='particle';const sz=0.5+Math.random()*0.9;p.style.cssText=`left:${Math.random()*100}%;font-size:${sz}rem;color:${cols[Math.floor(Math.random()*cols.length)]};animation-duration:${13+Math.random()*18}s;animation-delay:${Math.random()*25}s;`;p.textContent=syms[Math.floor(Math.random()*syms.length)];pc.appendChild(p);}
+  const rv=document.querySelectorAll('.reveal');
+  const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*30);obs.unobserve(e.target);}});},{threshold:0.06});
+  rv.forEach(el=>obs.observe(el));
+  let japTotal=0;
+  function addJap(n){japTotal+=n;document.getElementById('japCount').textContent=japTotal;const s=document.getElementById('japStatus');if(japTotal>=40)s.textContent='🏆 ४० पाठ पूर्ण! जय श्री राम!';else s.textContent=`${40-japTotal} पाठ शेष`;}
+  function resetJap(){japTotal=0;document.getElementById('japCount').textContent='0';document.getElementById('japStatus').textContent='लक्ष्य: ४० दिन नित्य पाठ';}
+</script>
+</body>
+</html>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>काली माँ आरती — Kali Maa Aarti | ShivaMarg</title>
+  <link rel="icon" type="image/png" href="/images/ShivMarg.png" />
+  <meta name="description" content="काली माँ आरती — सम्पूर्ण आरती। जय काली माँ जय काली माँ। जय श्याम काली महाकाली माँ। ShivaMarg।">
+  <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root{--void:#050004;--crimson:#900010;--blood:#BB0020;--blood-bright:#E02840;--violet:#5A0A90;--violet-soft:#8030B0;--violet-pale:#C090D0;--gold:#BCA000;--gold-light:#DEC020;--gold-bright:#F0D840;--cream:#F4EEFA;--soft:rgba(244,238,250,0.72);}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--void);color:var(--cream);font-family:'EB Garamond',serif;overflow-x:hidden;}
+    .bg-fixed{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 50% -10%,#200008 0%,transparent 62%),radial-gradient(ellipse 55% 45% at 0% 65%,#140005 0%,transparent 55%),radial-gradient(ellipse 55% 45% at 100% 25%,#0C0015 0%,transparent 55%),radial-gradient(ellipse 45% 40% at 50% 108%,#100020 0%,transparent 50%),linear-gradient(168deg,#050004 0%,#0E000E 55%,#050004 100%);}
+    .flame-bg{position:fixed;inset:0;z-index:0;opacity:0.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cellipse cx='40' cy='50' rx='16' ry='24' fill='none' stroke='%23BB0020' stroke-width='0.6'/%3E%3Cellipse cx='40' cy='55' rx='8' ry='14' fill='none' stroke='%23BCA000' stroke-width='0.5'/%3E%3Cline x1='40' y1='20' x2='40' y2='76' stroke='%235A0A90' stroke-width='0.3'/%3E%3Ccircle cx='40' cy='40' r='35' fill='none' stroke='%23BB0020' stroke-width='0.3'/%3E%3C/svg%3E");background-size:80px 80px;}
+    #flames{position:fixed;inset:0;z-index:0;pointer-events:none;}
+    .diya-flame{position:absolute;border-radius:50% 50% 25% 25%;animation:diya-rise linear infinite;opacity:0;}
+    @keyframes diya-rise{0%{transform:translateY(108vh) scaleX(0.5) rotate(-8deg);opacity:0;}6%{opacity:0.9;}50%{transform:translateY(52vh) scaleX(1.1) rotate(6deg);opacity:0.6;}88%{opacity:0.2;}100%{transform:translateY(-6vh) scaleX(0.7) rotate(-10deg);opacity:0;}}
+    .puja-aura{position:fixed;top:-150px;left:50%;transform:translateX(-50%);width:900px;height:700px;border-radius:50%;background:radial-gradient(ellipse,rgba(187,0,32,0.08) 0%,rgba(90,10,144,0.04) 40%,transparent 70%);animation:puja-breathe 5s ease-in-out infinite;pointer-events:none;z-index:0;}
+    @keyframes puja-breathe{0%,100%{transform:translateX(-50%) scale(1);opacity:0.5;}50%{transform:translateX(-50%) scale(1.2);opacity:1;}}
+
+    header{position:relative;z-index:10;padding:16px 5vw 0;border-bottom:1px solid rgba(187,0,32,0.15);}
+    .site-nav{display:flex;justify-content:space-between;align-items:center;max-width:1100px;margin:0 auto 13px;}
+    .logo{font-family:'Cinzel Decorative',serif;font-size:1.28rem;color:var(--gold);text-decoration:none;letter-spacing:1px;}
+    .logo em{color:var(--violet-soft);font-style:normal;}
+    nav a{color:rgba(244,238,250,0.45);text-decoration:none;margin-left:18px;font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;transition:color .3s;}
+    nav a:hover{color:var(--gold-light);}
+    .breadcrumb{max-width:1100px;margin:0 auto;font-family:'Cinzel',serif;font-size:0.64rem;letter-spacing:2px;color:rgba(244,238,250,0.28);padding-bottom:13px;}
+    .breadcrumb span{color:var(--blood-bright);margin:0 8px;}
+
+    .hero{position:relative;z-index:10;text-align:center;padding:88px 20px 68px;overflow:hidden;}
+    .hero::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:820px;height:820px;border-radius:50%;background:radial-gradient(circle,rgba(187,0,32,0.08) 0%,transparent 68%);}
+    .lamp-wrap{display:inline-block;margin-bottom:28px;position:relative;}
+    .lamp-sym{font-size:6.5rem;display:block;line-height:1;filter:drop-shadow(0 0 30px rgba(187,0,32,0.9)) drop-shadow(0 0 80px rgba(188,160,0,0.55));animation:lamp-glow 3.5s ease-in-out infinite;}
+    @keyframes lamp-glow{0%,100%{filter:drop-shadow(0 0 30px rgba(187,0,32,0.9)) drop-shadow(0 0 80px rgba(188,160,0,0.5));transform:scale(1) rotate(0deg);}25%{transform:scale(1.06) rotate(-3deg);}75%{transform:scale(1.04) rotate(3deg);}50%{filter:drop-shadow(0 0 60px rgba(224,40,64,1)) drop-shadow(0 0 120px rgba(222,192,32,0.55));transform:scale(1.09);}}
+    .orbit-flames{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:192px;height:192px;border:1px dashed rgba(187,0,32,0.25);border-radius:50%;animation:orbit-cw 16s linear infinite;}
+    .orbit-flames::before,.orbit-flames::after{content:'🔥';position:absolute;font-size:0.8rem;animation:orbit-ccw 16s linear infinite;}
+    .orbit-flames::before{top:-12px;left:50%;transform:translateX(-50%);}
+    .orbit-flames::after{bottom:-12px;left:50%;transform:translateX(-50%);}
+    @keyframes orbit-cw{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+    @keyframes orbit-ccw{from{transform:translateX(-50%) rotate(0)}to{transform:translateX(-50%) rotate(-360deg)}}
+
+    .hero-tag{font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:7px;color:var(--blood-bright);text-transform:uppercase;margin-bottom:18px;animation:fadeUp .9s ease both;}
+    .hero h1{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,5.5vw,4rem);color:var(--gold-bright);line-height:1.15;margin-bottom:8px;text-shadow:0 0 40px rgba(188,160,0,0.4),0 0 90px rgba(187,0,32,0.25);animation:fadeUp 1s ease both;}
+    .hero-deva{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1.6rem,4vw,2.8rem);color:rgba(192,144,208,0.8);margin-bottom:20px;animation:fadeUp 1.1s ease both;}
+    .hero-orn{color:rgba(188,160,0,0.4);font-size:1.1rem;letter-spacing:14px;margin:14px 0;animation:fadeUp 1.2s ease both;}
+    .hero-desc{font-size:1.04rem;color:var(--soft);max-width:620px;margin:0 auto 16px;line-height:1.82;animation:fadeUp 1.3s ease both;}
+    .composer-tag{display:inline-block;font-family:'Cinzel',serif;font-size:0.67rem;letter-spacing:3px;color:rgba(188,160,0,0.6);border:1px solid rgba(188,160,0,0.18);padding:6px 22px;margin-top:8px;animation:fadeUp 1.4s ease both;}
+    .hero-refrain{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1rem,2.2vw,1.42rem);color:rgba(224,40,64,0.8);letter-spacing:2px;margin-top:24px;animation:fadeUp 1.5s ease both;line-height:1.9;text-shadow:0 0 20px rgba(187,0,32,0.5);}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+    .ticker-wrap{position:relative;z-index:10;overflow:hidden;border-top:1px solid rgba(187,0,32,0.14);border-bottom:1px solid rgba(187,0,32,0.14);background:rgba(0,0,0,0.4);padding:12px 0;}
+    .ticker-track{display:flex;width:max-content;animation:ticker 32s linear infinite;}
+    @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .tick-item{font-family:'Tiro Devanagari Sanskrit',serif;font-size:1rem;color:rgba(188,160,0,0.52);padding:0 36px;white-space:nowrap;}
+    .tick-dot{color:var(--blood-bright);opacity:0.65;padding:0 6px;}
+
+    .container{position:relative;z-index:10;max-width:1100px;margin:0 auto;padding:52px 20px 70px;display:grid;grid-template-columns:1fr 300px;gap:32px;align-items:start;}
+    @media(max-width:800px){.container{grid-template-columns:1fr;}}
+
+    .aarti-card{background:linear-gradient(142deg,rgba(24,2,4,0.68) 0%,rgba(5,0,4,0.92) 100%);border:1px solid rgba(187,0,32,0.24);border-radius:2px;padding:46px 42px;position:relative;overflow:hidden;}
+    .aarti-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--blood-bright),var(--gold-bright),var(--blood-bright),var(--gold-bright),var(--blood-bright),transparent);}
+    .aarti-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),var(--blood),var(--gold),transparent);}
+    .corner{position:absolute;font-size:1.2rem;color:rgba(188,160,0,0.18);}
+    .corner.tl{top:12px;left:14px}.corner.tr{top:12px;right:14px}.corner.bl{bottom:12px;left:14px}.corner.br{bottom:12px;right:14px}
+    .card-label{font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:5px;color:var(--blood-bright);text-transform:uppercase;text-align:center;margin-bottom:32px;}
+
+    .aarti-intro{background:rgba(187,0,32,0.07);border:1px solid rgba(187,0,32,0.18);padding:22px 28px;margin-bottom:30px;text-align:center;}
+    .aarti-intro::before{content:'✦ आरती प्रारम्भ ✦';display:block;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:4px;color:var(--blood-bright);margin-bottom:14px;}
+    .aarti-intro-text{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1.05rem,2.2vw,1.38rem);color:var(--gold-light);line-height:2.12;text-shadow:0 0 16px rgba(188,160,0,0.2);}
+
+    .aarti-verse{margin-bottom:28px;padding:18px 22px;background:rgba(187,0,32,0.05);border-left:2px solid rgba(187,0,32,0.28);transition:background .3s;}
+    .aarti-verse:hover{background:rgba(187,0,32,0.1);border-left-color:var(--blood-bright);}
+    .aarti-verse-head{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:3px;color:rgba(224,40,64,0.55);margin-bottom:10px;text-transform:uppercase;}
+    .aarti-text{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1.08rem,2.3vw,1.45rem);color:var(--gold-light);line-height:2.12;text-align:center;text-shadow:0 0 18px rgba(188,160,0,0.16);}
+    .aarti-meaning{font-size:0.9rem;color:var(--soft);font-style:italic;line-height:1.82;text-align:center;margin-top:9px;padding-top:9px;border-top:1px solid rgba(187,0,32,0.12);}
+
+    .aarti-refrain{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1.1rem,2.3vw,1.5rem);color:rgba(224,40,64,0.92);text-align:center;line-height:2.1;margin:22px 0;text-shadow:0 0 25px rgba(187,0,32,0.75),0 0 55px rgba(90,10,144,0.35);letter-spacing:0.5px;background:rgba(187,0,32,0.06);border:1px solid rgba(187,0,32,0.15);padding:16px 24px;}
+    .vdivider{text-align:center;color:rgba(187,0,32,0.35);font-size:0.95rem;letter-spacing:10px;margin:20px 0;}
+
+    .phala-card{margin-top:32px;background:linear-gradient(135deg,rgba(24,2,4,0.75),rgba(5,0,4,0.93));border:1px solid rgba(188,160,0,0.22);border-radius:2px;padding:30px 36px;text-align:center;position:relative;}
+    .phala-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+    .phala-label{font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:5px;color:var(--gold);text-transform:uppercase;margin-bottom:16px;}
+    .phala-text{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1rem,2.1vw,1.26rem);color:var(--violet-pale);line-height:2.1;text-shadow:0 0 14px rgba(192,144,208,0.28);}
+    .phala-meaning{font-size:0.93rem;color:var(--soft);font-style:italic;line-height:1.82;border-top:1px solid rgba(188,160,0,0.12);padding-top:14px;margin-top:14px;}
+
+    .about-card{background:linear-gradient(142deg,rgba(24,2,4,0.45),rgba(5,0,4,0.65));border:1px solid rgba(187,0,32,0.16);border-radius:2px;padding:26px 32px;margin-top:24px;}
+    .about-card h3{font-family:'Cinzel',serif;color:var(--gold);font-size:1.08rem;margin-bottom:13px;letter-spacing:2px;}
+    .about-card p{font-size:0.94rem;line-height:1.9;color:var(--soft);margin-bottom:12px;}
+    .sig-list{display:grid;gap:10px;margin-top:12px;}
+    .sig-item{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;background:rgba(187,0,32,0.06);border-left:2px solid var(--blood);}
+    .sig-icon{font-size:1.25rem;flex-shrink:0;}
+    .sig-text{font-size:0.88rem;color:var(--soft);line-height:1.65;}
+    .sig-text strong{color:var(--violet-pale);display:block;font-family:'Cinzel',serif;font-size:0.73rem;letter-spacing:1px;margin-bottom:2px;}
+
+    .sidebar{display:flex;flex-direction:column;gap:20px;}
+    .widget{background:linear-gradient(142deg,rgba(24,2,4,0.55),rgba(5,0,4,0.78));border:1px solid rgba(187,0,32,0.18);border-radius:2px;padding:20px;position:relative;}
+    .widget::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--blood-bright),transparent);opacity:0.5;}
+    .widget-title{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:4px;color:var(--blood-bright);text-transform:uppercase;margin-bottom:14px;padding-bottom:9px;border-bottom:1px solid rgba(187,0,32,0.15);}
+
+    .diya-ring{width:112px;height:112px;border-radius:50%;border:2px solid rgba(187,0,32,0.3);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;background:rgba(187,0,32,0.08);box-shadow:0 0 30px rgba(187,0,32,0.15),inset 0 0 20px rgba(187,0,32,0.07);position:relative;}
+    .diya-ring::before{content:'';position:absolute;inset:6px;border-radius:50%;border:1px dashed rgba(188,160,0,0.25);animation:spin-slow 28s linear infinite;}
+    @keyframes spin-slow{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+    .diya-count{font-family:'Cinzel Decorative',serif;font-size:2rem;color:var(--gold-bright);position:relative;z-index:1;}
+    .diya-label{font-family:'Cinzel',serif;font-size:0.59rem;letter-spacing:3px;color:rgba(224,40,64,0.5);text-transform:uppercase;text-align:center;}
+    .diya-btns{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:11px;}
+    .dbtn{font-family:'Cinzel',serif;font-size:0.66rem;letter-spacing:1.5px;padding:8px 5px;background:rgba(187,0,32,0.09);border:1px solid rgba(224,40,64,0.2);color:rgba(224,144,208,0.9);cursor:pointer;transition:all .25s;text-transform:uppercase;}
+    .dbtn:hover{background:rgba(187,0,32,0.28);border-color:var(--blood-bright);color:var(--cream);}
+    .dbtn.reset{grid-column:1/-1;background:rgba(188,160,0,0.06);border-color:rgba(188,160,0,0.2);color:var(--gold);}
+    .dbtn.reset:hover{background:rgba(188,160,0,0.18);}
+    .diya-status{margin-top:10px;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:2px;color:rgba(224,40,64,0.42);text-align:center;}
+
+    .q-m{padding:9px 0;border-bottom:1px solid rgba(187,0,32,0.1);}
+    .q-m:last-child{border-bottom:none;}
+    .q-mt{font-family:'Tiro Devanagari Sanskrit',serif;font-size:0.96rem;color:var(--gold-light);margin-bottom:3px;}
+    .q-ms{font-size:0.71rem;color:rgba(244,238,250,0.38);font-family:'Cinzel',serif;letter-spacing:1px;}
+
+    .rel-post{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid rgba(187,0,32,0.1);text-decoration:none;color:inherit;transition:padding-left .3s;}
+    .rel-post:last-child{border-bottom:none;}
+    .rel-post:hover{padding-left:5px;}
+    .rel-icon{font-size:1.5rem;flex-shrink:0;}
+    .rel-name{font-family:'Tiro Devanagari Sanskrit',serif;font-size:0.9rem;color:var(--gold-light);margin-bottom:2px;}
+    .rel-sub{font-size:0.71rem;color:rgba(244,238,250,0.38);font-family:'Cinzel',serif;letter-spacing:1px;}
+
+    .names-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+    .name-chip{font-family:'Tiro Devanagari Sanskrit',serif;font-size:0.82rem;color:var(--gold-light);background:rgba(187,0,32,0.07);border:1px solid rgba(187,0,32,0.16);padding:5px 6px;text-align:center;cursor:default;transition:all .3s;}
+    .name-chip:hover{background:rgba(187,0,32,0.2);border-color:var(--blood-bright);color:var(--cream);}
+
+    footer{position:relative;z-index:10;text-align:center;padding:38px 20px;border-top:1px solid rgba(187,0,32,0.12);}
+    .foot-sym{font-size:2.8rem;color:rgba(188,160,0,0.2);display:block;margin-bottom:12px;}
+    .foot-txt{font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:4px;color:rgba(244,238,250,0.2);text-transform:uppercase;}
+
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+    .reveal.on{opacity:1;transform:none;}
+    @media(max-width:700px){nav{display:none;}.aarti-card{padding:28px 16px;}}
+  </style>
+</head>
+<body>
+<div class="bg-fixed"></div>
+<div class="flame-bg"></div>
+<div class="puja-aura"></div>
+<div id="flames"></div>
+
+<header>
+  <div class="site-nav">
+    <a href="/" class="logo">Shiva<em>Marg</em></a>
+    <nav>
+      <a href="/kali-mantras/">काली मंत्र</a>
+      <a href="#">आरती</a>
+      <a href="#">स्तोत्र</a>
+      <a href="#">महाविद्या</a>
+    </nav>
+  </div>
+  <div class="breadcrumb">मुख्य पृष्ठ <span>🔥</span> काली मंत्र <span>🔥</span> काली माँ आरती</div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="lamp-wrap">
+    <div class="orbit-flames"></div>
+    <span class="lamp-sym">🪔</span>
+  </div>
+  <div class="hero-tag">✦ सम्पूर्ण काली आरती ✦</div>
+  <h1>Kali Maa Aarti</h1>
+  <div class="hero-deva">काली माँ आरती</div>
+  <div class="hero-orn">✦ ✦ ✦</div>
+  <p class="hero-desc">माँ काली की सम्पूर्ण आरती — सायंकाल दीप जलाकर और प्रातःकाल भी गाई जाने वाली जय काली माँ की महान आरती। अर्थ सहित सम्पूर्ण पाठ।</p>
+  <div class="composer-tag">सम्पूर्ण आरती • ८ पद • काली पूजन • प्रातः-सायं</div>
+  <div class="hero-refrain">जय काली माँ जय काली माँ ॥ जय श्याम काली महाकाली माँ</div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="tick-item">जय काली माँ जय काली माँ</span><span class="tick-dot">🔥</span>
+    <span class="tick-item">जय श्याम काली महाकाली माँ</span><span class="tick-dot">🔥</span>
+    <span class="tick-item">जय जय महाकाली नमो नमः</span><span class="tick-dot">🔥</span>
+    <span class="tick-item">ॐ क्रीं कालिकायै नमः</span><span class="tick-dot">🔥</span>
+    <span class="tick-item">दीप जलाओ माँ को मनाओ</span><span class="tick-dot">🔥</span>
+    <span class="tick-item">जय काली माँ जय काली माँ</span><span class="tick-dot">🔥</span>
+    <span class="tick-item">जय श्याम काली महाकाली माँ</span><span class="tick-dot">🔥</span>
+    <span class="tick-item">जय जय महाकाली नमो नमः</span><span class="tick-dot">🔥</span>
+    <span class="tick-item">ॐ क्रीं कालिकायै नमः</span><span class="tick-dot">🔥</span>
+    <span class="tick-item">दीप जलाओ माँ को मनाओ</span><span class="tick-dot">🔥</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+  <div>
+    <div class="aarti-card reveal">
+      <span class="corner tl">🔥</span><span class="corner tr">🔥</span>
+      <span class="corner bl">🪔</span><span class="corner br">🪔</span>
+      <div class="card-label">✦ काली माँ आरती — सम्पूर्ण ✦</div>
+
+      <!-- MANGALA OPENING -->
+      <div class="aarti-intro">
+        <div class="aarti-intro-text">
+          ॐ जय काली माँ जय काली माँ।<br>
+          जय श्याम काली महाकाली माँ॥<br>
+          ॐ जय काली माँ॥
+        </div>
+      </div>
+
+      <!-- MAIN REFRAIN -->
+      <div class="aarti-refrain">
+        जय काली माँ जय काली माँ।<br>
+        जय श्याम काली महाकाली माँ।<br>
+        ॐ जय काली माँ॥
+      </div>
+
+      <!-- VERSE 1 -->
+      <div class="aarti-verse" id="a1">
+        <div class="aarti-verse-head">॥ आरती — प्रथम पद ॥</div>
+        <div class="aarti-text">
+          नील वरण तव तन शोभित माँ।<br>
+          मुण्डमाल गल सोहत माँ।<br>
+          चार भुजा में शस्त्र धारे माँ।<br>
+          भक्त जनों के दुख हरे माँ॥
+        </div>
+        <div class="aarti-meaning">नीले वर्ण का तन सुशोभित है, गले में मुण्डमाला सोहती है, चारों भुजाओं में शस्त्र धारण किए हैं — भक्तों के दुख हरने वाली माँ।</div>
+      </div>
+
+      <div class="aarti-refrain">
+        जय काली माँ जय काली माँ।<br>
+        जय श्याम काली महाकाली माँ।<br>
+        ॐ जय काली माँ॥
+      </div>
+      <div class="vdivider">~ 🔥 ~</div>
+
+      <!-- VERSE 2 -->
+      <div class="aarti-verse" id="a2">
+        <div class="aarti-verse-head">॥ आरती — द्वितीय पद ॥</div>
+        <div class="aarti-text">
+          शव के ऊपर खड़ी महारानी माँ।<br>
+          लाल जिह्वा वाली भवानी माँ।<br>
+          घोर अट्टहास से धरा कँपाती माँ।<br>
+          दानव दल को मार भगाती माँ॥
+        </div>
+        <div class="aarti-meaning">शव के ऊपर खड़ी महारानी, लाल जिह्वा वाली भवानी — जिनके घोर अट्टहास से पृथ्वी काँपती है और दानव-दल भाग जाते हैं।</div>
+      </div>
+
+      <div class="aarti-refrain">
+        जय काली माँ जय काली माँ।<br>
+        जय श्याम काली महाकाली माँ।<br>
+        ॐ जय काली माँ॥
+      </div>
+      <div class="vdivider">~ 🔥 ~</div>
+
+      <!-- VERSE 3 -->
+      <div class="aarti-verse" id="a3">
+        <div class="aarti-verse-head">॥ आरती — तृतीय पद ॥</div>
+        <div class="aarti-text">
+          चण्ड मुण्ड का नाश किया माँ।<br>
+          रक्तबीज का खून पिया माँ।<br>
+          शुम्भ निशुम्भ को मारा माँ।<br>
+          देवों का संकट टारा माँ॥
+        </div>
+        <div class="aarti-meaning">चण्ड-मुण्ड का संहार किया, रक्तबीज का रक्त पान किया, शुम्भ-निशुम्भ का वध करके देवताओं का संकट टाला।</div>
+      </div>
+
+      <div class="aarti-refrain">
+        जय काली माँ जय काली माँ।<br>
+        जय श्याम काली महाकाली माँ।<br>
+        ॐ जय काली माँ॥
+      </div>
+      <div class="vdivider">~ 🔥 ~</div>
+
+      <!-- VERSE 4 -->
+      <div class="aarti-verse" id="a4">
+        <div class="aarti-verse-head">॥ आरती — चतुर्थ पद ॥</div>
+        <div class="aarti-text">
+          कालीघाट में वास तुम्हारा माँ।<br>
+          दक्षिणेश्वर भी धाम तुम्हारा माँ।<br>
+          रामकृष्ण ने पूजा की माँ।<br>
+          अनन्य भक्ति की दीक्षा दी माँ॥
+        </div>
+        <div class="aarti-meaning">कालीघाट और दक्षिणेश्वर आपके धाम हैं। रामकृष्ण परमहंस ने आपकी उपासना की और अनन्य भक्ति की दीक्षा पाई।</div>
+      </div>
+
+      <div class="aarti-refrain">
+        जय काली माँ जय काली माँ।<br>
+        जय श्याम काली महाकाली माँ।<br>
+        ॐ जय काली माँ॥
+      </div>
+      <div class="vdivider">~ 🔥 ~</div>
+
+      <!-- VERSE 5 -->
+      <div class="aarti-verse" id="a5">
+        <div class="aarti-verse-head">॥ आरती — पञ्चम पद ॥</div>
+        <div class="aarti-text">
+          ब्रह्मा विष्णु शिव तुम्हें ध्याते माँ।<br>
+          इन्द्र आदि तव यश गाते माँ।<br>
+          दस महाविद्या की तुम प्रथमा माँ।<br>
+          सर्व जगत की तुम परमा माँ॥
+        </div>
+        <div class="aarti-meaning">ब्रह्मा, विष्णु, शिव और इन्द्र सभी आपका ध्यान करते और यश गाते हैं। दस महाविद्याओं में प्रथम — सर्व जगत की परम माँ।</div>
+      </div>
+
+      <div class="aarti-refrain">
+        जय काली माँ जय काली माँ।<br>
+        जय श्याम काली महाकाली माँ।<br>
+        ॐ जय काली माँ॥
+      </div>
+      <div class="vdivider">~ 🔥 ~</div>
+
+      <!-- VERSE 6 -->
+      <div class="aarti-verse" id="a6">
+        <div class="aarti-verse-head">॥ आरती — षष्ठ पद ॥</div>
+        <div class="aarti-text">
+          भक्त की पीड़ा तुम जानती माँ।<br>
+          मन की बात तुम मानती माँ।<br>
+          दर पर जो भी आता है माँ।<br>
+          खाली कभी न जाता है माँ॥
+        </div>
+        <div class="aarti-meaning">भक्त की पीड़ा जानती हैं, मन की बात मानती हैं। आपके द्वार पर जो भी आता है, वह कभी रिक्त हस्त नहीं जाता।</div>
+      </div>
+
+      <div class="aarti-refrain">
+        जय काली माँ जय काली माँ।<br>
+        जय श्याम काली महाकाली माँ।<br>
+        ॐ जय काली माँ॥
+      </div>
+      <div class="vdivider">~ 🔥 ~</div>
+
+      <!-- VERSE 7 -->
+      <div class="aarti-verse" id="a7">
+        <div class="aarti-verse-head">॥ आरती — सप्तम पद ॥</div>
+        <div class="aarti-text">
+          निर्धन को तुम धन देती माँ।<br>
+          सन्तानहीन को सन्तान देती माँ।<br>
+          रोग शोक संकट हरती माँ।<br>
+          अपने भक्तों पर कृपा करती माँ॥
+        </div>
+        <div class="aarti-meaning">निर्धन को धन, सन्तानहीन को सन्तान, रोग-शोक-संकट का नाश — अपने भक्तों पर अपार कृपा करती हैं।</div>
+      </div>
+
+      <div class="aarti-refrain">
+        जय काली माँ जय काली माँ।<br>
+        जय श्याम काली महाकाली माँ।<br>
+        ॐ जय काली माँ॥
+      </div>
+      <div class="vdivider">~ 🔥 ~</div>
+
+      <!-- VERSE 8 - MANGAL PRARTHANA -->
+      <div class="aarti-verse" id="a8">
+        <div class="aarti-verse-head">॥ आरती — अष्टम पद — मंगल प्रार्थना ॥</div>
+        <div class="aarti-text">
+          काली माँ की आरती जो गावे माँ।<br>
+          सब सुख सम्पद नित पावे माँ।<br>
+          पाप ताप संकट कट जाते माँ।<br>
+          माँ काली के चरण में आते माँ॥
+        </div>
+        <div class="aarti-meaning">जो भक्त माँ काली की आरती गाता है उसे सभी सुख-सम्पदा मिलती है, पाप-ताप-संकट कट जाते हैं और माँ काली के चरणों में स्थान मिलता है।</div>
+      </div>
+
+      <!-- FINAL GRAND REFRAIN -->
+      <div class="aarti-refrain" style="font-size:clamp(1.18rem,2.5vw,1.62rem);padding:22px 28px;">
+        जय काली माँ जय काली माँ।<br>
+        जय श्याम काली महाकाली माँ।<br>
+        जय जय जय महाकाली माँ।<br>
+        ॐ क्रीं कालिकायै नमः॥<br>
+        ॐ जय काली माँ॥
+      </div>
+
+    </div><!-- /aarti-card -->
+
+    <!-- PHALA -->
+    <div class="phala-card reveal">
+      <div class="phala-label">✦ काली आरती फल ✦</div>
+      <div class="phala-text">
+        काली आरती प्रातः-सायं जो करे।<br>
+        माँ काली की कृपा से जीवन भरे॥<br>
+        सर्व संकट दूर होय तत्काल।<br>
+        माँ की भक्ति से मिले खुशहाल॥
+      </div>
+      <div class="phala-meaning">जो प्रातःकाल और सायंकाल माँ काली की आरती करता है उसका जीवन माँ की कृपा से भर जाता है। सभी संकट तत्काल दूर होते हैं और माँ की भक्ति से सुखी जीवन मिलता है।</div>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="about-card reveal">
+      <h3>🪔 काली आरती — विधि एवं महत्व</h3>
+      <p>माँ काली की आरती पूजन का सर्वाधिक महत्वपूर्ण अंग है। आरती के समय दीप, धूप, पुष्प और नैवेद्य अर्पण करके भाव-भक्ति से गान करना चाहिए।</p>
+      <p>काली पूजा में विशेषतः अष्टमी, चतुर्दशी और अमावस्या को आरती का विशेष महत्व है। दीपावली की रात महाकाली पूजा और आरती विशेष रूप से की जाती है।</p>
+      <div class="sig-list">
+        <div class="sig-item"><div class="sig-icon">🪔</div><div class="sig-text"><strong>दीप-दान</strong>आरती के समय पाँच या सात दीपकों से थाली सजाएँ। घी अथवा सरसों के तेल का दीपक जलाएँ।</div></div>
+        <div class="sig-item"><div class="sig-icon">🌺</div><div class="sig-text"><strong>पुष्प-अर्पण</strong>लाल गुड़हल (जासवंत) माँ काली को अत्यन्त प्रिय हैं। आरती से पूर्व पुष्प अर्पण करें।</div></div>
+        <div class="sig-item"><div class="sig-icon">🔥</div><div class="sig-text"><strong>धूप-अगरबत्ती</strong>लोबान की धूप माँ काली को प्रिय है। आरती से पूर्व धूप जलाएँ।</div></div>
+        <div class="sig-item"><div class="sig-icon">🥁</div><div class="sig-text"><strong>घण्टा-शंख</strong>आरती के दौरान घण्टा बजाते हुए शंख ध्वनि करें। यह वातावरण को शुद्ध और ऊर्जावान करती है।</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <!-- Aarti Counter -->
+    <div class="widget reveal">
+      <div class="widget-title">✦ आरती काउंटर ✦</div>
+      <div style="text-align:center;padding:6px 0;">
+        <div class="diya-ring"><div class="diya-count" id="aartCount">0</div></div>
+        <div class="diya-label">आरती संख्या</div>
+        <div class="diya-btns">
+          <button class="dbtn" onclick="addAart(1)">🪔 + १</button>
+          <button class="dbtn" onclick="addAart(7)">🔥 + ७</button>
+          <button class="dbtn" onclick="addAart(21)">📿 + २१</button>
+          <button class="dbtn reset" onclick="resetAart()">↺ रीसेट</button>
+        </div>
+        <div class="diya-status" id="aartStatus">लक्ष्य: २१ आरती</div>
+      </div>
+    </div>
+
+    <!-- Pads index -->
+    <div class="widget reveal">
+      <div class="widget-title">✦ आरती क्रम ✦</div>
+      <div class="q-m"><div class="q-mt">🌅 प्रथम पद</div><div class="q-ms">नील वरण तव तन शोभित माँ</div></div>
+      <div class="q-m"><div class="q-mt">💀 द्वितीय पद</div><div class="q-ms">शव के ऊपर खड़ी महारानी माँ</div></div>
+      <div class="q-m"><div class="q-mt">⚔️ तृतीय पद</div><div class="q-ms">चण्ड मुण्ड का नाश किया माँ</div></div>
+      <div class="q-m"><div class="q-mt">🛕 चतुर्थ पद</div><div class="q-ms">कालीघाट में वास तुम्हारा माँ</div></div>
+      <div class="q-m"><div class="q-mt">🌌 पञ्चम पद</div><div class="q-ms">ब्रह्मा विष्णु शिव ध्याते माँ</div></div>
+      <div class="q-m"><div class="q-mt">💛 षष्ठ पद</div><div class="q-ms">भक्त की पीड़ा तुम जानती माँ</div></div>
+      <div class="q-m"><div class="q-mt">🌸 सप्तम पद</div><div class="q-ms">निर्धन को तुम धन देती माँ</div></div>
+      <div class="q-m"><div class="q-mt">🙏 अष्टम पद</div><div class="q-ms">मंगल प्रार्थना — काली चरण</div></div>
+    </div>
+
+    <!-- Patha Vidhi -->
+    <div class="widget reveal">
+      <div class="widget-title">✦ आरती विधि ✦</div>
+      <div class="q-m"><div class="q-mt">🌅 प्रातः सन्ध्या</div><div class="q-ms">स्नानादि के बाद पूजा</div></div>
+      <div class="q-m"><div class="q-mt">🕯️ पञ्च-दीप</div><div class="q-ms">पाँच दीपकों की थाली सजाएँ</div></div>
+      <div class="q-m"><div class="q-mt">🌺 लाल पुष्प</div><div class="q-ms">गुड़हल — काली को अर्पण</div></div>
+      <div class="q-m"><div class="q-mt">🥁 घण्टा नाद</div><div class="q-ms">पूरी आरती में घण्टा बजाएँ</div></div>
+      <div class="q-m"><div class="q-mt">🐚 शंख ध्वनि</div><div class="q-ms">आरती समाप्ति पर शंख फूँकें</div></div>
+      <div class="q-m"><div class="q-mt">🙏 प्रसाद वितरण</div><div class="q-ms">नैवेद्य अर्पण कर प्रसाद बाँटें</div></div>
+    </div>
+
+    <!-- Kali Names -->
+    <div class="widget reveal">
+      <div class="widget-title">✦ काली के नाम ✦</div>
+      <div class="names-grid">
+        <div class="name-chip">महाकाली</div><div class="name-chip">भवानी</div>
+        <div class="name-chip">चामुण्डा</div><div class="name-chip">कालिका</div>
+        <div class="name-chip">दक्षिणकाली</div><div class="name-chip">भद्रकाली</div>
+        <div class="name-chip">करालिनी</div><div class="name-chip">जगदम्बा</div>
+      </div>
+    </div>
+
+    <!-- Related -->
+    <div class="widget reveal">
+      <div class="widget-title">✦ संबंधित स्तोत्र ✦</div>
+      <a href="/kali-mantras/kalika-ashtakam/" class="rel-post"><div class="rel-icon">🌑</div><div><div class="rel-name">कालिकाष्टकम्</div><div class="rel-sub">Kalika Ashtakam</div></div></a>
+      <a href="/kali-mantras/kali-chalisa/" class="rel-post"><div class="rel-icon">📿</div><div><div class="rel-name">काली चालीसा</div><div class="rel-sub">Kali Chalisa</div></div></a>
+      <a href="/kali-mantras/mahakali-stotra/" class="rel-post"><div class="rel-icon">💀</div><div><div class="rel-name">महाकाली स्तोत्र</div><div class="rel-sub">Mahakali Stotra</div></div></a>
+      <a href="/kali-mantras/kali-beej-mantra/" class="rel-post"><div class="rel-icon">⚡</div><div><div class="rel-name">काली बीज मंत्र</div><div class="rel-sub">Kali Beej Mantra</div></div></a>
+    </div>
+
+    <!-- Benefits -->
+    <div class="widget reveal">
+      <div class="widget-title">✦ आरती के लाभ ✦</div>
+      <div class="q-m"><div class="q-mt">🔥 पाप-नाश</div><div class="q-ms">पाप और ताप का क्षण-नाश</div></div>
+      <div class="q-m"><div class="q-mt">🛡️ संकट-मुक्ति</div><div class="q-ms">समस्त संकटों से रक्षा</div></div>
+      <div class="q-m"><div class="q-mt">💰 धन-लाभ</div><div class="q-ms">लक्ष्मी का आगमन</div></div>
+      <div class="q-m"><div class="q-mt">💛 माँ की कृपा</div><div class="q-ms">शीघ्र माँ काली प्रसन्न</div></div>
+      <div class="q-m"><div class="q-mt">🌟 मोक्ष-पथ</div><div class="q-ms">भव-बन्धन की मुक्ति</div></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="foot-sym">🪔</span>
+  <div class="foot-txt">॥ जय माँ काली ॥ ॐ क्रीं कालिकायै नमः ॥ © ShivaMarg 2025 || shivmarg.live</div>
+</footer>
+
+<script>
+  /* Flames */
+  const fc=document.getElementById('flames');
+  const flameCols=['rgba(187,0,32,0.6)','rgba(224,40,64,0.55)','rgba(188,160,0,0.45)','rgba(240,216,64,0.4)','rgba(150,0,20,0.5)'];
+  for(let i=0;i<60;i++){
+    const f=document.createElement('div');f.className='diya-flame';
+    const w=4+Math.random()*9,h=w*1.6;
+    f.style.cssText=`left:${Math.random()*100}%;width:${w}px;height:${h}px;background:${flameCols[Math.floor(Math.random()*flameCols.length)]};animation-duration:${10+Math.random()*20}s;animation-delay:${Math.random()*24}s;`;
+    fc.appendChild(f);
+  }
+  /* Reveal */
+  const rv=document.querySelectorAll('.reveal');
+  const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*30);obs.unobserve(e.target);}});},{threshold:0.06});
+  rv.forEach(el=>obs.observe(el));
+  /* Aarti Counter */
+  let aartTotal=0;
+  function addAart(n){aartTotal+=n;document.getElementById('aartCount').textContent=aartTotal;const s=document.getElementById('aartStatus');if(aartTotal>=21)s.textContent='🏆 २१ आरती पूर्ण! जय माँ काली!';else s.textContent=`${21-aartTotal} आरती शेष`;}
+  function resetAart(){aartTotal=0;document.getElementById('aartCount').textContent='0';document.getElementById('aartStatus').textContent='लक्ष्य: २१ आरती';}
+</script>
+</body>
+</html>

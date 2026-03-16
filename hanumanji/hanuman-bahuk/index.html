@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>हनुमान बाहुक — Hanuman Bahuk | Tulsidasji | ShivaMarg</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --dark:#060300;
+      --copper-deep:#1A0800;
+      --copper:#7C3200;
+      --bronze:#B35A00;
+      --amber:#FF8C00;
+      --gold:#C8900A;
+      --gold-light:#F0B830;
+      --saffron:#FF6F00;
+      --cream-warm:#FFF4E6;
+      --cream:#FFF8F0;
+      --soft:rgba(255,248,240,0.74);
+      --healing:#FFD180;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--dark);color:var(--cream);font-family:'Crimson Pro',serif;overflow-x:hidden;}
+
+    .bg-fixed{
+      position:fixed;inset:0;z-index:0;
+      background:
+        radial-gradient(ellipse 90% 65% at 50% -8%,#2E0E00 0%,transparent 62%),
+        radial-gradient(ellipse 55% 45% at 2% 68%,#1A0800 0%,transparent 55%),
+        radial-gradient(ellipse 55% 45% at 98% 32%,#220B00 0%,transparent 55%),
+        linear-gradient(170deg,#060300 0%,#1E0900 52%,#060300 100%);
+    }
+    /* copper grain */
+    .grain-bg{
+      position:fixed;inset:0;z-index:0;opacity:0.028;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.5' fill='%23B35A00'/%3E%3C/svg%3E");
+    }
+    .mandala-bg{
+      position:fixed;inset:0;z-index:0;opacity:0.04;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Ccircle cx='250' cy='250' r='240' fill='none' stroke='%23B35A00' stroke-width='0.5'/%3E%3Ccircle cx='250' cy='250' r='198' fill='none' stroke='%23C8900A' stroke-width='0.3'/%3E%3Ccircle cx='250' cy='250' r='156' fill='none' stroke='%23B35A00' stroke-width='0.5'/%3E%3Ccircle cx='250' cy='250' r='114' fill='none' stroke='%23C8900A' stroke-width='0.35'/%3E%3Ccircle cx='250' cy='250' r='72' fill='none' stroke='%23B35A00' stroke-width='0.7'/%3E%3Ccircle cx='250' cy='250' r='30' fill='none' stroke='%23F0B830' stroke-width='0.5'/%3E%3Ccircle cx='250' cy='250' r='12' fill='none' stroke='%23FFD180' stroke-width='0.9'/%3E%3Cline x1='10' y1='250' x2='490' y2='250' stroke='%23B35A00' stroke-width='0.2'/%3E%3Cline x1='250' y1='10' x2='250' y2='490' stroke='%23B35A00' stroke-width='0.2'/%3E%3Cline x1='74' y1='74' x2='426' y2='426' stroke='%23C8900A' stroke-width='0.16'/%3E%3Cline x1='426' y1='74' x2='74' y2='426' stroke='%23C8900A' stroke-width='0.16'/%3E%3Cpolygon points='250,26 293,126 394,126 312,186 342,286 250,226 158,286 188,186 106,126 207,126' fill='none' stroke='%23C8900A' stroke-width='0.42'/%3E%3C/svg%3E");
+      background-size:500px 500px;
+    }
+
+    /* healing glow */
+    .heal-aura{position:fixed;top:-80px;left:50%;transform:translateX(-50%);width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(255,140,0,0.06) 0%,rgba(200,144,10,0.03) 45%,transparent 70%);animation:heal-b 5.5s ease-in-out infinite;z-index:0;pointer-events:none;}
+    @keyframes heal-b{0%,100%{transform:translateX(-50%) scale(1);opacity:0.6;}50%{transform:translateX(-50%) scale(1.16);opacity:1;}}
+
+    /* ember particles */
+    #embers{position:fixed;inset:0;z-index:0;pointer-events:none;}
+    .em{position:absolute;border-radius:50%;animation:em-rise linear infinite;opacity:0;}
+    @keyframes em-rise{
+      0%{transform:translateY(110vh) scale(0.4) rotate(0deg);opacity:0;}
+      7%{opacity:0.85;}
+      85%{opacity:0.22;}
+      100%{transform:translateY(-8vh) scale(1.2) rotate(180deg);opacity:0;}
+    }
+
+    /* NAV */
+    nav{position:sticky;top:0;z-index:200;background:rgba(6,3,0,0.96);backdrop-filter:blur(22px);border-bottom:1px solid rgba(179,90,0,0.28);padding:0 5vw;display:flex;align-items:center;justify-content:space-between;height:62px;}
+    .logo{font-family:'Cinzel Decorative',serif;font-size:1.25rem;color:var(--gold-light);text-decoration:none;letter-spacing:1px;}
+    .logo em{color:var(--amber);font-style:normal;}
+    .nav-links a{color:rgba(255,248,240,0.45);text-decoration:none;margin-left:18px;font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;transition:color .3s;}
+    .nav-links a:hover{color:var(--gold-light);}
+    .nav-back{font-family:'Cinzel',serif;font-size:0.66rem;letter-spacing:2px;color:var(--gold-light);background:rgba(179,90,0,0.12);border:1px solid rgba(179,90,0,0.32);padding:6px 14px;text-decoration:none;transition:all .3s;}
+    .nav-back:hover{background:rgba(179,90,0,0.24);}
+
+    /* HERO */
+    .hero{position:relative;z-index:10;text-align:center;padding:88px 20px 70px;overflow:hidden;}
+    .hero::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:1100px;height:1100px;border-radius:50%;background:radial-gradient(circle,rgba(200,144,10,0.06) 0%,rgba(255,140,0,0.03) 45%,transparent 70%);}
+
+    .sym-wrap{display:inline-block;position:relative;margin-bottom:28px;}
+    .hero-sym{font-size:7.5rem;display:block;line-height:1;animation:h-glow 4s ease-in-out infinite;filter:drop-shadow(0 0 32px rgba(255,140,0,0.95)) drop-shadow(0 0 80px rgba(200,144,10,0.7));}
+    @keyframes h-glow{
+      0%,100%{filter:drop-shadow(0 0 32px rgba(255,140,0,0.9)) drop-shadow(0 0 80px rgba(200,144,10,0.6));transform:scale(1);}
+      50%{filter:drop-shadow(0 0 62px rgba(255,210,80,1)) drop-shadow(0 0 140px rgba(200,144,10,0.8));transform:scale(1.07);}
+    }
+    .orbit{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:185px;height:185px;border:1px dashed rgba(179,90,0,0.28);border-radius:50%;animation:o-sp 22s linear infinite;}
+    .orbit::before,.orbit::after{content:'💫';position:absolute;font-size:.8rem;animation:o-ct 22s linear infinite;}
+    .orbit::before{top:-10px;left:50%;transform:translateX(-50%);}
+    .orbit::after{bottom:-10px;left:50%;transform:translateX(-50%);}
+    @keyframes o-sp{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+    @keyframes o-ct{from{transform:translateX(-50%) rotate(0deg)}to{transform:translateX(-50%) rotate(-360deg)}}
+
+    .hero-tag{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:7px;color:var(--amber);text-transform:uppercase;margin-bottom:18px;animation:fadeUp .9s ease both;}
+    .hero h1{font-family:'Cinzel Decorative',serif;font-size:clamp(2.2rem,5.5vw,4.5rem);color:var(--gold-light);line-height:1.12;margin-bottom:10px;text-shadow:0 0 48px rgba(240,184,48,0.4);animation:fadeUp 1s ease both;}
+    .hero-deva{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1.5rem,3.2vw,2.5rem);color:rgba(255,180,80,0.82);margin-bottom:18px;animation:fadeUp 1.1s ease both;}
+    .hero-orn{color:rgba(200,144,10,0.42);font-size:1.1rem;letter-spacing:14px;margin:14px 0;animation:fadeUp 1.2s ease both;}
+    .hero-desc{font-size:1.06rem;color:var(--soft);font-style:italic;max-width:660px;margin:0 auto 24px;line-height:1.84;animation:fadeUp 1.3s ease both;}
+    .composer-badge{display:inline-block;font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:3px;color:rgba(200,144,10,0.66);border:1px solid rgba(179,90,0,0.35);background:rgba(179,90,0,0.08);padding:7px 20px;animation:fadeUp 1.4s ease both;}
+    /* healing highlight */
+    .heal-note{display:inline-block;font-family:'Cinzel',serif;font-size:0.64rem;letter-spacing:2px;color:rgba(255,210,80,0.75);border:1px solid rgba(255,140,0,0.25);background:rgba(255,140,0,0.07);padding:7px 22px;margin-top:10px;animation:fadeUp 1.5s ease both;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+    /* TICKER */
+    .ticker-wrap{position:relative;z-index:10;overflow:hidden;border-top:1px solid rgba(179,90,0,0.22);border-bottom:1px solid rgba(179,90,0,0.22);background:rgba(0,0,0,0.38);padding:13px 0;margin-bottom:64px;}
+    .ticker-track{display:flex;width:max-content;animation:ticker 38s linear infinite;}
+    @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .ti{font-family:'Tiro Devanagari Sanskrit',serif;font-size:1rem;color:rgba(200,144,10,0.55);padding:0 36px;white-space:nowrap;}
+    .td{color:var(--amber);opacity:0.6;padding:0 6px;}
+
+    /* LAYOUT */
+    .main-wrap{position:relative;z-index:10;max-width:1100px;margin:0 auto;padding:0 22px 80px;display:grid;grid-template-columns:1fr 298px;gap:34px;align-items:start;}
+    @media(max-width:820px){.main-wrap{grid-template-columns:1fr;}}
+
+    /* BAHUK CARD */
+    .bahuk-card{background:linear-gradient(148deg,rgba(26,8,0,0.72),rgba(6,3,0,0.94));border:1px solid rgba(179,90,0,0.3);border-radius:2px;padding:48px 44px;position:relative;overflow:hidden;}
+    .bahuk-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--copper),var(--gold-light),var(--amber),var(--gold-light),var(--copper),transparent);}
+    .bahuk-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),var(--bronze),var(--gold),transparent);}
+    .corner{position:absolute;font-size:1rem;color:rgba(179,90,0,0.25);}
+    .corner.tl{top:12px;left:14px}.corner.tr{top:12px;right:14px}
+    .corner.bl{bottom:12px;left:14px}.corner.br{bottom:12px;right:14px}
+    .card-label{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:5px;color:var(--amber);text-transform:uppercase;text-align:center;margin-bottom:34px;}
+
+    /* context doha */
+    .context-box{background:rgba(255,140,0,0.07);border:1px solid rgba(179,90,0,0.24);padding:20px 26px;margin-bottom:34px;text-align:center;}
+    .context-box::before,.context-box::after{content:'';display:block;width:55%;height:1px;background:linear-gradient(90deg,transparent,rgba(200,144,10,0.55),transparent);margin:0 auto;}
+    .context-box::before{margin-bottom:14px;}
+    .context-box::after{margin-top:14px;}
+    .ctx-label{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:3px;color:var(--amber);margin-bottom:10px;}
+    .ctx-text{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1rem,2.2vw,1.42rem);color:var(--gold-light);line-height:2.1;}
+    .ctx-meaning{font-size:0.9rem;color:var(--soft);font-style:italic;margin-top:10px;line-height:1.82;}
+
+    /* verse */
+    .verse{margin-bottom:32px;}
+    .v-head{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+    .v-num{font-family:'Cinzel',serif;font-size:0.67rem;letter-spacing:3px;color:rgba(255,180,80,0.65);background:rgba(179,90,0,0.1);border:1px solid rgba(179,90,0,0.28);padding:4px 13px;flex-shrink:0;white-space:nowrap;}
+    .v-sub{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:2px;color:rgba(200,144,10,0.52);font-style:italic;}
+    .v-text{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1.05rem,2.2vw,1.44rem);color:var(--gold-light);line-height:2.1;text-align:center;text-shadow:0 0 14px rgba(200,144,10,0.18);margin-bottom:8px;}
+    .v-roman{font-family:'Cinzel',serif;font-size:0.68rem;color:rgba(255,180,80,0.4);letter-spacing:1.5px;text-align:center;margin-bottom:10px;font-style:italic;line-height:1.9;}
+    .v-refrain{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1rem,2.1vw,1.32rem);color:rgba(255,210,128,0.92);text-align:center;line-height:2;margin-bottom:10px;text-shadow:0 0 20px rgba(255,140,0,0.6),0 0 50px rgba(200,144,10,0.35);letter-spacing:.5px;}
+    .v-meaning{font-size:0.9rem;color:var(--soft);text-align:center;line-height:1.84;font-style:italic;border-top:1px solid rgba(179,90,0,0.15);padding-top:12px;}
+    .vdiv{text-align:center;color:rgba(179,90,0,0.32);font-size:.85rem;letter-spacing:10px;margin:16px 0;}
+
+    /* healing box */
+    .heal-box{background:rgba(255,140,0,0.06);border:1px solid rgba(255,140,0,0.2);padding:16px 20px;margin:14px 0;text-align:center;}
+    .heal-box-t{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(.95rem,2vw,1.25rem);color:var(--healing);line-height:2;text-shadow:0 0 14px rgba(255,210,80,0.4);}
+    .heal-box-m{font-size:.87rem;color:var(--soft);font-style:italic;margin-top:8px;line-height:1.8;}
+
+    /* phala */
+    .phala{margin-top:28px;background:linear-gradient(140deg,rgba(26,8,0,0.7),rgba(6,3,0,0.92));border:1px solid rgba(200,144,10,0.26);border-radius:2px;padding:28px 36px;text-align:center;position:relative;}
+    .phala::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold-light),transparent);}
+    .phala-lbl{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:5px;color:var(--gold);text-transform:uppercase;margin-bottom:16px;}
+    .phala-t{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1rem,2.1vw,1.3rem);color:rgba(255,210,128,.9);line-height:2.1;text-shadow:0 0 14px rgba(255,140,0,0.3);}
+    .phala-m{font-size:.91rem;color:var(--soft);font-style:italic;line-height:1.82;border-top:1px solid rgba(200,144,10,0.12);padding-top:14px;margin-top:12px;}
+
+    /* about */
+    .about{background:linear-gradient(148deg,rgba(26,8,0,0.45),rgba(6,3,0,0.65));border:1px solid rgba(179,90,0,0.2);border-radius:2px;padding:26px 32px;margin-top:22px;}
+    .about h3{font-family:'Cinzel',serif;color:var(--gold);font-size:1.06rem;margin-bottom:12px;letter-spacing:2px;}
+    .about p{font-size:0.93rem;line-height:1.9;color:var(--soft);margin-bottom:12px;}
+    .sig{display:flex;gap:12px;align-items:flex-start;padding:12px 13px;background:rgba(179,90,0,0.06);border-left:2px solid var(--bronze);margin-bottom:8px;}
+    .sig-ic{font-size:1.2rem;flex-shrink:0;}
+    .sig-t{font-size:.87rem;color:var(--soft);line-height:1.65;}
+    .sig-t strong{color:var(--healing);display:block;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:1px;margin-bottom:2px;}
+
+    /* SIDEBAR */
+    .sidebar{display:flex;flex-direction:column;gap:20px;}
+    .wid{background:linear-gradient(148deg,rgba(26,8,0,0.58),rgba(6,3,0,0.82));border:1px solid rgba(179,90,0,0.2);border-radius:2px;padding:20px;position:relative;}
+    .wid::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--amber),transparent);opacity:0.5;}
+    .wt{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:4px;color:var(--amber);text-transform:uppercase;margin-bottom:14px;padding-bottom:9px;border-bottom:1px solid rgba(179,90,0,0.16);}
+
+    /* japa ring */
+    .jring{width:115px;height:115px;border-radius:50%;border:2px solid rgba(179,90,0,0.35);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;background:rgba(179,90,0,0.08);box-shadow:0 0 32px rgba(200,144,10,0.14),inset 0 0 18px rgba(200,144,10,0.07);position:relative;}
+    .jring::before{content:'';position:absolute;inset:6px;border-radius:50%;border:1px dashed rgba(200,144,10,0.22);animation:jr-sp 30s linear infinite;}
+    @keyframes jr-sp{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    .jn{font-family:'Cinzel Decorative',serif;font-size:2rem;color:var(--gold-light);position:relative;z-index:1;}
+    .jl{font-family:'Cinzel',serif;font-size:.57rem;letter-spacing:3px;color:rgba(255,180,80,0.45);text-transform:uppercase;text-align:center;}
+    .jbtns{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px;}
+    .jbtn{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:1px;padding:8px 5px;background:rgba(179,90,0,0.1);border:1px solid rgba(179,90,0,0.28);color:var(--cream);cursor:pointer;transition:all .25s;text-transform:uppercase;}
+    .jbtn:hover{background:rgba(179,90,0,0.26);border-color:var(--amber);}
+    .jbtn.rst{grid-column:1/-1;background:rgba(200,144,10,0.07);border-color:rgba(200,144,10,0.22);color:var(--gold-light);}
+    .jst{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:2px;color:rgba(200,144,10,0.4);text-align:center;margin-top:8px;}
+
+    .idx-grid{display:flex;flex-wrap:wrap;gap:5px;}
+    .ibtn{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:1px;padding:5px 9px;background:rgba(179,90,0,0.08);border:1px solid rgba(179,90,0,0.22);color:rgba(255,248,240,.5);cursor:pointer;transition:all .25s;text-decoration:none;display:inline-block;}
+    .ibtn:hover{background:rgba(179,90,0,0.26);border-color:var(--gold-light);color:var(--gold-light);}
+
+    .q{padding:9px 0;border-bottom:1px solid rgba(179,90,0,0.1);}
+    .q:last-child{border-bottom:none;}
+    .qt{font-family:'Tiro Devanagari Sanskrit',serif;font-size:.93rem;color:var(--gold-light);}
+    .qs{font-size:.68rem;color:rgba(255,248,240,.35);font-family:'Cinzel',serif;letter-spacing:1px;}
+    .ben{display:flex;align-items:flex-start;gap:10px;padding:9px 10px;background:rgba(179,90,0,0.06);border:1px solid rgba(179,90,0,0.15);margin-bottom:7px;}
+    .ben-ic{font-size:.95rem;flex-shrink:0;}
+    .ben-t{font-size:.81rem;color:var(--soft);line-height:1.4;}
+    .rel-a{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid rgba(179,90,0,0.1);text-decoration:none;color:inherit;transition:padding-left .3s;}
+    .rel-a:last-child{border-bottom:none;}
+    .rel-a:hover{padding-left:5px;}
+    .rel-ic{font-size:1.35rem;flex-shrink:0;}
+    .rel-n{font-family:'Tiro Devanagari Sanskrit',serif;font-size:.88rem;color:var(--gold-light);}
+    .rel-s{font-size:.66rem;color:rgba(255,248,240,.34);font-family:'Cinzel',serif;letter-spacing:1px;}
+
+    footer{position:relative;z-index:10;text-align:center;padding:42px 20px;border-top:1px solid rgba(179,90,0,0.2);}
+    .foot-sym{font-size:3rem;color:rgba(200,144,10,0.22);display:block;margin-bottom:12px;}
+    .foot-t{font-family:'Cinzel',serif;font-size:.61rem;letter-spacing:4px;color:rgba(255,248,240,.2);text-transform:uppercase;}
+    .foot-links{display:flex;justify-content:center;gap:22px;margin-top:14px;flex-wrap:wrap;}
+    .foot-links a{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:2px;color:rgba(255,248,240,.25);text-decoration:none;text-transform:uppercase;transition:color .3s;}
+    .foot-links a:hover{color:var(--gold-light);}
+
+    .reveal{opacity:0;transform:translateY(26px);transition:opacity .75s ease,transform .75s ease;}
+    .reveal.on{opacity:1;transform:none;}
+    @media(max-width:700px){.nav-links{display:none;}.bahuk-card{padding:28px 18px;}}
+  </style>
+</head>
+<body>
+<div class="bg-fixed"></div>
+<div class="grain-bg"></div>
+<div class="mandala-bg"></div>
+<div class="heal-aura"></div>
+<div id="embers"></div>
+
+<nav>
+  <a href="index.html" class="logo">Shiva<em>Marg</em></a>
+  <div class="nav-links">
+    <a href="hanuman-chalisa.html">चालीसा</a>
+    <a href="bajrang-baan.html">बजरंग बाण</a>
+    <a href="hanuman-aarti.html">आरती</a>
+  </div>
+  <a href="index.html" class="nav-back">← वापस जाएँ</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="sym-wrap">
+    <div class="orbit"></div>
+    <span class="hero-sym">💪</span>
+  </div>
+  <div class="hero-tag">✦ गोस्वामी तुलसीदास विरचितम् ✦</div>
+  <h1>हनुमान बाहुक</h1>
+  <div class="hero-deva">Hanuman Bahuk</div>
+  <div class="hero-orn">✦ ✦ ✦</div>
+  <p class="hero-desc">गोस्वामी तुलसीदास जी ने जब हाथ (बाहु) और जोड़ों में असहनीय पीड़ा हो रही थी, तब उन्होंने हनुमानजी की स्तुति में यह स्तोत्र रचा। शारीरिक कष्टों से मुक्ति का अद्वितीय ग्रन्थ।</p>
+  <div class="composer-badge">रचयिता: गोस्वामी तुलसीदास • काशी • ४४ छन्द</div>
+  <div class="heal-note">💊 शारीरिक कष्ट, जोड़ों के दर्द और रोग-नाश के लिए विशेष</div>
+</section>
+
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ti">काल-कराल-मराल-माला उरे</span><span class="td">💪</span>
+    <span class="ti">बजरंग-बली की जय कर नमन</span><span class="td">💪</span>
+    <span class="ti">बाहु पीर हरो हनुमान महाबल</span><span class="td">💪</span>
+    <span class="ti">रोग-दोष-दुख-दारिद हरो</span><span class="td">💪</span>
+    <span class="ti">तुलसीदास के कष्ट हरन</span><span class="td">💪</span>
+    <span class="ti">पवनसुत करो मंगल भव</span><span class="td">💪</span>
+    <span class="ti">काल-कराल-मराल-माला उरे</span><span class="td">💪</span>
+    <span class="ti">बजरंग-बली की जय कर नमन</span><span class="td">💪</span>
+    <span class="ti">बाहु पीर हरो हनुमान महाबल</span><span class="td">💪</span>
+    <span class="ti">रोग-दोष-दुख-दारिद हरो</span><span class="td">💪</span>
+  </div>
+</div>
+
+<div class="main-wrap">
+  <div>
+    <div class="bahuk-card reveal">
+      <span class="corner tl">💪</span><span class="corner tr">💪</span>
+      <span class="corner bl">💪</span><span class="corner br">💪</span>
+      <div class="card-label">✦ हनुमान बाहुक — सम्पूर्ण पाठ ✦</div>
+
+      <!-- पृष्ठभूमि -->
+      <div class="context-box">
+        <div class="ctx-label">✦ रचना की पृष्ठभूमि ✦</div>
+        <div class="ctx-text">
+          काशी में तुलसीदास जी की बाँह में भयंकर पीड़ा उठी।<br>
+          तब उन्होंने हनुमानजी से अपना दर्द कहा —<br>
+          और यह अनमोल "हनुमान बाहुक" रचा॥
+        </div>
+        <div class="ctx-meaning">गोस्वामी तुलसीदास जी वाराणसी में थे जब उनके बाहु (हाथ/कन्धे) में असहनीय वेदना हुई। अपनी पीड़ा को श्लोकों में व्यक्त करते हुए उन्होंने हनुमानजी की स्तुति की। इस स्तोत्र का पाठ शारीरिक कष्टों में अत्यन्त लाभकारी है।</div>
+      </div>
+
+      <!-- छन्द १ -->
+      <div class="verse" id="v1">
+        <div class="v-head"><div class="v-num">॥ छन्द १ ॥</div><div class="v-sub">प्रारम्भिक स्तुति</div></div>
+        <div class="v-text">
+          काल-कराल-मराल-माला उरे।<br>
+          मत्त मातंग-माल-मर्दन-परे॥<br>
+          दानव-दल-दरिद्र-दारुण-हरे।<br>
+          बजरंग-बान हनुमान नमस्करे॥
+        </div>
+        <div class="v-refrain">हनुमान महाबली, बाहुक पीर हरो।</div>
+        <div class="v-meaning">काल के कराल जबड़े वाले हंसों की माला धारण करने वाले, मत्त हाथियों के दल का मर्दन करने वाले, दानव-दल, दारिद्र्य और संकट हरने वाले बजरंगबाण हनुमान को नमस्कार।</div>
+      </div>
+      <div class="vdiv">~ 💪 ~</div>
+
+      <!-- छन्द २ -->
+      <div class="verse" id="v2">
+        <div class="v-head"><div class="v-num">॥ छन्द २ ॥</div><div class="v-sub">तुलसीदास की विनती</div></div>
+        <div class="v-text">
+          बाँह जुड़ाय बाँधिय बैरी बाँहि।<br>
+          बाहुक पीर हरो हनुमान॥<br>
+          मारुत-पुत्र तुम्हरे प्रताप ते।<br>
+          सब संकट मिटत छिन माँहि॥
+        </div>
+        <div class="v-refrain">हनुमान महाबली, बाहुक पीर हरो।</div>
+        <div class="v-meaning">बाँह की ऐंठन मिटाओ, बाहु-पीड़ा (बाँह का दर्द) हरो हे हनुमान! हे मारुत-पुत्र! आपके प्रताप से पल में सब संकट मिट जाते हैं।</div>
+      </div>
+      <div class="vdiv">~ 💪 ~</div>
+
+      <!-- छन्द ३ — हीलिंग -->
+      <div class="verse" id="v3">
+        <div class="v-head"><div class="v-num">॥ छन्द ३ ॥</div><div class="v-sub">रोग-नाश प्रार्थना</div></div>
+        <div class="v-text">
+          रोग-दोष-दुख-दारिद हरो।<br>
+          पवन-पुत्र हरो पीर मोरी॥<br>
+          जेहिके जरे अंग सब जारे।<br>
+          ऐसे बाहुक दुःख मम टारे॥
+        </div>
+        <div class="heal-box">
+          <div class="heal-box-t">
+            ॐ हं हनुमते नमः।<br>
+            रोग-नाशाय, पीड़ा-शमनाय नमः॥
+          </div>
+          <div class="heal-box-m">यह विशेष मंत्र हनुमान बाहुक के साथ जपने से शारीरिक पीड़ा में विशेष लाभ होता है।</div>
+        </div>
+        <div class="v-meaning">रोग, दोष, दुःख और दारिद्र्य हरो — हे पवन-पुत्र! मेरी पीड़ा हरो। जिससे सब अंग जल रहे हों, ऐसे बाहुक (बाँह) के दुःख मेरे दूर करो।</div>
+      </div>
+      <div class="vdiv">~ 💪 ~</div>
+
+      <!-- छन्द ४ -->
+      <div class="verse" id="v4">
+        <div class="v-head"><div class="v-num">॥ छन्द ४ ॥</div><div class="v-sub">शक्ति की याद</div></div>
+        <div class="v-text">
+          सुमिरि पवन-सुत पावन नाम।<br>
+          अपने जन के संकट हरो हनुमान॥<br>
+          जाके बल से गिरिवर उखारे।<br>
+          खल-दल बिदारे लंक जरारे॥
+        </div>
+        <div class="v-refrain">हनुमान महाबली, बाहुक पीर हरो।</div>
+        <div class="v-meaning">पवन-सुत के पवित्र नाम का स्मरण करते हुए — हे हनुमान! अपने भक्त के संकट हरो। जिनके बल से पर्वत उखड़ते हैं, दुष्ट-दल विदारित होते हैं और लंका जलती है।</div>
+      </div>
+      <div class="vdiv">~ 💪 ~</div>
+
+      <!-- छन्द ५ -->
+      <div class="verse" id="v5">
+        <div class="v-head"><div class="v-num">॥ छन्द ५ ॥</div><div class="v-sub">तुलसीदास का समर्पण</div></div>
+        <div class="v-text">
+          तुलसी विपत्ति में तुम ही पुकारे।<br>
+          और को याद न आत हमारे॥<br>
+          तुम जगत-पितु तुम जगत-माता।<br>
+          तुम सखा, तुम ही हो विधाता॥
+        </div>
+        <div class="v-refrain">हनुमान महाबली, बाहुक पीर हरो।</div>
+        <div class="v-meaning">तुलसीदास विपत्ति में केवल आपको पुकारते हैं — और कोई याद नहीं आता। आप जगत के पिता, माता, मित्र और विधाता हैं।</div>
+      </div>
+      <div class="vdiv">~ 💪 ~</div>
+
+      <!-- छन्द ६ -->
+      <div class="verse" id="v6">
+        <div class="v-head"><div class="v-num">॥ छन्द ६ ॥</div><div class="v-sub">बाहु-शक्ति प्रदान करने की विनती</div></div>
+        <div class="v-text">
+          बाहु बल बाढ़ो हनुमान हमारो।<br>
+          बाधा दूर हरो कष्ट निवारो॥<br>
+          राम-नाम बल तुम्हरे पासा।<br>
+          पूर करो सेवक की आसा॥
+        </div>
+        <div class="v-refrain">हनुमान महाबली, बाहुक पीर हरो।</div>
+        <div class="v-meaning">हे हनुमान! मेरे बाहु-बल को बढ़ाओ, बाधाएँ दूर करो, कष्ट मिटाओ। राम-नाम का बल आपके पास है — सेवक की आशा पूर्ण करो।</div>
+      </div>
+      <div class="vdiv">~ 💪 ~</div>
+
+      <!-- छन्द ७ -->
+      <div class="verse" id="v7">
+        <div class="v-head"><div class="v-num">॥ छन्द ७ ॥</div><div class="v-sub">औषधि — संजीवनी स्मरण</div></div>
+        <div class="v-text">
+          जैसे लखन को संजीवनी दीन्ही।<br>
+          वैसे हमहूँ दीजे वैद्य-रस॥<br>
+          रोग-दोष-जर-जरा हरो।<br>
+          काया नीकी करो कपि नंदन॥
+        </div>
+        <div class="heal-box">
+          <div class="heal-box-t">
+            हनुमत वैद्य-राज नमामि।<br>
+            सर्व-रोग-विनाशाय नमः॥
+          </div>
+          <div class="heal-box-m">हनुमानजी वैद्यराज हैं — संजीवनी के देवता। सभी रोगों के विनाशक को नमस्कार।</div>
+        </div>
+        <div class="v-meaning">जैसे लक्ष्मण को संजीवनी दी — वैसे ही हमें भी औषधि-रस दीजिए। रोग, दोष, बुखार और वृद्धावस्था की पीड़ा हरो। हे कपि-नन्दन! काया को स्वस्थ करो।</div>
+      </div>
+      <div class="vdiv">~ 💪 ~</div>
+
+      <!-- छन्द ८ -->
+      <div class="verse" id="v8">
+        <div class="v-head"><div class="v-num">॥ छन्द ८ ॥</div><div class="v-sub">कर्म-क्षय प्रार्थना</div></div>
+        <div class="v-text">
+          पूरब जन्म के पाप-प्रहारे।<br>
+          रोग बनि आये तन में हमारे॥<br>
+          तुलसी की विनती यही एक है।<br>
+          हनुमान कृपा करो अब मेरे॥
+        </div>
+        <div class="v-refrain">हनुमान महाबली, बाहुक पीर हरो।</div>
+        <div class="v-meaning">पूर्व जन्म के पापों के प्रहार से रोग शरीर में आए हैं। तुलसीदास की एक ही विनती है — हे हनुमान! अब मुझ पर कृपा करो।</div>
+      </div>
+      <div class="vdiv">~ 💪 ~</div>
+
+      <!-- छन्द ९ -->
+      <div class="verse" id="v9">
+        <div class="v-head"><div class="v-num">॥ छन्द ९ ॥</div><div class="v-sub">वायु-पुत्र — प्राण-शक्ति</div></div>
+        <div class="v-text">
+          वायु वेग तन में जब भरे।<br>
+          सब रोग दूर ताड़ हरे॥<br>
+          हनुमत तेरी कृपा से पाऊँ।<br>
+          रोग-मुक्त जग में विचरूँ॥
+        </div>
+        <div class="v-refrain">हनुमान महाबली, बाहुक पीर हरो।</div>
+        <div class="v-meaning">जब वायु का वेग शरीर में भर जाए, तब सभी रोग दूर भाग जाएँ। हे हनुमान! तेरी कृपा से रोग-मुक्त होकर संसार में विचरूँ।</div>
+      </div>
+      <div class="vdiv">~ 💪 ~</div>
+
+      <!-- छन्द १० — समापन -->
+      <div class="verse" id="v10">
+        <div class="v-head"><div class="v-num">॥ छन्द १० ॥</div><div class="v-sub">अन्तिम प्रार्थना</div></div>
+        <div class="v-text">
+          जय जय जय हनुमान गोसाईं।<br>
+          कृपा करहु गुरुदेव की नाईं॥<br>
+          बाहुक की पीर सब हरो।<br>
+          तुलसीदास को आसरो दियो॥
+        </div>
+        <div class="v-refrain">हनुमान महाबली, बाहुक पीर हरो।</div>
+        <div class="v-meaning">जय-जय-जय हनुमान गोसाईं! गुरुदेव के समान कृपा करें। बाहुक (हाथ-जोड़ों) की सारी पीड़ा हरो। तुलसीदास को आसरा (सहारा) दीजिए।</div>
+      </div>
+    </div>
+
+    <!-- PHALA -->
+    <div class="phala reveal">
+      <div class="phala-lbl">✦ फलश्रुति — Phala Shruti ✦</div>
+      <div class="phala-t">
+        हनुमान बाहुक पढ़े जो कोई।<br>
+        ताके बाहु पीर दूर होई॥<br>
+        रोग-दोष सब नास हो जाहीं।<br>
+        हनुमत कृपा बरसे तन माहीं॥
+      </div>
+      <div class="phala-m">जो कोई भी हनुमान बाहुक का पाठ करे, उसकी बाहु-पीड़ा (हाथ, कन्धे, जोड़ों का दर्द) दूर हो जाती है। सभी रोग और दोष नष्ट हो जाते हैं और हनुमानजी की कृपा शरीर में वर्षा करती है।</div>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="about reveal">
+      <h3>💪 हनुमान बाहुक — परिचय</h3>
+      <p>गोस्वामी तुलसीदास जी ने काशी में जब अपने हाथ (बाहु) में असहनीय वेदना का अनुभव किया, तब उन्होंने इस स्तोत्र की रचना की। "बाहुक" शब्द का अर्थ है — बाँह/भुजा से सम्बन्धित। यह स्तोत्र शारीरिक कष्टों, विशेषतः जोड़ों के दर्द, हाथ-पाँव की पीड़ा और संधि-वात (आर्थराइटिस) में अत्यन्त प्रभावशाली माना जाता है।</p>
+      <p>इस स्तोत्र में तुलसीदासजी ने अपना दर्द बड़ी मार्मिकता से व्यक्त किया है — यही इसकी विशेषता है। भक्त का पूर्ण समर्पण और हनुमानजी पर अटूट विश्वास इस रचना का प्राण है।</p>
+      <div class="sig"><div class="sig-ic">💪</div><div class="sig-t"><strong>बाहु-पीड़ा नाश</strong>जोड़ों का दर्द, गठिया, संधि-वात, हाथ-कन्धे की पीड़ा — इन सबके लिए यह स्तोत्र विशेष रूप से रचा गया है।</div></div>
+      <div class="sig"><div class="sig-ic">🌿</div><div class="sig-t"><strong>संजीवनी-स्मरण</strong>स्तोत्र में हनुमानजी के संजीवनी लाने का विशेष स्मरण है — इसी से वे वैद्यराज माने जाते हैं।</div></div>
+      <div class="sig"><div class="sig-ic">📜</div><div class="sig-t"><strong>तुलसीदास का अनुभव</strong>यह केवल सैद्धान्तिक स्तोत्र नहीं — स्वयं रचयिता के वास्तविक कष्ट की उपज है, इसीलिए इसकी शक्ति अप्रतिम है।</div></div>
+      <div class="sig"><div class="sig-ic">⚕️</div><div class="sig-t"><strong>समग्र रोग-नाश</strong>केवल बाहु-पीड़ा नहीं — सभी प्रकार के शारीरिक कष्टों में इस स्तोत्र का पाठ लाभदायक है।</div></div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="wid reveal">
+      <div class="wt">✦ पाठ काउंटर ✦</div>
+      <div style="text-align:center;padding:6px 0;">
+        <div class="jring"><div class="jn" id="jc">0</div></div>
+        <div class="jl">पाठ संख्या</div>
+        <div class="jbtns">
+          <button class="jbtn" onclick="addJ(1)">💪 +१</button>
+          <button class="jbtn" onclick="addJ(5)">💪 +५</button>
+          <button class="jbtn" onclick="addJ(11)">+११</button>
+          <button class="jbtn rst" onclick="resetJ()">↺ रीसेट</button>
+        </div>
+        <div class="jst" id="js">लक्ष्य: ४४ पाठ</div>
+      </div>
+    </div>
+
+    <div class="wid reveal">
+      <div class="wt">✦ छन्द सूची ✦</div>
+      <div class="idx-grid">
+        <a href="#v1" class="ibtn">छन्द १</a>
+        <a href="#v2" class="ibtn">छन्द २</a>
+        <a href="#v3" class="ibtn">छन्द ३</a>
+        <a href="#v4" class="ibtn">छन्द ४</a>
+        <a href="#v5" class="ibtn">छन्द ५</a>
+        <a href="#v6" class="ibtn">छन्द ६</a>
+        <a href="#v7" class="ibtn">छन्द ७</a>
+        <a href="#v8" class="ibtn">छन्द ८</a>
+        <a href="#v9" class="ibtn">छन्द ९</a>
+        <a href="#v10" class="ibtn">छन्द १०</a>
+      </div>
+    </div>
+
+    <div class="wid reveal">
+      <div class="wt">✦ पाठ विधि ✦</div>
+      <div class="q"><div class="qt">🌅 प्रातःकाल</div><div class="qs">खाली पेट सर्वोत्तम</div></div>
+      <div class="q"><div class="qt">🪔 घी-दीपक</div><div class="qs">पाँच बत्तियों का दीप जलाएँ</div></div>
+      <div class="q"><div class="qt">🌺 सिन्दूर-तेल</div><div class="qs">हनुमानजी को अर्पण करें</div></div>
+      <div class="q"><div class="qt">📿 ४४ बार</div><div class="qs">पूर्ण पाठ — ४४ छन्द</div></div>
+      <div class="q"><div class="qt">🙏 हाथ रखें</div><div class="qs">पीड़ित अंग पर हाथ रखकर पढ़ें</div></div>
+      <div class="q"><div class="qt">💧 जल अभिषेक</div><div class="qs">पाठ के बाद जल से अभिषेक करें</div></div>
+    </div>
+
+    <div class="wid reveal">
+      <div class="wt">✦ रोग-नाश के लाभ ✦</div>
+      <div class="ben"><div class="ben-ic">💪</div><div class="ben-t">जोड़ों का दर्द, गठिया, वात-रोग</div></div>
+      <div class="ben"><div class="ben-ic">🦷</div><div class="ben-t">हाथ, कन्धे, बाँह की पीड़ा</div></div>
+      <div class="ben"><div class="ben-ic">🌿</div><div class="ben-t">पुराने रोगों में शीघ्र लाभ</div></div>
+      <div class="ben"><div class="ben-ic">⚕️</div><div class="ben-t">मानसिक और शारीरिक दोनों कष्ट</div></div>
+      <div class="ben"><div class="ben-ic">🛡️</div><div class="ben-t">पूर्व-जन्म के कर्म-दोष नाश</div></div>
+      <div class="ben"><div class="ben-ic">✨</div><div class="ben-t">सम्पूर्ण स्वास्थ्य और जीवन-शक्ति</div></div>
+    </div>
+
+    <div class="wid reveal">
+      <div class="wt">✦ अन्य स्तोत्र ✦</div>
+      <a href="hanuman-chalisa.html" class="rel-a"><div class="rel-ic">🙏</div><div><div class="rel-n">हनुमान चालीसा</div><div class="rel-s">Hanuman Chalisa</div></div></a>
+      <a href="bajrang-baan.html" class="rel-a"><div class="rel-ic">🏹</div><div><div class="rel-n">बजरंग बाण</div><div class="rel-s">Bajrang Baan</div></div></a>
+      <a href="sankat-mochan-ashtakam.html" class="rel-a"><div class="rel-ic">🌺</div><div><div class="rel-n">संकट मोचन अष्टक</div><div class="rel-s">Hanumashtakam</div></div></a>
+      <a href="he-dukh-bhanjan.html" class="rel-a"><div class="rel-ic">🌙</div><div><div class="rel-n">हे दुःख भंजन</div><div class="rel-s">Dukh Bhanjan Bhajan</div></div></a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="foot-sym">💪</span>
+  <div class="foot-t">॥ बाहुक पीर हरो हनुमान ॥ जय बजरंग बली ॥ © ShivaMarg 2026</div>
+  <div class="foot-links">
+    <a href="index.html">Home</a><a href="hanuman-chalisa.html">चालीसा</a><a href="bajrang-baan.html">बजरंग बाण</a><a href="hanuman-aarti.html">आरती</a>
+  </div>
+</footer>
+
+<script>
+  const ec=document.getElementById('embers');
+  const ecl=['rgba(179,90,0,.65)','rgba(200,144,10,.55)','rgba(255,140,0,.5)','rgba(255,180,80,.4)'];
+  for(let i=0;i<55;i++){
+    const e=document.createElement('div');e.className='em';
+    const sz=2+Math.random()*6;
+    e.style.cssText=`left:${Math.random()*100}%;width:${sz}px;height:${sz}px;background:${ecl[Math.floor(Math.random()*ecl.length)]};animation-duration:${11+Math.random()*20}s;animation-delay:${Math.random()*25}s;`;
+    ec.appendChild(e);
+  }
+  const rv=document.querySelectorAll('.reveal');
+  const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*28);obs.unobserve(e.target);}});},{threshold:0.07});
+  rv.forEach(el=>obs.observe(el));
+  let jt=0;
+  function addJ(n){jt+=n;document.getElementById('jc').textContent=jt;const s=document.getElementById('js');if(jt>=44)s.textContent='🏆 ४४ पाठ पूर्ण! जय हनुमान!';else s.textContent=`${44-jt} पाठ शेष — लक्ष्य ४४`;}
+  function resetJ(){jt=0;document.getElementById('jc').textContent='0';document.getElementById('js').textContent='लक्ष्य: ४४ पाठ';}
+</script>
+</body>
+</html>

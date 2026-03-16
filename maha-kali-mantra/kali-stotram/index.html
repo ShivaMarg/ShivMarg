@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>महाकाली स्तोत्र — Mahakali Stotra | ShivaMarg</title>
+  <link rel="icon" type="image/png" href="/images/ShivMarg.png" />
+  <meta name="description" content="महाकाली स्तोत्र — देवी महात्म्यम् • मार्कण्डेय पुराण। नमस्ते सते सर्वलोकाश्रये। सम्पूर्ण स्तोत्र अर्थ सहित। जय महाकाली।">
+  <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root{--void:#030008;--abyss:#080010;--maroon:#6B0000;--blood:#9A0010;--blood-mid:#C00020;--blood-bright:#DC2840;--violet:#4A0880;--violet-mid:#6A18A0;--violet-soft:#8840B8;--violet-pale:#BF90D8;--obsidian:#15001A;--gold:#B89800;--gold-light:#D8B818;--gold-pale:#F4D840;--cream:#F2ECFA;--soft:rgba(242,236,250,0.72);}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--void);color:var(--cream);font-family:'EB Garamond',serif;overflow-x:hidden;}
+
+    /* ── BACKGROUNDS ── */
+    .bg-fixed{position:fixed;inset:0;z-index:0;
+      background:
+        radial-gradient(ellipse 85% 65% at 50% -10%,#200005 0%,transparent 60%),
+        radial-gradient(ellipse 60% 50% at 0%   70%,#150030 0%,transparent 55%),
+        radial-gradient(ellipse 60% 50% at 100% 25%,#0A001C 0%,transparent 55%),
+        radial-gradient(ellipse 50% 45% at 50% 110%,#1A0008 0%,transparent 50%),
+        linear-gradient(175deg,#030008 0%,#0C0015 55%,#030008 100%);}
+    .kaal-grid{position:fixed;inset:0;z-index:0;opacity:0.03;
+      background-image:
+        linear-gradient(rgba(154,0,16,0.5) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(74,8,128,0.4) 1px,transparent 1px);
+      background-size:55px 55px;}
+    .skull-pattern{position:fixed;inset:0;z-index:0;opacity:0.025;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ccircle cx='50' cy='42' r='22' fill='none' stroke='%239A0010' stroke-width='0.8'/%3E%3Ccircle cx='43' cy='38' r='5' fill='none' stroke='%239A0010' stroke-width='0.6'/%3E%3Ccircle cx='57' cy='38' r='5' fill='none' stroke='%239A0010' stroke-width='0.6'/%3E%3Crect x='42' y='58' width='16' height='10' rx='2' fill='none' stroke='%239A0010' stroke-width='0.5'/%3E%3Cline x1='50' y1='58' x2='50' y2='68' stroke='%239A0010' stroke-width='0.4'/%3E%3Cline x1='46' y1='63' x2='54' y2='63' stroke='%239A0010' stroke-width='0.4'/%3E%3C/svg%3E");
+      background-size:100px 100px;}
+    #particles{position:fixed;inset:0;z-index:0;pointer-events:none;}
+    .pt{position:absolute;border-radius:50%;animation:pt-rise linear infinite;opacity:0;}
+    @keyframes pt-rise{0%{transform:translateY(110vh) scale(0.2);opacity:0;}8%{opacity:0.9;}85%{opacity:0.2;}100%{transform:translateY(-10vh) scale(1.5);opacity:0;}}
+    .mahakali-aura{position:fixed;top:-200px;left:50%;transform:translateX(-50%);width:1100px;height:700px;border-radius:50%;background:radial-gradient(ellipse,rgba(154,0,16,0.07) 0%,rgba(74,8,128,0.04) 45%,transparent 70%);animation:aura-swell 7s ease-in-out infinite;pointer-events:none;z-index:0;}
+    @keyframes aura-swell{0%,100%{transform:translateX(-50%) scale(1);opacity:0.5;}50%{transform:translateX(-50%) scale(1.22);opacity:1;}}
+
+    /* ── NAV ── */
+    header{position:relative;z-index:10;padding:16px 5vw 0;border-bottom:1px solid rgba(154,0,16,0.15);}
+    .site-nav{display:flex;justify-content:space-between;align-items:center;max-width:1100px;margin:0 auto 13px;}
+    .logo{font-family:'Cinzel Decorative',serif;font-size:1.28rem;color:var(--gold);text-decoration:none;letter-spacing:1px;}
+    .logo em{color:var(--violet-soft);font-style:normal;}
+    nav a{color:rgba(242,236,250,0.45);text-decoration:none;margin-left:18px;font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;transition:color .3s;}
+    nav a:hover{color:var(--gold-light);}
+    .breadcrumb{max-width:1100px;margin:0 auto;font-family:'Cinzel',serif;font-size:0.64rem;letter-spacing:2px;color:rgba(242,236,250,0.28);padding-bottom:13px;}
+    .breadcrumb span{color:var(--blood-bright);margin:0 8px;}
+
+    /* ── HERO ── */
+    .hero{position:relative;z-index:10;text-align:center;padding:90px 20px 72px;overflow:hidden;}
+    .hero::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(154,0,16,0.08) 0%,transparent 68%);}
+    .skull-wrap{display:inline-block;margin-bottom:28px;position:relative;}
+    .skull-sym{font-size:6rem;display:block;line-height:1;filter:drop-shadow(0 0 32px rgba(154,0,16,0.95)) drop-shadow(0 0 85px rgba(74,8,128,0.6));animation:skull-throb 4s ease-in-out infinite;}
+    @keyframes skull-throb{0%,100%{filter:drop-shadow(0 0 32px rgba(154,0,16,0.95)) drop-shadow(0 0 85px rgba(74,8,128,0.6));transform:scale(1);}50%{filter:drop-shadow(0 0 65px rgba(192,0,32,1)) drop-shadow(0 0 140px rgba(184,152,0,0.4));transform:scale(1.08);}}
+    .orbit-skull{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:185px;height:185px;border:1px dashed rgba(154,0,16,0.28);border-radius:50%;animation:sk-cw 18s linear infinite;}
+    .orbit-skull::before,.orbit-skull::after{content:'💀';position:absolute;font-size:0.82rem;animation:sk-ccw 18s linear infinite;}
+    .orbit-skull::before{top:-12px;left:50%;transform:translateX(-50%);}
+    .orbit-skull::after{bottom:-12px;left:50%;transform:translateX(-50%);}
+    .orbit-inner{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:130px;height:130px;border:1px dashed rgba(74,8,128,0.22);border-radius:50%;animation:sk-ccw 12s linear infinite;}
+    .orbit-inner::before{content:'⚡';position:absolute;right:-10px;top:50%;transform:translateY(-50%);animation:sk-cw 12s linear infinite;font-size:0.72rem;}
+    @keyframes sk-cw{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+    @keyframes sk-ccw{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(-360deg)}}
+
+    .hero-tag{font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:7px;color:var(--blood-bright);text-transform:uppercase;margin-bottom:18px;animation:fadeUp .9s ease both;}
+    .hero h1{font-family:'Cinzel Decorative',serif;font-size:clamp(1.9rem,5vw,3.8rem);color:var(--gold-pale);line-height:1.15;margin-bottom:8px;text-shadow:0 0 40px rgba(184,152,0,0.38),0 0 90px rgba(154,0,16,0.28);animation:fadeUp 1s ease both;}
+    .hero-deva{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1.6rem,4vw,2.8rem);color:rgba(191,144,216,0.78);margin-bottom:20px;animation:fadeUp 1.1s ease both;}
+    .hero-orn{color:rgba(184,152,0,0.4);font-size:1.1rem;letter-spacing:14px;margin:14px 0;animation:fadeUp 1.2s ease both;}
+    .hero-desc{font-size:1.04rem;color:var(--soft);max-width:640px;margin:0 auto 16px;line-height:1.82;animation:fadeUp 1.3s ease both;}
+    .source-tag{display:inline-flex;gap:22px;animation:fadeUp 1.4s ease both;border:1px solid rgba(154,0,16,0.2);padding:8px 24px;}
+    .source-item{font-family:'Cinzel',serif;font-size:0.67rem;letter-spacing:2px;color:rgba(184,152,0,0.6);text-transform:uppercase;}
+    .source-item span{color:var(--blood-bright);margin-right:6px;}
+    .hero-refrain{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1rem,2.2vw,1.42rem);color:rgba(220,40,64,0.82);letter-spacing:2px;margin-top:24px;animation:fadeUp 1.5s ease both;line-height:1.9;text-shadow:0 0 22px rgba(154,0,16,0.5);}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+    /* ── TICKER ── */
+    .ticker-wrap{position:relative;z-index:10;overflow:hidden;border-top:1px solid rgba(154,0,16,0.14);border-bottom:1px solid rgba(154,0,16,0.14);background:rgba(0,0,0,0.5);padding:12px 0;}
+    .ticker-track{display:flex;width:max-content;animation:ticker 38s linear infinite;}
+    @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .tick-item{font-family:'Tiro Devanagari Sanskrit',serif;font-size:1rem;color:rgba(184,152,0,0.5);padding:0 36px;white-space:nowrap;}
+    .tick-dot{color:var(--blood-bright);opacity:0.65;padding:0 6px;}
+
+    /* ── LAYOUT ── */
+    .container{position:relative;z-index:10;max-width:1100px;margin:0 auto;padding:52px 20px 70px;display:grid;grid-template-columns:1fr 300px;gap:32px;align-items:start;}
+    @media(max-width:800px){.container{grid-template-columns:1fr;}}
+
+    /* ── STOTRA CARD ── */
+    .stotra-card{background:linear-gradient(142deg,rgba(20,0,6,0.7) 0%,rgba(3,0,8,0.93) 100%);border:1px solid rgba(154,0,16,0.25);border-radius:2px;padding:46px 42px;position:relative;overflow:hidden;}
+    .stotra-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--blood-bright),var(--gold-light),var(--violet-soft),var(--gold-light),var(--blood-bright),transparent);}
+    .stotra-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--violet-mid),var(--blood-mid),var(--violet-mid),transparent);}
+    .corner{position:absolute;font-size:1.1rem;color:rgba(184,152,0,0.18);}
+    .corner.tl{top:12px;left:14px}.corner.tr{top:12px;right:14px}.corner.bl{bottom:12px;left:14px}.corner.br{bottom:12px;right:14px}
+    .card-label{font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:5px;color:var(--blood-bright);text-transform:uppercase;text-align:center;margin-bottom:32px;}
+
+    /* ── CONTEXT BLOCK ── */
+    .context-block{background:rgba(74,8,128,0.07);border:1px solid rgba(74,8,128,0.2);padding:20px 26px;margin-bottom:32px;}
+    .context-block::before{content:'✦ पौराणिक सन्दर्भ ✦';display:block;font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:4px;color:var(--violet-soft);margin-bottom:12px;}
+    .context-text{font-size:0.91rem;color:var(--soft);line-height:1.88;font-style:italic;}
+
+    /* ── DHYANA ── */
+    .dhyana-block{background:rgba(154,0,16,0.07);border:1px solid rgba(154,0,16,0.2);padding:24px 28px;margin-bottom:36px;text-align:center;position:relative;}
+    .dhyana-block::before{content:'— ध्यानम् —';display:block;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:4px;color:var(--blood-bright);margin-bottom:14px;}
+    .dhyana-text{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1.05rem,2.2vw,1.4rem);color:var(--gold-light);line-height:2.12;text-shadow:0 0 18px rgba(184,152,0,0.2);margin-bottom:8px;}
+    .dhyana-meaning{font-size:0.9rem;color:var(--soft);font-style:italic;line-height:1.8;}
+    .dhyana-block::after{content:'';display:block;width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--blood),transparent);margin:18px auto 0;}
+
+    /* ── VERSE ── */
+    .verse{margin-bottom:38px;}
+    .verse-head{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
+    .verse-num{font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:3px;color:rgba(220,40,64,0.75);white-space:nowrap;background:rgba(154,0,16,0.1);border:1px solid rgba(154,0,16,0.25);padding:4px 14px;flex-shrink:0;}
+    .verse-title-text{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:2px;color:rgba(184,152,0,0.52);font-style:italic;}
+    .verse-sanskrit{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1.1rem,2.4vw,1.48rem);color:var(--gold-light);line-height:2.15;text-align:center;text-shadow:0 0 20px rgba(184,152,0,0.15);margin-bottom:10px;}
+    .verse-roman{font-family:'Cinzel',serif;font-size:0.72rem;color:rgba(191,144,216,0.42);letter-spacing:1.5px;text-align:center;margin-bottom:13px;font-style:italic;line-height:1.95;}
+    .verse-refrain{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(0.98rem,2vw,1.3rem);color:rgba(220,40,64,0.85);text-align:center;line-height:2;margin-bottom:13px;text-shadow:0 0 24px rgba(154,0,16,0.72),0 0 52px rgba(74,8,128,0.38);letter-spacing:0.5px;}
+    .verse-meaning{font-size:0.93rem;color:var(--soft);text-align:center;line-height:1.88;font-style:italic;border-top:1px solid rgba(154,0,16,0.14);padding-top:13px;}
+    .vdivider{text-align:center;color:rgba(154,0,16,0.32);font-size:0.95rem;letter-spacing:10px;margin:22px 0;}
+
+    /* ── PHALA ── */
+    .phala-card{margin-top:32px;background:linear-gradient(135deg,rgba(20,0,6,0.78),rgba(3,0,8,0.94));border:1px solid rgba(184,152,0,0.2);border-radius:2px;padding:30px 36px;text-align:center;position:relative;}
+    .phala-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold-light),transparent);}
+    .phala-label{font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:5px;color:var(--gold);text-transform:uppercase;margin-bottom:16px;}
+    .phala-text{font-family:'Tiro Devanagari Sanskrit',serif;font-size:clamp(1rem,2.1vw,1.26rem);color:var(--violet-pale);line-height:2.1;text-shadow:0 0 14px rgba(191,144,216,0.28);}
+    .phala-meaning{font-size:0.93rem;color:var(--soft);font-style:italic;line-height:1.82;border-top:1px solid rgba(184,152,0,0.12);padding-top:14px;margin-top:14px;}
+
+    /* ── ABOUT ── */
+    .about-card{background:linear-gradient(142deg,rgba(20,0,6,0.45),rgba(3,0,8,0.65));border:1px solid rgba(154,0,16,0.16);border-radius:2px;padding:26px 32px;margin-top:24px;}
+    .about-card h3{font-family:'Cinzel',serif;color:var(--gold);font-size:1.08rem;margin-bottom:13px;letter-spacing:2px;}
+    .about-card p{font-size:0.94rem;line-height:1.9;color:var(--soft);margin-bottom:12px;}
+    .sig-list{display:grid;gap:10px;margin-top:12px;}
+    .sig-item{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;background:rgba(154,0,16,0.06);border-left:2px solid var(--blood-mid);}
+    .sig-icon{font-size:1.25rem;flex-shrink:0;}
+    .sig-text{font-size:0.88rem;color:var(--soft);line-height:1.65;}
+    .sig-text strong{color:var(--violet-pale);display:block;font-family:'Cinzel',serif;font-size:0.73rem;letter-spacing:1px;margin-bottom:2px;}
+
+    /* ── SIDEBAR ── */
+    .sidebar{display:flex;flex-direction:column;gap:20px;}
+    .widget{background:linear-gradient(142deg,rgba(20,0,6,0.55),rgba(3,0,8,0.78));border:1px solid rgba(154,0,16,0.18);border-radius:2px;padding:20px;position:relative;}
+    .widget::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--blood-bright),transparent);opacity:0.5;}
+    .widget-title{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:4px;color:var(--blood-bright);text-transform:uppercase;margin-bottom:14px;padding-bottom:9px;border-bottom:1px solid rgba(154,0,16,0.15);}
+
+    .japa-ring{width:112px;height:112px;border-radius:50%;border:2px solid rgba(154,0,16,0.3);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;background:rgba(154,0,16,0.08);box-shadow:0 0 30px rgba(154,0,16,0.15),inset 0 0 20px rgba(154,0,16,0.07);position:relative;}
+    .japa-ring::before{content:'';position:absolute;inset:6px;border-radius:50%;border:1px dashed rgba(184,152,0,0.25);animation:spin-slow 28s linear infinite;}
+    @keyframes spin-slow{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+    .japa-count{font-family:'Cinzel Decorative',serif;font-size:2rem;color:var(--gold-pale);position:relative;z-index:1;}
+    .japa-label{font-family:'Cinzel',serif;font-size:0.59rem;letter-spacing:3px;color:rgba(220,40,64,0.5);text-transform:uppercase;text-align:center;}
+    .japa-btns{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:11px;}
+    .jbtn{font-family:'Cinzel',serif;font-size:0.66rem;letter-spacing:1.5px;padding:8px 5px;background:rgba(154,0,16,0.09);border:1px solid rgba(220,40,64,0.2);color:var(--violet-pale);cursor:pointer;transition:all .25s;text-transform:uppercase;}
+    .jbtn:hover{background:rgba(154,0,16,0.28);border-color:var(--blood-bright);color:var(--cream);}
+    .jbtn.reset{grid-column:1/-1;background:rgba(184,152,0,0.06);border-color:rgba(184,152,0,0.2);color:var(--gold);}
+    .jbtn.reset:hover{background:rgba(184,152,0,0.18);}
+    .japa-status{margin-top:10px;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:2px;color:rgba(220,40,64,0.42);text-align:center;}
+
+    .verse-index{display:flex;flex-wrap:wrap;gap:6px;}
+    .idx-btn{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:1px;padding:5px 10px;background:rgba(154,0,16,0.08);border:1px solid rgba(154,0,16,0.22);color:rgba(242,236,250,0.55);cursor:pointer;transition:all .25s;text-decoration:none;display:inline-block;}
+    .idx-btn:hover{background:rgba(154,0,16,0.25);border-color:var(--blood-bright);color:var(--cream);}
+
+    .q-m{padding:9px 0;border-bottom:1px solid rgba(154,0,16,0.1);}
+    .q-m:last-child{border-bottom:none;}
+    .q-mt{font-family:'Tiro Devanagari Sanskrit',serif;font-size:0.96rem;color:var(--gold-light);margin-bottom:3px;}
+    .q-ms{font-size:0.71rem;color:rgba(242,236,250,0.38);font-family:'Cinzel',serif;letter-spacing:1px;}
+
+    .rel-post{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid rgba(154,0,16,0.1);text-decoration:none;color:inherit;transition:padding-left .3s;}
+    .rel-post:last-child{border-bottom:none;}
+    .rel-post:hover{padding-left:5px;}
+    .rel-icon{font-size:1.5rem;flex-shrink:0;}
+    .rel-name{font-family:'Tiro Devanagari Sanskrit',serif;font-size:0.9rem;color:var(--gold-light);margin-bottom:2px;}
+    .rel-sub{font-size:0.71rem;color:rgba(242,236,250,0.38);font-family:'Cinzel',serif;letter-spacing:1px;}
+
+    .names-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+    .name-chip{font-family:'Tiro Devanagari Sanskrit',serif;font-size:0.82rem;color:var(--gold-light);background:rgba(154,0,16,0.07);border:1px solid rgba(154,0,16,0.18);padding:5px 6px;text-align:center;cursor:default;transition:all .3s;}
+    .name-chip:hover{background:rgba(154,0,16,0.2);border-color:var(--blood-bright);color:var(--cream);}
+
+    footer{position:relative;z-index:10;text-align:center;padding:38px 20px;border-top:1px solid rgba(154,0,16,0.12);}
+    .foot-sym{font-size:2.8rem;color:rgba(184,152,0,0.2);display:block;margin-bottom:12px;}
+    .foot-txt{font-family:'Cinzel',serif;font-size:0.63rem;letter-spacing:4px;color:rgba(242,236,250,0.2);text-transform:uppercase;}
+
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+    .reveal.on{opacity:1;transform:none;}
+    @media(max-width:700px){nav{display:none;}.stotra-card{padding:28px 16px;}}
+  </style>
+</head>
+<body>
+<div class="bg-fixed"></div>
+<div class="kaal-grid"></div>
+<div class="skull-pattern"></div>
+<div class="mahakali-aura"></div>
+<div id="particles"></div>
+
+<header>
+  <div class="site-nav">
+    <a href="/" class="logo">Shiva<em>Marg</em></a>
+    <nav>
+      <a href="/kali-mantras/">काली मंत्र</a>
+      <a href="#">स्तोत्र</a>
+      <a href="#">महाविद्या</a>
+      <a href="#">पुराण</a>
+    </nav>
+  </div>
+  <div class="breadcrumb">मुख्य पृष्ठ <span>💀</span> काली मंत्र <span>💀</span> महाकाली स्तोत्र</div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="skull-wrap">
+    <div class="orbit-skull"></div>
+    <div class="orbit-inner"></div>
+    <span class="skull-sym">💀</span>
+  </div>
+  <div class="hero-tag">✦ देवी महात्म्यम् • मार्कण्डेय पुराण ✦</div>
+  <h1>Mahakali Stotra</h1>
+  <div class="hero-deva">महाकाली स्तोत्र</div>
+  <div class="hero-orn">✦ ✦ ✦</div>
+  <p class="hero-desc">देवी महात्म्यम् (दुर्गा सप्तशती) से उद्धृत महाकाली स्तोत्र — ब्रह्माजी द्वारा रचित। नमस्ते सते सर्वलोकाश्रये। सम्पूर्ण स्तोत्र, अर्थ सहित।</p>
+  <div class="source-tag">
+    <div class="source-item"><span>📜</span>देवी महात्म्यम्</div>
+    <div class="source-item"><span>📖</span>मार्कण्डेय पुराण</div>
+    <div class="source-item"><span>✍️</span>ब्रह्मा रचित</div>
+  </div>
+  <div class="hero-refrain">नमस्ते सते सर्वलोकाश्रये</div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="tick-item">नमस्ते सते सर्वलोकाश्रये</span><span class="tick-dot">💀</span>
+    <span class="tick-item">निरास्ते नमस्ते जगत्प्रतिपाले</span><span class="tick-dot">💀</span>
+    <span class="tick-item">जय त्वं देवि चामुण्डे जय भूतापहारिणि</span><span class="tick-dot">💀</span>
+    <span class="tick-item">जय सर्वगते देवि कालरात्रि नमोऽस्तु ते</span><span class="tick-dot">💀</span>
+    <span class="tick-item">नमस्ते सते सर्वलोकाश्रये</span><span class="tick-dot">💀</span>
+    <span class="tick-item">निरास्ते नमस्ते जगत्प्रतिपाले</span><span class="tick-dot">💀</span>
+    <span class="tick-item">जय त्वं देवि चामुण्डे जय भूतापहारिणि</span><span class="tick-dot">💀</span>
+    <span class="tick-item">जय सर्वगते देवि कालरात्रि नमोऽस्तु ते</span><span class="tick-dot">💀</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+  <div>
+    <div class="stotra-card reveal">
+      <span class="corner tl">💀</span><span class="corner tr">💀</span>
+      <span class="corner bl">⚡</span><span class="corner br">⚡</span>
+      <div class="card-label">✦ महाकाली स्तोत्र — सम्पूर्ण ✦</div>
+
+      <!-- CONTEXT -->
+      <div class="context-block">
+        <div class="context-text">देवी महात्म्यम् (मार्कण्डेय पुराण) के प्रथम चरित्र में सुरथ राजा और समाधि वैश्य को मेधस ऋषि ने यह कथा सुनाई। ब्रह्मा और देवताओं ने महाकाली की स्तुति की जब विष्णु की योगनिद्रा में मधु-कैटभ राक्षसों ने उत्पात मचाया। यह स्तोत्र उसी प्रसंग का है।</div>
+      </div>
+
+      <!-- DHYANA -->
+      <div class="dhyana-block">
+        <div class="dhyana-text">
+          ॐ खड्गं चक्रगदेषुचापरिघाञ्छूलं भुशुण्डीं शिरः।<br>
+          शङ्खं सन्दधतीं करैस्त्रिनयनां सर्वाङ्गभूषावृताम्।<br>
+          नीलाश्मद्युतिमास्यपाददशकां सेवे महाकालिकाम्।<br>
+          यामस्तौत् स्वपिते हरौ कमलजो हन्तुं मधुं कैटभम्॥
+        </div>
+        <div class="dhyana-meaning">जिनके दस हाथों में खड्ग, चक्र, गदा, बाण, धनुष, परिघ, शूल, भुशुण्डी, शीश और शंख हैं — त्रिनेत्रा, सर्वाभूषणभूषिता, नीलपाषाण जैसी कान्ति वाली, दस मुख-दस पाद वाली महाकाली की मैं सेवा करता हूँ, जिनकी स्तुति विष्णु की योगनिद्रा में ब्रह्मा ने की।</div>
+      </div>
+
+      <!-- VERSE 1 -->
+      <div class="verse" id="v1">
+        <div class="verse-head"><div class="verse-num">॥ श्लोक १ ॥</div><div class="verse-title-text">नमस्ते सते — सर्वलोकाश्रय</div></div>
+        <div class="verse-sanskrit">
+          नमस्ते सते सर्वलोकाश्रये<br>
+          निरास्ते नमस्ते जगत्प्रतिपाले।<br>
+          नमस्ते सते देवि चामुण्डिके<br>
+          नमस्ते जगत् कारणे चण्डिके॥
+        </div>
+        <div class="verse-roman">Namaste Sate Sarva-Lokāśraye Nirāste Namaste Jagat-Pratipāle | Namaste Sate Devi Cāmuṇḍike Namaste Jagat Kāraṇe Caṇḍike</div>
+        <div class="verse-refrain">नमस्ते सते सर्वलोकाश्रये</div>
+        <div class="verse-meaning">हे सत्य-स्वरूपे! सर्व-लोकों की आश्रय-दात्री — नमस्कार। हे निरातंक! हे जगत्-पालिके — नमस्कार। हे देवी चामुण्डिके — नमस्कार। हे जगत् की कारण-स्वरूपा चण्डिके — नमस्कार।</div>
+      </div>
+      <div class="vdivider">~ 💀 ~</div>
+
+      <!-- VERSE 2 -->
+      <div class="verse" id="v2">
+        <div class="verse-head"><div class="verse-num">॥ श्लोक २ ॥</div><div class="verse-title-text">विद्युत् स्वरूपा — काल-रात्रि</div></div>
+        <div class="verse-sanskrit">
+          नमस्ते जगत् संस्थिते देवि सर्व-<br>
+          नमस्ते रणे दुर्जये पापहारे।<br>
+          नमस्ते जले स्थले चापि देवि<br>
+          नमस्ते शिवे सर्वसिद्धिप्रदायिनि॥
+        </div>
+        <div class="verse-roman">Namaste Jagat Saṃsthite Devi Sarva Namaste Raṇe Durjaye Pāpa-Hāre | Namaste Jale Sthale Cāpi Devi Namaste Śive Sarva-Siddhi-Pradāyini</div>
+        <div class="verse-refrain">नमस्ते सते सर्वलोकाश्रये</div>
+        <div class="verse-meaning">हे जगत् में सर्वत्र विद्यमान देवी — नमस्कार। रण में अजेय, पाप-हारिणी — नमस्कार। जल में, स्थल में — सर्वत्र हे देवी — नमस्कार। हे शिवे! सर्व-सिद्धि देने वाली — नमस्कार।</div>
+      </div>
+      <div class="vdivider">~ 💀 ~</div>
+
+      <!-- VERSE 3 -->
+      <div class="verse" id="v3">
+        <div class="verse-head"><div class="verse-num">॥ श्लोक ३ ॥</div><div class="verse-title-text">महामाया — ब्रह्माण्ड व्यापिनी</div></div>
+        <div class="verse-sanskrit">
+          या देवी सर्वभूतेषु शक्तिरूपेण संस्थिता।<br>
+          नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः॥
+        </div>
+        <div class="verse-roman">Yā Devī Sarva-Bhūteṣu Śakti-Rūpeṇa Saṃsthitā | Namastasyai Namastasyai Namastasyai Namo Namaḥ</div>
+        <div class="verse-refrain">नमस्ते सते सर्वलोकाश्रये</div>
+        <div class="verse-meaning">जो देवी समस्त प्राणियों में शक्ति-रूप से विद्यमान हैं — उन्हें नमस्कार, नमस्कार, नमस्कार, बारम्बार नमस्कार।</div>
+      </div>
+      <div class="vdivider">~ 💀 ~</div>
+
+      <!-- VERSE 4 -->
+      <div class="verse" id="v4">
+        <div class="verse-head"><div class="verse-num">॥ श्लोक ४ ॥</div><div class="verse-title-text">चेतना रूपा — बुद्धि-स्वरूपा</div></div>
+        <div class="verse-sanskrit">
+          या देवी सर्वभूतेषु बुद्धिरूपेण संस्थिता।<br>
+          नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः॥<br>
+          या देवी सर्वभूतेषु चेतनेत्यभिधीयते।<br>
+          नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः॥
+        </div>
+        <div class="verse-roman">Yā Devī Sarva-Bhūteṣu Buddhi-Rūpeṇa Saṃsthitā | Namastasyai Namastasyai Namastasyai Namo Namaḥ | Yā Devī Sarva-Bhūteṣu Cetanetya-Bhidhīyate | Namastasyai Namastasyai Namastasyai Namo Namaḥ</div>
+        <div class="verse-refrain">नमस्ते सते सर्वलोकाश्रये</div>
+        <div class="verse-meaning">जो देवी समस्त प्राणियों में बुद्धि-रूप से विद्यमान हैं — उन्हें बारम्बार नमस्कार। जो देवी सर्वत्र चेतना कहलाती हैं — उन्हें बारम्बार नमस्कार।</div>
+      </div>
+      <div class="vdivider">~ 💀 ~</div>
+
+      <!-- VERSE 5 -->
+      <div class="verse" id="v5">
+        <div class="verse-head"><div class="verse-num">॥ श्लोक ५ ॥</div><div class="verse-title-text">निद्रा — क्षुधा — छाया रूपा</div></div>
+        <div class="verse-sanskrit">
+          या देवी सर्वभूतेषु निद्रारूपेण संस्थिता।<br>
+          नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः॥<br>
+          या देवी सर्वभूतेषु क्षुधारूपेण संस्थिता।<br>
+          नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः॥
+        </div>
+        <div class="verse-roman">Yā Devī Sarva-Bhūteṣu Nidrā-Rūpeṇa Saṃsthitā | Namastasyai Namastasyai Namastasyai Namo Namaḥ | Yā Devī Sarva-Bhūteṣu Kṣudhā-Rūpeṇa Saṃsthitā</div>
+        <div class="verse-refrain">नमस्ते सते सर्वलोकाश्रये</div>
+        <div class="verse-meaning">जो देवी सर्वत्र निद्रा-रूप में विद्यमान हैं — बारम्बार नमस्कार। जो देवी सर्वत्र क्षुधा (भूख) के रूप में हैं — बारम्बार नमस्कार।</div>
+      </div>
+      <div class="vdivider">~ 💀 ~</div>
+
+      <!-- VERSE 6 -->
+      <div class="verse" id="v6">
+        <div class="verse-head"><div class="verse-num">॥ श्लोक ६ ॥</div><div class="verse-title-text">तृष्णा — क्षान्ति — जाति रूपा</div></div>
+        <div class="verse-sanskrit">
+          या देवी सर्वभूतेषु तृष्णारूपेण संस्थिता।<br>
+          नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः॥<br>
+          या देवी सर्वभूतेषु क्षान्तिरूपेण संस्थिता।<br>
+          नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः॥
+        </div>
+        <div class="verse-roman">Yā Devī Sarva-Bhūteṣu Tṛṣṇā-Rūpeṇa Saṃsthitā | Namastasyai… | Yā Devī Sarva-Bhūteṣu Kṣānti-Rūpeṇa Saṃsthitā | Namastasyai…</div>
+        <div class="verse-refrain">नमस्ते सते सर्वलोकाश्रये</div>
+        <div class="verse-meaning">जो देवी सर्वत्र तृष्णा (प्यास/इच्छा) के रूप में हैं — नमस्कार। जो देवी सर्वत्र क्षमा-रूप में हैं — बारम्बार नमस्कार।</div>
+      </div>
+      <div class="vdivider">~ 💀 ~</div>
+
+      <!-- VERSE 7 -->
+      <div class="verse" id="v7">
+        <div class="verse-head"><div class="verse-num">॥ श्लोक ७ ॥</div><div class="verse-title-text">लज्जा — शान्ति — श्रद्धा रूपा</div></div>
+        <div class="verse-sanskrit">
+          या देवी सर्वभूतेषु लज्जारूपेण संस्थिता।<br>
+          नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः॥<br>
+          या देवी सर्वभूतेषु शान्तिरूपेण संस्थिता।<br>
+          नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः॥
+        </div>
+        <div class="verse-roman">Yā Devī Sarva-Bhūteṣu Lajjā-Rūpeṇa Saṃsthitā | Namastasyai… | Yā Devī Sarva-Bhūteṣu Śānti-Rūpeṇa Saṃsthitā | Namastasyai…</div>
+        <div class="verse-refrain">नमस्ते सते सर्वलोकाश्रये</div>
+        <div class="verse-meaning">जो देवी सर्वत्र लज्जा-रूप में विद्यमान हैं — बारम्बार नमस्कार। जो देवी सर्वत्र शान्ति-स्वरूप हैं — बारम्बार नमस्कार।</div>
+      </div>
+      <div class="vdivider">~ 💀 ~</div>
+
+      <!-- VERSE 8 -->
+      <div class="verse" id="v8">
+        <div class="verse-head"><div class="verse-num">॥ श्लोक ८ ॥</div><div class="verse-title-text">श्रद्धा — कान्ति — लक्ष्मी रूपा</div></div>
+        <div class="verse-sanskrit">
+          या देवी सर्वभूतेषु श्रद्धारूपेण संस्थिता।<br>
+          नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः॥<br>
+          या देवी सर्वभूतेषु कान्तिरूपेण संस्थिता।<br>
+          नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः॥
+        </div>
+        <div class="verse-roman">Yā Devī Sarva-Bhūteṣu Śraddhā-Rūpeṇa Saṃsthitā | Namastasyai… | Yā Devī Sarva-Bhūteṣu Kānti-Rūpeṇa Saṃsthitā | Namastasyai…</div>
+        <div class="verse-refrain">नमस्ते सते सर्वलोकाश्रये</div>
+        <div class="verse-meaning">जो देवी सर्वत्र श्रद्धा-रूप में हैं — नमस्कार। जो देवी सर्वत्र कान्ति (तेज) के रूप में विद्यमान हैं — बारम्बार नमस्कार।</div>
+      </div>
+      <div class="vdivider">~ 💀 ~</div>
+
+      <!-- VERSE 9 -->
+      <div class="verse" id="v9">
+        <div class="verse-head"><div class="verse-num">॥ श्लोक ९ ॥</div><div class="verse-title-text">जय देवि चामुण्डे — मंगल स्तुति</div></div>
+        <div class="verse-sanskrit">
+          जय त्वं देवि चामुण्डे जय भूतापहारिणि।<br>
+          जय सर्वगते देवि कालरात्रि नमोऽस्तु ते॥<br>
+          मधुकैटभविध्वंसि विधातृवरदे नमः।<br>
+          रूपं देहि जयं देहि यशो देहि द्विषो जहि॥
+        </div>
+        <div class="verse-roman">Jaya Tvaṃ Devi Cāmuṇḍe Jaya Bhūtāpahāriṇi | Jaya Sarvagate Devi Kālarātri Namo'stu Te | Madhu-Kaiṭabha-Vidhvaṃsi Vidhātṛ-Varade Namaḥ | Rūpaṃ Dehi Jayaṃ Dehi Yaśo Dehi Dviṣo Jahi</div>
+        <div class="verse-refrain">नमस्ते सते सर्वलोकाश्रये</div>
+        <div class="verse-meaning">हे देवी चामुण्डे — जय! हे भूत-भय-हारिणी — जय! हे सर्वव्यापी कालरात्रि — नमस्कार। हे मधु-कैटभ का विनाश करने वाली — नमस्कार! रूप दो, विजय दो, यश दो और शत्रुओं का नाश करो।</div>
+      </div>
+      <div class="vdivider">~ 💀 ~</div>
+
+      <!-- VERSE 10 - FINAL -->
+      <div class="verse" id="v10">
+        <div class="verse-head"><div class="verse-num">॥ श्लोक १० ॥</div><div class="verse-title-text">सर्वस्वरूपे — महामाया प्रार्थना</div></div>
+        <div class="verse-sanskrit">
+          सर्वस्वरूपे सर्वेशे सर्वशक्तिसमन्विते।<br>
+          भयेभ्यस्त्राहि नो देवि दुर्गे देवि नमोऽस्तु ते॥<br>
+          एतत्ते वदनं सौम्यं लोचनत्रयभूषितम्।<br>
+          पातु नः सर्वभीतिभ्यः कात्यायनि नमोऽस्तु ते॥
+        </div>
+        <div class="verse-roman">Sarva-Svarūpe Sarveśe Sarva-Śakti-Samanvite | Bhayebhyas-Trāhi No Devi Durge Devi Namo'stu Te | Etat-Te Vadanaṃ Saumyaṃ Locana-Traya-Bhūṣitam | Pātu Naḥ Sarva-Bhītibhyaḥ Kātyāyani Namo'stu Te</div>
+        <div class="verse-refrain">नमस्ते सते सर्वलोकाश्रये</div>
+        <div class="verse-meaning">हे सर्वस्वरूपे! हे सर्वेशी! हे सर्वशक्ति-सम्पन्ने! समस्त भयों से हमारी रक्षा करो — हे दुर्गा देवी — नमस्कार। हे कात्यायनी! आपका त्रिनेत्र-विभूषित शान्त मुख हमें सर्व भयों से बचाए — नमस्कार।</div>
+      </div>
+
+    </div><!-- /stotra-card -->
+
+    <!-- PHALA -->
+    <div class="phala-card reveal">
+      <div class="phala-label">✦ महाकाली स्तोत्र फल श्रुति ✦</div>
+      <div class="phala-text">
+        महाकाली स्तोत्रमिदं पठेद् भक्त्या नरो यदि।<br>
+        सर्वापद्विमुक्तः स्यात् पूज्यते त्रिदशैरपि॥<br>
+        या देवी भक्तिमाशाश्य दर्शनं कुरुते नृणाम्।<br>
+        नाशयत्याशु दारिद्र्यं विजयं च ददाति सः॥
+      </div>
+      <div class="phala-meaning">जो भक्त महाकाली स्तोत्र का पाठ करता है वह सम्पूर्ण आपदाओं से मुक्त होता है और देवता भी उसकी पूजा करते हैं। जो देवी भक्तों को दर्शन देती हैं वे दारिद्र्य का नाश करती हैं और विजय प्रदान करती हैं।</div>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="about-card reveal">
+      <h3>💀 महाकाली स्तोत्र — परिचय</h3>
+      <p>यह स्तोत्र देवी महात्म्यम् (दुर्गा सप्तशती) का अंग है जो मार्कण्डेय पुराण में संकलित है। देवी महात्म्यम् के ७०० श्लोकों में महाकाली, महालक्ष्मी और महासरस्वती — तीनों महाशक्तियों की स्तुति है।</p>
+      <p>"या देवी सर्वभूतेषु" — यह विश्व-प्रसिद्ध श्लोक-समूह भारतीय आध्यात्मिकता का सार है। देवी सर्वत्र हैं — शक्ति में, बुद्धि में, चेतना में, निद्रा में, क्षुधा में — हर रूप देवी का ही है।</p>
+      <div class="sig-list">
+        <div class="sig-item"><div class="sig-icon">📜</div><div class="sig-text"><strong>देवी महात्म्यम्</strong>मार्कण्डेय पुराण के ८१-९३ अध्यायों में संकलित ७०० श्लोकों का महान ग्रन्थ। नवरात्र में इसका पाठ विशेष महत्वपूर्ण है।</div></div>
+        <div class="sig-item"><div class="sig-icon">💀</div><div class="sig-text"><strong>महाकाली — प्रथम चरित्र</strong>देवी महात्म्यम् के प्रथम चरित्र में महाकाली ने मधु-कैटभ राक्षसों का वध किया। यह ब्रह्माजी की स्तुति का प्रसंग है।</div></div>
+        <div class="sig-item"><div class="sig-icon">🌑</div><div class="sig-text"><strong>या देवी सर्वभूतेषु</strong>यह अद्वैत शक्ति-उपासना का मूल सूत्र है — देवी किसी एक स्थान पर नहीं, वह सर्वत्र सर्व-रूप में विद्यमान हैं।</div></div>
+        <div class="sig-item"><div class="sig-icon">⚡</div><div class="sig-text"><strong>नवरात्र पाठ</strong>नवरात्र में देवी महात्म्यम् का पाठ नित्य किया जाता है। महाकाली स्तोत्र का पाठ महाकाली-पूजन में विशेष।</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <div class="widget reveal">
+      <div class="widget-title">✦ पाठ काउंटर ✦</div>
+      <div style="text-align:center;padding:6px 0;">
+        <div class="japa-ring"><div class="japa-count" id="japaCount">0</div></div>
+        <div class="japa-label">पाठ संख्या</div>
+        <div class="japa-btns">
+          <button class="jbtn" onclick="addJapa(1)">💀 + १</button>
+          <button class="jbtn" onclick="addJapa(11)">⚡ + ११</button>
+          <button class="jbtn" onclick="addJapa(108)">📿 + १०८</button>
+          <button class="jbtn reset" onclick="resetJapa()">↺ रीसेट</button>
+        </div>
+        <div class="japa-status" id="japaStatus">लक्ष्य: ११ पाठ</div>
+      </div>
+    </div>
+
+    <div class="widget reveal">
+      <div class="widget-title">✦ श्लोक सूची ✦</div>
+      <div class="verse-index">
+        <a href="#v1" class="idx-btn">श्लोक १</a><a href="#v2" class="idx-btn">श्लोक २</a>
+        <a href="#v3" class="idx-btn">श्लोक ३</a><a href="#v4" class="idx-btn">श्लोक ४</a>
+        <a href="#v5" class="idx-btn">श्लोक ५</a><a href="#v6" class="idx-btn">श्लोक ६</a>
+        <a href="#v7" class="idx-btn">श्लोक ७</a><a href="#v8" class="idx-btn">श्लोक ८</a>
+        <a href="#v9" class="idx-btn">श्लोक ९</a><a href="#v10" class="idx-btn">श्लोक १०</a>
+      </div>
+    </div>
+
+    <div class="widget reveal">
+      <div class="widget-title">✦ पाठ विधि ✦</div>
+      <div class="q-m"><div class="q-mt">🌙 सन्ध्या-रात्रि</div><div class="q-ms">महाकाली का विशेष समय</div></div>
+      <div class="q-m"><div class="q-mt">💀 अष्टमी-अमावस्या</div><div class="q-ms">विशेष पुण्य-पर्व</div></div>
+      <div class="q-m"><div class="q-mt">🕯️ पञ्च-दीप</div><div class="q-ms">पाँच दीपकों से पूजन</div></div>
+      <div class="q-m"><div class="q-mt">🌺 लाल पुष्प</div><div class="q-ms">गुड़हल — अति प्रिय</div></div>
+      <div class="q-m"><div class="q-mt">📿 क्रीं-जप</div><div class="q-ms">पाठ से पूर्व बीज-जप</div></div>
+      <div class="q-m"><div class="q-mt">🌊 नवरात्र</div><div class="q-ms">नित्य पाठ विशेष फलदायी</div></div>
+    </div>
+
+    <div class="widget reveal">
+      <div class="widget-title">✦ महाकाली के नाम ✦</div>
+      <div class="names-grid">
+        <div class="name-chip">महाकाली</div><div class="name-chip">चामुण्डा</div>
+        <div class="name-chip">कालरात्रि</div><div class="name-chip">भद्रकाली</div>
+        <div class="name-chip">कात्यायनी</div><div class="name-chip">चण्डिका</div>
+        <div class="name-chip">दुर्गा</div><div class="name-chip">महामाया</div>
+      </div>
+    </div>
+
+    <div class="widget reveal">
+      <div class="widget-title">✦ संबंधित स्तोत्र ✦</div>
+      <a href="/kali-mantras/kalika-ashtakam/" class="rel-post"><div class="rel-icon">🌑</div><div><div class="rel-name">कालिकाष्टकम्</div><div class="rel-sub">Kalika Ashtakam</div></div></a>
+      <a href="/kali-mantras/kali-chalisa/" class="rel-post"><div class="rel-icon">📿</div><div><div class="rel-name">काली चालीसा</div><div class="rel-sub">Kali Chalisa</div></div></a>
+      <a href="/kali-mantras/kali-aarti/" class="rel-post"><div class="rel-icon">🪔</div><div><div class="rel-name">काली माँ आरती</div><div class="rel-sub">Kali Aarti</div></div></a>
+      <a href="/kali-mantras/kali-kavacham/" class="rel-post"><div class="rel-icon">🛡️</div><div><div class="rel-name">काली कवचम्</div><div class="rel-sub">Kali Kavacham</div></div></a>
+    </div>
+
+    <div class="widget reveal">
+      <div class="widget-title">✦ स्तोत्र पाठ लाभ ✦</div>
+      <div class="q-m"><div class="q-mt">💀 आपद्-मुक्ति</div><div class="q-ms">सर्व आपदाओं से रक्षा</div></div>
+      <div class="q-m"><div class="q-mt">⚡ शत्रु-नाश</div><div class="q-ms">शत्रुओं का विनाश</div></div>
+      <div class="q-m"><div class="q-mt">🌟 यश-विजय</div><div class="q-ms">कीर्ति और विजय की प्राप्ति</div></div>
+      <div class="q-m"><div class="q-mt">💰 दारिद्र्य-नाश</div><div class="q-ms">निर्धनता दूर होती है</div></div>
+      <div class="q-m"><div class="q-mt">🌊 मोक्ष</div><div class="q-ms">अन्तिम मुक्ति का मार्ग</div></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="foot-sym">💀</span>
+  <div class="foot-txt">॥ नमस्ते सते सर्वलोकाश्रये ॥ जय महाकाली ॥ © ShivaMarg 2025 || saurabhjha.live</div>
+</footer>
+
+<script>
+  /* Particles */
+  const pc=document.getElementById('particles');
+  const ptcols=['rgba(154,0,16,0.7)','rgba(74,8,128,0.6)','rgba(184,152,0,0.4)','rgba(191,144,216,0.5)','rgba(192,0,32,0.55)'];
+  for(let i=0;i<65;i++){const p=document.createElement('div');p.className='pt';const w=2+Math.random()*7;p.style.cssText=`left:${Math.random()*100}%;width:${w}px;height:${w}px;background:${ptcols[Math.floor(Math.random()*ptcols.length)]};animation-duration:${11+Math.random()*22}s;animation-delay:${Math.random()*28}s;`;pc.appendChild(p);}
+  /* Reveal */
+  const rv=document.querySelectorAll('.reveal');
+  const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*30);obs.unobserve(e.target);}});},{threshold:0.06});
+  rv.forEach(el=>obs.observe(el));
+  /* Japa */
+  let japaTotal=0;
+  function addJapa(n){japaTotal+=n;document.getElementById('japaCount').textContent=japaTotal;const s=document.getElementById('japaStatus');if(japaTotal>=11)s.textContent='🏆 ११ पाठ पूर्ण! जय महाकाली!';else s.textContent=`${11-japaTotal} पाठ शेष`;}
+  function resetJapa(){japaTotal=0;document.getElementById('japaCount').textContent='0';document.getElementById('japaStatus').textContent='लक्ष्य: ११ पाठ';}
+</script>
+</body>
+</html>
