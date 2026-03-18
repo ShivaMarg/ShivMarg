@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Block unnecessary system files
+
+Disallow: /admin/
+Disallow: /private/
+
+Sitemap: https://www.shivmarg.live/sitemap.xml
