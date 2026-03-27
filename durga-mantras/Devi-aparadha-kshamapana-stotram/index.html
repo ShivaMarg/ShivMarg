@@ -879,13 +879,14 @@
   }, { threshold: 0.06 });
   rv.forEach(el => obs.observe(el));
 </script>
+
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
   let player, isPlaying = false;
   function onYouTubeIframeAPIReady() {
     player = new YT.Player("player", {
       videoId: "03goUB9QgHw",
-      playerVars: { controls: 0, modestbranding: 1, rel: 0 }
+      playerVars: { controls:0, modestbranding:1, rel:0 }
     });
   }
   document.addEventListener("DOMContentLoaded", function () {
@@ -897,6 +898,7 @@
     };
   });
 </script>
+
 <script src="/js/auth.js"></script>
 <script src="/js/s-comments.js"></script>
 <script>
