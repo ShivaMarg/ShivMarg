@@ -371,8 +371,10 @@
 
       w.innerHTML = `
         <div class="sm-user-chip">
-          <div class="sm-avatar" style="background:${avatarBg}">${avatarChar.toUpperCase()}</div>
-          <span class="sm-uname">${_user.username}</span>
+          <a href="/profile.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;cursor:pointer" title="मेरी प्रोफ़ाइल">
+            <div class="sm-avatar" style="background:${avatarBg}">${avatarChar.toUpperCase()}</div>
+            <span class="sm-uname" style="color:#B39DDB">${_user.username}</span>
+          </a>
           <button class="sm-logout" onclick="SmAuth.logout()">लॉगआउट</button>
         </div>`;
     } else {
