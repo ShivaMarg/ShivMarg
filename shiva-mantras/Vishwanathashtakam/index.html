@@ -682,6 +682,7 @@
   }, { threshold: 0.06 });
   rv.forEach(el => obs.observe(el));
 </script>
+
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
   let player;
@@ -690,38 +691,27 @@
   function onYouTubeIframeAPIReady() {
     player = new YT.Player("player", {
       videoId: "PlIoHp6v3LI",
-      playerVars: {
-        controls: 0,
-        modestbranding: 1,
-        rel: 0
-      }
+      playerVars: { controls: 0, modestbranding: 1, rel: 0 }
     });
   }
 
   document.addEventListener("DOMContentLoaded", function () {
     const btn = document.getElementById("playBtn");
-
     btn.onclick = function () {
       if (!player) return;
-
-      if (!isPlaying) {
-        player.playVideo();
-        btn.innerHTML = "⏸";
-        isPlaying = true;
-      } else {
-        player.pauseVideo();
-        btn.innerHTML = "▶";
-        isPlaying = false;
-      }
+      if (!isPlaying) { player.playVideo(); btn.innerHTML = "⏸"; isPlaying = true; }
+      else { player.pauseVideo(); btn.innerHTML = "▶"; isPlaying = false; }
     };
   });
 </script>
-  <script src="/js/auth.js"></script>
+<script src="/js/auth.js"></script>
   <script src="/js/s-comments.js"></script>
   <script>
     const SM_API = 'https://shivamargbackend.onrender.com'; // ← change to your server URL in prod
     SmAuth.init({ apiBase: SM_API });
     SmComments.init({ apiBase: SM_API });
   </script>
-<script src="/js/search.js"></script>\n</body>
+<script src="/js/search.js"></script>
+
+</body>
 </html>
