@@ -37,6 +37,9 @@
   </style>
 </head>
 <body>
+
+    <div id="nav-container"></div>
+
   <div class="container">
     <div class="hero">
       <h1>बड़ सुखसार पाओल तुअ तीरे</h1>
@@ -124,5 +127,15 @@
     SmAuth.init({ apiBase: SM_API });
     SmComments.init({ apiBase: SM_API });
 </script>  
+<script>
+    fetch('/nav.html')
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById('nav-container').innerHTML = html;
+        // Re-run scripts if needed
+        const scripts = document.getElementById('nav-container').querySelectorAll('script');
+        scripts.forEach(s => eval(s.textContent));
+      });
+  </script>
 </body>
 </html>

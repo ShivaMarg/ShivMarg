@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --saffron: #FF6B00;
+      --gold: #D4A017;
+      --gold-light: #F2C94C;
+      --cream: #FDF5E6;
+      --dark: #0D0500;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(13,5,0,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(212,160,23,0.2);
+      padding: 0 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+    .logo em { color: var(--saffron); font-style: normal; }
+
+    .nav-links { display: flex; gap: 0; }
+    .nav-links a {
+      color: rgba(253,245,230,0.65);
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0 16px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold-light); border-bottom-color: var(--saffron); }
+
+    /* ── DROPDOWN MENU ── */
+    .nav-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .nav-dropdown-btn {
+      background: transparent;
+      border: none;
+      color: rgba(253,245,230,0.65);
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0 16px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      gap: 6px;
+    }
+
+    .nav-dropdown-btn:hover {
+      color: var(--gold-light);
+      border-bottom: 2px solid var(--saffron);
+    }
+
+    .nav-dropdown-btn::after {
+      content: '▼';
+      font-size: 0.5rem;
+      transition: transform 0.3s;
+    }
+
+    .nav-dropdown-btn.active::after {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-content {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: rgba(13,5,0,0.95);
+      border: 1px solid rgba(212,160,23,0.2);
+      min-width: 300px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.4s ease;
+      opacity: 0;
+      z-index: 1000;
+      backdrop-filter: blur(14px);
+      border-radius: 2px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+
+    .dropdown-content.active {
+      max-height: 700px;
+      opacity: 1;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 14px 20px;
+      color: rgba(253,245,230,0.7);
+      text-decoration: none;
+      font-family: 'Tiro Devanagari Sanskrit', serif;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+      border-bottom: 1px solid rgba(212,160,23,0.1);
+    }
+
+    .dropdown-content a:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-content a:hover {
+      background: rgba(212,160,23,0.1);
+      color: var(--gold-light);
+      padding-left: 26px;
+    }
+
+    .dropdown-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,160,23,0.2), transparent);
+      margin: 8px 0;
+    }
+
+    .dropdown-label {
+      padding: 12px 20px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 5px;
+      color: var(--saffron);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .nav-search {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(212,160,23,0.25);
+      color: var(--cream);
+      padding: 7px 16px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 1px;
+      outline: none;
+      border-radius: 1px;
+      width: 180px;
+      transition: border-color 0.3s;
+    }
+    .nav-search::placeholder { color: rgba(253,245,230,0.35); }
+    .nav-search:focus { border-color: var(--gold); }
+
+    /* Mobile nav */
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+      .nav-dropdown { display: none; }
+      .nav-search { width: 140px; }
+    }
+
+    @media (max-width: 1000px) {
+      .dropdown-content {
+        min-width: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <a href="/" class="logo">Shiva<em>Marg</em></a>
+  <div class="nav-links">
+    <!-- SHIV STOTRAM DROPDOWN -->
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn" onclick="toggleDropdown(event, 'shiv-menu')">शिव स्तोत्र</button>
+      <div class="dropdown-content" id="shiv-menu">
+        <div class="dropdown-label">✦ शिव पंचाक्षर स्तोत्र ✦</div>
+        <a href="/shiva-mantras">शिव मंत्र</a>
+        <a href="/shiva-mantras/Shiva-mahamrityunjaya-mantra/">महामृत्युंजय मंत्र</a>
+        <a href="/shiva-mantras/bilvashtakam-बिल्वाष्टकम्/"> बिल्वाष्टकम्</a>
+        <a href="/shiva-mantras/lingashtakam-लिङ्गाष्टकम्/">लिङ्गाष्टकम्</a>
+        <a href="/shiva-mantras/kalabhairav-stotra/">कालभैरव स्तोत्र</a>
+        <a href="/shiva-mantras/shiva-tandav-stotram/">शिव तांडव स्तोत्र</a>
+        
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-label">✦ शिव आरती ✦</div>
+        <a href="/shiva-mantras/Shiv-aarti/">शिव आरती</a>
+        <a href="/shiva-mantras/Shiv-chalisa/">महा आरती</a>
+      </div>
+    </div>
+
+    <!-- SHAKTI DROPDOWN -->
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn" onclick="toggleDropdown(event, 'shakti-menu')">शक्ति</button>
+      <div class="dropdown-content" id="shakti-menu">
+        <div class="dropdown-label">✦ माता दुर्गा ✦</div>
+        <a href="/durga-mantras/">माँ दुर्गा मंत्र</a>
+        <a href="/durga-mantras/Argala-stotram/">अष्टोत्तर शतनाम</a>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-label">✦ देवी काली ✦</div>
+        <a href="/maha-kali-mantra/">माँ काली मंत्र</a>
+        <a href="/durga-mantras/kilaka-stotram/">कालिका स्तोत्र</a>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-label">✦ माता लक्ष्मी ✦</div>
+        <a href="/Lakshmi-mantras/">लक्ष्मी पूजन</a>
+        <a href="/Lakshmi-mantras/mahalakshmi-ashtakam/">लक्ष्मी स्तोत्र</a>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-label">✦ सरस्वती माता ✦</div>
+        <a href="/Sharaswati-mantra/">सरस्वती वंदना</a>
+        <a href="/Sharaswati-mantra/Ya-kundendu-saraswati-vandana.html/">सरस्वती स्तोत्र</a>
+      </div>
+    </div>
+
+    <!-- VISHNU DROPDOWN -->
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn" onclick="toggleDropdown(event, 'vishnu-menu')">विष्णु</button>
+      <div class="dropdown-content" id="vishnu-menu">
+        <div class="dropdown-label">✦ भगवान विष्णु ✦</div>
+        <a href="/bhagvan-vishnu-mantra/">विष्णु मंत्र</a>
+        <a href="/bhagvan-vishnu-mantra/">विष्णु सहस्रनाम</a>
+        <a href="#">विष्णुपदी स्तोत्र</a>
+      </div>
+    </div>
+
+    <!-- RAM-HANUMAN DROPDOWN -->
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn" onclick="toggleDropdown(event, 'ram-menu')">राम-हनुमान</button>
+      <div class="dropdown-content" id="ram-menu">
+        <div class="dropdown-label">✦ श्री राम ✦</div>
+        <a href="/Shri-ram-mantra/">राम मंत्र</a>
+        <a href="/Shri-ram-mantra/ram-raksha-stotram/">राम रक्षा स्तोत्र</a>
+        <a href="/Shri-ram-mantra/shree-ram-chalisha/">राम भजन</a>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-label">✦ हनुमान जी ✦</div>
+        <a href="/hanumanji/">हनुमान मंत्र</a>
+        <a href="/hanumanji/Hanuman-Chalisa/">हनुमान चालीसा</a>
+        <a href="/hanumanji/hey-dukh-bhanjan-maruti-nandan-sun-lo-meri-pukar/">हनुमान स्तोत्र</a>
+      </div>
+    </div>
+
+    <!-- KRISHNA DROPDOWN -->
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn" onclick="toggleDropdown(event, 'krishna-menu')">कृष्ण</button>
+      <div class="dropdown-content" id="krishna-menu">
+        <div class="dropdown-label">✦ श्री कृष्ण ✦</div>
+        <a href="/Krishna-Mahamantras/">कृष्ण महामंत्र</a>
+        <a href="#">कृष्ण भजन</a>
+        <a href="#">विद्यापति गीत</a>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-label">✦ मैथिली गीत ✦</div>
+        <a href="/Vidyapati-Geet-Sangrah/">विद्यापति गीत संग्रह</a>
+        <a href="/Maithili-bhajan-geet/">मैथिली भजन</a>
+      </div>
+    </div>
+
+    <!-- अन्य देव DROPDOWN -->
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn" onclick="toggleDropdown(event, 'other-menu')">अन्य देव</button>
+      <div class="dropdown-content" id="other-menu">
+        <div class="dropdown-label">✦ गणेश जी ✦</div>
+        <a href="/ganesh-mantras/">गणेश मंत्र</a>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-label">✦ सूर्य देव ✦</div>
+        <a href="/surya-dev/">सूर्य मंत्र</a>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-label">✦ कार्तिकेय ✦</div>
+        <a href="/kumar-kartikey-mantras/">कार्तिकेय मंत्र</a>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-label">✦ गायत्री माता ✦</div>
+        <a href="/Gayatri-mantra/">गायत्री मंत्र</a>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-label">✦ चंद्र देव ✦</div>
+        <a href="/Chandra-mantras/">चंद्र मंत्र</a>
+      </div>
+    </div>
+  </div>
+  <input class="nav-search" type="text" placeholder="🔍 खोजें...">
+</nav>
+
+<script>
+  /* === DROPDOWN TOGGLE === */
+  function toggleDropdown(event, menuId) {
+    event.preventDefault();
+    const btn = event.target.closest('.nav-dropdown-btn');
+    const menu = document.getElementById(menuId);
+    const allMenus = document.querySelectorAll('.dropdown-content');
+    const allBtns = document.querySelectorAll('.nav-dropdown-btn');
+    
+    // Close all other menus
+    allMenus.forEach(m => {
+      if (m !== menu) m.classList.remove('active');
+    });
+    allBtns.forEach(b => {
+      if (b !== btn) b.classList.remove('active');
+    });
+    
+    // Toggle current menu
+    menu.classList.toggle('active');
+    btn.classList.toggle('active');
+  }
+
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.nav-dropdown')) {
+      document.querySelectorAll('.dropdown-content').forEach(m => m.classList.remove('active'));
+      document.querySelectorAll('.nav-dropdown-btn').forEach(b => b.classList.remove('active'));
+    }
+  });
+</script>
+
+</body>
+</html>
