@@ -330,7 +330,7 @@
 
   function createCardHTML(g, isFeat) {
     const slug = slugify(g.eng || g.name);
-    const href = `/Maithili-bhajan-geet/${slug}/`;
+    const href = `/Vidyapati-Geet-Sangrah/${slug}/`;
     const cardClass = `card ${isFeat ? 'feat ' : ''}c-${g.category === 'shiv' ? 'shiv' : 'vid'} reveal`;
     return `
       <a href="${href}" class="${cardClass}" data-category="${g.category}" data-name="${(g.name + ' ' + g.eng).toLowerCase()}" data-preview="${g.preview.toLowerCase()}">
