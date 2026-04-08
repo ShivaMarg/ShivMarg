@@ -320,10 +320,20 @@
     document.getElementById('info3').innerText = "अमर";
   }
 
+  // helper: create URL-friendly slug (keeps Devanagari & Latin letters/numbers)
+  function slugify(text) {
+    return (text || '').toString().toLowerCase()
+      .replace(/[^a-z0-9\u0900-\u097F\s-]/g, '') // keep latin, devanagari, digits, spaces, dash
+      .trim()
+      .replace(/\s+/g, '-');
+  }
+
   function createCardHTML(g, isFeat) {
+    const slug = slugify(g.eng || g.name);
+    const href = `/Maithili-bhajan-geet/${slug}/`;
     const cardClass = `card ${isFeat ? 'feat ' : ''}c-${g.category === 'shiv' ? 'shiv' : 'vid'} reveal`;
     return `
-      <div class="${cardClass}" data-category="${g.category}" data-name="${g.name.toLowerCase()} ${g.eng.toLowerCase()}" data-preview="${g.preview.toLowerCase()}">
+      <a href="${href}" class="${cardClass}" data-category="${g.category}" data-name="${(g.name + ' ' + g.eng).toLowerCase()}" data-preview="${g.preview.toLowerCase()}">
         <div class="card-bg"></div>
         <div class="card-inner">
           <span class="card-sym">${g.symbol}</span>
@@ -334,7 +344,7 @@
           <div class="card-count"><span class="count-dot"></span> महाकवि विद्यापति</div>
         </div>
         <div class="card-arrow">→</div>
-      </div>
+      </a>
     `;
   }
 
