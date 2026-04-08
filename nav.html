@@ -3,91 +3,125 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&display=swap" rel="stylesheet">
+  <title>ShivaMarg — भजन, मंत्र और आरती</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
   <style>
     :root {
       --saffron: #FF6B00;
+      --deep-saffron: #CC4400;
       --gold: #D4A017;
       --gold-light: #F2C94C;
+      --gold-pale: #FBE89A;
+      --crimson: #7B0000;
+      --maroon: #3D0000;
       --cream: #FDF5E6;
+      --smoke: #F8EDD8;
       --dark: #0D0500;
+      --dark2: #170800;
+      --dark3: #1F0A00;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--dark); color: var(--cream); font-family: 'Crimson Pro', serif; overflow-x: hidden; }
 
-    /* ── NAV ── */
+    /* ── MODERN NAV ── */
     nav {
       position: sticky;
       top: 0;
       z-index: 200;
-      background: rgba(13,5,0,0.88);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(212,160,23,0.2);
-      padding: 0 5vw;
+      background: rgba(13, 5, 0, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(212, 160, 23, 0.15);
+      padding: 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
       height: 64px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
     }
 
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 24px;
+      gap: 20px;
+    }
+
+    /* LOGO */
     .logo {
       font-family: 'Cinzel Decorative', serif;
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       color: var(--gold);
       text-decoration: none;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
+    .logo::before { content: '🕉️'; font-size: 1.5rem; }
     .logo em { color: var(--saffron); font-style: normal; }
+    .logo:hover { color: var(--gold-light); }
 
-    .nav-links { display: flex; gap: 0; }
-    .nav-links a {
-      color: rgba(253,245,230,0.65);
+    /* NAV CENTER - Desktop Menu */
+    .nav-center {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex: 1;
+      max-width: 800px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0;
+    }
+
+    .nav-links a, .nav-dropdown-btn {
+      color: rgba(253, 245, 230, 0.65);
       text-decoration: none;
       font-family: 'Cinzel', serif;
       font-size: 0.72rem;
       letter-spacing: 2px;
       text-transform: uppercase;
-      padding: 0 16px;
+      padding: 0 14px;
       height: 64px;
       display: flex;
       align-items: center;
       border-bottom: 2px solid transparent;
-      transition: all 0.3s;
+      transition: all 0.3s ease;
+      background: none;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
     }
-    .nav-links a:hover { color: var(--gold-light); border-bottom-color: var(--saffron); }
 
-    /* ── DROPDOWN MENU ── */
+    .nav-links a:hover, .nav-dropdown-btn:hover {
+      color: var(--gold-light);
+      border-bottom-color: var(--saffron);
+    }
+
+    /* DROPDOWN */
     .nav-dropdown {
       position: relative;
       display: inline-block;
     }
 
     .nav-dropdown-btn {
-      background: transparent;
-      border: none;
-      color: rgba(253,245,230,0.65);
-      font-family: 'Cinzel', serif;
-      font-size: 0.72rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 0 16px;
-      height: 64px;
+      padding: 0 14px;
+      gap: 6px;
       display: flex;
       align-items: center;
-      cursor: pointer;
-      transition: all 0.3s;
-      gap: 6px;
-    }
-
-    .nav-dropdown-btn:hover {
-      color: var(--gold-light);
-      border-bottom: 2px solid var(--saffron);
     }
 
     .nav-dropdown-btn::after {
       content: '▼';
-      font-size: 0.5rem;
-      transition: transform 0.3s;
+      font-size: 0.45rem;
+      transition: transform 0.3s ease;
+      margin-left: 4px;
     }
 
     .nav-dropdown-btn.active::after {
@@ -96,35 +130,35 @@
 
     .dropdown-content {
       position: absolute;
-      top: 100%;
+      top: 64px;
       left: 0;
-      background: rgba(13,5,0,0.95);
-      border: 1px solid rgba(212,160,23,0.2);
-      min-width: 300px;
+      background: rgba(13, 5, 0, 0.97);
+      border: 1px solid rgba(212, 160, 23, 0.2);
+      border-top: none;
+      min-width: 320px;
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.4s ease, opacity 0.4s ease;
       opacity: 0;
       z-index: 1000;
-      backdrop-filter: blur(14px);
-      border-radius: 2px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
     }
 
     .dropdown-content.active {
-      max-height: 700px;
+      max-height: 600px;
       opacity: 1;
     }
 
     .dropdown-content a {
       display: block;
-      padding: 14px 20px;
-      color: rgba(253,245,230,0.7);
+      padding: 12px 20px;
+      color: rgba(253, 245, 230, 0.7);
       text-decoration: none;
       font-family: 'Tiro Devanagari Sanskrit', serif;
       font-size: 0.95rem;
-      transition: all 0.2s;
-      border-bottom: 1px solid rgba(212,160,23,0.1);
+      transition: all 0.2s ease;
+      border-bottom: 1px solid rgba(212, 160, 23, 0.08);
     }
 
     .dropdown-content a:last-child {
@@ -132,172 +166,525 @@
     }
 
     .dropdown-content a:hover {
-      background: rgba(212,160,23,0.1);
+      background: rgba(212, 160, 23, 0.12);
       color: var(--gold-light);
       padding-left: 26px;
     }
 
     .dropdown-divider {
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(212,160,23,0.2), transparent);
-      margin: 8px 0;
+      background: linear-gradient(90deg, transparent, rgba(212, 160, 23, 0.15), transparent);
+      margin: 6px 0;
     }
 
     .dropdown-label {
-      padding: 12px 20px;
+      padding: 10px 20px;
       font-family: 'Cinzel', serif;
-      font-size: 0.68rem;
-      letter-spacing: 5px;
+      font-size: 0.63rem;
+      letter-spacing: 4px;
       color: var(--saffron);
       text-transform: uppercase;
       font-weight: 600;
     }
 
+    /* NAV RIGHT - Search + Auth */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
     .nav-search {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(212,160,23,0.25);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(212, 160, 23, 0.22);
       color: var(--cream);
-      padding: 7px 16px;
+      padding: 8px 14px;
       font-family: 'Cinzel', serif;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 1px;
       outline: none;
-      border-radius: 1px;
-      width: 180px;
-      transition: border-color 0.3s;
-    }
-    .nav-search::placeholder { color: rgba(253,245,230,0.35); }
-    .nav-search:focus { border-color: var(--gold); }
-
-    /* Mobile nav */
-    @media (max-width: 700px) {
-      .nav-links { display: none; }
-      .nav-dropdown { display: none; }
-      .nav-search { width: 140px; }
+      border-radius: 3px;
+      width: 160px;
+      transition: all 0.3s ease;
     }
 
+    .nav-search::placeholder { color: rgba(253, 245, 230, 0.3); }
+    .nav-search:focus { 
+      border-color: var(--gold);
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 12px rgba(212, 160, 23, 0.2);
+    }
+
+    /* AUTH SECTION */
+    .nav-auth {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .auth-btn {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border: 1px solid rgba(212, 160, 23, 0.35);
+      color: rgba(253, 245, 230, 0.7);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+
+    .auth-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+      background: rgba(212, 160, 23, 0.08);
+    }
+
+    .auth-btn.primary {
+      background: linear-gradient(135deg, rgba(255, 107, 0, 0.15), rgba(212, 160, 23, 0.1));
+      border-color: var(--saffron);
+      color: var(--gold-light);
+    }
+
+    .auth-btn.primary:hover {
+      background: linear-gradient(135deg, rgba(255, 107, 0, 0.25), rgba(212, 160, 23, 0.2));
+      box-shadow: 0 0 16px rgba(255, 107, 0, 0.2);
+    }
+
+    /* USER CHIP */
+    .user-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(212, 160, 23, 0.08);
+      border: 1px solid rgba(212, 160, 23, 0.25);
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .user-chip:hover {
+      background: rgba(212, 160, 23, 0.15);
+      border-color: var(--gold);
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      color: #fff;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--saffron), var(--gold));
+    }
+
+    .user-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 1px;
+      color: var(--gold-light);
+      max-width: 120px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .user-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: rgba(13, 5, 0, 0.97);
+      border: 1px solid rgba(212, 160, 23, 0.25);
+      border-radius: 4px;
+      min-width: 180px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+      opacity: 0;
+      z-index: 1001;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(12px);
+    }
+
+    .user-menu.active {
+      max-height: 250px;
+      opacity: 1;
+    }
+
+    .user-menu a, .user-menu button {
+      display: block;
+      width: 100%;
+      padding: 12px 16px;
+      color: rgba(253, 245, 230, 0.7);
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 1px;
+      border: none;
+      background: none;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid rgba(212, 160, 23, 0.08);
+    }
+
+    .user-menu a:last-child, .user-menu button:last-child {
+      border-bottom: none;
+    }
+
+    .user-menu a:hover, .user-menu button:hover {
+      background: rgba(212, 160, 23, 0.12);
+      color: var(--gold-light);
+      padding-left: 20px;
+    }
+
+    .logout-btn {
+      color: #FF6B6B !important;
+    }
+
+    .logout-btn:hover {
+      background: rgba(255, 107, 107, 0.1) !important;
+    }
+
+    /* HAMBURGER MENU - Mobile */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 201;
+    }
+
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      background: var(--gold);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    /* MOBILE MENU */
+    .mobile-menu {
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: rgba(13, 5, 0, 0.98);
+      border-bottom: 1px solid rgba(212, 160, 23, 0.15);
+      max-height: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      transition: max-height 0.4s ease;
+      z-index: 199;
+      backdrop-filter: blur(12px);
+    }
+
+    .mobile-menu.active {
+      max-height: 100vh;
+    }
+
+    .mobile-menu-content {
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .mobile-menu-item {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(212, 160, 23, 0.08);
+      color: rgba(253, 245, 230, 0.65);
+      font-family: 'Tiro Devanagari Sanskrit', serif;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .mobile-menu-item:hover {
+      color: var(--gold-light);
+      padding-left: 8px;
+    }
+
+    .mobile-menu-item.label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 3px;
+      color: var(--saffron);
+      text-transform: uppercase;
+      margin-top: 12px;
+      cursor: default;
+    }
+
+    .mobile-menu-item.label:hover {
+      color: var(--saffron);
+      padding-left: 0;
+    }
+
+    .mobile-menu-divider {
+      height: 1px;
+      background: rgba(212, 160, 23, 0.1);
+      margin: 12px 0;
+    }
+
+    .mobile-auth-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(212, 160, 23, 0.15);
+    }
+
+    .mobile-auth-buttons .auth-btn {
+      width: 100%;
+      text-align: center;
+    }
+
+    /* RESPONSIVE */
     @media (max-width: 1000px) {
-      .dropdown-content {
-        min-width: 250px;
+      .nav-search {
+        width: 120px;
+        font-size: 0.65rem;
       }
+
+      .dropdown-content {
+        min-width: 280px;
+      }
+
+      .nav-links a, .nav-dropdown-btn {
+        padding: 0 10px;
+        font-size: 0.65rem;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .nav-container {
+        padding: 0 16px;
+      }
+
+      .nav-center {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-search {
+        display: none;
+      }
+
+      .logo {
+        font-size: 1.15rem;
+      }
+
+      .auth-btn {
+        padding: 6px 12px;
+        font-size: 0.62rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        height: 56px;
+      }
+
+      .mobile-menu {
+        top: 56px;
+      }
+
+      .logo {
+        font-size: 1rem;
+        gap: 4px;
+      }
+
+      .logo::before {
+        font-size: 1.2rem;
+      }
+
+      .avatar {
+        width: 28px;
+        height: 28px;
+        font-size: 0.7rem;
+      }
+
+      .user-name {
+        max-width: 80px;
+        font-size: 0.6rem;
+      }
+
+      .auth-btn {
+        padding: 5px 10px;
+        font-size: 0.58rem;
+      }
+    }
+
+    /* DEMO CONTENT */
+    .demo-content {
+      padding: 60px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      color: var(--cream);
+    }
+
+    .demo-content h1 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 3rem;
+      color: var(--gold-light);
+      margin-bottom: 20px;
+    }
+
+    .demo-content p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
 
-<!-- Nav -->
+<!-- MODERN NAVBAR -->
 <nav>
-  <a href="/" class="logo">Shiva<em>Marg</em></a>
-  <div class="nav-links">
-    <!-- SHIV STOTRAM DROPDOWN -->
-    <div class="nav-dropdown">
-      <button class="nav-dropdown-btn" onclick="toggleDropdown(event, 'shiv-menu')">शिव स्तोत्र</button>
-      <div class="dropdown-content" id="shiv-menu">
-        <div class="dropdown-label">✦ शिव पंचाक्षर स्तोत्र ✦</div>
-        <a href="/shiva-mantras">शिव मंत्र</a>
-        <a href="/shiva-mantras/Shiva-mahamrityunjaya-mantra/">महामृत्युंजय मंत्र</a>
-        <a href="/shiva-mantras/bilvashtakam-बिल्वाष्टकम्/"> बिल्वाष्टकम्</a>
-        <a href="/shiva-mantras/lingashtakam-लिङ्गाष्टकम्/">लिङ्गाष्टकम्</a>
-        <a href="/shiva-mantras/kalabhairav-stotra/">कालभैरव स्तोत्र</a>
-        <a href="/shiva-mantras/shiva-tandav-stotram/">शिव तांडव स्तोत्र</a>
-        
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-label">✦ शिव आरती ✦</div>
-        <a href="/shiva-mantras/Shiv-aarti/">शिव आरती</a>
-        <a href="/shiva-mantras/Shiv-chalisa/">महा आरती</a>
+  <div class="nav-container">
+    <!-- LOGO -->
+    <a href="/" class="logo">Shiva<em>Marg</em></a>
+
+    <!-- HAMBURGER (Mobile) -->
+    <button class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- CENTER MENU (Desktop) -->
+    <div class="nav-center">
+      <div class="nav-links">
+        <!-- शिव स्तोत्र DROPDOWN -->
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-btn" onclick="toggleDropdown(event, 'shiv-menu')">शिव स्तोत्र</button>
+          <div class="dropdown-content" id="shiv-menu">
+            <div class="dropdown-label">✦ शिव पंचाक्षर स्तोत्र ✦</div>
+            <a href="/shiva-mantras">शिव मंत्र</a>
+            <a href="/shiva-mantras/Shiva-mahamrityunjaya-mantra/">महामृत्युंजय मंत्र</a>
+            <a href="#">निर्वाणपटकम्</a>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-label">✦ शिव आरती ✦</div>
+            <a href="#">शिव आरती</a>
+            <a href="#">महा आरती</a>
+          </div>
+        </div>
+
+        <!-- शक्ति DROPDOWN -->
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-btn" onclick="toggleDropdown(event, 'shakti-menu')">शक्ति</button>
+          <div class="dropdown-content" id="shakti-menu">
+            <div class="dropdown-label">✦ माता दुर्गा ✦</div>
+            <a href="/durga-mantras/">माँ दुर्गा मंत्र</a>
+            <a href="#">अष्टोत्तर शतनाम</a>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-label">✦ देवी काली ✦</div>
+            <a href="/maha-kali-mantra/">माँ काली मंत्र</a>
+            <a href="#">कालिका स्तोत्र</a>
+          </div>
+        </div>
+
+        <!-- विष्णु DROPDOWN -->
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-btn" onclick="toggleDropdown(event, 'vishnu-menu')">विष्णु</button>
+          <div class="dropdown-content" id="vishnu-menu">
+            <div class="dropdown-label">✦ भगवान विष्णु ✦</div>
+            <a href="/bhagvan-vishnu-mantra/">विष्णु मंत्र</a>
+            <a href="#">विष्णु सहस्रनाम</a>
+          </div>
+        </div>
+
+        <!-- राम-हनुमान DROPDOWN -->
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-btn" onclick="toggleDropdown(event, 'ram-menu')">राम-हनुमान</button>
+          <div class="dropdown-content" id="ram-menu">
+            <div class="dropdown-label">✦ श्री राम ✦</div>
+            <a href="/Shri-ram-mantra/">राम मंत्र</a>
+            <a href="#">राम रक्षा स्तोत्र</a>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-label">✦ हनुमान जी ✦</div>
+            <a href="/hanumanji/">हनुमान मंत्र</a>
+            <a href="#">हनुमान चालीसा</a>
+          </div>
+        </div>
+
+        <!-- कृष्ण DROPDOWN -->
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-btn" onclick="toggleDropdown(event, 'krishna-menu')">कृष्ण</button>
+          <div class="dropdown-content" id="krishna-menu">
+            <div class="dropdown-label">✦ श्री कृष्ण ✦</div>
+            <a href="/Krishna-Mahamantras/">कृष्ण महामंत्र</a>
+            <a href="#">कृष्ण भजन</a>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-label">✦ मैथिली गीत ✦</div>
+            <a href="/Vidyapati-Geet-Sangrah/">विद्यापति गीत संग्रह</a>
+          </div>
+        </div>
+
+        <!-- अन्य देव DROPDOWN -->
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-btn" onclick="toggleDropdown(event, 'other-menu')">अन्य देव</button>
+          <div class="dropdown-content" id="other-menu">
+            <div class="dropdown-label">✦ गणेश जी ✦</div>
+            <a href="/ganesh-mantras/">गणेश मंत्र</a>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-label">✦ सूर्य देव ✦</div>
+            <a href="/surya-dev/">सूर्य मंत्र</a>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- SHAKTI DROPDOWN -->
-    <div class="nav-dropdown">
-      <button class="nav-dropdown-btn" onclick="toggleDropdown(event, 'shakti-menu')">शक्ति</button>
-      <div class="dropdown-content" id="shakti-menu">
-        <div class="dropdown-label">✦ माता दुर्गा ✦</div>
-        <a href="/durga-mantras/">माँ दुर्गा मंत्र</a>
-        <a href="/durga-mantras/Argala-stotram/">अष्टोत्तर शतनाम</a>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-label">✦ देवी काली ✦</div>
-        <a href="/maha-kali-mantra/">माँ काली मंत्र</a>
-        <a href="/durga-mantras/kilaka-stotram/">कालिका स्तोत्र</a>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-label">✦ माता लक्ष्मी ✦</div>
-        <a href="/Lakshmi-mantras/">लक्ष्मी पूजन</a>
-        <a href="/Lakshmi-mantras/mahalakshmi-ashtakam/">लक्ष्मी स्तोत्र</a>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-label">✦ सरस्वती माता ✦</div>
-        <a href="/Sharaswati-mantra/">सरस्वती वंदना</a>
-        <a href="/Sharaswati-mantra/Ya-kundendu-saraswati-vandana.html/">सरस्वती स्तोत्र</a>
-      </div>
-    </div>
-
-    <!-- VISHNU DROPDOWN -->
-    <div class="nav-dropdown">
-      <button class="nav-dropdown-btn" onclick="toggleDropdown(event, 'vishnu-menu')">विष्णु</button>
-      <div class="dropdown-content" id="vishnu-menu">
-        <div class="dropdown-label">✦ भगवान विष्णु ✦</div>
-        <a href="/bhagvan-vishnu-mantra/">विष्णु मंत्र</a>
-        <a href="/bhagvan-vishnu-mantra/">विष्णु सहस्रनाम</a>
-        <a href="#">विष्णुपदी स्तोत्र</a>
-      </div>
-    </div>
-
-    <!-- RAM-HANUMAN DROPDOWN -->
-    <div class="nav-dropdown">
-      <button class="nav-dropdown-btn" onclick="toggleDropdown(event, 'ram-menu')">राम-हनुमान</button>
-      <div class="dropdown-content" id="ram-menu">
-        <div class="dropdown-label">✦ श्री राम ✦</div>
-        <a href="/Shri-ram-mantra/">राम मंत्र</a>
-        <a href="/Shri-ram-mantra/ram-raksha-stotram/">राम रक्षा स्तोत्र</a>
-        <a href="/Shri-ram-mantra/shree-ram-chalisha/">राम भजन</a>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-label">✦ हनुमान जी ✦</div>
-        <a href="/hanumanji/">हनुमान मंत्र</a>
-        <a href="/hanumanji/Hanuman-Chalisa/">हनुमान चालीसा</a>
-        <a href="/hanumanji/hey-dukh-bhanjan-maruti-nandan-sun-lo-meri-pukar/">हनुमान स्तोत्र</a>
-      </div>
-    </div>
-
-    <!-- KRISHNA DROPDOWN -->
-    <div class="nav-dropdown">
-      <button class="nav-dropdown-btn" onclick="toggleDropdown(event, 'krishna-menu')">कृष्ण</button>
-      <div class="dropdown-content" id="krishna-menu">
-        <div class="dropdown-label">✦ श्री कृष्ण ✦</div>
-        <a href="/Krishna-Mahamantras/">कृष्ण महामंत्र</a>
-        <a href="#">कृष्ण भजन</a>
-        <a href="#">विद्यापति गीत</a>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-label">✦ मैथिली गीत ✦</div>
-        <a href="/Vidyapati-Geet-Sangrah/">विद्यापति गीत संग्रह</a>
-        <a href="/Maithili-bhajan-geet/">मैथिली भजन</a>
-      </div>
-    </div>
-
-    <!-- अन्य देव DROPDOWN -->
-    <div class="nav-dropdown">
-      <button class="nav-dropdown-btn" onclick="toggleDropdown(event, 'other-menu')">अन्य देव</button>
-      <div class="dropdown-content" id="other-menu">
-        <div class="dropdown-label">✦ गणेश जी ✦</div>
-        <a href="/ganesh-mantras/">गणेश मंत्र</a>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-label">✦ सूर्य देव ✦</div>
-        <a href="/surya-dev/">सूर्य मंत्र</a>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-label">✦ कार्तिकेय ✦</div>
-        <a href="/kumar-kartikey-mantras/">कार्तिकेय मंत्र</a>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-label">✦ गायत्री माता ✦</div>
-        <a href="/Gayatri-mantra/">गायत्री मंत्र</a>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-label">✦ चंद्र देव ✦</div>
-        <a href="/Chandra-mantras/">चंद्र मंत्र</a>
+    <!-- RIGHT SECTION (Search + Auth) -->
+    <div class="nav-right">
+      <input class="nav-search" type="text" placeholder="🔍 खोजें...">
+      
+      <div class="nav-auth">
+        <div id="auth-widget"></div>
       </div>
     </div>
   </div>
-  <input class="nav-search" type="text" placeholder="🔍 खोजें...">
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu-content" id="mobile-menu-content">
+      <!-- Populated by JS -->
+    </div>
+  </div>
 </nav>
 
+
+
 <script>
-  /* === DROPDOWN TOGGLE === */
+  /* ─── DROPDOWN LOGIC ─── */
   function toggleDropdown(event, menuId) {
     event.preventDefault();
     const btn = event.target.closest('.nav-dropdown-btn');
@@ -305,7 +692,6 @@
     const allMenus = document.querySelectorAll('.dropdown-content');
     const allBtns = document.querySelectorAll('.nav-dropdown-btn');
     
-    // Close all other menus
     allMenus.forEach(m => {
       if (m !== menu) m.classList.remove('active');
     });
@@ -313,18 +699,138 @@
       if (b !== btn) b.classList.remove('active');
     });
     
-    // Toggle current menu
     menu.classList.toggle('active');
     btn.classList.toggle('active');
   }
 
-  // Close dropdowns when clicking outside
+  // Close dropdowns on outside click
   document.addEventListener('click', function(e) {
     if (!e.target.closest('.nav-dropdown')) {
       document.querySelectorAll('.dropdown-content').forEach(m => m.classList.remove('active'));
       document.querySelectorAll('.nav-dropdown-btn').forEach(b => b.classList.remove('active'));
     }
   });
+
+  /* ─── MOBILE MENU ─── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileMenuContent = document.getElementById('mobile-menu-content');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+  });
+
+  // Close mobile menu when clicking a link
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('nav')) {
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('active');
+    }
+  });
+
+  // Populate mobile menu
+  function populateMobileMenu() {
+    const menuData = [
+      { label: '✦ शिव स्तोत्र ✦', items: [
+        { text: 'शिव मंत्र', link: '/shiva-mantras' },
+        { text: 'महामृत्युंजय मंत्र', link: '/shiva-mantras/Shiva-mahamrityunjaya-mantra/' },
+        { text: 'शिव आरती', link: '#' }
+      ]},
+      { label: '✦ शक्ति ✦', items: [
+        { text: 'माँ दुर्गा मंत्र', link: '/durga-mantras/' },
+        { text: 'माँ काली मंत्र', link: '/maha-kali-mantra/' }
+      ]},
+      { label: '✦ विष्णु ✦', items: [
+        { text: 'विष्णु मंत्र', link: '/bhagvan-vishnu-mantra/' },
+        { text: 'कृष्ण महामंत्र', link: '/Krishna-Mahamantras/' }
+      ]},
+      { label: '✦ राम-हनुमान ✦', items: [
+        { text: 'राम मंत्र', link: '/Shri-ram-mantra/' },
+        { text: 'हनुमान मंत्र', link: '/hanumanji/' }
+      ]}
+    ];
+
+    let html = '';
+    menuData.forEach(section => {
+      html += `<div class="mobile-menu-item label">${section.label}</div>`;
+      section.items.forEach(item => {
+        html += `<a href="${item.link}" class="mobile-menu-item">${item.text}</a>`;
+      });
+      html += '<div class="mobile-menu-divider"></div>';
+    });
+
+    // Add auth section for mobile
+    html += '<div class="mobile-auth-buttons" id="mobile-auth-buttons"></div>';
+
+    mobileMenuContent.innerHTML = html;
+  }
+
+  populateMobileMenu();
+
+  /* ─── AUTH WIDGET ─── */
+  function renderAuthWidget() {
+    const authWidget = document.getElementById('auth-widget');
+    const user = window.SmAuth?.getUser?.();
+
+    if (user) {
+      const avatarChar = (user.avatar && user.avatar.length === 1) ? user.avatar : user.username[0];
+      const avatarBg = window.SmAuth?.getAvatarBg?.(avatarChar) || 'linear-gradient(135deg, #FF6B00, #D4A017)';
+
+      authWidget.innerHTML = `
+        <div class="user-chip" onclick="toggleUserMenu()">
+          <div class="avatar" style="background: ${avatarBg}">${avatarChar.toUpperCase()}</div>
+          <span class="user-name">${user.username}</span>
+          <div class="user-menu" id="user-menu">
+            <a href="/profile.html">👤 प्रोफाइल</a>
+            <a href="/settings.html">⚙️ सेटिंग्स</a>
+            <a href="/favorites.html">❤️ पसंद</a>
+            <button class="logout-btn" onclick="window.SmAuth.logout()">🚪 लॉगआउट</button>
+          </div>
+        </div>`;
+
+      // Update mobile menu
+      document.getElementById('mobile-auth-buttons').innerHTML = `
+        <a href="/profile.html" class="auth-btn">👤 प्रोफाइल</a>
+        <button class="auth-btn logout-btn" onclick="window.SmAuth.logout()">लॉगआउट</button>`;
+    } else {
+      authWidget.innerHTML = `
+        <button class="auth-btn" onclick="window.SmAuth._switchTab('register');window.SmAuth._openModal()">खाता बनाएँ</button>
+        <button class="auth-btn primary" onclick="window.SmAuth._switchTab('login');window.SmAuth._openModal()">लॉगिन</button>`;
+
+      // Update mobile menu
+      document.getElementById('mobile-auth-buttons').innerHTML = `
+        <button class="auth-btn" onclick="window.SmAuth._switchTab('register');window.SmAuth._openModal()">खाता बनाएँ</button>
+        <button class="auth-btn primary" onclick="window.SmAuth._switchTab('login');window.SmAuth._openModal()">लॉगिन</button>`;
+    }
+  }
+
+  function toggleUserMenu() {
+    const userMenu = document.getElementById('user-menu');
+    if (userMenu) {
+      userMenu.classList.toggle('active');
+    }
+  }
+
+  // Close user menu on outside click
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.user-chip')) {
+      const userMenu = document.getElementById('user-menu');
+      if (userMenu) userMenu.classList.remove('active');
+    }
+  });
+
+  // Listen for auth changes
+  document.addEventListener('sm-auth-changed', renderAuthWidget);
+
+  // Initial render
+  renderAuthWidget();
+</script>
+
+<!-- AUTH SYSTEM -->
+
+<script>
+  SmAuth.init({ apiBase: 'https://shivamargbackend.onrender.com' });
 </script>
 
 </body>
