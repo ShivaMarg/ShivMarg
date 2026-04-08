@@ -185,16 +185,7 @@
 <div id="particles"></div>
 
 <header>
-  <div class="site-nav">
-    <a href="/" class="logo">Shiva<em>Marg</em></a>
-    <nav>
-      <a href="/kali-mantras/">काली मंत्र</a>
-      <a href="#">स्तोत्र</a>
-      <a href="#">महाविद्या</a>
-      <a href="#">पुराण</a>
-    </nav>
-  </div>
-  <div class="breadcrumb">मुख्य पृष्ठ <span>💀</span> काली मंत्र <span>💀</span> महाकाली स्तोत्र</div>
+ <div id="nav-container"></div>
 </header>
 
 <!-- HERO -->
@@ -497,7 +488,7 @@
     </div>
   </div>
 </div>
-
+<div id="sm-comments" data-page-id="kali-stotram"></div>
 <footer>
   <span class="foot-sym">💀</span>
   <div class="foot-txt">॥ नमस्ते सते सर्वलोकाश्रये ॥ जय महाकाली ॥ © ShivaMarg 2026 || saurabhjha.live</div>
@@ -517,5 +508,20 @@
   function addJapa(n){japaTotal+=n;document.getElementById('japaCount').textContent=japaTotal;const s=document.getElementById('japaStatus');if(japaTotal>=11)s.textContent='🏆 ११ पाठ पूर्ण! जय महाकाली!';else s.textContent=`${11-japaTotal} पाठ शेष`;}
   function resetJapa(){japaTotal=0;document.getElementById('japaCount').textContent='0';document.getElementById('japaStatus').textContent='लक्ष्य: ११ पाठ';}
 </script>
+<script>
+    fetch('/nav.html')
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById('nav-container').innerHTML = html;
+        // Re-run scripts if needed
+        const scripts = document.getElementById('nav-container').querySelectorAll('script');
+        scripts.forEach(s => eval(s.textContent));
+      });
+  </script>
+
+  <script src="/js/auth2.js">
+  </script>
+<script src="/js/s-comments.js"></script>
+<script src="/js/search.js"></script>
 </body>
 </html>
