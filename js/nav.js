@@ -194,6 +194,10 @@
 
     #sm-navbar .nav-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
 
+    #sm-navbar .nav-right .auth-btn {
+      display: inline-block;
+    }
+
     #sm-navbar .nav-search {
       background: rgba(255,255,255,0.06); border: 1px solid rgba(212,160,23,0.22);
       color: var(--cream); padding: 8px 14px;
@@ -294,7 +298,12 @@
       #sm-navbar .hamburger  { display: flex; }
       #sm-navbar .nav-search { display: none; }
       #sm-navbar .logo { font-size: 1.15rem; }
-      #sm-navbar .auth-btn { padding: 6px 12px; font-size: 0.62rem; }
+      
+      /* Hide auth buttons from top-right on mobile */
+      #sm-navbar .nav-right .auth-btn { display: none; }
+      
+      /* Show user chip normally, but hide if we add hamburger mode later */
+      #sm-navbar .user-chip { display: flex; }
     }
     @media (max-width: 480px) {
       #sm-navbar { height: 56px; }
@@ -368,8 +377,9 @@
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileMenuContent = document.getElementById('mobile-menu-content');
 
-    // Build mobile menu
+    // Build mobile menu - auth section will be added by renderNavAuth()
     mobileMenuContent.innerHTML = `
+        <div id="mobile-auth-section"></div>
       <div class="mobile-menu-item label">✦ शिव स्तोत्र ✦</div>
       <a href="/shiva-mantras" class="mobile-menu-item">शिव मंत्र</a>
       <a href="/shiva-mantras/Shiva-mahamrityunjaya-mantra/" class="mobile-menu-item">महामृत्युंजय मंत्र</a>
@@ -388,7 +398,8 @@
       <div class="mobile-menu-divider"></div>
       <div class="mobile-menu-item label">✦ मैथिली ✦</div>
       <a href="/Vidyapati-Geet-Sangrah/" class="mobile-menu-item">विद्यापति गीत संग्रह</a>
-      <div class="mobile-auth-section" id="mobile-auth-section"></div>`;
+      <div class="mobile-menu-divider"></div>
+     `;
 
     hamburger.addEventListener('click', () => {
       hamburger.classList.toggle('active');
@@ -433,6 +444,7 @@
       const avatarChar = (user.avatar && user.avatar.length === 1) ? user.avatar : user.username[0];
       const avatarBg = window.SmAuth.getAvatarBg(avatarChar);
 
+      // Desktop: Show user chip in top-right
       widget.innerHTML = `
         <div class="user-chip" id="user-chip" onclick="event.stopPropagation();document.getElementById('user-menu').classList.toggle('active')">
           <div class="avatar" style="background:${avatarBg}">${avatarChar.toUpperCase()}</div>
@@ -445,20 +457,30 @@
           </div>
         </div>`;
 
+      // Mobile: Show options in hamburger menu
       if (mobileAuth) {
         mobileAuth.innerHTML = `
-          <a href="/profile.html" class="auth-btn">👤 प्रोफाइल</a>
-          <button class="auth-btn logout-btn" onclick="window.SmAuth.logout()">🚪 लॉगआउट</button>`;
+          <div class="mobile-menu-divider"></div>
+          <div class="mobile-menu-item label">✦ खाता ✦</div>
+          <a href="/profile.html" class="mobile-menu-item">👤 ${user.username}</a>
+          <a href="/profile.html" class="mobile-menu-item">👤 प्रोफाइल</a>
+          <a href="/settings.html" class="mobile-menu-item">⚙️ सेटिंग्स</a>
+          <a href="/favorites.html" class="mobile-menu-item">❤️ पसंद</a>
+          <button class="mobile-menu-item logout-btn" onclick="window.SmAuth.logout()" style="color: #FF6B6B; padding: 12px 0; border: none; background: none; text-align: left; cursor: pointer; font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 0.95rem; width: 100%;">🚪 लॉगआउट</button>`;
       }
     } else {
+      // Not logged in: Show login/register buttons
       widget.innerHTML = `
         <button class="auth-btn" onclick="window.SmAuth._switchTab('register');window.SmAuth._openModal()">खाता बनाएँ</button>
         <button class="auth-btn primary" onclick="window.SmAuth._switchTab('login');window.SmAuth._openModal()">लॉगिन</button>`;
 
+      // Mobile: Show in hamburger menu instead
       if (mobileAuth) {
         mobileAuth.innerHTML = `
-          <button class="auth-btn" onclick="window.SmAuth._switchTab('register');window.SmAuth._openModal()">खाता बनाएँ</button>
-          <button class="auth-btn primary" onclick="window.SmAuth._switchTab('login');window.SmAuth._openModal()">लॉगिन</button>`;
+          <div class="mobile-menu-divider"></div>
+          <div class="mobile-menu-item label">✦ खाता ✦</div>
+          <button class="mobile-menu-item" onclick="window.SmAuth._switchTab('register');window.SmAuth._openModal()" style="color: #FDF5E6; padding: 12px 0; border: none; background: none; text-align: left; cursor: pointer; font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 0.95rem; width: 100%;">🌸 खाता बनाएँ</button>
+          <button class="mobile-menu-item" onclick="window.SmAuth._switchTab('login');window.SmAuth._openModal()" style="color: #F2C94C; padding: 12px 0; border: none; background: none; text-align: left; cursor: pointer; font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 0.95rem; width: 100%;">🔱 लॉगिन करें</button>`;
       }
     }
 
