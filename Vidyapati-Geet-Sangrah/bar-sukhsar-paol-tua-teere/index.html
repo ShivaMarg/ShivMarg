@@ -35,6 +35,16 @@
     footer{margin-top:22px;color:rgba(255,248,242,0.36);text-align:center;font-size:0.85rem}
     a.rel{color:#6fb3ff;text-decoration:none}
   </style>
+  <script>
+    fetch('/nav.html')
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById('nav-container').innerHTML = html;
+        // Re-run scripts if needed
+        const scripts = document.getElementById('nav-container').querySelectorAll('script');
+        scripts.forEach(s => eval(s.textContent));
+      });
+  </script>
 </head>
 <body>
 
@@ -120,7 +130,7 @@
   </div>
 
 
-<script>
+<!-- <script>
     fetch('/nav.html')
       .then(r => r.text())
       .then(html => {
@@ -129,7 +139,7 @@
         const scripts = document.getElementById('nav-container').querySelectorAll('script');
         scripts.forEach(s => eval(s.textContent));
       });
-  </script>
+  </script> -->
 
    <script src="/js/auth2.js">
   </script>
