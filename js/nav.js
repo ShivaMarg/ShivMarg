@@ -295,7 +295,7 @@
     }
     @media (max-width: 800px) {
       #sm-navbar .nav-center { display: none; }
-      #sm-navbar .hamburger  { display: flex; }
+      #sm-navbar .hamburger  { display: flex; margin-left: auto; }
       #sm-navbar .nav-search { display: none; }
       #sm-navbar .logo { font-size: 1.15rem; }
       
