@@ -185,13 +185,18 @@
     .foot-txt { font-family:'Cinzel',serif; font-size:0.63rem; letter-spacing:4px; color:rgba(240,240,255,0.2); text-transform:uppercase; }
     .reveal { opacity:0; transform:translateY(24px); transition:opacity .75s ease, transform .75s ease; }
     .reveal.on { opacity:1; transform:none; }
+    .orb-logo {
+        width: 90%;          /* adjust size */
+        height: 60%;
+        object-fit: contain; /* keeps aspect ratio */
+}
   </style>
 </head>
 <body>
 <div class="bg-fixed"></div><div class="stone-bg"></div><div class="mandala-bg"></div><div class="moon-glow"></div><div id="cosmos"></div>
-<header><div class="site-nav"><a href="/" class="logo">Shiva<em>Marg</em></a><nav><a href="#">शिव मंत्र</a><a href="#">स्तोत्र</a><a href="#">आरती</a><a href="#">मैथिली</a></nav></div><div class="breadcrumb">मुख्य पृष्ठ <span>☽</span> विद्यापति गीत <span>☽</span> बर अजगुत देखल तोर अंगना</div></header>
 
-<div class="hero"><div class="orb-wrap"><div class="orb-ring"></div><div class="orb-ring"></div><div class="orb-ring"></div><div class="orb"><span class="orb-sym">🌸</span></div></div>
+
+<div class="hero"><div class="orb-wrap"><div class="orb-ring"></div><div class="orb-ring"></div><div class="orb-ring"></div><div class="orb"><span class="orb-sym"><img src="/images/ShivMarg.png" alt="logo" class="orb-logo"></span></div></div>
 <div class="hero-tag">✦ विद्यापति पदावली • नचारी गीत ✦</div>
 <h1>Bar Ajgut Dekhal Tor Angana</h1><div class="hero-deva">बर अजगुत देखल तोर अंगना</div><div class="hero-orn">✦ ✦ ✦</div>
 <div class="hero-mantra">बर अजगुत देखल तोर अंगना,<br>गौरी रानी मैया...</div>
@@ -246,7 +251,8 @@
     <div class="sig-item"><div class="sig-icon">🎶</div><div class="sig-text"><strong>लोकप्रियता</strong>मैथिली समारोहों में गाया जाता है।</div></div></div></div>
   </div></div>
 
-  <div class="sidebar"><div class="widget reveal"><div class="widget-title">✦ श्रवण माला ✦</div><div class="mala-wrap"><span class="mala-count" id="japCount">0</span><span class="mala-sub">श्रद्धा बिंदु</span><div class="mala-progress" id="malaProgress"></div><div><button class="mala-btn" onclick="countJap()">+ १ श्रवण</button><button class="mala-btn" onclick="resetJap()">रीसेट</button></div><div style="font-size:0.6rem; text-align:center; margin-top:8px;" id="malaStatus">— गीत सुनने का संकल्प —</div></div></div>
+  <div class="sidebar">
+    <!-- <div class="widget reveal"><div class="widget-title">✦ श्रवण माला ✦</div><div class="mala-wrap"><span class="mala-count" id="japCount">0</span><span class="mala-sub">श्रद्धा बिंदु</span><div class="mala-progress" id="malaProgress"></div><div><button class="mala-btn" onclick="countJap()">+ १ श्रवण</button><button class="mala-btn" onclick="resetJap()">रीसेट</button></div><div style="font-size:0.6rem; text-align:center; margin-top:8px;" id="malaStatus">— गीत सुनने का संकल्प —</div></div></div> -->
     <div class="widget reveal"><div class="widget-title">✦ त्वरित नेविगेशन ✦</div><a href="#mantra" style="display:block; background:rgba(55,48,163,0.1); padding:8px 12px; margin:4px 0; color:var(--soft); text-decoration:none;">☽ सम्पूर्ण गीत</a><a href="#vidhi" style="display:block; background:rgba(55,48,163,0.1); padding:8px 12px; margin:4px 0; color:var(--soft); text-decoration:none;">☽ गीत की महिमा</a></div>
     <div class="widget reveal"><div class="widget-title">✦ श्रवण लाभ ✦</div><div class="benefit-grid"><div class="benefit-item"><span class="benefit-icon">🧘</span><div class="benefit-text">मानसिक शांति, भक्ति रस का आनंद</div></div><div class="benefit-item"><span class="benefit-icon">💖</span><div class="benefit-text">शिव-पार्वती की कृपा, वैवाहिक सुख</div></div><div class="benefit-item"><span class="benefit-icon">🌙</span><div class="benefit-text">संगीतमय ध्यान, सकारात्मक ऊर्जा</div></div><div class="benefit-item"><span class="benefit-icon">📜</span><div class="benefit-text">मैथिली संस्कृति का गौरव, भाषा प्रेम</div></div></div></div>
     <div class="widget reveal"><div class="widget-title">✦ विद्यापति रचनावली ✦</div><div class="rel-post"><div class="rel-name">बर अजगुत देखल तोर अंगना</div><div class="rel-sub">यही गीत</div></div><div class="rel-post"><div class="rel-name">गे माई चंद्रमुखी</div><div class="rel-sub">Vidyapati Pada</div></div><div class="rel-post"><div class="rel-name">पिया के प्रेम सब झूठ</div><div class="rel-sub">मैथिली भक्ति</div></div></div>
@@ -275,6 +281,7 @@
   renderComments();
 </script>
 
-<script src="/js/auth.js"></script>
+<script src="/js/auth2.js"></script>
+<script src="/js/nav.js"></script>
 </body>
 </html>
