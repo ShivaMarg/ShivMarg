@@ -1,10 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Home Page -->
+  <url>
+    <loc>https://www.shivmarg.live/</loc>
+    <priority>1.00</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <!-- Main Pages -->
+  <url>
+    <loc>https://www.shivmarg.live/about/</loc>
+    <priority>0.85</priority>
+    <changefreq>monthly</changefreq>
+  </url>
 
   <url>
-    <loc>https://www.shivmarg.live/shiva-mantras</loc>
-    <priority>0.80</priority>
+    <loc>https://www.shivmarg.live/contact/</loc>
+    <priority>0.85</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/privacy-policy/</loc>
+    <priority>0.70</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/disclaimer/</loc>
+    <priority>0.70</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <!-- SHIVA MANTRAS -->
+  <url>
+    <loc>https://www.shivmarg.live/shiva-mantras/</loc>
+    <priority>0.90</priority>
     <changefreq>daily</changefreq>
   </url>
 
@@ -13,7 +44,7 @@
     <priority>0.80</priority>
     <changefreq>daily</changefreq>
   </url>
- 
+
   <url>
     <loc>https://www.shivmarg.live/shiva-mantras/Namami-samisam-nirvanrupam</loc>
     <priority>0.80</priority>
@@ -86,13 +117,11 @@
     <changefreq>daily</changefreq>
   </url>
 
-
   <url>
     <loc>https://www.shivmarg.live/shiva-mantras/Shiva-sahasranama</loc>
     <priority>0.80</priority>
     <changefreq>daily</changefreq>
   </url>
-
 
   <url>
     <loc>https://www.shivmarg.live/shiva-mantras/shiva-tandav-stotram</loc>
@@ -100,78 +129,236 @@
     <changefreq>daily</changefreq>
   </url>
 
-
   <url>
     <loc>https://www.shivmarg.live/shiva-mantras/Shivashtakam</loc>
     <priority>0.80</priority>
     <changefreq>daily</changefreq>
   </url>
 
-
-
   <url>
-    <loc>https://www.shivmarg.live/shiva-mantras/bilvashtakam-बिल्वाष्टकम्</loc>
+    <loc>https://www.shivmarg.live/shiva-mantras/bilvashtakam</loc>
     <priority>0.80</priority>
     <changefreq>daily</changefreq>
   </url>
 
-
+  <!-- CHANDRA MANTRAS -->
   <url>
-    <loc>https://www.shivmarg.live/durga-mantras/Argala-stotram</loc>
-    <priority>0.80</priority>
-    <changefreq>daily</changefreq>
-  </url>
-
-  <url>
-    <loc>https://www.shivmarg.live/durga-mantras/Devi-kavacham</loc>
+    <loc>https://www.shivmarg.live/Chandra-mantras/</loc>
     <priority>0.80</priority>
     <changefreq>daily</changefreq>
   </url>
 
   <url>
-    <loc>https://www.shivmarg.live/durga-mantras/Durga-aarti</loc>
-    <priority>0.80</priority>
-    <changefreq>daily</changefreq>
-  </url>
-
-
-  <url>
-    <loc>https://www.shivmarg.live/durga-mantras/Durga-Chalisha</loc>
-    <priority>0.80</priority>
+    <loc>https://www.shivmarg.live/Chandra-mantras/chandra-aarti/</loc>
+    <priority>0.75</priority>
     <changefreq>daily</changefreq>
   </url>
 
   <url>
-    <loc>https://www.shivmarg.live/durga-mantras/kilaka-stotram</loc>
+    <loc>https://www.shivmarg.live/Chandra-mantras/chandra-ashtakam/</loc>
+    <priority>0.75</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/Chandra-mantras/chandra-beej-mantra/</loc>
+    <priority>0.75</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/Chandra-mantras/chandra-chalisa/</loc>
+    <priority>0.75</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/Chandra-mantras/chandra-gayatri-mantra/</loc>
+    <priority>0.75</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/Chandra-mantras/chandra-kavach/</loc>
+    <priority>0.75</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <!-- DURGA MANTRAS -->
+  <url>
+    <loc>https://www.shivmarg.live/durga-mantras/</loc>
+    <priority>0.90</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/durga-mantras/Argala-stotram/</loc>
     <priority>0.80</priority>
     <changefreq>daily</changefreq>
   </url>
 
   <url>
-    <loc>https://www.shivmarg.live/durga-mantras</loc>
+    <loc>https://www.shivmarg.live/durga-mantras/Devi-kavacham/</loc>
     <priority>0.80</priority>
     <changefreq>daily</changefreq>
   </url>
-
 
   <url>
-    <loc>https://www.shivmarg.live/durga-mantras/Nav-durga-mantra</loc>
+    <loc>https://www.shivmarg.live/durga-mantras/Durga-aarti/</loc>
     <priority>0.80</priority>
     <changefreq>daily</changefreq>
   </url>
 
+  <url>
+    <loc>https://www.shivmarg.live/durga-mantras/Durga-Chalisha/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
 
+  <url>
+    <loc>https://www.shivmarg.live/durga-mantras/kilaka-stotram/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
 
-  <!-- Add more blog URLs here -->
-    <url>
+  <url>
+    <loc>https://www.shivmarg.live/durga-mantras/Nav-durga-mantra/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/durga-mantras/santoshi-mata-aarti/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <!-- GANESH MANTRAS -->
+  <url>
+    <loc>https://www.shivmarg.live/ganesh-mantras/</loc>
+    <priority>0.90</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/ganesh-mantras/ganesh-aarti/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/ganesh-mantras/ganesh-chalisha/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <!-- GAYATRI MANTRA -->
+  <url>
+    <loc>https://www.shivmarg.live/Gayatri-mantra/</loc>
+    <priority>0.90</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <!-- HANUMAN JI -->
+  <url>
+    <loc>https://www.shivmarg.live/hanumanji/</loc>
+    <priority>0.90</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/hanumanji/bajrang-baan/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/hanumanji/hanuman-bahuk/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/hanumanji/Hanuman-Chalisa/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/hanumanji/Hanuman-ji-aarti/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <!-- KRISHNA MAHAMANTRAS -->
+  <url>
     <loc>https://www.shivmarg.live/Krishna-Mahamantras/</loc>
+    <priority>0.90</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/Krishna-Mahamantras/Achyutam-keshavam/</loc>
     <priority>0.80</priority>
     <changefreq>daily</changefreq>
   </url>
 
+  <url>
+    <loc>https://www.shivmarg.live/Krishna-Mahamantras/Damodarashtakam/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
 
   <url>
-    <loc>https://www.shivmarg.live/Krishna-Mahamantras/Hare-Krishna-mahamantras-%E0%A4%B9%E0%A4%B0%E0%A5%87-%E0%A4%95%E0%A5%83%E0%A4%B7%E0%A5%8D%E0%A4%A3/</loc>
+    <loc>https://www.shivmarg.live/Krishna-Mahamantras/Gita-chapter-2-nishkam-karma/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/Krishna-Mahamantras/Govindam-adi-purusham/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/Krishna-Mahamantras/Hare-Krishna-mahamantras/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/Krishna-Mahamantras/Krishna-108-names/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/Krishna-Mahamantras/Krishna-gayatri/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/Krishna-Mahamantras/Krishnashtakam/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/Krishna-Mahamantras/Madhurasthakam/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/Krishna-Mahamantras/Om-Namo-Bhagavate-Vasudevaya/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/Krishna-Mahamantras/Radhe-radhe-bhajan/</loc>
     <priority>0.80</priority>
     <changefreq>daily</changefreq>
   </url>
@@ -183,14 +370,7 @@
   </url>
 
   <url>
-    <loc>https://www.shivmarg.live/Krishna-Mahamantras/Madhurasthakam-%E0%A4%AE%E0%A4%A7%E0%A5%81%E0%A4%B0%E0%A4%BE%E0%A4%A7%E0%A4%BF%E0%A4%AA%E0%A4%A4%E0%A5%87%E0%A4%B0%E0%A4%96%E0%A4%BF%E0%A4%B2%E0%A4%82-%E0%A4%AE%E0%A4%A7%E0%A5%81%E0%A4%B0%E0%A4%AE%E0%A5%8D/</loc>
-    <priority>0.80</priority>
-    <changefreq>daily</changefreq>
-  </url>
-
-  <!-- https://www.shivmarg.live/Krishna-Mahamantras/Om-Namo-Bhagavate-Vasudevaya-%E0%A5%90-%E0%A4%A8%E0%A4%AE%E0%A5%8B-%E0%A4%AD%E0%A4%97%E0%A4%B5%E0%A4%A4%E0%A5%87-%E0%A4%B5%E0%A4%BE%E0%A4%B8%E0%A5%81%E0%A4%A6%E0%A5%87%E0%A4%B5%E0%A4%BE%E0%A4%AF/ -->
-  <url>
-    <loc>https://www.shivmarg.live/Krishna-Mahamantras/Om-Namo-Bhagavate-Vasudevaya-%E0%A5%90-%E0%A4%A8%E0%A4%AE%E0%A5%8B-%E0%A4%AD%E0%A4%97%E0%A4%B5%E0%A4%A4%E0%A5%87-%E0%A4%B5%E0%A4%BE%E0%A4%B8%E0%A5%81%E0%A4%A6%E0%A5%87%E0%A4%B5%E0%A4%BE%E0%A4%AF/</loc>
+    <loc>https://www.shivmarg.live/Krishna-Mahamantras/Shri-Krishna-Aarti/</loc>
     <priority>0.80</priority>
     <changefreq>daily</changefreq>
   </url>
@@ -201,67 +381,147 @@
     <changefreq>daily</changefreq>
   </url>
 
-  <!-- https://www.shivmarg.live/Krishna-Mahamantras/Achyutam%20keshavam/ -->
+  <!-- LAKSHMI MANTRAS -->
   <url>
-    <loc>https://www.shivmarg.live/Krishna-Mahamantras/Achyutam%20keshavam/</loc>
-    <priority>0.80</priority>
+    <loc>https://www.shivmarg.live/Lakshmi-mantras/</loc>
+    <priority>0.90</priority>
     <changefreq>daily</changefreq>
   </url>
 
- 
   <url>
-    <loc>https://www.shivmarg.live/Krishna-Mahamantras/Shri-Krishna-Aarti/</loc>
-    <priority>0.80</priority>
-    <changefreq>daily</changefreq>
-  </url>
-
-
-  <url>
-    <loc>https://www.shivmarg.live/Krishna-Mahamantras/Krishna-108-names/</loc>
-    <priority>0.80</priority>
-    <changefreq>daily</changefreq>
-  </url>
-
-  <!-- https://www.shivmarg.live/Krishna-Mahamantras/Damodarashtakam/ -->
-  <url>
-    <loc>https://www.shivmarg.live/Krishna-Mahamantras/Damodarashtakam/</loc>
-    <priority>0.80</priority>
-    <changefreq>daily</changefreq>
-  </url>
-  
-  <url>
-    <loc>https://www.shivmarg.live/Krishna-Mahamantras/Radhe-radhe-bhajan/</loc>
+    <loc>https://www.shivmarg.live/Lakshmi-mantras/lakshmi-aarti/</loc>
     <priority>0.80</priority>
     <changefreq>daily</changefreq>
   </url>
 
   <url>
-    <loc>https://www.shivmarg.live/Krishna-Mahamantras/Krishna-gayatri/</loc>
+    <loc>https://www.shivmarg.live/Lakshmi-mantras/lakshmi-ashtakam/</loc>
     <priority>0.80</priority>
     <changefreq>daily</changefreq>
   </url>
-
 
   <url>
-    <loc>https://www.shivmarg.live/Krishna-Mahamantras/Govindam-adi-purusham/</loc>
+    <loc>https://www.shivmarg.live/Lakshmi-mantras/lakshmi-chalisha/</loc>
     <priority>0.80</priority>
     <changefreq>daily</changefreq>
   </url>
-
-  
-  <url>
-    <loc>https://www.shivmarg.live/Krishna-Mahamantras/Gita-chapter-2-nishkam-karma/</loc>
-    <priority>0.80</priority>
-    <changefreq>daily</changefreq>
-  </url>
-
 
   <url>
-    <loc>https://www.shivmarg.live/Krishna-Mahamantras/Krishnashtakam/</loc>
+    <loc>https://www.shivmarg.live/Lakshmi-mantras/mahalakshmi-ashtakam/</loc>
     <priority>0.80</priority>
     <changefreq>daily</changefreq>
   </url>
 
-  
+  <url>
+    <loc>https://www.shivmarg.live/Lakshmi-mantras/shri-suktam/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <!-- KALI MANTRA -->
+  <url>
+    <loc>https://www.shivmarg.live/maha-kali-mantra/</loc>
+    <priority>0.90</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/maha-kali-mantra/kali-stotram/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/maha-kali-mantra/Kalikastakam/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/maha-kali-mantra/maa-kali-aarti/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/maha-kali-mantra/maa-kali-chalisha/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <!-- MAITHILI BHAJAN -->
+  <url>
+    <loc>https://www.shivmarg.live/Maithili-bhajan-geet/</loc>
+    <priority>0.90</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <!-- VIDYAPATI GEET SANGRAH -->
+  <url>
+    <loc>https://www.shivmarg.live/Vidyapati-Geet-Sangrah/</loc>
+    <priority>0.90</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/Vidyapati-Geet-Sangrah/ugna-re-mor-katai-gela/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/Vidyapati-Geet-Sangrah/gauri-dauri-dauri-kahthin-he/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/Vidyapati-Geet-Sangrah/jogiya-ek-hum-dekhlaun-ge-mai/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/Vidyapati-Geet-Sangrah/bar-ajgut-dekhal-tor-angana/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <!-- OTHER MAJOR SECTIONS -->
+  <url>
+    <loc>https://www.shivmarg.live/aigiri-nandini/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/bhagvan-vishnu-mantra/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/kumar-kartikey-mantras/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/Sharaswati-mantra/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/Shri-ram-mantra/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/surya-dev/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
 
 </urlset>
