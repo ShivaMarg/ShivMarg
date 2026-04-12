@@ -761,6 +761,11 @@
       color: rgba(253,245,230,0.25);
       font-style: italic;
     }
+    .orb-logo {
+      width: 10%;          /* adjust size */
+      height: 80%;
+      object-fit: contain; /* keeps aspect ratio */
+    }
 
     /* ── REVEAL ── */
     .reveal {
@@ -809,115 +814,11 @@
 <div id="diyas"></div>
 
 <!-- Nav -->
-<nav>
-  <a href="#" class="logo">Shiva<em>Marg</em></a>
-  <div class="nav-links">
-    <!-- SHIV STOTRAM DROPDOWN -->
-    <div class="nav-dropdown">
-      <button class="nav-dropdown-btn" onclick="toggleDropdown(event, 'shiv-menu')">शिव स्तोत्र</button>
-      <div class="dropdown-content" id="shiv-menu">
-        <div class="dropdown-label">✦ शिव पंचाक्षर स्तोत्र ✦</div>
-        <a href="/shiva-mantras">शिव मंत्र</a>
-        <a href="/shiva-mantras/Shiva-mahamrityunjaya-mantra/">महामृत्युंजय मंत्र</a>
-        <a href="#"> निर्वाणपटकम्</a>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-label">✦ शिव आरती ✦</div>
-        <a href="#">शिव आरती</a>
-        <a href="#">महा आरती</a>
-      </div>
-    </div>
 
-    <!-- SHAKTI DROPDOWN -->
-    <div class="nav-dropdown">
-      <button class="nav-dropdown-btn" onclick="toggleDropdown(event, 'shakti-menu')">शक्ति</button>
-      <div class="dropdown-content" id="shakti-menu">
-        <div class="dropdown-label">✦ माता दुर्गा ✦</div>
-        <a href="/durga-mantras/">माँ दुर्गा मंत्र</a>
-        <a href="#">अष्टोत्तर शतनाम</a>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-label">✦ देवी काली ✦</div>
-        <a href="/maha-kali-mantra/">माँ काली मंत्र</a>
-        <a href="#">कालिका स्तोत्र</a>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-label">✦ माता लक्ष्मी ✦</div>
-        <a href="/Lakshmi-mantras/">लक्ष्मी पूजन</a>
-        <a href="#">लक्ष्मी स्तोत्र</a>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-label">✦ सरस्वती माता ✦</div>
-        <a href="/Sharaswati-mantra/">सरस्वती वंदना</a>
-        <a href="#">सरस्वती स्तोत्र</a>
-      </div>
-    </div>
-
-    <!-- VISHNU DROPDOWN -->
-    <div class="nav-dropdown">
-      <button class="nav-dropdown-btn" onclick="toggleDropdown(event, 'vishnu-menu')">विष्णु</button>
-      <div class="dropdown-content" id="vishnu-menu">
-        <div class="dropdown-label">✦ भगवान विष्णु ✦</div>
-        <a href="/bhagvan-vishnu-mantra/">विष्णु मंत्र</a>
-        <a href="#">विष्णु सहस्रनाम</a>
-        <a href="#">विष्णुपदी स्तोत्र</a>
-      </div>
-    </div>
-
-    <!-- RAM-HANUMAN DROPDOWN -->
-    <div class="nav-dropdown">
-      <button class="nav-dropdown-btn" onclick="toggleDropdown(event, 'ram-menu')">राम-हनुमान</button>
-      <div class="dropdown-content" id="ram-menu">
-        <div class="dropdown-label">✦ श्री राम ✦</div>
-        <a href="/Shri-ram-mantra/">राम मंत्र</a>
-        <a href="#">राम रक्षा स्तोत्र</a>
-        <a href="#">राम भजन</a>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-label">✦ हनुमान जी ✦</div>
-        <a href="/hanumanji/">हनुमान मंत्र</a>
-        <a href="#">हनुमान चालीसा</a>
-        <a href="#">हनुमान स्तोत्र</a>
-      </div>
-    </div>
-
-    <!-- KRISHNA DROPDOWN -->
-    <div class="nav-dropdown">
-      <button class="nav-dropdown-btn" onclick="toggleDropdown(event, 'krishna-menu')">कृष्ण</button>
-      <div class="dropdown-content" id="krishna-menu">
-        <div class="dropdown-label">✦ श्री कृष्ण ✦</div>
-        <a href="/Krishna-Mahamantras/">कृष्ण महामंत्र</a>
-        <a href="#">कृष्ण भजन</a>
-        <a href="#">विद्यापति गीत</a>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-label">✦ मैथिली गीत ✦</div>
-        <a href="/Vidyapati-Geet-Sangrah/">विद्यापति गीत संग्रह</a>
-        <a href="/Maithili-bhajan-geet/">मैथिली भजन</a>
-      </div>
-    </div>
-
-    <!-- अन्य देव DROPDOWN -->
-    <div class="nav-dropdown">
-      <button class="nav-dropdown-btn" onclick="toggleDropdown(event, 'other-menu')">अन्य देव</button>
-      <div class="dropdown-content" id="other-menu">
-        <div class="dropdown-label">✦ गणेश जी ✦</div>
-        <a href="/ganesh-mantras/">गणेश मंत्र</a>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-label">✦ सूर्य देव ✦</div>
-        <a href="/surya-dev/">सूर्य मंत्र</a>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-label">✦ कार्तिकेय ✦</div>
-        <a href="/kumar-kartikey-mantras/">कार्तिकेय मंत्र</a>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-label">✦ गायत्री माता ✦</div>
-        <a href="/Gayatri-mantra/">गायत्री मंत्र</a>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-label">✦ चंद्र देव ✦</div>
-        <a href="/Chandra-mantras/">चंद्र मंत्र</a>
-      </div>
-    </div>
-  </div>
-  <input class="nav-search" type="text" placeholder="🔍 खोजें...">
-</nav>
 
 <!-- Hero -->
 <section class="hero">
-  <span class="hero-om">ॐ</span>
+  <span class="hero-om"><img src="images/ShivMarg.png" alt="logo" class="orb-logo"></span>
   <div class="hero-eyebrow">✦ भारत की दिव्य आस्था ✦</div>
   <h1 class="hero-title">ShivaMarg</h1>
   <div class="hero-deva">भजन, मंत्र और आरती</div>
@@ -1387,6 +1288,10 @@
   }, { threshold: 0.3 });
   statsObs.observe(document.querySelector('.feature-strip'));
 </script>
+<script src="/js/auth2.js"></script>
+<script src="/js/nav.js"></script>
+<script src="/js/comments.js"></script>
 <script src="/js/search.js"></script>
+
 </body>
 </html>

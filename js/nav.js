@@ -479,8 +479,8 @@
         mobileAuth.innerHTML = `
           <div class="mobile-menu-divider"></div>
           <div class="mobile-menu-item label">✦ खाता ✦</div>
-          <button class="mobile-menu-item" onclick="window.SmAuth._switchTab('register');window.SmAuth._openModal()" style="color: #FDF5E6; padding: 12px 0; border: none; background: none; text-align: left; cursor: pointer; font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 0.95rem; width: 100%;">🌸 खाता बनाएँ</button>
-          <button class="mobile-menu-item" onclick="window.SmAuth._switchTab('login');window.SmAuth._openModal()" style="color: #F2C94C; padding: 12px 0; border: none; background: none; text-align: left; cursor: pointer; font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 0.95rem; width: 100%;">🔱 लॉगिन करें</button>`;
+          <button class="mobile-menu-item" onclick="window.SmAuth._switchTab('register');window.SmAuth._openModal()" style="color: #FDF5E6; padding: 12px 0; border: none; background: none; text-align: left; cursor: pointer; font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 0.95rem; width: 100%;">👤 खाता बनाएँ</button>
+          <button class="mobile-menu-item" onclick="window.SmAuth._switchTab('login');window.SmAuth._openModal()" style="color: #F2C94C; padding: 12px 0; border: none; background: none; text-align: left; cursor: pointer; font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 0.95rem; width: 100%;">🔐 लॉगिन करें</button>`;
       }
     }
 

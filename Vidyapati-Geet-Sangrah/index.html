@@ -203,15 +203,7 @@
 <div class="mandala-bg"></div>
 <div id="sparks"></div>
 
-<nav>
-  <a href="/" class="logo">Shiva<em>Marg</em></a>
-  <div class="nav-links">
-    <a href="/Maithili-bhajan-geet/" class="active">विद्यापति गीत</a>
-    <a href="/shiva-mantras/">शिव मंत्र</a>
-    <a href="#">मैथिली भजन</a>
-  </div>
-  <input type="text" id="searchInput" class="nav-search" placeholder="🔍 गीत खोजू..." autocomplete="off">
-</nav>
+
 
 <section class="hero">
   <span class="hero-symbol">🎶</span>
@@ -411,5 +403,9 @@
   const sc = document.getElementById('sparks');
   for(let i=0;i<55;i++){ const s=document.createElement('div'); s.className='spark'; const sz=1+Math.random()*3; s.style.cssText=`left:${Math.random()*100}%;width:${sz}px;height:${sz}px;animation-duration:${8+Math.random()*16}s;animation-delay:${Math.random()*20}s;`; sc.appendChild(s); }
 </script>
+<script src="/js/auth2.js"></script>
+<script src="/js/nav.js"></script>
+<script src="/js/comments.js"></script>
+<script src="/js/search.js"></script>
 </body>
 </html>

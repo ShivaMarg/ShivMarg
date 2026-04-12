@@ -121,26 +121,11 @@
   </div>
 
 
-<script>
-    fetch('/nav.html')
-      .then(r => r.text())
-      .then(html => {
-        document.getElementById('nav-container').innerHTML = html;
-        // Re-run scripts if needed
-        const scripts = document.getElementById('nav-container').querySelectorAll('script');
-        scripts.forEach(s => eval(s.textContent));
-      });
-  </script>
 
-   <script src="/js/auth2.js">
-  </script>
-<script src="/js/s-comments.js"></script>
-<script src="/js/search.js"></script>   
 
-  <script>
-    const SM_API = 'https://shivamargbackend.onrender.com'; // ← change to your server URL in prod
-    SmComments.init({ apiBase: SM_API });
-  </script>
-
+<script src="/js/auth2.js"></script>
+<script src="/js/nav.js"></script>
+<script src="/js/comments.js"></script>
+<script src="/js/search.js"></script>
 </body>
 </html>
