@@ -121,9 +121,7 @@
 
     /* CARDS WRAP */
     .cards-wrap { position:relative; z-index:10; max-width:1280px; margin:0 auto; padding:0 22px 80px; }
-    .feat-row   { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-bottom:20px; }
-    @media(max-width:900px){.feat-row{grid-template-columns:repeat(2,1fr);}}
-    @media(max-width:560px){.feat-row{grid-template-columns:1fr;}}
+    .feat-row   { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px; margin-bottom:20px; }
     .cards-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
     @media(max-width:1100px){.cards-grid{grid-template-columns:repeat(3,1fr);}}
     @media(max-width:740px) {.cards-grid{grid-template-columns:repeat(2,1fr);}}
@@ -360,8 +358,26 @@
 <div class="cards-wrap">
 <div class="feat-row">
 
-  <!-- FEATURED 1 — Kali Beej Mantra -->
-  <a href="/maha-kali-mantra/Kalikastakam/" class="card feat m1 reveal" data-cat="mantra" style="animation-delay:0.05s">
+  <!-- FEATURED 1 — Complete Kali Mantra Collection -->
+  <a href="/kali-mantras/" class="card feat m1 reveal" data-cat="collection" style="animation-delay:0.05s">
+    <div class="card-bg"></div>
+    <div class="card-inner">
+      <span class="card-sym">🌌</span>
+      <div class="card-cat">पूर्ण संग्रह • Complete Collection</div>
+      <div class="card-name">काली मंत्र संग्रह</div>
+      <div class="card-eng">KALI MANTRA SANGRAH</div>
+      <div class="card-preview">
+        सभी काली मंत्र, स्तोत्र, कवच,<br>
+        आरती और नामावली का<br>
+        सम्पूर्ण संग्रह
+      </div>
+      <div class="card-count"><span class="count-dot"></span> २३ मंत्र • सभी प्रकार के काली मंत्र</div>
+    </div>
+    <div class="card-arrow">→</div>
+  </a>
+
+  <!-- FEATURED 2 — Kali Beej Mantra -->
+  <a href="/maha-kali-mantra/Kalikastakam/" class="card feat m1 reveal" data-cat="mantra" style="animation-delay:0.08s">
     <div class="card-bg"></div>
     <div class="card-inner">
       <span class="card-sym">⚡</span>
@@ -378,8 +394,8 @@
     <div class="card-arrow">→</div>
   </a>
 
-  <!-- FEATURED 2 — Mahakali Dhyanam -->
-  <a href="/maha-kali-mantra/maa-kali-aarti/" class="card feat m2 reveal" data-cat="stotra" style="animation-delay:0.08s">
+  <!-- FEATURED 3 — Mahakali Dhyanam -->
+  <a href="/maha-kali-mantra/maa-kali-aarti/" class="card feat m2 reveal" data-cat="stotra" style="animation-delay:0.12s">
     <div class="card-bg"></div>
     <div class="card-inner">
       <span class="card-sym">🔱</span>
@@ -395,8 +411,8 @@
     <div class="card-arrow">→</div>
   </a>
 
-  <!-- FEATURED 3 — Kalika Ashtakam (Adi Shankaracharya) -->
-  <a href="/maha-kali-mantra/Kalikastakam/" class="card feat m7 reveal" data-cat="ashtakam" style="animation-delay:0.12s">
+  <!-- FEATURED 4 — Kalika Ashtakam (Adi Shankaracharya) -->
+  <a href="/maha-kali-mantra/Kalikastakam/" class="card feat m7 reveal" data-cat="ashtakam" style="animation-delay:0.16s">
     <div class="card-bg"></div>
     <div class="card-inner">
       <span class="card-sym">🌑</span>

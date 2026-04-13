@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>काली खड्गमाला — Kali Khadgamala | ShivaMarg</title>
+  <meta name="description" content="काली खड्गमाला — शक्तिशाली श्लोक श्रृंखला।">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://saurabhjha.live/kali-mantras/kali-khadgamala/">
+  <style>body{margin:0;font-family:Segoe UI,system-ui,sans-serif;background:#05060f;color:#f8f4e8}a{color:#ffd86b;text-decoration:none}main{max-width:760px;margin:0 auto;padding:28px}h1{font-size:2.2rem;margin:.4em 0}h2{font-size:1rem;color:#f3d77f;margin:.35em 0}p{margin:1em 0;line-height:1.75}.badge{display:inline-block;margin:.8em 0;padding:.35em .8em;border:1px solid #c59636;color:#f7e0a3;border-radius:999px;font-size:.86rem}footer{margin-top:40px;text-align:center;padding:24px 0;border-top:1px solid rgba(255,216,107,0.18)}.foot-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;padding-top:12px}.foot-links a{font-size:.82rem;color:#f4e2bb}.audio-widget{position:fixed;bottom:20px;right:20px;background:rgba(8,6,14,0.96);border:1px solid rgba(255,216,107,0.18);padding:12px 14px;display:flex;align-items:center;gap:12px;z-index:100}.play-btn{width:38px;height:38px;border-radius:50%;background:#ffb347;border:none;color:#05060f;font-size:1rem;cursor:pointer}#player{width:0;height:0;overflow:hidden}</style>
+</head>
+<body>
+<main>
+  <a href="/kali-mantras/">← Back to Kali Mantras</a>
+  <h1>काली खड्गमाला</h1>
+  <h2>Kali Khadgamala</h2>
+  <span class="badge">Kali Mata Mantra</span>
+  <p>काली खड्गमाला — शक्तिशाली श्लोक श्रृंखला।</p>
+  <p>क्रीं क्ष्रीं स्वाहा ...</p>
+</main>
+<script src="/js/auth2.js"></script>
+<script src="/js/s-comments.js"></script>
+<script src="/js/nav.js"></script>
+<script src="/js/search.js"></script>
+  <script>
+    const SM_API = 'https://shivamargbackend.onrender.com'; // ← change to your server URL in prod
+    SmComments.init({ apiBase: SM_API });
+  </script>
+
+
+<!-- COMMENTS -->
+ Please login for comments
+<div id="sm-comments" data-page-id="kali-khadgamala"></div>
+<!-- FOOTER -->
+<footer>
+  <span class="foot-sym">🌺</span>
+  <div class="foot-txt">॥ काली खड्गमाला ॥ ShivaMarg ॥ © ShivaMarg 2026 || ShivMarg.live</div>
+   <div class="foot-links">
+    <a href="/">Home</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
+    <a href="/privacy-policy/">Privacy Policy</a>
+    <a href="/disclaimer/">Disclaimer</a>
+  </div>
+</footer>
+
+<!-- Audio Widget -->
+<div class="audio-widget">
+  <button id="playBtn" class="play-btn">▶</button>
+  <div>
+    <div class="audio-title">Kali Khadgamala</div>
+    <div class="audio-sub">Kali Mata • मंत्र</div>
+  </div>
+</div>
+<div id="player" style="width:0;height:0;overflow:hidden;"></div>
+
+<script>
+  let player, isPlaying=false;
+  function onYouTubeIframeAPIReady(){
+    player=new YT.Player('player',{videoId:'dQw4w9WgXcQ',playerVars:{controls:0,modestbranding:1,rel:0}});
+  }
+  document.addEventListener('DOMContentLoaded',function(){
+    const btn=document.getElementById('playBtn');
+    btn.onclick=function(){
+      if(!player) return;
+      if(!isPlaying){player.playVideo();btn.innerHTML='⏸';isPlaying=true;}
+      else{player.pauseVideo();btn.innerHTML='▶';isPlaying=false;}
+    };
+  });
+</script>
+<script src="https://www.youtube.com/iframe_api"></script>
+
+</body>
+</html>

@@ -252,6 +252,96 @@
     <changefreq>daily</changefreq>
   </url>
 
+  <url>
+    <loc>https://www.shivmarg.live/ganesh-mantras/gajanana-shree-gajanana/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/ganesh-mantras/ganesh-pancharatnam/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/ganesh-mantras/ganpati-bappa-morya/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/ganesh-mantras/ganesh-kavach/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/ganesh-mantras/ekadanta-stotra/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/ganesh-mantras/siddhi-vinayak-mantra/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/ganesh-mantras/ganesh-ashtanama-stotra/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/ganesh-mantras/ganesh-sahasranama/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/ganesh-mantras/modakahasta-stotra/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/ganesh-mantras/ganesh-dwadasha-nama/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/ganesh-mantras/ganesh-mangalacharana/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/ganesh-mantras/mudakarata-modakam/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/ganesh-mantras/heramba-stotra/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/ganesh-mantras/vighnaraja-stotra/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/ganesh-mantras/ganesh-namaskara-mantra/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
   <!-- GAYATRI MANTRA -->
   <url>
     <loc>https://www.shivmarg.live/Gayatri-mantra/</loc>
@@ -445,6 +535,151 @@
 
   <url>
     <loc>https://www.shivmarg.live/maha-kali-mantra/maa-kali-chalisha/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <!-- KALI MANTRAS COLLECTION -->
+  <url>
+    <loc>https://www.shivmarg.live/kali-mantras/</loc>
+    <priority>0.90</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/kali-mantras/dakshina-kali-mantra/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/kali-mantras/kali-chalisa/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/kali-mantras/kali-kavacham/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/kali-mantras/chamunda-stuti/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/kali-mantras/kali-gayatri/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/kali-mantras/kali-108-names/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/kali-mantras/kali-sahasranama/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/kali-mantras/adya-stotram/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/kali-mantras/kali-pratahsmarana/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/kali-mantras/dakshina-kali-kavach/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/kali-mantras/kali-khadgamala/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/kali-mantras/navarna-mantra/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/kali-mantras/parashurama-kali-stotram/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/kali-mantras/kali-puja-vidhi/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/kali-mantras/brahma-krita-kali-stuti/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/kali-mantras/guhya-kali-mantra/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/kali-mantras/smashanakali-stotra/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/kali-mantras/kali-mahastuti-ramakrishna/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/kali-mantras/jaganmangala-kali-kavach/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/kali-mantras/kali-ekakshari-mantra/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/kali-mantras/kali-mangal-aarti/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/kali-mantras/kamakala-kali-stotram/</loc>
+    <priority>0.80</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.shivmarg.live/kali-mantras/kali-namavali/</loc>
     <priority>0.80</priority>
     <changefreq>daily</changefreq>
   </url>
