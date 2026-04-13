@@ -6,7 +6,14 @@
     "category": "शिव",
     "symbol": "🔱",
     "preview": "नमामि शमीशान निर्वाण रूपं, विभुं व्यापकं ब्रह्म वेदस्वरूपम्",
-    "keywords": ["शिव", "shiv", "shiva", "महादेव", "om namah shivay", "शंकर"]
+    "keywords": [
+      "शिव",
+      "shiv",
+      "shiva",
+      "महादेव",
+      "om namah shivay",
+      "शंकर"
+    ]
   },
   {
     "title": "माँ दुर्गा मंत्र",
@@ -15,7 +22,13 @@
     "category": "शक्ति",
     "symbol": "🌺",
     "preview": "या देवी सर्वभूतेषु शक्तिरूपेण संस्थिता",
-    "keywords": ["दुर्गा", "durga", "shakti", "mata", "देवी"]
+    "keywords": [
+      "दुर्गा",
+      "durga",
+      "shakti",
+      "mata",
+      "देवी"
+    ]
   },
   {
     "title": "श्री कृष्ण महामंत्र",
@@ -24,7 +37,13 @@
     "category": "कृष्ण",
     "symbol": "🪈",
     "preview": "हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे",
-    "keywords": ["कृष्ण", "krishna", "hare krishna", "गोविन्द", "माखन चोर"]
+    "keywords": [
+      "कृष्ण",
+      "krishna",
+      "hare krishna",
+      "गोविन्द",
+      "माखन चोर"
+    ]
   },
   {
     "title": "श्री गणेश मंत्र",
@@ -33,7 +52,13 @@
     "category": "गणेश",
     "symbol": "🐘",
     "preview": "ॐ गं गणपतये नमः",
-    "keywords": ["गणेश", "ganesh", "गणपति", "विघ्नहर्ता", "ganapati"]
+    "keywords": [
+      "गणेश",
+      "ganesh",
+      "गणपति",
+      "विघ्नहर्ता",
+      "ganapati"
+    ]
   },
   {
     "title": "माँ लक्ष्मी मंत्र",
@@ -42,7 +67,13 @@
     "category": "शक्ति",
     "symbol": "🪷",
     "preview": "ॐ श्रीं ह्रीं श्रीं महालक्ष्म्यै नमः",
-    "keywords": ["लक्ष्मी", "lakshmi", "धन", "समृद्धि", "wealth"]
+    "keywords": [
+      "लक्ष्मी",
+      "lakshmi",
+      "धन",
+      "समृद्धि",
+      "wealth"
+    ]
   },
   {
     "title": "श्री राम मंत्र",
@@ -51,7 +82,13 @@
     "category": "राम",
     "symbol": "🏹",
     "preview": "श्री राम जय राम जय जय राम",
-    "keywords": ["राम", "ram", "rama", "सिया राम", "जय राम"]
+    "keywords": [
+      "राम",
+      "ram",
+      "rama",
+      "सिया राम",
+      "जय राम"
+    ]
   },
   {
     "title": "हनुमान जी मंत्र",
@@ -60,7 +97,13 @@
     "category": "राम",
     "symbol": "🙏",
     "preview": "जय हनुमान ज्ञान गुण सागर, जय कपीस तिहु लोक उजागर",
-    "keywords": ["हनुमान", "hanuman", "बजरंग", "bajrang", "पवनपुत्र"]
+    "keywords": [
+      "हनुमान",
+      "hanuman",
+      "बजरंग",
+      "bajrang",
+      "पवनपुत्र"
+    ]
   },
   {
     "title": "माँ सरस्वती मंत्र",
@@ -69,7 +112,13 @@
     "category": "शक्ति",
     "symbol": "🎵",
     "preview": "या कुन्देन्दु तुषार हार धवला",
-    "keywords": ["सरस्वती", "saraswati", "विद्या", "ज्ञान", "vidya"]
+    "keywords": [
+      "सरस्वती",
+      "saraswati",
+      "विद्या",
+      "ज्ञान",
+      "vidya"
+    ]
   },
   {
     "title": "भगवान विष्णु मंत्र",
@@ -78,7 +127,13 @@
     "category": "विष्णु",
     "symbol": "🌀",
     "preview": "ॐ नमो भगवते वासुदेवाय",
-    "keywords": ["विष्णु", "vishnu", "नारायण", "narayan", "वासुदेव"]
+    "keywords": [
+      "विष्णु",
+      "vishnu",
+      "नारायण",
+      "narayan",
+      "वासुदेव"
+    ]
   },
   {
     "title": "माँ काली मंत्र",
@@ -87,7 +142,13 @@
     "category": "शक्ति",
     "symbol": "⚡",
     "preview": "क्रीं काली क्रीं महाकाल्यै नमः",
-    "keywords": ["काली", "kali", "महाकाली", "mahakali", "shakti"]
+    "keywords": [
+      "काली",
+      "kali",
+      "महाकाली",
+      "mahakali",
+      "shakti"
+    ]
   },
   {
     "title": "भगवान सूर्य मंत्र",
@@ -96,7 +157,13 @@
     "category": "अन्य",
     "symbol": "☀️",
     "preview": "ॐ ह्रां ह्रीं ह्रौं सः सूर्याय नमः",
-    "keywords": ["सूर्य", "surya", "sun", "आदित्य", "aditya"]
+    "keywords": [
+      "सूर्य",
+      "surya",
+      "sun",
+      "आदित्य",
+      "aditya"
+    ]
   },
   {
     "title": "गायत्री मंत्र",
@@ -105,7 +172,13 @@
     "category": "अन्य",
     "symbol": "🌅",
     "preview": "ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यम् भर्गो देवस्य धीमहि",
-    "keywords": ["गायत्री", "gayatri", "सावित्री", "savitri", "mantra"]
+    "keywords": [
+      "गायत्री",
+      "gayatri",
+      "सावित्री",
+      "savitri",
+      "mantra"
+    ]
   },
   {
     "title": "श्री कार्तिकेय मंत्र",
@@ -114,7 +187,13 @@
     "category": "अन्य",
     "symbol": "🦚",
     "preview": "ॐ सरवण भव षण्मुखाय नमः",
-    "keywords": ["कार्तिकेय", "kartikeya", "मुरुगन", "murugan", "षण्मुख"]
+    "keywords": [
+      "कार्तिकेय",
+      "kartikeya",
+      "मुरुगन",
+      "murugan",
+      "षण्मुख"
+    ]
   },
   {
     "title": "महामृत्युंजय मंत्र",
@@ -123,166 +202,2446 @@
     "category": "शिव",
     "symbol": "🕉️",
     "preview": "ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्",
-    "keywords": ["महामृत्युंजय", "mahamrityunjaya", "mrityu", "maha mantra", "tryambak"]
+    "keywords": [
+      "महामृत्युंजय",
+      "mahamrityunjaya",
+      "mrityu",
+      "maha mantra",
+      "tryambak"
+    ]
   },
-  
-  
-  { "title": "नमामि शमीशान — रुद्राष्टकम्", "titleEng": "Namami Shamishan Rudrashtakam", "url": "/shiva-mantras/Namami-samisam-nirvanrupam/", "category": "शिव", "symbol": "🔱", "preview": "नमामि शमीशान निर्वाण रूपं विभुं व्यापकं ब्रह्म वेदस्वरूपम्", "keywords": ["रुद्राष्टकम्", "rudrashtakam", "namami shamishan", "तुलसीदास"] },
-  { "title": "महामृत्युंजय मंत्र", "titleEng": "Mahamrityunjaya Mantra", "url": "/shiva-mantras/Shiva-mahamrityunjaya-mantra/", "category": "शिव", "symbol": "☽", "preview": "ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्", "keywords": ["महामृत्युंजय", "mahamrityunjaya", "tryambakam", "mrityu mantra"] },
-  { "title": "ॐ नमः शिवाय — पञ्चाक्षर स्तोत्रम्", "titleEng": "Om Namah Shivaya Panchakshara", "url": "/shiva-mantras/Shiva-panchakshara-stotram/", "category": "शिव", "symbol": "🕉️", "preview": "नागेन्द्रहाराय त्रिलोचनाय भस्मांगरागाय महेश्वराय", "keywords": ["पञ्चाक्षर", "panchakshara", "om namah shivay", "shankaracharya"] },
-  { "title": "शिव तांडव स्तोत्रम्", "titleEng": "Shiv Tandav Stotram", "url": "/shiva-mantras/shiva-tandav-stotram/", "category": "शिव", "symbol": "💃", "preview": "जटाटवीगलज्जलप्रवाहपावितस्थले गलेऽवलम्ब्य लम्बितां भुजंगतुंगमालिकाम्", "keywords": ["तांडव", "tandav", "shiv tandav", "रावण", "ravan"] },
-  { "title": "शिव चालीसा", "titleEng": "Shiv Chalisa", "url": "/shiva-mantras/Shiv-chalisa", "category": "शिव", "symbol": "📿", "preview": "जय गणेश गिरिजा सुवन मंगल करण कृपाल", "keywords": ["चालीसा", "chalisa", "shiv chalisa"] },
-  { "title": "रुद्राष्टकम्", "titleEng": "Rudra Ashtakam", "url": "/shiva-mantras/Namami-samisam-nirvanrupam/", "category": "शिव", "symbol": "⚡", "preview": "नमामीशमीशान निर्वाणरूपम् विभुं व्यापकं ब्रह्म वेदस्वरूपम्", "keywords": ["रुद्राष्टकम्", "rudra ashtakam", "8 shloka"] },
-  { "title": "शिव सहस्रनाम", "titleEng": "Shiv Sahasranama", "url": "/shiva-mantras/Shiva-sahasranama/", "category": "शिव", "symbol": "🌿", "preview": "स्थिरः स्थाणुः प्रभुर्भानुः प्रवरो वरदो वरः", "keywords": ["सहस्रनाम", "sahasranama", "1000 names of shiv"] },
-  { "title": "बिल्वाष्टकम्", "titleEng": "Bilvashtakam", "url": "/shiva-mantras/bilvashtakam-बिल्वाष्टकम्/", "category": "शिव", "symbol": "🍃", "preview": "त्रिदलं त्रिगुणाकारं त्रिनेत्रं च त्रयायुधम्", "keywords": ["बिल्वाष्टकम्", "bilvashtakam", "bel patra", "बेल पत्र"] },
-  { "title": "लिंगाष्टकम्", "titleEng": "Lingashtakam", "url": "/shiva-mantras/Shiva-lingashtakam/", "category": "शिव", "symbol": "🏛️", "preview": "ब्रह्ममुरारिसुरार्चितलिंगं निर्मलभासितशोभितलिंगम्", "keywords": ["लिंगाष्टकम्", "lingashtakam", "shivling"] },
-  { "title": "शिव आरती", "titleEng": "Shiv Aarti", "url": "/shiva-mantras/Shiv-aarti/", "category": "शिव", "symbol": "🪔", "preview": "ॐ जय शिव ओंकारा स्वामी जय शिव ओंकारा", "keywords": ["आरती", "aarti", "shiv aarti", "om jai shiv omkara"] },
-  { "title": "शिव कवचम्", "titleEng": "Shiv Kavacham", "url": "/shiva-mantras/Shiv-kavacham", "category": "शिव", "symbol": "🛡️", "preview": "रुद्रो मे मस्तकं पातु ललाटं चन्द्रशेखरः", "keywords": ["कवच", "kavach", "shiv kavach", "रक्षा मंत्र"] },
-  { "title": "हर हर महादेव भजन", "titleEng": "Har Har Mahadev Bhajan", "url": "/shiva-mantras/har-har-mahadev", "category": "शिव", "symbol": "🎵", "preview": "हर हर महादेव बम बम भोले जय जय शम्भो नीलकंठ देव", "keywords": ["हर हर महादेव", "har har mahadev", "bam bam bhole", "भजन"] },
-  { "title": "शिव महिम्नः स्तोत्र", "titleEng": "Shiv Mahimna Stotra", "url": "/shiva-mantras/Shiva-mahimna-stotra", "category": "शिव", "symbol": "📖", "preview": "महिम्नः पारं ते परमविदुषो यद्यसदृशी स्तुतिर्ब्रह्मादीनामपि", "keywords": ["महिम्नः स्तोत्र", "mahimna stotra", "pushpadanta", "43 shloka"] },
-  { "title": "शिवाष्टकम्", "titleEng": "Shivashtakam", "url": "/shiva-mantras/Shivashtakam", "category": "शिव", "symbol": "🌙", "preview": "प्रभुं प्राणनाथं विभुं विश्वनाथं जगन्नाथनाथं सदानन्दभाजम्", "keywords": ["शिवाष्टकम्", "shivashtakam", "8 shloka"] },
-  { "title": "शिव बीज मंत्र", "titleEng": "Shiv Beej Mantra", "url": "/shiva-mantras/Shiva-beej-mantra", "category": "शिव", "symbol": "🌀", "preview": "ॐ नमः शिवाय ॐ ह्रौं जूं सः", "keywords": ["बीज मंत्र", "beej mantra", "hroun", "shiv shakti"] },
-  { "title": "द्वादश ज्योतिर्लिंग स्तोत्रम्", "titleEng": "Jyotirlinga Stotram", "url": "/shiva-mantras/Shiva-jyotirlinga-stotram", "category": "शिव", "symbol": "✨", "preview": "सौराष्ट्रे सोमनाथं च श्रीशैले मल्लिकार्जुनम् उज्जयिन्यां महाकालम्", "keywords": ["ज्योतिर्लिंग", "jyotirlinga", "12 jyotirlinga", "somnath"] },
-  { "title": "शिव गायत्री मंत्र", "titleEng": "Shiv Gayatri Mantra", "url": "/shiva-mantras/shiva-gayatri-mantra", "category": "शिव", "symbol": "🌅", "preview": "ॐ तत्पुरुषाय विद्महे महादेवाय धीमहि तन्नो रुद्रः प्रचोदयात्", "keywords": ["शिव गायत्री", "shiv gayatri", "tatpurushaya", "rudra"] },
-  { "title": "शिव मानस पूजा", "titleEng": "Shiv Manasa Puja", "url": "/shiva-mantras/shiva-manasa-puja", "category": "शिव", "symbol": "🙏", "preview": "रत्नैः कल्पितमासनं हिमजलैः स्नानं च दिव्याम्बरं", "keywords": ["मानस पूजा", "manasa puja", "shankaracharya", "mental worship"] },
-
-  { "title": "या कुन्देन्दु तुषार — वंदना", "titleEng": "Ya Kundendu Vandana", "url": "/saraswati-mantras/ya-kundendu-vandana/", "category": "सरस्वती", "symbol": "🪷", "preview": "या कुन्देन्दु तुषारहारधवला या शुभ्रवस्त्रावृता", "keywords": ["या कुन्देन्दु", "ya kundendu", "saraswati vandana", "सरस्वती"] },
-  { "title": "ॐ ऐं सरस्वत्यै नमः — बीज मंत्र", "titleEng": "Om Aim Saraswatyai Namah", "url": "/saraswati-mantras/om-aim-saraswatyai-namah/", "category": "सरस्वती", "symbol": "🕉️", "preview": "ॐ ऐं सरस्वत्यै नमः ऐं सरस्वती का बीज अक्षर", "keywords": ["ॐ ऐं", "om aim", "saraswati beej", "बीज मंत्र"] },
-  { "title": "सरस्वति नमस्तुभ्यं", "titleEng": "Saraswati Namastubhyam", "url": "/saraswati-mantras/saraswati-namastubhyam/", "category": "सरस्वती", "symbol": "📚", "preview": "सरस्वति नमस्तुभ्यं वरदे कामरूपिणि विद्यारम्भं करिष्यामि", "keywords": ["नमस्तुभ्यं", "namastubhyam", "vidyarambh", "विद्यारम्भ"] },
-  { "title": "सरस्वती माता आरती", "titleEng": "Saraswati Mata Aarti", "url": "/saraswati-mantras/saraswati-aarti/", "category": "सरस्वती", "symbol": "🪔", "preview": "ॐ जय सरस्वती माता मैया जय सरस्वती माता", "keywords": ["सरस्वती आरती", "saraswati aarti", "jai saraswati"] },
-  { "title": "श्री सरस्वती चालीसा", "titleEng": "Saraswati Chalisa", "url": "/saraswati-mantras/saraswati-chalisa/", "category": "सरस्वती", "symbol": "📿", "preview": "जय श्री सकल बुद्धि बलरासी जय सर्वज्ञ अमर अविनाशी", "keywords": ["सरस्वती चालीसा", "saraswati chalisa", "40 chaupai"] },
-  { "title": "सरस्वती स्तोत्रम्", "titleEng": "Saraswati Stotram", "url": "/saraswati-mantras/saraswati-stotram/", "category": "सरस्वती", "symbol": "📖", "preview": "दोर्भिर्युक्ता चतुर्भिः स्फटिकमणिमयीं मक्षमालां दधाना", "keywords": ["सरस्वती स्तोत्र", "saraswati stotram", "stotra"] },
-  { "title": "अगस्त्य सरस्वती स्तोत्र", "titleEng": "Agastya Saraswati Stotram", "url": "/saraswati-mantras/agastya-saraswati-stotram/", "category": "सरस्वती", "symbol": "🌊", "preview": "शुद्धस्फटिकरूपायै सूक्ष्मरूपे नमो नमः", "keywords": ["अगस्त्य", "agastya", "saraswati stotra", "muni"] },
-  { "title": "ॐ ऐं महासरस्वत्यै नमः", "titleEng": "Mahasaraswati Mantra", "url": "/saraswati-mantras/mahasaraswati-mantra/", "category": "सरस्वती", "symbol": "✨", "preview": "ॐ ऐं महासरस्वत्यै नमः देवी दुर्गासप्तशती", "keywords": ["महासरस्वती", "mahasaraswati", "durga saptashati"] },
-  { "title": "सरस्वती गायत्री मंत्र", "titleEng": "Saraswati Gayatri Mantra", "url": "/saraswati-mantras/saraswati-gayatri-mantra/", "category": "सरस्वती", "symbol": "🌅", "preview": "ॐ ऐं वाग्देव्यै विद्महे कामराजाय धीमहि तन्नो देवी प्रचोदयात्", "keywords": ["सरस्वती गायत्री", "saraswati gayatri", "vagdevyai"] },
-  { "title": "विद्या सरस्वती मंत्र", "titleEng": "Vidya Saraswati Mantra", "url": "/saraswati-mantras/vidya-saraswati-mantra/", "category": "सरस्वती", "symbol": "🎓", "preview": "या देवी सर्वभूतेषु विद्यारूपेण संस्थिता नमस्तस्यै", "keywords": ["विद्या मंत्र", "vidya mantra", "student mantra", "विद्यार्थी"] },
-  { "title": "वद वद वाग्वादिनी स्वाहा", "titleEng": "Vad Vad Vagvadini Svaha", "url": "/saraswati-mantras/vagvadini-mantra/", "category": "सरस्वती", "symbol": "🗣️", "preview": "ॐ ऐं ह्रीं श्रीं वद वद वाग्वादिनी स्वाहा", "keywords": ["वाग्वादिनी", "vagvadini", "vak siddhi", "वाक् सिद्धि"] },
-  { "title": "सरस्वती कवचम्", "titleEng": "Saraswati Kavacham", "url": "/saraswati-mantras/saraswati-kavach/", "category": "सरस्वती", "symbol": "🛡️", "preview": "सरस्वती शिरः पातु ललाटं वाग्देवता", "keywords": ["सरस्वती कवच", "saraswati kavach", "protection"] },
-  { "title": "सरस्वती अष्टकम्", "titleEng": "Saraswati Ashtakam", "url": "/saraswati-mantras/saraswati-ashtakam/", "category": "सरस्वती", "symbol": "✴️", "preview": "यं ब्रह्मा वरुणेन्द्ररुद्रमरुतः स्तुन्वन्ति दिव्यैः स्तवैः", "keywords": ["सरस्वती अष्टकम्", "saraswati ashtakam", "8 shloka"] },
-  { "title": "सरस्वती १०८ नाम", "titleEng": "Saraswati 108 Names", "url": "/saraswati-mantras/saraswati-108-names/", "category": "सरस्वती", "symbol": "🌟", "preview": "ॐ सरस्वत्यै नमः ॐ महाभद्रायै नमः ॐ महामायायै नमः", "keywords": ["108 names", "saraswati names", "शतनाम"] },
-  { "title": "ॐ ऐं ह्रीं श्रीं वाग्देव्यै", "titleEng": "Aim Hreem Shreem Vagdevyai", "url": "/saraswati-mantras/saraswati-beej-mantra/", "category": "सरस्वती", "symbol": "🔮", "preview": "ॐ ऐं ह्रीं श्रीं वाग्देव्यै सरस्वत्यै नमः", "keywords": ["त्रि-बीज", "tri beej", "aim hreem shreem", "tantrik"] },
-  { "title": "याज्ञवल्क्य सरस्वती स्तोत्र", "titleEng": "Yajnavalkya Saraswati Stotram", "url": "/saraswati-mantras/yajnavalkya-saraswati-stotram/", "category": "सरस्वती", "symbol": "🏺", "preview": "नमो सरस्वति देव्यै ब्रह्मविद्यास्वरूपिणि", "keywords": ["याज्ञवल्क्य", "yajnavalkya", "rishi", "ऋषि"] },
-  { "title": "सरस्वती ध्यान श्लोक", "titleEng": "Saraswati Dhyana Shloka", "url": "/saraswati-mantras/saraswati-dhyana-shloka/", "category": "सरस्वती", "symbol": "🧘", "preview": "श्वेतपद्मासना देवी श्वेतगन्धानुलेपना", "keywords": ["ध्यान", "dhyana", "meditation", "saraswati puja"] },
-  { "title": "सरस्वती विद्यार्थी मंत्र", "titleEng": "Saraswati Vidyarthi Mantra", "url": "/saraswati-mantras/saraswati-vidyarthi-mantra/", "category": "सरस्वती", "symbol": "✏️", "preview": "परमेश्वरीं भगवतीं बुद्धिप्रदां शारदाम्", "keywords": ["विद्यार्थी", "student", "exam mantra", "परीक्षा"] },
-  { "title": "हंसवाहिनी माँ भजन", "titleEng": "Hansavahini Maa Bhajan", "url": "/saraswati-mantras/saraswati-bhajan/", "category": "सरस्वती", "symbol": "🎶", "preview": "वीणावादिनी माँ सरस्वती तेरी महिमा अपरम्पार", "keywords": ["भजन", "bhajan", "hansavahini", "veena"] },
-
-  { "title": "हरे कृष्ण महामंत्र", "titleEng": "Hare Krishna Mahamantra", "url": "/Krishna-Mahamantras/Hare-Krishna-mahamantras-हरे-कृष्ण/", "category": "कृष्ण", "symbol": "🪈", "preview": "हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे हरे राम हरे राम", "keywords": ["हरे कृष्ण", "hare krishna", "mahamantra", "kaliyug"] },
-  { "title": "श्रीमद् भगवद्गीता", "titleEng": "Bhagavad Gita", "url": "/Krishna-Mahamantras/Shreemad-Bhagavad-gita/", "category": "कृष्ण", "symbol": "📖", "preview": "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत अभ्युत्थानमधर्मस्य", "keywords": ["भगवद्गीता", "bhagavad gita", "gita", "18 adhyay", "700 shloka"] },
-  { "title": "माधुराष्टकम्", "titleEng": "Madhurashtakam", "url": "/Krishna-Mahamantras/Madhurkam-मधुराधिपतेरखिलं-मधुरम्/", "category": "कृष्ण", "symbol": "🌸", "preview": "अधरं मधुरं वदनं मधुरं नयनं मधुरं हसितं मधुरम्", "keywords": ["माधुराष्टकम्", "madhurashtakam", "vallabhacharya", "madhuram"] },
-  { "title": "ॐ नमो भगवते वासुदेवाय", "titleEng": "Om Namo Bhagavate Vasudevaya", "url": "/Krishna-Mahamantras/Om-Namo-Bhagavate-Vasudevaya-ॐ-नमो-भगवते-वासुदेवाय/", "category": "कृष्ण", "symbol": "🌀", "preview": "ॐ नमो भगवते वासुदेवाय द्वादशाक्षर मंत्र", "keywords": ["वासुदेवाय", "vasudevaya", "dwadashakshar", "moksha"] },
-  { "title": "कृष्ण चालीसा", "titleEng": "Krishna Chalisa", "url": "/Krishna-Mahamantras/Shri-Krishna-Chalisha/", "category": "कृष्ण", "symbol": "📿", "preview": "जय जय जय कृष्ण कृपाला जय जय जय नन्दलाला", "keywords": ["कृष्ण चालीसा", "krishna chalisa", "40 chaupai"] },
-  { "title": "अच्युतम् केशवम्", "titleEng": "Achyutam Keshavam", "url": "/Krishna-Mahamantras/Achyutam keshavam/", "category": "कृष्ण", "symbol": "🌿", "preview": "अच्युतम् केशवम् कृष्णदामोदरम् राम नारायणं जानकीवल्लभम्", "keywords": ["अच्युतम्", "achyutam", "keshavam", "vaishnav bhajan"] },
-  { "title": "श्री कृष्ण आरती", "titleEng": "Krishna Aarti", "url": "/Krishna-Mahamantras/Shri-Krishna-Aarti/", "category": "कृष्ण", "symbol": "🪔", "preview": "आरती कुंजबिहारी की श्री गिरिधर कृष्णमुरारी की", "keywords": ["कृष्ण आरती", "krishna aarti", "kunj bihari"] },
-  { "title": "दामोदराष्टकम्", "titleEng": "Damodarashtakam", "url": "/Krishna-Mahamantras/Damodarashtakam/", "category": "कृष्ण", "symbol": "🪢", "preview": "नमामीश्वरं सच्चिदानन्दरूपम् लसत्कुण्डलं गोकुले भ्राजमानम्", "keywords": ["दामोदराष्टकम्", "damodarashtakam", "kartik", "8 shloka"] },
-  { "title": "कृष्ण १०८ नाम", "titleEng": "Krishna 108 Names", "url": "/Krishna-Mahamantras/Krishna-108-names/", "category": "कृष्ण", "symbol": "✨", "preview": "कृष्णो वासुदेवो हरिरात्मा पुण्यश्चामलपावनः", "keywords": ["108 नाम", "krishna names", "shatnam"] },
-  { "title": "राधे राधे भजन", "titleEng": "Radhe Radhe Bhajan", "url": "/Krishna-Mahamantras/Radhe-radhe-bhajan/", "category": "कृष्ण", "symbol": "💕", "preview": "राधे राधे जपो चले आयेंगे बिहारी", "keywords": ["राधे राधे", "radhe radhe", "vrindavan bhajan", "राधा"] },
-  { "title": "कृष्ण गायत्री मंत्र", "titleEng": "Krishna Gayatri Mantra", "url": "/Krishna-Mahamantras/Krishna-gayatri/", "category": "कृष्ण", "symbol": "🌅", "preview": "ॐ देवकीनन्दनाय विद्महे वासुदेवाय धीमहि तन्नो कृष्णः प्रचोदयात्", "keywords": ["कृष्ण गायत्री", "krishna gayatri", "devaki nandan"] },
-  { "title": "गोविन्दम् आदि पुरुषम्", "titleEng": "Govindam Adi Purusham", "url": "/Krishna-Mahamantras/Govindam-adi-purusham/", "category": "कृष्ण", "symbol": "🌳", "preview": "गोविन्दम् आदि पुरुषम् तमहं भजामि", "keywords": ["गोविन्द", "govindam", "brahmasamhita", "adi purush"] },
-  { "title": "गीता अध्याय २ — निष्काम कर्म", "titleEng": "Gita Chapter 2 Nishkam Karma", "url": "/Krishna-Mahamantras/Gita-chapter-2-nishkam-karma/", "category": "कृष्ण", "symbol": "⚖️", "preview": "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन", "keywords": ["गीता", "gita", "nishkam karma", "chapter 2", "karmanye"] },
-  { "title": "कृष्णाष्टकम्", "titleEng": "Krishnashtakam", "url": "/Krishna-Mahamantras/Krishnashtakam/", "category": "कृष्ण", "symbol": "💫", "preview": "भजे व्रजैकमण्डनं समस्तपापखण्डनम् स्वभक्तचित्तरञ्जनं", "keywords": ["कृष्णाष्टकम्", "krishnashtakam", "shankaracharya", "8 shloka"] },
-
-  { "title": "अयि गिरिनन्दिनि — महिषासुरमर्दिनि", "titleEng": "Aigiri Nandini Mahishasura Mardini", "url": "/aigiri-nandini/", "category": "दुर्गा", "symbol": "🌺", "preview": "अयि गिरिनन्दिनि नन्दितमेदिनि विश्वविनोदिनि नन्दिनुते", "keywords": ["अयि गिरिनन्दिनि", "aigiri nandini", "mahishasura mardini", "shankaracharya", "21 shloka"] },
-  { "title": "या देवी सर्वभूतेषु", "titleEng": "Ya Devi Sarvabhuteshu", "url": "/durga-mantras/", "category": "दुर्गा", "symbol": "🌸", "preview": "या देवी सर्वभूतेषु शक्तिरूपेण संस्थिता नमस्तस्यै नमस्तस्यै", "keywords": ["या देवी", "ya devi", "shakti roopena", "namastasyai"] },
-  { "title": "दुर्गा सप्तशती", "titleEng": "Durga Saptashati", "url": "/durga-mantras/", "category": "दुर्गा", "symbol": "⚔️", "preview": "शरणागतदीनार्तपरित्राणपरायणे सर्वस्यार्तिहरे देवि", "keywords": ["सप्तशती", "saptashati", "700 shloka", "markandeya purana", "chandi"] },
-  { "title": "दुर्गा चालीसा", "titleEng": "Durga Chalisa", "url": "/durga-mantras/Durga-Chalisha", "category": "दुर्गा", "symbol": "📿", "preview": "नमो नमो दुर्गे सुख करनी नमो नमो दुर्गे दुख हरनी", "keywords": ["दुर्गा चालीसा", "durga chalisa", "40 chaupai"] },
-  { "title": "दुर्गा आरती", "titleEng": "Durga Aarti", "url": "/durga-mantras/Durga-aarti/", "category": "दुर्गा", "symbol": "🪔", "preview": "जय अम्बे गौरी मैया जय श्यामा गौरी", "keywords": ["दुर्गा आरती", "durga aarti", "jai ambe gauri"] },
-  { "title": "अर्गला स्तोत्रम्", "titleEng": "Argala Stotram", "url": "/durga-mantras/Argala-stotram/", "category": "दुर्गा", "symbol": "🌠", "preview": "जयन्ती मंगला काली भद्रकाली कपालिनी दुर्गा क्षमा शिवा धात्री", "keywords": ["अर्गला", "argala stotram", "27 shloka", "saptashati"] },
-  { "title": "कीलक स्तोत्रम्", "titleEng": "Kilaka Stotram", "url": "/durga-mantras/kilaka-stotram/", "category": "दुर्गा", "symbol": "🔐", "preview": "ओम् नमश्चण्डिकायै मार्कण्डेय उवाच", "keywords": ["कीलक", "kilaka stotram", "chandika", "saptashati"] },
-  { "title": "नवदुर्गा स्तुति", "titleEng": "Nav Durga Mantra", "url": "/durga-mantras/Nav-durga-mantra/", "category": "दुर्गा", "symbol": "🌟", "preview": "शैलपुत्री ब्रह्मचारिणी चन्द्रघण्टा कूष्माण्डा स्कन्दमाता", "keywords": ["नवदुर्गा", "nav durga", "9 devi", "navratri"] },
-  { "title": "देवी कवचम्", "titleEng": "Devi Kavacham", "url": "/durga-mantras/Devi-kavacham/", "category": "दुर्गा", "symbol": "🛡️", "preview": "प्राच्यां रक्षतु मामैन्द्री आग्नेय्यामग्निदेवता", "keywords": ["देवी कवच", "devi kavach", "sarvansh raksha"] },
-  { "title": "दुर्गा गायत्री मंत्र", "titleEng": "Durga Gayatri Mantra", "url": "/durga-mantras/", "category": "दुर्गा", "symbol": "🌅", "preview": "ॐ गिरिजायै विद्महे शिवप्रियायै धीमहि तन्नो दुर्गा प्रचोदयात्", "keywords": ["दुर्गा गायत्री", "durga gayatri", "girijayai"] },
-  { "title": "दुर्गा बीज मंत्र", "titleEng": "Durga Beej Mantra", "url": "/durga-mantras/", "category": "दुर्गा", "symbol": "🌺", "preview": "ॐ दुं दुर्गायै नमः ॐ ह्रीं दुं दुर्गायै नमः", "keywords": ["दुर्गा बीज", "durga beej mantra", "dum durgayai"] },
-
-  { "title": "हनुमान चालीसा", "titleEng": "Hanuman Chalisa", "url": "/hanuman-mantras/hanuman-chalisa/", "category": "हनुमान", "symbol": "🙏", "preview": "जय हनुमान ज्ञान गुण सागर जय कपीस तिहु लोक उजागर", "keywords": ["हनुमान चालीसा", "hanuman chalisa", "tulsidas", "40 chaupai"] },
-  { "title": "बजरंग बाण", "titleEng": "Bajrang Baan", "url": "/hanuman-mantras/bajrang-baan/", "category": "हनुमान", "symbol": "🏹", "preview": "निश्चय प्रेम प्रतीति ते विनय करें सनमान तेहि के कारज सकल", "keywords": ["बजरंग बाण", "bajrang baan", "raksha stotra", "sankat naashak"] },
-  { "title": "सुंदरकाण्ड", "titleEng": "Sundarkand", "url": "/hanuman-mantras/sundarkand/", "category": "हनुमान", "symbol": "🌿", "preview": "जामवंत के बचन सुहाए सुनि हनुमंत हृदय अति भाए", "keywords": ["सुंदरकाण्ड", "sundarkand", "ramcharitmanas", "5th kand"] },
-  { "title": "हनुमान बीज मंत्र", "titleEng": "Hanuman Beej Mantra", "url": "/hanuman-mantras/hanuman-beej-mantra/", "category": "हनुमान", "symbol": "🔮", "preview": "ॐ हं हनुमते नमः ॐ ऐं भ्रीं हनुमते रामदूताय नमः", "keywords": ["हनुमान बीज", "hanuman beej", "om han hanumate", "मंगलवार"] },
-  { "title": "श्री हनुमान आरती", "titleEng": "Hanuman Aarti", "url": "/hanuman-mantras/hanuman-aarti/", "category": "हनुमान", "symbol": "🪔", "preview": "आरती कीजे हनुमान लला की दुष्ट दलन रघुनाथ कला की", "keywords": ["हनुमान आरती", "hanuman aarti", "lala ki aarti"] },
-  { "title": "हनुमानष्टकम्", "titleEng": "Hanumashtakam", "url": "/hanuman-mantras/hanuman-ashtakam/", "category": "हनुमान", "symbol": "💫", "preview": "बाल समय रवि भक्षी लियो तब तीनहुँ लोक भयो अँधियारो", "keywords": ["हनुमानष्टकम्", "hanumashtakam", "tulsidas", "8 shloka"] },
-  { "title": "पञ्चमुखी हनुमान मंत्र", "titleEng": "Panchamukhi Hanuman Mantra", "url": "/hanuman-mantras/panchamukhi-hanuman-mantra/", "category": "हनुमान", "symbol": "🦁", "preview": "ॐ हं पञ्चवक्त्राय विद्महे महावीराय धीमहि", "keywords": ["पञ्चमुखी", "panchamukhi", "5 faces", "narasimha garuda"] },
-  { "title": "हनुमान कवचम्", "titleEng": "Hanuman Kavacham", "url": "/hanuman-mantras/hanuman-kavacham/", "category": "हनुमान", "symbol": "🛡️", "preview": "हनुमान मे शिरः पातु मुखं केसरिनन्दनः", "keywords": ["हनुमान कवच", "hanuman kavach", "bhoot badha", "raksha"] },
-  { "title": "हनुमान १०८ नाम", "titleEng": "Hanuman 108 Names", "url": "/hanuman-mantras/hanuman-108-names/", "category": "हनुमान", "symbol": "✨", "preview": "ॐ आञ्जनेयाय नमः ॐ महावीराय नमः ॐ हनुमते नमः", "keywords": ["108 नाम", "hanuman names", "anjaneya", "shatnam"] },
-  { "title": "हनुमान गायत्री मंत्र", "titleEng": "Hanuman Gayatri Mantra", "url": "/hanuman-mantras/hanuman-gayatri-mantra/", "category": "हनुमान", "symbol": "🌅", "preview": "ॐ आञ्जनेयाय विद्महे वायुपुत्राय धीमहि तन्नो हनुमत् प्रचोदयात्", "keywords": ["हनुमान गायत्री", "hanuman gayatri", "anjaneya", "vayuputra"] },
-  { "title": "मारुति स्तोत्र", "titleEng": "Maruti Stotra", "url": "/hanuman-mantras/maruti-stotra/", "category": "हनुमान", "symbol": "🌺", "preview": "मनोजवं मारुततुल्यवेगं जितेन्द्रियं बुद्धिमतां वरिष्ठम्", "keywords": ["मारुति", "maruti", "manojavam", "valmiki"] },
-  { "title": "संकट मोचन मंत्र", "titleEng": "Sankat Mochan Mantra", "url": "/hanuman-mantras/sankat-mochan-mantra/", "category": "हनुमान", "symbol": "🌸", "preview": "ॐ नमो हनुमते रुद्रावताराय सर्वशत्रुसंहारणाय", "keywords": ["संकट मोचन", "sankat mochan", "fear mantra", "bhay nash"] },
-  { "title": "हनुमान सहस्रनाम", "titleEng": "Hanuman Sahasranama", "url": "/hanuman-mantras/hanuman-sahasranama/", "category": "हनुमान", "symbol": "🏵️", "preview": "हनुमानञ्जनासूनुः वायुपुत्रो महाबलः रामेष्टः", "keywords": ["हनुमान सहस्रनाम", "hanuman sahasranama", "1000 names"] },
-
-  { "title": "श्री रामरक्षा स्तोत्रम्", "titleEng": "Shri Ram Raksha Stotram", "url": "/ram-mantras/ram-raksha-stotram/", "category": "राम", "symbol": "🛡️", "preview": "चरितं रघुनाथस्य शतकोटि-प्रविस्तरम् एकैकमक्षरं पुंसां महापातकनाशनम्", "keywords": ["राम रक्षा", "ram raksha stotram", "38 shloka", "brahmananda purana"] },
-  { "title": "राम तारक मंत्र", "titleEng": "Ram Taraka Mantra", "url": "/ram-mantras/ram-taraka-mantra/", "category": "राम", "symbol": "🏹", "preview": "श्री राम जय राम जय जय राम राम रामेति रामेति रमे रामे मनोरमे", "keywords": ["तारक मंत्र", "taraka mantra", "moksha mantra", "shiv upadesit"] },
-  { "title": "रामचरितमानस", "titleEng": "Ramcharitmanas", "url": "/ram-mantras/ramcharitmanas/", "category": "राम", "symbol": "📖", "preview": "मंगल भवन अमंगल हारी द्रवउ सो दशरथ अजिर बिहारी", "keywords": ["रामचरितमानस", "ramcharitmanas", "tulsidas", "7 kand", "doha chaupai"] },
-  { "title": "राम गायत्री मंत्र", "titleEng": "Ram Gayatri Mantra", "url": "/ram-mantras/ram-gayatri-mantra/", "category": "राम", "symbol": "🌅", "preview": "ॐ दशरथाय विद्महे सीतावल्लभाय धीमहि तन्नो रामः प्रचोदयात्", "keywords": ["राम गायत्री", "ram gayatri", "dasharatha", "sitavallabha"] },
-  { "title": "श्री राम चालीसा", "titleEng": "Shri Ram Chalisa", "url": "/ram-mantras/ram-chalisa/", "category": "राम", "symbol": "📿", "preview": "श्री रामचन्द्र कृपालु भज मन हरण भवभय दारुणम्", "keywords": ["राम चालीसा", "ram chalisa", "40 chaupai"] },
-  { "title": "श्री राम आरती", "titleEng": "Shri Ram Aarti", "url": "/ram-mantras/ram-aarti/", "category": "राम", "symbol": "🪔", "preview": "आरती कीजे हनुमान लला की दुष्ट-दलन रघुनाथ कला की", "keywords": ["राम आरती", "ram aarti", "raghunath"] },
-  { "title": "राम कवचम्", "titleEng": "Ram Kavacham", "url": "/ram-mantras/ram-kavacham/", "category": "राम", "symbol": "⚔️", "preview": "रामो राजमणिः सदा विजयते रामं रमेशं भजे", "keywords": ["राम कवच", "ram kavach", "protection mantra"] },
-  { "title": "श्री राम १०८ नाम", "titleEng": "108 Names of Shri Ram", "url": "/ram-mantras/ram-108-names/", "category": "राम", "symbol": "✨", "preview": "ॐ रामाय नमः ॐ रामभद्राय नमः ॐ रामचन्द्राय नमः", "keywords": ["108 नाम", "ram 108 names", "ashtottara"] },
-  { "title": "आपदाम् अपहर्तारम्", "titleEng": "Apadam Apahartaram", "url": "/ram-mantras/apadam-apahartaram/", "category": "राम", "symbol": "🌊", "preview": "आपदामपहर्तारम् दातारम् सर्वसम्पदाम् लोकाभिरामम् श्रीरामम्", "keywords": ["आपदाम्", "apadam apahartaram", "vipat nashak", "sankat"] },
-  { "title": "नाम रामायणम्", "titleEng": "Nama Ramayanam", "url": "/ram-mantras/nama-ramayanam/", "category": "राम", "symbol": "📜", "preview": "श्री रामजयम् शुद्धब्रह्मपरात्पर राम", "keywords": ["नाम रामायणम्", "nama ramayanam", "valmiki", "108 shloka"] },
-  { "title": "रघुपति राघव राजाराम", "titleEng": "Raghupati Raghava Rajaram", "url": "/ram-mantras/raghupati-raghava/", "category": "राम", "symbol": "🎵", "preview": "रघुपति राघव राजाराम पतित पावन सीताराम", "keywords": ["रघुपति राघव", "raghupati raghava", "gandhi bhajan", "national"] },
-  { "title": "सीताराम भजन", "titleEng": "Sita Ram Bhajan", "url": "/ram-mantras/sita-ram-bhajan/", "category": "राम", "symbol": "💕", "preview": "सीयाराम सीयाराम सीयाराम जय राम जय राम", "keywords": ["सीताराम", "sita ram", "janaki raman", "bhajan"] },
-  { "title": "राम बीज मंत्र", "titleEng": "Ram Beej Mantra", "url": "/ram-mantras/ram-beej-mantra/", "category": "राम", "symbol": "⚡", "preview": "ॐ श्रीं रामाय रघुनाथाय रामभद्राय रामचन्द्राय नमः", "keywords": ["राम बीज", "ram beej mantra", "shaktiशाली"] },
-
-  { "title": "विष्णु सहस्रनाम", "titleEng": "Vishnu Sahasranama", "url": "/vishnu-mantras/vishnu-sahasranama/", "category": "विष्णु", "symbol": "🏵️", "preview": "विश्वं विष्णुर्वषट्कारो भूतभव्यभवत्प्रभुः भूतकृत् भूतभृत्", "keywords": ["विष्णु सहस्रनाम", "vishnu sahasranama", "1000 names", "mahabharat"] },
-  { "title": "शान्ताकारं भुजगशयनं", "titleEng": "Shantakaram Bhujangashayanam", "url": "/vishnu-mantras/shantakaram-stuti/", "category": "विष्णु", "symbol": "🌊", "preview": "शान्ताकारं भुजगशयनं पद्मनाभं सुरेशम् विश्वाधारं गगनसदृशं", "keywords": ["शान्ताकारं", "shantakaram", "padmanabham", "vishnu dhyan"] },
-  { "title": "विष्णु चालीसा", "titleEng": "Vishnu Chalisa", "url": "/vishnu-mantras/vishnu-chalisa/", "category": "विष्णु", "symbol": "📿", "preview": "जय जय श्री विष्णु भगवाना जगत् पिता जगत् के त्राणा", "keywords": ["विष्णु चालीसा", "vishnu chalisa", "40 chaupai"] },
-  { "title": "ॐ जय जगदीश हरे", "titleEng": "Om Jai Jagdish Hare Aarti", "url": "/vishnu-mantras/om-jai-jagdish-hare-aarti/", "category": "विष्णु", "symbol": "🪔", "preview": "ॐ जय जगदीश हरे स्वामी जय जगदीश हरे भक्त जनों के संकट", "keywords": ["ॐ जय जगदीश", "om jai jagdish", "vishnu aarti", "nitya path"] },
-  { "title": "नारायण कवचम्", "titleEng": "Narayana Kavacham", "url": "/vishnu-mantras/narayana-kavacham/", "category": "विष्णु", "symbol": "🛡️", "preview": "ॐ हरिर्विदध्यान्मम सर्वरक्षां न्यस्ताङ्घ्रिपद्मः पतगेन्द्रपृष्ठे", "keywords": ["नारायण कवच", "narayana kavach", "bhagavat purana", "sarvansh raksha"] },
-  { "title": "विष्णु गायत्री मंत्र", "titleEng": "Vishnu Gayatri Mantra", "url": "/vishnu-mantras/vishnu-gayatri-mantra/", "category": "विष्णु", "symbol": "🌅", "preview": "ॐ नारायणाय विद्महे वासुदेवाय धीमहि तन्नो विष्णुः प्रचोदयात्", "keywords": ["विष्णु गायत्री", "vishnu gayatri", "narayanaya"] },
-  { "title": "दशावतार स्तोत्रम्", "titleEng": "Dashavatara Stotram", "url": "/vishnu-mantras/dashavatara-stotra/", "category": "विष्णु", "symbol": "🐟", "preview": "प्रलयपयोधिजले धृतवानसि वेदम् विहितवहित्रचरित्रमखेदम् केशव धृतमीनशरीर", "keywords": ["दशावतार", "dashavatara", "10 avatars", "jayadev", "keshava"] },
-  { "title": "श्री हरि स्तोत्रम्", "titleEng": "Shri Hari Stotram", "url": "/vishnu-mantras/shri-hari-stotram/", "category": "विष्णु", "symbol": "✨", "preview": "जगज्जालपालं चलत्कण्ठमालं शरच्चन्द्रभालं महादैत्यकालम्", "keywords": ["हरि स्तोत्र", "hari stotram", "8 shloka", "popular"] },
-  { "title": "वेंकटेश्वर स्तोत्रम्", "titleEng": "Venkateshwara Stotram", "url": "/vishnu-mantras/venkateshwara-stotram/", "category": "विष्णु", "symbol": "⛰️", "preview": "कमलाकुचचूचुककुंकुमतो नियमादभिचाञ्चदशेषजनम्", "keywords": ["वेंकटेश्वर", "venkateshwara", "tirupati", "balaji"] },
-  { "title": "विष्ण्वष्टकम्", "titleEng": "Vishnu Ashtakam", "url": "/vishnu-mantras/vishnu-ashtakam/", "category": "विष्णु", "symbol": "💫", "preview": "शान्तं पद्मासनस्थं शशिधरमकुटं चारुवक्त्रं चतुर्भुजम्", "keywords": ["विष्ण्वष्टकम्", "vishnu ashtakam", "shankaracharya", "8 shloka"] },
-  { "title": "नृसिंह स्तोत्रम्", "titleEng": "Narasimha Stotram", "url": "/vishnu-mantras/narasimha-stotram/", "category": "विष्णु", "symbol": "🦁", "preview": "उग्रं वीरं महाविष्णुं ज्वलन्तं सर्वतोमुखम् नृसिंहं भीषणं भद्रम्", "keywords": ["नृसिंह", "narasimha", "hiranyakashipu", "4th avatar"] },
-  { "title": "ॐ नमो नारायणाय — अष्टाक्षर", "titleEng": "Om Namo Narayanaya", "url": "/vishnu-mantras/om-namo-narayanaya/", "category": "विष्णु", "symbol": "🌀", "preview": "ॐ नमो नारायणाय अष्टाक्षर महामंत्र मोक्ष का मार्ग", "keywords": ["ॐ नमो नारायणाय", "om namo narayanaya", "ashtakshar", "moksha mantra"] },
-  { "title": "एकादशी व्रत मंत्र", "titleEng": "Ekadashi Vrat Mantra", "url": "/vishnu-mantras/ekadashi-vrat-mantra/", "category": "विष्णु", "symbol": "🌙", "preview": "उदितिष्ठोतिष्ठ गोविन्द त्यज निद्रां जगत्पते", "keywords": ["एकादशी", "ekadashi", "vrat", "govind", "devotthan"] },
-  { "title": "सत्यनारायण व्रत कथा", "titleEng": "Satyanarayana Vrat Katha", "url": "/vishnu-mantras/satyanarayana-vrat-katha/", "category": "विष्णु", "symbol": "🌟", "preview": "सत्यनारायण कथा श्रुत्वा सर्वपापैः प्रमुच्यते", "keywords": ["सत्यनारायण", "satyanarayana", "vrat katha", "skanda purana"] },
-  { "title": "गरुड स्तोत्रम्", "titleEng": "Garuda Stotram", "url": "/vishnu-mantras/garuda-stotram/", "category": "विष्णु", "symbol": "🦅", "preview": "वन्दे विनतासुतं सुरमुनीन्द्राणां वरदं हरि-वाहनम्", "keywords": ["गरुड", "garuda", "vishnu vahana", "sarp nashak"] },
-
-  { "title": "गौरी दौरी दौरी कहथिन हे", "titleEng": "Gauri Dauri Dauri Kahthin He", "url": "/Vidyapati-Geet-Sangrah/gauri-dauri-dauri-kahthin-he/", "category": "मैथिली", "symbol": "🎵", "preview": "गौरी दौरी दौरी कहथिन हे मोरि अंगना", "keywords": ["गौरी दौरी", "gauri dauri", "vidyapati", "maithili geet", "mithila"] },
-  { "title": "जोगिया एक हम देखलौं गे माई", "titleEng": "Jogiya Ek Hum Dekhlaun Ge Mai", "url": "/Vidyapati-Geet-Sangrah/jogiya-ek-hum-dekhlaun-ge-mai/", "category": "मैथिली", "symbol": "🎶", "preview": "जोगिया एक हम देखलौं गे माई मोरि अंगना", "keywords": ["जोगिया", "jogiya", "vidyapati", "maithili geet", "mithila"] },
-  { "title": "बर अजगुत देखल तोर अंगना", "titleEng": "Bar Ajgut Dekhal Tor Angana", "url": "/Vidyapati-Geet-Sangrah/bar-ajgut-dekhal-tor-angana/", "category": "मैथिली", "symbol": "🌸", "preview": "बर अजगुत देखल तोर अंगना मोरि अंगना", "keywords": ["बर अजगुत", "bar ajgut", "vidyapati", "maithili geet", "mithila"] },
-  { "title": "उगना रे मोर कटाई गेला", "titleEng": "Ugna Re Mor Katai Gela", "url": "/Vidyapati-Geet-Sangrah/ugna-re-mor-katai-gela/", "category": "मैथिली", "symbol": "🌺", "preview": "उगना रे मोर कटाई गेला मोरि अंगना", "keywords": ["उगना रे", "ugna re", "vidyapati", "maithili geet", "mithila"] },
-
-  { "title": "आजु नाथ एक व्रत", "titleEng": "Aaju Nath Ek Vrat", "url": "/Vidyapati-Geet-Sangrah/aaju-nath-ek-vrat/", "category": "मैथिली", "symbol": "🕉️", "preview": "आजु नाथ एक व्रत महा सुख लागत हे", "keywords": ["आजु नाथ", "aaju nath", "vidyapati", "maithili geet", "shiva gauri"] },
-  { "title": "बड़ सुखसार पाओल तुअ तीरे", "titleEng": "Bar Sukhsar Paol Tua Tere", "url": "/Vidyapati-Geet-Sangrah/bar-sukhsar-paol-tua-teere/", "category": "मैथिली", "symbol": "🌸", "preview": "बड़ सुखसार पाओल तुअ तीरे", "keywords": ["बड़ सुखसार", "bar sukhsar", "vidyapati", "maithili geet", "mithila"] },
-  { "title": "गे माई चंद्रमुखी सन", "titleEng": "Ge Mai Chandramukhi San", "url": "/Vidyapati-Geet-Sangrah/chandramukhi-san-gauri-hamar-chhathi/", "category": "मैथिली", "symbol": "🌙", "preview": "गे माई चंद्रमुखी सन गौरी हमर छथि", "keywords": ["गे माई", "ge mai", "vidyapati", "maithili geet", "chandramukhi"] },
-
-  { "title": "दक्षिण काली मंत्र", "titleEng": "Dakshina Kali Mantra", "url": "/kali-mantras/dakshina-kali-mantra/", "category": "काली", "symbol": "⚡", "preview": "ॐ ह्रीं क्रीं दक्षिणकाली वाच्यै नमः॥", "keywords": ["दक्षिण काली", "dakshina kali", "kali mantra", "shakti"] },
-  { "title": "काली चालीसा", "titleEng": "Kali Chalisa", "url": "/kali-mantras/kali-chalisa/", "category": "काली", "symbol": "📿", "preview": "जय काली जय जगदम्बे। शिव की प्रिय हे जगत की अम्बे॥", "keywords": ["काली चालीसा", "kali chalisa", "40 chaupai", "kali mata"] },
-  { "title": "काली कवचम्", "titleEng": "Kali Kavacham", "url": "/kali-mantras/kali-kavacham/", "category": "काली", "symbol": "🛡️", "preview": "गणेशो मे शिरः पातु ललाटं विघ्ननाशनः।", "keywords": ["काली कवच", "kali kavach", "protection", "raksha"] },
-  { "title": "चामुंडा स्तुति", "titleEng": "Chamunda Stuti", "url": "/kali-mantras/chamunda-stuti/", "category": "काली", "symbol": "💀", "preview": "चामुंडा चण्डिका घोरा चण्डमुण्डासुरान्तकृत्।", "keywords": ["चामुंडा", "chamunda", "chandika", "ghora"] },
-  { "title": "काली गायत्री", "titleEng": "Kali Gayatri", "url": "/kali-mantras/kali-gayatri/", "category": "काली", "symbol": "🌅", "preview": "ॐ काल्यै विद्महे श्मशानवासिन्यै धीमहि तन्नो काली प्रचोदयात्।", "keywords": ["काली गायत्री", "kali gayatri", "gayatri mantra", "kali"] },
-  { "title": "काली १०८ नाम", "titleEng": "Kali 108 Names", "url": "/kali-mantras/kali-108-names/", "category": "काली", "symbol": "✨", "preview": "ॐ काल्यै नमः ॐ कालकर्ण्यै नमः ॐ कालरात्र्यै नमः।", "keywords": ["काली १०८ नाम", "kali 108 names", "ashtottara", "kali names"] },
-  { "title": "काली सहस्रनाम", "titleEng": "Kali Sahasranama", "url": "/kali-mantras/kali-sahasranama/", "category": "काली", "symbol": "🌟", "preview": "ॐ काल्यै नमः ॐ कालकर्ण्यै नमः ॐ कालरात्र्यै नमः।", "keywords": ["काली सहस्रनाम", "kali sahasranama", "1000 names", "kali"] },
-  { "title": "आद्य स्तोत्रम्", "titleEng": "Adya Stotram", "url": "/kali-mantras/adya-stotram/", "category": "काली", "symbol": "📜", "preview": "आद्या देवी महाकाली सर्वमङ्गलकारिणी।", "keywords": ["आद्य स्तोत्र", "adya stotram", "mahakali", "sarvamangala"] },
-  { "title": "काली प्रातःस्मरण", "titleEng": "Kali Pratah Smarana", "url": "/kali-mantras/kali-pratahsmarana/", "category": "काली", "symbol": "🌄", "preview": "प्रातः कालीं स्मरेन्नित्यं सायं कालीं स्मरेत् सदा।", "keywords": ["प्रातःस्मरण", "pratah smarana", "morning prayer", "kali"] },
-  { "title": "दक्षिण काली कवच", "titleEng": "Dakshina Kali Kavach", "url": "/kali-mantras/dakshina-kali-kavach/", "category": "काली", "symbol": "🛡️", "preview": "दक्षिणकाली मे शिरः पातु ललाटं कालिका सदा।", "keywords": ["दक्षिण काली कवच", "dakshina kali kavach", "protection", "kali"] },
-  { "title": "काली खड्गमाला", "titleEng": "Kali Khadgamala", "url": "/kali-mantras/kali-khadgamala/", "category": "काली", "symbol": "🔪", "preview": "ॐ ऐं ह्रीं क्लीं चामुण्डायै विच्चे।", "keywords": ["खड्गमाला", "khadgamala", "kali", "tantric"] },
-  { "title": "नवरात्रि मंत्र", "titleEng": "Navarna Mantra", "url": "/kali-mantras/navarna-mantra/", "category": "काली", "symbol": "🌙", "preview": "ॐ ऐं ह्रीं क्लीं चामुण्डायै विच्चे।", "keywords": ["नवरात्रि", "navarna", "9 letters", "kali"] },
-  { "title": "परशुराम काली स्तोत्रम्", "titleEng": "Parashurama Kali Stotram", "url": "/kali-mantras/parashurama-kali-stotram/", "category": "काली", "symbol": "🪓", "preview": "नमस्ते शङ्करप्रियायै नमस्ते देवि कालिके।", "keywords": ["परशुराम", "parashurama", "kali stotram", "shankarpriya"] },
-  { "title": "काली पूजा विधि", "titleEng": "Kali Puja Vidhi", "url": "/kali-mantras/kali-puja-vidhi/", "category": "काली", "symbol": "🙏", "preview": "काली पूजाविधिं वक्ष्ये सर्वकामफलप्रदम्।", "keywords": ["काली पूजा", "kali puja vidhi", "worship method", "kali"] },
-  { "title": "ब्रह्म-कृत काली स्तुति", "titleEng": "Brahma-Krita Kali Stuti", "url": "/kali-mantras/brahma-krita-kali-stuti/", "category": "काली", "symbol": "📖", "preview": "ब्रह्मोवाच — देवि त्वं परमा शक्तिः सर्वेषां प्राणवल्लभा।", "keywords": ["ब्रह्म कृत", "brahma krita", "kali stuti", "brahma"] },
-  { "title": "गुह्य काली मंत्र", "titleEng": "Guhya Kali Mantra", "url": "/kali-mantras/guhya-kali-mantra/", "category": "काली", "symbol": "🔮", "preview": "गुह्य काली महारौद्री सर्वशत्रुक्षयंकरी।", "keywords": ["गुह्य काली", "guhya kali", "secret mantra", "raoudri"] },
-  { "title": "श्मशानकाली स्तोत्र", "titleEng": "SmashanaKali Stotra", "url": "/kali-mantras/smashanakali-stotra/", "category": "काली", "symbol": "⚰️", "preview": "श्मशानवासिनी देवी महाकाली नमोऽस्तु ते।", "keywords": ["श्मशानकाली", "smashanakali", "cremation ground", "kali"] },
-  { "title": "काली महास्थुति — रामकृष्ण", "titleEng": "Kali Mahastuti Ramakrishna", "url": "/kali-mantras/kali-mahastuti-ramakrishna/", "category": "काली", "symbol": "🌺", "preview": "जगन्मातर् जगदाधारे जगदम्बे नमो नमः।", "keywords": ["रामकृष्ण", "ramakrishna", "kali mahastuti", "jagadamba"] },
-  { "title": "जगन्मंगल काली कवच", "titleEng": "Jaganmangala Kali Kavach", "url": "/kali-mantras/jaganmangala-kali-kavach/", "category": "काली", "symbol": "🌍", "preview": "जगन्मंगल काली कवचं सर्वरक्षाकरं परम्।", "keywords": ["जगन्मंगल", "jaganmangala", "kali kavach", "universal protection"] },
-  { "title": "काली एकाक्षरी मंत्र", "titleEng": "Kali Ekakshari Mantra", "url": "/kali-mantras/kali-ekakshari-mantra/", "category": "काली", "symbol": "🔤", "preview": "ॐ क्रीं काली।", "keywords": ["एकाक्षरी", "ekakshari", "single letter", "kali"] },
-  { "title": "काली मंगल आरती", "titleEng": "Kali Mangal Aarti", "url": "/kali-mantras/kali-mangal-aarti/", "category": "काली", "symbol": "🪔", "preview": "जय काली माँ जय काली माँ। जय श्याम काली महाकाली माँ॥", "keywords": ["काली आरती", "kali aarti", "mangal aarti", "kali maa"] },
-  { "title": "कामकला काली स्तोत्रम्", "titleEng": "Kamakala Kali Stotram", "url": "/kali-mantras/kamakala-kali-stotram/", "category": "काली", "symbol": "🌙", "preview": "कामकला काली देवी सर्वकामफलप्रदा।", "keywords": ["कामकला", "kamakala", "kali stotram", "desire fulfillment"] },
-  { "title": "काली नामावली", "titleEng": "Kali Namavali", "url": "/kali-mantras/kali-namavali/", "category": "काली", "symbol": "📝", "preview": "काली कालिका कपालिनी चामुण्डा चण्डिका घोरा।", "keywords": ["काली नामावली", "kali namavali", "names of kali", "kali"] },
-
-  { "title": "गजाननं भूत गणादि", "titleEng": "Gajanana Bhoot Ganadi", "url": "/ganesh-mantras/gajanana-shree-gajanana/", "category": "गणेश", "symbol": "🐘", "preview": "गजाननं भूतगणादिसेवितं कपित्थजम्बूफलसार भक्षितम्।", "keywords": ["गजानन", "gajanana", "ganesh bhajan", "elephant faced"] },
-  { "title": "गणेश पञ्चरत्नम्", "titleEng": "Ganesh Pancharatnam", "url": "/ganesh-mantras/ganesh-pancharatnam/", "category": "गणेश", "symbol": "💎", "preview": "मुदाकरात्तमोदकं सदा विमुक्तिसाधकम् कलाधरावतंसकम्।", "keywords": ["पञ्चरत्न", "pancharatnam", "5 gems", "shankaracharya"] },
-  { "title": "गणपति बप्पा मोरया", "titleEng": "Ganpati Bappa Morya", "url": "/ganesh-mantras/ganpati-bappa-morya/", "category": "गणेश", "symbol": "🥁", "preview": "गणपति बप्पा मोरया मंगलमूर्ती मोरया।", "keywords": ["गणपति बप्पा", "ganpati bappa", "morya", "festival bhajan"] },
-  { "title": "गणेश कवचम्", "titleEng": "Ganesh Kavacham", "url": "/ganesh-mantras/ganesh-kavach/", "category": "गणेश", "symbol": "🛡️", "preview": "गणेशो मे शिरः पातु ललाटं विघ्ननाशनः।", "keywords": ["गणेश कवच", "ganesh kavach", "protection", "vigraha"] },
-  { "title": "एकदंत स्तोत्र", "titleEng": "Ekadanta Stotra", "url": "/ganesh-mantras/ekadanta-stotra/", "category": "गणेश", "symbol": "🦷", "preview": "एकदंतं महाकायं तप्तकाञ्चनसन्निभम्।", "keywords": ["एकदंत", "ekadanta", "single tusk", "ganesh"] },
-  { "title": "सिद्धि विनायक मंत्र", "titleEng": "Siddhi Vinayak Mantra", "url": "/ganesh-mantras/siddhi-vinayak-mantra/", "category": "गणेश", "symbol": "⭐", "preview": "ॐ नमो सिद्धि विनायकाय सर्व कार्य कर्त्रे।", "keywords": ["सिद्धि विनायक", "siddhi vinayak", "success mantra", "ganesh"] },
-  { "title": "गणेश अष्टनाम स्तोत्र", "titleEng": "Ganesh Ashtanama Stotra", "url": "/ganesh-mantras/ganesh-ashtanama-stotra/", "category": "गणेश", "symbol": "📖", "preview": "वक्रतुण्ड एकदंतश्च कृष्णपिंगाक्षगजवक्त्रकाः।", "keywords": ["अष्टनाम", "ashtanama", "8 names", "ganesh"] },
-  { "title": "गणेश सहस्रनाम", "titleEng": "Ganesh Sahasranama", "url": "/ganesh-mantras/ganesh-sahasranama/", "category": "गणेश", "symbol": "🌟", "preview": "ॐ गणेश्वराय नमः ॐ गणक्रीडाय नमः।", "keywords": ["गणेश सहस्रनाम", "ganesh sahasranama", "1000 names", "ganesh"] },
-  { "title": "मोदकहस्त स्तुति", "titleEng": "Modakahasta Stuti", "url": "/ganesh-mantras/modakahasta-stotra/", "category": "गणेश", "symbol": "🍬", "preview": "मोदकहस्तं मुषकवाहनम् सिद्धिबुद्धिसमेतम्।", "keywords": ["मोदकहस्त", "modakahasta", "sweet in hand", "ganesh"] },
-  { "title": "गणेश द्वादश नाम", "titleEng": "Ganesh Dwadasha Nama", "url": "/ganesh-mantras/ganesh-dwadasha-nama/", "category": "गणेश", "symbol": "🔢", "preview": "सुमुखश्चैकदंतश्च कपिलो गजकर्णकः।", "keywords": ["द्वादश नाम", "dwadasha nama", "12 names", "ganesh"] },
-  { "title": "गणेश मंगलाचरण", "titleEng": "Ganesh Mangalacharana", "url": "/ganesh-mantras/ganesh-mangalacharana/", "category": "गणेश", "symbol": "🌸", "preview": "शुक्लाम्बरधरं विष्णुं शशिवर्णं चतुर्भुजम्।", "keywords": ["मंगलाचरण", "mangalacharana", "auspicious beginning", "ganesh"] },
-  { "title": "मुदाकरात्त मोदकम्", "titleEng": "Mudakaratta Modakam", "url": "/ganesh-mantras/mudakarata-modakam/", "category": "गणेश", "symbol": "🏺", "preview": "मुदाकरात्तमोदकं सदा विमुक्तिसाधकम्।", "keywords": ["मुदाकरात्त", "mudakaratta", "modakam", "shankaracharya"] },
-  { "title": "हेरम्ब पञ्चमुख स्तोत्र", "titleEng": "Heramba Panchamukha Stotra", "url": "/ganesh-mantras/heramba-stotra/", "category": "गणेश", "symbol": "🌞", "preview": "पञ्चाननं गजवदनं महोदरं सिंहवाहनम्।", "keywords": ["हेरम्ब", "heramba", "panchamukha", "5 faced ganesh"] },
-  { "title": "विघ्नराज स्तोत्र", "titleEng": "Vighnaraja Stotra", "url": "/ganesh-mantras/vighnaraja-stotra/", "category": "गणेश", "symbol": "👑", "preview": "विघ्नेश्वरं विश्ववन्द्यम् गणाध्यक्षं पुरातनम्।", "keywords": ["विघ्नराज", "vighnaraja", "obstacle remover", "ganesh"] },
-  { "title": "गणेश नमस्कार मंत्र", "titleEng": "Ganesh Namaskara Mantra", "url": "/ganesh-mantras/ganesh-namaskara-mantra/", "category": "गणेश", "symbol": "🙏", "preview": "ॐ श्री गणेशाय नमः ॐ विघ्नहर्त्रे नमः।", "keywords": ["नमस्कार मंत्र", "namaskara mantra", "morning prayer", "ganesh"] }
+  {
+    "title": "नमामि शमीशान — रुद्राष्टकम्",
+    "titleEng": "Namami Shamishan Rudrashtakam",
+    "url": "/shiva-mantras/Namami-samisam-nirvanrupam/",
+    "category": "शिव",
+    "symbol": "🔱",
+    "preview": "नमामि शमीशान निर्वाण रूपं विभुं व्यापकं ब्रह्म वेदस्वरूपम्",
+    "keywords": [
+      "रुद्राष्टकम्",
+      "rudrashtakam",
+      "namami shamishan",
+      "तुलसीदास"
+    ]
+  },
+  {
+    "title": "महामृत्युंजय मंत्र",
+    "titleEng": "Mahamrityunjaya Mantra",
+    "url": "/shiva-mantras/Shiva-mahamrityunjaya-mantra/",
+    "category": "शिव",
+    "symbol": "☽",
+    "preview": "ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्",
+    "keywords": [
+      "महामृत्युंजय",
+      "mahamrityunjaya",
+      "tryambakam",
+      "mrityu mantra"
+    ]
+  },
+  {
+    "title": "ॐ नमः शिवाय — पञ्चाक्षर स्तोत्रम्",
+    "titleEng": "Om Namah Shivaya Panchakshara",
+    "url": "/shiva-mantras/Shiva-panchakshara-stotram/",
+    "category": "शिव",
+    "symbol": "🕉️",
+    "preview": "नागेन्द्रहाराय त्रिलोचनाय भस्मांगरागाय महेश्वराय",
+    "keywords": [
+      "पञ्चाक्षर",
+      "panchakshara",
+      "om namah shivay",
+      "shankaracharya"
+    ]
+  },
+  {
+    "title": "शिव तांडव स्तोत्रम्",
+    "titleEng": "Shiv Tandav Stotram",
+    "url": "/shiva-mantras/shiva-tandav-stotram/",
+    "category": "शिव",
+    "symbol": "💃",
+    "preview": "जटाटवीगलज्जलप्रवाहपावितस्थले गलेऽवलम्ब्य लम्बितां भुजंगतुंगमालिकाम्",
+    "keywords": [
+      "तांडव",
+      "tandav",
+      "shiv tandav",
+      "रावण",
+      "ravan"
+    ]
+  },
+  {
+    "title": "शिव चालीसा",
+    "titleEng": "Shiv Chalisa",
+    "url": "/shiva-mantras/Shiv-chalisa",
+    "category": "शिव",
+    "symbol": "📿",
+    "preview": "जय गणेश गिरिजा सुवन मंगल करण कृपाल",
+    "keywords": [
+      "चालीसा",
+      "chalisa",
+      "shiv chalisa"
+    ]
+  },
+  {
+    "title": "रुद्राष्टकम्",
+    "titleEng": "Rudra Ashtakam",
+    "url": "/shiva-mantras/Namami-samisam-nirvanrupam/",
+    "category": "शिव",
+    "symbol": "⚡",
+    "preview": "नमामीशमीशान निर्वाणरूपम् विभुं व्यापकं ब्रह्म वेदस्वरूपम्",
+    "keywords": [
+      "रुद्राष्टकम्",
+      "rudra ashtakam",
+      "8 shloka"
+    ]
+  },
+  {
+    "title": "शिव सहस्रनाम",
+    "titleEng": "Shiv Sahasranama",
+    "url": "/shiva-mantras/Shiva-sahasranama/",
+    "category": "शिव",
+    "symbol": "🌿",
+    "preview": "स्थिरः स्थाणुः प्रभुर्भानुः प्रवरो वरदो वरः",
+    "keywords": [
+      "सहस्रनाम",
+      "sahasranama",
+      "1000 names of shiv"
+    ]
+  },
+  {
+    "title": "बिल्वाष्टकम्",
+    "titleEng": "Bilvashtakam",
+    "url": "/shiva-mantras/bilvashtakam-बिल्वाष्टकम्/",
+    "category": "शिव",
+    "symbol": "🍃",
+    "preview": "त्रिदलं त्रिगुणाकारं त्रिनेत्रं च त्रयायुधम्",
+    "keywords": [
+      "बिल्वाष्टकम्",
+      "bilvashtakam",
+      "bel patra",
+      "बेल पत्र"
+    ]
+  },
+  {
+    "title": "लिंगाष्टकम्",
+    "titleEng": "Lingashtakam",
+    "url": "/shiva-mantras/Shiva-lingashtakam/",
+    "category": "शिव",
+    "symbol": "🏛️",
+    "preview": "ब्रह्ममुरारिसुरार्चितलिंगं निर्मलभासितशोभितलिंगम्",
+    "keywords": [
+      "लिंगाष्टकम्",
+      "lingashtakam",
+      "shivling"
+    ]
+  },
+  {
+    "title": "शिव आरती",
+    "titleEng": "Shiv Aarti",
+    "url": "/shiva-mantras/Shiv-aarti/",
+    "category": "शिव",
+    "symbol": "🪔",
+    "preview": "ॐ जय शिव ओंकारा स्वामी जय शिव ओंकारा",
+    "keywords": [
+      "आरती",
+      "aarti",
+      "shiv aarti",
+      "om jai shiv omkara"
+    ]
+  },
+  {
+    "title": "शिव कवचम्",
+    "titleEng": "Shiv Kavacham",
+    "url": "/shiva-mantras/Shiv-kavacham",
+    "category": "शिव",
+    "symbol": "🛡️",
+    "preview": "रुद्रो मे मस्तकं पातु ललाटं चन्द्रशेखरः",
+    "keywords": [
+      "कवच",
+      "kavach",
+      "shiv kavach",
+      "रक्षा मंत्र"
+    ]
+  },
+  {
+    "title": "हर हर महादेव भजन",
+    "titleEng": "Har Har Mahadev Bhajan",
+    "url": "/shiva-mantras/har-har-mahadev",
+    "category": "शिव",
+    "symbol": "🎵",
+    "preview": "हर हर महादेव बम बम भोले जय जय शम्भो नीलकंठ देव",
+    "keywords": [
+      "हर हर महादेव",
+      "har har mahadev",
+      "bam bam bhole",
+      "भजन"
+    ]
+  },
+  {
+    "title": "शिव महिम्नः स्तोत्र",
+    "titleEng": "Shiv Mahimna Stotra",
+    "url": "/shiva-mantras/Shiva-mahimna-stotra",
+    "category": "शिव",
+    "symbol": "📖",
+    "preview": "महिम्नः पारं ते परमविदुषो यद्यसदृशी स्तुतिर्ब्रह्मादीनामपि",
+    "keywords": [
+      "महिम्नः स्तोत्र",
+      "mahimna stotra",
+      "pushpadanta",
+      "43 shloka"
+    ]
+  },
+  {
+    "title": "शिवाष्टकम्",
+    "titleEng": "Shivashtakam",
+    "url": "/shiva-mantras/Shivashtakam",
+    "category": "शिव",
+    "symbol": "🌙",
+    "preview": "प्रभुं प्राणनाथं विभुं विश्वनाथं जगन्नाथनाथं सदानन्दभाजम्",
+    "keywords": [
+      "शिवाष्टकम्",
+      "shivashtakam",
+      "8 shloka"
+    ]
+  },
+  {
+    "title": "शिव बीज मंत्र",
+    "titleEng": "Shiv Beej Mantra",
+    "url": "/shiva-mantras/Shiva-beej-mantra",
+    "category": "शिव",
+    "symbol": "🌀",
+    "preview": "ॐ नमः शिवाय ॐ ह्रौं जूं सः",
+    "keywords": [
+      "बीज मंत्र",
+      "beej mantra",
+      "hroun",
+      "shiv shakti"
+    ]
+  },
+  {
+    "title": "द्वादश ज्योतिर्लिंग स्तोत्रम्",
+    "titleEng": "Jyotirlinga Stotram",
+    "url": "/shiva-mantras/Shiva-jyotirlinga-stotram",
+    "category": "शिव",
+    "symbol": "✨",
+    "preview": "सौराष्ट्रे सोमनाथं च श्रीशैले मल्लिकार्जुनम् उज्जयिन्यां महाकालम्",
+    "keywords": [
+      "ज्योतिर्लिंग",
+      "jyotirlinga",
+      "12 jyotirlinga",
+      "somnath"
+    ]
+  },
+  {
+    "title": "शिव गायत्री मंत्र",
+    "titleEng": "Shiv Gayatri Mantra",
+    "url": "/shiva-mantras/shiva-gayatri-mantra",
+    "category": "शिव",
+    "symbol": "🌅",
+    "preview": "ॐ तत्पुरुषाय विद्महे महादेवाय धीमहि तन्नो रुद्रः प्रचोदयात्",
+    "keywords": [
+      "शिव गायत्री",
+      "shiv gayatri",
+      "tatpurushaya",
+      "rudra"
+    ]
+  },
+  {
+    "title": "शिव मानस पूजा",
+    "titleEng": "Shiv Manasa Puja",
+    "url": "/shiva-mantras/shiva-manasa-puja",
+    "category": "शिव",
+    "symbol": "🙏",
+    "preview": "रत्नैः कल्पितमासनं हिमजलैः स्नानं च दिव्याम्बरं",
+    "keywords": [
+      "मानस पूजा",
+      "manasa puja",
+      "shankaracharya",
+      "mental worship"
+    ]
+  },
+  {
+    "title": "या कुन्देन्दु तुषार — वंदना",
+    "titleEng": "Ya Kundendu Vandana",
+    "url": "/saraswati-mantras/ya-kundendu-vandana/",
+    "category": "सरस्वती",
+    "symbol": "🪷",
+    "preview": "या कुन्देन्दु तुषारहारधवला या शुभ्रवस्त्रावृता",
+    "keywords": [
+      "या कुन्देन्दु",
+      "ya kundendu",
+      "saraswati vandana",
+      "सरस्वती"
+    ]
+  },
+  {
+    "title": "ॐ ऐं सरस्वत्यै नमः — बीज मंत्र",
+    "titleEng": "Om Aim Saraswatyai Namah",
+    "url": "/saraswati-mantras/om-aim-saraswatyai-namah/",
+    "category": "सरस्वती",
+    "symbol": "🕉️",
+    "preview": "ॐ ऐं सरस्वत्यै नमः ऐं सरस्वती का बीज अक्षर",
+    "keywords": [
+      "ॐ ऐं",
+      "om aim",
+      "saraswati beej",
+      "बीज मंत्र"
+    ]
+  },
+  {
+    "title": "सरस्वति नमस्तुभ्यं",
+    "titleEng": "Saraswati Namastubhyam",
+    "url": "/saraswati-mantras/saraswati-namastubhyam/",
+    "category": "सरस्वती",
+    "symbol": "📚",
+    "preview": "सरस्वति नमस्तुभ्यं वरदे कामरूपिणि विद्यारम्भं करिष्यामि",
+    "keywords": [
+      "नमस्तुभ्यं",
+      "namastubhyam",
+      "vidyarambh",
+      "विद्यारम्भ"
+    ]
+  },
+  {
+    "title": "सरस्वती माता आरती",
+    "titleEng": "Saraswati Mata Aarti",
+    "url": "/saraswati-mantras/saraswati-aarti/",
+    "category": "सरस्वती",
+    "symbol": "🪔",
+    "preview": "ॐ जय सरस्वती माता मैया जय सरस्वती माता",
+    "keywords": [
+      "सरस्वती आरती",
+      "saraswati aarti",
+      "jai saraswati"
+    ]
+  },
+  {
+    "title": "श्री सरस्वती चालीसा",
+    "titleEng": "Saraswati Chalisa",
+    "url": "/saraswati-mantras/saraswati-chalisa/",
+    "category": "सरस्वती",
+    "symbol": "📿",
+    "preview": "जय श्री सकल बुद्धि बलरासी जय सर्वज्ञ अमर अविनाशी",
+    "keywords": [
+      "सरस्वती चालीसा",
+      "saraswati chalisa",
+      "40 chaupai"
+    ]
+  },
+  {
+    "title": "सरस्वती स्तोत्रम्",
+    "titleEng": "Saraswati Stotram",
+    "url": "/saraswati-mantras/saraswati-stotram/",
+    "category": "सरस्वती",
+    "symbol": "📖",
+    "preview": "दोर्भिर्युक्ता चतुर्भिः स्फटिकमणिमयीं मक्षमालां दधाना",
+    "keywords": [
+      "सरस्वती स्तोत्र",
+      "saraswati stotram",
+      "stotra"
+    ]
+  },
+  {
+    "title": "अगस्त्य सरस्वती स्तोत्र",
+    "titleEng": "Agastya Saraswati Stotram",
+    "url": "/saraswati-mantras/agastya-saraswati-stotram/",
+    "category": "सरस्वती",
+    "symbol": "🌊",
+    "preview": "शुद्धस्फटिकरूपायै सूक्ष्मरूपे नमो नमः",
+    "keywords": [
+      "अगस्त्य",
+      "agastya",
+      "saraswati stotra",
+      "muni"
+    ]
+  },
+  {
+    "title": "ॐ ऐं महासरस्वत्यै नमः",
+    "titleEng": "Mahasaraswati Mantra",
+    "url": "/saraswati-mantras/mahasaraswati-mantra/",
+    "category": "सरस्वती",
+    "symbol": "✨",
+    "preview": "ॐ ऐं महासरस्वत्यै नमः देवी दुर्गासप्तशती",
+    "keywords": [
+      "महासरस्वती",
+      "mahasaraswati",
+      "durga saptashati"
+    ]
+  },
+  {
+    "title": "सरस्वती गायत्री मंत्र",
+    "titleEng": "Saraswati Gayatri Mantra",
+    "url": "/saraswati-mantras/saraswati-gayatri-mantra/",
+    "category": "सरस्वती",
+    "symbol": "🌅",
+    "preview": "ॐ ऐं वाग्देव्यै विद्महे कामराजाय धीमहि तन्नो देवी प्रचोदयात्",
+    "keywords": [
+      "सरस्वती गायत्री",
+      "saraswati gayatri",
+      "vagdevyai"
+    ]
+  },
+  {
+    "title": "विद्या सरस्वती मंत्र",
+    "titleEng": "Vidya Saraswati Mantra",
+    "url": "/saraswati-mantras/vidya-saraswati-mantra/",
+    "category": "सरस्वती",
+    "symbol": "🎓",
+    "preview": "या देवी सर्वभूतेषु विद्यारूपेण संस्थिता नमस्तस्यै",
+    "keywords": [
+      "विद्या मंत्र",
+      "vidya mantra",
+      "student mantra",
+      "विद्यार्थी"
+    ]
+  },
+  {
+    "title": "वद वद वाग्वादिनी स्वाहा",
+    "titleEng": "Vad Vad Vagvadini Svaha",
+    "url": "/saraswati-mantras/vagvadini-mantra/",
+    "category": "सरस्वती",
+    "symbol": "🗣️",
+    "preview": "ॐ ऐं ह्रीं श्रीं वद वद वाग्वादिनी स्वाहा",
+    "keywords": [
+      "वाग्वादिनी",
+      "vagvadini",
+      "vak siddhi",
+      "वाक् सिद्धि"
+    ]
+  },
+  {
+    "title": "सरस्वती कवचम्",
+    "titleEng": "Saraswati Kavacham",
+    "url": "/saraswati-mantras/saraswati-kavach/",
+    "category": "सरस्वती",
+    "symbol": "🛡️",
+    "preview": "सरस्वती शिरः पातु ललाटं वाग्देवता",
+    "keywords": [
+      "सरस्वती कवच",
+      "saraswati kavach",
+      "protection"
+    ]
+  },
+  {
+    "title": "सरस्वती अष्टकम्",
+    "titleEng": "Saraswati Ashtakam",
+    "url": "/saraswati-mantras/saraswati-ashtakam/",
+    "category": "सरस्वती",
+    "symbol": "✴️",
+    "preview": "यं ब्रह्मा वरुणेन्द्ररुद्रमरुतः स्तुन्वन्ति दिव्यैः स्तवैः",
+    "keywords": [
+      "सरस्वती अष्टकम्",
+      "saraswati ashtakam",
+      "8 shloka"
+    ]
+  },
+  {
+    "title": "सरस्वती १०८ नाम",
+    "titleEng": "Saraswati 108 Names",
+    "url": "/saraswati-mantras/saraswati-108-names/",
+    "category": "सरस्वती",
+    "symbol": "🌟",
+    "preview": "ॐ सरस्वत्यै नमः ॐ महाभद्रायै नमः ॐ महामायायै नमः",
+    "keywords": [
+      "108 names",
+      "saraswati names",
+      "शतनाम"
+    ]
+  },
+  {
+    "title": "ॐ ऐं ह्रीं श्रीं वाग्देव्यै",
+    "titleEng": "Aim Hreem Shreem Vagdevyai",
+    "url": "/saraswati-mantras/saraswati-beej-mantra/",
+    "category": "सरस्वती",
+    "symbol": "🔮",
+    "preview": "ॐ ऐं ह्रीं श्रीं वाग्देव्यै सरस्वत्यै नमः",
+    "keywords": [
+      "त्रि-बीज",
+      "tri beej",
+      "aim hreem shreem",
+      "tantrik"
+    ]
+  },
+  {
+    "title": "याज्ञवल्क्य सरस्वती स्तोत्र",
+    "titleEng": "Yajnavalkya Saraswati Stotram",
+    "url": "/saraswati-mantras/yajnavalkya-saraswati-stotram/",
+    "category": "सरस्वती",
+    "symbol": "🏺",
+    "preview": "नमो सरस्वति देव्यै ब्रह्मविद्यास्वरूपिणि",
+    "keywords": [
+      "याज्ञवल्क्य",
+      "yajnavalkya",
+      "rishi",
+      "ऋषि"
+    ]
+  },
+  {
+    "title": "सरस्वती ध्यान श्लोक",
+    "titleEng": "Saraswati Dhyana Shloka",
+    "url": "/saraswati-mantras/saraswati-dhyana-shloka/",
+    "category": "सरस्वती",
+    "symbol": "🧘",
+    "preview": "श्वेतपद्मासना देवी श्वेतगन्धानुलेपना",
+    "keywords": [
+      "ध्यान",
+      "dhyana",
+      "meditation",
+      "saraswati puja"
+    ]
+  },
+  {
+    "title": "सरस्वती विद्यार्थी मंत्र",
+    "titleEng": "Saraswati Vidyarthi Mantra",
+    "url": "/saraswati-mantras/saraswati-vidyarthi-mantra/",
+    "category": "सरस्वती",
+    "symbol": "✏️",
+    "preview": "परमेश्वरीं भगवतीं बुद्धिप्रदां शारदाम्",
+    "keywords": [
+      "विद्यार्थी",
+      "student",
+      "exam mantra",
+      "परीक्षा"
+    ]
+  },
+  {
+    "title": "हंसवाहिनी माँ भजन",
+    "titleEng": "Hansavahini Maa Bhajan",
+    "url": "/saraswati-mantras/saraswati-bhajan/",
+    "category": "सरस्वती",
+    "symbol": "🎶",
+    "preview": "वीणावादिनी माँ सरस्वती तेरी महिमा अपरम्पार",
+    "keywords": [
+      "भजन",
+      "bhajan",
+      "hansavahini",
+      "veena"
+    ]
+  },
+  {
+    "title": "हरे कृष्ण महामंत्र",
+    "titleEng": "Hare Krishna Mahamantra",
+    "url": "/Krishna-Mahamantras/Hare-Krishna-mahamantras-हरे-कृष्ण/",
+    "category": "कृष्ण",
+    "symbol": "🪈",
+    "preview": "हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे हरे राम हरे राम",
+    "keywords": [
+      "हरे कृष्ण",
+      "hare krishna",
+      "mahamantra",
+      "kaliyug"
+    ]
+  },
+  {
+    "title": "श्रीमद् भगवद्गीता",
+    "titleEng": "Bhagavad Gita",
+    "url": "/Krishna-Mahamantras/Shreemad-Bhagavad-gita/",
+    "category": "कृष्ण",
+    "symbol": "📖",
+    "preview": "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत अभ्युत्थानमधर्मस्य",
+    "keywords": [
+      "भगवद्गीता",
+      "bhagavad gita",
+      "gita",
+      "18 adhyay",
+      "700 shloka"
+    ]
+  },
+  {
+    "title": "माधुराष्टकम्",
+    "titleEng": "Madhurashtakam",
+    "url": "/Krishna-Mahamantras/Madhurkam-मधुराधिपतेरखिलं-मधुरम्/",
+    "category": "कृष्ण",
+    "symbol": "🌸",
+    "preview": "अधरं मधुरं वदनं मधुरं नयनं मधुरं हसितं मधुरम्",
+    "keywords": [
+      "माधुराष्टकम्",
+      "madhurashtakam",
+      "vallabhacharya",
+      "madhuram"
+    ]
+  },
+  {
+    "title": "ॐ नमो भगवते वासुदेवाय",
+    "titleEng": "Om Namo Bhagavate Vasudevaya",
+    "url": "/Krishna-Mahamantras/Om-Namo-Bhagavate-Vasudevaya-ॐ-नमो-भगवते-वासुदेवाय/",
+    "category": "कृष्ण",
+    "symbol": "🌀",
+    "preview": "ॐ नमो भगवते वासुदेवाय द्वादशाक्षर मंत्र",
+    "keywords": [
+      "वासुदेवाय",
+      "vasudevaya",
+      "dwadashakshar",
+      "moksha"
+    ]
+  },
+  {
+    "title": "कृष्ण चालीसा",
+    "titleEng": "Krishna Chalisa",
+    "url": "/Krishna-Mahamantras/Shri-Krishna-Chalisha/",
+    "category": "कृष्ण",
+    "symbol": "📿",
+    "preview": "जय जय जय कृष्ण कृपाला जय जय जय नन्दलाला",
+    "keywords": [
+      "कृष्ण चालीसा",
+      "krishna chalisa",
+      "40 chaupai"
+    ]
+  },
+  {
+    "title": "अच्युतम् केशवम्",
+    "titleEng": "Achyutam Keshavam",
+    "url": "/Krishna-Mahamantras/Achyutam keshavam/",
+    "category": "कृष्ण",
+    "symbol": "🌿",
+    "preview": "अच्युतम् केशवम् कृष्णदामोदरम् राम नारायणं जानकीवल्लभम्",
+    "keywords": [
+      "अच्युतम्",
+      "achyutam",
+      "keshavam",
+      "vaishnav bhajan"
+    ]
+  },
+  {
+    "title": "श्री कृष्ण आरती",
+    "titleEng": "Krishna Aarti",
+    "url": "/Krishna-Mahamantras/Shri-Krishna-Aarti/",
+    "category": "कृष्ण",
+    "symbol": "🪔",
+    "preview": "आरती कुंजबिहारी की श्री गिरिधर कृष्णमुरारी की",
+    "keywords": [
+      "कृष्ण आरती",
+      "krishna aarti",
+      "kunj bihari"
+    ]
+  },
+  {
+    "title": "दामोदराष्टकम्",
+    "titleEng": "Damodarashtakam",
+    "url": "/Krishna-Mahamantras/Damodarashtakam/",
+    "category": "कृष्ण",
+    "symbol": "🪢",
+    "preview": "नमामीश्वरं सच्चिदानन्दरूपम् लसत्कुण्डलं गोकुले भ्राजमानम्",
+    "keywords": [
+      "दामोदराष्टकम्",
+      "damodarashtakam",
+      "kartik",
+      "8 shloka"
+    ]
+  },
+  {
+    "title": "कृष्ण १०८ नाम",
+    "titleEng": "Krishna 108 Names",
+    "url": "/Krishna-Mahamantras/Krishna-108-names/",
+    "category": "कृष्ण",
+    "symbol": "✨",
+    "preview": "कृष्णो वासुदेवो हरिरात्मा पुण्यश्चामलपावनः",
+    "keywords": [
+      "108 नाम",
+      "krishna names",
+      "shatnam"
+    ]
+  },
+  {
+    "title": "राधे राधे भजन",
+    "titleEng": "Radhe Radhe Bhajan",
+    "url": "/Krishna-Mahamantras/Radhe-radhe-bhajan/",
+    "category": "कृष्ण",
+    "symbol": "💕",
+    "preview": "राधे राधे जपो चले आयेंगे बिहारी",
+    "keywords": [
+      "राधे राधे",
+      "radhe radhe",
+      "vrindavan bhajan",
+      "राधा"
+    ]
+  },
+  {
+    "title": "कृष्ण गायत्री मंत्र",
+    "titleEng": "Krishna Gayatri Mantra",
+    "url": "/Krishna-Mahamantras/Krishna-gayatri/",
+    "category": "कृष्ण",
+    "symbol": "🌅",
+    "preview": "ॐ देवकीनन्दनाय विद्महे वासुदेवाय धीमहि तन्नो कृष्णः प्रचोदयात्",
+    "keywords": [
+      "कृष्ण गायत्री",
+      "krishna gayatri",
+      "devaki nandan"
+    ]
+  },
+  {
+    "title": "गोविन्दम् आदि पुरुषम्",
+    "titleEng": "Govindam Adi Purusham",
+    "url": "/Krishna-Mahamantras/Govindam-adi-purusham/",
+    "category": "कृष्ण",
+    "symbol": "🌳",
+    "preview": "गोविन्दम् आदि पुरुषम् तमहं भजामि",
+    "keywords": [
+      "गोविन्द",
+      "govindam",
+      "brahmasamhita",
+      "adi purush"
+    ]
+  },
+  {
+    "title": "गीता अध्याय २ — निष्काम कर्म",
+    "titleEng": "Gita Chapter 2 Nishkam Karma",
+    "url": "/Krishna-Mahamantras/Gita-chapter-2-nishkam-karma/",
+    "category": "कृष्ण",
+    "symbol": "⚖️",
+    "preview": "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन",
+    "keywords": [
+      "गीता",
+      "gita",
+      "nishkam karma",
+      "chapter 2",
+      "karmanye"
+    ]
+  },
+  {
+    "title": "कृष्णाष्टकम्",
+    "titleEng": "Krishnashtakam",
+    "url": "/Krishna-Mahamantras/Krishnashtakam/",
+    "category": "कृष्ण",
+    "symbol": "💫",
+    "preview": "भजे व्रजैकमण्डनं समस्तपापखण्डनम् स्वभक्तचित्तरञ्जनं",
+    "keywords": [
+      "कृष्णाष्टकम्",
+      "krishnashtakam",
+      "shankaracharya",
+      "8 shloka"
+    ]
+  },
+  {
+    "title": "अयि गिरिनन्दिनि — महिषासुरमर्दिनि",
+    "titleEng": "Aigiri Nandini Mahishasura Mardini",
+    "url": "/aigiri-nandini/",
+    "category": "दुर्गा",
+    "symbol": "🌺",
+    "preview": "अयि गिरिनन्दिनि नन्दितमेदिनि विश्वविनोदिनि नन्दिनुते",
+    "keywords": [
+      "अयि गिरिनन्दिनि",
+      "aigiri nandini",
+      "mahishasura mardini",
+      "shankaracharya",
+      "21 shloka"
+    ]
+  },
+  {
+    "title": "या देवी सर्वभूतेषु",
+    "titleEng": "Ya Devi Sarvabhuteshu",
+    "url": "/durga-mantras/",
+    "category": "दुर्गा",
+    "symbol": "🌸",
+    "preview": "या देवी सर्वभूतेषु शक्तिरूपेण संस्थिता नमस्तस्यै नमस्तस्यै",
+    "keywords": [
+      "या देवी",
+      "ya devi",
+      "shakti roopena",
+      "namastasyai"
+    ]
+  },
+  {
+    "title": "दुर्गा सप्तशती",
+    "titleEng": "Durga Saptashati",
+    "url": "/durga-mantras/",
+    "category": "दुर्गा",
+    "symbol": "⚔️",
+    "preview": "शरणागतदीनार्तपरित्राणपरायणे सर्वस्यार्तिहरे देवि",
+    "keywords": [
+      "सप्तशती",
+      "saptashati",
+      "700 shloka",
+      "markandeya purana",
+      "chandi"
+    ]
+  },
+  {
+    "title": "दुर्गा चालीसा",
+    "titleEng": "Durga Chalisa",
+    "url": "/durga-mantras/Durga-Chalisha",
+    "category": "दुर्गा",
+    "symbol": "📿",
+    "preview": "नमो नमो दुर्गे सुख करनी नमो नमो दुर्गे दुख हरनी",
+    "keywords": [
+      "दुर्गा चालीसा",
+      "durga chalisa",
+      "40 chaupai"
+    ]
+  },
+  {
+    "title": "दुर्गा आरती",
+    "titleEng": "Durga Aarti",
+    "url": "/durga-mantras/Durga-aarti/",
+    "category": "दुर्गा",
+    "symbol": "🪔",
+    "preview": "जय अम्बे गौरी मैया जय श्यामा गौरी",
+    "keywords": [
+      "दुर्गा आरती",
+      "durga aarti",
+      "jai ambe gauri"
+    ]
+  },
+  {
+    "title": "अर्गला स्तोत्रम्",
+    "titleEng": "Argala Stotram",
+    "url": "/durga-mantras/Argala-stotram/",
+    "category": "दुर्गा",
+    "symbol": "🌠",
+    "preview": "जयन्ती मंगला काली भद्रकाली कपालिनी दुर्गा क्षमा शिवा धात्री",
+    "keywords": [
+      "अर्गला",
+      "argala stotram",
+      "27 shloka",
+      "saptashati"
+    ]
+  },
+  {
+    "title": "कीलक स्तोत्रम्",
+    "titleEng": "Kilaka Stotram",
+    "url": "/durga-mantras/kilaka-stotram/",
+    "category": "दुर्गा",
+    "symbol": "🔐",
+    "preview": "ओम् नमश्चण्डिकायै मार्कण्डेय उवाच",
+    "keywords": [
+      "कीलक",
+      "kilaka stotram",
+      "chandika",
+      "saptashati"
+    ]
+  },
+  {
+    "title": "नवदुर्गा स्तुति",
+    "titleEng": "Nav Durga Mantra",
+    "url": "/durga-mantras/Nav-durga-mantra/",
+    "category": "दुर्गा",
+    "symbol": "🌟",
+    "preview": "शैलपुत्री ब्रह्मचारिणी चन्द्रघण्टा कूष्माण्डा स्कन्दमाता",
+    "keywords": [
+      "नवदुर्गा",
+      "nav durga",
+      "9 devi",
+      "navratri"
+    ]
+  },
+  {
+    "title": "देवी कवचम्",
+    "titleEng": "Devi Kavacham",
+    "url": "/durga-mantras/Devi-kavacham/",
+    "category": "दुर्गा",
+    "symbol": "🛡️",
+    "preview": "प्राच्यां रक्षतु मामैन्द्री आग्नेय्यामग्निदेवता",
+    "keywords": [
+      "देवी कवच",
+      "devi kavach",
+      "sarvansh raksha"
+    ]
+  },
+  {
+    "title": "दुर्गा गायत्री मंत्र",
+    "titleEng": "Durga Gayatri Mantra",
+    "url": "/durga-mantras/",
+    "category": "दुर्गा",
+    "symbol": "🌅",
+    "preview": "ॐ गिरिजायै विद्महे शिवप्रियायै धीमहि तन्नो दुर्गा प्रचोदयात्",
+    "keywords": [
+      "दुर्गा गायत्री",
+      "durga gayatri",
+      "girijayai"
+    ]
+  },
+  {
+    "title": "दुर्गा बीज मंत्र",
+    "titleEng": "Durga Beej Mantra",
+    "url": "/durga-mantras/",
+    "category": "दुर्गा",
+    "symbol": "🌺",
+    "preview": "ॐ दुं दुर्गायै नमः ॐ ह्रीं दुं दुर्गायै नमः",
+    "keywords": [
+      "दुर्गा बीज",
+      "durga beej mantra",
+      "dum durgayai"
+    ]
+  },
+  {
+    "title": "हनुमान चालीसा",
+    "titleEng": "Hanuman Chalisa",
+    "url": "/hanuman-mantras/hanuman-chalisa/",
+    "category": "हनुमान",
+    "symbol": "🙏",
+    "preview": "जय हनुमान ज्ञान गुण सागर जय कपीस तिहु लोक उजागर",
+    "keywords": [
+      "हनुमान चालीसा",
+      "hanuman chalisa",
+      "tulsidas",
+      "40 chaupai"
+    ]
+  },
+  {
+    "title": "बजरंग बाण",
+    "titleEng": "Bajrang Baan",
+    "url": "/hanuman-mantras/bajrang-baan/",
+    "category": "हनुमान",
+    "symbol": "🏹",
+    "preview": "निश्चय प्रेम प्रतीति ते विनय करें सनमान तेहि के कारज सकल",
+    "keywords": [
+      "बजरंग बाण",
+      "bajrang baan",
+      "raksha stotra",
+      "sankat naashak"
+    ]
+  },
+  {
+    "title": "सुंदरकाण्ड",
+    "titleEng": "Sundarkand",
+    "url": "/hanuman-mantras/sundarkand/",
+    "category": "हनुमान",
+    "symbol": "🌿",
+    "preview": "जामवंत के बचन सुहाए सुनि हनुमंत हृदय अति भाए",
+    "keywords": [
+      "सुंदरकाण्ड",
+      "sundarkand",
+      "ramcharitmanas",
+      "5th kand"
+    ]
+  },
+  {
+    "title": "हनुमान बीज मंत्र",
+    "titleEng": "Hanuman Beej Mantra",
+    "url": "/hanuman-mantras/hanuman-beej-mantra/",
+    "category": "हनुमान",
+    "symbol": "🔮",
+    "preview": "ॐ हं हनुमते नमः ॐ ऐं भ्रीं हनुमते रामदूताय नमः",
+    "keywords": [
+      "हनुमान बीज",
+      "hanuman beej",
+      "om han hanumate",
+      "मंगलवार"
+    ]
+  },
+  {
+    "title": "श्री हनुमान आरती",
+    "titleEng": "Hanuman Aarti",
+    "url": "/hanuman-mantras/hanuman-aarti/",
+    "category": "हनुमान",
+    "symbol": "🪔",
+    "preview": "आरती कीजे हनुमान लला की दुष्ट दलन रघुनाथ कला की",
+    "keywords": [
+      "हनुमान आरती",
+      "hanuman aarti",
+      "lala ki aarti"
+    ]
+  },
+  {
+    "title": "हनुमानष्टकम्",
+    "titleEng": "Hanumashtakam",
+    "url": "/hanuman-mantras/hanuman-ashtakam/",
+    "category": "हनुमान",
+    "symbol": "💫",
+    "preview": "बाल समय रवि भक्षी लियो तब तीनहुँ लोक भयो अँधियारो",
+    "keywords": [
+      "हनुमानष्टकम्",
+      "hanumashtakam",
+      "tulsidas",
+      "8 shloka"
+    ]
+  },
+  {
+    "title": "पञ्चमुखी हनुमान मंत्र",
+    "titleEng": "Panchamukhi Hanuman Mantra",
+    "url": "/hanuman-mantras/panchamukhi-hanuman-mantra/",
+    "category": "हनुमान",
+    "symbol": "🦁",
+    "preview": "ॐ हं पञ्चवक्त्राय विद्महे महावीराय धीमहि",
+    "keywords": [
+      "पञ्चमुखी",
+      "panchamukhi",
+      "5 faces",
+      "narasimha garuda"
+    ]
+  },
+  {
+    "title": "हनुमान कवचम्",
+    "titleEng": "Hanuman Kavacham",
+    "url": "/hanuman-mantras/hanuman-kavacham/",
+    "category": "हनुमान",
+    "symbol": "🛡️",
+    "preview": "हनुमान मे शिरः पातु मुखं केसरिनन्दनः",
+    "keywords": [
+      "हनुमान कवच",
+      "hanuman kavach",
+      "bhoot badha",
+      "raksha"
+    ]
+  },
+  {
+    "title": "हनुमान १०८ नाम",
+    "titleEng": "Hanuman 108 Names",
+    "url": "/hanuman-mantras/hanuman-108-names/",
+    "category": "हनुमान",
+    "symbol": "✨",
+    "preview": "ॐ आञ्जनेयाय नमः ॐ महावीराय नमः ॐ हनुमते नमः",
+    "keywords": [
+      "108 नाम",
+      "hanuman names",
+      "anjaneya",
+      "shatnam"
+    ]
+  },
+  {
+    "title": "हनुमान गायत्री मंत्र",
+    "titleEng": "Hanuman Gayatri Mantra",
+    "url": "/hanuman-mantras/hanuman-gayatri-mantra/",
+    "category": "हनुमान",
+    "symbol": "🌅",
+    "preview": "ॐ आञ्जनेयाय विद्महे वायुपुत्राय धीमहि तन्नो हनुमत् प्रचोदयात्",
+    "keywords": [
+      "हनुमान गायत्री",
+      "hanuman gayatri",
+      "anjaneya",
+      "vayuputra"
+    ]
+  },
+  {
+    "title": "मारुति स्तोत्र",
+    "titleEng": "Maruti Stotra",
+    "url": "/hanuman-mantras/maruti-stotra/",
+    "category": "हनुमान",
+    "symbol": "🌺",
+    "preview": "मनोजवं मारुततुल्यवेगं जितेन्द्रियं बुद्धिमतां वरिष्ठम्",
+    "keywords": [
+      "मारुति",
+      "maruti",
+      "manojavam",
+      "valmiki"
+    ]
+  },
+  {
+    "title": "संकट मोचन मंत्र",
+    "titleEng": "Sankat Mochan Mantra",
+    "url": "/hanuman-mantras/sankat-mochan-mantra/",
+    "category": "हनुमान",
+    "symbol": "🌸",
+    "preview": "ॐ नमो हनुमते रुद्रावताराय सर्वशत्रुसंहारणाय",
+    "keywords": [
+      "संकट मोचन",
+      "sankat mochan",
+      "fear mantra",
+      "bhay nash"
+    ]
+  },
+  {
+    "title": "हनुमान सहस्रनाम",
+    "titleEng": "Hanuman Sahasranama",
+    "url": "/hanuman-mantras/hanuman-sahasranama/",
+    "category": "हनुमान",
+    "symbol": "🏵️",
+    "preview": "हनुमानञ्जनासूनुः वायुपुत्रो महाबलः रामेष्टः",
+    "keywords": [
+      "हनुमान सहस्रनाम",
+      "hanuman sahasranama",
+      "1000 names"
+    ]
+  },
+  {
+    "title": "श्री रामरक्षा स्तोत्रम्",
+    "titleEng": "Shri Ram Raksha Stotram",
+    "url": "/ram-mantras/ram-raksha-stotram/",
+    "category": "राम",
+    "symbol": "🛡️",
+    "preview": "चरितं रघुनाथस्य शतकोटि-प्रविस्तरम् एकैकमक्षरं पुंसां महापातकनाशनम्",
+    "keywords": [
+      "राम रक्षा",
+      "ram raksha stotram",
+      "38 shloka",
+      "brahmananda purana"
+    ]
+  },
+  {
+    "title": "राम तारक मंत्र",
+    "titleEng": "Ram Taraka Mantra",
+    "url": "/ram-mantras/ram-taraka-mantra/",
+    "category": "राम",
+    "symbol": "🏹",
+    "preview": "श्री राम जय राम जय जय राम राम रामेति रामेति रमे रामे मनोरमे",
+    "keywords": [
+      "तारक मंत्र",
+      "taraka mantra",
+      "moksha mantra",
+      "shiv upadesit"
+    ]
+  },
+  {
+    "title": "रामचरितमानस",
+    "titleEng": "Ramcharitmanas",
+    "url": "/ram-mantras/ramcharitmanas/",
+    "category": "राम",
+    "symbol": "📖",
+    "preview": "मंगल भवन अमंगल हारी द्रवउ सो दशरथ अजिर बिहारी",
+    "keywords": [
+      "रामचरितमानस",
+      "ramcharitmanas",
+      "tulsidas",
+      "7 kand",
+      "doha chaupai"
+    ]
+  },
+  {
+    "title": "राम गायत्री मंत्र",
+    "titleEng": "Ram Gayatri Mantra",
+    "url": "/ram-mantras/ram-gayatri-mantra/",
+    "category": "राम",
+    "symbol": "🌅",
+    "preview": "ॐ दशरथाय विद्महे सीतावल्लभाय धीमहि तन्नो रामः प्रचोदयात्",
+    "keywords": [
+      "राम गायत्री",
+      "ram gayatri",
+      "dasharatha",
+      "sitavallabha"
+    ]
+  },
+  {
+    "title": "श्री राम चालीसा",
+    "titleEng": "Shri Ram Chalisa",
+    "url": "/ram-mantras/ram-chalisa/",
+    "category": "राम",
+    "symbol": "📿",
+    "preview": "श्री रामचन्द्र कृपालु भज मन हरण भवभय दारुणम्",
+    "keywords": [
+      "राम चालीसा",
+      "ram chalisa",
+      "40 chaupai"
+    ]
+  },
+  {
+    "title": "श्री राम आरती",
+    "titleEng": "Shri Ram Aarti",
+    "url": "/ram-mantras/ram-aarti/",
+    "category": "राम",
+    "symbol": "🪔",
+    "preview": "आरती कीजे हनुमान लला की दुष्ट-दलन रघुनाथ कला की",
+    "keywords": [
+      "राम आरती",
+      "ram aarti",
+      "raghunath"
+    ]
+  },
+  {
+    "title": "राम कवचम्",
+    "titleEng": "Ram Kavacham",
+    "url": "/ram-mantras/ram-kavacham/",
+    "category": "राम",
+    "symbol": "⚔️",
+    "preview": "रामो राजमणिः सदा विजयते रामं रमेशं भजे",
+    "keywords": [
+      "राम कवच",
+      "ram kavach",
+      "protection mantra"
+    ]
+  },
+  {
+    "title": "श्री राम १०८ नाम",
+    "titleEng": "108 Names of Shri Ram",
+    "url": "/ram-mantras/ram-108-names/",
+    "category": "राम",
+    "symbol": "✨",
+    "preview": "ॐ रामाय नमः ॐ रामभद्राय नमः ॐ रामचन्द्राय नमः",
+    "keywords": [
+      "108 नाम",
+      "ram 108 names",
+      "ashtottara"
+    ]
+  },
+  {
+    "title": "आपदाम् अपहर्तारम्",
+    "titleEng": "Apadam Apahartaram",
+    "url": "/ram-mantras/apadam-apahartaram/",
+    "category": "राम",
+    "symbol": "🌊",
+    "preview": "आपदामपहर्तारम् दातारम् सर्वसम्पदाम् लोकाभिरामम् श्रीरामम्",
+    "keywords": [
+      "आपदाम्",
+      "apadam apahartaram",
+      "vipat nashak",
+      "sankat"
+    ]
+  },
+  {
+    "title": "नाम रामायणम्",
+    "titleEng": "Nama Ramayanam",
+    "url": "/ram-mantras/nama-ramayanam/",
+    "category": "राम",
+    "symbol": "📜",
+    "preview": "श्री रामजयम् शुद्धब्रह्मपरात्पर राम",
+    "keywords": [
+      "नाम रामायणम्",
+      "nama ramayanam",
+      "valmiki",
+      "108 shloka"
+    ]
+  },
+  {
+    "title": "रघुपति राघव राजाराम",
+    "titleEng": "Raghupati Raghava Rajaram",
+    "url": "/ram-mantras/raghupati-raghava/",
+    "category": "राम",
+    "symbol": "🎵",
+    "preview": "रघुपति राघव राजाराम पतित पावन सीताराम",
+    "keywords": [
+      "रघुपति राघव",
+      "raghupati raghava",
+      "gandhi bhajan",
+      "national"
+    ]
+  },
+  {
+    "title": "सीताराम भजन",
+    "titleEng": "Sita Ram Bhajan",
+    "url": "/ram-mantras/sita-ram-bhajan/",
+    "category": "राम",
+    "symbol": "💕",
+    "preview": "सीयाराम सीयाराम सीयाराम जय राम जय राम",
+    "keywords": [
+      "सीताराम",
+      "sita ram",
+      "janaki raman",
+      "bhajan"
+    ]
+  },
+  {
+    "title": "राम बीज मंत्र",
+    "titleEng": "Ram Beej Mantra",
+    "url": "/ram-mantras/ram-beej-mantra/",
+    "category": "राम",
+    "symbol": "⚡",
+    "preview": "ॐ श्रीं रामाय रघुनाथाय रामभद्राय रामचन्द्राय नमः",
+    "keywords": [
+      "राम बीज",
+      "ram beej mantra",
+      "shaktiशाली"
+    ]
+  },
+  {
+    "title": "विष्णु सहस्रनाम",
+    "titleEng": "Vishnu Sahasranama",
+    "url": "/vishnu-mantras/vishnu-sahasranama/",
+    "category": "विष्णु",
+    "symbol": "🏵️",
+    "preview": "विश्वं विष्णुर्वषट्कारो भूतभव्यभवत्प्रभुः भूतकृत् भूतभृत्",
+    "keywords": [
+      "विष्णु सहस्रनाम",
+      "vishnu sahasranama",
+      "1000 names",
+      "mahabharat"
+    ]
+  },
+  {
+    "title": "शान्ताकारं भुजगशयनं",
+    "titleEng": "Shantakaram Bhujangashayanam",
+    "url": "/vishnu-mantras/shantakaram-stuti/",
+    "category": "विष्णु",
+    "symbol": "🌊",
+    "preview": "शान्ताकारं भुजगशयनं पद्मनाभं सुरेशम् विश्वाधारं गगनसदृशं",
+    "keywords": [
+      "शान्ताकारं",
+      "shantakaram",
+      "padmanabham",
+      "vishnu dhyan"
+    ]
+  },
+  {
+    "title": "विष्णु चालीसा",
+    "titleEng": "Vishnu Chalisa",
+    "url": "/vishnu-mantras/vishnu-chalisa/",
+    "category": "विष्णु",
+    "symbol": "📿",
+    "preview": "जय जय श्री विष्णु भगवाना जगत् पिता जगत् के त्राणा",
+    "keywords": [
+      "विष्णु चालीसा",
+      "vishnu chalisa",
+      "40 chaupai"
+    ]
+  },
+  {
+    "title": "ॐ जय जगदीश हरे",
+    "titleEng": "Om Jai Jagdish Hare Aarti",
+    "url": "/vishnu-mantras/om-jai-jagdish-hare-aarti/",
+    "category": "विष्णु",
+    "symbol": "🪔",
+    "preview": "ॐ जय जगदीश हरे स्वामी जय जगदीश हरे भक्त जनों के संकट",
+    "keywords": [
+      "ॐ जय जगदीश",
+      "om jai jagdish",
+      "vishnu aarti",
+      "nitya path"
+    ]
+  },
+  {
+    "title": "नारायण कवचम्",
+    "titleEng": "Narayana Kavacham",
+    "url": "/vishnu-mantras/narayana-kavacham/",
+    "category": "विष्णु",
+    "symbol": "🛡️",
+    "preview": "ॐ हरिर्विदध्यान्मम सर्वरक्षां न्यस्ताङ्घ्रिपद्मः पतगेन्द्रपृष्ठे",
+    "keywords": [
+      "नारायण कवच",
+      "narayana kavach",
+      "bhagavat purana",
+      "sarvansh raksha"
+    ]
+  },
+  {
+    "title": "विष्णु गायत्री मंत्र",
+    "titleEng": "Vishnu Gayatri Mantra",
+    "url": "/vishnu-mantras/vishnu-gayatri-mantra/",
+    "category": "विष्णु",
+    "symbol": "🌅",
+    "preview": "ॐ नारायणाय विद्महे वासुदेवाय धीमहि तन्नो विष्णुः प्रचोदयात्",
+    "keywords": [
+      "विष्णु गायत्री",
+      "vishnu gayatri",
+      "narayanaya"
+    ]
+  },
+  {
+    "title": "दशावतार स्तोत्रम्",
+    "titleEng": "Dashavatara Stotram",
+    "url": "/vishnu-mantras/dashavatara-stotra/",
+    "category": "विष्णु",
+    "symbol": "🐟",
+    "preview": "प्रलयपयोधिजले धृतवानसि वेदम् विहितवहित्रचरित्रमखेदम् केशव धृतमीनशरीर",
+    "keywords": [
+      "दशावतार",
+      "dashavatara",
+      "10 avatars",
+      "jayadev",
+      "keshava"
+    ]
+  },
+  {
+    "title": "श्री हरि स्तोत्रम्",
+    "titleEng": "Shri Hari Stotram",
+    "url": "/vishnu-mantras/shri-hari-stotram/",
+    "category": "विष्णु",
+    "symbol": "✨",
+    "preview": "जगज्जालपालं चलत्कण्ठमालं शरच्चन्द्रभालं महादैत्यकालम्",
+    "keywords": [
+      "हरि स्तोत्र",
+      "hari stotram",
+      "8 shloka",
+      "popular"
+    ]
+  },
+  {
+    "title": "वेंकटेश्वर स्तोत्रम्",
+    "titleEng": "Venkateshwara Stotram",
+    "url": "/vishnu-mantras/venkateshwara-stotram/",
+    "category": "विष्णु",
+    "symbol": "⛰️",
+    "preview": "कमलाकुचचूचुककुंकुमतो नियमादभिचाञ्चदशेषजनम्",
+    "keywords": [
+      "वेंकटेश्वर",
+      "venkateshwara",
+      "tirupati",
+      "balaji"
+    ]
+  },
+  {
+    "title": "विष्ण्वष्टकम्",
+    "titleEng": "Vishnu Ashtakam",
+    "url": "/vishnu-mantras/vishnu-ashtakam/",
+    "category": "विष्णु",
+    "symbol": "💫",
+    "preview": "शान्तं पद्मासनस्थं शशिधरमकुटं चारुवक्त्रं चतुर्भुजम्",
+    "keywords": [
+      "विष्ण्वष्टकम्",
+      "vishnu ashtakam",
+      "shankaracharya",
+      "8 shloka"
+    ]
+  },
+  {
+    "title": "नृसिंह स्तोत्रम्",
+    "titleEng": "Narasimha Stotram",
+    "url": "/vishnu-mantras/narasimha-stotram/",
+    "category": "विष्णु",
+    "symbol": "🦁",
+    "preview": "उग्रं वीरं महाविष्णुं ज्वलन्तं सर्वतोमुखम् नृसिंहं भीषणं भद्रम्",
+    "keywords": [
+      "नृसिंह",
+      "narasimha",
+      "hiranyakashipu",
+      "4th avatar"
+    ]
+  },
+  {
+    "title": "ॐ नमो नारायणाय — अष्टाक्षर",
+    "titleEng": "Om Namo Narayanaya",
+    "url": "/vishnu-mantras/om-namo-narayanaya/",
+    "category": "विष्णु",
+    "symbol": "🌀",
+    "preview": "ॐ नमो नारायणाय अष्टाक्षर महामंत्र मोक्ष का मार्ग",
+    "keywords": [
+      "ॐ नमो नारायणाय",
+      "om namo narayanaya",
+      "ashtakshar",
+      "moksha mantra"
+    ]
+  },
+  {
+    "title": "एकादशी व्रत मंत्र",
+    "titleEng": "Ekadashi Vrat Mantra",
+    "url": "/vishnu-mantras/ekadashi-vrat-mantra/",
+    "category": "विष्णु",
+    "symbol": "🌙",
+    "preview": "उदितिष्ठोतिष्ठ गोविन्द त्यज निद्रां जगत्पते",
+    "keywords": [
+      "एकादशी",
+      "ekadashi",
+      "vrat",
+      "govind",
+      "devotthan"
+    ]
+  },
+  {
+    "title": "सत्यनारायण व्रत कथा",
+    "titleEng": "Satyanarayana Vrat Katha",
+    "url": "/vishnu-mantras/satyanarayana-vrat-katha/",
+    "category": "विष्णु",
+    "symbol": "🌟",
+    "preview": "सत्यनारायण कथा श्रुत्वा सर्वपापैः प्रमुच्यते",
+    "keywords": [
+      "सत्यनारायण",
+      "satyanarayana",
+      "vrat katha",
+      "skanda purana"
+    ]
+  },
+  {
+    "title": "गरुड स्तोत्रम्",
+    "titleEng": "Garuda Stotram",
+    "url": "/vishnu-mantras/garuda-stotram/",
+    "category": "विष्णु",
+    "symbol": "🦅",
+    "preview": "वन्दे विनतासुतं सुरमुनीन्द्राणां वरदं हरि-वाहनम्",
+    "keywords": [
+      "गरुड",
+      "garuda",
+      "vishnu vahana",
+      "sarp nashak"
+    ]
+  },
+  {
+    "title": "गौरी दौरी दौरी कहथिन हे",
+    "titleEng": "Gauri Dauri Dauri Kahthin He",
+    "url": "/Vidyapati-Geet-Sangrah/gauri-dauri-dauri-kahthin-he/",
+    "category": "मैथिली",
+    "symbol": "🎵",
+    "preview": "गौरी दौरी दौरी कहथिन हे मोरि अंगना",
+    "keywords": [
+      "गौरी दौरी",
+      "gauri dauri",
+      "vidyapati",
+      "maithili geet",
+      "mithila"
+    ]
+  },
+  {
+    "title": "जोगिया एक हम देखलौं गे माई",
+    "titleEng": "Jogiya Ek Hum Dekhlaun Ge Mai",
+    "url": "/Vidyapati-Geet-Sangrah/jogiya-ek-hum-dekhlaun-ge-mai/",
+    "category": "मैथिली",
+    "symbol": "🎶",
+    "preview": "जोगिया एक हम देखलौं गे माई मोरि अंगना",
+    "keywords": [
+      "जोगिया",
+      "jogiya",
+      "vidyapati",
+      "maithili geet",
+      "mithila"
+    ]
+  },
+  {
+    "title": "बर अजगुत देखल तोर अंगना",
+    "titleEng": "Bar Ajgut Dekhal Tor Angana",
+    "url": "/Vidyapati-Geet-Sangrah/bar-ajgut-dekhal-tor-angana/",
+    "category": "मैथिली",
+    "symbol": "🌸",
+    "preview": "बर अजगुत देखल तोर अंगना मोरि अंगना",
+    "keywords": [
+      "बर अजगुत",
+      "bar ajgut",
+      "vidyapati",
+      "maithili geet",
+      "mithila"
+    ]
+  },
+  {
+    "title": "उगना रे मोर कटाई गेला",
+    "titleEng": "Ugna Re Mor Katai Gela",
+    "url": "/Vidyapati-Geet-Sangrah/ugna-re-mor-katai-gela/",
+    "category": "मैथिली",
+    "symbol": "🌺",
+    "preview": "उगना रे मोर कटाई गेला मोरि अंगना",
+    "keywords": [
+      "उगना रे",
+      "ugna re",
+      "vidyapati",
+      "maithili geet",
+      "mithila"
+    ]
+  },
+  {
+    "title": "आजु नाथ एक व्रत",
+    "titleEng": "Aaju Nath Ek Vrat",
+    "url": "/Vidyapati-Geet-Sangrah/aaju-nath-ek-vrat/",
+    "category": "मैथिली",
+    "symbol": "🕉️",
+    "preview": "आजु नाथ एक व्रत महा सुख लागत हे",
+    "keywords": [
+      "आजु नाथ",
+      "aaju nath",
+      "vidyapati",
+      "maithili geet",
+      "shiva gauri"
+    ]
+  },
+  {
+    "title": "बड़ सुखसार पाओल तुअ तीरे",
+    "titleEng": "Bar Sukhsar Paol Tua Tere",
+    "url": "/Vidyapati-Geet-Sangrah/bar-sukhsar-paol-tua-teere/",
+    "category": "मैथिली",
+    "symbol": "🌸",
+    "preview": "बड़ सुखसार पाओल तुअ तीरे",
+    "keywords": [
+      "बड़ सुखसार",
+      "bar sukhsar",
+      "vidyapati",
+      "maithili geet",
+      "mithila"
+    ]
+  },
+  {
+    "title": "गे माई चंद्रमुखी सन",
+    "titleEng": "Ge Mai Chandramukhi San",
+    "url": "/Vidyapati-Geet-Sangrah/chandramukhi-san-gauri-hamar-chhathi/",
+    "category": "मैथिली",
+    "symbol": "🌙",
+    "preview": "गे माई चंद्रमुखी सन गौरी हमर छथि",
+    "keywords": [
+      "गे माई",
+      "ge mai",
+      "vidyapati",
+      "maithili geet",
+      "chandramukhi"
+    ]
+  },
+  {
+    "title": "दक्षिण काली मंत्र",
+    "titleEng": "Dakshina Kali Mantra",
+    "url": "/kali-mantras/dakshina-kali-mantra/",
+    "category": "काली",
+    "symbol": "⚡",
+    "preview": "ॐ ह्रीं क्रीं दक्षिणकाली वाच्यै नमः॥",
+    "keywords": [
+      "दक्षिण काली",
+      "dakshina kali",
+      "kali mantra",
+      "shakti"
+    ]
+  },
+  {
+    "title": "काली चालीसा",
+    "titleEng": "Kali Chalisa",
+    "url": "/kali-mantras/kali-chalisa/",
+    "category": "काली",
+    "symbol": "📿",
+    "preview": "जय काली जय जगदम्बे। शिव की प्रिय हे जगत की अम्बे॥",
+    "keywords": [
+      "काली चालीसा",
+      "kali chalisa",
+      "40 chaupai",
+      "kali mata"
+    ]
+  },
+  {
+    "title": "काली कवचम्",
+    "titleEng": "Kali Kavacham",
+    "url": "/kali-mantras/kali-kavacham/",
+    "category": "काली",
+    "symbol": "🛡️",
+    "preview": "गणेशो मे शिरः पातु ललाटं विघ्ननाशनः।",
+    "keywords": [
+      "काली कवच",
+      "kali kavach",
+      "protection",
+      "raksha"
+    ]
+  },
+  {
+    "title": "चामुंडा स्तुति",
+    "titleEng": "Chamunda Stuti",
+    "url": "/kali-mantras/chamunda-stuti/",
+    "category": "काली",
+    "symbol": "💀",
+    "preview": "चामुंडा चण्डिका घोरा चण्डमुण्डासुरान्तकृत्।",
+    "keywords": [
+      "चामुंडा",
+      "chamunda",
+      "chandika",
+      "ghora"
+    ]
+  },
+  {
+    "title": "काली गायत्री",
+    "titleEng": "Kali Gayatri",
+    "url": "/kali-mantras/kali-gayatri/",
+    "category": "काली",
+    "symbol": "🌅",
+    "preview": "ॐ काल्यै विद्महे श्मशानवासिन्यै धीमहि तन्नो काली प्रचोदयात्।",
+    "keywords": [
+      "काली गायत्री",
+      "kali gayatri",
+      "gayatri mantra",
+      "kali"
+    ]
+  },
+  {
+    "title": "काली १०८ नाम",
+    "titleEng": "Kali 108 Names",
+    "url": "/kali-mantras/kali-108-names/",
+    "category": "काली",
+    "symbol": "✨",
+    "preview": "ॐ काल्यै नमः ॐ कालकर्ण्यै नमः ॐ कालरात्र्यै नमः।",
+    "keywords": [
+      "काली १०८ नाम",
+      "kali 108 names",
+      "ashtottara",
+      "kali names"
+    ]
+  },
+  {
+    "title": "काली सहस्रनाम",
+    "titleEng": "Kali Sahasranama",
+    "url": "/kali-mantras/kali-sahasranama/",
+    "category": "काली",
+    "symbol": "🌟",
+    "preview": "ॐ काल्यै नमः ॐ कालकर्ण्यै नमः ॐ कालरात्र्यै नमः।",
+    "keywords": [
+      "काली सहस्रनाम",
+      "kali sahasranama",
+      "1000 names",
+      "kali"
+    ]
+  },
+  {
+    "title": "आद्य स्तोत्रम्",
+    "titleEng": "Adya Stotram",
+    "url": "/kali-mantras/adya-stotram/",
+    "category": "काली",
+    "symbol": "📜",
+    "preview": "आद्या देवी महाकाली सर्वमङ्गलकारिणी।",
+    "keywords": [
+      "आद्य स्तोत्र",
+      "adya stotram",
+      "mahakali",
+      "sarvamangala"
+    ]
+  },
+  {
+    "title": "काली प्रातःस्मरण",
+    "titleEng": "Kali Pratah Smarana",
+    "url": "/kali-mantras/kali-pratahsmarana/",
+    "category": "काली",
+    "symbol": "🌄",
+    "preview": "प्रातः कालीं स्मरेन्नित्यं सायं कालीं स्मरेत् सदा।",
+    "keywords": [
+      "प्रातःस्मरण",
+      "pratah smarana",
+      "morning prayer",
+      "kali"
+    ]
+  },
+  {
+    "title": "दक्षिण काली कवच",
+    "titleEng": "Dakshina Kali Kavach",
+    "url": "/kali-mantras/dakshina-kali-kavach/",
+    "category": "काली",
+    "symbol": "🛡️",
+    "preview": "दक्षिणकाली मे शिरः पातु ललाटं कालिका सदा।",
+    "keywords": [
+      "दक्षिण काली कवच",
+      "dakshina kali kavach",
+      "protection",
+      "kali"
+    ]
+  },
+  {
+    "title": "काली खड्गमाला",
+    "titleEng": "Kali Khadgamala",
+    "url": "/kali-mantras/kali-khadgamala/",
+    "category": "काली",
+    "symbol": "🔪",
+    "preview": "ॐ ऐं ह्रीं क्लीं चामुण्डायै विच्चे।",
+    "keywords": [
+      "खड्गमाला",
+      "khadgamala",
+      "kali",
+      "tantric"
+    ]
+  },
+  {
+    "title": "नवरात्रि मंत्र",
+    "titleEng": "Navarna Mantra",
+    "url": "/kali-mantras/navarna-mantra/",
+    "category": "काली",
+    "symbol": "🌙",
+    "preview": "ॐ ऐं ह्रीं क्लीं चामुण्डायै विच्चे।",
+    "keywords": [
+      "नवरात्रि",
+      "navarna",
+      "9 letters",
+      "kali"
+    ]
+  },
+  {
+    "title": "परशुराम काली स्तोत्रम्",
+    "titleEng": "Parashurama Kali Stotram",
+    "url": "/kali-mantras/parashurama-kali-stotram/",
+    "category": "काली",
+    "symbol": "🪓",
+    "preview": "नमस्ते शङ्करप्रियायै नमस्ते देवि कालिके।",
+    "keywords": [
+      "परशुराम",
+      "parashurama",
+      "kali stotram",
+      "shankarpriya"
+    ]
+  },
+  {
+    "title": "काली पूजा विधि",
+    "titleEng": "Kali Puja Vidhi",
+    "url": "/kali-mantras/kali-puja-vidhi/",
+    "category": "काली",
+    "symbol": "🙏",
+    "preview": "काली पूजाविधिं वक्ष्ये सर्वकामफलप्रदम्।",
+    "keywords": [
+      "काली पूजा",
+      "kali puja vidhi",
+      "worship method",
+      "kali"
+    ]
+  },
+  {
+    "title": "ब्रह्म-कृत काली स्तुति",
+    "titleEng": "Brahma-Krita Kali Stuti",
+    "url": "/kali-mantras/brahma-krita-kali-stuti/",
+    "category": "काली",
+    "symbol": "📖",
+    "preview": "ब्रह्मोवाच — देवि त्वं परमा शक्तिः सर्वेषां प्राणवल्लभा।",
+    "keywords": [
+      "ब्रह्म कृत",
+      "brahma krita",
+      "kali stuti",
+      "brahma"
+    ]
+  },
+  {
+    "title": "गुह्य काली मंत्र",
+    "titleEng": "Guhya Kali Mantra",
+    "url": "/kali-mantras/guhya-kali-mantra/",
+    "category": "काली",
+    "symbol": "🔮",
+    "preview": "गुह्य काली महारौद्री सर्वशत्रुक्षयंकरी।",
+    "keywords": [
+      "गुह्य काली",
+      "guhya kali",
+      "secret mantra",
+      "raoudri"
+    ]
+  },
+  {
+    "title": "श्मशानकाली स्तोत्र",
+    "titleEng": "SmashanaKali Stotra",
+    "url": "/kali-mantras/smashanakali-stotra/",
+    "category": "काली",
+    "symbol": "⚰️",
+    "preview": "श्मशानवासिनी देवी महाकाली नमोऽस्तु ते।",
+    "keywords": [
+      "श्मशानकाली",
+      "smashanakali",
+      "cremation ground",
+      "kali"
+    ]
+  },
+  {
+    "title": "काली महास्थुति — रामकृष्ण",
+    "titleEng": "Kali Mahastuti Ramakrishna",
+    "url": "/kali-mantras/kali-mahastuti-ramakrishna/",
+    "category": "काली",
+    "symbol": "🌺",
+    "preview": "जगन्मातर् जगदाधारे जगदम्बे नमो नमः।",
+    "keywords": [
+      "रामकृष्ण",
+      "ramakrishna",
+      "kali mahastuti",
+      "jagadamba"
+    ]
+  },
+  {
+    "title": "जगन्मंगल काली कवच",
+    "titleEng": "Jaganmangala Kali Kavach",
+    "url": "/kali-mantras/jaganmangala-kali-kavach/",
+    "category": "काली",
+    "symbol": "🌍",
+    "preview": "जगन्मंगल काली कवचं सर्वरक्षाकरं परम्।",
+    "keywords": [
+      "जगन्मंगल",
+      "jaganmangala",
+      "kali kavach",
+      "universal protection"
+    ]
+  },
+  {
+    "title": "काली एकाक्षरी मंत्र",
+    "titleEng": "Kali Ekakshari Mantra",
+    "url": "/kali-mantras/kali-ekakshari-mantra/",
+    "category": "काली",
+    "symbol": "🔤",
+    "preview": "ॐ क्रीं काली।",
+    "keywords": [
+      "एकाक्षरी",
+      "ekakshari",
+      "single letter",
+      "kali"
+    ]
+  },
+  {
+    "title": "काली मंगल आरती",
+    "titleEng": "Kali Mangal Aarti",
+    "url": "/kali-mantras/kali-mangal-aarti/",
+    "category": "काली",
+    "symbol": "🪔",
+    "preview": "जय काली माँ जय काली माँ। जय श्याम काली महाकाली माँ॥",
+    "keywords": [
+      "काली आरती",
+      "kali aarti",
+      "mangal aarti",
+      "kali maa"
+    ]
+  },
+  {
+    "title": "कामकला काली स्तोत्रम्",
+    "titleEng": "Kamakala Kali Stotram",
+    "url": "/kali-mantras/kamakala-kali-stotram/",
+    "category": "काली",
+    "symbol": "🌙",
+    "preview": "कामकला काली देवी सर्वकामफलप्रदा।",
+    "keywords": [
+      "कामकला",
+      "kamakala",
+      "kali stotram",
+      "desire fulfillment"
+    ]
+  },
+  {
+    "title": "काली नामावली",
+    "titleEng": "Kali Namavali",
+    "url": "/kali-mantras/kali-namavali/",
+    "category": "काली",
+    "symbol": "📝",
+    "preview": "काली कालिका कपालिनी चामुण्डा चण्डिका घोरा।",
+    "keywords": [
+      "काली नामावली",
+      "kali namavali",
+      "names of kali",
+      "kali"
+    ]
+  },
+  {
+    "title": "गजाननं भूत गणादि",
+    "titleEng": "Gajanana Bhoot Ganadi",
+    "url": "/ganesh-mantras/gajanana-shree-gajanana/",
+    "category": "गणेश",
+    "symbol": "🐘",
+    "preview": "गजाननं भूतगणादिसेवितं कपित्थजम्बूफलसार भक्षितम्।",
+    "keywords": [
+      "गजानन",
+      "gajanana",
+      "ganesh bhajan",
+      "elephant faced"
+    ]
+  },
+  {
+    "title": "गणेश पञ्चरत्नम्",
+    "titleEng": "Ganesh Pancharatnam",
+    "url": "/ganesh-mantras/ganesh-pancharatnam/",
+    "category": "गणेश",
+    "symbol": "💎",
+    "preview": "मुदाकरात्तमोदकं सदा विमुक्तिसाधकम् कलाधरावतंसकम्।",
+    "keywords": [
+      "पञ्चरत्न",
+      "pancharatnam",
+      "5 gems",
+      "shankaracharya"
+    ]
+  },
+  {
+    "title": "गणपति बप्पा मोरया",
+    "titleEng": "Ganpati Bappa Morya",
+    "url": "/ganesh-mantras/ganpati-bappa-morya/",
+    "category": "गणेश",
+    "symbol": "🥁",
+    "preview": "गणपति बप्पा मोरया मंगलमूर्ती मोरया।",
+    "keywords": [
+      "गणपति बप्पा",
+      "ganpati bappa",
+      "morya",
+      "festival bhajan"
+    ]
+  },
+  {
+    "title": "गणेश कवचम्",
+    "titleEng": "Ganesh Kavacham",
+    "url": "/ganesh-mantras/ganesh-kavach/",
+    "category": "गणेश",
+    "symbol": "🛡️",
+    "preview": "गणेशो मे शिरः पातु ललाटं विघ्ननाशनः।",
+    "keywords": [
+      "गणेश कवच",
+      "ganesh kavach",
+      "protection",
+      "vigraha"
+    ]
+  },
+  {
+    "title": "एकदंत स्तोत्र",
+    "titleEng": "Ekadanta Stotra",
+    "url": "/ganesh-mantras/ekadanta-stotra/",
+    "category": "गणेश",
+    "symbol": "🦷",
+    "preview": "एकदंतं महाकायं तप्तकाञ्चनसन्निभम्।",
+    "keywords": [
+      "एकदंत",
+      "ekadanta",
+      "single tusk",
+      "ganesh"
+    ]
+  },
+  {
+    "title": "सिद्धि विनायक मंत्र",
+    "titleEng": "Siddhi Vinayak Mantra",
+    "url": "/ganesh-mantras/siddhi-vinayak-mantra/",
+    "category": "गणेश",
+    "symbol": "⭐",
+    "preview": "ॐ नमो सिद्धि विनायकाय सर्व कार्य कर्त्रे।",
+    "keywords": [
+      "सिद्धि विनायक",
+      "siddhi vinayak",
+      "success mantra",
+      "ganesh"
+    ]
+  },
+  {
+    "title": "गणेश अष्टनाम स्तोत्र",
+    "titleEng": "Ganesh Ashtanama Stotra",
+    "url": "/ganesh-mantras/ganesh-ashtanama-stotra/",
+    "category": "गणेश",
+    "symbol": "📖",
+    "preview": "वक्रतुण्ड एकदंतश्च कृष्णपिंगाक्षगजवक्त्रकाः।",
+    "keywords": [
+      "अष्टनाम",
+      "ashtanama",
+      "8 names",
+      "ganesh"
+    ]
+  },
+  {
+    "title": "गणेश सहस्रनाम",
+    "titleEng": "Ganesh Sahasranama",
+    "url": "/ganesh-mantras/ganesh-sahasranama/",
+    "category": "गणेश",
+    "symbol": "🌟",
+    "preview": "ॐ गणेश्वराय नमः ॐ गणक्रीडाय नमः।",
+    "keywords": [
+      "गणेश सहस्रनाम",
+      "ganesh sahasranama",
+      "1000 names",
+      "ganesh"
+    ]
+  },
+  {
+    "title": "मोदकहस्त स्तुति",
+    "titleEng": "Modakahasta Stuti",
+    "url": "/ganesh-mantras/modakahasta-stotra/",
+    "category": "गणेश",
+    "symbol": "🍬",
+    "preview": "मोदकहस्तं मुषकवाहनम् सिद्धिबुद्धिसमेतम्।",
+    "keywords": [
+      "मोदकहस्त",
+      "modakahasta",
+      "sweet in hand",
+      "ganesh"
+    ]
+  },
+  {
+    "title": "गणेश द्वादश नाम",
+    "titleEng": "Ganesh Dwadasha Nama",
+    "url": "/ganesh-mantras/ganesh-dwadasha-nama/",
+    "category": "गणेश",
+    "symbol": "🔢",
+    "preview": "सुमुखश्चैकदंतश्च कपिलो गजकर्णकः।",
+    "keywords": [
+      "द्वादश नाम",
+      "dwadasha nama",
+      "12 names",
+      "ganesh"
+    ]
+  },
+  {
+    "title": "गणेश मंगलाचरण",
+    "titleEng": "Ganesh Mangalacharana",
+    "url": "/ganesh-mantras/ganesh-mangalacharana/",
+    "category": "गणेश",
+    "symbol": "🌸",
+    "preview": "शुक्लाम्बरधरं विष्णुं शशिवर्णं चतुर्भुजम्।",
+    "keywords": [
+      "मंगलाचरण",
+      "mangalacharana",
+      "auspicious beginning",
+      "ganesh"
+    ]
+  },
+  {
+    "title": "मुदाकरात्त मोदकम्",
+    "titleEng": "Mudakaratta Modakam",
+    "url": "/ganesh-mantras/mudakarata-modakam/",
+    "category": "गणेश",
+    "symbol": "🏺",
+    "preview": "मुदाकरात्तमोदकं सदा विमुक्तिसाधकम्।",
+    "keywords": [
+      "मुदाकरात्त",
+      "mudakaratta",
+      "modakam",
+      "shankaracharya"
+    ]
+  },
+  {
+    "title": "हेरम्ब पञ्चमुख स्तोत्र",
+    "titleEng": "Heramba Panchamukha Stotra",
+    "url": "/ganesh-mantras/heramba-stotra/",
+    "category": "गणेश",
+    "symbol": "🌞",
+    "preview": "पञ्चाननं गजवदनं महोदरं सिंहवाहनम्।",
+    "keywords": [
+      "हेरम्ब",
+      "heramba",
+      "panchamukha",
+      "5 faced ganesh"
+    ]
+  },
+  {
+    "title": "विघ्नराज स्तोत्र",
+    "titleEng": "Vighnaraja Stotra",
+    "url": "/ganesh-mantras/vighnaraja-stotra/",
+    "category": "गणेश",
+    "symbol": "👑",
+    "preview": "विघ्नेश्वरं विश्ववन्द्यम् गणाध्यक्षं पुरातनम्।",
+    "keywords": [
+      "विघ्नराज",
+      "vighnaraja",
+      "obstacle remover",
+      "ganesh"
+    ]
+  },
+  {
+    "title": "गणेश नमस्कार मंत्र",
+    "titleEng": "Ganesh Namaskara Mantra",
+    "url": "/ganesh-mantras/ganesh-namaskara-mantra/",
+    "category": "गणेश",
+    "symbol": "🙏",
+    "preview": "ॐ श्री गणेशाय नमः ॐ विघ्नहर्त्रे नमः।",
+    "keywords": [
+      "नमस्कार मंत्र",
+      "namaskara mantra",
+      "morning prayer",
+      "ganesh"
+    ]
+  },
+  {
+    "title": "चन्द्र कवच",
+    "titleEng": "Chandra Kavach",
+    "url": "/Chandra-mantras/chandra-kavach/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "चन्द्र कवच — चंद्र देव की रक्षा स्तुति।",
+    "keywords": [
+      "चन्द्र कवच",
+      "chandra kavach",
+      "moon kavach",
+      "protection mantra"
+    ]
+  },
+  {
+    "title": "चन्द्र बीज मंत्र",
+    "titleEng": "Chandra Beej Mantra",
+    "url": "/Chandra-mantras/chandra-beej-mantra/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "चन्द्र बीज मंत्र — चन्द्र देव की साधना के लिए।",
+    "keywords": [
+      "चन्द्र बीज",
+      "chandra beej",
+      "moon seed mantra",
+      "soma mantra"
+    ]
+  },
+  {
+    "title": "चन्द्र चालीसा",
+    "titleEng": "Chandra Chalisa",
+    "url": "/Chandra-mantras/chandra-chalisa/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "चन्द्र चालीसा — सरल चालीसा पाठ।",
+    "keywords": [
+      "चन्द्र चालीसा",
+      "chandra chalisa",
+      "chalisa",
+      "moon devotion"
+    ]
+  },
+  {
+    "title": "चन्द्र गायत्री मंत्र",
+    "titleEng": "Chandra Gayatri Mantra",
+    "url": "/Chandra-mantras/chandra-gayatri-mantra/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "चन्द्र गायत्री — आदित्य गायत्री की तरह अनुष्ठान।",
+    "keywords": [
+      "चन्द्र गायत्री",
+      "chandra gayatri",
+      "gayatri mantra",
+      "moon mantra"
+    ]
+  },
+  {
+    "title": "चन्द्र आरती",
+    "titleEng": "Chandra Aarti",
+    "url": "/Chandra-mantras/chandra-aarti/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "चन्द्र आरती — आरती पाठ और भजन।",
+    "keywords": [
+      "चन्द्र आरती",
+      "chandra aarti",
+      "moon aarti",
+      "aarti mantra"
+    ]
+  },
+  {
+    "title": "सोम स्तोत्र",
+    "titleEng": "Som Stotra",
+    "url": "/Chandra-mantras/som-stotra/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "सोम स्तोत्र — चन्द्र देव की स्तुति।",
+    "keywords": [
+      "सोम स्तोत्र",
+      "som stotra",
+      "moon stotra",
+      "chandra stotra"
+    ]
+  },
+  {
+    "title": "चन्द्र अष्टकम्",
+    "titleEng": "Chandra Ashtakam",
+    "url": "/Chandra-mantras/chandra-ashtakam/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "चन्द्र अष्टकम् — आठ श्लोक।",
+    "keywords": [
+      "चन्द्र अष्टकम्",
+      "chandra ashtakam",
+      "ashtakam",
+      "moon verses"
+    ]
+  },
+  {
+    "title": "चन्द्र नमस्कार मंत्र",
+    "titleEng": "Chandra Namaskar Mantra",
+    "url": "/Chandra-mantras/chandra-namaskar-mantra/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "चन्द्र नमस्कार — प्रणाम मंत्र।",
+    "keywords": [
+      "चन्द्र नमस्कार",
+      "chandra namaskar",
+      "moon greeting",
+      "salutation mantra"
+    ]
+  },
+  {
+    "title": "वैदिक सोम मंत्र",
+    "titleEng": "Vedic Som Mantra",
+    "url": "/Chandra-mantras/vedic-som-mantra/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "वैदिक सोम मंत्र — प्राचीन चंद्र मंत्र।",
+    "keywords": [
+      "वैदिक सोम मंत्र",
+      "vedic som",
+      "moon invocation",
+      "vedic mantra"
+    ]
+  },
+  {
+    "title": "चन्द्र 108 नाम",
+    "titleEng": "Chandra 108 Names",
+    "url": "/Chandra-mantras/chandra-108-names/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "चन्द्र 108 नाम — नामावलि।",
+    "keywords": [
+      "चन्द्र 108 नाम",
+      "chandra 108 names",
+      "names of moon",
+      "ashtottara names"
+    ]
+  },
+  {
+    "title": "चन्द्र स्तोत्रम्",
+    "titleEng": "Chandra Stotram",
+    "url": "/Chandra-mantras/chandra-stotram/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "चन्द्र स्तोत्रम् — दिव्य स्तुति।",
+    "keywords": [
+      "चन्द्र स्तोत्रम्",
+      "chandra stotram",
+      "moon hymn",
+      "stotra"
+    ]
+  },
+  {
+    "title": "चन्द्र सहस्रनाम",
+    "titleEng": "Chandra Sahasranama",
+    "url": "/Chandra-mantras/chandra-sahasranama/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "चन्द्र सहस्रनाम — हज़ार नाम।",
+    "keywords": [
+      "चन्द्र सहस्रनाम",
+      "chandra sahasranama",
+      "1000 names",
+      "moon names"
+    ]
+  },
+  {
+    "title": "करवा चौथ मंत्र",
+    "titleEng": "Karwa Chauth Mantra",
+    "url": "/Chandra-mantras/karwa-chauth-mantra/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "करवा चौथ मंत्र — व्रत मंत्र।",
+    "keywords": [
+      "करवा चौथ मंत्र",
+      "karwa chauth mantra",
+      "vrat mantra",
+      "moon vrat"
+    ]
+  },
+  {
+    "title": "चन्द्र ग्रह शांति",
+    "titleEng": "Chandra Graha Shanti",
+    "url": "/Chandra-mantras/chandra-graha-shanti/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "चन्द्र ग्रह शांति — ग्रह शांति पूजा।",
+    "keywords": [
+      "चन्द्र ग्रह शांति",
+      "chandra graha shanti",
+      "moon planetary peace",
+      "graha shanti"
+    ]
+  },
+  {
+    "title": "सोम पंचाक्षर",
+    "titleEng": "Som Panchakshara",
+    "url": "/Chandra-mantras/som-panchakshara/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "सोम पंचाक्षर — पंचाक्षरी मंत्र।",
+    "keywords": [
+      "सोम पंचाक्षर",
+      "som panchakshara",
+      "five syllable",
+      "moon mantra"
+    ]
+  },
+  {
+    "title": "चन्द्र वंदना",
+    "titleEng": "Chandra Vandana",
+    "url": "/Chandra-mantras/chandra-vandana/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "चन्द्र वंदना — वंदना पाठ।",
+    "keywords": [
+      "चन्द्र वंदना",
+      "chandra vandana",
+      "moon prayer",
+      "vandana"
+    ]
+  },
+  {
+    "title": "चन्द्र पूजा विधि",
+    "titleEng": "Chandra Puja Vidhi",
+    "url": "/Chandra-mantras/chandra-puja-vidhi-mantra/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "चन्द्र पूजा विधि — पूजा निर्देश।",
+    "keywords": [
+      "चन्द्र पूजा विधि",
+      "chandra puja vidhi",
+      "moon worship",
+      "puja guide"
+    ]
+  },
+  {
+    "title": "चन्द्र मंगलाचारण",
+    "titleEng": "Chandra Mangalacharan",
+    "url": "/Chandra-mantras/chandra-mangalacharan/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "चन्द्र मंगलाचारण — मंगल पाठ।",
+    "keywords": [
+      "चन्द्र मंगलाचारण",
+      "chandra mangalacharan",
+      "invocation",
+      "auspicious"
+    ]
+  },
+  {
+    "title": "चन्द्र नमस्कार स्तोत्रम्",
+    "titleEng": "Chandra Namaskara Stotram",
+    "url": "/Chandra-mantras/chandra-namaskara-stotram/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "चन्द्र नमस्कार स्तोत्रम् — स्तोत्र।",
+    "keywords": [
+      "चन्द्र नमस्कार स्तोत्रम्",
+      "chandra namaskara stotram",
+      "salutation stotram",
+      "moon hymn"
+    ]
+  },
+  {
+    "title": "शरद पूर्णिमा मंत्र",
+    "titleEng": "Sharad Purnima Mantra",
+    "url": "/Chandra-mantras/sharad-purnima-mantra/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "शरद पूर्णिमा मंत्र — विशेष पूजन मंत्र।",
+    "keywords": [
+      "शरद पूर्णिमा मंत्र",
+      "sharad purnima mantra",
+      "full moon vrat",
+      "moon festival"
+    ]
+  },
+  {
+    "title": "चन्द्र द्वादश नाम",
+    "titleEng": "Chandra Dwadasha Nama",
+    "url": "/Chandra-mantras/chandra-dwadasha-nama/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "चन्द्र द्वादश नाम — बारह नाम।",
+    "keywords": [
+      "चन्द्र द्वादश नाम",
+      "chandra dwadasha nama",
+      "12 names",
+      "moon names"
+    ]
+  },
+  {
+    "title": "चन्द्र व्रत कथा",
+    "titleEng": "Chandra Vrat Katha",
+    "url": "/Chandra-mantras/chandra-vrat-katha/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "चन्द्र व्रत कथा — पौराणिक कथा।",
+    "keywords": [
+      "चन्द्र व्रत कथा",
+      "chandra vrat katha",
+      "vow story",
+      "moon fast"
+    ]
+  },
+  {
+    "title": "चन्द्र प्रातः स्मरण",
+    "titleEng": "Chandra Pratah Smarana",
+    "url": "/Chandra-mantras/chandra-pratah-smarana/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "चन्द्र प्रातः स्मरण — सुबह मंत्र।",
+    "keywords": [
+      "चन्द्र प्रातः स्मरण",
+      "chandra pratah smarana",
+      "morning prayer",
+      "moon remembrance"
+    ]
+  },
+  {
+    "title": "चन्द्र तंत्र मंत्र",
+    "titleEng": "Chandra Tantra Mantra",
+    "url": "/Chandra-mantras/chandra-tantra-mantra/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "चन्द्र तंत्र मंत्र — तांत्रिक मंत्र।",
+    "keywords": [
+      "चन्द्र तंत्र मंत्र",
+      "chandra tantra mantra",
+      "tantra",
+      "moon ritual"
+    ]
+  },
+  {
+    "title": "चन्द्र उपनिषद् श्लोक",
+    "titleEng": "Chandra Upanishad Shloka",
+    "url": "/Chandra-mantras/chandra-upanishad-shloka/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "चन्द्र उपनिषद् श्लोक — विद्युतीय श्लोक।",
+    "keywords": [
+      "चन्द्र उपनिषद् श्लोक",
+      "chandra upanishad",
+      "moon wisdom",
+      "shloka"
+    ]
+  },
+  {
+    "title": "चन्द्र ज्योति मंत्र",
+    "titleEng": "Chandra Jyoti Mantra",
+    "url": "/Chandra-mantras/chandra-jyoti-mantra/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "चन्द्र ज्योति मंत्र — ज्योति मंत्र।",
+    "keywords": [
+      "चन्द्र ज्योति मंत्र",
+      "chandra jyoti mantra",
+      "moonlight",
+      "jyoti"
+    ]
+  },
+  {
+    "title": "करवा चौथ व्रत कथा",
+    "titleEng": "Karwa Chauth Vrat Katha",
+    "url": "/Chandra-mantras/karwa-chauth-vrat-katha/",
+    "category": "चंद्र",
+    "symbol": "🌙",
+    "preview": "करवा चौथ व्रत कथा — कथा पाठ।",
+    "keywords": [
+      "करवा चौथ व्रत कथा",
+      "karwa chauth vrat katha",
+      "vow story",
+      "moon fast"
+    ]
+  }
 ]
