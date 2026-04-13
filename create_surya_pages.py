@@ -39,7 +39,7 @@ common = '''
 
 
 <!-- COMMENTS -->
- Please login for comments
+
 <div id="sm-comments" data-page-id="{page_id}"></div>
 <!-- FOOTER -->
 <footer>

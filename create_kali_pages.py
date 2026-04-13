@@ -30,18 +30,11 @@ pages = [
     ("kali-namavali", "काली नामावली", "Kali Namavali", "काली नामावली — माँ के दिव्य नामों की सूची।", "Kali Namavali", "क्रीं क्रीं काली ..."),
 ]
 
-common_js = '''<script src="/js/auth2.js"></script>
-<script src="/js/s-comments.js"></script>
-<script src="/js/nav.js"></script>
-<script src="/js/search.js"></script>
-  <script>
-    const SM_API = 'https://shivamargbackend.onrender.com'; // ← change to your server URL in prod
-    SmComments.init({ apiBase: SM_API });
-  </script>
+common_js = '''
 
 
 <!-- COMMENTS -->
- Please login for comments
+
 <div id="sm-comments" data-page-id="{page_id}"></div>
 <!-- FOOTER -->
 <footer>
@@ -81,6 +74,14 @@ common_js = '''<script src="/js/auth2.js"></script>
   });
 </script>
 <script src="https://www.youtube.com/iframe_api"></script>
+<script src="/js/auth2.js"></script>
+<script src="/js/s-comments.js"></script>
+<script src="/js/nav.js"></script>
+<script src="/js/search.js"></script>
+  <script>
+    const SM_API = 'https://shivamargbackend.onrender.com'; // ← change to your server URL in prod
+    SmComments.init({ apiBase: SM_API });
+  </script>
 '''
 
 for slug, title, eng, desc, audio_title, preview in pages:
