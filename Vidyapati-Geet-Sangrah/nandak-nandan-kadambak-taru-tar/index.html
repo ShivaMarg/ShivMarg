@@ -330,17 +330,7 @@
 <div class="divine-glow"></div>
 <div id="petals"></div>
 
-<header>
-  <nav class="site-nav">
-    <a href="/" class="logo">Shiva<em>Marg</em></a>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/about/">About</a>
-      <a href="/contact/">Contact</a>
-    </nav>
-  </nav>
-  <div class="breadcrumb">Home <span>></span> Vidyapati Geet Sangrah <span>></span> Nandak Nandan Kadambak Taru Tar</div>
-</header>
+
 
 <div class="hero">
   <div class="village-wrap">
@@ -442,5 +432,13 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
+<script src="/js/auth2.js"></script>
+<script src="/js/s-comments.js"></script>
+<script src="/js/nav.js"></script>
+<script>
+  const SM_API = 'https://shivamargbackend.onrender.com';
+  SmComments.init({ apiBase: SM_API });
+</script>
+<script src="/js/search.js"></script>
 </body>
 </html>
