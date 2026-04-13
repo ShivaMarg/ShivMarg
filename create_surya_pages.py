@@ -85,7 +85,7 @@ common = '''
 <script src="/js/search.js"></script>
   <script>
     const SM_API = 'https://shivamargbackend.onrender.com'; // ← change to your server URL in prod
-    SmComments.init({{ apiBase: SM_API }});
+    SmComments.init({ apiBase: SM_API });
   </script>
 '''
 
