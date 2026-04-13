@@ -35,14 +35,7 @@ pages = [
     ("surya-jyoti-mantra", "सूर्य ज्योति मंत्र", "Surya Jyoti Mantra", "सूर्य ज्योति मंत्र — दीपक मंत्र।", "Surya Jyoti Mantra • Surya Mantra", "ॐ तेजोऽसि शुक्रमस्यमृतमसि धाम नाम्ना। प्रियं देवानामनाद्यनन्तं ज्योतिर्भासि॥"),
 ]
 
-common = '''<script src="/js/auth2.js"></script>
-<script src="/js/s-comments.js"></script>
-<script src="/js/nav.js"></script>
-<script src="/js/search.js"></script>
-  <script>
-    const SM_API = 'https://shivamargbackend.onrender.com'; // ← change to your server URL in prod
-    SmComments.init({{ apiBase: SM_API }});
-  </script>
+common = '''
 
 
 <!-- COMMENTS -->
@@ -86,6 +79,14 @@ common = '''<script src="/js/auth2.js"></script>
   });
 </script>
 <script src="https://www.youtube.com/iframe_api"></script>
+<script src="/js/auth2.js"></script>
+<script src="/js/s-comments.js"></script>
+<script src="/js/nav.js"></script>
+<script src="/js/search.js"></script>
+  <script>
+    const SM_API = 'https://shivamargbackend.onrender.com'; // ← change to your server URL in prod
+    SmComments.init({{ apiBase: SM_API }});
+  </script>
 '''
 
 def make_content(slug, title, eng, desc, audio_title, preview):
