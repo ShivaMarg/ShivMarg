@@ -274,6 +274,7 @@ html_template = """<!DOCTYPE html>
     <div class="comments-title">टिप्पणियाँ</div>
     <div id="s-comments"></div>
   </div>
+  <div id="sm-comments" data-page-id="{page_id}"></div>
 
   <!-- FOOTER -->
   <footer>
@@ -298,10 +299,12 @@ for slug, title, description in pages:
     folder_path = base_path / slug
     folder_path.mkdir(exist_ok=True)
 
+    page_js = common_js.replace('{page_id}', slug).replace('{audio_title}', title).replace('{title}', title)
     html_content = html_template.format(
         title=title,
         description=description,
-        common_js=common_js
+        page_id=slug,
+        common_js=page_js
     )
 
     file_path = folder_path / "index.html"
