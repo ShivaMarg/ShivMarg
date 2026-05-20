@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>पिया मोर बालक - Vidyapati Song | ShivMarg</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #8B4513;
+            --primary-dark: #5C2E0F;
+            --primary-light: #D4A574;
+            --accent-color: #CD853F;
+            --text-dark: #1a1a1a;
+            --text-light: #666;
+            --bg-light: #fef9f3;
+            --bg-white: #ffffff;
+            --border-color: #e0d5c7;
+            --gold: #d4af37;
+            --shadow: 0 10px 40px rgba(139, 69, 19, 0.15);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-light) 0%, #f5ede3 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+            color: #fff;
+            padding: 2rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="white" opacity="0.1"/><circle cx="80" cy="80" r="2" fill="white" opacity="0.1"/></svg>');
+            opacity: 0.5;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.9;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Main Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Image Section */
+        .image-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .image-container {
+            background: var(--bg-white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            aspect-ratio: 3/4;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #e8dcc8 0%, #d4c4b0 100%);
+            color: var(--text-light);
+            font-size: 1rem;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .upload-section {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.08);
+        }
+
+        .upload-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-input-wrapper input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-input-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent-color) 100%);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            border: 2px dashed transparent;
+        }
+
+        .file-input-wrapper input[type="file"]:hover + .file-input-label {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.25);
+        }
+
+        /* Content Section */
+        .content-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* About Card */
+        .about-card {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .about-card h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .about-card p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .highlight-text {
+            background: linear-gradient(120deg, var(--gold), var(--primary-light));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+
+        /* YouTube Section */
+        .youtube-section {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            margin-bottom: 1.2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .youtube-input-group {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .youtube-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.75rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .youtube-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.3);
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+
+        .youtube-container {
+            width: 100%;
+            padding-bottom: 56.25%;
+            position: relative;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .youtube-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Lyrics Section */
+        .lyrics-section {
+            grid-column: 1 / -1;
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .lyrics-content {
+            columns: 2;
+            column-gap: 2rem;
+            column-fill: balance;
+            font-size: 1.05rem;
+            line-height: 2;
+            color: var(--text-dark);
+        }
+
+        @media (max-width: 768px) {
+            .lyrics-content {
+                columns: 1;
+            }
+        }
+
+        .lyrics-line {
+            margin-bottom: 0.5rem;
+            word-spacing: 0.1em;
+        }
+
+        .lyrics-separator {
+            text-align: center;
+            margin: 1.5rem 0;
+            color: var(--primary-light);
+            font-weight: 300;
+        }
+
+        /* Posts Grid */
+        .posts-section {
+            grid-column: 1 / -1;
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Post Card */
+        .post-card {
+            background: var(--bg-white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+        }
+
+        .post-image {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent-color) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            overflow: hidden;
+        }
+
+        .post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .post-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-date {
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .post-excerpt {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .post-link {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+
+        .post-link:hover {
+            gap: 1rem;
+        }
+
+        /* Add Post Section */
+        .add-post-section {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            color: white;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .add-post-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .add-post-section p {
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-color);
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-light);
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header-meta {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .main-grid {
+                gap: 1.5rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .about-card, .youtube-section, .lyrics-section {
+                padding: 1.5rem;
+            }
+
+            .lyrics-content {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .about-card, .youtube-section, .lyrics-section, .post-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .post-card:nth-child(1) { animation-delay: 0.1s; }
+        .post-card:nth-child(2) { animation-delay: 0.2s; }
+        .post-card:nth-child(3) { animation-delay: 0.3s; }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-light);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-light);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1>पिया मोर बालक</h1>
+            <p style="font-size: 1.1rem; margin: 0.5rem 0; opacity: 0.95;">Piya Mor Balak</p>
+            <div class="header-meta">
+                <div class="meta-item">
+                    <span>🎼</span>
+                    <span>विद्यापति (Vidyapati)</span>
+                </div>
+                <div class="meta-item">
+                    <span>📜</span>
+                    <span>14th Century Maithili</span>
+                </div>
+                <div class="meta-item">
+                    <span>💚</span>
+                    <span>Bhakti Geet</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-grid">
+            <!-- Left Column: Image & Upload -->
+            <div class="image-section">
+                <div class="image-container" id="imageContainer">
+                    <div class="image-placeholder">
+                        📸 विद्यापति की प्रतिमा
+                    </div>
+                </div>
+                <div class="upload-section">
+                    <label class="upload-label">विद्यापति की फोटो अपलोड करें</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="imageUpload" accept="image/*">
+                        <label for="imageUpload" class="file-input-label">
+                            <span>📤</span>
+                            <span>फोटो चुनें या ड्रैग करें</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Info & YouTube -->
+            <div class="content-section">
+                <!-- About Card -->
+                <div class="about-card">
+                    <h2>🌟 विद्यापति के बारे में</h2>
+                    <p><span class="highlight-text">महाकवि विद्यापति</span> (1352-1448) को <strong>मैथिल कवि कोकिल</strong> (मैथिली का कवि कोकिल) के नाम से जाना जाता है। वे मिथिला क्षेत्र (वर्तमान बिहार) के महान संस्कृत और मैथिली कवि थे।</p>
+                    <p>इन्होंने <strong>राधा-कृष्ण</strong> की प्रेम कथाओं पर सुंदर भक्ति गीत लिखे जो आज भी लोगों के हृदय को छूते हैं। विद्यापति का प्रभाव केवल मैथिली साहित्य तक सीमित नहीं था, बल्कि बंगाल और पूरे पूर्वी भारत के साहित्य पर गहरा प्रभाव पड़ा।</p>
+                </div>
+
+                <!-- YouTube Section -->
+                <div class="youtube-section">
+                    <h3 class="section-title">🎵 गीत सुनें</h3>
+                    <div class="youtube-input-group">
+                        <input type="text" class="youtube-input" id="youtubeUrl" placeholder="YouTube वीडियो का लिंक डालें...">
+                        <button class="btn btn-primary btn-small" onclick="loadYoutubeVideo()">लोड करें</button>
+                    </div>
+                    <div id="youtubePlayer"></div>
+                    <div style="padding: 1rem; background: #f0e6d2; border-radius: 8px; color: #666; font-size: 0.9rem;">
+                        💡 यूट्यूब लिंक कॉपी करके ऊपर पेस्ट करें। लिंक इस तरह हो सकता है: <code>https://www.youtube.com/watch?v=VIDEO_ID</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lyrics Section -->
+        <div class="lyrics-section">
+            <h2 style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.5rem; text-align: center;">📝 गीत के बोल</h2>
+            <div class="lyrics-content">
+                <div class="lyrics-line">पिया मोर बालक,</div>
+                <div class="lyrics-line">हम तरूणि गे!</div>
+                <div class="lyrics-separator">✦</div>
+                
+                <div class="lyrics-line">कौन तप चुकलौं</div>
+                <div class="lyrics-line">भेलौ जननि गे! पिया मोर बालक</div>
+                <div class="lyrics-separator">✦</div>
+
+                <div class="lyrics-line">पहिरि लेल सखी दछिन चीर</div>
+                <div class="lyrics-line">पिया के देखैत मोरा दगध शरीर</div>
+                <div class="lyrics-line">पिया लेल गोद कै चलली बाजार</div>
+                <div class="lyrics-line">हटिया के लोग पूछे के लागै</div>
+                <div class="lyrics-line">तोहार पिया मोर बालक</div>
+                <div class="lyrics-separator">✦</div>
+
+                <div class="lyrics-line">नहीं मोरा देवर की</div>
+                <div class="lyrics-line">नहीं छोट भाई</div>
+                <div class="lyrics-line">पूरब लिखल छल बलमु</div>
+                <div class="lyrics-line">हमार वाट के बटोहिया</div>
+                <div class="lyrics-line">के तुहु मोरा भाई</div>
+                <div class="lyrics-line">हमरो समाद नैहर लेने जाय</div>
+                <div class="lyrics-line">पिया मोर बालक</div>
+                <div class="lyrics-separator">✦</div>
+
+                <div class="lyrics-line">कही हुन बाबा के कीनै धेनु गाय</div>
+                <div class="lyrics-line">दुधवा पिआई के पोसत जमाई</div>
+                <div class="lyrics-line">भनही विद्यापति सुनहु बृजनारि</div>
+                <div class="lyrics-line">धयरज धैरहुं मिलत मुरारी</div>
+                <div class="lyrics-line">पिया मोर बालक</div>
+            </div>
+        </div>
+
+        <!-- Posts Section -->
+        <div class="posts-section">
+            <h2 style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.5rem;">📚 पिछले भक्ति गीत</h2>
+            <div class="posts-grid" id="postsGrid">
+                <!-- Sample posts will be added here -->
+                <div class="post-card">
+                    <div class="post-image">🎼</div>
+                    <div class="post-content">
+                        <div class="post-date">उदाहरण पोस्ट</div>
+                        <div class="post-title">यहाँ आपके पिछले भक्ति गीत दिखेंगे</div>
+                        <div class="post-excerpt">अपने भक्ति गीतों को यहाँ जोड़ने के लिए नीचे दिए गए बटन का उपयोग करें।</div>
+                        <a href="#" class="post-link">और पढ़ें →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Post Section -->
+            <div class="add-post-section">
+                <h3>✨ नया भक्ति गीत जोड़ें</h3>
+                <p>अपने नए गीत या भजन को साझा करने के लिए नीचे क्लिक करें</p>
+                <button class="btn btn-secondary" onclick="addNewPost()">नया गीत जोड़ें</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script>
+        // Image Upload Handler
+        document.getElementById('imageUpload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const imageContainer = document.getElementById('imageContainer');
+                    imageContainer.innerHTML = '<img src="' + event.target.result + '" alt="Vidyapati">';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // YouTube Video Loader
+        function loadYoutubeVideo() {
+            const url = document.getElementById('youtubeUrl').value;
+            const videoId = "8cg5VEbpqXY";
+            
+            if (videoId) {
+                const youtubePlayer = document.getElementById('youtubePlayer');
+                youtubePlayer.innerHTML = `
+                    <div class="youtube-container">
+                        <iframe src="https://www.youtube.com/embed/${videoId}" 
+                                allowfullscreen="" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                        </iframe>
+                    </div>
+                `;
+            } else {
+                alert('कृपया सही यूट्यूब लिंक दर्ज करें');
+            }
+        }
+
+        // Extract YouTube Video ID from URL
+        function extractVideoId(url) {
+            const patterns = [
+                /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]{11})/,
+                /(?:https?:\/\/)?(?:www\.)?youtu\.be\/([a-zA-Z0-9_-]{11})/,
+                /([a-zA-Z0-9_-]{11})/
+            ];
+            
+            for (let pattern of patterns) {
+                const match = url.match(pattern);
+                if (match && match[1]) {
+                    return match[1];
+                }
+            }
+            return null;
+        }
+
+        // Add New Post
+        function addNewPost() {
+            const title = prompt('गीत का शीर्षक दर्ज करें:');
+            if (title) {
+                const excerpt = prompt('गीत का विवरण दर्ज करें (संक्षिप्त):');
+                const link = prompt('गीत का लिंक दर्ज करें (वैकल्पिक):');
+                
+                if (excerpt) {
+                    const postsGrid = document.getElementById('postsGrid');
+                    const newPost = document.createElement('div');
+                    newPost.className = 'post-card';
+                    
+                    const today = new Date();
+                    const dateStr = today.toLocaleDateString('hi-IN');
+                    
+                    newPost.innerHTML = `
+                        <div class="post-image">🎵</div>
+                        <div class="post-content">
+                            <div class="post-date">${dateStr}</div>
+                            <div class="post-title">${title}</div>
+                            <div class="post-excerpt">${excerpt}</div>
+                            <a href="${link || '#'}" class="post-link">और पढ़ें →</a>
+                        </div>
+                    `;
+                    
+                    postsGrid.insertBefore(newPost, postsGrid.firstChild);
+                    alert('गीत सफलतापूर्वक जोड़ा गया! 🎉');
+                }
+            }
+        }
+
+        // Allow Enter key to load YouTube video
+        document.getElementById('youtubeUrl').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                loadYoutubeVideo();
+            }
+        });
+    </script>
+</body>
+</html>
