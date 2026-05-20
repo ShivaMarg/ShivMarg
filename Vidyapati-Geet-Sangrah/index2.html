@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="mai">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>विद्यापति गीत संग्रह — Maithili Vidyapati Geet | ShivaMarg</title>
+  <link rel="icon" type="image/png" href="/images/ShivMarg.png" />
+  <meta name="description" content="मैथिली विद्यापति गीत संग्रह — महाकवि विद्यापति के अमर नचारी गीत, शिव भजन, भगवती गीत। सम्पूर्ण गीत लिरिक्स, अर्थ और भक्ति रस।">
+  <meta name="keywords" content="Vidyapati Geet, Maithili Song, Vidyapati Nachari, मैथिली गीत, विद्यापति, Shiv Bhajan, Maithili Lyrics, ShivaMarg">
+  <meta name="author" content="ShivaMarg">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="विद्यापति गीत संग्रह — Maithili Vidyapati Geet | ShivaMarg">
+  <meta property="og:description" content="महाकवि विद्यापति के शिव-पार्वती लीलागीत, नचारी गीत और भक्ति रचनाएँ।">
+  <meta property="og:site_name" content="ShivaMarg">
+  <meta name="google-adsense-account" content="ca-pub-5809900825917201">
+  <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary:      #8B4513;
+      --primary-dark: #5C2E0F;
+      --primary-light:#D4A574;
+      --accent:       #CD853F;
+      --gold:         #d4af37;
+      --gold-light:   #e8c96a;
+      --gold-pale:    #fdf3dc;
+      --bg-light:     #fef9f3;
+      --bg-warm:      #f5ede3;
+      --bg-card:      #fffaf4;
+      --text-dark:    #1a1005;
+      --text-mid:     #4a3318;
+      --text-soft:    #8B6040;
+      --border:       #e0d5c7;
+      --border-gold:  rgba(212,175,55,0.35);
+      --shadow-sm:    0 4px 16px rgba(139,69,19,0.10);
+      --shadow-md:    0 10px 40px rgba(139,69,19,0.15);
+      --shadow-lg:    0 20px 60px rgba(139,69,19,0.22);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-warm) 100%);
+      color: var(--text-dark);
+      font-family: 'Crimson Pro', serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ── BACKGROUND PATTERN ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='440' height='440'%3E%3Ccircle cx='220' cy='220' r='200' fill='none' stroke='%23CD853F' stroke-width='0.5'/%3E%3Ccircle cx='220' cy='220' r='160' fill='none' stroke='%23CD853F' stroke-width='0.25'/%3E%3Ccircle cx='220' cy='220' r='120' fill='none' stroke='%23CD853F' stroke-width='0.5'/%3E%3Ccircle cx='220' cy='220' r='80' fill='none' stroke='%23CD853F' stroke-width='0.25'/%3E%3Ccircle cx='220' cy='220' r='40' fill='none' stroke='%23CD853F' stroke-width='0.5'/%3E%3Cpolygon points='220,30 255,120 350,120 278,175 305,265 220,210 135,265 162,175 90,120 185,120' fill='none' stroke='%23d4af37' stroke-width='0.4'/%3E%3C/svg%3E");
+      background-size: 440px 440px;
+      opacity: 0.06;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(254,249,243,0.93); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-gold);
+      padding: 0 5vw; display: flex; align-items: center;
+      justify-content: space-between; height: 62px;
+      box-shadow: 0 2px 12px rgba(139,69,19,0.08);
+    }
+    .logo { font-family:'Cinzel Decorative',serif; font-size:1.25rem; color:var(--primary); text-decoration:none; letter-spacing:1px; }
+    .logo em { color:var(--text-soft); font-style:normal; }
+    .nav-links a { color:var(--text-soft); text-decoration:none; margin-left:18px; font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; transition:color 0.3s; }
+    .nav-links a:hover, .nav-links a.active { color:var(--primary); }
+    .nav-search { background:rgba(139,69,19,0.06); border:1px solid var(--border-gold); color:var(--text-dark); padding:7px 16px; font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:1px; outline:none; border-radius:2px; width:200px; transition:border-color 0.3s; }
+    .nav-search:focus { border-color:var(--primary); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; z-index: 10;
+      text-align: center; padding: 80px 20px 60px;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 800px; height: 800px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,175,55,0.07) 0%, transparent 70%);
+    }
+    .hero-symbol {
+      font-size: 6rem; display: block; line-height: 1; margin-bottom: 24px;
+      animation: shiv-glow 4s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px rgba(212,175,55,0.6));
+    }
+    @keyframes shiv-glow {
+      0%,100%{ filter:drop-shadow(0 0 20px rgba(212,175,55,0.5)); transform:scale(1) rotate(-2deg); }
+      50%    { filter:drop-shadow(0 0 40px rgba(212,175,55,0.9)); transform:scale(1.06) rotate(2deg); }
+    }
+    .hero-tag { font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:7px; color:var(--text-soft); text-transform:uppercase; margin-bottom:18px; animation:fadeUp 0.9s ease both; }
+    .hero h1 { font-family:'Cinzel Decorative',serif; font-size:clamp(2rem,5.5vw,4rem); color:var(--primary); line-height:1.15; margin-bottom:10px; text-shadow:0 2px 16px rgba(139,69,19,0.15); animation:fadeUp 1s ease both; }
+    .hero-deva { font-family:'Tiro Devanagari Sanskrit',serif; font-size:clamp(1.6rem,3.8vw,2.8rem); color:var(--text-soft); margin-bottom:22px; animation:fadeUp 1.1s ease both; }
+    .hero-desc { font-size:1.05rem; color:var(--text-mid); font-style:italic; max-width:620px; margin:0 auto 30px; line-height:1.75; animation:fadeUp 1.2s ease both; }
+    .hero-stats {
+      display:inline-flex; gap:0; border:1px solid var(--border-gold);
+      background:var(--bg-card); border-radius:3px;
+      animation:fadeUp 1.4s ease both; overflow:hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .stat-item { padding:14px 32px; text-align:center; border-right:1px solid var(--border-gold); }
+    .stat-item:last-child { border-right:none; }
+    .stat-num { font-family:'Cinzel Decorative',serif; font-size:1.6rem; color:var(--primary); display:block; }
+    .stat-lbl { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:3px; color:var(--text-soft); text-transform:uppercase; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── TICKER ── */
+    .ticker-wrap { position:relative; z-index:10; overflow:hidden; border-top:1px solid var(--border-gold); border-bottom:1px solid var(--border-gold); background:rgba(212,175,55,0.06); padding:13px 0; margin-bottom:60px; }
+    .ticker-track { display:flex; width:max-content; animation:ticker 28s linear infinite; }
+    @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .tick-item { font-family:'Tiro Devanagari Sanskrit',serif; font-size:1rem; color:var(--accent); padding:0 36px; white-space:nowrap; }
+    .tick-dot { color:var(--primary-light); opacity:0.7; padding:0 6px; }
+
+    /* ── FILTER BAR ── */
+    .filter-bar { position:relative; z-index:10; display:flex; justify-content:center; flex-wrap:wrap; gap:9px; padding:0 20px 48px; }
+    .fbtn { font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; padding:9px 20px; background:transparent; border:1px solid var(--border-gold); color:var(--text-soft); cursor:pointer; transition:all 0.3s; border-radius:2px; }
+    .fbtn:hover, .fbtn.active { background:var(--primary); border-color:var(--primary); color:#fff; }
+
+    /* ── SECTION HEADER ── */
+    .sec-hdr { position:relative; z-index:10; text-align:center; padding:0 20px 36px; }
+    .sec-tag { font-family:'Cinzel',serif; font-size:0.66rem; letter-spacing:5px; color:var(--text-soft); text-transform:uppercase; margin-bottom:10px; }
+    .sec-title { font-family:'Cinzel Decorative',serif; font-size:clamp(1.4rem,3vw,2rem); color:var(--primary); }
+
+    /* ── VIDYAPATI BIO SECTION ── */
+    .bio-section {
+      position:relative; z-index:10;
+      max-width:1280px; margin:0 auto 70px; padding:0 22px;
+    }
+    .bio-card {
+      background:var(--bg-card);
+      border:1px solid var(--border-gold);
+      border-radius:12px;
+      padding:0;
+      overflow:hidden;
+      box-shadow:var(--shadow-md);
+      display:grid;
+      grid-template-columns:320px 1fr;
+    }
+    @media(max-width:860px){ .bio-card { grid-template-columns:1fr; } }
+    .bio-img-wrap {
+      position:relative;
+      background:linear-gradient(160deg,#5C2E0F 0%,#8B4513 50%,#CD853F 100%);
+      min-height:320px;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      padding:32px 24px;
+      overflow:hidden;
+    }
+    .bio-img-wrap::before {
+      content:'';position:absolute;inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Ccircle cx='150' cy='150' r='130' fill='none' stroke='rgba(212,175,55,0.2)' stroke-width='1'/%3E%3Ccircle cx='150' cy='150' r='100' fill='none' stroke='rgba(212,175,55,0.15)' stroke-width='0.5'/%3E%3Ccircle cx='150' cy='150' r='70' fill='none' stroke='rgba(212,175,55,0.2)' stroke-width='1'/%3E%3C/svg%3E");
+      background-size:300px 300px; background-position:center; opacity:0.6;
+    }
+    .bio-avatar {
+      position:relative; z-index:1;
+      width:140px; height:140px; border-radius:50%;
+      border:3px solid rgba(212,175,55,0.7);
+      background:rgba(92,46,15,0.6);
+      display:flex; align-items:center; justify-content:center;
+      font-size:4rem; margin-bottom:18px;
+      box-shadow:0 8px 32px rgba(0,0,0,0.3);
+    }
+    .bio-img-wrap img.bio-photo {
+      position:relative; z-index:1;
+      width:140px; height:140px; border-radius:50%;
+      object-fit:cover;
+      border:3px solid rgba(212,175,55,0.7);
+      margin-bottom:18px;
+      box-shadow:0 8px 32px rgba(0,0,0,0.3);
+    }
+    .bio-name-wrap { position:relative;z-index:1;text-align:center; }
+    .bio-name-deva { font-family:'Tiro Devanagari Sanskrit',serif; font-size:1.5rem; color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.4); }
+    .bio-name-eng { font-family:'Cinzel',serif; font-size:0.75rem; letter-spacing:3px; color:rgba(212,175,55,0.85); text-transform:uppercase; margin-top:4px; }
+    .bio-years { font-family:'Crimson Pro',serif; font-size:0.95rem; color:rgba(255,255,255,0.65); margin-top:6px; font-style:italic; }
+    .bio-content { padding:36px 38px; }
+    @media(max-width:600px){ .bio-content{padding:24px 20px;} }
+    .bio-content h2 { font-family:'Cinzel Decorative',serif; font-size:1.3rem; color:var(--primary); margin-bottom:14px; }
+    .bio-content p { font-size:1.05rem; line-height:1.85; color:var(--text-mid); margin-bottom:12px; }
+    .bio-content p:last-child { margin-bottom:0; }
+    .bio-highlight { font-weight:600; color:var(--primary); }
+    .bio-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
+    .bio-tag { font-family:'Cinzel',serif; font-size:0.62rem; letter-spacing:2px; text-transform:uppercase; padding:5px 14px; border:1px solid var(--border-gold); border-radius:2px; color:var(--text-soft); background:rgba(212,175,55,0.07); }
+
+    /* ── CARDS ── */
+    .cards-wrap { position:relative; z-index:10; max-width:1280px; margin:0 auto; padding:0 22px 80px; }
+    .feat-row { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-bottom:20px; }
+    @media(max-width:900px){.feat-row{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:560px){.feat-row{grid-template-columns:1fr;}}
+    .cards-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+    @media(max-width:1100px){.cards-grid{grid-template-columns:repeat(3,1fr);}}
+    @media(max-width:740px) {.cards-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:480px) {.cards-grid{grid-template-columns:1fr;}}
+
+    .card {
+      position:relative; border-radius:12px; overflow:hidden;
+      cursor:pointer;
+      transition:transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275), box-shadow 0.4s;
+      animation:cardIn 0.6s ease both;
+      text-decoration:none; color:inherit; display:block;
+      background:var(--bg-card);
+      border:1px solid var(--border);
+      box-shadow:var(--shadow-sm);
+    }
+    .card:hover { transform:translateY(-8px) scale(1.025); box-shadow:var(--shadow-lg); border-color:var(--border-gold); z-index:5; }
+    @keyframes cardIn { from{opacity:0;transform:translateY(28px) scale(0.96)} to{opacity:1;transform:translateY(0) scale(1)} }
+
+    /* card image */
+    .card-img {
+      width:100%; aspect-ratio:16/9; overflow:hidden;
+      position:relative;
+    }
+    .card.feat .card-img { aspect-ratio:4/3; }
+    .card-img img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.4s; }
+    .card:hover .card-img img { transform:scale(1.07); }
+    .card-img-placeholder {
+      width:100%; height:100%;
+      display:flex; align-items:center; justify-content:center;
+      flex-direction:column; gap:8px;
+      font-size:0.75rem; font-family:'Cinzel',serif; letter-spacing:2px; text-transform:uppercase;
+      color:rgba(255,255,255,0.7);
+    }
+    .card-img-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(180deg,transparent 40%,rgba(92,46,15,0.55) 100%);
+    }
+    .card-cat-badge {
+      position:absolute; top:10px; left:10px; z-index:2;
+      font-family:'Cinzel',serif; font-size:0.58rem; letter-spacing:2px; text-transform:uppercase;
+      padding:4px 10px; border-radius:2px;
+      background:rgba(92,46,15,0.85); color:var(--gold-light);
+      backdrop-filter:blur(4px);
+    }
+        .bio-avatar img{
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        border-radius:50%;
+    }
+
+    /* card body */
+    .card-inner { padding:16px 18px 14px; display:flex; flex-direction:column; gap:6px; }
+    .card.feat .card-inner { padding:20px 22px 18px; }
+    .card-name { font-family:'Tiro Devanagari Sanskrit',serif; font-size:1.1rem; color:var(--primary-dark); line-height:1.3; }
+    .card.feat .card-name { font-size:1.4rem; }
+    .card-eng { font-family:'Cinzel',serif; font-size:0.62rem; letter-spacing:2px; color:var(--text-soft); text-transform:uppercase; }
+    .card-preview { font-family:'Tiro Devanagari Sanskrit',serif; font-size:0.85rem; color:var(--text-mid); line-height:1.65; border-top:1px solid var(--border); padding-top:8px; font-style:italic; }
+    .card-footer { display:flex; align-items:center; justify-content:space-between; margin-top:4px; }
+    .card-author { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:2px; color:var(--text-soft); display:flex; align-items:center; gap:5px; }
+    .author-dot { width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0; }
+    .card-arrow { width:28px;height:28px;border-radius:50%;border:1px solid var(--border-gold);display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:var(--accent);transition:all 0.3s; }
+    .card:hover .card-arrow { background:var(--primary);border-color:var(--primary);color:#fff;transform:rotate(45deg); }
+
+    /* placeholder gradient per category */
+    .card-img.c-vidyapati .card-img-placeholder { background:linear-gradient(140deg,#5C2E0F,#8B4513,#CD853F); }
+    .card-img.c-shiv .card-img-placeholder { background:linear-gradient(140deg,#2E1A47,#4A2D6E,#7B52A3); }
+    .card-img.c-nachari .card-img-placeholder { background:linear-gradient(140deg,#1A3A2A,#2E6B4A,#4DAA7A); }
+    .card-img.c-bhagwati .card-img-placeholder { background:linear-gradient(140deg,#4A1A1A,#8B2E2E,#C75C5C); }
+
+    /* ── DIVIDER ── */
+    .divider { position:relative;z-index:10;display:flex;align-items:center;gap:18px;max-width:1280px;margin:10px auto 44px;padding:0 22px; }
+    .div-line { flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--border-gold),transparent); }
+    .div-txt { font-family:'Cinzel',serif;font-size:0.66rem;letter-spacing:5px;color:var(--accent);text-transform:uppercase;white-space:nowrap; }
+
+    /* ── INFO STRIP ── */
+    .info-strip {
+      position:relative; z-index:10;
+      background:linear-gradient(135deg,var(--primary-dark),var(--primary));
+      border-top:1px solid rgba(212,175,55,0.25); border-bottom:1px solid rgba(212,175,55,0.25);
+      padding:40px 5vw; display:flex; justify-content:space-around; flex-wrap:wrap; gap:20px;
+      margin:0 0 70px;
+    }
+    .info-item { text-align:center; flex:1; min-width:140px; }
+    .info-num { font-family:'Cinzel Decorative',serif; font-size:2rem; color:var(--gold-light); display:block; }
+    .info-lbl { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:3px; color:rgba(255,255,255,0.55); text-transform:uppercase; margin-top:4px; }
+
+    /* ── FOOTER ── */
+    footer {
+      position:relative; z-index:10;
+      text-align:center; padding:40px 20px;
+      border-top:1px solid var(--border-gold);
+      background:rgba(92,46,15,0.04);
+    }
+    .foot-sym { font-family:'Tiro Devanagari Sanskrit',serif; font-size:3rem; color:rgba(139,69,19,0.2); display:block; margin-bottom:12px; }
+    .foot-txt { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:4px; color:var(--text-soft); text-transform:uppercase; }
+    .foot-links { display:flex; justify-content:center; gap:24px; margin-top:14px; flex-wrap:wrap; }
+    .foot-links a { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:2px; color:var(--text-soft); text-decoration:none; text-transform:uppercase; transition:color 0.3s; }
+    .foot-links a:hover { color:var(--primary); }
+
+    /* ── REVEAL ANIMATION ── */
+    .reveal { opacity:0; transform:translateY(26px); transition:opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.on { opacity:1; transform:none; }
+
+    @media(max-width:700px){ .nav-links{display:none;} .nav-search{width:140px;} }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <span class="hero-symbol">🎶</span>
+  <div class="hero-tag">✦ महाकवि विद्यापति • नचारी गीत ✦</div>
+  <h1>Vidyapati Geet Sangrah</h1>
+  <div class="hero-deva">विद्यापति गीत संग्रह</div>
+  <div class="hero-orn">✦ ✦ ✦</div>
+  <p class="hero-desc">मैथिली कोकिल महाकवि विद्यापति के शिव-पार्वती लीलागीत, नचारी, भक्ति रस के अमर पद। हर गीत में मधुर भाव, संस्कृति और श्रृंगार।</p>
+  <div class="hero-stats">
+    <div class="stat-item"><span class="stat-num" id="totalGeet">0</span><div class="stat-lbl">✦ गीत</div></div>
+    <div class="stat-item"><span class="stat-num" id="vidCount">0</span><div class="stat-lbl">✦ विद्यापति रचना</div></div>
+    <div class="stat-item"><span class="stat-num" id="shivCount">0</span><div class="stat-lbl">✦ शिव भजन</div></div>
+  </div>
+</section>
+
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="tick-item">चंद्रमुखी सन गौरी हमर छथि</span><span class="tick-dot">🎵</span>
+    <span class="tick-item">उगना रे मोर कतए गेलाह</span><span class="tick-dot">🎵</span>
+    <span class="tick-item">जोगिया मोर जगत सुखदायक</span><span class="tick-dot">🎵</span>
+    <span class="tick-item">आजु नाथ एक व्रत महा सुख लागल हे</span><span class="tick-dot">🎵</span>
+    <span class="tick-item">हर हर महादेव बम बम भोले</span><span class="tick-dot">🎵</span>
+    <span class="tick-item">गौरी दौरी दौरी कहथिन हे</span><span class="tick-dot">🎵</span>
+    <span class="tick-item">चंद्रमुखी सन गौरी हमर छथि</span><span class="tick-dot">🎵</span>
+  </div>
+</div>
+
+<!-- ── VIDYAPATI BIO SECTION ── -->
+<div class="bio-section reveal">
+  <div class="sec-hdr" style="margin-bottom:28px;">
+    <div class="sec-tag">✦ कवि परिचय ✦</div>
+    <div class="sec-title">महाकवि विद्यापति — Maithil Kavi Kokil</div>
+  </div>
+  <div class="bio-card">
+    <div class="bio-img-wrap">
+    <div class="bio-avatar" id="bioAvatarEmoji">
+        <a href="/images/Vidyapatee.jpg" target="_blank">
+            <img src="/images/Vidyapatee.jpg" alt="Vidyapatee">
+        </a>
+    </div>      
+    <div class="bio-name-wrap">
+        <div class="bio-name-deva">महाकवि विद्यापति</div>
+        <div class="bio-name-eng">Mahakavi Vidyapati</div>
+        <div class="bio-years">c. 1352 – 1448 CE</div>
+      </div>
+    </div>
+    <div class="bio-content">
+      <h2>मैथिल कविकोकिल — The Nightingale of Maithili</h2>
+      <p>
+        <span class="bio-highlight">महाकवि विद्यापति ठाकुर</span> (लगभग 1352–1448 ई.) मिथिला क्षेत्र के सर्वश्रेष्ठ कवि थे जिन्हें <span class="bio-highlight">मैथिल कविकोकिल</span> की उपाधि दी गई। उनका जन्म बिहार के मधुबनी जिले के बिस्फी गाँव में हुआ था। वे राजा शिवसिंह के दरबारी कवि थे।
+      </p>
+      <p>
+        विद्यापति की रचनाएँ मुख्यतः <span class="bio-highlight">मैथिली, संस्कृत और अपभ्रंश</span> में हैं। उनके पदों में राधा-कृष्ण की श्रृंगारमयी लीला और शिव-पार्वती की भक्ति का अनूठा संगम मिलता है। उनकी नचारी गीत परंपरा आज भी मिथिलांचल में अत्यंत लोकप्रिय है।
+      </p>
+      <p>
+        उनके गीतों का प्रभाव केवल मैथिली तक सीमित नहीं रहा — वैष्णव आंदोलन के माध्यम से <span class="bio-highlight">बंगाल, असम और ओडिशा</span> के साहित्य पर भी उनकी गहरी छाप पड़ी। कहा जाता है कि स्वयं <span class="bio-highlight">भगवान शिव उगना के रूप में उनके सेवक बने थे</span> — यह भक्ति की चरम पराकाष्ठा का प्रमाण है।
+      </p>
+      <div class="bio-tags">
+        <span class="bio-tag">मैथिली कविकोकिल</span>
+        <span class="bio-tag">14वीं–15वीं सदी</span>
+        <span class="bio-tag">बिस्फी, मिथिला</span>
+        <span class="bio-tag">शिव–पार्वती भक्ति</span>
+        <span class="bio-tag">राधा–कृष्ण श्रृंगार</span>
+        <span class="bio-tag">नचारी परंपरा</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="filter-bar reveal">
+  <button class="fbtn active" data-filter="all">सभी</button>
+  <button class="fbtn" data-filter="vidyapati">विद्यापति गीत</button>
+  <button class="fbtn" data-filter="shiv">शिव भजन</button>
+  <button class="fbtn" data-filter="nachari">नचारी गीत</button>
+  <button class="fbtn" data-filter="bhagwati">भगवती गीत</button>
+</div>
+
+<div class="sec-hdr reveal">
+  <div class="sec-tag">✦ अमर रचना ✦</div>
+  <div class="sec-title">Maithili Vidyapati Geet — मैथिली गीत</div>
+</div>
+
+<div class="cards-wrap" id="cardsContainer">
+  <div class="feat-row" id="featuredRow"></div>
+  <div class="divider reveal"><div class="div-line"></div><div class="div-txt">✦ सम्पूर्ण गीत संग्रह ✦</div><div class="div-line"></div></div>
+  <div class="cards-grid" id="cardsGrid"></div>
+</div>
+
+<div class="info-strip">
+  <div class="info-item"><span class="info-num" id="info1">0</span><div class="info-lbl">✦ गीत संग्रह</div></div>
+  <div class="info-item"><span class="info-num" id="info2">0</span><div class="info-lbl">✦ रचनाकाल</div></div>
+  <div class="info-item"><span class="info-num" id="info3">0</span><div class="info-lbl">✦ श्रद्धालु</div></div>
+</div>
+
+<footer>
+  <span class="foot-sym">🎶</span>
+  <div class="foot-txt">॥ गे माई चंद्रमुखी सन, गौरी हमर छथि ॥ © ShivaMarg 2026 || shivmarg.live</div>
+  <div class="foot-links"><a href="/">Home</a><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/privacy-policy/">Privacy Policy</a></div>
+</footer>
+
+<script>
+  const geetData = [
+    { name:"उगना रे मोर कतए गेलाह", eng:"Ugna Re Mor Katai Gela", preview:"उगना रे मोर कतए गेलाह, राति बितल अन्हारा...", category:"vidyapati", typeLabel:"विद्यापति गीत", img:"/images/VidyapateeShivLokGeet.png", featured:true },
+    { name:"आजु नाथ एक व्रत महा सुख लागल हे", eng:"Aaju Nath Ek Vrat", preview:"आजु नाथ एक व्रत महा सुख लागल हे, शिव सँ हमर बियाह...", category:"vidyapati", typeLabel:"शिव भजन", img:"/images/ShivVidyapatee.png", featured:true },
+    { name:"जोगिया मोर जगत सुखदायक", eng:"Jogiya Mor Jagat Sukhdayak", preview:"जोगिया मोर जगत सुखदायक, त्रिपुरारि भोलेश्वर...", category:"shiv", typeLabel:"शिव भजन", img:"/images/ShivMarg.png", featured:true },
+    { name:"हम नहि शिव सँ गौरी बिआहब", eng:"Hum Nahi Shiv Sang Gauri Biahb", preview:"हम नहि शिव सँ गौरी बिआहब, ई तपसि वर मोर न पसन्द...", category:"vidyapati", typeLabel:"विद्यापति गीत", img:"/images/ShivParwati.png", featured:false },
+    { name:"बड़ सुखसार पाओल तुअ तीरे", eng:"Bar Sukhsar Paol Tua Teere", preview:"बड़ सुखसार पाओल तुअ तीरे, प्रभु शिव शंकर...", category:"shiv", typeLabel:"शिव भजन", img:"/images/geet/bar-sukhsar.jpg", featured:false },
+    { name:"बर अजगुत देखल तोर अंगना", eng:"Bar Ajgut Dekhal Tor Angana", preview:"बर अजगुत देखल तोर अंगना, गौरी रानी मैया...", category:"vidyapati", typeLabel:"नचारी गीत", img:"/images/ShivParwatiVidyapatee.png", featured:false },
+    { name:"हम नहिं आजु रहब एहि आँगन", eng:"Hum Nahi Aaju Rahab Ehi Aangan", preview:"हम नहिं आजु रहब एहि आँगन, बिदा दे मोर पिता...", category:"vidyapati", typeLabel:"विद्यापति गीत", img:"/images/hum-nahi-aaju.jpg", featured:false },
+    { name:"हे हर हमर करहुं प्रतिपाला", eng:"He Har Hamar Karahun Pratipala", preview:"हे हर हमर करहुं प्रतिपाला, रक्षा करु नीलकंठ...", category:"shiv", typeLabel:"शिव भजन", img:"/images/geet/he-har-hamar.jpg", featured:false },
+    { name:"चंद्रमुखी सन गौरी हमर छथि", eng:"Chandramukhi San Gauri Hamar Chhathi", preview:"गे माई चंद्रमुखी सन, गौरी हमर छथि, सुरुज सन करितौं जमाई...", category:"vidyapati", typeLabel:"विद्यापति गीत", img:"/images/ShivParwatiVidyapatee.png", featured:true },
+    { name:"कखन हरब दुख मोर", eng:"Kakhan Harab Dukh Mor", preview:"कखन हरब दुख मोर, प्रभु शिव संकटहर...", category:"shiv", typeLabel:"शिव भजन", img:"/images/ShivVidyapatee.png", featured:false },
+    { name:"हिमाचल किछुओ ने केलैन्ह बिचारी", eng:"Himachal Kichhuo Ne Kelainh Bichari", preview:"हिमाचल किछुओ ने केलैन्ह बिचारी, गौरी बियाह के लेल...", category:"vidyapati", typeLabel:"नचारी गीत", img:"/images/geet/himachal.jpg", featured:false },
+    { name:"रुसि चलली गौरी तेजि महेश", eng:"Rusi Chalali Gauri Teji Mahesh", preview:"रुसि चलली गौरी तेजि महेश, कहिन मैया रिसाए...", category:"vidyapati", typeLabel:"विद्यापति गीत", img:"/images/geet/rusi-chalali.jpg", featured:false },
+    { name:"शिव हो उतरब पार कवन विधि", eng:"Shiv Ho Utarab Paar Kavan Vidhi", preview:"शिव हो उतरब पार कवन विधि, भवसागर से मोक्ति...", category:"shiv", typeLabel:"शिव भजन", img:"/images/geet/shiv-ho.jpg", featured:false },
+    { name:"जोगी एक ठाढ़ छै अंगनवा में", eng:"Jogi Ek Thaadh Chhai Anganwa Mein", preview:"जोगी एक ठाढ़ छै अंगनवा में, बाबा भोलेनाथ...", category:"shiv", typeLabel:"नचारी गीत", img:"/images/geet/jogi-ek.jpg", featured:false },
+    { name:"अरे बाप रे बाप शिव के सागर", eng:"Are Baap Re Baap Shiv Ke Sagar", preview:"अरे बाप रे बाप शिव के सागर, करुणा के सिंधु...", category:"shiv", typeLabel:"शिव भजन", img:"/images/geet/are-baap.jpg", featured:false },
+    { name:"जगत विदित बैद्यनाथ", eng:"Jagat Vidit Baidyanath", preview:"जगत विदित बैद्यनाथ, देव देव महेश्वर...", category:"shiv", typeLabel:"शिव भजन", img:"/images/geet/jagat-vidit.jpg", featured:false },
+    { name:"जोगिया एक हम देखलौं गे माई", eng:"Jogiya Ek Hum Dekhlaun Ge Mai", preview:"जोगिया एक हम देखलौं गे माई, जटाजूटधारी...", category:"vidyapati", typeLabel:"विद्यापति गीत", img:"/images/geet/jogiya-ek.jpg", featured:false },
+    { name:"जय-जय संकर जय त्रिपुरारि", eng:"Jay Jay Sankar Jay Tripurari", preview:"जय-जय संकर जय त्रिपुरारि, दीनन के दुख हरनहार...", category:"shiv", typeLabel:"शिव भजन", img:"/images/geet/jay-jay.jpg", featured:false },
+    { name:"गौरी दौरी दौरी कहथिन हे", eng:"Gauri Dauri Dauri Kahthin He", preview:"गौरी दौरी दौरी कहथिन हे, नाथ हम नहि जाब...", category:"vidyapati", typeLabel:"नचारी गीत", img:"/images/geet/gauri-dauri.jpg", featured:false },
+    { name:"छोटी मोटी टूटली मडैय्या में गौरी दाई", eng:"Chhoti Moti Tutli Madaiya Mein Gauri Dai", preview:"छोटी मोटी टूटली मडैय्या में, गौरी दाई झूलै...", category:"vidyapati", typeLabel:"विद्यापति गीत", img:"/images/geet/chhoti-moti.jpg", featured:false },
+    { name:"राजा हेमंत घर गौरी जनम लेल", eng:"Raja Hemant Ghar Gauri Janam Lel", preview:"राजा हेमंत घर गौरी जनम लेल, हर हर महादेव...", category:"vidyapati", typeLabel:"विद्यापति गीत", img:"/images/geet/raja-hemant.jpg", featured:false },
+    { name:"जय-जय भैरवि असुर भयाउनि", eng:"Jai Jai Bhairavi Asur Bhayauni", preview:"जय-जय भैरवि असुर भयाउनि, माता शक्ति स्वरूपा...", category:"bhagwati", typeLabel:"भगवती गीत", img:"/images/geet/jai-bhairavi.jpg", featured:false },
+    { name:"चानन भेल विषम सर रे", eng:"Chanan Bhel Visham Sar Re", preview:"चानन भेल विषम सर रे, राधा कृष्ण रसाल...", category:"vidyapati", typeLabel:"विद्यापति गीत", img:"/images/geet/chanan-bhel.jpg", featured:false },
+    { name:"मोरा रे अँगनमा चानन केरि गछिया", eng:"Mora Re Anganma Chaanan Keri Gachhiya", preview:"मोरा रे अँगनमा चानन केरि गछिया, डारी डारी फुलै...", category:"vidyapati", typeLabel:"विद्यापति गीत", img:"/images/geet/mora-re.jpg", featured:false },
+    { name:"सुनु सुनु रसिया", eng:"Sunu Sunu Rasiya", preview:"सुनु सुनु रसिया, प्रीतम मोर कान्हा...", category:"vidyapati", typeLabel:"विद्यापति गीत", img:"/images/geet/sunu-sunu.jpg", featured:false },
+    { name:"कोयल कमल कंठ झर झर कांनय", eng:"Koyal Kamal Kanth Jhar Jhar Kaanay", preview:"कोयल कमल कंठ झर झर कांनय, सावन मास आयल...", category:"vidyapati", typeLabel:"विद्यापति गीत", img:"/images/geet/koyal.jpg", featured:false },
+    { name:"कुसुमित कानन कुंज बसी रे", eng:"Kusumit Kanan Kunj Basi Re", preview:"कुसुमित कानन कुंज बसी रे, बृन्दावन के मोर...", category:"vidyapati", typeLabel:"विद्यापति गीत", img:"/images/geet/kusumit.jpg", featured:false },
+    { name:"नन्दनक नन्दन कदम्बक तरु तर", eng:"Nandak Nandan Kadambak Taru Tar", preview:"नन्दनक नन्दन कदम्बक तरु तर, गोपी संग रसकेलि...", category:"vidyapati", typeLabel:"विद्यापति गीत", img:"/images/geet/nandan.jpg", featured:false }
+  ];
+
+  const catClass = { vidyapati:'c-vidyapati', shiv:'c-shiv', nachari:'c-nachari', bhagwati:'c-bhagwati' };
+
+  function slugify(text) {
+    return (text||'').toString().toLowerCase()
+      .replace(/[^a-z0-9\u0900-\u097F\s-]/g,'').trim().replace(/\s+/g,'-');
+  }
+
+  function imgLabelForCat(cat) {
+    const m = {vidyapati:'विद्यापति गीत',shiv:'शिव भजन',nachari:'नचारी',bhagwati:'भगवती'};
+    return m[cat]||'गीत';
+  }
+
+  function createCardHTML(g, isFeat) {
+    const slug = slugify(g.eng || g.name);
+    const href = `/Vidyapati-Geet-Sangrah/${slug}/`;
+    const cc = catClass[g.category]||'c-vidyapati';
+    const cardClass = `card ${isFeat?'feat ':''} reveal`;
+    return `
+      <a href="${href}" class="${cardClass}" data-category="${g.category}" data-name="${(g.name+' '+g.eng).toLowerCase()}" data-preview="${g.preview.toLowerCase()}">
+        <div class="card-img ${cc}">
+          <img src="${g.img}" alt="${g.name}" loading="lazy"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="card-img-placeholder" style="display:none;">
+            <span style="font-size:2.2rem;opacity:0.7">🎼</span>
+            <span>${imgLabelForCat(g.category)}</span>
+          </div>
+          <div class="card-img-overlay"></div>
+          <div class="card-cat-badge">${g.typeLabel}</div>
+        </div>
+        <div class="card-inner">
+          <div class="card-name">${g.name}</div>
+          <div class="card-eng">${g.eng}</div>
+          <div class="card-preview">${g.preview.substring(0,72)}${g.preview.length>72?'…':''}</div>
+          <div class="card-footer">
+            <div class="card-author"><span class="author-dot"></span>महाकवि विद्यापति</div>
+            <div class="card-arrow">→</div>
+          </div>
+        </div>
+      </a>
+    `;
+  }
+
+  function renderHome() {
+    const featured = geetData.filter(g=>g.featured);
+    const normal   = geetData.filter(g=>!g.featured);
+    document.getElementById('featuredRow').innerHTML = featured.map(g=>createCardHTML(g,true)).join('');
+    document.getElementById('cardsGrid').innerHTML   = normal.map(g=>createCardHTML(g,false)).join('');
+    document.getElementById('totalGeet').innerText = geetData.length;
+    document.getElementById('vidCount').innerText  = geetData.filter(g=>g.category==='vidyapati').length;
+    document.getElementById('shivCount').innerText = geetData.filter(g=>g.category==='shiv').length;
+    document.getElementById('info1').innerText = geetData.length;
+    document.getElementById('info2').innerText = "14वीं सदी";
+    document.getElementById('info3').innerText = "अमर";
+  }
+
+  function filterCards(f) {
+    document.querySelectorAll('.card').forEach(c=>{
+      const show = f==='all'||c.getAttribute('data-category')===f;
+      c.style.display = show?'block':'none';
+    });
+  }
+  function searchGeet(q) {
+    const t = q.trim().toLowerCase();
+    document.querySelectorAll('.card').forEach(c=>{
+      const match = !t||c.getAttribute('data-name').includes(t)||c.getAttribute('data-preview').includes(t);
+      if(!match) c.style.display='none';
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', ()=>{
+    renderHome();
+    const btns = document.querySelectorAll('.fbtn');
+    btns.forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        btns.forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        filterCards(btn.getAttribute('data-filter'));
+        const s = document.getElementById('searchInput');
+        if(s&&s.value.trim()) searchGeet(s.value);
+      });
+    });
+    const si = document.getElementById('searchInput');
+    if(si) si.addEventListener('input',e=>{
+      filterCards(document.querySelector('.fbtn.active').getAttribute('data-filter'));
+      searchGeet(e.target.value);
+    });
+    const obs = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('on'); });
+    },{threshold:0.08});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  });
+</script>
+<script src="/js/auth2.js"></script>
+<script src="/js/s-comments.js"></script>
+<script src="/js/nav.js"></script>
+<script src="/js/search.js"></script>
+<script>
+  const SM_API = 'https://shivamargbackend.onrender.com';
+  SmComments.init({ apiBase: SM_API });
+</script>
+</body>
+</html>
