@@ -124,6 +124,14 @@ mantra for wealth
       --dark: #0D0500;
       --dark2: #170800;
       --dark3: #1F0A00;
+      --primary-color: #8B4513;
+      --primary-dark: #5C2E0F;
+      --primary-light: #D4A574;
+      --accent-color: #CD853F;
+      --text-light: #666;
+      --bg-light: #fef9f3;
+      --border-color: #e0d5c7;
+      --shadow: 0 10px 40px rgba(139, 69, 19, 0.15);
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -517,16 +525,18 @@ mantra for wealth
     /* ── CARD BASE ── */
     .card {
       position: relative;
-      border-radius: 2px;
+      border-radius: 12px;
       overflow: hidden;
       cursor: pointer;
       transition: transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275), box-shadow 0.4s;
       animation: cardReveal 0.7s ease both;
+      background: var(--bg-white);
+      box-shadow: 0 4px 15px rgba(139, 69, 19, 0.1);
     }
 
     .card:hover {
       transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 30px rgba(212,160,23,0.15);
+      box-shadow: var(--shadow);
       z-index: 5;
     }
 
@@ -547,12 +557,31 @@ mantra for wealth
     }
     .card:hover::before { opacity: 1; }
 
-    .card-inner {
-      padding: 28px 24px 24px;
+    .card-image {
+      width: 100%;
+      height: 180px;
+      background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent-color) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card-image img {
+      width: 100%;
       height: 100%;
+      object-fit: cover;
+    }
+
+    .card-inner {
+      padding: 1.5rem;
+      height: auto;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 0.75rem;
       position: relative;
       z-index: 1;
     }
@@ -565,13 +594,18 @@ mantra for wealth
     }
 
     /* FEATURED card */
-    .card.featured .card-inner { padding: 40px 36px; }
+    .card.featured {
+      grid-column: span 1;
+    }
+
+    .card.featured .card-inner { padding: 2rem; }
+    .card.featured .card-image { height: 220px; }
 
     .card-deity-symbol {
-      font-size: 3rem;
+      font-size: 2.5rem;
       line-height: 1;
       display: block;
-      margin-bottom: 4px;
+      margin-bottom: 0.5rem;
       filter: drop-shadow(0 0 10px rgba(212,160,23,0.5));
       transition: transform 0.3s;
     }
@@ -579,132 +613,136 @@ mantra for wealth
 
     .card-tag {
       font-family: 'Cinzel', serif;
-      font-size: 0.62rem;
-      letter-spacing: 3px;
+      font-size: 0.68rem;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      color: var(--card-tag-color, rgba(253,245,230,0.5));
-      margin-bottom: 2px;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
     }
 
     .card-name-deva {
       font-family: 'Tiro Devanagari Sanskrit', serif;
-      font-size: 1.45rem;
-      color: var(--gold-light);
+      font-size: 1.3rem;
+      color: var(--primary-color);
       line-height: 1.2;
-      text-shadow: 0 0 20px rgba(212,160,23,0.3);
+      font-weight: 700;
     }
 
-    .card.featured .card-name-deva { font-size: 1.9rem; }
+    .card.featured .card-name-deva { font-size: 1.6rem; }
 
     .card-name-eng {
       font-family: 'Cinzel', serif;
-      font-size: 0.78rem;
-      letter-spacing: 3px;
-      color: rgba(253,245,230,0.5);
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      color: var(--text-light);
       text-transform: uppercase;
     }
 
     .card-mantra-preview {
       font-family: 'Tiro Devanagari Sanskrit', serif;
-      font-size: 0.95rem;
-      color: rgba(253,245,230,0.7);
-      line-height: 1.8;
-      border-top: 1px solid rgba(212,160,23,0.15);
-      padding-top: 12px;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      line-height: 1.6;
+      border-top: 1px solid var(--border-color);
+      padding-top: 0.75rem;
       font-style: italic;
     }
 
-    .card.featured .card-mantra-preview { font-size: 1.05rem; }
+    .card.featured .card-mantra-preview { font-size: 1rem; }
 
     .card-count {
       margin-top: auto;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 0.5rem;
       font-family: 'Cinzel', serif;
-      font-size: 0.68rem;
-      letter-spacing: 2px;
-      color: rgba(253,245,230,0.4);
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      color: var(--text-light);
+      font-weight: 600;
     }
 
     .card-count-dot {
-      width: 4px; height: 4px;
+      width: 6px; height: 6px;
       border-radius: 50%;
-      background: var(--saffron);
+      background: var(--primary-color);
       flex-shrink: 0;
     }
 
     .card-arrow {
       position: absolute;
-      bottom: 20px; right: 20px;
-      width: 32px; height: 32px;
+      bottom: 1.5rem; right: 1.5rem;
+      width: 36px; height: 36px;
       border-radius: 50%;
-      border: 1px solid rgba(212,160,23,0.3);
+      border: 2px solid var(--primary-light);
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.8rem;
-      color: rgba(212,160,23,0.5);
+      font-size: 0.9rem;
+      color: var(--primary-color);
       transition: all 0.3s;
       z-index: 2;
+      background: white;
+      font-weight: bold;
     }
     .card:hover .card-arrow {
-      background: var(--saffron);
-      border-color: var(--saffron);
+      background: var(--primary-color);
+      border-color: var(--primary-color);
       color: white;
       transform: rotate(45deg);
     }
 
     /* ── CARD COLOR THEMES ── */
-    /* Shiv — deep maroon / ash */
-    .card-shiv .card-bg { background: linear-gradient(145deg, rgba(60,5,5,0.9) 0%, rgba(15,5,5,0.95) 100%); }
-    .card-shiv { --card-accent: linear-gradient(90deg, transparent, #888, var(--gold), #888, transparent); --card-tag-color: rgba(180,180,180,0.6); }
+    /* Shiv — deep brown */
+    .card-shiv .card-image { background: linear-gradient(135deg, #8B6F47 0%, #5C4A33 100%); }
+    .card-shiv { --card-accent: linear-gradient(90deg, transparent, #8B4513, #D4A574, #8B4513, transparent); }
 
-    /* Vishnu — deep blue */
-    .card-vishnu .card-bg { background: linear-gradient(145deg, rgba(0,20,80,0.9) 0%, rgba(0,8,30,0.95) 100%); }
-    .card-vishnu { --card-accent: linear-gradient(90deg, transparent, #4488FF, #99CCFF, #4488FF, transparent); --card-tag-color: rgba(100,160,255,0.7); }
+    /* Vishnu — blue */
+    .card-vishnu .card-image { background: linear-gradient(135deg, #4A90E2 0%, #2E5FA3 100%); }
+    .card-vishnu { --card-accent: linear-gradient(90deg, transparent, #4488FF, #99CCFF, #4488FF, transparent); }
 
-    /* Durga — crimson / warrior */
-    .card-durga .card-bg { background: linear-gradient(145deg, rgba(90,0,20,0.9) 0%, rgba(25,0,5,0.95) 100%); }
-    .card-durga { --card-accent: linear-gradient(90deg, transparent, #FF3366, #FF6688, #FF3366, transparent); --card-tag-color: rgba(255,100,120,0.7); }
+    /* Durga — crimson */
+    .card-durga .card-image { background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%); }
+    .card-durga { --card-accent: linear-gradient(90deg, transparent, #FF3366, #FF6688, #FF3366, transparent); }
 
-    /* Lakshmi — gold pink */
-    .card-lakshmi .card-bg { background: linear-gradient(145deg, rgba(80,35,0,0.9) 0%, rgba(20,8,0,0.95) 100%); }
-    .card-lakshmi { --card-accent: linear-gradient(90deg, transparent, #FFB347, #FFD700, #FFB347, transparent); --card-tag-color: rgba(255,200,100,0.7); }
+    /* Lakshmi — gold */
+    .card-lakshmi .card-image { background: linear-gradient(135deg, #F39C12 0%, #D68910 100%); }
+    .card-lakshmi { --card-accent: linear-gradient(90deg, transparent, #FFB347, #FFD700, #FFB347, transparent); }
 
-    /* Ganesh — ochre saffron */
-    .card-ganesh .card-bg { background: linear-gradient(145deg, rgba(80,40,0,0.9) 0%, rgba(20,10,0,0.95) 100%); }
-    .card-ganesh { --card-accent: linear-gradient(90deg, transparent, #FF8C00, #FFD700, #FF8C00, transparent); --card-tag-color: rgba(255,160,50,0.7); }
+    /* Ganesh — saffron */
+    .card-ganesh .card-image { background: linear-gradient(135deg, #E67E22 0%, #CA6F1E 100%); }
+    .card-ganesh { --card-accent: linear-gradient(90deg, transparent, #FF8C00, #FFD700, #FF8C00, transparent); }
 
-    /* Ram — green forest */
-    .card-ram .card-bg { background: linear-gradient(145deg, rgba(0,45,15,0.9) 0%, rgba(0,12,5,0.95) 100%); }
-    .card-ram { --card-accent: linear-gradient(90deg, transparent, #22CC66, #88FFAA, #22CC66, transparent); --card-tag-color: rgba(80,220,130,0.7); }
+    /* Ram — green */
+    .card-ram .card-image { background: linear-gradient(135deg, #27AE60 0%, #1E8449 100%); }
+    .card-ram { --card-accent: linear-gradient(90deg, transparent, #22CC66, #88FFAA, #22CC66, transparent); }
 
-    /* Krishna — deep purple-blue */
-    .card-krishna .card-bg { background: linear-gradient(145deg, rgba(30,0,70,0.9) 0%, rgba(8,0,20,0.95) 100%); }
-    .card-krishna { --card-accent: linear-gradient(90deg, transparent, #9966FF, #CCAAFF, #9966FF, transparent); --card-tag-color: rgba(160,120,255,0.7); }
+    /* Krishna — purple */
+    .card-krishna .card-image { background: linear-gradient(135deg, #8E44AD 0%, #6C3483 100%); }
+    .card-krishna { --card-accent: linear-gradient(90deg, transparent, #9966FF, #CCAAFF, #9966FF, transparent); }
 
-    /* Saraswati — white blue */
-    .card-saraswati .card-bg { background: linear-gradient(145deg, rgba(0,30,60,0.9) 0%, rgba(0,8,20,0.95) 100%); }
-    .card-saraswati { --card-accent: linear-gradient(90deg, transparent, #66CCFF, #AADDFF, #66CCFF, transparent); --card-tag-color: rgba(100,200,255,0.7); }
+    /* Saraswati — cyan */
+    .card-saraswati .card-image { background: linear-gradient(135deg, #3498DB 0%, #2980B9 100%); }
+    .card-saraswati { --card-accent: linear-gradient(90deg, transparent, #66CCFF, #AADDFF, #66CCFF, transparent); }
 
-    /* Hanuman — red orange */
-    .card-hanuman .card-bg { background: linear-gradient(145deg, rgba(80,20,0,0.9) 0%, rgba(20,5,0,0.95) 100%); }
-    .card-hanuman { --card-accent: linear-gradient(90deg, transparent, #FF4400, #FF8844, #FF4400, transparent); --card-tag-color: rgba(255,100,60,0.7); }
+    /* Hanuman — orange */
+    .card-hanuman .card-image { background: linear-gradient(135deg, #FF6B35 0%, #E55100 100%); }
+    .card-hanuman { --card-accent: linear-gradient(90deg, transparent, #FF4400, #FF8844, #FF4400, transparent); }
 
-    /* Kali — black purple */
-    .card-kali .card-bg { background: linear-gradient(145deg, rgba(40,0,50,0.95) 0%, rgba(8,0,12,0.98) 100%); }
-    .card-kali { --card-accent: linear-gradient(90deg, transparent, #CC44FF, #FF88FF, #CC44FF, transparent); --card-tag-color: rgba(200,80,255,0.7); }
+    /* Kali — deep purple */
+    .card-kali .card-image { background: linear-gradient(135deg, #663399 0%, #3D1F47 100%); }
+    .card-kali { --card-accent: linear-gradient(90deg, transparent, #CC44FF, #FF88FF, #CC44FF, transparent); }
 
-    /* Surya — bright amber */
-    .card-surya .card-bg { background: linear-gradient(145deg, rgba(80,50,0,0.9) 0%, rgba(20,10,0,0.95) 100%); }
-    .card-surya { --card-accent: linear-gradient(90deg, transparent, #FFD700, #FFF176, #FFD700, transparent); --card-tag-color: rgba(255,220,60,0.7); }
+    /* Surya — amber */
+    .card-surya .card-image { background: linear-gradient(135deg, #FFB300 0%, #FF9500 100%); }
+    .card-surya { --card-accent: linear-gradient(90deg, transparent, #FFD700, #FFF176, #FFD700, transparent); }
 
-    /* Kartik — peacock teal */
-    .card-kartik .card-bg { background: linear-gradient(145deg, rgba(0,50,50,0.9) 0%, rgba(0,12,12,0.95) 100%); }
-    .card-kartik { --card-accent: linear-gradient(90deg, transparent, #00DDBB, #88FFEE, #00DDBB, transparent); --card-tag-color: rgba(0,220,190,0.7); }
+    /* Kartik — teal */
+    .card-kartik .card-image { background: linear-gradient(135deg, #16A085 0%, #0D6B55 100%); }
+    .card-kartik { --card-accent: linear-gradient(90deg, transparent, #00DDBB, #88FFEE, #00DDBB, transparent); }
 
-    /* Gayatri — dawn orange-white */
-    .card-gayatri .card-bg { background: linear-gradient(145deg, rgba(60,30,5,0.9) 0%, rgba(15,8,0,0.95) 100%); }
-    .card-gayatri { --card-accent: linear-gradient(90deg, transparent, #FFAA55, #FFE0B0, #FFAA55, transparent); --card-tag-color: rgba(255,180,100,0.7); }
+    /* Gayatri — dawn */
+    .card-gayatri .card-image { background: linear-gradient(135deg, #F0A868 0%, #D68A4B 100%); }
+    .card-gayatri { --card-accent: linear-gradient(90deg, transparent, #FFAA55, #FFE0B0, #FFAA55, transparent); }
 
     /* ── DIVIDER ── */
     .divider {
@@ -731,9 +769,9 @@ mantra for wealth
       white-space: nowrap;
     }
     .orb-logo {
-      width: 10%;          /* adjust size */
+      width: 10%;
       height: 80%;
-      object-fit: contain; /* keeps aspect ratio */
+      object-fit: contain;
     }
 
     /* ── FEATURE STRIP ── */
@@ -874,14 +912,29 @@ mantra for wealth
         min-width: 250px;
       }
     }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-light);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary-light);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-color);
+    }
   </style>
   	  <script>
 	window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 	</script>
 	<script defer src="/_vercel/insights/script.js"></script>
-
-
-
 		<script>
 	window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
 	</script>
@@ -899,8 +952,6 @@ mantra for wealth
 <div class="bg-fixed"></div>
 <div class="mandala-tex"></div>
 <div id="diyas"></div>
-
-<!-- Nav -->
 
 <!-- Hero -->
 <section class="hero">
@@ -956,10 +1007,9 @@ mantra for wealth
 
     <!-- SHIV FEATURED -->
     <a href="/shiva-mantras" class="card featured card-shiv reveal" data-cat="shiv" style="animation-delay:0.05s; text-decoration: none; color: inherit;">
-    <div class="card-bg"></div>
+        <div class="card-image"><img src="/images/home/namami-samisam.png" alt=""></div>
         <div class="card-inner">
-            <span class="card-deity-symbol">🔱</span>
-            <div class="card-tag" style="color:rgba(180,180,180,0.7)">Shiv Stotram</div>
+            <div class="card-tag">Shiv Stotram</div>
             <div class="card-name-deva">भगवान शिव</div>
             <div class="card-name-eng">BHAGWAN SHIV</div>
             <div class="card-mantra-preview">
@@ -975,10 +1025,9 @@ mantra for wealth
 
     <!-- DURGA FEATURED -->
     <a href="/durga-mantras/" class="card featured card-durga reveal" data-cat="shakti" style="animation-delay:0.1s; text-decoration: none; color: inherit;">
-    <div class="card-bg"></div>
+    <div class="card-image"><img src="/images/home/MataDurga.png" alt="Maa Durga"></div>
     <div class="card-inner">
-      <span class="card-deity-symbol">🌺</span>
-      <div class="card-tag" style="color:rgba(255,100,130,0.8)">Durga Stuti</div>
+      <div class="card-tag">Durga Stuti</div>
       <div class="card-name-deva">माँ दुर्गा</div>
       <div class="card-name-eng">MAA DURGA</div>
       <div class="card-mantra-preview">या देवी सर्वभूतेषु शक्तिरूपेण संस्थिता।<br>नमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः॥</div>
@@ -989,10 +1038,9 @@ mantra for wealth
 
     <!-- KRISHNA FEATURED -->
      <a href="/Krishna-Mahamantras/" class="card featured card-krishna reveal" data-cat="krishna" style="animation-delay:0.15s; text-decoration: none; color: inherit;">
-    <div class="card-bg"></div>
+    <div class="card-image"><img src="/images/home/ShriKrishna.jpeg" alt=""></div>
     <div class="card-inner">
-      <span class="card-deity-symbol">🪈</span>
-      <div class="card-tag" style="color:rgba(160,120,255,0.8)">Krishna Bhajan</div>
+      <div class="card-tag">Krishna Bhajan</div>
       <div class="card-name-deva">श्री कृष्ण</div>
       <div class="card-name-eng">SHRI KRISHNA</div>
       <div class="card-mantra-preview">हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे।<br>हरे राम हरे राम राम राम हरे हरे॥</div>
@@ -1015,9 +1063,8 @@ mantra for wealth
 
     <!-- GANESH -->
      <a href="/ganesh-mantras/" class="card card-ganesh reveal" data-cat="devi" style="animation-delay:0.05s; text-decoration: none; color: inherit;">
-    <div class="card-bg"></div>
+    <div class="card-image"><img src="/images/home/GaneshJi.png" alt="Ganesh"></div>
     <div class="card-inner">
-      <span class="card-deity-symbol">🐘</span>
       <div class="card-tag">Ganesh Mantra</div>
       <div class="card-name-deva">श्री गणेश</div>
       <div class="card-name-eng">SHRI GANESH</div>
@@ -1029,9 +1076,8 @@ mantra for wealth
 
     <!-- LAKSHMI -->
      <a href="/Lakshmi-mantras/" class="card card-lakshmi reveal" data-cat="shakti" style="animation-delay:0.1s; text-decoration: none; color: inherit;">
-    <div class="card-bg"></div>
+    <div class="card-image"><img src="/images/home/LakshmiMata.png" alt="Maa Lakshmi"></div>
     <div class="card-inner">
-      <span class="card-deity-symbol">🪷</span>
       <div class="card-tag">Lakshmi Stotram</div>
       <div class="card-name-deva">माँ लक्ष्मी</div>
       <div class="card-name-eng">MAA LAKSHMI</div>
@@ -1043,9 +1089,8 @@ mantra for wealth
 
     <!-- RAM -->
      <a href="/Shri-ram-mantra/" class="card card-ram reveal" data-cat="ram" style="animation-delay:0.15s; text-decoration: none; color: inherit;">
-    <div class="card-bg"></div>
+    <div class="card-image"><img src="/images/home/ShriRam.png" alt="Shri Ram"></div>
     <div class="card-inner">
-      <span class="card-deity-symbol">🏹</span>
       <div class="card-tag">Ram Mantra</div>
       <div class="card-name-deva">श्री राम</div>
       <div class="card-name-eng">SHRI RAM</div>
@@ -1057,9 +1102,8 @@ mantra for wealth
 
     <!-- HANUMAN -->
     <a href="/hanumanji/" class="card card-hanuman reveal" data-cat="ram" style="animation-delay:0.2s; text-decoration: none; color: inherit;">
-    <div class="card-bg"></div>
+    <div class="card-image"><img src="/images/home/Hanumanji.png" alt="Hanuman Ji"></div>
     <div class="card-inner">
-      <span class="card-deity-symbol">🙏</span>
       <div class="card-tag">Hanuman Bhajan</div>
       <div class="card-name-deva">हनुमान जी</div>
       <div class="card-name-eng">HANUMAN JI</div>
@@ -1071,9 +1115,8 @@ mantra for wealth
 
     <!-- SARASWATI -->
     <a href="/Sharaswati-mantra/" class="card card-saraswati reveal" data-cat="shakti" style="animation-delay:0.25s; text-decoration: none; color: inherit;">
-    <div class="card-bg"></div>
+    <div class="card-image"><img src="/images/home/Sharaswati.png" alt="Maa Saraswati"></div>
     <div class="card-inner">
-      <span class="card-deity-symbol">🎵</span>
       <div class="card-tag">Saraswati Vandana</div>
       <div class="card-name-deva">माँ सरस्वती</div>
       <div class="card-name-eng">MAA SARASWATI</div>
@@ -1085,9 +1128,8 @@ mantra for wealth
 
     <!-- VISHNU -->
     <a href="/bhagvan-vishnu-mantra/" class="card card-vishnu reveal" data-cat="vishnu" style="animation-delay:0.3s; text-decoration: none; color: inherit;">
-    <div class="card-bg"></div>
+    <div class="card-image"><img src="/images/home/VishnuBhagwan.png" alt="Bhagwan Vishnu"></div>
     <div class="card-inner">
-      <span class="card-deity-symbol">🌀</span>
       <div class="card-tag">Vishnu Stotram</div>
       <div class="card-name-deva">भगवान विष्णु</div>
       <div class="card-name-eng">BHAGWAN VISHNU</div>
@@ -1099,9 +1141,8 @@ mantra for wealth
 
     <!-- KALI -->
     <a href="/maha-kali-mantra/" class="card card-kali reveal" data-cat="shakti" style="animation-delay:0.35s; text-decoration: none; color: inherit;">
-    <div class="card-bg"></div>
+    <div class="card-image"><img src="/images/home/KaliMataMantra.png" alt="Maa Kali"></div>
     <div class="card-inner">
-      <span class="card-deity-symbol">⚡</span>
       <div class="card-tag">Kali Mantra</div>
       <div class="card-name-deva">माँ काली</div>
       <div class="card-name-eng">MAA KALI</div>
@@ -1113,9 +1154,8 @@ mantra for wealth
 
     <!-- SURYA -->
   <a href="/surya-dev/" class="card card-surya reveal" data-cat="devi" style="animation-delay:0.4s; text-decoration: none; color: inherit;">
-    <div class="card-bg"></div>
+    <div class="card-image"><img src="/images/home/suryadev.png" alt="Bhagwan Surya"></div>
     <div class="card-inner">
-      <span class="card-deity-symbol">☀️</span>
       <div class="card-tag">Surya Mantra</div>
       <div class="card-name-deva">भगवान सूर्य</div>
       <div class="card-name-eng">BHAGWAN SURYA</div>
@@ -1128,9 +1168,8 @@ mantra for wealth
 
     <!-- Chandra Dev -->
     <a href="/Chandra-mantras/" class="card card-kali reveal" data-cat="devi" style="animation-delay:0.45s; text-decoration: none; color: inherit;">
-    <div class="card-bg"></div>
+    <div class="card-image">🌙</div>
     <div class="card-inner">
-      <span class="card-deity-symbol">🌙</span>
       <div class="card-tag">Chandra Mantra</div>
       <div class="card-name-deva">चंद्र मंत्र</div>
       <div class="card-name-eng">Chandra Mantra</div>
@@ -1143,9 +1182,8 @@ mantra for wealth
 
     <!-- GAYATRI -->
     <a href="/Gayatri-mantra/" class="card card-gayatri reveal" data-cat="devi" style="animation-delay:0.5s; text-decoration: none; color: inherit;">
-    <div class="card-bg"></div>
+    <div class="card-image">🌅</div>
     <div class="card-inner">
-      <span class="card-deity-symbol">🌅</span>
       <div class="card-tag">Gayatri Mantra</div>
       <div class="card-name-deva">गायत्री माता</div>
       <div class="card-name-eng">GAYATRI MATA</div>
@@ -1157,9 +1195,8 @@ mantra for wealth
 
     <!-- KARTIK -->
     <a href="/kumar-kartikey-mantras/" class="card card-kartik reveal" data-cat="devi" style="animation-delay:0.55s; text-decoration: none; color: inherit;">
-    <div class="card-bg"></div>
+    <div class="card-image">🦚</div>
     <div class="card-inner">
-      <span class="card-deity-symbol">🦚</span>
       <div class="card-tag">Kartik Stotram</div>
       <div class="card-name-deva">श्री कार्तिकेय</div>
       <div class="card-name-eng">SHRI KARTIK</div>
@@ -1171,9 +1208,8 @@ mantra for wealth
 
     <!-- SHIV (another) -->
       <a href="/shiva-mantras/Shiva-mahamrityunjaya-mantra/" class="card card-shiv reveal" data-cat="shiv" style="animation-delay:0.6s; text-decoration: none; color: inherit;">
-    <div class="card-bg"></div>
+    <div class="card-image">🕉️</div>
     <div class="card-inner">
-      <span class="card-deity-symbol">🕉️</span>
       <div class="card-tag">Mahamrityunjaya</div>
       <div class="card-name-deva">महामृत्युंजय</div>
       <div class="card-name-eng">MAHAMRITYUNJAYA</div>
@@ -1185,9 +1221,8 @@ mantra for wealth
 
     <!-- VISHNU (another) -->
     <div class="card card-vishnu reveal" data-cat="vishnu" style="animation-delay:0.65s">
-      <div class="card-bg"></div>
+      <div class="card-image">🏵️</div>
       <div class="card-inner">
-        <span class="card-deity-symbol">🏵️</span>
         <div class="card-tag">Vishnu Sahasranam</div>
         <div class="card-name-deva">विष्णु सहस्रनाम</div>
         <div class="card-name-eng">VISHNU SAHASRANAM</div>
@@ -1207,9 +1242,8 @@ mantra for wealth
   <div class="cards-grid" id="cards-grid">
         <!-- MAITHILI — VIDYAPATI GEET -->
         <a href="/Vidyapati-Geet-Sangrah/" class="card card-krishna reveal" data-cat="krishna" style="animation-delay:0.7s; text-decoration: none; color: inherit;">
-        <div class="card-bg"></div>
+        <div class="card-image"><img src="/images/Vidyapatee.jpg" alt="Vidyapati Geet"></div>
         <div class="card-inner">
-          <span class="card-deity-symbol">📜</span>
           <div class="card-tag">Vidyapati Geet</div>
           <div class="card-name-deva">विद्यापति गीत</div>
           <div class="card-name-eng">VIDYAPATI GEET</div>
@@ -1221,9 +1255,8 @@ mantra for wealth
     
         <!-- SHIV — BHAJANS -->
         <a href="/Maithili-bhajan-geet/" class="card card-shiv reveal" data-cat="shiv" style="animation-delay:0.75s; text-decoration: none; color: inherit;">
-        <div class="card-bg"></div>
+        <div class="card-image"><img src="/images/ShivParwatiMithilaPaiting.jpg" alt="Shiv Bhajan Maithili"></div>
         <div class="card-inner">
-          <span class="card-deity-symbol">🎵</span>
           <div class="card-tag">Shiv Bhajan Maithili</div>
           <div class="card-name-deva">शिव भजन मैथिली गीत</div>
           <div class="card-name-eng">SHIV BHAJANS Maithili Geet</div>
@@ -1256,6 +1289,8 @@ mantra for wealth
     <div class="feature-label">✦ दैनिक उपयोगकर्ता</div>
   </div>
 </div>
+
+<div id="sm-comments" data-page-id=""></div>
 
 <!-- Footer -->
 <footer>
@@ -1379,7 +1414,7 @@ mantra for wealth
 <script src="/js/nav.js"></script>
 <script src="/js/search.js"></script>
   <script>
-    const SM_API = 'https://shivamargbackend.onrender.com'; // ← change to your server URL in prod
+    const SM_API = 'https://shivamargbackend.onrender.com';
     
     SmComments.init({ apiBase: SM_API });
   </script>
