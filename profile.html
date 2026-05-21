@@ -346,7 +346,7 @@
             </div>` :
             comments.map(c=>`
               <div class="comment-item">
-                <<a class="page-pill" href="${getPageUrl(c.page_id)}">🔱 ${pageTitle(c.page_id)} →</a>
+                <a class="page-pill" href="${getPageUrl(c.page_id)}">🔱 ${pageTitle(c.page_id)} →</a>
                 <div class="comment-text">${escHtml(c.text)}</div>
                 <div class="comment-meta">${timeAgo(c.created_at)} &middot; ${c.likes||0} पसंद</div>
               </div>`).join('')
@@ -470,16 +470,12 @@
       'shiva-jyotirlinga-stotram', 'rudrashtakam', 'shiv-chalisa',
       'om-namah-shivaya', 'kashi-vishwanath', 'jay-jay-sankar-jay-tripurari',
       'shiv-kailasho-ke-washi', 'Vishwanthashtakam',
-      'Vishwanthashtakam'
     ],
-    'Devi-mantras': [
-      'aigiri-nandini', 'nav-durga-mantra', 'durga-chalisha',
-      'devi-aparadha-kshamapana-stotram', 'himachal-kichhuo-ne-kelainh-bichari',
-      'chhoti-moti-tutli-madaiya-mein-gauri-dai',
-      'Gauri-Dauri-Dauri-Kahthin-He-vidyapati-geet',
-      'chanan-bhel-visham-sar-re'
+    'durga-mantras': [
+      'nav-durga-mantra', 'durga-chalisha',
+      'devi-aparadha-kshamapana-stotram', 'himachal-kichhuo-ne-kelainh-bichari'
     ],
-    'Krishna-Mantras': [
+    'Krishna-Mahamantras': [
       'krishna-mahamantras', 'Hare-krishna-mahamantras',
       'Om-Namo-Bhagavate-Vasudevaya-ॐ-नमो-भगवते-वासुदेवाय',
       'achyutam-keshavam', 'madhurasthakam', 'shri-krishna-chalisha',
@@ -489,17 +485,20 @@
       'vishnu-mantras'
     ],
     'Surya-mantras': [
-      'surya-mantras', 'surya-gayatri-mantra'
+    'surya-gayatri-mantra'
     ],
     'Bhagavad-Gita': [
       'gita-chapter-2-nishkam-karma'
     ],
     'Maithili-bhajan-geet': [
-      'Maithili-bhajan-geet/Ge-Mai-Chandramukhi-San-Gauri-Hamar-Chhathi-vidyapati-geet',
+    ],
+    'Vidyapati-Geet-Sangrah' : [
       'Ge-Mai-Chandramukhi-San-Gauri-Hamar-Chhathi-vidyapati-geet',
-      'Maithili-bhajan-geet/Ge-Mai-Chandramukhi-San-Gauri-Hamar-Chhathi-vidyapati-geet',
       'ugna-re-mor-katai-gela', 'bar-sukhsar-paol-tua-teere',
-      'jogi-ek-thaadh-chhai-anganwa-mein', 'Vidyapati-Geet-Sangrah'
+      'jogi-ek-thaadh-chhai-anganwa-mein',
+      'chhoti-moti-tutli-madaiya-mein-gauri-dai',
+      'Gauri-Dauri-Dauri-Kahthin-He-vidyapati-geet',
+      'chanan-bhel-visham-sar-re'
     ]
   };
 
