@@ -346,7 +346,7 @@
             </div>` :
             comments.map(c=>`
               <div class="comment-item">
-                <a class="page-pill" href="/${c.page_id}">🔱 ${pageTitle(c.page_id)} →</a>
+                <<a class="page-pill" href="${getPageUrl(c.page_id)}">🔱 ${pageTitle(c.page_id)} →</a>
                 <div class="comment-text">${escHtml(c.text)}</div>
                 <div class="comment-meta">${timeAgo(c.created_at)} &middot; ${c.likes||0} पसंद</div>
               </div>`).join('')
@@ -458,6 +458,62 @@
     finally { btn.disabled = false; }
   }
 
+  /* ── PAGE PREFIX MAP ── 
+   Add new page_ids here under the correct prefix.
+   If a page_id isn't listed, it falls back to /${page_id}
+*/
+  const PAGE_PREFIXES = {
+    'Shiva-mantras': [
+      'shiv-kavacham', 'shiv-aarti', 'bilvashtakam', 'lingashtakam',
+      'shiva-panchakshara-stotram', 'namami-samisam-nirvanrupam',
+      'kilaka-stotram', 'shiva-mahamrityunjaya-mantra', 'maha-mrityunjaya',
+      'shiva-jyotirlinga-stotram', 'rudrashtakam', 'shiv-chalisa',
+      'om-namah-shivaya', 'kashi-vishwanath', 'jay-jay-sankar-jay-tripurari',
+      'shiv-kailasho-ke-washi', 'Vishwanthashtakam',
+      'Vishwanthashtakam'
+    ],
+    'Devi-mantras': [
+      'aigiri-nandini', 'nav-durga-mantra', 'durga-chalisha',
+      'devi-aparadha-kshamapana-stotram', 'himachal-kichhuo-ne-kelainh-bichari',
+      'chhoti-moti-tutli-madaiya-mein-gauri-dai',
+      'Gauri-Dauri-Dauri-Kahthin-He-vidyapati-geet',
+      'chanan-bhel-visham-sar-re'
+    ],
+    'Krishna-Mantras': [
+      'krishna-mahamantras', 'Hare-krishna-mahamantras',
+      'Om-Namo-Bhagavate-Vasudevaya-ॐ-नमो-भगवते-वासुदेवाय',
+      'achyutam-keshavam', 'madhurasthakam', 'shri-krishna-chalisha',
+      'damodarashtakam', 'krishnashtakam', '108-names-of-krishna'
+    ],
+    'Vishnu-mantras': [
+      'vishnu-mantras'
+    ],
+    'Surya-mantras': [
+      'surya-mantras', 'surya-gayatri-mantra'
+    ],
+    'Bhagavad-Gita': [
+      'gita-chapter-2-nishkam-karma'
+    ],
+    'Maithili-bhajan-geet': [
+      'Maithili-bhajan-geet/Ge-Mai-Chandramukhi-San-Gauri-Hamar-Chhathi-vidyapati-geet',
+      'Ge-Mai-Chandramukhi-San-Gauri-Hamar-Chhathi-vidyapati-geet',
+      'Maithili-bhajan-geet/Ge-Mai-Chandramukhi-San-Gauri-Hamar-Chhathi-vidyapati-geet',
+      'ugna-re-mor-katai-gela', 'bar-sukhsar-paol-tua-teere',
+      'jogi-ek-thaadh-chhai-anganwa-mein', 'Vidyapati-Geet-Sangrah'
+    ]
+  };
+
+  /* Build reverse lookup: page_id → prefix (computed once on load) */
+  const _PAGE_PREFIX_LOOKUP = {};
+  Object.entries(PAGE_PREFIXES).forEach(([prefix, ids]) => {
+    ids.forEach(id => { _PAGE_PREFIX_LOOKUP[id] = prefix; });
+  });
+
+  function getPageUrl(page_id) {
+    const prefix = _PAGE_PREFIX_LOOKUP[page_id];
+    if (prefix) return `/${prefix}/${page_id}`;
+    return `/${page_id}`;   // fallback
+  }
   /* ── SAVE: details ── */
   async function saveDetails() {
     const btn = document.getElementById('btn-details');
