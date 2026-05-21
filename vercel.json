@@ -1,5 +1,5 @@
 {
   "rewrites": [
-    { "source": "/U/:username", "destination": "/U/index.html" }
+    { "source": "/profile/:username", "destination": "/profile/index.html" }
   ]
 }
