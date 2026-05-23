@@ -140,6 +140,10 @@
       }
       .sm-textarea::placeholder { color: rgba(243,238,255,0.3); }
       .sm-textarea:focus { border-color: #9575CD; }
+      .sm-textarea:disabled {
+        opacity: 0.6; cursor: not-allowed;
+        border-color: rgba(124,77,255,0.1);
+      }
       .sm-char-count {
         font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 2px;
         color: rgba(243,238,255,0.3); text-align: right; margin-bottom: 10px;
@@ -265,6 +269,14 @@
 
       /* Error / info */
       .sm-msg { text-align: center; font-size: 0.88rem; color: #FF8A80; font-style: italic; margin: 10px 0; }
+
+      /* Helper text for non-logged in users */
+      .sm-login-helper {
+        font-family: 'Cinzel', serif; font-size: 0.65rem; 
+        color: rgba(243,238,255,0.4); letter-spacing: 1px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
     `;
     document.head.appendChild(s);
   }
@@ -397,28 +409,40 @@
   }
 
   function renderWriteBox(user) {
-    if (!user) {
-      return `
-        <div class="sm-login-prompt">
-          <p>टिप्पणी करने के लिए लॉगिन करें — भक्तों का समुदाय जुड़ें।</p>
-          <button class="sm-login-prompt-btn" onclick="SmAuth.requireLogin()">🔱 लॉगिन / खाता बनाएँ</button>
-        </div>`;
+    // Show write box to everyone
+    let avatarHTML = '';
+    let usernameHTML = '';
+    let submitButton = '';
+    
+    if (user) {
+      // User is logged in - show avatar, username, and submit button
+      const char = avatarChar(user);
+      const bg   = getAvatarBg(char);
+      avatarHTML = `<div class="sm-c-avatar" style="background:${bg};font-size:0.75rem">${char}</div>`;
+      usernameHTML = `<span style="font-family:'Cinzel',serif;font-size:0.65rem;color:#B39DDB;letter-spacing:1px;">${user.username}</span>`;
+      submitButton = `<button class="sm-post-btn" id="sm-post-btn" onclick="SmComments._submit()">
+        <span>🙏 टिप्पणी भेजें</span>
+      </button>`;
+    } else {
+      // User is not logged in - show login button instead of submit
+      submitButton = `<button class="sm-login-prompt-btn" onclick="SmAuth.requireLogin()">
+        🔱 लॉगिन / खाता बनाएँ
+      </button>
+      <span class="sm-login-helper">✦ टिप्पणी के लिए लॉगिन करें ✦</span>`;
     }
-    const char = avatarChar(user);
-    const bg   = getAvatarBg(char);
+    
     return `
       <div class="sm-write-box">
         <div class="sm-write-title">✦ टिप्पणी लिखें ✦</div>
         <textarea id="sm-new-text" class="sm-textarea"
           placeholder="हर हर महादेव! अपना अनुभव, भाव या प्रश्न साझा करें...&#10;(अधिकतम १००० अक्षर)"
-          maxlength="1000"></textarea>
+          maxlength="1000"
+          ${!user ? 'disabled' : ''}></textarea>
         <div id="sm-char-count" class="sm-char-count">0/1000</div>
         <div class="sm-write-row">
-          <button class="sm-post-btn" id="sm-post-btn" onclick="SmComments._submit()">
-            <span>🙏 टिप्पणी भेजें</span>
-          </button>
-          <div class="sm-c-avatar" style="background:${bg};font-size:0.75rem">${char}</div>
-          <span style="font-family:'Cinzel',serif;font-size:0.65rem;color:#B39DDB;letter-spacing:1px;">${user.username}</span>
+          ${submitButton}
+          ${avatarHTML}
+          ${usernameHTML}
         </div>
         <div id="sm-post-error" class="sm-msg" style="display:none"></div>
       </div>`;
