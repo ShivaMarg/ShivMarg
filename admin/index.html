@@ -354,22 +354,16 @@
 <script src="../js/search.js"></script>
 <script>
 const API = 'https://shivamargbackend.onrender.com';
-const PER_PAGE = 25;
-
-let currentTab = 'dashboard';
-let currentToken = null;
-
+const PER_PAGE = 15;
+let token = localStorage.getItem('admin_token');
 document.addEventListener('DOMContentLoaded', () => {
   const token = localStorage.getItem('admin_token');
   if (!token) {
     window.location.href = '/admin-login.html';
     return;
   }
-
-  currentToken = token;
 });
-
-let token = currentToken;
+let currentTab = 'dashboard';
 
 const state = {
   users: [], comments: [], posts: [],
@@ -417,7 +411,7 @@ async function apiFetch(path,opts={}){
 
 async function loadStats(){
   const data=await apiFetch('/api/admin/dashboard/stats');
-  const d=data;
+  const d=data||{total_users:DEMO_USERS.length,total_comments:DEMO_COMMENTS.length,total_posts:DEMO_POSTS.length,featured_posts:DEMO_POSTS.filter(p=>p.featured).length,recent_users_7d:2,recent_comments_7d:5};
   document.getElementById('s-users').textContent=d.total_users;
   document.getElementById('s-comments').textContent=d.total_comments;
   document.getElementById('s-posts').textContent=d.total_posts;
