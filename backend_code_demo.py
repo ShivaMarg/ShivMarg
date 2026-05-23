@@ -98,16 +98,33 @@ def require_user(creds: HTTPAuthorizationCredentials = Depends(bearer)):
         raise HTTPException(status_code=401, detail="Authentication required")
     return user
 
+def require_admin(current_user=Depends(require_user)):
+    """Check if user is admin or editor"""
+    role = current_user.get("role", "user")
+    if role not in ["admin", "editor"]:
+        raise HTTPException(status_code=403, detail="Admin access required")
+    return current_user
+
+def require_super_admin(current_user=Depends(require_user)):
+    """Check if user is super admin only"""
+    role = current_user.get("role", "user")
+    if role != "admin":
+        raise HTTPException(status_code=403, detail="Super admin access required")
+    return current_user
+
 # ─────────────────────────────────────────────
 #  HELPERS
 # ─────────────────────────────────────────────
 def serialize_user(u: dict) -> dict:
     return {
-        "id":         str(u["_id"]),
-        "username":   u["username"],
-        "email":      u["email"],
-        "avatar":     u.get("avatar", u["username"][0].upper()),
-        "created_at": u["created_at"].isoformat(),
+        "id":           str(u["_id"]),
+        "username":     u["username"],
+        "display_name": u.get("display_name", u["username"]),
+        "email":        u["email"],
+        "avatar":       u.get("avatar", u["username"][0].upper()),
+        "role":         u.get("role", "user"),
+        "mobile":       u.get("mobile"),
+        "created_at":   u["created_at"].isoformat(),
     }
 
 def serialize_comment(c: dict, current_user_id: Optional[str] = None) -> dict:
@@ -155,6 +172,7 @@ class RegisterInput(BaseModel):
     email: str
     password: str = Field(..., min_length=6)
     display_name: Optional[str] = None
+    role: Optional[str] = "user"  # default user role
 
 class LoginInput(BaseModel):
     email: str
@@ -189,6 +207,7 @@ def register(body: RegisterInput):
             "email":        body.email.lower(),
             "password":     hash_password(body.password),
             "avatar":       body.username[0].upper(),
+            "role":         "user",
             "created_at":   datetime.utcnow(),
         }
         result = users_col.insert_one(doc)
@@ -677,6 +696,229 @@ def get_post_detail(post_id: str):
         raise HTTPException(404, "Post not found")
     
     return serialize_post(post)
+
+
+# ─────────────────────────────────────────────
+#  ADMIN DASHBOARD ROUTES
+# ─────────────────────────────────────────────
+
+@app.get("/api/admin/dashboard/stats")
+def get_dashboard_stats(current_user=Depends(require_admin)):
+    """Get overall dashboard statistics"""
+    try:
+        total_users = users_col.count_documents({})
+        total_comments = comments_col.count_documents({})
+        total_posts = vidyapati_posts_col.count_documents({})
+        featured_posts = vidyapati_posts_col.count_documents({"featured": True})
+        
+        # Get recent activity (last 7 days)
+        seven_days_ago = datetime.utcnow() - timedelta(days=7)
+        recent_users = users_col.count_documents({"created_at": {"$gte": seven_days_ago}})
+        recent_comments = comments_col.count_documents({"created_at": {"$gte": seven_days_ago}})
+        
+        return {
+            "total_users": total_users,
+            "total_comments": total_comments,
+            "total_posts": total_posts,
+            "featured_posts": featured_posts,
+            "recent_users_7d": recent_users,
+            "recent_comments_7d": recent_comments,
+        }
+    except Exception as e:
+        print(f"DASHBOARD STATS ERROR: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/admin/users")
+def get_all_users(
+    skip: int = 0,
+    limit: int = 100,
+    role: Optional[str] = None,
+    current_user=Depends(require_admin)
+):
+    """Get all users with pagination and optional role filter"""
+    try:
+        limit = min(int(limit), 100)
+        skip = max(int(skip), 0)
+        
+        query = {}
+        if role and role in ["user", "admin", "editor"]:
+            query["role"] = role
+        
+        cursor = (
+            users_col
+            .find(query)
+            .sort("created_at", DESCENDING)
+            .skip(skip)
+            .limit(limit)
+        )
+        
+        users = [serialize_user(u) for u in cursor]
+        total = users_col.count_documents(query)
+        
+        return {
+            "users": users,
+            "total": total,
+            "limit": limit,
+            "skip": skip
+        }
+    except Exception as e:
+        print(f"GET USERS ERROR: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/admin/comments")
+def get_all_comments(
+    skip: int = 0,
+    limit: int = 50,
+    page_id: Optional[str] = None,
+    current_user=Depends(require_admin)
+):
+    """Get all comments with pagination and optional page filter"""
+    try:
+        limit = min(int(limit), 50)
+        skip = max(int(skip), 0)
+        
+        query = {}
+        if page_id:
+            query["page_id"] = page_id
+        
+        cursor = (
+            comments_col
+            .find(query)
+            .sort("created_at", DESCENDING)
+            .skip(skip)
+            .limit(limit)
+        )
+        
+        comments = [serialize_comment(c, str(current_user["_id"])) for c in cursor]
+        total = comments_col.count_documents(query)
+        
+        # Get unique pages
+        pages = comments_col.distinct("page_id", {})
+        
+        return {
+            "comments": comments,
+            "total": total,
+            "pages": pages,
+            "limit": limit,
+            "skip": skip
+        }
+    except Exception as e:
+        print(f"GET COMMENTS ERROR: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/admin/posts")
+def get_all_posts(
+    skip: int = 0,
+    limit: int = 50,
+    category: Optional[str] = None,
+    current_user=Depends(require_admin)
+):
+    """Get all Vidyapati posts with pagination and optional category filter"""
+    try:
+        limit = min(int(limit), 50)
+        skip = max(int(skip), 0)
+        
+        query = {}
+        if category:
+            query["category"] = category
+        
+        cursor = (
+            vidyapati_posts_col
+            .find(query)
+            .sort("createdAt", DESCENDING)
+            .skip(skip)
+            .limit(limit)
+        )
+        
+        posts = [serialize_post(p) for p in cursor]
+        total = vidyapati_posts_col.count_documents(query)
+        
+        # Get unique categories
+        categories = vidyapati_posts_col.distinct("category", {})
+        
+        return {
+            "posts": posts,
+            "total": total,
+            "categories": categories,
+            "limit": limit,
+            "skip": skip
+        }
+    except Exception as e:
+        print(f"GET POSTS ERROR: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.patch("/api/admin/users/{user_id}/role")
+def update_user_role(
+    user_id: str,
+    role: str = Field(..., description="user, admin, or editor"),
+    current_user=Depends(require_super_admin)
+):
+    """Update user role - super admin only"""
+    try:
+        if role not in ["user", "admin", "editor"]:
+            raise HTTPException(400, "Invalid role. Must be 'user', 'admin', or 'editor'")
+        
+        oid = ObjectId(user_id)
+        user = users_col.find_one({"_id": oid})
+        if not user:
+            raise HTTPException(404, "User not found")
+        
+        users_col.update_one({"_id": oid}, {"$set": {"role": role, "updated_at": datetime.utcnow()}})
+        updated = users_col.find_one({"_id": oid})
+        return serialize_user(updated)
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"UPDATE ROLE ERROR: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.delete("/api/admin/comments/{comment_id}")
+def admin_delete_comment(
+    comment_id: str,
+    current_user=Depends(require_admin)
+):
+    """Admin delete any comment"""
+    try:
+        oid = ObjectId(comment_id)
+    except Exception:
+        raise HTTPException(400, "Invalid comment id")
+
+    comment = comments_col.find_one({"_id": oid})
+    if not comment:
+        raise HTTPException(404, "Comment not found")
+
+    comments_col.delete_one({"_id": oid})
+    return {"status": "deleted", "id": str(oid)}
+
+
+@app.delete("/api/admin/users/{user_id}")
+def admin_delete_user(
+    user_id: str,
+    current_user=Depends(require_super_admin)
+):
+    """Super admin delete user"""
+    try:
+        oid = ObjectId(user_id)
+    except Exception:
+        raise HTTPException(400, "Invalid user id")
+
+    if str(oid) == str(current_user["_id"]):
+        raise HTTPException(400, "Cannot delete yourself")
+
+    user = users_col.find_one({"_id": oid})
+    if not user:
+        raise HTTPException(404, "User not found")
+
+    users_col.delete_one({"_id": oid})
+    # Also delete user's comments
+    comments_col.delete_many({"user_id": user_id})
+    
+    return {"status": "deleted", "id": str(oid), "comments_deleted": comments_col.count_documents({"user_id": user_id})}
 
 
 # ─────────────────────────────────────────────
