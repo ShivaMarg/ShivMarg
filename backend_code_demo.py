@@ -18,6 +18,7 @@ from datetime import datetime, timedelta
 from typing import Optional, List
 import os
 import re
+import uvicorn
 
 # ─────────────────────────────────────────────
 #  CONFIG  (change these via env vars in prod)
@@ -933,5 +934,5 @@ def health():
 #  RUN
 # ─────────────────────────────────────────────
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("shivamarg_backend:app", host="0.0.0.0", port=8000, reload=True)
+    port = int(os.getenv("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port, reload=False)
