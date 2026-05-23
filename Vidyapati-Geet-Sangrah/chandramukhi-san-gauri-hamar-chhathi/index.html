@@ -185,6 +185,18 @@
     .foot-txt { font-family:'Cinzel',serif; font-size:0.63rem; letter-spacing:4px; color:rgba(240,240,255,0.2); text-transform:uppercase; }
     .reveal { opacity:0; transform:translateY(24px); transition:opacity .75s ease, transform .75s ease; }
     .reveal.on { opacity:1; transform:none; }
+    
+    .suggested-posts-grid { display:grid; grid-template-columns:1fr; gap:12px; }
+    .suggested-post-card { background:linear-gradient(135deg, rgba(15,12,38,0.6), rgba(5,4,15,0.8)); border:1px solid rgba(184,192,255,0.14); border-radius:2px; overflow:hidden; transition:all .3s; cursor:pointer; }
+    .suggested-post-card:hover { transform:translateY(-3px); border-color:rgba(184,192,255,0.3); box-shadow:0 8px 20px rgba(55,48,163,0.2); }
+    .post-image-wrap { width:100%; height:120px; overflow:hidden; background:rgba(0,0,0,0.4); position:relative; }
+    .post-image { width:100%; height:100%; object-fit:cover; }
+    .post-image-placeholder { width:100%; height:100%; background:linear-gradient(135deg, #3730A3, #1E1B4B); display:flex; align-items:center; justify-content:center; font-size:2.5rem; }
+    .post-content { padding:12px; }
+    .post-name { font-family:'Tiro Devanagari Sanskrit',serif; font-size:0.95rem; color:var(--gold-light); margin-bottom:6px; line-height:1.3; }
+    .post-desc { font-size:0.78rem; color:rgba(240,240,255,0.7); margin-bottom:8px; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    .post-date { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:1px; color:rgba(240,240,255,0.4); }
+    .post-loading { text-align:center; padding:20px 12px; color:var(--soft); font-size:0.85rem; }
   </style>
 </head>
 <body>
@@ -266,7 +278,7 @@
     <div class="sig-item"><div class="sig-icon">🎶</div><div class="sig-text"><strong>लोकप्रियता</strong>यह गीत आज भी मैथिली समारोहों, विवाहों और शिवरात्रि में गाया जाता है।</div></div></div></div>
   </div></div>
 
-  <div class="sidebar"><div class="widget reveal"><div class="widget-title">✦ श्रवण माला ✦</div><div class="mala-wrap"><span class="mala-count" id="japCount">0</span><span class="mala-sub">श्रद्धा बिंदु</span><div class="mala-progress" id="malaProgress"></div><div><button class="mala-btn" onclick="countJap()">+ १ श्रवण</button><button class="mala-btn" onclick="resetJap()">रीसेट</button></div><div style="font-size:0.6rem; text-align:center; margin-top:8px;" id="malaStatus">— गीत सुनने का संकल्प —</div></div></div>
+    <div class="widget reveal"><div class="widget-title">✦ सुझाव — नवीनतम पोस्ट ✦</div><div id="suggestedPostsContainer" class="suggested-posts-grid"></div></div>
     <div class="widget reveal"><div class="widget-title">✦ त्वरित नेविगेशन ✦</div><a href="#mantra" style="display:block; background:rgba(55,48,163,0.1); padding:8px 12px; margin:4px 0; color:var(--soft); text-decoration:none;">☽ सम्पूर्ण गीत</a><a href="#vidhi" style="display:block; background:rgba(55,48,163,0.1); padding:8px 12px; margin:4px 0; color:var(--soft); text-decoration:none;">☽ गीत की महिमा</a></div>
     <div class="widget reveal"><div class="widget-title">✦ श्रवण लाभ ✦</div><div class="benefit-grid"><div class="benefit-item"><span class="benefit-icon">🧘</span><div class="benefit-text">मानसिक शांति, भक्ति रस का आनंद</div></div><div class="benefit-item"><span class="benefit-icon">💖</span><div class="benefit-text">शिव-पार्वती की कृपा, वैवाहिक सुख</div></div><div class="benefit-item"><span class="benefit-icon">🌙</span><div class="benefit-text">संगीतमय ध्यान, सकारात्मक ऊर्जा</div></div><div class="benefit-item"><span class="benefit-icon">📜</span><div class="benefit-text">मैथिली संस्कृति का गौरव, भाषा प्रेम</div></div></div></div>
     <div class="widget reveal"><div class="widget-title">✦ विद्यापति रचनावली ✦</div><div class="rel-post"><div class="rel-name">गे माई चंद्रमुखी</div><div class="rel-sub">यही गीत</div></div><div class="rel-post"><div class="rel-name">पिया के प्रेम सब झूठ</div><div class="rel-sub">Vidyapati Pada</div></div><div class="rel-post"><div class="rel-name">जौन पंख भरि उड़ि जाइ</div><div class="rel-sub">मैथिली भक्ति</div></div></div>
@@ -284,12 +296,6 @@
   for (let i=0;i<60;i++){ let s=document.createElement('div'); s.className='star'; let sz=0.8+Math.random()*2.5; s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;background:rgba(${Math.random()>0.5?'184,192,255':'103,232,249'},${0.4+Math.random()*0.6});animation-duration:${2+Math.random()*4}s;animation-delay:${Math.random()*5}s;`; cosmos.appendChild(s); }
   for (let i=0;i<8;i++){ let m=document.createElement('div'); m.className='mist'; let sz=60+Math.random()*120; m.style.cssText=`left:${Math.random()*100}%;top:${20+Math.random()*70}%;width:${sz}px;height:${sz}px;animation-duration:${8+Math.random()*12}s;animation-delay:${Math.random()*10}s;`; cosmos.appendChild(m); }
   const rev = document.querySelectorAll('.reveal'); const obs = new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); obs.unobserve(e.target); } }); },{threshold:0.05}); rev.forEach(el=>obs.observe(el));
-  let japCount = 0; const MALA = 108;
-  function renderBeads(){ const prog=document.getElementById('malaProgress'); const inMala=japCount%MALA; prog.innerHTML=''; for(let i=0;i<MALA;i++){ let b=document.createElement('div'); b.className='bead'+(i<inMala?' done':''); prog.appendChild(b); } }
-  function updateStatus(){ const malas=Math.floor(japCount/MALA); const rem=japCount%MALA; const stat=document.getElementById('malaStatus'); if(japCount===0){ stat.textContent='— श्रवण संकल्प शुरू करू —'; return; } stat.textContent=`${malas} पूर्ण माला • ${rem} श्रवण`; }
-  window.countJap=function(){ japCount++; document.getElementById('japCount').textContent=japCount; renderBeads(); updateStatus(); };
-  window.resetJap=function(){ japCount=0; document.getElementById('japCount').textContent=0; renderBeads(); updateStatus(); };
-  renderBeads(); updateStatus();
   let comments = JSON.parse(localStorage.getItem('vidyapati_comments') || '[{"name":"गौरीभक्त","text":"ई गीत सुनते ही आँखनमे अमृत बरस जाय छै। हर हर महादेव।","date":"2026-04-07"}]');
   function renderComments(){ const container=document.getElementById('commentsContainer'); if(!container)return; container.innerHTML=comments.slice().reverse().map(c=>`<div class="comment-card"><div class="c-hdr"><div class="avatar">${c.name.charAt(0)}</div><div><div class="c-name">${escapeHtml(c.name)}</div><div class="c-date">${c.date}</div></div></div><div class="c-txt">${escapeHtml(c.text)}</div></div>`).join(''); }
   function escapeHtml(str){ return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
@@ -298,6 +304,7 @@
 </script>
 
 <script src="/js/auth2.js"></script>
+<script src="/js/suggested-posts.js"></script>
 <script src="/js/s-comments.js"></script>
 <script src="/js/nav.js"></script>
 <script src="/js/search.js"></script>
