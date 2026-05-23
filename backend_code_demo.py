@@ -587,7 +587,7 @@ def get_featured_posts(limit: int = 5):
         cursor = (
             vidyapati_posts_col
             .find({"featured": True})
-            .sort("createdAt", DESCENDING)
+            .sort("updatedAt", DESCENDING)
             .limit(limit)
         )
         

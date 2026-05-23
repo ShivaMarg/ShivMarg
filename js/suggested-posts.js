@@ -6,7 +6,7 @@
 const SuggestedPosts = (() => {
   const API_BASE = 'https://shivamargbackend.onrender.com'; // Change this to your actual backend URL
   const CONTAINER_ID = 'suggestedPostsContainer';
-  const POSTS_LIMIT = 5;
+  const POSTS_LIMIT = 15;
 
   /**
    * Fetch latest posts from backend
