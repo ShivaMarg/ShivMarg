@@ -181,9 +181,9 @@
       <div class="logo-text">Shiva<span>Marg</span></div>
     </div>
     <div class="user-card">
-      <div class="avatar-circle">A</div>
-      <div class="u-name">Admin User</div>
-      <div class="u-role">super admin</div>
+      <div class="avatar-circle" id="userAvatar">A</div>
+      <div class="u-name" id="userName">Loading...</div>
+      <div class="u-role" id="userRole">—</div>
     </div>
     <nav>
       <div class="nav-item active" onclick="showTab('dashboard',this)"><i class="ti ti-layout-dashboard" aria-hidden="true"></i> Dashboard</div>
@@ -599,7 +599,19 @@ async function deleteComment(cid){
 
 function handleLogout(){if(confirm('Log out?')){localStorage.removeItem('admin_token');window.location.href='/admin-login.html'}}
 
-loadStats();loadUsers();loadComments();loadPosts();
+async function loadCurrentUser(){
+  const data=await apiFetch('/api/auth/me');
+  if(data&&data.username){
+    const name=data.display_name||data.username||'User';
+    const role=(data.role||'user').toUpperCase();
+    const initials=name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2)||'U';
+    document.getElementById('userName').textContent=name;
+    document.getElementById('userRole').textContent=role;
+    document.getElementById('userAvatar').textContent=initials;
+  }
+}
+
+loadCurrentUser();loadStats();loadUsers();loadComments();loadPosts();
 </script>
 
 </body>
