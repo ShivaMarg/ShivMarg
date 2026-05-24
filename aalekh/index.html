@@ -637,7 +637,7 @@ async function doSearch() {
     const data = await apiFetch(`/api/articles/search?q=${encodeURIComponent(q)}&limit=8`);
     if (!data.articles.length) { results.innerHTML = '<p style="font-size:.8rem;color:var(--ink-4);padding:.5rem 0">कोई रचना नहीं मिली।</p>'; return; }
     results.innerHTML = data.articles.map(a => `
-      <a href="article.html?slug=${encodeURIComponent(a.slug)}" class="search-result-item">
+      <a href="/articles?slug=${encodeURIComponent(a.slug)}" class="search-result-item">
         <span class="sr-cat">${a.category || '—'}</span>
         <div class="sr-title">${a.title}</div>
         <div class="sr-exc">${a.excerpt ? a.excerpt.slice(0, 80) + '…' : ''}</div>
@@ -667,10 +667,10 @@ async function loadHero() {
     const sides = (side.articles || []).slice(1, 5);
     hero.innerHTML = `
       <div class="hero-main">
-        <div class="hero-main-img" onclick="window.location.href='article.html?slug=${encodeURIComponent(main.slug)}'">${main.thumbnail_url ? `<img src="${main.thumbnail_url}" alt="${main.title}" loading="lazy">` : `<div class="img-ph">📜</div>`}</div>
+        <div class="hero-main-img" onclick="window.location.href='/articles?slug=${encodeURIComponent(main.slug)}'">${main.thumbnail_url ? `<img src="${main.thumbnail_url}" alt="${main.title}" loading="lazy">` : `<div class="img-ph">📜</div>`}</div>
         <span class="hero-badge">${main.category || 'रचना'}</span>
-        <a href="article.html?slug=${encodeURIComponent(main.slug)}" class="hero-title">${main.title}</a>
-        <p class="hero-excerpt" onclick="window.location.href='article.html?slug=${encodeURIComponent(main.slug)}'">${main.excerpt ? main.excerpt.slice(0, 150) + '…' : ''}</p>
+        <a href="/articles?slug=${encodeURIComponent(main.slug)}" class="hero-title">${main.title}</a>
+        <p class="hero-excerpt" onclick="window.location.href='/articles?slug=${encodeURIComponent(main.slug)}'">${main.excerpt ? main.excerpt.slice(0, 150) + '…' : ''}</p>
         <div class="hero-meta">
           <span class="hero-author">${main.author?.username || '—'}</span>
           <span class="meta-dot"></span>
@@ -682,7 +682,7 @@ async function loadHero() {
       <div class="hero-side">
         <div class="side-label">और पढ़ें</div>
         ${sides.map(a => `
-          <a href="article.html?slug=${encodeURIComponent(a.slug)}" class="side-card">
+          <a href="/articles?slug=${encodeURIComponent(a.slug)}" class="side-card">
             <div class="side-thumb">${a.thumbnail_url ? `<img src="${a.thumbnail_url}" alt="${a.title}" loading="lazy">` : `<div class="ph">📖</div>`}</div>
             <div>
               <span class="side-cat">${a.category || 'रचना'}</span>
@@ -699,7 +699,7 @@ async function loadHero() {
 // ── FEED ───────────────────────────────────────────────────────────
 function feedCardHTML(a) {
   return `
-    <a href="article.html?slug=${encodeURIComponent(a.slug)}" class="feed-card">
+    <a href="/articles?slug=${encodeURIComponent(a.slug)}" class="feed-card">
       <div class="fc-img">${a.thumbnail_url ? `<img src="${a.thumbnail_url}" alt="${a.title}" loading="lazy">` : `<div class="ph">📜</div>`}</div>
       <span class="fc-cat">${a.category || 'रचना'}</span>
       <div class="fc-title">${a.title}</div>
@@ -751,7 +751,7 @@ async function loadPopular() {
     const arts = data.articles || [];
     if (!arts.length) { list.innerHTML = '<div class="error-msg">अभी कोई लोकप्रिय रचना नहीं।</div>'; return; }
     list.innerHTML = arts.map((a, i) => `
-      <a href="article.html?slug=${encodeURIComponent(a.slug)}" class="pop-card">
+      <a href="article?slug=${encodeURIComponent(a.slug)}" class="pop-card">
         <div class="pop-num">0${i + 1}</div>
         <div class="pop-body">
           <div class="cat">${a.category || 'रचना'}</div>
