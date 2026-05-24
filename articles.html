@@ -790,7 +790,7 @@
   // ─────────────────────────────────────────────
   async function loadLatestPosts() {
     try {
-      const res = await fetch(`${API_BASE}/api/articles/latest?limit=5`);
+      const res = await fetch(`${API_BASE}/api/articles/latest?limit=7`);
       const json = await res.json();
       const el = document.getElementById('latestPosts');
 
@@ -906,7 +906,7 @@
   // ─────────────────────────────────────────────
   async function likeComment(id, btn) {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('sm_token');
       if (!token) {
         showToast('लॉगइन करें');
         return;
