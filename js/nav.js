@@ -97,6 +97,17 @@
             <a href="/surya-dev/">सूर्य मंत्र</a>
           </div>
         </div>
+
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-btn" data-menu="articles-menu">लेख</button>
+          <div class="dropdown-content" id="articles-menu">
+            <div class="dropdown-label">✦ लेख प्रबंधन ✦</div>
+            <a href="/articles">सभी लेख</a>
+            <a href="/article-editor">नया लेख लिखें</a>
+            <a href="/article-editor?edit=true">मेरे लेख</a>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -397,6 +408,11 @@
       <div class="mobile-menu-divider"></div>
       <div class="mobile-menu-item label">✦ मैथिली ✦</div>
       <a href="/Vidyapati-Geet-Sangrah/" class="mobile-menu-item">विद्यापति गीत संग्रह</a>
+      <div class="mobile-menu-divider"></div>
+      <div class="mobile-menu-item label">✦ लेख प्रबंधन ✦</div>
+      <a href="/articles" class="mobile-menu-item">सभी लेख</a>
+      <a href="/article-editor" class="mobile-menu-item">नया लेख लिखें</a>
+      <a href="/article-editor?edit=true" class="mobile-menu-item">मेरे लेख</a>
       `;
 
     hamburger.addEventListener('click', () => {
