@@ -103,8 +103,8 @@
           <div class="dropdown-content" id="articles-menu">
             <div class="dropdown-label">✦ लेख प्रबंधन ✦</div>
             <a href="/articles">सभी लेख</a>
-            <a href="/articles-editor">नया लेख लिखें</a>
-            <a href="/articles-editor?edit=true">मेरे लेख</a>
+            <a href="/article_editor">नया लेख लिखें</a>
+            <a href="/article_editor?edit=true">मेरे लेख</a>
           </div>
         </div>
 
@@ -411,8 +411,8 @@
       <div class="mobile-menu-divider"></div>
       <div class="mobile-menu-item label">✦ लेख प्रबंधन ✦</div>
       <a href="/articles" class="mobile-menu-item">सभी लेख</a>
-      <a href="/article-editor" class="mobile-menu-item">नया लेख लिखें</a>
-      <a href="/article-editor?edit=true" class="mobile-menu-item">मेरे लेख</a>
+      <a href="/article_editor" class="mobile-menu-item">नया लेख लिखें</a>
+      <a href="/article_editor?edit=true" class="mobile-menu-item">मेरे लेख</a>
       `;
 
     hamburger.addEventListener('click', () => {
