@@ -734,37 +734,48 @@
   </div>
 </div>
 
-<!-- ── TOAST ──────────────────────────────– -->
-<div class="toast" id="toast"></div>
+<!-- My Drafts Modal -->
+<div class="modal" id="draftsModal">
+  <div class="modal-content" style="max-width: 700px; max-height: 80vh; overflow-y: auto;">
+    <h2 class="modal-title">📝 मेरे ड्राफ्ट्स</h2>
+    <div id="draftsList" style="margin-top: 1.5rem;">
+      <p style="text-align: center; color: var(--ink-muted);">लोड हो रहा है...</p>
+    </div>
+    <div class="modal-actions" style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1rem;">
+      <button class="btn btn-secondary" onclick="closeModal('draftsModal')">बंद करें</button>
+    </div>
+  </div>
+</div>
 
-<!-- ── JAVASCRIPT ──────────────────────────– -->
-<script>
-  // ─────────────────────────────────────────────
-  // CONFIG & STATE
-  // ─────────────────────────────────────────────
-  const API_BASE = 'https://shivamargbackend.onrender.com'; // Change for production
-  let currentUser = null;
-  let isPublishing = false;
-  let tags = [];
+<!-- My Articles Modal -->
+<div class="modal" id="articlesModal">
+  <div class="modal-content" style="max-width: 700px; max-height: 80vh; overflow-y: auto;">
+    <h2 class="modal-title">📚 मेरे लेख</h2>
+    <div id="articlesList" style="margin-top: 1.5rem;">
+      <p style="text-align: center; color: var(--ink-muted);">लोड हो रहा है...</p>
+    </div>
+    <div class="modal-actions" style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1rem;">
+      <button class="btn btn-secondary" onclick="closeModal('articlesModal')">बंद करें</button>
+    </div>
+  </div>
+</div>
 
-  // ─────────────────────────────────────────────
-  // UTILITY: Local Storage & Auth
-  // ─────────────────────────────────────────────
-  function getToken() {
-    return localStorage.getItem('sm_token') || null;
-  }
-
-  function getCurrentUser() {
-    const user = localStorage.getItem('currentUser');
-    return user ? JSON.parse(user) : null;
-  }
-
-  function logout() {
-    localStorage.removeItem('sm_token');
-    localStorage.removeItem('currentUser');
-    window.location.href = '/';
-  }
-
+<!-- Delete Confirmation Modal -->
+<div class="modal" id="deleteModal">
+  <div class="modal-content">
+    <h2 class="modal-title">⚠️ लेख हटाएँ?</h2>
+    <div class="modal-body">
+      <p>यह क्रिया वापस नहीं की जा सकती। क्या आप निश्चित हैं?</p>
+      <p style="margin-top: 1rem; font-weight: 600;">
+        <span id="deleteArticleTitle">लेख का शीर्षक</span>
+      </p>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal('deleteModal')">रद्द करें</button>
+      <button class="btn btn-primary" style="background: #e74c3c;" onclick="confirmDelete()">हाँ, हटाएँ</button>
+    </div>
+  </div>
+</div>
   // ─────────────────────────────────────────────
   // INIT: Check Auth & Load User
   // ─────────────────────────────────────────────
@@ -1148,14 +1159,219 @@
   }
 
   // ─────────────────────────────────────────────
-  // HELPER: Load Drafts/Articles (placeholders)
+  // LOAD DRAFTS & ARTICLES
   // ─────────────────────────────────────────────
-  function loadDrafts() {
-    showToast('ड्राफ्ट्स पेज (जल्द आ रहा है)', 'info');
+  async function loadDrafts() {
+    const token = getToken();
+    if (!token) {
+      showToast('पहले लॉगिन करें', 'error');
+      return;
+    }
+
+    try {
+      const draftsList = document.getElementById('draftsList');
+      draftsList.innerHTML = '<p style="text-align: center; color: var(--ink-muted);">लोड हो रहा है...</p>';
+
+      const res = await fetch(`${API_BASE}/api/articles?status=draft`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+
+      if (!res.ok) throw new Error('ड्राफ्ट्स फेच नहीं हो सके');
+
+      const articles = await res.json();
+      
+      if (!articles || articles.length === 0) {
+        draftsList.innerHTML = '<p style="text-align: center; color: var(--ink-muted);">कोई ड्राफ्ट नहीं मिले</p>';
+      } else {
+        draftsList.innerHTML = articles.map(article => `
+          <div style="
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            background: var(--paper-warm);
+          ">
+            <div style="display: flex; justify-content: space-between; align-items: start; gap: 1rem;">
+              <div style="flex: 1;">
+                <h4 style="color: var(--ink); margin-bottom: 0.5rem; font-family: var(--display);">
+                  ${article.title}
+                </h4>
+                <p style="color: var(--ink-muted); font-size: 0.85rem; margin-bottom: 0.5rem;">
+                  ${article.category} · सहेजा: ${new Date(article.updated_at || article.created_at).toLocaleDateString('hi-IN')}
+                </p>
+                <p style="color: var(--ink-soft); font-size: 0.9rem; line-height: 1.4;">
+                  ${article.excerpt}
+                </p>
+              </div>
+            </div>
+            <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+              <button class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;" 
+                      onclick="editArticle('${article._id}')">संपादित करें</button>
+              <button class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem; background: var(--success);" 
+                      onclick="publishFromDraft('${article._id}', '${article.title.replace(/'/g, "\\'")}')">प्रकाशित करें</button>
+              <button class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem; background: #e74c3c;" 
+                      onclick="deleteArticlePrompt('${article._id}', '${article.title.replace(/'/g, "\\'")}')">हटाएँ</button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      openModal('draftsModal');
+    } catch(e) {
+      showToast(e.message || 'कुछ गड़बड़ हुई', 'error');
+      console.error(e);
+    }
   }
 
-  function loadArticles() {
-    showToast('मेरे लेख पेज (जल्द आ रहा है)', 'info');
+  async function loadArticles() {
+    const token = getToken();
+    if (!token) {
+      showToast('पहले लॉगिन करें', 'error');
+      return;
+    }
+
+    try {
+      const articlesList = document.getElementById('articlesList');
+      articlesList.innerHTML = '<p style="text-align: center; color: var(--ink-muted);">लोड हो रहा है...</p>';
+
+      const res = await fetch(`${API_BASE}/api/articles?status=published`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+
+      if (!res.ok) throw new Error('लेख फेच नहीं हो सके');
+
+      const articles = await res.json();
+      
+      if (!articles || articles.length === 0) {
+        articlesList.innerHTML = '<p style="text-align: center; color: var(--ink-muted);">कोई प्रकाशित लेख नहीं मिले</p>';
+      } else {
+        articlesList.innerHTML = articles.map(article => `
+          <div style="
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            background: var(--paper-warm);
+          ">
+            <div style="display: flex; justify-content: space-between; align-items: start; gap: 1rem;">
+              <div style="flex: 1;">
+                <h4 style="color: var(--ink); margin-bottom: 0.5rem; font-family: var(--display);">
+                  ${article.title}
+                </h4>
+                <p style="color: var(--ink-muted); font-size: 0.85rem; margin-bottom: 0.5rem;">
+                  ${article.category} · ${article.read_time || 5} मिनट · प्रकाशित: ${new Date(article.created_at).toLocaleDateString('hi-IN')}
+                </p>
+                <p style="color: var(--ink-soft); font-size: 0.9rem; line-height: 1.4;">
+                  ${article.excerpt}
+                </p>
+              </div>
+            </div>
+            <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+              <button class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;" 
+                      onclick="viewArticle('${article.slug}')">देखें</button>
+              <button class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;" 
+                      onclick="editArticle('${article._id}')">संपादित करें</button>
+              <button class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem; background: #e74c3c;" 
+                      onclick="deleteArticlePrompt('${article._id}', '${article.title.replace(/'/g, "\\'")}')">हटाएँ</button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      openModal('articlesModal');
+    } catch(e) {
+      showToast(e.message || 'कुछ गड़बड़ हुई', 'error');
+      console.error(e);
+    }
+  }
+
+  // ─────────────────────────────────────────────
+  // ARTICLE ACTIONS
+  // ─────────────────────────────────────────────
+  function viewArticle(slug) {
+    window.open(`/articles.html?slug=${slug}`, '_blank');
+  }
+
+  function editArticle(articleId) {
+    // Store the article ID to edit
+    sessionStorage.setItem('editArticleId', articleId);
+    window.location.href = `?edit=${articleId}`;
+  }
+
+  function deleteArticlePrompt(articleId, title) {
+    window.currentDeleteId = articleId;
+    document.getElementById('deleteArticleTitle').textContent = title;
+    openModal('deleteModal');
+  }
+
+  async function confirmDelete() {
+    const articleId = window.currentDeleteId;
+    const token = getToken();
+
+    if (!token || !articleId) {
+      showToast('कुछ गड़बड़ हुई', 'error');
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_BASE}/api/articles/${articleId}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+
+      if (!res.ok) throw new Error('लेख नहीं हटाया जा सका');
+
+      closeModal('deleteModal');
+      showToast('लेख सफलतापूर्वक हटाया गया', 'success');
+      
+      // Reload drafts/articles
+      setTimeout(() => {
+        loadDrafts();
+      }, 500);
+    } catch(e) {
+      showToast(e.message || 'कुछ गड़बड़ हुई', 'error');
+      console.error(e);
+    }
+  }
+
+  function publishFromDraft(articleId, title) {
+    window.currentPublishId = articleId;
+    document.getElementById('publishArticleTitle').textContent = title;
+    openModal('publishModal');
+  }
+
+  async function confirmPublish() {
+    const articleId = window.currentPublishId;
+    const token = getToken();
+
+    if (!token || !articleId) {
+      showToast('कुछ गड़बड़ हुई', 'error');
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_BASE}/api/articles/${articleId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ status: 'published' })
+      });
+
+      if (!res.ok) throw new Error('लेख प्रकाशित नहीं हो सका');
+
+      closeModal('publishModal');
+      showToast('लेख प्रकाशित हो गया!', 'success');
+      
+      // Reload drafts
+      setTimeout(() => {
+        loadDrafts();
+      }, 500);
+    } catch(e) {
+      showToast(e.message || 'कुछ गड़बड़ हुई', 'error');
+      console.error(e);
+    }
   }
 
   // ─────────────────────────────────────────────

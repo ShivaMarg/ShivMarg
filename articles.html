@@ -851,7 +851,7 @@
     btn.disabled = true;
 
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('sm_token');
       if (!token) {
         showToast('कमेंट के लिए पहले लॉगइन करें');
         btn.textContent = 'कमेंट करें';
@@ -916,7 +916,7 @@
   // ─────────────────────────────────────────────
   async function toggleArticleLike(slug) {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('sm_token');
       if (!token) {
         showToast('लॉगइन करें');
         return;
