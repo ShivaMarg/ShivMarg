@@ -350,7 +350,7 @@
         <div class="tbl-wrap">
           <table>
             <thead><tr>
-              <th>Title</th><th>Author</th><th>Category</th><th>Status</th><th>Date</th><th style="text-align:right">Views</th><th style="text-align:right">Actions</th>
+              <th>Title</th><th>Author</th><th>Category</th><th>Status</th><th>Date</th><th style="text-align:right">Views</th><th style="text-align:right">Likes</th><th style="text-align:right">Actions</th>
             </tr></thead>
             <tbody id="articlesTbody"></tbody>
           </table>
@@ -631,11 +631,12 @@ function _renderArticles(){
   tbody.innerHTML=items.map(a=>`
     <tr>
       <td><strong>${esc(a.title)}</strong></td>
-      <td style="color:var(--muted)">${esc(a.author||'—')}</td>
+      <td style="color:var(--muted)">${esc(a.author_username||'—')}</td>
       <td style="color:var(--muted)">${esc(a.category||'—')}</td>
       <td><span class="badge badge-${a.status==='published'?'publish':'draft'}">${a.status}</span></td>
       <td style="color:var(--muted)">${fmtDate(a.created_at)}</td>
       <td style="color:var(--muted); text-align:right">${a.view_count||0}</td>
+      <td style="color:var(--muted); text-align:right">${a.like_count||0}</td>
       <td><div class="act-row">
         <a class="act-btn act-view" href="https://shivamarg.live/articles.html?slug=${esc(a.slug)}" target="_blank"><i class="ti ti-external-link" style="font-size:11px" aria-hidden="true"></i> View</a>
         <button class="act-btn act-edit" onclick="alert('Edit functionality: Article ${esc(a.title)}')" style="cursor:pointer">Edit</button>
