@@ -794,7 +794,7 @@
   // UTILITY: Local Storage & Auth
   // ─────────────────────────────────────────────
   function getToken() {
-    return localStorage.getItem('sm_token') || null;
+    return localStorage.getItem('admin_token') || null;
   }
 
   function getCurrentUser() {
@@ -803,9 +803,9 @@
   }
 
   function logout() {
-    localStorage.removeItem('sm_token');
+    localStorage.removeItem('admin_token');
     localStorage.removeItem('currentUser');
-    window.location.href = '/';
+    window.location.href = '/admin-login.html';
   }
 
   // ─────────────────────────────────────────────
@@ -814,7 +814,7 @@
   async function initPage() {
     const token = getToken();
     if (!token) {
-      window.location.href = '/'; // Redirect to login
+      window.location.href = '/admin-login.html'; // Redirect to login
       return;
     }
 
