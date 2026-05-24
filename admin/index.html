@@ -196,21 +196,20 @@
       <div class="nav-item" onclick="showTab('articles', this)"><i class="ti ti-file-text"></i> Articles</div>
     </nav>
     <div class="nav-divider"></div>
-      <button class="logout-btn" onclick="handleLogout()"><i class="ti ti-logout" aria-hidden="true"></i> Logout</button>
-    </div>
+    <button class="logout-btn" onclick="handleLogout()"><i class="ti ti-logout" aria-hidden="true"></i> Logout</button>
   </aside>
 
   <!-- MAIN -->
   <div class="main">
-    <header class="topbar">
-      <h2 class="page-title" id="pageTitle">Dashboard</h2>
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="page-title" id="pageTitle">Dashboard</div>
       <div class="topbar-right">
-        <button class="refresh-btn" onclick="refreshCurrent()"><i class="ti ti-refresh" aria-hidden="true"></i> Refresh</button>
+        <button class="refresh-btn" onclick="refreshCurrent()"><i class="ti ti-refresh-cw" aria-hidden="true"></i> Refresh</button>
       </div>
-    </header>
+    </div>
 
     <div class="content" style="position:relative">
-
       <!-- DASHBOARD TAB -->
       <div id="tab-dashboard" class="tab-pane active">
         <div class="stats-grid">
@@ -392,14 +391,14 @@
 <script>
 const API = 'https://shivamargbackend.onrender.com';
 const PER_PAGE = 15;
-let token = localStorage.getItem('admin_token');
-document.addEventListener('DOMContentLoaded', () => {
-  const token = localStorage.getItem('admin_token');
-  if (!token) {
-    window.location.href = '/admin-login.html';
-    return;
-  }
-});
+let token = localStorage.getItem('admin_token') || null;
+// document.addEventListener('DOMContentLoaded', () => {
+//   const token = localStorage.getItem('admin_token');
+//   if (!token) {
+//     window.location.href = '/admin-login.html';
+//     return;
+//   }
+// });
 let currentTab = 'dashboard';
 
 const state = {
