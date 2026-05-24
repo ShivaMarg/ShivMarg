@@ -48,141 +48,162 @@ header{background:var(--paper);border-bottom:1px solid var(--line-dark);position
 .btn-back{font-size:.75rem;padding:.35rem .9rem;border:1.5px solid var(--saffron);border-radius:4px;color:var(--saffron);background:none;cursor:pointer;font-family:'Source Sans 3',sans-serif;transition:all .15s;text-decoration:none}
 .btn-back:hover{background:var(--saffron);color:#fff}
 
-/* ── PROFILE HEADER ── */
+/* ── PROFILE BANNER ── */
 .profile-banner{width:100%;height:300px;background:linear-gradient(135deg, var(--saffron-m) 0%, var(--leaf) 100%);position:relative;overflow:hidden}
-.profile-banner::before{content:'';position:absolute;top:-50%;right:-10%;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,0.1)}
+.profile-banner img.cover{width:100%;height:100%;object-fit:cover;display:block}
+.profile-banner::before{content:'';position:absolute;top:-50%;right:-10%;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,0.07);pointer-events:none}
 
+/* ── PROFILE HEADER ── */
 .profile-header{max-width:1280px;margin:0 auto;padding:0 1.5rem}
 .profile-info{display:grid;grid-template-columns:180px 1fr 300px;gap:2rem;margin-top:-100px;position:relative;padding-bottom:2rem;align-items:start}
 
-.author-avatar{width:180px;height:180px;border-radius:12px;background:var(--paper);border:4px solid #fff;box-shadow:0 4px 20px rgba(24,18,10,0.2);display:flex;align-items:center;justify-content:center;font-size:80px}
+.author-avatar-wrap{position:relative;width:180px}
+.author-avatar{width:180px;height:180px;border-radius:12px;background:var(--saffron-m);border:4px solid #fff;box-shadow:0 4px 20px rgba(24,18,10,0.2);display:flex;align-items:center;justify-content:center;font-size:80px;color:#fff;font-family:'Tiro Devanagari Hindi',serif;font-weight:700;overflow:hidden}
+.author-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.verified-badge{position:absolute;bottom:-6px;right:-6px;background:var(--leaf);color:#fff;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:1rem;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.2)}
 
-.author-details h1{font-family:'Tiro Devanagari Hindi',serif;font-size:2.5rem;color:var(--ink);margin-bottom:.3rem}
-.author-username{color:var(--saffron);font-weight:600;font-size:1rem;margin-bottom:1rem}
-.author-bio{color:var(--ink-3);font-size:1rem;line-height:1.7;margin-bottom:1.5rem}
+.author-details h1{font-family:'Tiro Devanagari Hindi',serif;font-size:2.2rem;color:var(--ink);margin-bottom:.15rem;line-height:1.2}
+.author-pen-name{font-family:'Tiro Devanagari Hindi',serif;font-size:1rem;color:var(--ink-3);font-style:italic;margin-bottom:.2rem}
+.author-username{color:var(--saffron);font-weight:600;font-size:.9rem;margin-bottom:.4rem}
+.author-tagline{color:var(--ink-2);font-size:1rem;font-style:italic;margin-bottom:.6rem;font-family:'Tiro Devanagari Hindi',serif}
+.author-bio{color:var(--ink-3);font-size:.95rem;line-height:1.7;margin-bottom:1.2rem}
+
+.author-meta-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.2rem}
+.meta-tag{font-size:.7rem;padding:.2rem .6rem;border-radius:20px;background:var(--saffron-l);color:var(--saffron);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.meta-tag.leaf{background:var(--leaf-l);color:var(--leaf)}
+
 .author-stats{display:flex;gap:2rem;margin-bottom:1.5rem;flex-wrap:wrap}
 .stat-item{display:flex;flex-direction:column}
-.stat-number{font-family:'Playfair Display',serif;font-size:2rem;color:var(--saffron);font-weight:700}
-.stat-label{font-size:.8rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:1px}
+.stat-number{font-family:'Playfair Display',serif;font-size:2rem;color:var(--saffron);font-weight:700;line-height:1}
+.stat-label{font-size:.75rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:1px;margin-top:.1rem}
 
-.author-actions{display:flex;gap:1rem;flex-direction:column}
-.btn-follow{width:100%;padding:.7rem 1.5rem;background:var(--saffron);color:#fff;border:none;border-radius:6px;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:.9rem;font-weight:600;transition:all .15s}
-.btn-follow:hover{opacity:.9}
-.btn-follow.following{background:var(--paper-2);color:var(--ink);border:2px solid var(--saffron)}
+.author-extra{display:flex;flex-wrap:wrap;gap:.6rem;font-size:.8rem;color:var(--ink-3);margin-bottom:1rem}
+.author-extra span{display:flex;align-items:center;gap:.3rem}
 
-.social-links{display:flex;gap:.8rem;justify-content:center;margin-top:1rem}
-.social-link{width:40px;height:40px;border-radius:50%;background:var(--saffron-l);display:flex;align-items:center;justify-content:center;color:var(--saffron);text-decoration:none;transition:all .15s;font-size:1.2rem}
+.author-actions{display:flex;gap:.7rem;flex-direction:column}
+.btn-follow{width:100%;padding:.75rem 1.5rem;background:var(--saffron);color:#fff;border:none;border-radius:6px;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:.9rem;font-weight:600;transition:all .15s;letter-spacing:.3px}
+.btn-follow:hover{opacity:.88;transform:translateY(-1px)}
+.btn-follow.following{background:var(--paper-2);color:var(--ink-2);border:2px solid var(--line-dark)}
+.lekhak-badge{background:var(--leaf-l);color:var(--leaf);font-size:.8rem;font-weight:700;padding:.5rem 1rem;border-radius:6px;text-align:center;border:1px solid rgba(42,96,66,0.2);letter-spacing:.5px}
+
+.social-links{display:flex;gap:.6rem;justify-content:center;margin-top:.5rem;flex-wrap:wrap}
+.social-link{height:36px;padding:0 .8rem;border-radius:20px;background:var(--saffron-l);display:flex;align-items:center;gap:.3rem;color:var(--saffron);text-decoration:none;transition:all .15s;font-size:.78rem;font-weight:600}
 .social-link:hover{background:var(--saffron);color:#fff}
 
 /* ── MAIN CONTENT ── */
 main{max-width:1280px;margin:0 auto;padding:2rem 1.5rem}
 
-.tabs{display:flex;gap:1rem;border-bottom:2px solid var(--line);margin-bottom:2rem;flex-wrap:wrap}
-.tab{padding:.8rem 1.5rem;background:none;border:none;font-family:'Source Sans 3',sans-serif;font-size:.95rem;color:var(--ink-3);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .15s;font-weight:600}
+.tabs{display:flex;gap:0;border-bottom:2px solid var(--line);margin-bottom:2rem;overflow-x:auto}
+.tab{padding:.7rem 1.4rem;background:none;border:none;font-family:'Source Sans 3',sans-serif;font-size:.9rem;color:var(--ink-3);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .15s;font-weight:600;white-space:nowrap;flex-shrink:0}
 .tab.active{color:var(--saffron);border-bottom-color:var(--saffron)}
-.tab:hover{color:var(--ink-2)}
+.tab:hover:not(.active){color:var(--ink-2)}
 
 .tab-content{display:none}
 .tab-content.active{display:block}
 
 /* ── BIOGRAPHY SECTION ── */
-.bio-section{background:var(--paper-2);border-radius:var(--radius);padding:2rem;margin-bottom:2rem;border-left:4px solid var(--saffron)}
-.bio-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1.5rem;color:var(--ink);margin-bottom:1rem}
-.bio-content{font-family:'Tiro Devanagari Hindi',serif;font-size:1rem;line-height:1.85;color:var(--ink-2)}
-.bio-content p{margin-bottom:1rem}
+.bio-grid{display:grid;grid-template-columns:1fr 300px;gap:2rem}
+.bio-section{background:var(--paper-2);border-radius:var(--radius);padding:2rem;border-left:4px solid var(--saffron)}
+.bio-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1.4rem;color:var(--ink);margin-bottom:1rem}
+.bio-content{font-family:'Tiro Devanagari Hindi',serif;font-size:1rem;line-height:1.9;color:var(--ink-2)}
+.bio-content p{margin-bottom:.9rem}
+.sidebar-card{background:#fff;border-radius:var(--radius);padding:1.5rem;box-shadow:0 2px 8px rgba(24,18,10,0.06)}
+.sidebar-card h4{font-family:'Tiro Devanagari Hindi',serif;font-size:1rem;color:var(--ink);margin-bottom:.8rem;padding-bottom:.5rem;border-bottom:1px solid var(--line)}
+.info-row{display:flex;justify-content:space-between;align-items:center;padding:.35rem 0;border-bottom:1px solid var(--line);font-size:.85rem}
+.info-row:last-child{border-bottom:none}
+.info-label{color:var(--ink-4)}
+.info-value{color:var(--ink-2);font-weight:600;text-align:right}
+.category-pill{display:inline-block;padding:.2rem .6rem;background:var(--saffron-l);color:var(--saffron);border-radius:20px;font-size:.72rem;font-weight:600;margin:.15rem}
 
 /* ── ARTICLES GRID ── */
 .articles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;margin-bottom:2rem}
 .article-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 8px rgba(24,18,10,0.06);transition:all .3s;cursor:pointer;text-decoration:none;color:inherit;display:block}
 .article-card:hover{transform:translateY(-4px);box-shadow:0 8px 16px rgba(24,18,10,0.12)}
-.article-thumb{width:100%;aspect-ratio:16/9;background:var(--paper-3);overflow:hidden}
+.article-thumb{width:100%;aspect-ratio:16/9;background:var(--paper-3);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:2rem}
 .article-thumb img{width:100%;height:100%;object-fit:cover}
 .article-info{padding:1.2rem}
 .article-category{font-size:.65rem;text-transform:uppercase;letter-spacing:1px;color:var(--saffron);font-weight:700;margin-bottom:.3rem;display:block}
 .article-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1rem;line-height:1.5;color:var(--ink);margin-bottom:.5rem;font-weight:600}
-.article-excerpt{font-size:.85rem;color:var(--ink-3);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:.5rem}
+.article-excerpt{font-size:.85rem;color:var(--ink-3);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:.6rem}
 .article-meta{font-size:.75rem;color:var(--ink-4);display:flex;gap:.5rem;justify-content:space-between}
 
+.load-more{display:block;margin:2rem auto 0;padding:.6rem 2rem;background:none;border:1.5px solid var(--saffron);border-radius:4px;color:var(--saffron);cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:.85rem;font-weight:600;transition:all .15s}
+.load-more:hover{background:var(--saffron);color:#fff}
+
 /* ── BOOKS SECTION ── */
-.books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:2rem;margin-bottom:2rem}
-.book-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 8px rgba(24,18,10,0.06);transition:all .3s;text-decoration:none;color:inherit}
+.books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1.8rem;margin-bottom:2rem}
+.book-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 8px rgba(24,18,10,0.06);transition:all .3s;text-decoration:none;color:inherit;display:block}
 .book-card:hover{transform:translateY(-4px);box-shadow:0 8px 16px rgba(24,18,10,0.12)}
-.book-cover{width:100%;aspect-ratio:3/4;background:linear-gradient(135deg, var(--saffron-m) 0%, var(--leaf) 100%);display:flex;align-items:center;justify-content:center;font-size:3rem;color:rgba(255,255,255,0.3)}
+.book-cover{width:100%;aspect-ratio:3/4;background:linear-gradient(135deg, var(--saffron-m) 0%, var(--leaf) 100%);display:flex;align-items:center;justify-content:center;font-size:3rem;color:rgba(255,255,255,.4)}
 .book-cover img{width:100%;height:100%;object-fit:cover}
-.book-info{padding:1rem}
-.book-title{font-family:'Tiro Devanagari Hindi',serif;font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:.3rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.book-year{font-size:.8rem;color:var(--ink-3)}
+.book-info{padding:.9rem}
+.book-title{font-family:'Tiro Devanagari Hindi',serif;font-size:.9rem;font-weight:600;color:var(--ink);margin-bottom:.25rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.book-year{font-size:.78rem;color:var(--ink-3)}
+.book-pub{font-size:.72rem;color:var(--ink-4);margin-top:.2rem}
 
 /* ── CONTRIBUTIONS ── */
-.contributions-list{display:grid;gap:1.5rem}
-.contribution-item{background:#fff;border-radius:var(--radius);padding:1.5rem;border-left:4px solid var(--saffron);box-shadow:0 2px 8px rgba(24,18,10,0.06)}
-.contribution-year{font-size:.8rem;text-transform:uppercase;color:var(--saffron);font-weight:700;margin-bottom:.3rem}
-.contribution-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1.1rem;color:var(--ink);margin-bottom:.5rem;font-weight:600}
-.contribution-desc{font-size:.9rem;color:var(--ink-2);line-height:1.7}
+.contributions-list{display:grid;gap:1.2rem}
+.contribution-item{background:#fff;border-radius:var(--radius);padding:1.4rem;border-left:4px solid var(--saffron);box-shadow:0 2px 8px rgba(24,18,10,0.06);display:flex;gap:1.5rem;align-items:flex-start}
+.contribution-year-badge{background:var(--saffron);color:#fff;border-radius:4px;padding:.3rem .6rem;font-size:.8rem;font-weight:700;min-width:50px;text-align:center;flex-shrink:0}
+.contribution-body{}
+.contribution-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1.05rem;color:var(--ink);margin-bottom:.4rem;font-weight:600}
+.contribution-desc{font-size:.88rem;color:var(--ink-2);line-height:1.7}
 
-/* ── ACTIVITIES ── */
-.activities-timeline{position:relative;padding:2rem 0;padding-left:2rem}
-.activities-timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--saffron-m)}
+/* ── ACTIVITIES TIMELINE ── */
+.activities-timeline{position:relative;padding-left:2rem}
+.activities-timeline::before{content:'';position:absolute;left:0;top:.5rem;bottom:.5rem;width:2px;background:linear-gradient(to bottom, var(--saffron), var(--saffron-m))}
 .activity-item{margin-bottom:2rem;position:relative}
-.activity-item::before{content:'';position:absolute;left:-2.5rem;top:.3rem;width:12px;height:12px;border-radius:50%;background:var(--saffron);border:3px solid var(--paper)}
-.activity-date{font-size:.85rem;color:var(--saffron);font-weight:700;margin-bottom:.3rem}
+.activity-item::before{content:'';position:absolute;left:-2.4rem;top:.35rem;width:12px;height:12px;border-radius:50%;background:var(--saffron);border:3px solid var(--paper);box-shadow:0 0 0 2px var(--saffron-m)}
+.activity-date{font-size:.82rem;color:var(--saffron);font-weight:700;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.5px}
 .activity-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1.05rem;color:var(--ink);margin-bottom:.3rem;font-weight:600}
-.activity-desc{font-size:.9rem;color:var(--ink-2);line-height:1.7}
+.activity-desc{font-size:.88rem;color:var(--ink-2);line-height:1.7}
 
-/* ── CATEGORY BREAKDOWN ── */
-.category-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.5rem;margin-bottom:2rem}
-.category-card{background:#fff;border-radius:var(--radius);padding:1.5rem;text-align:center;box-shadow:0 2px 8px rgba(24,18,10,0.06)}
-.category-icon{font-size:2.5rem;margin-bottom:.5rem}
-.category-name{font-family:'Tiro Devanagari Hindi',serif;font-size:1rem;color:var(--ink);font-weight:600;margin-bottom:.3rem}
-.category-count{font-size:1.8rem;color:var(--saffron);font-weight:700}
-
-/* ── LOADING ── */
+/* ── LOADING / EMPTY ── */
 .loading-spinner{text-align:center;padding:3rem;color:var(--ink-4);font-size:.85rem}
-.loading-spinner::before{content:'';display:inline-block;width:24px;height:24px;border:2px solid var(--line);border-top-color:var(--saffron);border-radius:50%;animation:spin .7s linear infinite;margin-right:.5rem;vertical-align:middle}
+.loading-spinner::before{content:'';display:inline-block;width:22px;height:22px;border:2px solid var(--line);border-top-color:var(--saffron);border-radius:50%;animation:spin .7s linear infinite;margin-right:.5rem;vertical-align:middle}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-.empty-state{text-align:center;padding:2rem;color:var(--ink-4)}
-.empty-state span{display:block;font-size:2rem;margin-bottom:.5rem}
+.empty-state{text-align:center;padding:3rem;color:var(--ink-4)}
+.empty-state .icon{display:block;font-size:2.5rem;margin-bottom:.7rem;opacity:.6}
+.empty-state p{font-size:.9rem}
 
 /* ── FOOTER ── */
 footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5rem;margin-top:4rem}
 .footer-inner{max-width:1280px;margin:0 auto}
 .footer-brand-hi{font-family:'Tiro Devanagari Hindi',serif;font-size:1.5rem;color:#fff;margin-bottom:.5rem}
-.footer-copy{font-size:.7rem;color:rgba(255,255,255,.3);text-align:center}
+.footer-copy{font-size:.7rem;color:rgba(255,255,255,.3);text-align:center;margin-top:1rem}
 
 /* ── TOAST ── */
-.toast{position:fixed;bottom:2rem;right:2rem;background:var(--ink-2);color:#fff;padding:.6rem 1.2rem;border-radius:4px;font-size:.8rem;z-index:999;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none}
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--ink-2);color:#fff;padding:.6rem 1.2rem;border-radius:4px;font-size:.82rem;z-index:999;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;max-width:280px}
 .toast.show{opacity:1;transform:translateY(0)}
 
 /* ── RESPONSIVE ── */
 @media(max-width:1024px){
   .profile-info{grid-template-columns:1fr;margin-top:-50px}
-  .author-avatar{width:150px;height:150px;font-size:60px}
+  .author-avatar-wrap{width:140px}.author-avatar{width:140px;height:140px;font-size:55px}
   .articles-grid{grid-template-columns:repeat(2,1fr)}
-  .books-grid{grid-template-columns:repeat(2,1fr)}
+  .bio-grid{grid-template-columns:1fr}
 }
 @media(max-width:640px){
-  .profile-info{grid-template-columns:1fr}
-  .author-avatar{width:120px;height:120px;font-size:50px}
-  .author-details h1{font-size:1.8rem}
+  .profile-banner{height:200px}
+  .author-avatar-wrap{width:110px}.author-avatar{width:110px;height:110px;font-size:44px}
+  .author-details h1{font-size:1.7rem}
+  .author-stats{gap:1.2rem}
+  .stat-number{font-size:1.6rem}
   .articles-grid{grid-template-columns:1fr}
-  .books-grid{grid-template-columns:1fr}
-  .tabs{flex-direction:column}
-  .tab{padding:.6rem 1rem;border-bottom:none !important;border-right:3px solid transparent;margin-bottom:0;padding-left:1.5rem}
-  .tab.active{border-right-color:var(--saffron);border-bottom-color:transparent}
+  .books-grid{grid-template-columns:repeat(2,1fr)}
+  .tabs{gap:0}
+  .tab{font-size:.8rem;padding:.6rem .9rem}
+  .contribution-item{flex-direction:column;gap:.6rem}
 }
 </style>
 </head>
 
 <body>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- TOP STRIP -->
 <div class="top-strip">रचना · विचार · कला · संस्कृति</div>
 
-<!-- HEADER -->
 <header>
   <div class="header-inner">
     <a class="logo" href="index.html">
@@ -194,42 +215,41 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
   </div>
 </header>
 
-<!-- PROFILE BANNER -->
-<div class="profile-banner"></div>
+<!-- BANNER -->
+<div class="profile-banner" id="profileBanner"></div>
 
 <!-- PROFILE HEADER -->
 <div class="profile-header">
   <div class="profile-info" id="profileInfo">
-    <div class="loading-spinner">लेखक की जानकारी लोड हो रही है…</div>
+    <div class="loading-spinner" style="grid-column:1/-1">लेखक की जानकारी लोड हो रही है…</div>
   </div>
 </div>
 
-<!-- MAIN CONTENT -->
+<!-- MAIN -->
 <main>
-  <!-- TABS -->
-  <div class="tabs" id="tabsContainer">
-    <button class="tab active" onclick="switchTab(this, 'biography')">परिचय</button>
-    <button class="tab" onclick="switchTab(this, 'articles')">रचनाएँ</button>
-    <button class="tab" onclick="switchTab(this, 'books')">किताबें</button>
-    <button class="tab" onclick="switchTab(this, 'contributions')">योगदान</button>
-    <button class="tab" onclick="switchTab(this, 'activities')">गतिविधियाँ</button>
+  <div class="tabs" id="tabsContainer" style="display:none">
+    <button class="tab active" onclick="switchTab(this,'biography')">परिचय</button>
+    <button class="tab" onclick="switchTab(this,'articles')">रचनाएँ</button>
+    <button class="tab" onclick="switchTab(this,'books')">किताबें</button>
+    <button class="tab" onclick="switchTab(this,'contributions')">योगदान</button>
+    <button class="tab" onclick="switchTab(this,'activities')">गतिविधियाँ</button>
   </div>
 
-  <!-- BIOGRAPHY TAB -->
+  <!-- BIOGRAPHY -->
   <div id="biography" class="tab-content active">
     <div id="bioContainer" class="loading-spinner">लोड हो रहा है…</div>
   </div>
 
-  <!-- ARTICLES TAB -->
+  <!-- ARTICLES -->
   <div id="articles" class="tab-content">
     <h2 style="font-family:'Tiro Devanagari Hindi',serif;font-size:1.5rem;color:var(--ink);margin-bottom:1.5rem">रचनाएँ</h2>
-    <div class="category-stats" id="categoryStats"></div>
     <div class="articles-grid" id="articlesGrid">
       <div class="loading-spinner" style="grid-column:1/-1">रचनाएँ लोड हो रही हैं…</div>
     </div>
+    <button class="load-more" id="loadMoreBtn" style="display:none" onclick="loadMoreArticles()">और रचनाएँ देखें</button>
   </div>
 
-  <!-- BOOKS TAB -->
+  <!-- BOOKS -->
   <div id="books" class="tab-content">
     <h2 style="font-family:'Tiro Devanagari Hindi',serif;font-size:1.5rem;color:var(--ink);margin-bottom:1.5rem">किताबें</h2>
     <div class="books-grid" id="booksGrid">
@@ -237,15 +257,15 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
     </div>
   </div>
 
-  <!-- CONTRIBUTIONS TAB -->
+  <!-- CONTRIBUTIONS -->
   <div id="contributions" class="tab-content">
-    <h2 style="font-family:'Tiro Devanagari Hindi',serif;font-size:1.5rem;color:var(--ink);margin-bottom:1.5rem">योगदान</h2>
+    <h2 style="font-family:'Tiro Devanagari Hindi',serif;font-size:1.5rem;color:var(--ink);margin-bottom:1.5rem">साहित्यिक योगदान</h2>
     <div class="contributions-list" id="contributionsList">
       <div class="loading-spinner">योगदान लोड हो रहे हैं…</div>
     </div>
   </div>
 
-  <!-- ACTIVITIES TAB -->
+  <!-- ACTIVITIES -->
   <div id="activities" class="tab-content">
     <h2 style="font-family:'Tiro Devanagari Hindi',serif;font-size:1.5rem;color:var(--ink);margin-bottom:1.5rem">सामाजिक गतिविधियाँ</h2>
     <div class="activities-timeline" id="activitiesTimeline">
@@ -254,7 +274,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
   </div>
 </main>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-brand-hi">बरगद</div>
@@ -263,16 +282,25 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
 </footer>
 
 <script>
+// ── CONFIG ────────────────────────────────────────────────────────
 const API = 'https://shivamargbackend.onrender.com';
 
-let state = {
-  token: localStorage.getItem('bargad_token') || null,
-  user: JSON.parse(localStorage.getItem('bargad_user') || 'null'),
-  authorId: null,
+// ── STATE ──────────────────────────────────────────────────────────
+const state = {
+  token:      localStorage.getItem('bargad_token') || null,
+  user:       JSON.parse(localStorage.getItem('bargad_user') || 'null'),
+  authorSlug: null,
   authorData: null,
+  articlesSkip: 0,
+  articlesLimit: 12,
+  articlesTotal: 0,
 };
 
-// ── API HELPERS ────────────────────────────────────────────────────
+// Resolve slug from URL:  ?slug=ramesh-kumar  OR (legacy) ?username=ramesh
+const params     = new URLSearchParams(window.location.search);
+state.authorSlug = params.get('slug') || params.get('username') || '';
+
+// ── HELPERS ────────────────────────────────────────────────────────
 async function apiFetch(path, opts = {}) {
   const headers = { 'Content-Type': 'application/json' };
   if (state.token) headers['Authorization'] = 'Bearer ' + state.token;
@@ -289,240 +317,293 @@ async function apiFetch(path, opts = {}) {
   }
 }
 
-// ── TOAST ──────────────────────────────────────────────────────────
-function showToast(msg, dur = 2500) {
+function showToast(msg, dur = 2800) {
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), dur);
 }
 
-// ── DATE FORMATTER ─────────────────────────────────────────────────
 function fmtDate(iso) {
   if (!iso) return '';
-  try {
-    return new Date(iso).toLocaleDateString('hi-IN', { day: 'numeric', month: 'long', year: 'numeric' });
-  } catch { return iso.slice(0, 10); }
+  try { return new Date(iso).toLocaleDateString('hi-IN', { day: 'numeric', month: 'long', year: 'numeric' }); }
+  catch { return iso.slice(0, 10); }
 }
 
-// ── TAB SWITCHING ──────────────────────────────────────────────────
 function switchTab(el, tabName) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
   document.getElementById(tabName).classList.add('active');
-  window.scrollTo({ top: document.querySelector('main').offsetTop, behavior: 'smooth' });
+  window.scrollTo({ top: document.querySelector('main').offsetTop - 80, behavior: 'smooth' });
 }
 
-// ── LOAD AUTHOR PROFILE ────────────────────────────────────────────
+// ── LOAD PROFILE ───────────────────────────────────────────────────
 async function loadAuthorProfile() {
-  const params = new URLSearchParams(window.location.search);
-  const username = params.get('username') || 'lekha';
-  state.authorId = username;
+  if (!state.authorSlug) {
+    document.getElementById('profileInfo').innerHTML =
+      `<div class="empty-state" style="grid-column:1/-1"><span class="icon">⚠️</span><p>लेखक का slug URL में नहीं मिला।</p></div>`;
+    return;
+  }
 
   try {
-    const author = await apiFetch(`/api/authors/${username}`);
+    const author = await apiFetch(`/api/lekhak/${state.authorSlug}`);
     state.authorData = author;
     renderProfileHeader(author);
-    loadAuthorArticles();
-    loadAuthorBooks();
-    loadAuthorContributions();
-    loadAuthorActivities();
+    renderBiography(author);
+    renderBooks(author.books || []);
+    renderContributions(author.contributions || []);
+    renderActivities(author.activities || []);
+    loadArticles();
+    document.getElementById('tabsContainer').style.display = 'flex';
   } catch (e) {
-    document.getElementById('profileInfo').innerHTML = `<div class="empty-state"><span>⚠️</span>${e.message}</div>`;
+    document.getElementById('profileInfo').innerHTML =
+      `<div class="empty-state" style="grid-column:1/-1"><span class="icon">⚠️</span><p>${e.message}</p></div>`;
   }
 }
 
-// ── RENDER PROFILE HEADER ──────────────────────────────────────────
-function renderProfileHeader(author) {
-  const profileInfo = document.getElementById('profileInfo');
-  const avatarInitial = author.display_name ? author.display_name[0].toUpperCase() : '👤';
-  
-  profileInfo.innerHTML = `
-    <div class="author-avatar">${author.avatar || avatarInitial}</div>
+// ── RENDER PROFILE HEADER ─────────────────────────────────────────
+function renderProfileHeader(a) {
+  // cover image
+  const banner = document.getElementById('profileBanner');
+  if (a.cover_image) {
+    banner.innerHTML = `<img class="cover" src="${a.cover_image}" alt="cover">`;
+  }
+
+  // avatar
+  const avatarHTML = a.avatar && a.avatar.startsWith('http')
+    ? `<img src="${a.avatar}" alt="${a.display_name}">`
+    : `<span style="font-family:'Tiro Devanagari Hindi',serif">${(a.display_name || a.username || '?')[0].toUpperCase()}</span>`;
+
+  const isSelf     = state.user && (state.user.id === a.user_id);
+  const followText = isSelf ? 'आपकी प्रोफ़ाइल' : (a.is_following ? '✓ अनुसरण कर रहे हैं' : '+ अनुसरण करें');
+  const followCls  = a.is_following && !isSelf ? 'following' : '';
+
+  // categories as pills
+  const catHTML = (a.categories || []).map(c => `<span class="meta-tag">${c}</span>`).join('');
+
+  // extra info chips
+  const extras = [];
+  if (a.location)   extras.push(`<span>📍 ${a.location}</span>`);
+  if (a.birth_year) extras.push(`<span>📅 ${a.birth_year}</span>`);
+  if (a.expertise)  extras.push(`<span>✍️ ${a.expertise}</span>`);
+
+  // social links
+  const socials = [];
+  if (a.website)   socials.push(`<a href="${a.website}" target="_blank" class="social-link">🌐 वेबसाइट</a>`);
+  if (a.twitter)   socials.push(`<a href="https://twitter.com/${a.twitter}" target="_blank" class="social-link">𝕏 Twitter</a>`);
+  if (a.instagram) socials.push(`<a href="https://instagram.com/${a.instagram}" target="_blank" class="social-link">📷 Instagram</a>`);
+  if (a.facebook)  socials.push(`<a href="https://facebook.com/${a.facebook}" target="_blank" class="social-link">f Facebook</a>`);
+  if (a.youtube)   socials.push(`<a href="https://youtube.com/@${a.youtube}" target="_blank" class="social-link">▶ YouTube</a>`);
+
+  document.getElementById('profileInfo').innerHTML = `
+    <div class="author-avatar-wrap">
+      <div class="author-avatar">${avatarHTML}</div>
+      ${a.is_verified ? `<div class="verified-badge" title="सत्यापित लेखक">✓</div>` : ''}
+    </div>
+
     <div class="author-details">
-      <h1>${author.display_name || author.username}</h1>
-      <div class="author-username">@${author.username}</div>
-      <p class="author-bio">${author.bio || 'लेखक, विचारक और समाज सेवक'}</p>
+      <h1>${a.display_name || a.username}</h1>
+      ${a.pen_name ? `<div class="author-pen-name">— ${a.pen_name}</div>` : ''}
+      <div class="author-username">@${a.username}</div>
+      ${a.tagline ? `<div class="author-tagline">"${a.tagline}"</div>` : ''}
+      <p class="author-bio">${a.bio || ''}</p>
+      ${catHTML ? `<div class="author-meta-tags">${catHTML}</div>` : ''}
       <div class="author-stats">
         <div class="stat-item">
-          <div class="stat-number">${author.articles_count || 0}</div>
+          <div class="stat-number">${a.articles_count || 0}</div>
           <div class="stat-label">रचनाएँ</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">${author.followers_count || 0}</div>
+          <div class="stat-number">${a.followers_count || 0}</div>
           <div class="stat-label">अनुयायी</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">${author.total_views || 0}</div>
+          <div class="stat-number">${a.total_views || 0}</div>
           <div class="stat-label">पाठक</div>
         </div>
+        ${(a.books || []).length ? `
+        <div class="stat-item">
+          <div class="stat-number">${a.books.length}</div>
+          <div class="stat-label">किताबें</div>
+        </div>` : ''}
       </div>
+      ${extras.length ? `<div class="author-extra">${extras.join('')}</div>` : ''}
     </div>
+
     <div class="author-actions">
-      <button class="btn-follow" id="followBtn" onclick="toggleFollow()">${state.user && state.user.id === author.id ? 'आपकी प्रोफ़ाइल' : (author.is_following ? 'अनुसरण कर रहे हैं' : 'अनुसरण करें')}</button>
-      ${author.website ? `<a href="${author.website}" target="_blank" style="text-align:center;color:var(--saffron);text-decoration:none;font-weight:600">वेबसाइट</a>` : ''}
-      <div class="social-links">
-        ${author.twitter ? `<a href="https://twitter.com/${author.twitter}" target="_blank" class="social-link" title="Twitter">𝕏</a>` : ''}
-        ${author.facebook ? `<a href="https://facebook.com/${author.facebook}" target="_blank" class="social-link" title="Facebook">f</a>` : ''}
-        ${author.instagram ? `<a href="https://instagram.com/${author.instagram}" target="_blank" class="social-link" title="Instagram">📷</a>` : ''}
-      </div>
+      <div class="lekhak-badge">✍️ नई पीढ़ी का लेखक</div>
+      ${!isSelf ? `<button class="btn-follow ${followCls}" id="followBtn" onclick="toggleFollow()">${followText}</button>` : ''}
+      ${socials.length ? `<div class="social-links">${socials.join('')}</div>` : ''}
+      <div style="font-size:.72rem;color:var(--ink-4);text-align:center;margin-top:.3rem">लेखक बने: ${fmtDate(a.joined_at)}</div>
     </div>
   `;
 
-  // Load biography
-  const bioContainer = document.getElementById('bioContainer');
-  if (author.biography) {
-    bioContainer.innerHTML = `
-      <div class="bio-section">
-        <h3 class="bio-title">परिचय</h3>
-        <div class="bio-content">${author.biography.replace(/\n/g, '</p><p>')}</div>
-      </div>`;
-  }
-
-  document.title = `${author.display_name} — बरगद`;
+  document.title = `${a.display_name || a.username} — बरगद`;
 }
 
-// ── LOAD AUTHOR ARTICLES ────────────────────────────────────────────
-async function loadAuthorArticles() {
-  const grid = document.getElementById('articlesGrid');
-  const stats = document.getElementById('categoryStats');
-  
+// ── BIOGRAPHY TAB ─────────────────────────────────────────────────
+function renderBiography(a) {
+  const bio   = document.getElementById('bioContainer');
+  const rows  = [];
+  if (a.location)   rows.push(['स्थान', a.location]);
+  if (a.birth_year) rows.push(['जन्म वर्ष', a.birth_year]);
+  if (a.expertise)  rows.push(['विशेषज्ञता', a.expertise]);
+  if ((a.books||[]).length) rows.push(['पुस्तकें', a.books.length]);
+  rows.push(['रचनाएँ', a.articles_count || 0]);
+  rows.push(['अनुयायी', a.followers_count || 0]);
+
+  const catPills = (a.categories||[]).map(c=>`<span class="category-pill">${c}</span>`).join('');
+
+  bio.innerHTML = `
+    <div class="bio-grid">
+      <div>
+        ${a.biography
+          ? `<div class="bio-section">
+               <h3 class="bio-title">परिचय</h3>
+               <div class="bio-content"><p>${a.biography.replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>')}</p></div>
+             </div>`
+          : (a.bio ? `<div class="bio-section">
+               <h3 class="bio-title">परिचय</h3>
+               <div class="bio-content"><p>${a.bio}</p></div>
+             </div>` : '<div class="empty-state"><span class="icon">📖</span><p>परिचय उपलब्ध नहीं है।</p></div>')}
+      </div>
+      <div>
+        <div class="sidebar-card">
+          <h4>लेखक जानकारी</h4>
+          ${rows.map(([l,v])=>`<div class="info-row"><span class="info-label">${l}</span><span class="info-value">${v}</span></div>`).join('')}
+          ${catPills ? `<div style="margin-top:.8rem">${catPills}</div>` : ''}
+        </div>
+      </div>
+    </div>`;
+}
+
+// ── ARTICLES TAB ──────────────────────────────────────────────────
+async function loadArticles(append = false) {
+  const grid    = document.getElementById('articlesGrid');
+  const moreBtn = document.getElementById('loadMoreBtn');
+  if (!append) {
+    grid.innerHTML = `<div class="loading-spinner" style="grid-column:1/-1">रचनाएँ लोड हो रही हैं…</div>`;
+    state.articlesSkip = 0;
+  }
+
   try {
-    const data = await apiFetch(`/api/authors/${state.authorId}/articles`);
+    const data     = await apiFetch(`/api/lekhak/${state.authorSlug}/articles?skip=${state.articlesSkip}&limit=${state.articlesLimit}`);
     const articles = data.articles || [];
-    
-    if (!articles.length) {
-      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><span>📝</span>अभी कोई रचना प्रकाशित नहीं है।</div>';
+    state.articlesTotal = data.total || 0;
+
+    if (!articles.length && !append) {
+      grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><span class="icon">📝</span><p>अभी कोई रचना प्रकाशित नहीं है।</p></div>`;
+      moreBtn.style.display = 'none';
       return;
     }
 
-    // Category breakdown
-    const categories = {};
-    articles.forEach(a => {
-      categories[a.category] = (categories[a.category] || 0) + 1;
-    });
-
-    stats.innerHTML = Object.entries(categories).map(([cat, count]) => `
-      <div class="category-card">
-        <div class="category-icon">📄</div>
-        <div class="category-name">${cat || 'अन्य'}</div>
-        <div class="category-count">${count}</div>
-      </div>`).join('');
-
-    grid.innerHTML = articles.map(a => `
+    const html = articles.map(a => `
       <a href="article.html?slug=${encodeURIComponent(a.slug)}" class="article-card">
-        <div class="article-thumb">${a.thumbnail_url ? `<img src="${a.thumbnail_url}" alt="${a.title}">` : `<div style="width:100%;height:100%;background:var(--paper-3);display:flex;align-items:center;justify-content:center">📖</div>`}</div>
+        <div class="article-thumb">
+          ${a.thumbnail_url ? `<img src="${a.thumbnail_url}" alt="${a.title}" loading="lazy">` : '📖'}
+        </div>
         <div class="article-info">
           <span class="article-category">${a.category || 'रचना'}</span>
           <h3 class="article-title">${a.title}</h3>
           <p class="article-excerpt">${a.excerpt || ''}</p>
           <div class="article-meta">
             <span>${fmtDate(a.published_at)}</span>
-            <span>${a.read_time || 5} मिनट</span>
+            <span>${a.read_time || 5} मिनट · ${a.view_count || 0} पाठक</span>
           </div>
         </div>
       </a>`).join('');
+
+    if (append) {
+      grid.insertAdjacentHTML('beforeend', html);
+    } else {
+      grid.innerHTML = html;
+    }
+
+    state.articlesSkip += articles.length;
+    moreBtn.style.display = state.articlesSkip < state.articlesTotal ? 'block' : 'none';
   } catch (e) {
-    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><span>⚠️</span>${e.message}</div>`;
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><span class="icon">⚠️</span><p>${e.message}</p></div>`;
   }
 }
 
-// ── LOAD AUTHOR BOOKS ──────────────────────────────────────────────
-async function loadAuthorBooks() {
+function loadMoreArticles() { loadArticles(true); }
+
+// ── BOOKS TAB ─────────────────────────────────────────────────────
+function renderBooks(books) {
   const grid = document.getElementById('booksGrid');
-  
-  try {
-    const data = await apiFetch(`/api/authors/${state.authorId}/books`);
-    const books = data.books || [];
-    
-    if (!books.length) {
-      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><span>📚</span>अभी कोई किताब प्रकाशित नहीं है।</div>';
-      return;
-    }
-
-    grid.innerHTML = books.map(b => `
-      <a href="${b.link || '#'}" target="_blank" class="book-card">
-        <div class="book-cover">${b.cover_url ? `<img src="${b.cover_url}" alt="${b.title}">` : '📕'}</div>
-        <div class="book-info">
-          <div class="book-title">${b.title}</div>
-          <div class="book-year">${b.year || new Date().getFullYear()}</div>
-          ${b.publisher ? `<div style="font-size:.75rem;color:var(--ink-4);margin-top:.3rem">${b.publisher}</div>` : ''}
-        </div>
-      </a>`).join('');
-  } catch (e) {
-    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><span>⚠️</span>${e.message}</div>`;
-  }
-}
-
-// ── LOAD AUTHOR CONTRIBUTIONS ──────────────────────────────────────
-async function loadAuthorContributions() {
-  const list = document.getElementById('contributionsList');
-  
-  try {
-    const data = await apiFetch(`/api/authors/${state.authorId}/contributions`);
-    const contributions = data.contributions || [];
-    
-    if (!contributions.length) {
-      list.innerHTML = '<div class="empty-state"><span>🤝</span>अभी कोई योगदान दर्ज नहीं है।</div>';
-      return;
-    }
-
-    list.innerHTML = contributions.map(c => `
-      <div class="contribution-item">
-        <div class="contribution-year">${c.year}</div>
-        <div class="contribution-title">${c.title}</div>
-        <div class="contribution-desc">${c.description}</div>
-      </div>`).join('');
-  } catch (e) {
-    list.innerHTML = `<div class="empty-state"><span>⚠️</span>${e.message}</div>`;
-  }
-}
-
-// ── LOAD AUTHOR ACTIVITIES ─────────────────────────────────────────
-async function loadAuthorActivities() {
-  const timeline = document.getElementById('activitiesTimeline');
-  
-  try {
-    const data = await apiFetch(`/api/authors/${state.authorId}/activities`);
-    const activities = data.activities || [];
-    
-    if (!activities.length) {
-      timeline.innerHTML = '<div class="empty-state"><span>📢</span>अभी कोई गतिविधि दर्ज नहीं है।</div>';
-      return;
-    }
-
-    timeline.innerHTML = activities.map(a => `
-      <div class="activity-item">
-        <div class="activity-date">${fmtDate(a.date)}</div>
-        <div class="activity-title">${a.title}</div>
-        <div class="activity-desc">${a.description}</div>
-      </div>`).join('');
-  } catch (e) {
-    timeline.innerHTML = `<div class="empty-state"><span>⚠️</span>${e.message}</div>`;
-  }
-}
-
-// ── FOLLOW AUTHOR ──────────────────────────────────────────────────
-async function toggleFollow() {
-  if (!state.user) {
-    showToast('अनुसरण करने के लिए लॉग-इन करें।');
+  if (!books.length) {
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><span class="icon">📚</span><p>अभी कोई किताब सूचीबद्ध नहीं है।</p></div>`;
     return;
   }
+  grid.innerHTML = books.map(b => `
+    <a href="${b.link || '#'}" target="${b.link?'_blank':'_self'}" class="book-card">
+      <div class="book-cover">
+        ${b.cover_url ? `<img src="${b.cover_url}" alt="${b.title}" loading="lazy">` : '📕'}
+      </div>
+      <div class="book-info">
+        <div class="book-title">${b.title}</div>
+        ${b.year ? `<div class="book-year">${b.year}</div>` : ''}
+        ${b.publisher ? `<div class="book-pub">${b.publisher}</div>` : ''}
+      </div>
+    </a>`).join('');
+}
 
+// ── CONTRIBUTIONS TAB ─────────────────────────────────────────────
+function renderContributions(list) {
+  const el = document.getElementById('contributionsList');
+  if (!list.length) {
+    el.innerHTML = `<div class="empty-state"><span class="icon">🤝</span><p>अभी कोई योगदान दर्ज नहीं है।</p></div>`;
+    return;
+  }
+  // sort descending by year
+  const sorted = [...list].sort((a,b) => (b.year||0) - (a.year||0));
+  el.innerHTML = sorted.map(c => `
+    <div class="contribution-item">
+      <div class="contribution-year-badge">${c.year}</div>
+      <div class="contribution-body">
+        <div class="contribution-title">${c.title}</div>
+        <div class="contribution-desc">${c.description}</div>
+      </div>
+    </div>`).join('');
+}
+
+// ── ACTIVITIES TAB ────────────────────────────────────────────────
+function renderActivities(list) {
+  const el = document.getElementById('activitiesTimeline');
+  if (!list.length) {
+    el.innerHTML = `<div class="empty-state"><span class="icon">📢</span><p>अभी कोई गतिविधि दर्ज नहीं है।</p></div>`;
+    return;
+  }
+  // sort newest first
+  const sorted = [...list].sort((a,b) => new Date(b.date) - new Date(a.date));
+  el.innerHTML = sorted.map(a => `
+    <div class="activity-item">
+      <div class="activity-date">${fmtDate(a.date)}</div>
+      <div class="activity-title">${a.title}</div>
+      <div class="activity-desc">${a.description}</div>
+    </div>`).join('');
+}
+
+// ── FOLLOW ────────────────────────────────────────────────────────
+async function toggleFollow() {
+  if (!state.user) { showToast('अनुसरण करने के लिए लॉग-इन करें।'); return; }
   try {
-    const data = await apiFetch(`/api/authors/${state.authorId}/follow`, { method: 'POST' });
-    const btn = document.getElementById('followBtn');
+    const data = await apiFetch(`/api/lekhak/${state.authorSlug}/follow`, { method: 'POST' });
+    const btn  = document.getElementById('followBtn');
     if (btn) {
-      btn.textContent = data.is_following ? 'अनुसरण कर रहे हैं' : 'अनुसरण करें';
+      btn.textContent = data.is_following ? '✓ अनुसरण कर रहे हैं' : '+ अनुसरण करें';
       btn.classList.toggle('following', data.is_following);
     }
+    // update follower count in stat
+    const countEl = document.querySelector('.stat-number[data-stat="followers"]');
+    if (countEl) countEl.textContent = data.followers_count;
     showToast(data.is_following ? 'आप अब अनुसरण कर रहे हैं!' : 'अनुसरण रद्द किया गया।');
   } catch (e) {
     showToast(e.message);
   }
 }
 
-// ── INIT ───────────────────────────────────────────────────────────
+// ── INIT ──────────────────────────────────────────────────────────
 loadAuthorProfile();
 </script>
 </body>
