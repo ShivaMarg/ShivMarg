@@ -751,7 +751,7 @@ async function loadPopular() {
     const arts = data.articles || [];
     if (!arts.length) { list.innerHTML = '<div class="error-msg">अभी कोई लोकप्रिय रचना नहीं।</div>'; return; }
     list.innerHTML = arts.map((a, i) => `
-      <a href="article?slug=${encodeURIComponent(a.slug)}" class="pop-card">
+      <a href="articles?slug=${encodeURIComponent(a.slug)}" class="pop-card">
         <div class="pop-num">0${i + 1}</div>
         <div class="pop-body">
           <div class="cat">${a.category || 'रचना'}</div>
