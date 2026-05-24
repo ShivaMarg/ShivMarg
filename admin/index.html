@@ -104,6 +104,8 @@
     .badge-user{background:rgba(16,185,129,0.12);color:#6EE7B7;border:1px solid rgba(16,185,129,0.25)}
     .badge-feat{background:rgba(167,139,250,0.15);color:#C4B5FD;border:1px solid rgba(167,139,250,0.3)}
     .badge-reg{background:rgba(180,170,255,0.08);color:var(--muted);border:1px solid var(--border)}
+    .badge-publish{background:rgba(39,174,96,0.15);color:#6EE7B7;border:1px solid rgba(39,174,96,0.3)}
+    .badge-draft{background:rgba(245,158,11,0.15);color:#FDE08A;border:1px solid rgba(245,158,11,0.3)}
 
     /* ACTIONS */
     .act-row{display:flex;gap:6px;justify-content:flex-end}
@@ -158,6 +160,7 @@
     .act-dot.blue{background:var(--secondary)}
     .act-dot.amber{background:var(--warning)}
     .act-dot.red{background:var(--danger)}
+    .act-dot.gold{background:var(--gold)}
     .act-text{flex:1;font-size:0.83rem}
     .act-time{font-size:0.72rem;color:var(--muted)}
 
@@ -191,8 +194,10 @@
       <div class="nav-item" onclick="showTab('comments',this)"><i class="ti ti-message-dots" aria-hidden="true"></i> Comments</div>
       <div class="nav-item" onclick="showTab('posts',this)"><i class="ti ti-article" aria-hidden="true"></i> Posts</div>
     </nav>
+    <div class="nav-item" onclick="showTab('articles', this)">
+      <i class="ti ti-file-text"></i> Articles
+    </div>
     <div class="nav-divider"></div>
-    <div class="logout-wrap">
       <button class="logout-btn" onclick="handleLogout()"><i class="ti ti-logout" aria-hidden="true"></i> Logout</button>
     </div>
   </aside>
@@ -326,6 +331,40 @@
         </div>
       </div>
 
+      <!-- ARTICLES TAB -->
+      <div id="tab-articles" class="tab-pane">
+        <div class="section-head">
+          <div class="section-title">All articles</div>
+          <div class="section-count" id="articleCount">— total</div>
+        </div>
+        <div class="filters">
+          <span class="filter-label">Status:</span>
+          <select class="filter-select" id="articleStatusFilter" onchange="renderArticles()">
+            <option value="">All status</option>
+            <option value="published">Published</option>
+            <option value="draft">Draft</option>
+          </select>
+          <span class="filter-label">Category:</span>
+          <select class="filter-select" id="articleCategoryFilter" onchange="renderArticles()">
+            <option value="">All categories</option>
+          </select>
+          <input type="text" class="search-input" id="articleSearch" placeholder="Search title or author…" oninput="renderArticles()">
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr>
+              <th>Title</th><th>Author</th><th>Category</th><th>Status</th><th>Date</th><th style="text-align:right">Views</th><th style="text-align:right">Actions</th>
+            </tr></thead>
+            <tbody id="articlesTbody"></tbody>
+          </table>
+        </div>
+        <div class="pag">
+          <button class="pag-btn" id="articlePrev" onclick="changePage('articles',-1)" disabled>← Prev</button>
+          <span class="pag-info" id="articlePageInfo">Page 1</span>
+          <button class="pag-btn" id="articleNext" onclick="changePage('articles',1)">Next →</button>
+        </div>
+      </div>
+
       <!-- ROLE MODAL -->
       <div class="modal-overlay" id="roleModal">
         <div class="modal-box">
@@ -366,8 +405,8 @@ document.addEventListener('DOMContentLoaded', () => {
 let currentTab = 'dashboard';
 
 const state = {
-  users: [], comments: [], posts: [],
-  userPage: 1, commentPage: 1, postPage: 1,
+  users: [], comments: [], posts: [], articles: [],
+  userPage: 1, commentPage: 1, postPage: 1, articlePage: 1,
   modalUserId: null, modalCurrentRole: null
 };
 
@@ -397,6 +436,14 @@ const DEMO_POSTS = [
   {id:'p5',name:'विद्यापति गीत',title:'Vidyapati Geet',category:'geet',featured:false,createdAt:'2025-03-15T00:00:00',url:'https://shivmarg.live/vidyapati'},
   {id:'p6',name:'ॐ नमः शिवाय',title:'Om Namah Shivaya',category:'mantra',featured:true,createdAt:'2025-03-01T00:00:00',url:'https://shivmarg.live/om-namah-shivaya'},
 ];
+const DEMO_ARTICLES = [
+  {_id:'a1',title:'शिव आरती की महत्ता और लाभ',author:'shiva_admin',category:'आरती',status:'published',created_at:'2025-05-20T10:00:00',view_count:1250,slug:'shiv-aarti-importance'},
+  {_id:'a2',title:'महामृत्युंजय मंत्र का रहस्य',author:'dev_editor',category:'मंत्र',status:'published',created_at:'2025-05-18T14:30:00',view_count:890,slug:'maha-mrityunjaya-secret'},
+  {_id:'a3',title:'शिव चालीसा पाठ करने के लाभ',author:'shiva_admin',category:'चालीसा',status:'draft',created_at:'2025-05-15T09:15:00',view_count:0,slug:'shiv-chalisa-benefits'},
+  {_id:'a4',title:'रुद्राष्टकम् की व्याख्या',author:'ankit_v',category:'स्तोत्र',status:'published',created_at:'2025-05-10T16:45:00',view_count:650,slug:'rudrashtakam-explanation'},
+  {_id:'a5',title:'विद्यापति के गीत - परिचय और विश्लेषण',author:'dev_editor',category:'गीत',status:'published',created_at:'2025-05-05T11:20:00',view_count:450,slug:'vidyapati-geet-analysis'},
+  {_id:'a6',title:'ॐ नमः शिवाय - शक्तिशाली मंत्र',author:'shiva_admin',category:'मंत्र',status:'published',created_at:'2025-04-28T08:00:00',view_count:2100,slug:'om-namah-shivaya-powerful'},
+];
 
 function esc(s){if(!s)return'';return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function fmtDate(s){if(!s)return'—';const d=new Date(s);return d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}
@@ -411,7 +458,7 @@ async function apiFetch(path,opts={}){
 
 async function loadStats(){
   const data=await apiFetch('/api/admin/dashboard/stats');
-  const d=data||{total_users:DEMO_USERS.length,total_comments:DEMO_COMMENTS.length,total_posts:DEMO_POSTS.length,featured_posts:DEMO_POSTS.filter(p=>p.featured).length,recent_users_7d:2,recent_comments_7d:5};
+  const d=data||{total_users:DEMO_USERS.length,total_comments:DEMO_COMMENTS.length,total_posts:DEMO_POSTS.length,total_articles:DEMO_ARTICLES.length,featured_posts:DEMO_POSTS.filter(p=>p.featured).length,recent_users_7d:2,recent_comments_7d:5};
   document.getElementById('s-users').textContent=d.total_users;
   document.getElementById('s-comments').textContent=d.total_comments;
   document.getElementById('s-posts').textContent=d.total_posts;
@@ -423,6 +470,7 @@ async function loadStats(){
     {dot:'blue',text:`${d.recent_comments_7d} new comments`,time:'Last 7 days'},
     {dot:'amber',text:`${d.featured_posts} posts featured`,time:'Currently'},
     {dot:'blue',text:`${d.recent_users_7d} new users joined`,time:'Last 7 days'},
+    {dot:'gold',text:`${d.total_articles} articles published`,time:'Currently'},
   ];
   document.getElementById('activityList').innerHTML=acts.map(a=>`<div class="act-item"><div class="act-dot ${a.dot}"></div><div class="act-text">${a.text}</div><div class="act-time">${a.time}</div></div>`).join('');
 }
@@ -464,6 +512,12 @@ function getFiltered(type){
     const cat=document.getElementById('catFilter').value;
     const q=(document.getElementById('postSearch').value||'').toLowerCase();
     return state.posts.filter(p=>(!cat||p.category===cat)&&(!q||p.name.toLowerCase().includes(q)||(p.title||'').toLowerCase().includes(q)||p.category.toLowerCase().includes(q)));
+  }
+  if(type==='articles'){
+    const status=document.getElementById('articleStatusFilter').value;
+    const cat=document.getElementById('articleCategoryFilter').value;
+    const q=(document.getElementById('articleSearch').value||'').toLowerCase();
+    return state.articles.filter(a=>(!status||a.status===status)&&(!cat||a.category===cat)&&(!q||a.title.toLowerCase().includes(q)||a.author.toLowerCase().includes(q)));
   }
   return[];
 }
@@ -550,10 +604,54 @@ function _renderPosts(){
     </tr>`).join('');
 }
 
+async function loadArticles(){
+  const data=await apiFetch('/api/admin/articles?limit=100');
+  state.articles=(data&&data.articles)||DEMO_ARTICLES;
+  const cats=[...new Set(state.articles.map(a=>a.category).filter(Boolean))];
+  const sel=document.getElementById('articleCategoryFilter');
+  if(sel){
+    const currentCat=sel.value;
+    sel.innerHTML='<option value="">All categories</option>'+cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
+    sel.value=currentCat;
+  }
+  renderArticles();
+}
+
+function renderArticles(){
+  state.articlePage=1;
+  _renderArticles();
+}
+
+function _renderArticles(){
+  const filtered=getFiltered('articles');
+  const {items,page,total}=paginate(filtered,state.articlePage);
+  document.getElementById('articleCount').textContent=filtered.length+' total';
+  document.getElementById('articlePageInfo').textContent=`Page ${page} of ${total}`;
+  document.getElementById('articlePrev').disabled=page<=1;
+  document.getElementById('articleNext').disabled=page>=total;
+  const tbody=document.getElementById('articlesTbody');
+  if(!items.length){tbody.innerHTML=`<tr class="empty-row"><td colspan="7">No articles found</td></tr>`;return}
+  tbody.innerHTML=items.map(a=>`
+    <tr>
+      <td><strong>${esc(a.title)}</strong></td>
+      <td style="color:var(--muted)">${esc(a.author||'—')}</td>
+      <td style="color:var(--muted)">${esc(a.category||'—')}</td>
+      <td><span class="badge badge-${a.status==='published'?'publish':'draft'}">${a.status}</span></td>
+      <td style="color:var(--muted)">${fmtDate(a.created_at)}</td>
+      <td style="color:var(--muted); text-align:right">${a.view_count||0}</td>
+      <td><div class="act-row">
+        <a class="act-btn act-view" href="https://shivamarg.live/articles?slug=${esc(a.slug)}" target="_blank"><i class="ti ti-external-link" style="font-size:11px" aria-hidden="true"></i> View</a>
+        <button class="act-btn act-edit" onclick="alert('Edit functionality: Article ${esc(a.title)}')" style="cursor:pointer">Edit</button>
+        <button class="act-btn act-del" onclick="if(confirm('Delete article: ${esc(a.title)}?')){apiFetch('/api/admin/articles/${a._id}',{method:'DELETE'}).then(()=>{state.articles=state.articles.filter(x=>x._id!=='${a._id}');renderArticles();})}" style="cursor:pointer">Delete</button>
+      </div></td>
+    </tr>`).join('');
+}
+
 function changePage(type,dir){
   if(type==='users'){state.userPage+=dir;_renderUsers()}
   if(type==='comments'){state.commentPage+=dir;_renderComments()}
   if(type==='posts'){state.postPage+=dir;_renderPosts()}
+  if(type==='articles'){state.articlePage+=dir;_renderArticles()}
 }
 
 function showTab(tab,el){
@@ -562,11 +660,11 @@ function showTab(tab,el){
   document.getElementById('tab-'+tab).classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   if(el)el.classList.add('active');
-  const titles={dashboard:'Dashboard',users:'Manage users',comments:'Manage comments',posts:'Manage posts'};
+  const titles={dashboard:'Dashboard',users:'Manage users',comments:'Manage comments',posts:'Manage posts',articles:'Manage articles'};
   document.getElementById('pageTitle').textContent=titles[tab]||tab;
 }
 
-function refreshCurrent(){loadStats();if(currentTab==='users')loadUsers();else if(currentTab==='comments')loadComments();else if(currentTab==='posts')loadPosts();}
+function refreshCurrent(){loadStats();if(currentTab==='users')loadUsers();else if(currentTab==='comments')loadComments();else if(currentTab==='posts')loadPosts();else if(currentTab==='articles')loadArticles();}
 
 function openRoleModal(uid,uname,role){
   state.modalUserId=uid;
