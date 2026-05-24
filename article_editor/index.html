@@ -1116,7 +1116,7 @@
 
   function successRedirect() {
     if (window.articleSlug) {
-      window.location.href = `/articles.html?slug=${window.articleSlug}`;
+      window.location.href = `/articles?slug=${window.articleSlug}`;
     }
   }
 
@@ -1352,7 +1352,7 @@
   // ARTICLE ACTIONS
   // ─────────────────────────────────────────────
   function viewArticle(slug) {
-    window.open(`/articles.html?slug=${slug}`, '_blank');
+    window.open(`/articles?slug=${slug}`, '_blank');
   }
 
   function editArticle(articleId) {

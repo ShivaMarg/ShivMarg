@@ -781,7 +781,7 @@
       }
 
       el.innerHTML = json.articles.map(p => `
-        <a href="articles.html/?slug=${p.slug}" class="pop-card">
+        <a href="articles/?slug=${p.slug}" class="pop-card">
           <img src="${p.thumbnail_url || 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22%3E%3C/svg%3E'}" 
                alt="${p.title}" class="pop-thumb"
                onerror="this.style.background='var(--border)';this.style.display='none';">
@@ -812,7 +812,7 @@
       }
 
       el.innerHTML = json.articles.map(p => `
-        <a href="articles.html/?slug=${p.slug}" class="lat-item">
+        <a href="articles/?slug=${p.slug}" class="lat-item">
           <img src="${p.thumbnail_url || 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22%3E%3C/svg%3E'}" 
                alt="${p.title}" class="lat-thumb"
                onerror="this.style.background='var(--border)';this.style.display='none';">
