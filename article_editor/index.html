@@ -751,7 +751,7 @@
   // UTILITY: Local Storage & Auth
   // ─────────────────────────────────────────────
   function getToken() {
-    return localStorage.getItem('token') || null;
+    return localStorage.getItem('sm_token') || null;
   }
 
   function getCurrentUser() {
@@ -760,7 +760,7 @@
   }
 
   function logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem('sm_token');
     localStorage.removeItem('currentUser');
     window.location.href = '/';
   }
