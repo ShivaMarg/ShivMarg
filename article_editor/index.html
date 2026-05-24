@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>लेख लिखें | बेला</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- TinyMCE Rich Text Editor -->
+  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js"></script>
+
+  <style>
+    /* ── TOKENS ─────────────────────────────── */
+    :root {
+      --ink:       #1a1410;
+      --ink-soft:  #4a3f35;
+      --ink-muted: #8a7a6e;
+      --paper:     #faf8f5;
+      --paper-warm:#f5f0e8;
+      --accent:    #c0392b;
+      --accent-2:  #e8a87c;
+      --border:    #e2d9ce;
+      --success:   #27ae60;
+      --warning:   #f39c12;
+      --serif:     'Noto Serif Devanagari', 'Georgia', serif;
+      --display:   'Playfair Display', serif;
+      --mono:      'DM Mono', monospace;
+    }
+
+    /* ── RESET ──────────────────────────────– */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--serif);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ─────────────────────────────── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--ink);
+      border-bottom: 3px solid var(--accent);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+
+    .logo {
+      font-family: var(--display);
+      font-size: 1.5rem;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: .04em;
+    }
+    .logo span { color: var(--accent); }
+
+    nav.hdr-nav { display: flex; gap: 1.5rem; }
+    nav.hdr-nav a {
+      color: rgba(255,255,255,.7);
+      text-decoration: none;
+      font-size: .85rem;
+      font-family: var(--mono);
+      letter-spacing: .05em;
+      cursor: pointer;
+      transition: color .2s;
+    }
+    nav.hdr-nav a:hover { color: var(--accent-2); }
+
+    .hdr-actions { display: flex; gap: .75rem; align-items: center; }
+    .hdr-user {
+      color: rgba(255,255,255,.7);
+      font-family: var(--mono);
+      font-size: .8rem;
+    }
+    .btn-logout {
+      background: var(--accent); color: #fff;
+      border: none; padding: .4rem 1rem;
+      font-size: .8rem; font-family: var(--mono);
+      cursor: pointer; transition: opacity .2s;
+    }
+    .btn-logout:hover { opacity: .85; }
+
+    /* ── MAIN CONTAINER ─────────────────────── */
+    .editor-wrap {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* ── BREADCRUMB ─────────────────────────── */
+    .breadcrumb {
+      display: flex; gap: .5rem; align-items: center;
+      font-family: var(--mono); font-size: .75rem;
+      color: var(--ink-muted); margin-bottom: 2rem;
+    }
+    .breadcrumb a { color: var(--accent); text-decoration: none; cursor: pointer; }
+
+    /* ── PAGE TITLE ─────────────────────────– */
+    .editor-title {
+      font-family: var(--display);
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--ink);
+    }
+    .editor-subtitle {
+      color: var(--ink-muted);
+      font-family: var(--mono);
+      font-size: .85rem;
+      margin-bottom: 2rem;
+    }
+
+    /* ── FORM CONTAINER ─────────────────────── */
+    .editor-form {
+      background: #fff;
+      border: 1px solid var(--border);
+      padding: 2rem;
+      border-radius: 4px;
+    }
+
+    .form-section {
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .form-section:last-child {
+      border-bottom: none;
+    }
+
+    .form-section-title {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      color: var(--ink);
+      margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .form-section-icon {
+      font-size: 1.4rem;
+    }
+
+    /* ── FORM FIELDS ────────────────────────── */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: .5rem;
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: .85rem;
+      letter-spacing: .05em;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="number"],
+    .form-group input[type="url"],
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: .75rem 1rem;
+      border: 1px solid var(--border);
+      background: var(--paper-warm);
+      font-family: var(--serif);
+      font-size: .95rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(192, 57, 43, .1);
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-help {
+      font-family: var(--mono);
+      font-size: .75rem;
+      color: var(--ink-muted);
+      margin-top: .4rem;
+    }
+
+    /* ── TWO COLUMN LAYOUT ──────────────────– */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    @media (max-width: 700px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    /* ── TAG INPUT ──────────────────────────– */
+    .tag-input-wrap {
+      display: flex; gap: .5rem; flex-wrap: wrap;
+      margin-top: .5rem;
+      min-height: 40px;
+      padding: .5rem;
+      border: 1px solid var(--border);
+      background: var(--paper-warm);
+      border-radius: 2px;
+    }
+    .tag {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--accent);
+      color: #fff;
+      padding: .35rem .75rem;
+      border-radius: 2px;
+      font-size: .85rem;
+      font-family: var(--mono);
+    }
+    .tag button {
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0;
+      display: flex; align-items: center;
+    }
+    .tag-input-wrap input {
+      border: none;
+      background: transparent;
+      flex: 1;
+      min-width: 100px;
+      padding: .5rem 0;
+      outline: none;
+      font-family: var(--serif);
+      font-size: .95rem;
+    }
+
+    /* ── IMAGE UPLOAD ───────────────────────– */
+    .image-upload-area {
+      border: 2px dashed var(--border);
+      border-radius: 4px;
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all .2s;
+      background: var(--paper-warm);
+    }
+    .image-upload-area:hover {
+      border-color: var(--accent);
+      background: #fff;
+    }
+    .image-upload-area.dragover {
+      border-color: var(--accent);
+      background: rgba(192, 57, 43, .05);
+    }
+    .upload-icon { font-size: 2rem; margin-bottom: .5rem; }
+    .upload-text { color: var(--ink-muted); font-size: .9rem; }
+    .image-preview {
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 1rem;
+    }
+    .preview-item {
+      position: relative;
+      background: var(--border);
+      aspect-ratio: 1;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .preview-item .remove-btn {
+      position: absolute; top: 4px; right: 4px;
+      background: var(--accent); color: #fff;
+      border: none; width: 24px; height: 24px;
+      border-radius: 50%; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem;
+    }
+
+    /* ── EDITOR TOOLBAR ─────────────────────– */
+    .tox.tox-tinymce {
+      border: 1px solid var(--border) !important;
+      border-radius: 4px !important;
+    }
+    .tox .tox-toolbar {
+      background: var(--paper-warm) !important;
+      border-bottom: 1px solid var(--border) !important;
+    }
+    .tox .tox-tbtn:hover,
+    .tox .tox-tbtn--active {
+      background: rgba(192, 57, 43, .1) !important;
+    }
+
+    /* ── STATUS BAR ─────────────────────────– */
+    .status-bar {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem;
+      background: var(--paper-warm);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+      font-size: .9rem;
+    }
+    .status-badge {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .35rem .75rem;
+      border-radius: 2px;
+      font-family: var(--mono);
+      font-size: .8rem;
+      font-weight: 600;
+    }
+    .status-badge.draft {
+      background: var(--warning);
+      color: #fff;
+    }
+    .status-badge.published {
+      background: var(--success);
+      color: #fff;
+    }
+    .word-count {
+      margin-left: auto;
+      color: var(--ink-muted);
+      font-family: var(--mono);
+      font-size: .8rem;
+    }
+
+    /* ── ACTION BUTTONS ────────────────────── */
+    .form-actions {
+      display: flex; gap: 1rem; justify-content: flex-end;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .btn {
+      padding: .65rem 1.5rem;
+      border: none;
+      font-family: var(--mono);
+      font-size: .85rem;
+      letter-spacing: .05em;
+      cursor: pointer;
+      transition: all .2s;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .btn-secondary {
+      background: var(--border);
+      color: var(--ink);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      background: var(--ink-muted);
+      color: #fff;
+      border-color: var(--ink-muted);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: 1px solid var(--accent);
+    }
+    .btn-primary:hover {
+      opacity: .85;
+    }
+
+    .btn-success {
+      background: var(--success);
+      color: #fff;
+      border: 1px solid var(--success);
+    }
+    .btn-success:hover {
+      opacity: .85;
+    }
+
+    .btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    /* ── TOGGLE SWITCH ──────────────────────– */
+    .toggle-group {
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .toggle-switch {
+      position: relative;
+      width: 50px;
+      height: 28px;
+      background: var(--border);
+      border-radius: 14px;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .toggle-switch.active {
+      background: var(--success);
+    }
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: #fff;
+      border-radius: 50%;
+      top: 2px; left: 2px;
+      transition: left .2s;
+    }
+    .toggle-switch.active::after {
+      left: 24px;
+    }
+
+    /* ── MODAL ──────────────────────────────– */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal.show {
+      display: flex;
+    }
+    .modal-content {
+      background: #fff;
+      border-radius: 4px;
+      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 10px 40px rgba(0,0,0,.2);
+    }
+    .modal-title {
+      font-family: var(--display);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .modal-body {
+      margin-bottom: 1.5rem;
+      color: var(--ink-soft);
+    }
+    .modal-actions {
+      display: flex; gap: .75rem; justify-content: flex-end;
+    }
+
+    /* ── TOAST ──────────────────────────────– */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--ink);
+      color: #fff;
+      padding: 1rem 1.5rem;
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: .85rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all .3s;
+      pointer-events: none;
+      z-index: 999;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+    .toast.success {
+      background: var(--success);
+    }
+    .toast.error {
+      background: var(--accent);
+    }
+
+    /* ── PREVIEW PANEL ──────────────────────– */
+    .preview-panel {
+      position: fixed;
+      right: -400px;
+      top: 60px;
+      width: 400px;
+      height: calc(100vh - 60px);
+      background: #fff;
+      border-left: 1px solid var(--border);
+      overflow-y: auto;
+      transition: right .3s;
+      z-index: 99;
+      padding: 2rem;
+    }
+    .preview-panel.open {
+      right: 0;
+    }
+    .preview-title {
+      font-family: var(--display);
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+    .preview-meta {
+      font-family: var(--mono);
+      font-size: .75rem;
+      color: var(--ink-muted);
+      margin-bottom: 1.5rem;
+    }
+    .preview-content {
+      font-size: .9rem;
+      line-height: 1.6;
+      color: var(--ink-soft);
+    }
+
+    /* ── RESPONSIVE ─────────────────────────– */
+    @media (max-width: 900px) {
+      .editor-wrap { padding: 1.5rem 1rem; }
+      .editor-form { padding: 1.5rem; }
+      .form-actions { flex-direction: column-reverse; }
+      .btn { width: 100%; }
+      .preview-panel { width: 100%; right: -100%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ─────────────────────────────── -->
+<header>
+  <a href="/" class="logo">बेला<span>.</span></a>
+  <nav class="hdr-nav">
+    <a href="/">होम</a>
+    <a href="/" onclick="loadDrafts(); return false;">ड्राफ्ट्स</a>
+    <a href="/" onclick="loadArticles(); return false;">मेरे लेख</a>
+  </nav>
+  <div class="hdr-actions">
+    <span class="hdr-user" id="userDisplay">लॉड हो रहा है...</span>
+    <button class="btn-logout" onclick="logout()">लॉग आउट</button>
+  </div>
+</header>
+
+<!-- ── MAIN EDITOR ────────────────────────– -->
+<div class="editor-wrap">
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="/">बेला</a>
+    <span>›</span>
+    <span>नया लेख</span>
+  </div>
+
+  <!-- Title -->
+  <h1 class="editor-title">नया लेख लिखें</h1>
+  <p class="editor-subtitle">अपने विचार, ज्ञान और अनुभव साझा करें</p>
+
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <span class="status-badge draft" id="statusBadge">ड्राफ्ट</span>
+    <div class="word-count" id="wordCount">शब्द: 0</div>
+  </div>
+
+  <!-- Editor Form -->
+  <form class="editor-form" id="editorForm" onsubmit="submitArticle(event)">
+
+    <!-- ── BASIC INFO ─────────────────────– -->
+    <div class="form-section">
+      <h3 class="form-section-title">
+        <span class="form-section-icon">📝</span>
+        मूल जानकारी
+      </h3>
+
+      <div class="form-group">
+        <label for="title">लेख का शीर्षक *</label>
+        <input type="text" id="title" name="title" placeholder="जैसे: घर की जगह क्या होती है?"
+               maxlength="300" required onkeyup="updatePreview(); generateSlug();">
+        <div class="form-help">यह आपके लेख का मुख्य शीर्षक होगा</div>
+      </div>
+
+      <div class="form-group">
+        <label for="subtitle">उपशीर्षक</label>
+        <input type="text" id="subtitle" name="subtitle" placeholder="लेख का संक्षिप्त परिचय"
+               maxlength="150" onkeyup="updatePreview();">
+        <div class="form-help">वैकल्पिक। लेख की सूची में दिखेगा</div>
+      </div>
+
+      <div class="form-group">
+        <label for="excerpt">अंश (Excerpt) *</label>
+        <textarea id="excerpt" name="excerpt" placeholder="लेख का 2-3 लाइन का सारांश... यह सूची में दिखेगा"
+                  maxlength="200" required onkeyup="updatePreview();"></textarea>
+        <div class="form-help">सूची और सर्च में दिखने वाला छोटा विवरण</div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="category">श्रेणी (Category) *</label>
+          <select id="category" name="category" required onchange="generateCategorySlug(); updatePreview();">
+            <option value="">— चुनें —</option>
+            <option value="कविता">कविता</option>
+            <option value="गद्य">गद्य</option>
+            <option value="निबंध">निबंध</option>
+            <option value="आलोचना">आलोचना</option>
+            <option value="समीक्षा">समीक्षा</option>
+            <option value="अन्य">अन्य</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="readTime">पढ़ने का समय (मिनट में)</label>
+          <input type="number" id="readTime" name="readTime" min="1" max="60" value="5" onchange="updatePreview();">
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CONTENT ────────────────────────– -->
+    <div class="form-section">
+      <h3 class="form-section-title">
+        <span class="form-section-icon">✍️</span>
+        लेख की सामग्री
+      </h3>
+      <textarea id="content" name="content" placeholder="यहाँ अपना लेख लिखें..." 
+                onkeyup="updateWordCount(); updatePreview();"></textarea>
+      <div class="form-help">HTML tags का उपयोग कर सकते हैं। <strong>, <em>, <p>, <blockquote> आदि।</div>
+    </div>
+
+    <!-- ── MEDIA ──────────────────────────– -->
+    <div class="form-section">
+      <h3 class="form-section-title">
+        <span class="form-section-icon">🖼️</span>
+        बैनर और थंबनेल
+      </h3>
+
+      <div class="form-group">
+        <label for="bannerUrl">बैनर इमेज URL *</label>
+        <input type="url" id="bannerUrl" name="bannerUrl" placeholder="https://example.com/banner.jpg" required
+               onchange="updatePreview();">
+        <div class="form-help">लेख के ऊपर दिखने वाली बड़ी इमेज (अनुपात: 16:9 बेहतर है)</div>
+      </div>
+
+      <div class="form-group">
+        <label for="thumbnailUrl">थंबनेल इमेज URL</label>
+        <input type="url" id="thumbnailUrl" name="thumbnailUrl" placeholder="https://example.com/thumb.jpg"
+               onchange="updatePreview();">
+        <div class="form-help">सूची में दिखने वाली छोटी इमेज (अनुपात: 1:1 बेहतर है)</div>
+      </div>
+    </div>
+
+    <!-- ── METADATA ───────────────────────– -->
+    <div class="form-section">
+      <h3 class="form-section-title">
+        <span class="form-section-icon">🏷️</span>
+        टैग और विवरण
+      </h3>
+
+      <div class="form-group">
+        <label>टैग्स</label>
+        <div class="tag-input-wrap" id="tagInput">
+          <input type="text" id="tagField" placeholder="टैग दर्ज करें और Enter दबाएँ..." 
+                 onkeyup="handleTagInput(event);">
+        </div>
+        <div class="form-help">लेख को खोजने में मदद करने वाले कीवर्ड्स। Enter दबाएँ</div>
+      </div>
+
+      <div class="form-group">
+        <label for="slug">स्लग (URL) *</label>
+        <input type="text" id="slug" name="slug" placeholder="article-slug" required>
+        <div class="form-help">लेख का URL (स्वचालित रूप से जनरेट होता है)</div>
+      </div>
+    </div>
+
+    <!-- ── PUBLISH SETTINGS ──────────────── -->
+    <div class="form-section">
+      <h3 class="form-section-title">
+        <span class="form-section-icon">🚀</span>
+        प्रकाशन सेटिंग्स
+      </h3>
+
+      <div class="form-group toggle-group">
+        <label>तुरंत प्रकाशित करें?</label>
+        <div class="toggle-switch" id="publishToggle" onclick="togglePublish()"></div>
+        <span id="publishStatus">ड्राफ्ट में रहेगा</span>
+      </div>
+      <div class="form-help">आप बाद में ड्राफ्ट को संपादित और प्रकाशित कर सकते हैं</div>
+    </div>
+
+    <!-- ── ACTIONS ────────────────────────– -->
+    <div class="form-actions">
+      <button type="button" class="btn btn-secondary" onclick="window.history.back();">रद्द करें</button>
+      <button type="button" class="btn btn-secondary" id="previewBtn" onclick="togglePreview();">पूर्वावलोकन</button>
+      <button type="submit" class="btn btn-primary" id="saveDraftBtn">ड्राफ्ट सहेजें</button>
+      <button type="submit" class="btn btn-success" id="publishBtn" style="display:none;">प्रकाशित करें</button>
+    </div>
+  </form>
+</div>
+
+<!-- ── PREVIEW PANEL ──────────────────────– -->
+<div class="preview-panel" id="previewPanel">
+  <h2 class="preview-title" id="previewTitle">लेख का शीर्षक</h2>
+  <div class="preview-meta" id="previewMeta">कविता · 5 मिनट पढ़ें</div>
+  <div class="preview-content" id="previewContent">
+    यहाँ आपके लेख का पूर्वावलोकन दिखेगा
+  </div>
+</div>
+
+<!-- ── MODALS ─────────────────────────────– -->
+
+<!-- Confirm Publish Modal -->
+<div class="modal" id="publishModal">
+  <div class="modal-content">
+    <h2 class="modal-title">लेख को प्रकाशित करें?</h2>
+    <div class="modal-body">
+      <p>एक बार प्रकाशित होने के बाद, यह सबको दिखेगा। क्या आप निश्चित हैं?</p>
+      <p style="margin-top: 1rem; font-weight: 600;">
+        <span id="publishArticleTitle">लेख का शीर्षक</span>
+      </p>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal('publishModal')">रद्द करें</button>
+      <button class="btn btn-success" onclick="confirmPublish()">हाँ, प्रकाशित करें</button>
+    </div>
+  </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal" id="successModal">
+  <div class="modal-content">
+    <h2 class="modal-title">✓ सफल!</h2>
+    <div class="modal-body" id="successMessage">
+      लेख सफलतापूर्वक सहेजा गया।
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-primary" onclick="successRedirect()">लेख देखें</button>
+      <button class="btn btn-secondary" onclick="successNew()">नया लेख लिखें</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── TOAST ──────────────────────────────– -->
+<div class="toast" id="toast"></div>
+
+<!-- ── JAVASCRIPT ──────────────────────────– -->
+<script>
+  // ─────────────────────────────────────────────
+  // CONFIG & STATE
+  // ─────────────────────────────────────────────
+  const API_BASE = 'http://localhost:8000'; // Change for production
+  let currentUser = null;
+  let isPublishing = false;
+  let tags = [];
+
+  // ─────────────────────────────────────────────
+  // UTILITY: Local Storage & Auth
+  // ─────────────────────────────────────────────
+  function getToken() {
+    return localStorage.getItem('token') || null;
+  }
+
+  function getCurrentUser() {
+    const user = localStorage.getItem('currentUser');
+    return user ? JSON.parse(user) : null;
+  }
+
+  function logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('currentUser');
+    window.location.href = '/';
+  }
+
+  // ─────────────────────────────────────────────
+  // INIT: Check Auth & Load User
+  // ─────────────────────────────────────────────
+  async function initPage() {
+    const token = getToken();
+    if (!token) {
+      window.location.href = '/'; // Redirect to login
+      return;
+    }
+
+    currentUser = getCurrentUser();
+    if (!currentUser) {
+      try {
+        const res = await fetch(`${API_BASE}/api/auth/me`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (!res.ok) throw new Error('Unauthorized');
+        currentUser = await res.json();
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      } catch(e) {
+        logout();
+        return;
+      }
+    }
+
+    document.getElementById('userDisplay').textContent = `${currentUser.display_name || currentUser.username}`;
+
+    // Initialize TinyMCE
+    initEditor();
+
+    // Auto-save to localStorage every 30 seconds
+    setInterval(autoSave, 30000);
+    
+    // Load saved draft if exists
+    loadDraftFromStorage();
+  }
+
+  // ─────────────────────────────────────────────
+  // TINYMCE EDITOR INIT
+  // ─────────────────────────────────────────────
+  function initEditor() {
+    tinymce.init({
+      selector: '#content',
+      height: 500,
+      plugins: [
+        'advlist', 'autolink', 'lists', 'link', 'image', 
+        'charmap', 'preview', 'anchor', 'searchreplace', 'visualblocks',
+        'code', 'fullscreen', 'insertdatetime', 'media', 'table', 'help', 'wordcount'
+      ],
+      toolbar: 'undo redo | formatselect | bold italic underline strikethrough | ' +
+        'alignleft aligncenter alignright alignjustify | ' +
+        'bullist numlist outdent indent | link image media | ' +
+        'blockquote code | removeformat | help',
+      content_css: 'default',
+      body_class: 'mce-content-body',
+      content_style: `
+        body { font-family: 'Noto Serif Devanagari', Georgia, serif; font-size: 16px; line-height: 1.8; }
+        p { margin-bottom: 15px; }
+        h1, h2, h3 { margin: 20px 0 10px; }
+        blockquote { border-left: 4px solid #c0392b; padding: 15px; margin: 20px 0; background: #f5f0e8; }
+      `,
+      setup: function(editor) {
+        editor.on('change', function() {
+          updateWordCount();
+          updatePreview();
+        });
+      }
+    });
+  }
+
+  // ─────────────────────────────────────────────
+  // WORD COUNT
+  // ─────────────────────────────────────────────
+  function updateWordCount() {
+    const editor = tinymce.get('content');
+    const text = editor ? editor.getContent({ format: 'text' }) : '';
+    const words = text.trim().split(/\s+/).filter(w => w.length > 0).length;
+    document.getElementById('wordCount').textContent = `शब्द: ${words}`;
+  }
+
+  // ─────────────────────────────────────────────
+  // SLUG GENERATION
+  // ─────────────────────────────────────────────
+  function generateSlug() {
+    const title = document.getElementById('title').value;
+    if (!title) return;
+    
+    // Slug: transliterate Hindi to ASCII-friendly, lowercase, hyphens
+    let slug = title
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .slice(0, 60);
+    
+    document.getElementById('slug').value = slug;
+  }
+
+  function generateCategorySlug() {
+    const category = document.getElementById('category').value;
+    // Store internally but user only sees category name
+  }
+
+  // ─────────────────────────────────────────────
+  // TAG HANDLING
+  // ─────────────────────────────────────────────
+  function handleTagInput(e) {
+    if (e.key === 'Enter' && e.target.value.trim()) {
+      e.preventDefault();
+      const tag = e.target.value.trim();
+      if (!tags.includes(tag)) {
+        tags.push(tag);
+        renderTags();
+        e.target.value = '';
+      }
+    }
+  }
+
+  function removeTag(tag) {
+    tags = tags.filter(t => t !== tag);
+    renderTags();
+  }
+
+  function renderTags() {
+    const wrapper = document.getElementById('tagInput');
+    const input = wrapper.querySelector('input');
+    wrapper.innerHTML = '';
+    
+    tags.forEach(tag => {
+      const el = document.createElement('span');
+      el.className = 'tag';
+      el.innerHTML = `${tag} <button type="button" onclick="removeTag('${tag}')">×</button>`;
+      wrapper.appendChild(el);
+    });
+
+    wrapper.appendChild(input);
+  }
+
+  // ─────────────────────────────────────────────
+  // PREVIEW
+  // ─────────────────────────────────────────────
+  function updatePreview() {
+    const title = document.getElementById('title').value || 'लेख का शीर्षक';
+    const category = document.getElementById('category').value || 'श्रेणी';
+    const readTime = document.getElementById('readTime').value || 5;
+    const excerpt = document.getElementById('excerpt').value || 'यहाँ अंश दिखेगा';
+    const editor = tinymce.get('content');
+    const content = editor ? editor.getContent() : '';
+
+    document.getElementById('previewTitle').textContent = title;
+    document.getElementById('previewMeta').textContent = `${category} · ${readTime} मिनट पढ़ें`;
+    document.getElementById('previewContent').innerHTML = content ? content.substring(0, 300) + '...' : excerpt;
+
+    updatePreviewInList();
+  }
+
+  function togglePreview() {
+    document.getElementById('previewPanel').classList.toggle('open');
+  }
+
+  // ─────────────────────────────────────────────
+  // PUBLISH TOGGLE
+  // ─────────────────────────────────────────────
+  function togglePublish() {
+    const toggle = document.getElementById('publishToggle');
+    const status = document.getElementById('publishStatus');
+    const badge = document.getElementById('statusBadge');
+    const saveDraftBtn = document.getElementById('saveDraftBtn');
+    const publishBtn = document.getElementById('publishBtn');
+
+    toggle.classList.toggle('active');
+    
+    if (toggle.classList.contains('active')) {
+      status.textContent = 'तुरंत प्रकाशित होगा';
+      badge.className = 'status-badge published';
+      badge.textContent = 'प्रकाशित';
+      saveDraftBtn.style.display = 'none';
+      publishBtn.style.display = 'inline-block';
+    } else {
+      status.textContent = 'ड्राफ्ट में रहेगा';
+      badge.className = 'status-badge draft';
+      badge.textContent = 'ड्राफ्ट';
+      saveDraftBtn.style.display = 'inline-block';
+      publishBtn.style.display = 'none';
+    }
+    isPublishing = toggle.classList.contains('active');
+  }
+
+  // ─────────────────────────────────────────────
+  // FORM SUBMISSION
+  // ─────────────────────────────────────────────
+  async function submitArticle(e) {
+    e.preventDefault();
+
+    const token = getToken();
+    if (!token) {
+      showToast('पहले लॉगिन करें', 'error');
+      return;
+    }
+
+    // Validate
+    const title = document.getElementById('title').value.trim();
+    const excerpt = document.getElementById('excerpt').value.trim();
+    const category = document.getElementById('category').value;
+    const bannerUrl = document.getElementById('bannerUrl').value.trim();
+    const slug = document.getElementById('slug').value.trim();
+    const editor = tinymce.get('content');
+    const content = editor ? editor.getContent() : '';
+
+    if (!title || !excerpt || !category || !bannerUrl || !slug || !content) {
+      showToast('कृपया सभी आवश्यक फील्ड भरें (*)', 'error');
+      return;
+    }
+
+    // Prepare payload
+    const payload = {
+      title,
+      subtitle: document.getElementById('subtitle').value.trim() || null,
+      content,
+      excerpt,
+      banner_url: bannerUrl,
+      thumbnail_url: document.getElementById('thumbnailUrl').value.trim() || null,
+      category,
+      category_slug: slug.split('-')[0] || category.toLowerCase(),
+      tags,
+      status: isPublishing ? 'published' : 'draft',
+      read_time: parseInt(document.getElementById('readTime').value) || 5,
+      slug
+    };
+
+    try {
+      const btn = e.target.querySelector('button[type="submit"]');
+      const originalText = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'भेजा जा रहा है...';
+
+      const res = await fetch(`${API_BASE}/api/articles`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.detail || 'कुछ गड़बड़ हुई');
+      }
+
+      const article = await res.json();
+
+      // Clear localStorage draft
+      localStorage.removeItem('articleDraft');
+
+      // Show success
+      const statusText = isPublishing ? 'प्रकाशित' : 'ड्राफ्ट में सहेजा';
+      showToast(`लेख ${statusText} हो गया!`, 'success');
+
+      // Show success modal
+      document.getElementById('successMessage').textContent = 
+        `आपका लेख "${title}" ${statusText.toLowerCase()} हो गया।`;
+      document.getElementById('publishArticleTitle').textContent = title;
+      openModal('successModal');
+
+      // Store for redirect
+      window.articleSlug = article.slug;
+
+    } catch(e) {
+      showToast(e.message || 'लेख नहीं भेजा जा सका', 'error');
+      console.error(e);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = originalText;
+    }
+  }
+
+  // ─────────────────────────────────────────────
+  // MODALS
+  // ─────────────────────────────────────────────
+  function openModal(id) {
+    document.getElementById(id).classList.add('show');
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('show');
+  }
+
+  function confirmPublish() {
+    closeModal('publishModal');
+    document.getElementById('publishBtn').click();
+  }
+
+  function successRedirect() {
+    if (window.articleSlug) {
+      window.location.href = `article.html?slug=${window.articleSlug}`;
+    }
+  }
+
+  function successNew() {
+    document.getElementById('editorForm').reset();
+    tags = [];
+    renderTags();
+    updateWordCount();
+    updatePreview();
+    if (tinymce.get('content')) {
+      tinymce.get('content').setContent('');
+    }
+    closeModal('successModal');
+  }
+
+  // ─────────────────────────────────────────────
+  // AUTO-SAVE
+  // ─────────────────────────────────────────────
+  function autoSave() {
+    const editor = tinymce.get('content');
+    const draft = {
+      title: document.getElementById('title').value,
+      subtitle: document.getElementById('subtitle').value,
+      content: editor ? editor.getContent() : '',
+      excerpt: document.getElementById('excerpt').value,
+      category: document.getElementById('category').value,
+      bannerUrl: document.getElementById('bannerUrl').value,
+      thumbnailUrl: document.getElementById('thumbnailUrl').value,
+      readTime: document.getElementById('readTime').value,
+      tags,
+      slug: document.getElementById('slug').value,
+      isPublishing,
+      savedAt: new Date().toLocaleString('hi-IN')
+    };
+    localStorage.setItem('articleDraft', JSON.stringify(draft));
+  }
+
+  function loadDraftFromStorage() {
+    const draft = localStorage.getItem('articleDraft');
+    if (!draft) return;
+
+    try {
+      const data = JSON.parse(draft);
+      document.getElementById('title').value = data.title || '';
+      document.getElementById('subtitle').value = data.subtitle || '';
+      document.getElementById('excerpt').value = data.excerpt || '';
+      document.getElementById('category').value = data.category || '';
+      document.getElementById('bannerUrl').value = data.bannerUrl || '';
+      document.getElementById('thumbnailUrl').value = data.thumbnailUrl || '';
+      document.getElementById('readTime').value = data.readTime || 5;
+      document.getElementById('slug').value = data.slug || '';
+      tags = data.tags || [];
+      renderTags();
+
+      // Restore editor content
+      setTimeout(() => {
+        const editor = tinymce.get('content');
+        if (editor && data.content) {
+          editor.setContent(data.content);
+        }
+      }, 1000);
+
+      if (data.isPublishing) {
+        document.getElementById('publishToggle').click();
+      }
+
+      showToast(`ड्राफ्ट लोड हुया: ${data.savedAt}`, 'success');
+    } catch(e) {
+      console.error('Error loading draft:', e);
+    }
+  }
+
+  function updatePreviewInList() {
+    // Can add live preview of what will show in article list
+  }
+
+  // ─────────────────────────────────────────────
+  // TOAST NOTIFICATIONS
+  // ─────────────────────────────────────────────
+  function showToast(msg, type = 'info') {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.className = `toast show ${type}`;
+    setTimeout(() => toast.classList.remove('show'), 3000);
+  }
+
+  // ─────────────────────────────────────────────
+  // HELPER: Load Drafts/Articles (placeholders)
+  // ─────────────────────────────────────────────
+  function loadDrafts() {
+    showToast('ड्राफ्ट्स पेज (जल्द आ रहा है)', 'info');
+  }
+
+  function loadArticles() {
+    showToast('मेरे लेख पेज (जल्द आ रहा है)', 'info');
+  }
+
+  // ─────────────────────────────────────────────
+  // INIT ON PAGE LOAD
+  // ─────────────────────────────────────────────
+  window.addEventListener('DOMContentLoaded', initPage);
+</script>
+</body>
+</html>
