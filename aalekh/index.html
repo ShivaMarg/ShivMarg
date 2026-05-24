@@ -1,0 +1,476 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=DM+Serif+Display:ital@0;1&family=Lato:wght@300;400;700&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --saffron:#D4570A;
+  --saffron-light:#F5E8DC;
+  --saffron-mid:#E8A06A;
+  --ink:#1A1208;
+  --ink-mid:#4A3B2A;
+  --ink-muted:#8C7B68;
+  --paper:#FAF7F2;
+  --paper2:#F2EDE4;
+  --paper3:#E8E0D4;
+  --leaf:#2D6A4F;
+  --leaf-light:#D8EDD6;
+  --indigo:#2C3E7A;
+  --line:rgba(74,59,42,0.15);
+}
+
+body{font-family:'Lato',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh}
+
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+
+/* HEADER */
+.site-header{background:var(--paper);border-bottom:1px solid var(--line);padding:0 2rem;position:sticky;top:0;z-index:100}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;height:60px}
+.site-logo{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--saffron);letter-spacing:-0.5px;text-decoration:none;flex-shrink:0}
+.site-logo span{color:var(--ink);font-style:italic}
+.header-tagline{font-size:0.72rem;color:var(--ink-muted);letter-spacing:2px;text-transform:uppercase;border-left:1px solid var(--line);padding-left:1rem;flex-shrink:0}
+.header-nav{display:flex;gap:0;margin-left:auto}
+.header-nav a{font-size:0.8rem;color:var(--ink-mid);text-decoration:none;padding:0.3rem 0.7rem;border-radius:4px;transition:all .15s;letter-spacing:.3px}
+.header-nav a:hover{background:var(--saffron-light);color:var(--saffron)}
+.header-search{width:32px;height:32px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink-muted);font-size:14px;transition:all .15s}
+.header-search:hover{border-color:var(--saffron);color:var(--saffron)}
+
+/* DATELINE */
+.dateline{background:var(--saffron);color:white;text-align:center;font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;padding:0.35rem;font-weight:700}
+
+/* MAIN LAYOUT */
+.site-main{max-width:1200px;margin:0 auto;padding:2rem}
+
+/* SECTION LABEL */
+.section-label{display:inline-flex;align-items:center;gap:8px;font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--saffron);font-weight:700;margin-bottom:1.2rem}
+.section-label::before{content:'';display:block;width:20px;height:2px;background:var(--saffron)}
+
+/* HERO — top featured */
+.hero-grid{display:grid;grid-template-columns:1fr 380px;gap:2rem;margin-bottom:3rem;padding-bottom:2.5rem;border-bottom:1px solid var(--line)}
+.hero-main{display:flex;flex-direction:column;justify-content:flex-end}
+.hero-img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:4px;display:block;background:var(--paper2)}
+.hero-img-placeholder{width:100%;aspect-ratio:16/9;border-radius:4px;background:linear-gradient(135deg,var(--paper2) 0%,var(--paper3) 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hero-img-placeholder::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(74,59,42,0.03) 10px,rgba(74,59,42,0.03) 20px)}
+.hero-kite{color:var(--saffron-mid);font-size:4rem;opacity:.4;font-family:'Tiro Devanagari Hindi',serif}
+.hero-badge{display:inline-block;background:var(--saffron);color:white;font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;border-radius:2px;margin:1rem 0 0.6rem;font-weight:700}
+.hero-title{font-family:'Tiro Devanagari Hindi',serif;font-size:2rem;line-height:1.35;color:var(--ink);margin-bottom:.6rem}
+.hero-excerpt{font-size:0.9rem;color:var(--ink-muted);line-height:1.7;margin-bottom:.8rem}
+.hero-meta{display:flex;align-items:center;gap:.8rem;font-size:.75rem;color:var(--ink-muted)}
+.hero-meta .dot{width:3px;height:3px;border-radius:50%;background:var(--saffron-mid);display:inline-block}
+.hero-author{font-weight:700;color:var(--ink-mid)}
+
+/* SIDEBAR STACK */
+.hero-sidebar{display:flex;flex-direction:column;gap:1.2rem}
+.side-article{display:grid;grid-template-columns:90px 1fr;gap:.8rem;padding-bottom:1.2rem;border-bottom:1px solid var(--line);cursor:pointer;transition:opacity .15s}
+.side-article:last-child{border-bottom:none;padding-bottom:0}
+.side-article:hover{opacity:.75}
+.side-thumb{width:90px;height:70px;object-fit:cover;border-radius:3px;background:var(--paper2);flex-shrink:0}
+.side-thumb-ph{width:90px;height:70px;border-radius:3px;background:var(--paper3);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--ink-muted);flex-shrink:0}
+.side-cat{font-size:0.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--saffron);font-weight:700;display:block;margin-bottom:3px}
+.side-title{font-family:'Tiro Devanagari Hindi',serif;font-size:.88rem;line-height:1.45;color:var(--ink)}
+.side-date{font-size:.7rem;color:var(--ink-muted);margin-top:4px;display:block}
+
+/* CATEGORY TABS */
+.cat-tabs{display:flex;gap:.3rem;margin-bottom:2rem;flex-wrap:wrap}
+.cat-tab{font-size:.75rem;padding:.35rem .9rem;border:1px solid var(--line);border-radius:20px;cursor:pointer;color:var(--ink-mid);background:transparent;font-family:'Lato',sans-serif;transition:all .15s;letter-spacing:.3px}
+.cat-tab:hover,.cat-tab.active{background:var(--saffron);border-color:var(--saffron);color:white}
+
+/* MAIN FEED GRID */
+.feed-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;margin-bottom:3rem}
+.feed-card{cursor:pointer;transition:transform .2s}
+.feed-card:hover{transform:translateY(-2px)}
+.feed-card:hover .feed-card-title{color:var(--saffron)}
+.feed-thumb{width:100%;aspect-ratio:3/2;border-radius:4px;object-fit:cover;display:block;background:var(--paper2);margin-bottom:.8rem}
+.feed-thumb-ph{width:100%;aspect-ratio:3/2;border-radius:4px;background:var(--paper3);display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:var(--ink-muted);margin-bottom:.8rem;position:relative;overflow:hidden}
+.feed-thumb-ph::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 8px,rgba(74,59,42,0.04) 8px,rgba(74,59,42,0.04) 16px)}
+.feed-cat-badge{font-size:.6rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--saffron);font-weight:700;display:block;margin-bottom:.3rem}
+.feed-card-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1.05rem;line-height:1.45;color:var(--ink);transition:color .15s;margin-bottom:.4rem}
+.feed-excerpt{font-size:.82rem;color:var(--ink-muted);line-height:1.6;margin-bottom:.5rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.feed-meta{display:flex;align-items:center;gap:.6rem;font-size:.72rem;color:var(--ink-muted)}
+.feed-tag{font-size:.63rem;background:var(--paper2);border:1px solid var(--line);padding:2px 7px;border-radius:2px;color:var(--ink-muted)}
+
+/* DIVIDER SECTION */
+.section-divider{border:none;border-top:1px solid var(--line);margin:2.5rem 0}
+.section-head{display:flex;align-items:center;gap:1rem;margin-bottom:1.8rem}
+.section-head h2{font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--ink);font-weight:400}
+.section-head-line{flex:1;height:1px;background:var(--line)}
+.section-head-more{font-size:.72rem;color:var(--saffron);letter-spacing:1px;text-decoration:none;text-transform:uppercase;font-weight:700;flex-shrink:0}
+
+/* BELA-STYLE WIDE CARDS */
+.wide-cards{display:flex;flex-direction:column;gap:0}
+.wide-card{display:grid;grid-template-columns:120px 1fr 80px;gap:1rem;padding:1.2rem 0;border-bottom:1px solid var(--line);cursor:pointer;transition:opacity .15s;align-items:start}
+.wide-card:last-child{border-bottom:none}
+.wide-card:hover{opacity:.75}
+.wide-card-num{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--paper3);font-weight:400;line-height:1;padding-top:4px;text-align:center}
+.wide-card-body .cat{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--leaf);font-weight:700;margin-bottom:3px}
+.wide-card-body h3{font-family:'Tiro Devanagari Hindi',serif;font-size:.95rem;line-height:1.45;color:var(--ink);margin-bottom:.3rem}
+.wide-card-body .exc{font-size:.8rem;color:var(--ink-muted);line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.wide-card-body .meta{font-size:.68rem;color:var(--ink-muted);margin-top:.4rem}
+.wide-card-read{font-size:.65rem;color:var(--ink-muted);letter-spacing:.5px;padding-top:4px;text-align:right}
+
+/* TWO-COL BOTTOM */
+.bottom-grid{display:grid;grid-template-columns:2fr 1fr;gap:3rem;margin-top:1rem}
+
+/* CINEMA / SCIENCE HIGHLIGHT */
+.highlight-card{background:var(--ink);border-radius:6px;padding:1.8rem;position:relative;overflow:hidden;cursor:pointer;transition:opacity .15s}
+.highlight-card::before{content:'';position:absolute;top:-20px;right:-20px;width:120px;height:120px;border-radius:50%;background:rgba(212,87,10,.15)}
+.highlight-card:hover{opacity:.9}
+.highlight-cat{font-size:.62rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--saffron-mid);font-weight:700;margin-bottom:.5rem}
+.highlight-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1.25rem;color:white;line-height:1.4;margin-bottom:.6rem}
+.highlight-exc{font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.6;margin-bottom:.8rem}
+.highlight-link{font-size:.75rem;color:var(--saffron-mid);font-weight:700;letter-spacing:.5px;text-transform:uppercase;display:inline-flex;align-items:center;gap:4px}
+
+/* SIDEBAR WIDGETS */
+.widget{margin-bottom:2rem}
+.widget-title{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--ink);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--saffron);display:inline-block;font-weight:400}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:.4rem}
+.tag-pill{font-size:.72rem;padding:.3rem .75rem;border:1px solid var(--line);border-radius:20px;color:var(--ink-mid);cursor:pointer;transition:all .15s;font-family:'Lato',sans-serif}
+.tag-pill:hover{background:var(--saffron-light);border-color:var(--saffron-mid);color:var(--saffron)}
+.newsletter-box{background:var(--saffron-light);border-radius:6px;padding:1.2rem}
+.newsletter-box h4{font-family:'Tiro Devanagari Hindi',serif;font-size:1rem;color:var(--saffron);margin-bottom:.4rem}
+.newsletter-box p{font-size:.78rem;color:var(--ink-mid);line-height:1.6;margin-bottom:.8rem}
+.newsletter-input{width:100%;padding:.5rem .75rem;border:1px solid var(--saffron-mid);border-radius:4px;font-size:.82rem;background:white;color:var(--ink);outline:none;margin-bottom:.5rem;font-family:'Lato',sans-serif}
+.newsletter-btn{width:100%;padding:.5rem;background:var(--saffron);color:white;border:none;border-radius:4px;font-size:.8rem;font-weight:700;letter-spacing:.5px;cursor:pointer;font-family:'Lato',sans-serif;transition:opacity .15s}
+.newsletter-btn:hover{opacity:.85}
+
+/* FOOTER */
+.site-footer{background:var(--ink);color:rgba(255,255,255,.7);padding:3rem 2rem 1.5rem;margin-top:4rem}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-brand{font-family:'DM Serif Display',serif;font-size:1.8rem;color:white;margin-bottom:.3rem}
+.footer-brand span{color:var(--saffron-mid);font-style:italic}
+.footer-tagline{font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:2rem}
+.footer-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;padding:2rem 0;border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:1.5rem}
+.footer-col h4{font-size:.7rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.8rem}
+.footer-col a{display:block;font-size:.82rem;color:rgba(255,255,255,.6);text-decoration:none;padding:2px 0;transition:color .15s}
+.footer-col a:hover{color:var(--saffron-mid)}
+.footer-copy{font-size:.75rem;color:rgba(255,255,255,.35);text-align:center}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .feed-grid{grid-template-columns:1fr 1fr}
+  .bottom-grid{grid-template-columns:1fr}
+  .footer-cols{grid-template-columns:1fr 1fr}
+  .wide-card{grid-template-columns:60px 1fr}
+  .wide-card-read{display:none}
+}
+@media(max-width:600px){
+  .feed-grid{grid-template-columns:1fr}
+  .header-nav{display:none}
+  .header-tagline{display:none}
+  .hero-title{font-size:1.5rem}
+}
+</style>
+
+<h2 class="sr-only">ShivaMarg — Hindi literary magazine homepage showcasing latest articles, kavitas, stories, and more</h2>
+
+<div class="dateline">रचना · विचार · कला · संस्कृति</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#" class="site-logo">शिव<span>मार्ग</span></a>
+    <span class="header-tagline">साहित्य का सफ़र</span>
+    <nav class="header-nav">
+      <a href="#">बेला</a>
+      <a href="#">कविता</a>
+      <a href="#">कहानी</a>
+      <a href="#">सिनेमा</a>
+      <a href="#">विज्ञान</a>
+      <a href="#">विचार</a>
+    </nav>
+    <div class="header-search"><i class="ti ti-search" aria-hidden="true"></i></div>
+  </div>
+</header>
+
+<main class="site-main">
+
+  <!-- HERO -->
+  <div class="section-label">आज का विशेष</div>
+  <div class="hero-grid">
+    <div class="hero-main">
+      <div class="hero-img-placeholder"><span class="hero-kite">ॐ</span></div>
+      <span class="hero-badge">कविता</span>
+      <h1 class="hero-title">जब पक्षी लौटते हैं उसी डाल पर<br>जहाँ उनका घोंसला था कभी</h1>
+      <p class="hero-excerpt">एक कवि की आत्मा का संवाद उस स्मृति से जो न मिटती है, न पूरी होती है — बस तैरती रहती है समय की नदी में।</p>
+      <div class="hero-meta">
+        <span class="hero-author">अविनाश मिश्र</span>
+        <span class="dot"></span>
+        <span>24 मई 2026</span>
+        <span class="dot"></span>
+        <span>5 मिनट</span>
+      </div>
+    </div>
+    <div class="hero-sidebar">
+      <div class="section-label" style="margin-bottom:.8rem">और पढ़ें</div>
+      <article class="side-article">
+        <div class="side-thumb-ph"><i class="ti ti-movie" aria-hidden="true"></i></div>
+        <div>
+          <span class="side-cat">सिनेमा</span>
+          <div class="side-title">इरफ़ान की क़ब्र पर 25 साल पुराना फूल</div>
+          <span class="side-date">19 मई 2026</span>
+        </div>
+      </article>
+      <article class="side-article">
+        <div class="side-thumb-ph"><i class="ti ti-book" aria-hidden="true"></i></div>
+        <div>
+          <span class="side-cat">किताबें</span>
+          <div class="side-title">देह की देहरी पर परिवार और समाज का पहरा</div>
+          <span class="side-date">18 मई 2026</span>
+        </div>
+      </article>
+      <article class="side-article">
+        <div class="side-thumb-ph"><i class="ti ti-device-tv" aria-hidden="true"></i></div>
+        <div>
+          <span class="side-cat">AI · तकनीक</span>
+          <div class="side-title">कॉमनवेल्थ विजेता कहानी पर AI की परछाईं</div>
+          <span class="side-date">21 मई 2026</span>
+        </div>
+      </article>
+      <article class="side-article">
+        <div class="side-thumb-ph"><i class="ti ti-map-pin" aria-hidden="true"></i></div>
+        <div>
+          <span class="side-cat">स्मृतिलोक</span>
+          <div class="side-title">फ़ीफ़ा, मैकडॉनल्ड्स और बीस साल पहले का इलाहाबाद</div>
+          <span class="side-date">22 मई 2026</span>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- CATEGORY FILTER -->
+  <div class="cat-tabs">
+    <button class="cat-tab active">सभी</button>
+    <button class="cat-tab">कविता</button>
+    <button class="cat-tab">कहानी</button>
+    <button class="cat-tab">निबंध</button>
+    <button class="cat-tab">सिनेमा</button>
+    <button class="cat-tab">विज्ञान</button>
+    <button class="cat-tab">AI</button>
+    <button class="cat-tab">संगीत</button>
+    <button class="cat-tab">लोक</button>
+    <button class="cat-tab">विचार</button>
+  </div>
+
+  <!-- FEED GRID -->
+  <div class="feed-grid">
+
+    <article class="feed-card">
+      <div class="feed-thumb-ph"><i class="ti ti-music" aria-hidden="true"></i></div>
+      <span class="feed-cat-badge">लोक · संगीत</span>
+      <h3 class="feed-card-title">DJ वाले बाबू आजकल बिहार में जो बजा रहे हैं…</h3>
+      <p class="feed-excerpt">अगर किसी विदेशी शोधार्थी को बिहार का समकालीन समाज समझाना हो तो उसे एक क़स्बाई शादी में भेजना पसंद करूँगा।</p>
+      <div class="feed-meta">
+        <span>कुमार केशव</span>
+        <span class="feed-tag">युवा</span>
+        <span class="feed-tag">गाँव</span>
+      </div>
+    </article>
+
+    <article class="feed-card">
+      <div class="feed-thumb-ph"><i class="ti ti-feather" aria-hidden="true"></i></div>
+      <span class="feed-cat-badge">रविवासरीय · कविता</span>
+      <h3 class="feed-card-title">कविता और उसके संपादक — रविवासरीय 4.0</h3>
+      <p class="feed-excerpt">एक बार की बात है — 'कथानक' नामधारी एक पत्रिका ने अपना कविता-विशेषांक घोषित किया।</p>
+      <div class="feed-meta">
+        <span>अविनाश मिश्र</span>
+        <span class="feed-tag">आलोचना</span>
+      </div>
+    </article>
+
+    <article class="feed-card">
+      <div class="feed-thumb-ph"><i class="ti ti-home" aria-hidden="true"></i></div>
+      <span class="feed-cat-badge">शनिवारेर चिट्ठी</span>
+      <h3 class="feed-card-title">घर की जगह — एक पत्र</h3>
+      <p class="feed-excerpt">मनुष्य अपने घर के बारे में सबसे कम तब सोचता है जब वह उसका निवासी होता है।</p>
+      <div class="feed-meta">
+        <span>शायक अलोक</span>
+        <span class="feed-tag">स्मृति</span>
+        <span class="feed-tag">घर</span>
+      </div>
+    </article>
+
+    <article class="feed-card">
+      <div class="feed-thumb-ph"><i class="ti ti-atom-2" aria-hidden="true"></i></div>
+      <span class="feed-cat-badge">विज्ञान · दर्शन</span>
+      <h3 class="feed-card-title">रूपक-कथाएँ : स्वल्प-वासी</h3>
+      <p class="feed-excerpt">बग़ीची के पास पानी का नहीं, प्रतिध्वनियों का एक कुआँ था। जब झाँकता तो आवाज़ दिखाई देती।</p>
+      <div class="feed-meta">
+        <span>पीयूष दइया</span>
+        <span class="feed-tag">अस्तित्व</span>
+      </div>
+    </article>
+
+    <article class="feed-card">
+      <div class="feed-thumb-ph"><i class="ti ti-brand-google" aria-hidden="true"></i></div>
+      <span class="feed-cat-badge">AI · तकनीक</span>
+      <h3 class="feed-card-title">ChatGPT से लेखन कितना बदल गया है हिंदी में?</h3>
+      <p class="feed-excerpt">कृत्रिम बुद्धिमत्ता के युग में हिंदी लेखन की चुनौतियाँ और अवसर — एक विश्लेषण।</p>
+      <div class="feed-meta">
+        <span>—</span>
+        <span class="feed-tag">IT</span>
+        <span class="feed-tag">भाषा</span>
+      </div>
+    </article>
+
+    <article class="feed-card">
+      <div class="feed-thumb-ph"><i class="ti ti-telescope" aria-hidden="true"></i></div>
+      <span class="feed-cat-badge">विज्ञान</span>
+      <h3 class="feed-card-title">ब्रह्मांड की उत्पत्ति और भारतीय दर्शन</h3>
+      <p class="feed-excerpt">आधुनिक ब्रह्मांड विज्ञान और वेदांत के बीच जो समानताएँ हैं, वे आश्चर्यजनक हैं।</p>
+      <div class="feed-meta">
+        <span>—</span>
+        <span class="feed-tag">दर्शन</span>
+      </div>
+    </article>
+
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- RECENT LONG READS -->
+  <div class="section-head">
+    <h2>लंबी पढ़ाई</h2>
+    <div class="section-head-line"></div>
+    <a href="#" class="section-head-more">सभी देखें →</a>
+  </div>
+
+  <div class="bottom-grid">
+    <div>
+      <div class="wide-cards">
+        <article class="wide-card">
+          <div class="wide-card-num">01</div>
+          <div class="wide-card-body">
+            <div class="cat">निबंध</div>
+            <h3>क्रिस्टोफ़र नोलन, अमृता शेर-गिल, मंगलेश डबराल और अन्य मुलाक़ातें</h3>
+            <p class="exc">समय किसी सीधी बहती नदी की तरह नहीं। वह लौटता हुआ और मुड़ता हुआ — समय अपनी ही दिशा पर संदेह करता हुआ।</p>
+            <div class="meta">शायक अलोक · 16 मई 2026 · 10 मिनट</div>
+          </div>
+          <div class="wide-card-read">10 मिनट</div>
+        </article>
+        <article class="wide-card">
+          <div class="wide-card-num">02</div>
+          <div class="wide-card-body">
+            <div class="cat">स्मृतिलोक</div>
+            <h3>फ़ीफ़ा, मैकडॉनल्ड्स और बीस साल पहले का इलाहाबाद</h3>
+            <p class="exc">इस दफ़ा फुटबॉल विश्वकप की मेज़बानी और भारत में प्रसारण अधिकार की दिलचस्प कहानी।</p>
+            <div class="meta">अभिषेक कुमार सिंह · 22 मई 2026 · 8 मिनट</div>
+          </div>
+          <div class="wide-card-read">8 मिनट</div>
+        </article>
+        <article class="wide-card">
+          <div class="wide-card-num">03</div>
+          <div class="wide-card-body">
+            <div class="cat">आलोचना</div>
+            <h3>देह की देहरी पर परिवार और समाज का पहरा — जया जादवानी की कहानियाँ</h3>
+            <p class="exc">मानवीय रिश्तों की बारीकियों, जटिलताओं और गहराई को उन्होंने अपनी कहानियों में ख़ूबसूरती से अभिव्यक्त किया।</p>
+            <div class="meta">सियाराम शर्मा · 18 मई 2026 · 7 मिनट</div>
+          </div>
+          <div class="wide-card-read">7 मिनट</div>
+        </article>
+        <article class="wide-card">
+          <div class="wide-card-num">04</div>
+          <div class="wide-card-body">
+            <div class="cat">सिनेमा</div>
+            <h3>The Last Tenant : इरफ़ान की क़ब्र पर 25 साल पुराना फूल</h3>
+            <p class="exc">अब शादियों के एल्बम नहीं दिखते। आजकल नीले-नीले लिंक होते हैं जो सीधे तस्वीरों के समंदर में पटक देते हैं।</p>
+            <div class="meta">शशांक मिश्र · 19 मई 2026 · 9 मिनट</div>
+          </div>
+          <div class="wide-card-read">9 मिनट</div>
+        </article>
+      </div>
+    </div>
+
+    <aside>
+      <div class="widget">
+        <div class="widget-title">विषय</div>
+        <div class="tag-cloud">
+          <span class="tag-pill">कविता</span>
+          <span class="tag-pill">कहानी</span>
+          <span class="tag-pill">निबंध</span>
+          <span class="tag-pill">सिनेमा</span>
+          <span class="tag-pill">AI</span>
+          <span class="tag-pill">विज्ञान</span>
+          <span class="tag-pill">संगीत</span>
+          <span class="tag-pill">लोक</span>
+          <span class="tag-pill">स्मृति</span>
+          <span class="tag-pill">दर्शन</span>
+          <span class="tag-pill">यात्रा</span>
+          <span class="tag-pill">इतिहास</span>
+          <span class="tag-pill">भाषा</span>
+          <span class="tag-pill">पत्र</span>
+          <span class="tag-pill">IT</span>
+          <span class="tag-pill">पर्यावरण</span>
+        </div>
+      </div>
+
+      <div class="highlight-card" style="margin:1.5rem 0">
+        <div class="highlight-cat">सिनेमा · विशेष</div>
+        <div class="highlight-title">हिंदी सिनेमा के अनदेखे मोड़</div>
+        <p class="highlight-exc">जो फ़िल्में दिखाई नहीं गईं — मगर जिन्होंने बदल दिया सोचने का तरीक़ा।</p>
+        <span class="highlight-link">पढ़ें <i class="ti ti-arrow-right" aria-hidden="true"></i></span>
+      </div>
+
+      <div class="widget">
+        <div class="widget-title">न्यूज़लेटर</div>
+        <div class="newsletter-box">
+          <h4>शिवमार्ग से जुड़ें</h4>
+          <p>हर हफ़्ते चुनिंदा लेख, कविताएँ और विचार — सीधे आपके इनबॉक्स में।</p>
+          <input class="newsletter-input" type="email" placeholder="आपका ई-मेल">
+          <button class="newsletter-btn">सब्सक्राइब करें</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">शिव<span>मार्ग</span></div>
+    <div class="footer-tagline">साहित्य · कला · विचार · संस्कृति</div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>साहित्य</h4>
+        <a href="#">कविता</a>
+        <a href="#">कहानी</a>
+        <a href="#">निबंध</a>
+        <a href="#">डायरी</a>
+      </div>
+      <div class="footer-col">
+        <h4>संस्कृति</h4>
+        <a href="#">सिनेमा</a>
+        <a href="#">संगीत</a>
+        <a href="#">लोक</a>
+        <a href="#">यात्रा</a>
+      </div>
+      <div class="footer-col">
+        <h4>ज्ञान</h4>
+        <a href="#">विज्ञान</a>
+        <a href="#">AI · IT</a>
+        <a href="#">दर्शन</a>
+        <a href="#">इतिहास</a>
+      </div>
+      <div class="footer-col">
+        <h4>जानकारी</h4>
+        <a href="#">परिचय</a>
+        <a href="#">संपर्क</a>
+        <a href="#">गोपनीयता</a>
+        <a href="#">लेखक बनें</a>
+      </div>
+    </div>
+    <p class="footer-copy">© 2026 ShivaMarg. सर्वाधिकार सुरक्षित।</p>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.cat-tab').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.cat-tab').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+document.querySelectorAll('.feed-card,.wide-card,.side-article,.highlight-card').forEach(el=>{
+  el.addEventListener('click',()=>sendPrompt('शिवमार्ग पर इस लेख के लिए API integration कैसे करें — /api/articles endpoint से डेटा fetch करके?'));
+});
+</script>
