@@ -627,7 +627,8 @@ function _renderArticles(){
   document.getElementById('articlePrev').disabled=page<=1;
   document.getElementById('articleNext').disabled=page>=total;
   const tbody=document.getElementById('articlesTbody');
-  if(!items.length){tbody.innerHTML=`<tr class="empty-row"><td colspan="7">No articles found</td></tr>`;return}
+  console.log('Rendering articles:',items);
+  if(!items.length){tbody.innerHTML=`<tr class="empty-row"><td colspan="8">No articles found</td></tr>`;return}
   tbody.innerHTML=items.map(a=>`
     <tr>
       <td><strong>${esc(a.title)}</strong></td>
