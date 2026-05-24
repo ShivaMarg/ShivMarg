@@ -1,0 +1,37 @@
+#page-loader{
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+}
+
+#page-loader.active{
+    opacity: 1;
+    visibility: visible;
+}
+
+.loader-content img{
+    width: 120px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    0%{
+        transform: scale(1);
+        opacity: .7;
+    }
+    50%{
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    100%{
+        transform: scale(1);
+        opacity: .7;
+    }
+}
