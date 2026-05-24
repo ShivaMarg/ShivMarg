@@ -1210,7 +1210,16 @@
 
       if (!res.ok) throw new Error('ड्राफ्ट्स फेच नहीं हो सके');
 
-      const articles = await res.json();
+      let articles = await res.json();
+      
+      // Handle different response formats
+      if (articles.articles && Array.isArray(articles.articles)) {
+        articles = articles.articles;
+      } else if (articles.data && Array.isArray(articles.data)) {
+        articles = articles.data;
+      } else if (!Array.isArray(articles)) {
+        articles = [];
+      }
       
       if (!articles || articles.length === 0) {
         draftsList.innerHTML = '<p style="text-align: center; color: var(--ink-muted);">कोई ड्राफ्ट नहीं मिले</p>';
@@ -1272,7 +1281,16 @@
 
       if (!res.ok) throw new Error('लेख फेच नहीं हो सके');
 
-      const articles = await res.json();
+      let articles = await res.json();
+      
+      // Handle different response formats
+      if (articles.articles && Array.isArray(articles.articles)) {
+        articles = articles.articles;
+      } else if (articles.data && Array.isArray(articles.data)) {
+        articles = articles.data;
+      } else if (!Array.isArray(articles)) {
+        articles = [];
+      }
       
       if (!articles || articles.length === 0) {
         articlesList.innerHTML = '<p style="text-align: center; color: var(--ink-muted);">कोई प्रकाशित लेख नहीं मिले</p>';
