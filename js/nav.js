@@ -103,8 +103,8 @@
           <div class="dropdown-content" id="articles-menu">
             <div class="dropdown-label">✦ लेख प्रबंधन ✦</div>
             <a href="/articles">सभी लेख</a>
-            <a href="/article-editor">नया लेख लिखें</a>
-            <a href="/article-editor?edit=true">मेरे लेख</a>
+            <a href="/articles-editor">नया लेख लिखें</a>
+            <a href="/articles-editor?edit=true">मेरे लेख</a>
           </div>
         </div>
 
