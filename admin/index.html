@@ -392,13 +392,13 @@
 const API = 'https://shivamargbackend.onrender.com';
 const PER_PAGE = 15;
 let token = localStorage.getItem('admin_token') || null;
-// document.addEventListener('DOMContentLoaded', () => {
-//   const token = localStorage.getItem('admin_token');
-//   if (!token) {
-//     window.location.href = '/admin-login.html';
-//     return;
-//   }
-// });
+document.addEventListener('DOMContentLoaded', () => {
+  const token = localStorage.getItem('admin_token');
+  if (!token) {
+    window.location.href = '/admin-login.html';
+    return;
+  }
+});
 let currentTab = 'dashboard';
 
 const state = {
