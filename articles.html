@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>लेख | बेला</title>
+  <title>लेख | शिव मार्ग</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
@@ -441,7 +441,7 @@
 
 <!-- ── HEADER ─────────────────────────────────── -->
 <header>
-  <a href="/" class="logo">बेला<span>.</span></a>
+  <a href="/" class="logo">शिव मार्ग<span>.</span></a>
   <nav class="hdr-nav">
     <a href="#">कवि</a>
     <a href="#">कविता</a>
@@ -462,7 +462,7 @@
 
     <!-- breadcrumb -->
     <div class="breadcrumb">
-      <a href="/">बेला</a>
+      <a href="/">शिव मार्ग</a>
       <span class="breadcrumb-sep">›</span>
       <span>लेख</span>
     </div>
@@ -519,7 +519,7 @@
 
     <!-- newsletter -->
     <div class="newsletter-block">
-      <h3>'बेला' की नई पोस्ट्स पाने के लिए</h3>
+      <h3>शिव मार्ग की नई पोस्ट्स पाने के लिए</h3>
       <p>सब्सक्राइब कीजिए — स्पैम नहीं भेजेंगे।</p>
       <input type="email" class="nl-input" placeholder="आपका ई-मेल">
       <button class="nl-btn" onclick="showToast('सब्सक्राइब के लिए धन्यवाद!')">सब्सक्राइब</button>
@@ -528,7 +528,7 @@
     <!-- popular posts -->
     <div class="sidebar-block">
       <div class="sidebar-title">
-        <span>बेला पॉपुलर</span>
+        <span>शिव मार्ग पॉपुलर</span>
         <span style="font-size:.65rem;opacity:.5;">सबसे पढ़ी गई</span>
       </div>
       <div id="popularPosts">
@@ -540,7 +540,7 @@
 
     <!-- latest posts -->
     <div class="sidebar-block">
-      <div class="sidebar-title"><span>बेला लेटेस्ट</span></div>
+      <div class="sidebar-title"><span>शिव मार्ग लेटेस्ट</span></div>
       <div id="latestPosts">
         <div class="skeleton" style="height:52px;margin-bottom:.75rem;"></div>
         <div class="skeleton" style="height:52px;margin-bottom:.75rem;opacity:.7;"></div>
@@ -572,7 +572,7 @@
 
 <!-- ── FOOTER ──────────────────────────────── -->
 <footer>
-  <p>© 2026 बेला · <a href="#">प्राइवेसी पॉलिसी</a> · <a href="#">संपर्क</a></p>
+  <p>© 2026 शिव मार्ग · <a href="#">प्राइवेसी पॉलिसी</a> · <a href="#">संपर्क</a></p>
 </footer>
 
 <!-- ── JAVASCRIPT ──────────────────────────– -->
@@ -637,11 +637,11 @@
 
   function renderArticle(a) {
     // Page title
-    document.title = `${a.title} | बेला`;
+    document.title = `${a.title} | शिव मार्ग`;
 
     // Breadcrumb
     document.querySelector('.breadcrumb').innerHTML = `
-      <a href="/">बेला</a>
+      <a href="/">शिव मार्ग</a>
       <span class="breadcrumb-sep">›</span>
       <a href="/?category=${a.category_slug}">${a.category}</a>
       <span class="breadcrumb-sep">›</span>
@@ -651,7 +651,7 @@
     // Tags
     const tagRow = document.querySelector('.tag-row');
     tagRow.innerHTML = `
-      <a href="/" class="tag">बेला</a>
+      <a href="/" class="tag">शिव मार्ग</a>
       <a href="/?category=${a.category_slug}" class="tag active">${a.category}</a>
     `;
 
