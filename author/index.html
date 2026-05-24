@@ -498,7 +498,7 @@ async function loadArticles(append = false) {
     }
 
     const html = articles.map(a => `
-      <a href="/article?slug=${encodeURIComponent(a.slug)}" class="article-card">
+      <a href="/articles?slug=${encodeURIComponent(a.slug)}" class="article-card">
         <div class="article-thumb">
           ${a.thumbnail_url ? `<img src="${a.thumbnail_url}" alt="${a.title}" loading="lazy">` : '📖'}
         </div>
