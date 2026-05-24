@@ -542,12 +542,14 @@ function showToast(msg, dur = 2500) {
 }
 
 // ── AUTH UI ────────────────────────────────────────────────────────
+// ── AUTH UI ────────────────────────────────────────────────────────
 function renderAuthArea() {
   const area = document.getElementById('authArea');
   if (state.user) {
     area.innerHTML = `
       <div class="user-bar">
-        <div class="user-avatar" title="${state.user.display_name}">${state.user.avatar || state.user.username[0].toUpperCase()}</div>
+-       <div class="user-avatar" title="${state.user.display_name}">${state.user.avatar || state.user.username[0].toUpperCase()}</div>
++       <div class="user-avatar" title="${state.user.display_name}" onclick="window.location.href='profile.html'" style="cursor:pointer;">${state.user.avatar || state.user.username[0].toUpperCase()}</div>
         <button class="btn-logout" onclick="doLogout()">लॉग-आउट</button>
       </div>`;
   } else {
