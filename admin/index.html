@@ -602,7 +602,7 @@ function _renderPosts(){
 }
 
 async function loadArticles(){
-  const data=await apiFetch('/api/admin/articles?limit=100');
+  const data=await apiFetch('/api/articles?limit=100');
   state.articles=(data&&data.articles)||DEMO_ARTICLES;
   const cats=[...new Set(state.articles.map(a=>a.category).filter(Boolean))];
   const sel=document.getElementById('articleCategoryFilter');
