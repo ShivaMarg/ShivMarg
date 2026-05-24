@@ -50,7 +50,7 @@ header{background:var(--paper);border-bottom:1px solid var(--line-dark);position
 .logo-hi{font-family:'Tiro Devanagari Hindi',serif;font-size:1.8rem;color:var(--saffron);letter-spacing:-1px}
 .logo-sub{font-size:.58rem;letter-spacing:3px;text-transform:uppercase;color:var(--ink-3);margin-top:1px}
 nav.main-nav{display:flex;align-items:center;gap:.1rem;flex-wrap:wrap;justify-content:center}
-nav.main-nav a{font-size:.78rem;color:var(--ink-2);text-decoration:none;padding:.35rem .65rem;border-radius:4px;transition:all .15s;letter-spacing:.2px;white-space:nowrap}
+nav.main-nav a{font-size:.78rem;color:var(--ink-2);text-decoration:none;padding:.35rem .65rem;border-radius:4px;transition:all .15s;letter-spacing:.2px;white-space:nowrap;cursor:pointer}
 nav.main-nav a:hover,nav.main-nav a.active{background:var(--saffron-l);color:var(--saffron)}
 .header-actions{display:flex;align-items:center;gap:.6rem}
 .btn-search{background:none;border:1.5px solid var(--line-dark);border-radius:50%;width:34px;height:34px;cursor:pointer;color:var(--ink-3);font-size:15px;display:flex;align-items:center;justify-content:center;transition:all .15s}
@@ -94,13 +94,15 @@ main{max-width:1280px;margin:0 auto;padding:2rem 1.5rem}
 
 /* ── HERO ── */
 .hero{display:grid;grid-template-columns:1fr 360px;gap:2rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid var(--line)}
-.hero-main-img{width:100%;aspect-ratio:16/9;background:var(--paper-3);border-radius:var(--radius);overflow:hidden;margin-bottom:1rem;position:relative}
+.hero-main-img{width:100%;aspect-ratio:16/9;background:var(--paper-3);border-radius:var(--radius);overflow:hidden;margin-bottom:1rem;position:relative;cursor:pointer}
+.hero-main-img:hover{opacity:0.9}
 .hero-main-img img{width:100%;height:100%;object-fit:cover}
 .hero-main-img .img-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Tiro Devanagari Hindi',serif;font-size:4rem;color:var(--saffron-m);opacity:.4}
 .hero-badge{display:inline-block;background:var(--saffron);color:#fff;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;border-radius:2px;margin-bottom:.5rem;font-weight:700}
 .hero-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1.9rem;line-height:1.35;color:var(--ink);margin-bottom:.6rem;cursor:pointer;transition:color .2s}
 .hero-title:hover{color:var(--saffron)}
-.hero-excerpt{font-size:.88rem;color:var(--ink-3);line-height:1.7;margin-bottom:.7rem}
+.hero-excerpt{font-size:.88rem;color:var(--ink-3);line-height:1.7;margin-bottom:.7rem;cursor:pointer}
+.hero-excerpt:hover{color:var(--ink)}
 .hero-meta{display:flex;align-items:center;gap:.6rem;font-size:.72rem;color:var(--ink-3);flex-wrap:wrap}
 .hero-author{font-weight:600;color:var(--ink-2)}
 .meta-dot{width:3px;height:3px;border-radius:50%;background:var(--saffron-m);display:inline-block;flex-shrink:0}
@@ -124,7 +126,7 @@ main{max-width:1280px;margin:0 auto;padding:2rem 1.5rem}
 
 /* ── FEED GRID ── */
 .feed-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;margin-bottom:2.5rem}
-.feed-card{cursor:pointer;border-bottom:2px solid transparent;transition:border-color .2s}
+.feed-card{cursor:pointer;border-bottom:2px solid transparent;transition:border-color .2s;text-decoration:none;color:inherit;display:block}
 .feed-card:hover{border-color:var(--saffron)}
 .feed-card:hover .fc-title{color:var(--saffron)}
 .fc-img{width:100%;aspect-ratio:3/2;background:var(--paper-3);border-radius:var(--radius);overflow:hidden;margin-bottom:.75rem}
@@ -158,7 +160,7 @@ hr.divider{border:none;border-top:1px solid var(--line);margin:2rem 0}
 
 /* ── POPULAR LIST ── */
 .popular-list{display:flex;flex-direction:column;gap:0}
-.pop-card{display:grid;grid-template-columns:52px 1fr 90px;gap:.8rem;padding:1rem 0;border-bottom:1px solid var(--line);cursor:pointer;transition:opacity .15s;align-items:start}
+.pop-card{display:grid;grid-template-columns:52px 1fr 90px;gap:.8rem;padding:1rem 0;border-bottom:1px solid var(--line);cursor:pointer;transition:opacity .15s;align-items:start;text-decoration:none;color:inherit}
 .pop-card:last-child{border-bottom:none;padding-bottom:0}
 .pop-card:hover{opacity:.7}
 .pop-num{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--paper-3);line-height:1;text-align:center;padding-top:2px}
@@ -172,7 +174,7 @@ hr.divider{border:none;border-top:1px solid var(--line);margin:2rem 0}
 .sidebar{display:flex;flex-direction:column;gap:1.8rem}
 .widget-title{font-family:'Playfair Display',serif;font-size:1rem;color:var(--ink);margin-bottom:.9rem;padding-bottom:.4rem;border-bottom:2px solid var(--saffron);display:inline-block;font-weight:400}
 .tag-cloud{display:flex;flex-wrap:wrap;gap:.35rem}
-.tag-pill{font-size:.68rem;padding:.28rem .7rem;border:1px solid var(--line-dark);border-radius:16px;color:var(--ink-2);cursor:pointer;transition:all .15s;font-family:'Source Sans 3',sans-serif}
+.tag-pill{font-size:.68rem;padding:.28rem .7rem;border:1px solid var(--line-dark);border-radius:16px;color:var(--ink-2);cursor:pointer;transition:all .15s;font-family:'Source Sans 3',sans-serif;background:none}
 .tag-pill:hover{background:var(--saffron-l);border-color:var(--saffron-m);color:var(--saffron)}
 .highlight-card{background:var(--ink-2);border-radius:var(--radius);padding:1.4rem;cursor:pointer;transition:opacity .2s;position:relative;overflow:hidden}
 .highlight-card::before{content:'';position:absolute;top:-15px;right:-15px;width:80px;height:80px;border-radius:50%;background:rgba(200,84,10,.18)}
@@ -189,50 +191,6 @@ hr.divider{border:none;border-top:1px solid var(--line);margin:2rem 0}
 .nl-btn{width:100%;padding:.45rem;background:var(--saffron);color:#fff;border:none;border-radius:4px;font-size:.76rem;font-weight:700;cursor:pointer;font-family:'Source Sans 3',sans-serif;transition:opacity .15s;letter-spacing:.3px}
 .nl-btn:hover{opacity:.85}
 .nl-msg{font-size:.72rem;color:var(--leaf);margin-top:.3rem;display:none}
-
-/* ── ARTICLE READER ── */
-.article-page{display:none}
-.article-page.open{display:block}
-.homepage{display:block}
-.homepage.hidden{display:none}
-.back-btn{display:inline-flex;align-items:center;gap:.4rem;font-size:.75rem;color:var(--saffron);cursor:pointer;margin-bottom:1.5rem;background:none;border:none;font-family:'Source Sans 3',sans-serif;padding:0}
-.back-btn:hover{text-decoration:underline}
-.art-header{max-width:760px;margin:0 auto 2rem}
-.art-badge{display:inline-block;background:var(--saffron);color:#fff;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;border-radius:2px;margin-bottom:.8rem;font-weight:700}
-.art-title{font-family:'Tiro Devanagari Hindi',serif;font-size:2.2rem;line-height:1.35;color:var(--ink);margin-bottom:.6rem}
-.art-subtitle{font-size:1rem;color:var(--ink-3);line-height:1.65;margin-bottom:1rem;font-style:italic}
-.art-meta-bar{display:flex;align-items:center;gap:.8rem;font-size:.75rem;color:var(--ink-3);padding:.8rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);flex-wrap:wrap}
-.art-author-name{font-weight:600;color:var(--ink-2)}
-.art-banner{width:100%;max-width:900px;margin:1.5rem auto;border-radius:var(--radius);overflow:hidden}
-.art-banner img{width:100%;display:block}
-.art-content{max-width:760px;margin:0 auto;font-family:'Tiro Devanagari Hindi',serif;font-size:1.05rem;line-height:1.85;color:var(--ink-2)}
-.art-content p{margin-bottom:1.2rem}
-.art-content h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--ink);margin:2rem 0 .8rem}
-.art-content h3{font-family:'Tiro Devanagari Hindi',serif;font-size:1.1rem;color:var(--ink);margin:1.5rem 0 .6rem}
-.art-content blockquote{border-left:3px solid var(--saffron);padding:.8rem 1.2rem;background:var(--paper-2);margin:1.5rem 0;font-style:italic;color:var(--ink-2)}
-.art-footer{max-width:760px;margin:2rem auto 0;padding-top:1.5rem;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-wrap:gap}
-.art-like-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.2rem;border:1.5px solid var(--line-dark);border-radius:4px;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:.8rem;background:none;color:var(--ink-2);transition:all .15s}
-.art-like-btn:hover,.art-like-btn.liked{background:var(--saffron-l);border-color:var(--saffron);color:var(--saffron)}
-.art-tags{display:flex;flex-wrap:wrap;gap:.3rem}
-
-/* ── COMMENTS ── */
-.comments-section{max-width:760px;margin:2.5rem auto 0}
-.comment-form{margin-bottom:1.5rem}
-.comment-form textarea{width:100%;padding:.7rem 1rem;border:1.5px solid var(--line-dark);border-radius:4px;font-size:.85rem;font-family:'Source Sans 3',sans-serif;background:var(--paper-2);color:var(--ink);outline:none;resize:vertical;min-height:80px}
-.comment-form textarea:focus{border-color:var(--saffron)}
-.comment-form-actions{display:flex;justify-content:flex-end;margin-top:.4rem}
-.btn-comment{padding:.4rem 1.2rem;background:var(--saffron);color:#fff;border:none;border-radius:4px;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:.8rem;transition:opacity .15s}
-.btn-comment:hover{opacity:.85}
-.comment-item{padding:.9rem 0;border-bottom:1px solid var(--line)}
-.comment-item:last-child{border-bottom:none}
-.comment-header{display:flex;align-items:center;gap:.6rem;margin-bottom:.35rem}
-.comment-avatar{width:30px;height:30px;border-radius:50%;background:var(--saffron-l);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:var(--saffron);flex-shrink:0}
-.comment-username{font-weight:600;font-size:.8rem;color:var(--ink-2)}
-.comment-date{font-size:.68rem;color:var(--ink-4)}
-.comment-text{font-size:.85rem;color:var(--ink-2);line-height:1.6}
-.comment-like-btn{background:none;border:none;cursor:pointer;font-size:.7rem;color:var(--ink-4);display:inline-flex;align-items:center;gap:.3rem;margin-top:.3rem;transition:color .15s;font-family:'Source Sans 3',sans-serif}
-.comment-like-btn:hover,.comment-like-btn.liked{color:var(--saffron)}
-.login-notice{background:var(--saffron-l);border-radius:4px;padding:.7rem 1rem;font-size:.8rem;color:var(--saffron);text-align:center}
 
 /* ── LOADING / SKELETON ── */
 .skeleton{background:linear-gradient(90deg,var(--paper-2) 25%,var(--paper-3) 50%,var(--paper-2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:4px}
@@ -302,7 +260,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
   .hamburger{display:flex}
   .feed-grid{grid-template-columns:1fr}
   .hero-title{font-size:1.5rem}
-  .art-title{font-size:1.6rem}
   .footer-grid{grid-template-columns:1fr 1fr}
   .bottom-grid{grid-template-columns:1fr}
   main{padding:1.5rem 1rem}
@@ -310,23 +267,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
 @media(max-width:400px){
   .footer-grid{grid-template-columns:1fr}
   .cat-tabs{gap:.25rem}
-}
-</style>
-<style>
-.story-image {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    border-radius: 12px;
-    display: block;
-    margin: 20px auto;
-    object-fit: cover;
-}
-
-.image-wrapper {
-    width: 100%;
-    overflow: hidden;
-    border-radius: 12px;
 }
 </style>
 </head>
@@ -342,19 +282,19 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
 <!-- HEADER -->
 <header>
   <div class="header-inner">
-    <a class="logo" href="#" onclick="showHome();return false">
+    <a class="logo" href="index.html">
       <span class="logo-hi">बरगद</span>
       <span class="logo-sub">साहित्य का सफ़र</span>
     </a>
     <nav class="main-nav" id="mainNav">
-      <a href="#" data-cat="" class="active" onclick="filterCat(this,'');return false">सभी</a>
-      <a href="#" data-cat="kavita" onclick="filterCat(this,'kavita');return false">कविता</a>
-      <a href="#" data-cat="kahani" onclick="filterCat(this,'kahani');return false">कहानी</a>
-      <a href="#" data-cat="nibandh" onclick="filterCat(this,'nibandh');return false">निबंध</a>
-      <a href="#" data-cat="cinema" onclick="filterCat(this,'cinema');return false">सिनेमा</a>
-      <a href="#" data-cat="science" onclick="filterCat(this,'science');return false">विज्ञान</a>
-      <a href="#" data-cat="ai-it" onclick="filterCat(this,'ai-it');return false">AI · IT</a>
-      <a href="#" data-cat="vichar" onclick="filterCat(this,'vichar');return false">विचार</a>
+      <a onclick="filterCat(this,'')">सभी</a>
+      <a onclick="filterCat(this,'kavita')">कविता</a>
+      <a onclick="filterCat(this,'kahani')">कहानी</a>
+      <a onclick="filterCat(this,'nibandh')">निबंध</a>
+      <a onclick="filterCat(this,'cinema')">सिनेमा</a>
+      <a onclick="filterCat(this,'science')">विज्ञान</a>
+      <a onclick="filterCat(this,'ai-it')">AI · IT</a>
+      <a onclick="filterCat(this,'vichar')">विचार</a>
     </nav>
     <div class="header-actions">
       <button class="btn-search" onclick="toggleSearch()" title="खोजें">&#128269;</button>
@@ -375,14 +315,14 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
     <button class="mobile-menu-close" onclick="toggleMobileMenu()">✕</button>
   </div>
   <nav>
-    <a href="#" onclick="filterCat(null,'');toggleMobileMenu();return false">सभी रचनाएँ</a>
-    <a href="#" onclick="filterCat(null,'kavita');toggleMobileMenu();return false">कविता</a>
-    <a href="#" onclick="filterCat(null,'kahani');toggleMobileMenu();return false">कहानी</a>
-    <a href="#" onclick="filterCat(null,'nibandh');toggleMobileMenu();return false">निबंध</a>
-    <a href="#" onclick="filterCat(null,'cinema');toggleMobileMenu();return false">सिनेमा</a>
-    <a href="#" onclick="filterCat(null,'science');toggleMobileMenu();return false">विज्ञान</a>
-    <a href="#" onclick="filterCat(null,'ai-it');toggleMobileMenu();return false">AI · IT</a>
-    <a href="#" onclick="filterCat(null,'vichar');toggleMobileMenu();return false">विचार</a>
+    <a onclick="filterCat(null,'');toggleMobileMenu()">सभी रचनाएँ</a>
+    <a onclick="filterCat(null,'kavita');toggleMobileMenu()">कविता</a>
+    <a onclick="filterCat(null,'kahani');toggleMobileMenu()">कहानी</a>
+    <a onclick="filterCat(null,'nibandh');toggleMobileMenu()">निबंध</a>
+    <a onclick="filterCat(null,'cinema');toggleMobileMenu()">सिनेमा</a>
+    <a onclick="filterCat(null,'science');toggleMobileMenu()">विज्ञान</a>
+    <a onclick="filterCat(null,'ai-it');toggleMobileMenu()">AI · IT</a>
+    <a onclick="filterCat(null,'vichar');toggleMobileMenu()">विचार</a>
   </nav>
 </div>
 
@@ -426,7 +366,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
 </div>
 
 <!-- HOMEPAGE -->
-<div class="homepage" id="homepage">
 <main>
 
   <!-- HERO -->
@@ -474,20 +413,20 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
       <div>
         <div class="widget-title">विषय</div>
         <div class="tag-cloud" id="tagCloud">
-          <span class="tag-pill" onclick="filterCat(null,'kavita')">कविता</span>
-          <span class="tag-pill" onclick="filterCat(null,'kahani')">कहानी</span>
-          <span class="tag-pill" onclick="filterCat(null,'nibandh')">निबंध</span>
-          <span class="tag-pill" onclick="filterCat(null,'cinema')">सिनेमा</span>
-          <span class="tag-pill" onclick="filterCat(null,'science')">विज्ञान</span>
-          <span class="tag-pill" onclick="filterCat(null,'ai-it')">AI</span>
-          <span class="tag-pill" onclick="filterCat(null,'lok')">लोक</span>
-          <span class="tag-pill" onclick="filterCat(null,'sangeet')">संगीत</span>
-          <span class="tag-pill" onclick="filterCat(null,'vichar')">विचार</span>
-          <span class="tag-pill" onclick="filterCat(null,'itihas')">इतिहास</span>
-          <span class="tag-pill" onclick="filterCat(null,'darshan')">दर्शन</span>
-          <span class="tag-pill" onclick="filterCat(null,'bhasha')">भाषा</span>
-          <span class="tag-pill" onclick="filterCat(null,'smriti')">स्मृति</span>
-          <span class="tag-pill" onclick="filterCat(null,'yatra')">यात्रा</span>
+          <button class="tag-pill" onclick="filterCat(null,'kavita')">कविता</button>
+          <button class="tag-pill" onclick="filterCat(null,'kahani')">कहानी</button>
+          <button class="tag-pill" onclick="filterCat(null,'nibandh')">निबंध</button>
+          <button class="tag-pill" onclick="filterCat(null,'cinema')">सिनेमा</button>
+          <button class="tag-pill" onclick="filterCat(null,'science')">विज्ञान</button>
+          <button class="tag-pill" onclick="filterCat(null,'ai-it')">AI</button>
+          <button class="tag-pill" onclick="filterCat(null,'lok')">लोक</button>
+          <button class="tag-pill" onclick="filterCat(null,'sangeet')">संगीत</button>
+          <button class="tag-pill" onclick="filterCat(null,'vichar')">विचार</button>
+          <button class="tag-pill" onclick="filterCat(null,'itihas')">इतिहास</button>
+          <button class="tag-pill" onclick="filterCat(null,'darshan')">दर्शन</button>
+          <button class="tag-pill" onclick="filterCat(null,'bhasha')">भाषा</button>
+          <button class="tag-pill" onclick="filterCat(null,'smriti')">स्मृति</button>
+          <button class="tag-pill" onclick="filterCat(null,'yatra')">यात्रा</button>
         </div>
       </div>
       <div>
@@ -508,17 +447,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
   </div>
 
 </main>
-</div>
-
-<!-- ARTICLE PAGE -->
-<div class="article-page" id="articlePage">
-<main>
-  <button class="back-btn" onclick="showHome()">← वापस</button>
-  <div id="articleContent">
-    <div class="loading-spinner">रचना लोड हो रही है…</div>
-  </div>
-</main>
-</div>
 
 <!-- FOOTER -->
 <footer>
@@ -572,7 +500,6 @@ let state = {
   limit: 9,
   total: 0,
   category: '',
-  currentSlug: null,
   likedArticles: JSON.parse(localStorage.getItem('bargad_likes') || '[]'),
 };
 
@@ -620,7 +547,7 @@ function renderAuthArea() {
   if (state.user) {
     area.innerHTML = `
       <div class="user-bar">
-        <div class="user-avatar" src="/profile" title="${state.user.display_name}">${state.user.avatar || state.user.username[0].toUpperCase()}</div>
+        <div class="user-avatar" title="${state.user.display_name}">${state.user.avatar || state.user.username[0].toUpperCase()}</div>
         <button class="btn-logout" onclick="doLogout()">लॉग-आउट</button>
       </div>`;
   } else {
@@ -708,11 +635,11 @@ async function doSearch() {
     const data = await apiFetch(`/api/articles/search?q=${encodeURIComponent(q)}&limit=8`);
     if (!data.articles.length) { results.innerHTML = '<p style="font-size:.8rem;color:var(--ink-4);padding:.5rem 0">कोई रचना नहीं मिली।</p>'; return; }
     results.innerHTML = data.articles.map(a => `
-      <div class="search-result-item" onclick="openArticle('${a.slug}');toggleSearch()">
+      <a href="article.html?slug=${encodeURIComponent(a.slug)}" class="search-result-item">
         <span class="sr-cat">${a.category || '—'}</span>
         <div class="sr-title">${a.title}</div>
         <div class="sr-exc">${a.excerpt ? a.excerpt.slice(0, 80) + '…' : ''}</div>
-      </div>`).join('');
+      </a>`).join('');
   } catch (e) { results.innerHTML = `<div class="error-msg" style="padding:.5rem">${e.message}</div>`; }
 }
 
@@ -720,12 +647,8 @@ async function doSearch() {
 function filterCat(el, cat) {
   state.category = cat;
   state.skip = 0; state.articles = [];
-  // update tab active states
   document.querySelectorAll('.cat-tab, nav.main-nav a').forEach(t => t.classList.remove('active'));
   if (el) el.classList.add('active');
-  // sync both nav sets
-  document.querySelectorAll(`nav.main-nav a[data-cat="${cat}"]`).forEach(a => a.classList.add('active'));
-  document.querySelectorAll(`.cat-tab`).forEach(t => { if (t.textContent.trim() && t.onclick && t.onclick.toString().includes(`'${cat}'`)) t.classList.add('active'); });
   loadFeed(true);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -742,10 +665,10 @@ async function loadHero() {
     const sides = (side.articles || []).slice(1, 5);
     hero.innerHTML = `
       <div class="hero-main">
-        <div class="hero-main-img">${main.thumbnail_url ? `<img src="${main.thumbnail_url}" alt="${main.title}" loading="lazy">` : `<div class="img-ph">📜</div>`}</div>
+        <div class="hero-main-img" onclick="window.location.href='article.html?slug=${encodeURIComponent(main.slug)}'">${main.thumbnail_url ? `<img src="${main.thumbnail_url}" alt="${main.title}" loading="lazy">` : `<div class="img-ph">📜</div>`}</div>
         <span class="hero-badge">${main.category || 'रचना'}</span>
-        <div class="hero-title" onclick="openArticle('${main.slug}')">${main.title}</div>
-        <p class="hero-excerpt">${main.excerpt ? main.excerpt.slice(0, 150) + '…' : ''}</p>
+        <a href="article.html?slug=${encodeURIComponent(main.slug)}" class="hero-title">${main.title}</a>
+        <p class="hero-excerpt" onclick="window.location.href='article.html?slug=${encodeURIComponent(main.slug)}'">${main.excerpt ? main.excerpt.slice(0, 150) + '…' : ''}</p>
         <div class="hero-meta">
           <span class="hero-author">${main.author?.username || '—'}</span>
           <span class="meta-dot"></span>
@@ -757,14 +680,14 @@ async function loadHero() {
       <div class="hero-side">
         <div class="side-label">और पढ़ें</div>
         ${sides.map(a => `
-          <div class="side-card" onclick="openArticle('${a.slug}')">
+          <a href="article.html?slug=${encodeURIComponent(a.slug)}" class="side-card">
             <div class="side-thumb">${a.thumbnail_url ? `<img src="${a.thumbnail_url}" alt="${a.title}" loading="lazy">` : `<div class="ph">📖</div>`}</div>
             <div>
               <span class="side-cat">${a.category || 'रचना'}</span>
               <div class="side-title">${a.title}</div>
               <span class="side-date">${fmtDate(a.published_at)}</span>
             </div>
-          </div>`).join('')}
+          </a>`).join('')}
       </div>`;
   } catch (e) {
     hero.innerHTML = `<div class="error-msg"><span>⚠️</span>${e.message}</div>`;
@@ -774,7 +697,7 @@ async function loadHero() {
 // ── FEED ───────────────────────────────────────────────────────────
 function feedCardHTML(a) {
   return `
-    <div class="feed-card" onclick="openArticle('${a.slug}')">
+    <a href="article.html?slug=${encodeURIComponent(a.slug)}" class="feed-card">
       <div class="fc-img">${a.thumbnail_url ? `<img src="${a.thumbnail_url}" alt="${a.title}" loading="lazy">` : `<div class="ph">📜</div>`}</div>
       <span class="fc-cat">${a.category || 'रचना'}</span>
       <div class="fc-title">${a.title}</div>
@@ -784,7 +707,7 @@ function feedCardHTML(a) {
         ${(a.tags || []).slice(0, 2).map(t => `<span class="fc-tag">${t}</span>`).join('')}
         <span class="fc-read">${a.read_time || 5} मिनट</span>
       </div>
-    </div>`;
+    </a>`;
 }
 
 async function loadFeed(reset = false) {
@@ -826,7 +749,7 @@ async function loadPopular() {
     const arts = data.articles || [];
     if (!arts.length) { list.innerHTML = '<div class="error-msg">अभी कोई लोकप्रिय रचना नहीं।</div>'; return; }
     list.innerHTML = arts.map((a, i) => `
-      <div class="pop-card" onclick="openArticle('${a.slug}')">
+      <a href="article.html?slug=${encodeURIComponent(a.slug)}" class="pop-card">
         <div class="pop-num">0${i + 1}</div>
         <div class="pop-body">
           <div class="cat">${a.category || 'रचना'}</div>
@@ -835,7 +758,7 @@ async function loadPopular() {
           <div class="meta">${a.author?.username || '—'} · ${fmtDate(a.published_at)}</div>
         </div>
         <div class="pop-read">${a.read_time || 5} मिनट<br><small style="color:var(--ink-4)">${a.view_count || 0} बार</small></div>
-      </div>`).join('');
+      </a>`).join('');
   } catch (e) { list.innerHTML = `<div class="error-msg">${e.message}</div>`; }
 }
 
@@ -847,152 +770,12 @@ async function loadLatestSidebar() {
     const arts = data.articles || [];
     el.className = '';
     el.innerHTML = arts.map(a => `
-      <div style="padding:.6rem 0;border-bottom:1px solid var(--line);cursor:pointer" onclick="openArticle('${a.slug}')">
+      <a href="article.html?slug=${encodeURIComponent(a.slug)}" style="display:block;padding:.6rem 0;border-bottom:1px solid var(--line);cursor:pointer;text-decoration:none;color:inherit">
         <span style="font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--saffron);font-weight:700">${a.category || '—'}</span>
         <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:.83rem;color:var(--ink);margin-top:2px;line-height:1.4">${a.title}</div>
         <div style="font-size:.65rem;color:var(--ink-4);margin-top:2px">${fmtDate(a.published_at)}</div>
-      </div>`).join('');
+      </a>`).join('');
   } catch (e) { el.innerHTML = `<div class="error-msg" style="padding:.5rem">${e.message}</div>`; }
-}
-
-// ── ARTICLE PAGE ────────────────────────────────────────────────────
-async function openArticle(slug) {
-  state.currentSlug = slug;
-  document.getElementById('homepage').classList.add('hidden');
-  document.getElementById('articlePage').classList.add('open');
-  const content = document.getElementById('articleContent');
-  content.innerHTML = '<div class="loading-spinner">रचना लोड हो रही है…</div>';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  try {
-    const a = await apiFetch(`/api/articles/${slug}`);
-    const liked = state.likedArticles.includes(slug);
-    content.innerHTML = `
-      <div class="art-header">
-        <span class="art-badge">${a.category || 'रचना'}</span>
-        <h1 class="art-title">${a.title}</h1>
-        ${a.subtitle ? `<p class="art-subtitle">${a.subtitle}</p>` : ''}
-        <div class="art-meta-bar">
-          <span class="art-author-name">${a.author?.username || '—'}</span>
-          <span class="meta-dot"></span>
-          <span>${fmtDate(a.published_at)}</span>
-          <span class="meta-dot"></span>
-          <span>${a.read_time || 5} मिनट पढ़ें</span>
-          <span class="meta-dot"></span>
-          <span>${a.view_count || 0} बार पढ़ा गया</span>
-        </div>
-      </div>
-      ${a.banner_url ? `<div class="art-banner"><img src="${a.banner_url}" alt="${a.title}"></div>` : ''}
-      <div class="art-content">${a.content || '<p>सामग्री उपलब्ध नहीं है।</p>'}</div>
-      <div class="art-footer">
-        <button class="art-like-btn ${liked ? 'liked' : ''}" id="likeBtn" onclick="toggleLike('${slug}')">
-          ${liked ? '♥' : '♡'} पसंद <span id="likeCount">${a.like_count || 0}</span>
-        </button>
-        <div class="art-tags">
-          ${(a.tags || []).map(t => `<span class="fc-tag">${t}</span>`).join('')}
-        </div>
-      </div>
-      <div class="comments-section">
-        <div class="sec-head"><h2>टिप्पणियाँ</h2><div class="sec-head-line"></div></div>
-        <div id="commentFormArea"></div>
-        <div id="commentsList"><div class="loading-spinner" style="padding:1rem">टिप्पणियाँ लोड हो रही हैं…</div></div>
-      </div>`;
-    renderCommentForm(slug);
-    loadComments(slug);
-  } catch (e) {
-    content.innerHTML = `<div class="error-msg"><span>⚠️</span>${e.message}</div>`;
-  }
-}
-
-function showHome() {
-  document.getElementById('homepage').classList.remove('hidden');
-  document.getElementById('articlePage').classList.remove('open');
-  state.currentSlug = null;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// ── LIKE ───────────────────────────────────────────────────────────
-async function toggleLike(slug) {
-  if (!state.user) { openModal(); showToast('पसंद करने के लिए लॉग-इन करें।'); return; }
-  try {
-    const data = await apiFetch(`/api/articles/${slug}/like`, { method: 'POST' });
-    const liked = data.liked;
-    if (liked) state.likedArticles.push(slug); else state.likedArticles = state.likedArticles.filter(s => s !== slug);
-    localStorage.setItem('bargad_likes', JSON.stringify(state.likedArticles));
-    const btn = document.getElementById('likeBtn');
-    const cnt = document.getElementById('likeCount');
-    if (btn) { btn.className = 'art-like-btn ' + (liked ? 'liked' : ''); btn.firstChild.textContent = liked ? ' ♥ पसंद ' : ' ♡ पसंद '; }
-    if (cnt) cnt.textContent = data.like_count;
-    showToast(liked ? 'पसंद किया! ♥' : 'पसंद हटाई।');
-  } catch (e) { showToast(e.message); }
-}
-
-// ── COMMENTS ───────────────────────────────────────────────────────
-function renderCommentForm(slug) {
-  const area = document.getElementById('commentFormArea');
-  if (state.user) {
-    area.innerHTML = `
-      <div class="comment-form">
-        <textarea id="commentText" placeholder="अपनी टिप्पणी लिखें…"></textarea>
-        <div class="comment-form-actions">
-          <button class="btn-comment" onclick="postComment('${slug}')">भेजें</button>
-        </div>
-      </div>`;
-  } else {
-    area.innerHTML = `<div class="login-notice">टिप्पणी करने के लिए <a href="#" onclick="openModal();return false" style="color:var(--saffron);font-weight:600">लॉग-इन करें</a>।</div>`;
-  }
-}
-
-async function loadComments(slug) {
-  const list = document.getElementById('commentsList');
-  try {
-    const data = await apiFetch(`/api/comments/${encodeURIComponent(slug)}?limit=20`);
-    const comments = data.comments || [];
-    if (!comments.length) { list.innerHTML = '<p style="font-size:.8rem;color:var(--ink-4);padding:.5rem 0">अभी कोई टिप्पणी नहीं।</p>'; return; }
-    list.innerHTML = comments.map(c => `
-      <div class="comment-item" id="cmt-${c.id}">
-        <div class="comment-header">
-          <div class="comment-avatar">${c.avatar || c.username[0].toUpperCase()}</div>
-          <span class="comment-username">${c.username}</span>
-          <span class="comment-date">${fmtDate(c.created_at)}</span>
-          ${state.user && state.user.id === c.user_id ? `<button onclick="deleteComment('${c.id}','${slug}')" style="margin-left:auto;background:none;border:none;font-size:.65rem;color:var(--ink-4);cursor:pointer">हटाएँ</button>` : ''}
-        </div>
-        <div class="comment-text">${c.text}</div>
-        <button class="comment-like-btn ${c.liked_by_me ? 'liked' : ''}" id="cl-${c.id}" onclick="likeComment('${c.id}')">
-          ${c.liked_by_me ? '♥' : '♡'} <span id="clc-${c.id}">${c.likes}</span>
-        </button>
-      </div>`).join('');
-  } catch (e) { list.innerHTML = `<div class="error-msg">${e.message}</div>`; }
-}
-
-async function postComment(slug) {
-  const txt = document.getElementById('commentText');
-  if (!txt || !txt.value.trim()) { showToast('टिप्पणी लिखें।'); return; }
-  try {
-    await apiFetch('/api/comments', { method: 'POST', body: JSON.stringify({ page_id: slug, text: txt.value.trim() }) });
-    txt.value = '';
-    loadComments(slug);
-    showToast('टिप्पणी जोड़ी गई!');
-  } catch (e) { showToast(e.message); }
-}
-
-async function likeComment(id) {
-  if (!state.user) { openModal(); return; }
-  try {
-    const data = await apiFetch(`/api/comments/${id}/like`, { method: 'POST' });
-    const btn = document.getElementById('cl-' + id);
-    const cnt = document.getElementById('clc-' + id);
-    if (btn) { btn.className = 'comment-like-btn ' + (data.liked_by_me ? 'liked' : ''); btn.firstChild.textContent = data.liked_by_me ? ' ♥ ' : ' ♡ '; }
-    if (cnt) cnt.textContent = data.likes;
-  } catch (e) { showToast(e.message); }
-}
-
-async function deleteComment(id, slug) {
-  if (!confirm('टिप्पणी हटाएँ?')) return;
-  try {
-    await apiFetch(`/api/comments/${id}`, { method: 'DELETE' });
-    loadComments(slug);
-    showToast('टिप्पणी हटाई गई।');
-  } catch (e) { showToast(e.message); }
 }
 
 // ── NEWSLETTER ─────────────────────────────────────────────────────
@@ -1007,7 +790,6 @@ function nlSubscribe() {
 // ── INIT ───────────────────────────────────────────────────────────
 async function init() {
   renderAuthArea();
-  // verify stored token
   if (state.token) {
     apiFetch('/api/auth/me').then(u => {
       state.user = u;
@@ -1023,7 +805,6 @@ async function init() {
   await Promise.all([loadHero(), loadFeed(true), loadPopular(), loadLatestSidebar()]);
 }
 
-// close mobile menu on resize
 window.addEventListener('resize', () => {
   if (window.innerWidth > 640) document.getElementById('mobileMenu').classList.remove('open');
 });
