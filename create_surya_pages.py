@@ -42,6 +42,12 @@ common = '''
 
 <div id="sm-comments" data-page-id="{page_id}"></div>
 <!-- FOOTER -->
+<div id="page-loader">
+    <div class="loader-content">
+        <img src="/images/ShivMarg.png" alt="Logo">
+    </div>
+</div>
+
 <footer>
   <span class="foot-sym">🌺</span>
   <div class="foot-txt">॥ {title} ॥ ShivaMarg ॥ © ShivaMarg 2026 || ShivMarg.live</div>

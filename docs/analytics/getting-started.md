@@ -148,7 +148,9 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <title>Next.js</title>
-      </head>
+      <link rel="stylesheet" href="/loder/loder.css">
+<script src="/loder/loder.js" defer></script>
+</head>
       <body>
         {children}
         <Analytics />
@@ -167,7 +169,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <title>Next.js</title>
-      </head>
+      <link rel="stylesheet" href="/loder/loder.css">
+<script src="/loder/loder.js" defer></script>
+</head>
       <body>
         {children}
         <Analytics />
@@ -229,7 +233,9 @@ export default function App() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
-      </head>
+      <link rel="stylesheet" href="/loder/loder.css">
+<script src="/loder/loder.js" defer></script>
+</head>
       <body>
         <Analytics />
         <Outlet />
@@ -262,7 +268,9 @@ export default function App() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
-      </head>
+      <link rel="stylesheet" href="/loder/loder.css">
+<script src="/loder/loder.js" defer></script>
+</head>
       <body>
         <Analytics />
         <Outlet />
@@ -423,7 +431,9 @@ import Analytics from '@vercel/analytics/astro';
     <meta charset="utf-8" />
     <!-- ... -->
     <Analytics />
-	</head>
+	<link rel="stylesheet" href="/loder/loder.css">
+<script src="/loder/loder.js" defer></script>
+</head>
 	<body>
 		<slot />
   <script src="/js/search.js"></script>\n</body>
@@ -442,7 +452,9 @@ import Analytics from '@vercel/analytics/astro';
     <meta charset="utf-8" />
     <!-- ... -->
     <Analytics />
-	</head>
+	<link rel="stylesheet" href="/loder/loder.css">
+<script src="/loder/loder.js" defer></script>
+</head>
 	<body>
 		<slot />
   <script src="/js/search.js"></script>\n</body>

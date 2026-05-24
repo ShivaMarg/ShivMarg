@@ -277,7 +277,13 @@ html_template = """<!DOCTYPE html>
   <div id="sm-comments" data-page-id="{page_id}"></div>
 
   <!-- FOOTER -->
-  <footer>
+  <div id="page-loader">
+    <div class="loader-content">
+        <img src="/images/ShivMarg.png" alt="Logo">
+    </div>
+</div>
+
+<footer>
     <div class="foot-sym">🕉️</div>
     <div class="foot-txt">ॐ शान्तिः शान्तिः शान्तिः</div>
     <div class="foot-links">
