@@ -631,7 +631,7 @@ function _renderArticles(){
   tbody.innerHTML=items.map(a=>`
     <tr>
       <td><strong>${esc(a.title)}</strong></td>
-      <td style="color:var(--muted)">${esc(a.author_username||'—')}</td>
+      <td style="color:var(--muted)">${esc(a.author_username ||'—')}</td>
       <td style="color:var(--muted)">${esc(a.category||'—')}</td>
       <td><span class="badge badge-${a.status==='published'?'publish':'draft'}">${a.status}</span></td>
       <td style="color:var(--muted)">${fmtDate(a.created_at)}</td>
