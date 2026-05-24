@@ -674,11 +674,11 @@
 
   function renderArticle(a) {
     // Page title
-    document.title = `${a.title} | शिव मार्ग`;
+    document.title = `${a.title} | आलेख`;
 
     // Breadcrumb
     document.querySelector('.breadcrumb').innerHTML = `
-      <a href="/">शिव मार्ग</a>
+      <a href="/aalekh/">आलेख</a>
       <span class="breadcrumb-sep">›</span>
       <a href="/?category=${a.category_slug}">${a.category}</a>
       <span class="breadcrumb-sep">›</span>
@@ -688,7 +688,7 @@
     // Tags
     const tagRow = document.querySelector('.tag-row');
     tagRow.innerHTML = `
-      <a href="/" class="tag">शिव मार्ग</a>
+      <a href="/aalekh/" class="tag">आलेख</a>
       <a href="/?category=${a.category_slug}" class="tag active">${a.category}</a>
     `;
 
