@@ -1,489 +1,1017 @@
-
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="ShivaMarg — Hindi literary magazine showcasing kavitas, stories, essays, and cultural content">
-  <title>ShivaMarg — साहित्य का सफ़र</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='80' fill='%23D4570A'>ॐ</text></svg>">
-  <style>
-@import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=DM+Serif+Display:ital@0;1&family=Lato:wght@300;400;700&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>बरगद — साहित्य · कला · विचार</title>
+<meta name="description" content="बरगद — हिंदी साहित्य, कविता, कहानी, सिनेमा, विज्ञान और विचार का संसार">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
 
-*{box-sizing:border-box;margin:0;padding:0}
-
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --saffron:#D4570A;
-  --saffron-light:#F5E8DC;
-  --saffron-mid:#E8A06A;
-  --ink:#1A1208;
-  --ink-mid:#4A3B2A;
-  --ink-muted:#8C7B68;
+  --saffron:#C8540A;
+  --saffron-l:#F5EAE0;
+  --saffron-m:#E8935A;
+  --ink:#18120A;
+  --ink-2:#3D2E1E;
+  --ink-3:#7A6653;
+  --ink-4:#B0A090;
   --paper:#FAF7F2;
-  --paper2:#F2EDE4;
-  --paper3:#E8E0D4;
-  --leaf:#2D6A4F;
-  --leaf-light:#D8EDD6;
-  --indigo:#2C3E7A;
-  --line:rgba(74,59,42,0.15);
+  --paper-2:#F3EDE3;
+  --paper-3:#E9E0D3;
+  --leaf:#2A6042;
+  --leaf-l:#DCF0E4;
+  --indigo:#1E3A6E;
+  --indigo-l:#E3EBF8;
+  --line:rgba(61,46,30,0.12);
+  --line-dark:rgba(61,46,30,0.22);
+  --radius:6px;
+  --shadow:0 2px 16px rgba(24,18,10,0.08);
 }
 
-body{font-family:'Lato',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh}
+html{scroll-behavior:smooth}
+body{font-family:'Source Sans 3',sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;min-height:100vh;overflow-x:hidden}
 
-.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--paper-2)}
+::-webkit-scrollbar-thumb{background:var(--saffron-m);border-radius:3px}
 
-/* HEADER */
-.site-header{background:var(--paper);border-bottom:1px solid var(--line);padding:0 2rem;position:sticky;top:0;z-index:100}
-.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:1.5rem;height:60px}
-.site-logo{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--saffron);letter-spacing:-0.5px;text-decoration:none;flex-shrink:0}
-.site-logo span{color:var(--ink);font-style:italic}
-.header-tagline{font-size:0.72rem;color:var(--ink-muted);letter-spacing:2px;text-transform:uppercase;border-left:1px solid var(--line);padding-left:1rem;flex-shrink:0}
-.header-nav{display:flex;gap:0;margin-left:auto}
-.header-nav a{font-size:0.8rem;color:var(--ink-mid);text-decoration:none;padding:0.3rem 0.7rem;border-radius:4px;transition:all .15s;letter-spacing:.3px}
-.header-nav a:hover{background:var(--saffron-light);color:var(--saffron)}
-.header-search{width:32px;height:32px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink-muted);font-size:14px;transition:all .15s}
-.header-search:hover{border-color:var(--saffron);color:var(--saffron)}
+/* ── TOP STRIP ── */
+.top-strip{background:var(--saffron);color:#fff;text-align:center;font-size:.65rem;letter-spacing:3px;text-transform:uppercase;padding:.3rem 1rem;font-weight:600}
 
-/* DATELINE */
-.dateline{background:var(--saffron);color:white;text-align:center;font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;padding:0.35rem;font-weight:700}
+/* ── HEADER ── */
+header{background:var(--paper);border-bottom:1px solid var(--line-dark);position:sticky;top:0;z-index:200;box-shadow:0 1px 8px rgba(24,18,10,0.06)}
+.header-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1rem;padding:.75rem 1.5rem}
+.logo{text-decoration:none;display:flex;flex-direction:column;line-height:1}
+.logo-hi{font-family:'Tiro Devanagari Hindi',serif;font-size:1.8rem;color:var(--saffron);letter-spacing:-1px}
+.logo-sub{font-size:.58rem;letter-spacing:3px;text-transform:uppercase;color:var(--ink-3);margin-top:1px}
+nav.main-nav{display:flex;align-items:center;gap:.1rem;flex-wrap:wrap;justify-content:center}
+nav.main-nav a{font-size:.78rem;color:var(--ink-2);text-decoration:none;padding:.35rem .65rem;border-radius:4px;transition:all .15s;letter-spacing:.2px;white-space:nowrap}
+nav.main-nav a:hover,nav.main-nav a.active{background:var(--saffron-l);color:var(--saffron)}
+.header-actions{display:flex;align-items:center;gap:.6rem}
+.btn-search{background:none;border:1.5px solid var(--line-dark);border-radius:50%;width:34px;height:34px;cursor:pointer;color:var(--ink-3);font-size:15px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.btn-search:hover{border-color:var(--saffron);color:var(--saffron)}
+.btn-login{font-size:.75rem;padding:.35rem .9rem;border:1.5px solid var(--saffron);border-radius:4px;color:var(--saffron);background:none;cursor:pointer;font-family:'Source Sans 3',sans-serif;transition:all .15s;text-decoration:none;white-space:nowrap}
+.btn-login:hover{background:var(--saffron);color:#fff}
 
-/* MAIN LAYOUT */
-.site-main{max-width:1200px;margin:0 auto;padding:2rem}
+/* ── HAMBURGER ── */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{display:block;width:22px;height:2px;background:var(--ink-2);border-radius:2px;transition:all .3s}
+.mobile-menu{display:none;position:fixed;inset:0;background:var(--paper);z-index:300;padding:2rem 1.5rem;overflow-y:auto}
+.mobile-menu.open{display:block}
+.mobile-menu-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--line)}
+.mobile-menu-close{background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--ink-2)}
+.mobile-menu nav a{display:block;font-family:'Tiro Devanagari Hindi',serif;font-size:1.2rem;color:var(--ink-2);text-decoration:none;padding:.7rem 0;border-bottom:1px solid var(--line);transition:color .15s}
+.mobile-menu nav a:hover{color:var(--saffron)}
 
-/* SECTION LABEL */
-.section-label{display:inline-flex;align-items:center;gap:8px;font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--saffron);font-weight:700;margin-bottom:1.2rem}
-.section-label::before{content:'';display:block;width:20px;height:2px;background:var(--saffron)}
+/* ── SEARCH OVERLAY ── */
+.search-overlay{display:none;position:fixed;inset:0;background:rgba(24,18,10,0.85);z-index:400;align-items:flex-start;justify-content:center;padding-top:10vh}
+.search-overlay.open{display:flex}
+.search-box{background:var(--paper);border-radius:var(--radius);padding:1.5rem;width:90%;max-width:600px}
+.search-box h3{font-family:'Tiro Devanagari Hindi',serif;font-size:1.1rem;color:var(--ink-2);margin-bottom:1rem}
+.search-input-wrap{display:flex;gap:.5rem}
+.search-input-wrap input{flex:1;padding:.6rem 1rem;border:1.5px solid var(--line-dark);border-radius:4px;font-size:.9rem;font-family:'Source Sans 3',sans-serif;background:var(--paper-2);color:var(--ink);outline:none}
+.search-input-wrap input:focus{border-color:var(--saffron)}
+.search-input-wrap button{padding:.6rem 1.2rem;background:var(--saffron);color:#fff;border:none;border-radius:4px;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:.85rem}
+#searchResults{margin-top:1rem;max-height:50vh;overflow-y:auto}
+.search-result-item{padding:.6rem 0;border-bottom:1px solid var(--line);cursor:pointer}
+.search-result-item:hover .sr-title{color:var(--saffron)}
+.sr-cat{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--saffron);display:block;margin-bottom:2px}
+.sr-title{font-family:'Tiro Devanagari Hindi',serif;font-size:.9rem;color:var(--ink);transition:color .15s}
+.sr-exc{font-size:.75rem;color:var(--ink-3);margin-top:2px}
+.search-close{background:none;border:none;float:right;font-size:1.2rem;cursor:pointer;color:var(--ink-3);margin-top:-0.2rem}
 
-/* HERO — top featured */
-.hero-grid{display:grid;grid-template-columns:1fr 380px;gap:2rem;margin-bottom:3rem;padding-bottom:2.5rem;border-bottom:1px solid var(--line)}
-.hero-main{display:flex;flex-direction:column;justify-content:flex-end}
-.hero-img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:4px;display:block;background:var(--paper2)}
-.hero-img-placeholder{width:100%;aspect-ratio:16/9;border-radius:4px;background:linear-gradient(135deg,var(--paper2) 0%,var(--paper3) 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.hero-img-placeholder::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(74,59,42,0.03) 10px,rgba(74,59,42,0.03) 20px)}
-.hero-kite{color:var(--saffron-mid);font-size:4rem;opacity:.4;font-family:'Tiro Devanagari Hindi',serif}
-.hero-badge{display:inline-block;background:var(--saffron);color:white;font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;border-radius:2px;margin:1rem 0 0.6rem;font-weight:700}
-.hero-title{font-family:'Tiro Devanagari Hindi',serif;font-size:2rem;line-height:1.35;color:var(--ink);margin-bottom:.6rem}
-.hero-excerpt{font-size:0.9rem;color:var(--ink-muted);line-height:1.7;margin-bottom:.8rem}
-.hero-meta{display:flex;align-items:center;gap:.8rem;font-size:.75rem;color:var(--ink-muted)}
-.hero-meta .dot{width:3px;height:3px;border-radius:50%;background:var(--saffron-mid);display:inline-block}
-.hero-author{font-weight:700;color:var(--ink-mid)}
+/* ── MAIN LAYOUT ── */
+main{max-width:1280px;margin:0 auto;padding:2rem 1.5rem}
 
-/* SIDEBAR STACK */
-.hero-sidebar{display:flex;flex-direction:column;gap:1.2rem}
-.side-article{display:grid;grid-template-columns:90px 1fr;gap:.8rem;padding-bottom:1.2rem;border-bottom:1px solid var(--line);cursor:pointer;transition:opacity .15s}
-.side-article:last-child{border-bottom:none;padding-bottom:0}
-.side-article:hover{opacity:.75}
-.side-thumb{width:90px;height:70px;object-fit:cover;border-radius:3px;background:var(--paper2);flex-shrink:0}
-.side-thumb-ph{width:90px;height:70px;border-radius:3px;background:var(--paper3);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--ink-muted);flex-shrink:0}
-.side-cat{font-size:0.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--saffron);font-weight:700;display:block;margin-bottom:3px}
-.side-title{font-family:'Tiro Devanagari Hindi',serif;font-size:.88rem;line-height:1.45;color:var(--ink)}
-.side-date{font-size:.7rem;color:var(--ink-muted);margin-top:4px;display:block}
+/* ── SECTION LABEL ── */
+.sec-label{display:inline-flex;align-items:center;gap:8px;font-size:.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--saffron);font-weight:700;margin-bottom:1.2rem}
+.sec-label::before{content:'';display:block;width:18px;height:2px;background:var(--saffron)}
 
-/* CATEGORY TABS */
-.cat-tabs{display:flex;gap:.3rem;margin-bottom:2rem;flex-wrap:wrap}
-.cat-tab{font-size:.75rem;padding:.35rem .9rem;border:1px solid var(--line);border-radius:20px;cursor:pointer;color:var(--ink-mid);background:transparent;font-family:'Lato',sans-serif;transition:all .15s;letter-spacing:.3px}
-.cat-tab:hover,.cat-tab.active{background:var(--saffron);border-color:var(--saffron);color:white}
+/* ── HERO ── */
+.hero{display:grid;grid-template-columns:1fr 360px;gap:2rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid var(--line)}
+.hero-main-img{width:100%;aspect-ratio:16/9;background:var(--paper-3);border-radius:var(--radius);overflow:hidden;margin-bottom:1rem;position:relative}
+.hero-main-img img{width:100%;height:100%;object-fit:cover}
+.hero-main-img .img-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Tiro Devanagari Hindi',serif;font-size:4rem;color:var(--saffron-m);opacity:.4}
+.hero-badge{display:inline-block;background:var(--saffron);color:#fff;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;border-radius:2px;margin-bottom:.5rem;font-weight:700}
+.hero-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1.9rem;line-height:1.35;color:var(--ink);margin-bottom:.6rem;cursor:pointer;transition:color .2s}
+.hero-title:hover{color:var(--saffron)}
+.hero-excerpt{font-size:.88rem;color:var(--ink-3);line-height:1.7;margin-bottom:.7rem}
+.hero-meta{display:flex;align-items:center;gap:.6rem;font-size:.72rem;color:var(--ink-3);flex-wrap:wrap}
+.hero-author{font-weight:600;color:var(--ink-2)}
+.meta-dot{width:3px;height:3px;border-radius:50%;background:var(--saffron-m);display:inline-block;flex-shrink:0}
+.hero-side{display:flex;flex-direction:column;gap:0}
+.side-label{font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--saffron);font-weight:700;margin-bottom:.8rem;display:flex;align-items:center;gap:6px}
+.side-label::before{content:'';display:block;width:14px;height:2px;background:var(--saffron)}
+.side-card{display:grid;grid-template-columns:80px 1fr;gap:.7rem;padding:.9rem 0;border-bottom:1px solid var(--line);cursor:pointer;transition:opacity .15s}
+.side-card:last-child{border-bottom:none}
+.side-card:hover{opacity:.7}
+.side-thumb{width:80px;height:62px;background:var(--paper-3);border-radius:4px;overflow:hidden;flex-shrink:0}
+.side-thumb img{width:100%;height:100%;object-fit:cover}
+.side-thumb .ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--ink-4)}
+.side-cat{font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--saffron);font-weight:700;display:block;margin-bottom:2px}
+.side-title{font-family:'Tiro Devanagari Hindi',serif;font-size:.84rem;line-height:1.4;color:var(--ink)}
+.side-date{font-size:.68rem;color:var(--ink-4);margin-top:3px;display:block}
 
-/* MAIN FEED GRID */
-.feed-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;margin-bottom:3rem}
-.feed-card{cursor:pointer;transition:transform .2s}
-.feed-card:hover{transform:translateY(-2px)}
-.feed-card:hover .feed-card-title{color:var(--saffron)}
-.feed-thumb{width:100%;aspect-ratio:3/2;border-radius:4px;object-fit:cover;display:block;background:var(--paper2);margin-bottom:.8rem}
-.feed-thumb-ph{width:100%;aspect-ratio:3/2;border-radius:4px;background:var(--paper3);display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:var(--ink-muted);margin-bottom:.8rem;position:relative;overflow:hidden}
-.feed-thumb-ph::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 8px,rgba(74,59,42,0.04) 8px,rgba(74,59,42,0.04) 16px)}
-.feed-cat-badge{font-size:.6rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--saffron);font-weight:700;display:block;margin-bottom:.3rem}
-.feed-card-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1.05rem;line-height:1.45;color:var(--ink);transition:color .15s;margin-bottom:.4rem}
-.feed-excerpt{font-size:.82rem;color:var(--ink-muted);line-height:1.6;margin-bottom:.5rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.feed-meta{display:flex;align-items:center;gap:.6rem;font-size:.72rem;color:var(--ink-muted)}
-.feed-tag{font-size:.63rem;background:var(--paper2);border:1px solid var(--line);padding:2px 7px;border-radius:2px;color:var(--ink-muted)}
+/* ── CATEGORY TABS ── */
+.cat-tabs{display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:1.8rem}
+.cat-tab{font-size:.72rem;padding:.3rem .85rem;border:1.5px solid var(--line-dark);border-radius:20px;cursor:pointer;color:var(--ink-2);background:transparent;font-family:'Source Sans 3',sans-serif;transition:all .15s;white-space:nowrap}
+.cat-tab:hover,.cat-tab.active{background:var(--saffron);border-color:var(--saffron);color:#fff}
 
-/* DIVIDER SECTION */
-.section-divider{border:none;border-top:1px solid var(--line);margin:2.5rem 0}
-.section-head{display:flex;align-items:center;gap:1rem;margin-bottom:1.8rem}
-.section-head h2{font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--ink);font-weight:400}
-.section-head-line{flex:1;height:1px;background:var(--line)}
-.section-head-more{font-size:.72rem;color:var(--saffron);letter-spacing:1px;text-decoration:none;text-transform:uppercase;font-weight:700;flex-shrink:0}
+/* ── FEED GRID ── */
+.feed-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;margin-bottom:2.5rem}
+.feed-card{cursor:pointer;border-bottom:2px solid transparent;transition:border-color .2s}
+.feed-card:hover{border-color:var(--saffron)}
+.feed-card:hover .fc-title{color:var(--saffron)}
+.fc-img{width:100%;aspect-ratio:3/2;background:var(--paper-3);border-radius:var(--radius);overflow:hidden;margin-bottom:.75rem}
+.fc-img img{width:100%;height:100%;object-fit:cover}
+.fc-img .ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--ink-4)}
+.fc-cat{font-size:.58rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--saffron);font-weight:700;display:block;margin-bottom:.25rem}
+.fc-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1rem;line-height:1.45;color:var(--ink);transition:color .15s;margin-bottom:.35rem}
+.fc-excerpt{font-size:.8rem;color:var(--ink-3);line-height:1.6;margin-bottom:.4rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.fc-meta{display:flex;align-items:center;gap:.5rem;font-size:.7rem;color:var(--ink-4);flex-wrap:wrap}
+.fc-tag{font-size:.6rem;background:var(--paper-2);border:1px solid var(--line);padding:1px 7px;border-radius:2px;color:var(--ink-3)}
+.fc-read{font-size:.65rem;color:var(--ink-4);margin-left:auto}
 
-/* BELA-STYLE WIDE CARDS */
-.wide-cards{display:flex;flex-direction:column;gap:0}
-.wide-card{display:grid;grid-template-columns:120px 1fr 80px;gap:1rem;padding:1.2rem 0;border-bottom:1px solid var(--line);cursor:pointer;transition:opacity .15s;align-items:start}
-.wide-card:last-child{border-bottom:none}
-.wide-card:hover{opacity:.75}
-.wide-card-num{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--paper3);font-weight:400;line-height:1;padding-top:4px;text-align:center}
-.wide-card-body .cat{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--leaf);font-weight:700;margin-bottom:3px}
-.wide-card-body h3{font-family:'Tiro Devanagari Hindi',serif;font-size:.95rem;line-height:1.45;color:var(--ink);margin-bottom:.3rem}
-.wide-card-body .exc{font-size:.8rem;color:var(--ink-muted);line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.wide-card-body .meta{font-size:.68rem;color:var(--ink-muted);margin-top:.4rem}
-.wide-card-read{font-size:.65rem;color:var(--ink-muted);letter-spacing:.5px;padding-top:4px;text-align:right}
+/* ── LOAD MORE ── */
+.load-more-wrap{text-align:center;margin:1rem 0 2.5rem}
+.btn-load-more{padding:.6rem 2rem;border:1.5px solid var(--saffron);border-radius:4px;color:var(--saffron);background:none;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:.82rem;transition:all .15s}
+.btn-load-more:hover{background:var(--saffron);color:#fff}
+.btn-load-more:disabled{opacity:.4;cursor:not-allowed}
 
-/* TWO-COL BOTTOM */
-.bottom-grid{display:grid;grid-template-columns:2fr 1fr;gap:3rem;margin-top:1rem}
+/* ── DIVIDER ── */
+hr.divider{border:none;border-top:1px solid var(--line);margin:2rem 0}
 
-/* CINEMA / SCIENCE HIGHLIGHT */
-.highlight-card{background:var(--ink);border-radius:6px;padding:1.8rem;position:relative;overflow:hidden;cursor:pointer;transition:opacity .15s}
-.highlight-card::before{content:'';position:absolute;top:-20px;right:-20px;width:120px;height:120px;border-radius:50%;background:rgba(212,87,10,.15)}
-.highlight-card:hover{opacity:.9}
-.highlight-cat{font-size:.62rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--saffron-mid);font-weight:700;margin-bottom:.5rem}
-.highlight-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1.25rem;color:white;line-height:1.4;margin-bottom:.6rem}
-.highlight-exc{font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.6;margin-bottom:.8rem}
-.highlight-link{font-size:.75rem;color:var(--saffron-mid);font-weight:700;letter-spacing:.5px;text-transform:uppercase;display:inline-flex;align-items:center;gap:4px}
+/* ── SECTION HEAD ── */
+.sec-head{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem}
+.sec-head h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--ink);font-weight:400;white-space:nowrap}
+.sec-head-line{flex:1;height:1px;background:var(--line)}
+.sec-head-more{font-size:.68rem;color:var(--saffron);letter-spacing:.5px;text-decoration:none;text-transform:uppercase;font-weight:700;white-space:nowrap;cursor:pointer}
+.sec-head-more:hover{text-decoration:underline}
 
-/* SIDEBAR WIDGETS */
-.widget{margin-bottom:2rem}
-.widget-title{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--ink);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--saffron);display:inline-block;font-weight:400}
-.tag-cloud{display:flex;flex-wrap:wrap;gap:.4rem}
-.tag-pill{font-size:.72rem;padding:.3rem .75rem;border:1px solid var(--line);border-radius:20px;color:var(--ink-mid);cursor:pointer;transition:all .15s;font-family:'Lato',sans-serif}
-.tag-pill:hover{background:var(--saffron-light);border-color:var(--saffron-mid);color:var(--saffron)}
-.newsletter-box{background:var(--saffron-light);border-radius:6px;padding:1.2rem}
-.newsletter-box h4{font-family:'Tiro Devanagari Hindi',serif;font-size:1rem;color:var(--saffron);margin-bottom:.4rem}
-.newsletter-box p{font-size:.78rem;color:var(--ink-mid);line-height:1.6;margin-bottom:.8rem}
-.newsletter-input{width:100%;padding:.5rem .75rem;border:1px solid var(--saffron-mid);border-radius:4px;font-size:.82rem;background:white;color:var(--ink);outline:none;margin-bottom:.5rem;font-family:'Lato',sans-serif}
-.newsletter-btn{width:100%;padding:.5rem;background:var(--saffron);color:white;border:none;border-radius:4px;font-size:.8rem;font-weight:700;letter-spacing:.5px;cursor:pointer;font-family:'Lato',sans-serif;transition:opacity .15s}
-.newsletter-btn:hover{opacity:.85}
+/* ── BOTTOM GRID ── */
+.bottom-grid{display:grid;grid-template-columns:1fr 300px;gap:2.5rem}
 
-/* FOOTER */
-.site-footer{background:var(--ink);color:rgba(255,255,255,.7);padding:3rem 2rem 1.5rem;margin-top:4rem}
-.footer-inner{max-width:1200px;margin:0 auto}
-.footer-brand{font-family:'DM Serif Display',serif;font-size:1.8rem;color:white;margin-bottom:.3rem}
-.footer-brand span{color:var(--saffron-mid);font-style:italic}
-.footer-tagline{font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:2rem}
-.footer-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;padding:2rem 0;border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:1.5rem}
-.footer-col h4{font-size:.7rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.8rem}
-.footer-col a{display:block;font-size:.82rem;color:rgba(255,255,255,.6);text-decoration:none;padding:2px 0;transition:color .15s}
-.footer-col a:hover{color:var(--saffron-mid)}
-.footer-copy{font-size:.75rem;color:rgba(255,255,255,.35);text-align:center}
+/* ── POPULAR LIST ── */
+.popular-list{display:flex;flex-direction:column;gap:0}
+.pop-card{display:grid;grid-template-columns:52px 1fr 90px;gap:.8rem;padding:1rem 0;border-bottom:1px solid var(--line);cursor:pointer;transition:opacity .15s;align-items:start}
+.pop-card:last-child{border-bottom:none;padding-bottom:0}
+.pop-card:hover{opacity:.7}
+.pop-num{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--paper-3);line-height:1;text-align:center;padding-top:2px}
+.pop-body .cat{font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--leaf);font-weight:700;margin-bottom:2px}
+.pop-body h3{font-family:'Tiro Devanagari Hindi',serif;font-size:.9rem;line-height:1.4;color:var(--ink);margin-bottom:.25rem}
+.pop-body .exc{font-size:.77rem;color:var(--ink-3);line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pop-body .meta{font-size:.65rem;color:var(--ink-4);margin-top:.3rem}
+.pop-read{font-size:.63rem;color:var(--ink-4);text-align:right;padding-top:2px}
 
-/* RESPONSIVE */
-@media(max-width:900px){
-  .hero-grid{grid-template-columns:1fr}
+/* ── SIDEBAR ── */
+.sidebar{display:flex;flex-direction:column;gap:1.8rem}
+.widget-title{font-family:'Playfair Display',serif;font-size:1rem;color:var(--ink);margin-bottom:.9rem;padding-bottom:.4rem;border-bottom:2px solid var(--saffron);display:inline-block;font-weight:400}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:.35rem}
+.tag-pill{font-size:.68rem;padding:.28rem .7rem;border:1px solid var(--line-dark);border-radius:16px;color:var(--ink-2);cursor:pointer;transition:all .15s;font-family:'Source Sans 3',sans-serif}
+.tag-pill:hover{background:var(--saffron-l);border-color:var(--saffron-m);color:var(--saffron)}
+.highlight-card{background:var(--ink-2);border-radius:var(--radius);padding:1.4rem;cursor:pointer;transition:opacity .2s;position:relative;overflow:hidden}
+.highlight-card::before{content:'';position:absolute;top:-15px;right:-15px;width:80px;height:80px;border-radius:50%;background:rgba(200,84,10,.18)}
+.highlight-card:hover{opacity:.88}
+.hl-cat{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--saffron-m);font-weight:700;margin-bottom:.4rem}
+.hl-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1.05rem;color:#fff;line-height:1.4;margin-bottom:.5rem}
+.hl-exc{font-size:.78rem;color:rgba(255,255,255,.55);line-height:1.6;margin-bottom:.6rem}
+.hl-link{font-size:.7rem;color:var(--saffron-m);font-weight:700;letter-spacing:.3px;text-transform:uppercase}
+.newsletter-box{background:var(--saffron-l);border-radius:var(--radius);padding:1.2rem}
+.newsletter-box h4{font-family:'Tiro Devanagari Hindi',serif;font-size:.95rem;color:var(--saffron);margin-bottom:.35rem}
+.newsletter-box p{font-size:.75rem;color:var(--ink-2);line-height:1.6;margin-bottom:.7rem}
+.nl-input{width:100%;padding:.45rem .75rem;border:1.5px solid var(--saffron-m);border-radius:4px;font-size:.78rem;background:#fff;color:var(--ink);outline:none;margin-bottom:.4rem;font-family:'Source Sans 3',sans-serif}
+.nl-input:focus{border-color:var(--saffron)}
+.nl-btn{width:100%;padding:.45rem;background:var(--saffron);color:#fff;border:none;border-radius:4px;font-size:.76rem;font-weight:700;cursor:pointer;font-family:'Source Sans 3',sans-serif;transition:opacity .15s;letter-spacing:.3px}
+.nl-btn:hover{opacity:.85}
+.nl-msg{font-size:.72rem;color:var(--leaf);margin-top:.3rem;display:none}
+
+/* ── ARTICLE READER ── */
+.article-page{display:none}
+.article-page.open{display:block}
+.homepage{display:block}
+.homepage.hidden{display:none}
+.back-btn{display:inline-flex;align-items:center;gap:.4rem;font-size:.75rem;color:var(--saffron);cursor:pointer;margin-bottom:1.5rem;background:none;border:none;font-family:'Source Sans 3',sans-serif;padding:0}
+.back-btn:hover{text-decoration:underline}
+.art-header{max-width:760px;margin:0 auto 2rem}
+.art-badge{display:inline-block;background:var(--saffron);color:#fff;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;border-radius:2px;margin-bottom:.8rem;font-weight:700}
+.art-title{font-family:'Tiro Devanagari Hindi',serif;font-size:2.2rem;line-height:1.35;color:var(--ink);margin-bottom:.6rem}
+.art-subtitle{font-size:1rem;color:var(--ink-3);line-height:1.65;margin-bottom:1rem;font-style:italic}
+.art-meta-bar{display:flex;align-items:center;gap:.8rem;font-size:.75rem;color:var(--ink-3);padding:.8rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.art-author-name{font-weight:600;color:var(--ink-2)}
+.art-banner{width:100%;max-width:900px;margin:1.5rem auto;border-radius:var(--radius);overflow:hidden}
+.art-banner img{width:100%;display:block}
+.art-content{max-width:760px;margin:0 auto;font-family:'Tiro Devanagari Hindi',serif;font-size:1.05rem;line-height:1.85;color:var(--ink-2)}
+.art-content p{margin-bottom:1.2rem}
+.art-content h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--ink);margin:2rem 0 .8rem}
+.art-content h3{font-family:'Tiro Devanagari Hindi',serif;font-size:1.1rem;color:var(--ink);margin:1.5rem 0 .6rem}
+.art-content blockquote{border-left:3px solid var(--saffron);padding:.8rem 1.2rem;background:var(--paper-2);margin:1.5rem 0;font-style:italic;color:var(--ink-2)}
+.art-footer{max-width:760px;margin:2rem auto 0;padding-top:1.5rem;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-wrap:gap}
+.art-like-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.2rem;border:1.5px solid var(--line-dark);border-radius:4px;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:.8rem;background:none;color:var(--ink-2);transition:all .15s}
+.art-like-btn:hover,.art-like-btn.liked{background:var(--saffron-l);border-color:var(--saffron);color:var(--saffron)}
+.art-tags{display:flex;flex-wrap:wrap;gap:.3rem}
+
+/* ── COMMENTS ── */
+.comments-section{max-width:760px;margin:2.5rem auto 0}
+.comment-form{margin-bottom:1.5rem}
+.comment-form textarea{width:100%;padding:.7rem 1rem;border:1.5px solid var(--line-dark);border-radius:4px;font-size:.85rem;font-family:'Source Sans 3',sans-serif;background:var(--paper-2);color:var(--ink);outline:none;resize:vertical;min-height:80px}
+.comment-form textarea:focus{border-color:var(--saffron)}
+.comment-form-actions{display:flex;justify-content:flex-end;margin-top:.4rem}
+.btn-comment{padding:.4rem 1.2rem;background:var(--saffron);color:#fff;border:none;border-radius:4px;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:.8rem;transition:opacity .15s}
+.btn-comment:hover{opacity:.85}
+.comment-item{padding:.9rem 0;border-bottom:1px solid var(--line)}
+.comment-item:last-child{border-bottom:none}
+.comment-header{display:flex;align-items:center;gap:.6rem;margin-bottom:.35rem}
+.comment-avatar{width:30px;height:30px;border-radius:50%;background:var(--saffron-l);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:var(--saffron);flex-shrink:0}
+.comment-username{font-weight:600;font-size:.8rem;color:var(--ink-2)}
+.comment-date{font-size:.68rem;color:var(--ink-4)}
+.comment-text{font-size:.85rem;color:var(--ink-2);line-height:1.6}
+.comment-like-btn{background:none;border:none;cursor:pointer;font-size:.7rem;color:var(--ink-4);display:inline-flex;align-items:center;gap:.3rem;margin-top:.3rem;transition:color .15s;font-family:'Source Sans 3',sans-serif}
+.comment-like-btn:hover,.comment-like-btn.liked{color:var(--saffron)}
+.login-notice{background:var(--saffron-l);border-radius:4px;padding:.7rem 1rem;font-size:.8rem;color:var(--saffron);text-align:center}
+
+/* ── LOADING / SKELETON ── */
+.skeleton{background:linear-gradient(90deg,var(--paper-2) 25%,var(--paper-3) 50%,var(--paper-2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:4px}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.skel-img{aspect-ratio:3/2;margin-bottom:.75rem}
+.skel-line{height:.8rem;margin-bottom:.4rem}
+.skel-line.short{width:60%}
+.loading-spinner{text-align:center;padding:3rem;color:var(--ink-4);font-size:.85rem}
+.loading-spinner::before{content:'';display:inline-block;width:24px;height:24px;border:2px solid var(--line);border-top-color:var(--saffron);border-radius:50%;animation:spin .7s linear infinite;margin-right:.5rem;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+.error-msg{text-align:center;padding:2rem;color:var(--ink-4);font-size:.85rem}
+.error-msg span{display:block;font-size:2rem;margin-bottom:.5rem}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5rem;margin-top:4rem}
+.footer-inner{max-width:1280px;margin:0 auto}
+.footer-brand-hi{font-family:'Tiro Devanagari Hindi',serif;font-size:2rem;color:#fff;margin-bottom:.2rem}
+.footer-brand-sub{font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:2rem}
+.footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;padding:2rem 0;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:1.5rem}
+.footer-col h4{font-size:.62rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.7rem}
+.footer-col a{display:block;font-size:.8rem;color:rgba(255,255,255,.55);text-decoration:none;padding:2px 0;transition:color .15s;cursor:pointer}
+.footer-col a:hover{color:var(--saffron-m)}
+.footer-copy{font-size:.7rem;color:rgba(255,255,255,.3);text-align:center}
+
+/* ── AUTH MODAL ── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(24,18,10,.8);z-index:500;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--paper);border-radius:var(--radius);padding:2rem;width:90%;max-width:400px;position:relative}
+.modal-close{position:absolute;top:.8rem;right:1rem;background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--ink-3)}
+.modal-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1.3rem;color:var(--ink);margin-bottom:1.2rem}
+.modal-tabs{display:flex;gap:0;margin-bottom:1.5rem;border-bottom:1px solid var(--line)}
+.modal-tab{padding:.5rem 1rem;cursor:pointer;font-size:.8rem;color:var(--ink-3);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;background:none;border-top:none;border-left:none;border-right:none;font-family:'Source Sans 3',sans-serif}
+.modal-tab.active{color:var(--saffron);border-bottom-color:var(--saffron)}
+.form-field{margin-bottom:.9rem}
+.form-field label{display:block;font-size:.72rem;color:var(--ink-3);margin-bottom:.3rem;letter-spacing:.3px}
+.form-field input{width:100%;padding:.5rem .75rem;border:1.5px solid var(--line-dark);border-radius:4px;font-size:.85rem;font-family:'Source Sans 3',sans-serif;background:var(--paper-2);color:var(--ink);outline:none}
+.form-field input:focus{border-color:var(--saffron)}
+.btn-submit{width:100%;padding:.55rem;background:var(--saffron);color:#fff;border:none;border-radius:4px;font-size:.85rem;font-weight:600;cursor:pointer;font-family:'Source Sans 3',sans-serif;transition:opacity .15s;margin-top:.3rem}
+.btn-submit:hover{opacity:.85}
+.form-msg{font-size:.75rem;text-align:center;margin-top:.5rem;min-height:1.2em}
+.form-msg.error{color:#c0392b}
+.form-msg.success{color:var(--leaf)}
+
+/* ── USER BAR ── */
+.user-bar{display:flex;align-items:center;gap:.5rem}
+.user-avatar{width:30px;height:30px;border-radius:50%;background:var(--saffron-l);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:var(--saffron);cursor:pointer;border:1.5px solid var(--saffron-m)}
+.btn-logout{font-size:.7rem;color:var(--ink-3);background:none;border:none;cursor:pointer;font-family:'Source Sans 3',sans-serif;text-decoration:underline}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--ink-2);color:#fff;padding:.6rem 1.2rem;border-radius:4px;font-size:.8rem;z-index:999;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr}
+  .hero-side{display:none}
   .feed-grid{grid-template-columns:1fr 1fr}
   .bottom-grid{grid-template-columns:1fr}
-  .footer-cols{grid-template-columns:1fr 1fr}
-  .wide-card{grid-template-columns:60px 1fr}
-  .wide-card-read{display:none}
+  .sidebar .highlight-card{display:none}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .pop-card{grid-template-columns:44px 1fr}
+  .pop-read{display:none}
 }
-@media(max-width:600px){
+@media(max-width:640px){
+  .header-inner{grid-template-columns:auto 1fr auto;padding:.6rem 1rem}
+  nav.main-nav{display:none}
+  .hamburger{display:flex}
   .feed-grid{grid-template-columns:1fr}
-  .header-nav{display:none}
-  .header-tagline{display:none}
   .hero-title{font-size:1.5rem}
+  .art-title{font-size:1.6rem}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .bottom-grid{grid-template-columns:1fr}
+  main{padding:1.5rem 1rem}
+}
+@media(max-width:400px){
+  .footer-grid{grid-template-columns:1fr}
+  .cat-tabs{gap:.25rem}
 }
 </style>
 </head>
+
 <body>
 
-<h2 class="sr-only">ShivaMarg — Hindi literary magazine homepage showcasing latest articles, kavitas, stories, and more</h2>
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
-<div class="dateline">रचना · विचार · कला · संस्कृति</div>
+<!-- TOP STRIP -->
+<div class="top-strip">रचना · विचार · कला · संस्कृति</div>
 
-<header class="site-header">
+<!-- HEADER -->
+<header>
   <div class="header-inner">
-    <a href="#" class="site-logo">शिव<span>मार्ग</span></a>
-    <span class="header-tagline">साहित्य का सफ़र</span>
-    <nav class="header-nav">
-      <a href="#">बेला</a>
-      <a href="#">कविता</a>
-      <a href="#">कहानी</a>
-      <a href="#">सिनेमा</a>
-      <a href="#">विज्ञान</a>
-      <a href="#">विचार</a>
+    <a class="logo" href="#" onclick="showHome();return false">
+      <span class="logo-hi">बरगद</span>
+      <span class="logo-sub">साहित्य का सफ़र</span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="#" data-cat="" class="active" onclick="filterCat(this,'');return false">सभी</a>
+      <a href="#" data-cat="kavita" onclick="filterCat(this,'kavita');return false">कविता</a>
+      <a href="#" data-cat="kahani" onclick="filterCat(this,'kahani');return false">कहानी</a>
+      <a href="#" data-cat="nibandh" onclick="filterCat(this,'nibandh');return false">निबंध</a>
+      <a href="#" data-cat="cinema" onclick="filterCat(this,'cinema');return false">सिनेमा</a>
+      <a href="#" data-cat="science" onclick="filterCat(this,'science');return false">विज्ञान</a>
+      <a href="#" data-cat="ai-it" onclick="filterCat(this,'ai-it');return false">AI · IT</a>
+      <a href="#" data-cat="vichar" onclick="filterCat(this,'vichar');return false">विचार</a>
     </nav>
-    <div class="header-search"><i class="ti ti-search" aria-hidden="true"></i></div>
+    <div class="header-actions">
+      <button class="btn-search" onclick="toggleSearch()" title="खोजें">&#128269;</button>
+      <div id="authArea">
+        <a class="btn-login" href="#" onclick="openModal();return false">लॉग-इन</a>
+      </div>
+      <button class="hamburger" onclick="toggleMobileMenu()" aria-label="menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>
 
-<main class="site-main">
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-header">
+    <span class="logo-hi" style="color:var(--saffron)">बरगद</span>
+    <button class="mobile-menu-close" onclick="toggleMobileMenu()">✕</button>
+  </div>
+  <nav>
+    <a href="#" onclick="filterCat(null,'');toggleMobileMenu();return false">सभी रचनाएँ</a>
+    <a href="#" onclick="filterCat(null,'kavita');toggleMobileMenu();return false">कविता</a>
+    <a href="#" onclick="filterCat(null,'kahani');toggleMobileMenu();return false">कहानी</a>
+    <a href="#" onclick="filterCat(null,'nibandh');toggleMobileMenu();return false">निबंध</a>
+    <a href="#" onclick="filterCat(null,'cinema');toggleMobileMenu();return false">सिनेमा</a>
+    <a href="#" onclick="filterCat(null,'science');toggleMobileMenu();return false">विज्ञान</a>
+    <a href="#" onclick="filterCat(null,'ai-it');toggleMobileMenu();return false">AI · IT</a>
+    <a href="#" onclick="filterCat(null,'vichar');toggleMobileMenu();return false">विचार</a>
+  </nav>
+</div>
 
-  <!-- HERO -->
-  <div class="section-label">आज का विशेष</div>
-  <div class="hero-grid">
-    <div class="hero-main">
-      <div class="hero-img-placeholder"><span class="hero-kite">ॐ</span></div>
-      <span class="hero-badge">कविता</span>
-      <h1 class="hero-title">जब पक्षी लौटते हैं उसी डाल पर<br>जहाँ उनका घोंसला था कभी</h1>
-      <p class="hero-excerpt">एक कवि की आत्मा का संवाद उस स्मृति से जो न मिटती है, न पूरी होती है — बस तैरती रहती है समय की नदी में।</p>
-      <div class="hero-meta">
-        <span class="hero-author">अविनाश मिश्र</span>
-        <span class="dot"></span>
-        <span>24 मई 2026</span>
-        <span class="dot"></span>
-        <span>5 मिनट</span>
-      </div>
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay" onclick="closeSearch(event)">
+  <div class="search-box" onclick="event.stopPropagation()">
+    <button class="search-close" onclick="toggleSearch()">✕</button>
+    <h3>खोजिए</h3>
+    <div class="search-input-wrap">
+      <input type="text" id="searchInput" placeholder="कोई शीर्षक, लेखक, विषय..." onkeydown="if(event.key==='Enter')doSearch()">
+      <button onclick="doSearch()">खोजें</button>
     </div>
-    <div class="hero-sidebar">
-      <div class="section-label" style="margin-bottom:.8rem">और पढ़ें</div>
-      <article class="side-article">
-        <div class="side-thumb-ph"><i class="ti ti-movie" aria-hidden="true"></i></div>
-        <div>
-          <span class="side-cat">सिनेमा</span>
-          <div class="side-title">इरफ़ान की क़ब्र पर 25 साल पुराना फूल</div>
-          <span class="side-date">19 मई 2026</span>
-        </div>
-      </article>
-      <article class="side-article">
-        <div class="side-thumb-ph"><i class="ti ti-book" aria-hidden="true"></i></div>
-        <div>
-          <span class="side-cat">किताबें</span>
-          <div class="side-title">देह की देहरी पर परिवार और समाज का पहरा</div>
-          <span class="side-date">18 मई 2026</span>
-        </div>
-      </article>
-      <article class="side-article">
-        <div class="side-thumb-ph"><i class="ti ti-device-tv" aria-hidden="true"></i></div>
-        <div>
-          <span class="side-cat">AI · तकनीक</span>
-          <div class="side-title">कॉमनवेल्थ विजेता कहानी पर AI की परछाईं</div>
-          <span class="side-date">21 मई 2026</span>
-        </div>
-      </article>
-      <article class="side-article">
-        <div class="side-thumb-ph"><i class="ti ti-map-pin" aria-hidden="true"></i></div>
-        <div>
-          <span class="side-cat">स्मृतिलोक</span>
-          <div class="side-title">फ़ीफ़ा, मैकडॉनल्ड्स और बीस साल पहले का इलाहाबाद</div>
-          <span class="side-date">22 मई 2026</span>
-        </div>
-      </article>
+    <div id="searchResults"></div>
+  </div>
+</div>
+
+<!-- AUTH MODAL -->
+<div class="modal-overlay" id="authModal" onclick="closeModal(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-title" id="modalTitle">स्वागत है</div>
+    <div class="modal-tabs">
+      <button class="modal-tab active" onclick="switchTab('login')">लॉग-इन</button>
+      <button class="modal-tab" onclick="switchTab('register')">नया खाता</button>
+    </div>
+    <div id="loginForm">
+      <div class="form-field"><label>ई-मेल</label><input type="email" id="loginEmail" placeholder="आपका ई-मेल"></div>
+      <div class="form-field"><label>पासवर्ड</label><input type="password" id="loginPass" placeholder="पासवर्ड"></div>
+      <button class="btn-submit" onclick="doLogin()">लॉग-इन करें</button>
+      <div class="form-msg" id="loginMsg"></div>
+    </div>
+    <div id="registerForm" style="display:none">
+      <div class="form-field"><label>उपयोगकर्ता नाम</label><input type="text" id="regUsername" placeholder="username (केवल अंग्रेज़ी)"></div>
+      <div class="form-field"><label>नाम</label><input type="text" id="regDisplay" placeholder="आपका नाम"></div>
+      <div class="form-field"><label>ई-मेल</label><input type="email" id="regEmail" placeholder="आपका ई-मेल"></div>
+      <div class="form-field"><label>पासवर्ड</label><input type="password" id="regPass" placeholder="कम से कम 6 अक्षर"></div>
+      <button class="btn-submit" onclick="doRegister()">खाता बनाएँ</button>
+      <div class="form-msg" id="registerMsg"></div>
     </div>
   </div>
+</div>
 
-  <!-- CATEGORY FILTER -->
-  <div class="cat-tabs">
-    <button class="cat-tab active">सभी</button>
-    <button class="cat-tab">कविता</button>
-    <button class="cat-tab">कहानी</button>
-    <button class="cat-tab">निबंध</button>
-    <button class="cat-tab">सिनेमा</button>
-    <button class="cat-tab">विज्ञान</button>
-    <button class="cat-tab">AI</button>
-    <button class="cat-tab">संगीत</button>
-    <button class="cat-tab">लोक</button>
-    <button class="cat-tab">विचार</button>
+<!-- HOMEPAGE -->
+<div class="homepage" id="homepage">
+<main>
+
+  <!-- HERO -->
+  <div class="sec-label">आज का विशेष</div>
+  <div class="hero" id="heroSection">
+    <div class="loading-spinner">रचनाएँ लोड हो रही हैं…</div>
+  </div>
+
+  <!-- CATEGORY TABS -->
+  <div class="cat-tabs" id="catTabs">
+    <button class="cat-tab active" onclick="filterCat(this,'')">सभी</button>
+    <button class="cat-tab" onclick="filterCat(this,'kavita')">कविता</button>
+    <button class="cat-tab" onclick="filterCat(this,'kahani')">कहानी</button>
+    <button class="cat-tab" onclick="filterCat(this,'nibandh')">निबंध</button>
+    <button class="cat-tab" onclick="filterCat(this,'cinema')">सिनेमा</button>
+    <button class="cat-tab" onclick="filterCat(this,'science')">विज्ञान</button>
+    <button class="cat-tab" onclick="filterCat(this,'ai-it')">AI · IT</button>
+    <button class="cat-tab" onclick="filterCat(this,'vichar')">विचार</button>
+    <button class="cat-tab" onclick="filterCat(this,'lok')">लोक</button>
+    <button class="cat-tab" onclick="filterCat(this,'sangeet')">संगीत</button>
   </div>
 
   <!-- FEED GRID -->
-  <div class="feed-grid">
-
-    <article class="feed-card">
-      <div class="feed-thumb-ph"><i class="ti ti-music" aria-hidden="true"></i></div>
-      <span class="feed-cat-badge">लोक · संगीत</span>
-      <h3 class="feed-card-title">DJ वाले बाबू आजकल बिहार में जो बजा रहे हैं…</h3>
-      <p class="feed-excerpt">अगर किसी विदेशी शोधार्थी को बिहार का समकालीन समाज समझाना हो तो उसे एक क़स्बाई शादी में भेजना पसंद करूँगा।</p>
-      <div class="feed-meta">
-        <span>कुमार केशव</span>
-        <span class="feed-tag">युवा</span>
-        <span class="feed-tag">गाँव</span>
-      </div>
-    </article>
-
-    <article class="feed-card">
-      <div class="feed-thumb-ph"><i class="ti ti-feather" aria-hidden="true"></i></div>
-      <span class="feed-cat-badge">रविवासरीय · कविता</span>
-      <h3 class="feed-card-title">कविता और उसके संपादक — रविवासरीय 4.0</h3>
-      <p class="feed-excerpt">एक बार की बात है — 'कथानक' नामधारी एक पत्रिका ने अपना कविता-विशेषांक घोषित किया।</p>
-      <div class="feed-meta">
-        <span>अविनाश मिश्र</span>
-        <span class="feed-tag">आलोचना</span>
-      </div>
-    </article>
-
-    <article class="feed-card">
-      <div class="feed-thumb-ph"><i class="ti ti-home" aria-hidden="true"></i></div>
-      <span class="feed-cat-badge">शनिवारेर चिट्ठी</span>
-      <h3 class="feed-card-title">घर की जगह — एक पत्र</h3>
-      <p class="feed-excerpt">मनुष्य अपने घर के बारे में सबसे कम तब सोचता है जब वह उसका निवासी होता है।</p>
-      <div class="feed-meta">
-        <span>शायक अलोक</span>
-        <span class="feed-tag">स्मृति</span>
-        <span class="feed-tag">घर</span>
-      </div>
-    </article>
-
-    <article class="feed-card">
-      <div class="feed-thumb-ph"><i class="ti ti-atom-2" aria-hidden="true"></i></div>
-      <span class="feed-cat-badge">विज्ञान · दर्शन</span>
-      <h3 class="feed-card-title">रूपक-कथाएँ : स्वल्प-वासी</h3>
-      <p class="feed-excerpt">बग़ीची के पास पानी का नहीं, प्रतिध्वनियों का एक कुआँ था। जब झाँकता तो आवाज़ दिखाई देती।</p>
-      <div class="feed-meta">
-        <span>पीयूष दइया</span>
-        <span class="feed-tag">अस्तित्व</span>
-      </div>
-    </article>
-
-    <article class="feed-card">
-      <div class="feed-thumb-ph"><i class="ti ti-brand-google" aria-hidden="true"></i></div>
-      <span class="feed-cat-badge">AI · तकनीक</span>
-      <h3 class="feed-card-title">ChatGPT से लेखन कितना बदल गया है हिंदी में?</h3>
-      <p class="feed-excerpt">कृत्रिम बुद्धिमत्ता के युग में हिंदी लेखन की चुनौतियाँ और अवसर — एक विश्लेषण।</p>
-      <div class="feed-meta">
-        <span>—</span>
-        <span class="feed-tag">IT</span>
-        <span class="feed-tag">भाषा</span>
-      </div>
-    </article>
-
-    <article class="feed-card">
-      <div class="feed-thumb-ph"><i class="ti ti-telescope" aria-hidden="true"></i></div>
-      <span class="feed-cat-badge">विज्ञान</span>
-      <h3 class="feed-card-title">ब्रह्मांड की उत्पत्ति और भारतीय दर्शन</h3>
-      <p class="feed-excerpt">आधुनिक ब्रह्मांड विज्ञान और वेदांत के बीच जो समानताएँ हैं, वे आश्चर्यजनक हैं।</p>
-      <div class="feed-meta">
-        <span>—</span>
-        <span class="feed-tag">दर्शन</span>
-      </div>
-    </article>
-
+  <div class="feed-grid" id="feedGrid">
+    <div class="loading-spinner" style="grid-column:1/-1">रचनाएँ लोड हो रही हैं…</div>
+  </div>
+  <div class="load-more-wrap">
+    <button class="btn-load-more" id="loadMoreBtn" onclick="loadMore()" style="display:none">और रचनाएँ देखें</button>
   </div>
 
-  <hr class="section-divider">
+  <hr class="divider">
 
-  <!-- RECENT LONG READS -->
-  <div class="section-head">
-    <h2>लंबी पढ़ाई</h2>
-    <div class="section-head-line"></div>
-    <a href="#" class="section-head-more">सभी देखें →</a>
-  </div>
-
+  <!-- BOTTOM -->
   <div class="bottom-grid">
     <div>
-      <div class="wide-cards">
-        <article class="wide-card">
-          <div class="wide-card-num">01</div>
-          <div class="wide-card-body">
-            <div class="cat">निबंध</div>
-            <h3>क्रिस्टोफ़र नोलन, अमृता शेर-गिल, मंगलेश डबराल और अन्य मुलाक़ातें</h3>
-            <p class="exc">समय किसी सीधी बहती नदी की तरह नहीं। वह लौटता हुआ और मुड़ता हुआ — समय अपनी ही दिशा पर संदेह करता हुआ।</p>
-            <div class="meta">शायक अलोक · 16 मई 2026 · 10 मिनट</div>
-          </div>
-          <div class="wide-card-read">10 मिनट</div>
-        </article>
-        <article class="wide-card">
-          <div class="wide-card-num">02</div>
-          <div class="wide-card-body">
-            <div class="cat">स्मृतिलोक</div>
-            <h3>फ़ीफ़ा, मैकडॉनल्ड्स और बीस साल पहले का इलाहाबाद</h3>
-            <p class="exc">इस दफ़ा फुटबॉल विश्वकप की मेज़बानी और भारत में प्रसारण अधिकार की दिलचस्प कहानी।</p>
-            <div class="meta">अभिषेक कुमार सिंह · 22 मई 2026 · 8 मिनट</div>
-          </div>
-          <div class="wide-card-read">8 मिनट</div>
-        </article>
-        <article class="wide-card">
-          <div class="wide-card-num">03</div>
-          <div class="wide-card-body">
-            <div class="cat">आलोचना</div>
-            <h3>देह की देहरी पर परिवार और समाज का पहरा — जया जादवानी की कहानियाँ</h3>
-            <p class="exc">मानवीय रिश्तों की बारीकियों, जटिलताओं और गहराई को उन्होंने अपनी कहानियों में ख़ूबसूरती से अभिव्यक्त किया।</p>
-            <div class="meta">सियाराम शर्मा · 18 मई 2026 · 7 मिनट</div>
-          </div>
-          <div class="wide-card-read">7 मिनट</div>
-        </article>
-        <article class="wide-card">
-          <div class="wide-card-num">04</div>
-          <div class="wide-card-body">
-            <div class="cat">सिनेमा</div>
-            <h3>The Last Tenant : इरफ़ान की क़ब्र पर 25 साल पुराना फूल</h3>
-            <p class="exc">अब शादियों के एल्बम नहीं दिखते। आजकल नीले-नीले लिंक होते हैं जो सीधे तस्वीरों के समंदर में पटक देते हैं।</p>
-            <div class="meta">शशांक मिश्र · 19 मई 2026 · 9 मिनट</div>
-          </div>
-          <div class="wide-card-read">9 मिनट</div>
-        </article>
+      <div class="sec-head">
+        <h2>लोकप्रिय रचनाएँ</h2>
+        <div class="sec-head-line"></div>
+      </div>
+      <div class="popular-list" id="popularList">
+        <div class="loading-spinner">लोड हो रही हैं…</div>
       </div>
     </div>
-
-    <aside>
-      <div class="widget">
+    <aside class="sidebar">
+      <div>
         <div class="widget-title">विषय</div>
-        <div class="tag-cloud">
-          <span class="tag-pill">कविता</span>
-          <span class="tag-pill">कहानी</span>
-          <span class="tag-pill">निबंध</span>
-          <span class="tag-pill">सिनेमा</span>
-          <span class="tag-pill">AI</span>
-          <span class="tag-pill">विज्ञान</span>
-          <span class="tag-pill">संगीत</span>
-          <span class="tag-pill">लोक</span>
-          <span class="tag-pill">स्मृति</span>
-          <span class="tag-pill">दर्शन</span>
-          <span class="tag-pill">यात्रा</span>
-          <span class="tag-pill">इतिहास</span>
-          <span class="tag-pill">भाषा</span>
-          <span class="tag-pill">पत्र</span>
-          <span class="tag-pill">IT</span>
-          <span class="tag-pill">पर्यावरण</span>
+        <div class="tag-cloud" id="tagCloud">
+          <span class="tag-pill" onclick="filterCat(null,'kavita')">कविता</span>
+          <span class="tag-pill" onclick="filterCat(null,'kahani')">कहानी</span>
+          <span class="tag-pill" onclick="filterCat(null,'nibandh')">निबंध</span>
+          <span class="tag-pill" onclick="filterCat(null,'cinema')">सिनेमा</span>
+          <span class="tag-pill" onclick="filterCat(null,'science')">विज्ञान</span>
+          <span class="tag-pill" onclick="filterCat(null,'ai-it')">AI</span>
+          <span class="tag-pill" onclick="filterCat(null,'lok')">लोक</span>
+          <span class="tag-pill" onclick="filterCat(null,'sangeet')">संगीत</span>
+          <span class="tag-pill" onclick="filterCat(null,'vichar')">विचार</span>
+          <span class="tag-pill" onclick="filterCat(null,'itihas')">इतिहास</span>
+          <span class="tag-pill" onclick="filterCat(null,'darshan')">दर्शन</span>
+          <span class="tag-pill" onclick="filterCat(null,'bhasha')">भाषा</span>
+          <span class="tag-pill" onclick="filterCat(null,'smriti')">स्मृति</span>
+          <span class="tag-pill" onclick="filterCat(null,'yatra')">यात्रा</span>
         </div>
       </div>
-
-      <div class="highlight-card" style="margin:1.5rem 0">
-        <div class="highlight-cat">सिनेमा · विशेष</div>
-        <div class="highlight-title">हिंदी सिनेमा के अनदेखे मोड़</div>
-        <p class="highlight-exc">जो फ़िल्में दिखाई नहीं गईं — मगर जिन्होंने बदल दिया सोचने का तरीक़ा।</p>
-        <span class="highlight-link">पढ़ें <i class="ti ti-arrow-right" aria-hidden="true"></i></span>
-      </div>
-
-      <div class="widget">
+      <div>
         <div class="widget-title">न्यूज़लेटर</div>
         <div class="newsletter-box">
-          <h4>शिवमार्ग से जुड़ें</h4>
-          <p>हर हफ़्ते चुनिंदा लेख, कविताएँ और विचार — सीधे आपके इनबॉक्स में।</p>
-          <input class="newsletter-input" type="email" placeholder="आपका ई-मेल">
-          <button class="newsletter-btn">सब्सक्राइब करें</button>
+          <h4>बरगद से जुड़ें</h4>
+          <p>हर हफ़्ते चुनिंदा रचनाएँ — सीधे आपके इनबॉक्स में।</p>
+          <input class="nl-input" type="email" id="nlEmail" placeholder="आपका ई-मेल">
+          <button class="nl-btn" onclick="nlSubscribe()">सब्सक्राइब करें</button>
+          <div class="nl-msg" id="nlMsg">धन्यवाद! आप जुड़ गए हैं। 🌿</div>
         </div>
+      </div>
+      <div id="latestWidget">
+        <div class="widget-title">ताज़ा रचनाएँ</div>
+        <div id="latestList" class="loading-spinner" style="font-size:.75rem;padding:1rem">लोड हो रही हैं…</div>
       </div>
     </aside>
   </div>
 
 </main>
+</div>
 
-<footer class="site-footer">
+<!-- ARTICLE PAGE -->
+<div class="article-page" id="articlePage">
+<main>
+  <button class="back-btn" onclick="showHome()">← वापस</button>
+  <div id="articleContent">
+    <div class="loading-spinner">रचना लोड हो रही है…</div>
+  </div>
+</main>
+</div>
+
+<!-- FOOTER -->
+<footer>
   <div class="footer-inner">
-    <div class="footer-brand">शिव<span>मार्ग</span></div>
-    <div class="footer-tagline">साहित्य · कला · विचार · संस्कृति</div>
-    <div class="footer-cols">
+    <div class="footer-brand-hi">बरगद</div>
+    <div class="footer-brand-sub">साहित्य · कला · विचार · संस्कृति</div>
+    <div class="footer-grid">
       <div class="footer-col">
         <h4>साहित्य</h4>
-        <a href="#">कविता</a>
-        <a href="#">कहानी</a>
-        <a href="#">निबंध</a>
-        <a href="#">डायरी</a>
+        <a onclick="filterCat(null,'kavita')">कविता</a>
+        <a onclick="filterCat(null,'kahani')">कहानी</a>
+        <a onclick="filterCat(null,'nibandh')">निबंध</a>
+        <a onclick="filterCat(null,'smriti')">स्मृति</a>
       </div>
       <div class="footer-col">
         <h4>संस्कृति</h4>
-        <a href="#">सिनेमा</a>
-        <a href="#">संगीत</a>
-        <a href="#">लोक</a>
-        <a href="#">यात्रा</a>
+        <a onclick="filterCat(null,'cinema')">सिनेमा</a>
+        <a onclick="filterCat(null,'sangeet')">संगीत</a>
+        <a onclick="filterCat(null,'lok')">लोक</a>
+        <a onclick="filterCat(null,'yatra')">यात्रा</a>
       </div>
       <div class="footer-col">
         <h4>ज्ञान</h4>
-        <a href="#">विज्ञान</a>
-        <a href="#">AI · IT</a>
-        <a href="#">दर्शन</a>
-        <a href="#">इतिहास</a>
+        <a onclick="filterCat(null,'science')">विज्ञान</a>
+        <a onclick="filterCat(null,'ai-it')">AI · IT</a>
+        <a onclick="filterCat(null,'darshan')">दर्शन</a>
+        <a onclick="filterCat(null,'itihas')">इतिहास</a>
       </div>
       <div class="footer-col">
         <h4>जानकारी</h4>
         <a href="#">परिचय</a>
         <a href="#">संपर्क</a>
-        <a href="#">गोपनीयता</a>
-        <a href="#">लेखक बनें</a>
+        <a href="#">गोपनीयता नीति</a>
+        <a onclick="openModal()">लेखक बनें</a>
       </div>
     </div>
-    <p class="footer-copy">© 2026 ShivaMarg. सर्वाधिकार सुरक्षित।</p>
+    <p class="footer-copy">© 2026 बरगद. सर्वाधिकार सुरक्षित।</p>
   </div>
 </footer>
 
 <script>
-document.querySelectorAll('.cat-tab').forEach(btn=>{
-  btn.addEventListener('click',function(){
-    document.querySelectorAll('.cat-tab').forEach(b=>b.classList.remove('active'));
-    this.classList.add('active');
-  });
-});
-document.querySelectorAll('.feed-card,.wide-card,.side-article,.highlight-card').forEach(el=>{
-  el.addEventListener('click',()=>sendPrompt('शिवमार्ग पर इस लेख के लिए API integration कैसे करें — /api/articles endpoint से डेटा fetch करके?'));
-});
-</script>
+// ── CONFIG ─────────────────────────────────────────────────────────
+const API = 'http://localhost:8000'; // ← change to your server URL
 
+// ── STATE ──────────────────────────────────────────────────────────
+let state = {
+  token: localStorage.getItem('bargad_token') || null,
+  user: JSON.parse(localStorage.getItem('bargad_user') || 'null'),
+  articles: [],
+  skip: 0,
+  limit: 9,
+  total: 0,
+  category: '',
+  currentSlug: null,
+  likedArticles: JSON.parse(localStorage.getItem('bargad_likes') || '[]'),
+};
+
+// ── API HELPERS ────────────────────────────────────────────────────
+async function apiFetch(path, opts = {}) {
+  const headers = { 'Content-Type': 'application/json' };
+  if (state.token) headers['Authorization'] = 'Bearer ' + state.token;
+  try {
+    const res = await fetch(API + path, { headers, ...opts });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ detail: res.statusText }));
+      throw new Error(err.detail || 'Server error');
+    }
+    return await res.json();
+  } catch (e) {
+    if (e.name === 'TypeError') throw new Error('सर्वर से जुड़ नहीं पाए। कृपया जाँचें।');
+    throw e;
+  }
+}
+
+// ── DATE FORMATTER ─────────────────────────────────────────────────
+function fmtDate(iso) {
+  if (!iso) return '';
+  try {
+    return new Date(iso).toLocaleDateString('hi-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+  } catch { return iso.slice(0, 10); }
+}
+
+// ── IMAGE ──────────────────────────────────────────────────────────
+function imgEl(url, alt, cls) {
+  if (url) return `<img src="${url}" alt="${alt||''}" class="${cls||''}" loading="lazy" onerror="this.style.display='none'">`;
+  return `<div class="ph">📖</div>`;
+}
+
+// ── TOAST ──────────────────────────────────────────────────────────
+function showToast(msg, dur = 2500) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), dur);
+}
+
+// ── AUTH UI ────────────────────────────────────────────────────────
+function renderAuthArea() {
+  const area = document.getElementById('authArea');
+  if (state.user) {
+    area.innerHTML = `
+      <div class="user-bar">
+        <div class="user-avatar" title="${state.user.display_name}">${state.user.avatar || state.user.username[0].toUpperCase()}</div>
+        <button class="btn-logout" onclick="doLogout()">लॉग-आउट</button>
+      </div>`;
+  } else {
+    area.innerHTML = `<a class="btn-login" href="#" onclick="openModal();return false">लॉग-इन</a>`;
+  }
+}
+
+function openModal() { document.getElementById('authModal').classList.add('open'); }
+function closeModal(e) {
+  if (!e || e.target === document.getElementById('authModal'))
+    document.getElementById('authModal').classList.remove('open');
+}
+function switchTab(tab) {
+  document.getElementById('loginForm').style.display = tab === 'login' ? 'block' : 'none';
+  document.getElementById('registerForm').style.display = tab === 'register' ? 'block' : 'none';
+  document.querySelectorAll('.modal-tab').forEach((t, i) => t.classList.toggle('active', (i === 0) === (tab === 'login')));
+}
+
+async function doLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass = document.getElementById('loginPass').value;
+  const msg = document.getElementById('loginMsg');
+  msg.textContent = '…'; msg.className = 'form-msg';
+  try {
+    const data = await apiFetch('/api/auth/login', {
+      method: 'POST', body: JSON.stringify({ email, password: pass })
+    });
+    state.token = data.token; state.user = data.user;
+    localStorage.setItem('bargad_token', data.token);
+    localStorage.setItem('bargad_user', JSON.stringify(data.user));
+    renderAuthArea();
+    closeModal();
+    showToast('स्वागत है, ' + data.user.display_name + '!');
+  } catch (e) { msg.textContent = e.message; msg.className = 'form-msg error'; }
+}
+
+async function doRegister() {
+  const username = document.getElementById('regUsername').value.trim();
+  const display = document.getElementById('regDisplay').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const pass = document.getElementById('regPass').value;
+  const msg = document.getElementById('registerMsg');
+  msg.textContent = '…'; msg.className = 'form-msg';
+  try {
+    const data = await apiFetch('/api/auth/register', {
+      method: 'POST', body: JSON.stringify({ username, display_name: display, email, password: pass })
+    });
+    state.token = data.token; state.user = data.user;
+    localStorage.setItem('bargad_token', data.token);
+    localStorage.setItem('bargad_user', JSON.stringify(data.user));
+    renderAuthArea();
+    closeModal();
+    showToast('खाता बन गया! स्वागत है।');
+  } catch (e) { msg.textContent = e.message; msg.className = 'form-msg error'; }
+}
+
+function doLogout() {
+  state.token = null; state.user = null;
+  localStorage.removeItem('bargad_token');
+  localStorage.removeItem('bargad_user');
+  renderAuthArea();
+  showToast('लॉग-आउट हो गए।');
+}
+
+// ── MOBILE MENU ────────────────────────────────────────────────────
+function toggleMobileMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// ── SEARCH ─────────────────────────────────────────────────────────
+function toggleSearch() {
+  document.getElementById('searchOverlay').classList.toggle('open');
+  if (document.getElementById('searchOverlay').classList.contains('open'))
+    setTimeout(() => document.getElementById('searchInput').focus(), 100);
+}
+function closeSearch(e) {
+  if (e.target === document.getElementById('searchOverlay')) toggleSearch();
+}
+async function doSearch() {
+  const q = document.getElementById('searchInput').value.trim();
+  const results = document.getElementById('searchResults');
+  if (!q) { results.innerHTML = ''; return; }
+  results.innerHTML = '<div class="loading-spinner" style="padding:.5rem">खोज रहे हैं…</div>';
+  try {
+    const data = await apiFetch(`/api/articles/search?q=${encodeURIComponent(q)}&limit=8`);
+    if (!data.articles.length) { results.innerHTML = '<p style="font-size:.8rem;color:var(--ink-4);padding:.5rem 0">कोई रचना नहीं मिली।</p>'; return; }
+    results.innerHTML = data.articles.map(a => `
+      <div class="search-result-item" onclick="openArticle('${a.slug}');toggleSearch()">
+        <span class="sr-cat">${a.category || '—'}</span>
+        <div class="sr-title">${a.title}</div>
+        <div class="sr-exc">${a.excerpt ? a.excerpt.slice(0, 80) + '…' : ''}</div>
+      </div>`).join('');
+  } catch (e) { results.innerHTML = `<div class="error-msg" style="padding:.5rem">${e.message}</div>`; }
+}
+
+// ── CATEGORY FILTER ────────────────────────────────────────────────
+function filterCat(el, cat) {
+  state.category = cat;
+  state.skip = 0; state.articles = [];
+  // update tab active states
+  document.querySelectorAll('.cat-tab, nav.main-nav a').forEach(t => t.classList.remove('active'));
+  if (el) el.classList.add('active');
+  // sync both nav sets
+  document.querySelectorAll(`nav.main-nav a[data-cat="${cat}"]`).forEach(a => a.classList.add('active'));
+  document.querySelectorAll(`.cat-tab`).forEach(t => { if (t.textContent.trim() && t.onclick && t.onclick.toString().includes(`'${cat}'`)) t.classList.add('active'); });
+  loadFeed(true);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── HERO ───────────────────────────────────────────────────────────
+async function loadHero() {
+  const hero = document.getElementById('heroSection');
+  try {
+    const latest = await apiFetch('/api/articles/latest?limit=5');
+    const side = await apiFetch('/api/articles/latest?limit=4');
+    const articles = latest.articles || [];
+    if (!articles.length) { hero.innerHTML = '<div class="error-msg"><span>📭</span>अभी कोई रचना नहीं है।</div>'; return; }
+    const main = articles[0];
+    const sides = (side.articles || []).slice(1, 5);
+    hero.innerHTML = `
+      <div class="hero-main">
+        <div class="hero-main-img">${main.thumbnail_url ? `<img src="${main.thumbnail_url}" alt="${main.title}" loading="lazy">` : `<div class="img-ph">📜</div>`}</div>
+        <span class="hero-badge">${main.category || 'रचना'}</span>
+        <div class="hero-title" onclick="openArticle('${main.slug}')">${main.title}</div>
+        <p class="hero-excerpt">${main.excerpt ? main.excerpt.slice(0, 150) + '…' : ''}</p>
+        <div class="hero-meta">
+          <span class="hero-author">${main.author?.username || '—'}</span>
+          <span class="meta-dot"></span>
+          <span>${fmtDate(main.published_at)}</span>
+          <span class="meta-dot"></span>
+          <span>${main.read_time || 5} मिनट</span>
+        </div>
+      </div>
+      <div class="hero-side">
+        <div class="side-label">और पढ़ें</div>
+        ${sides.map(a => `
+          <div class="side-card" onclick="openArticle('${a.slug}')">
+            <div class="side-thumb">${a.thumbnail_url ? `<img src="${a.thumbnail_url}" alt="${a.title}" loading="lazy">` : `<div class="ph">📖</div>`}</div>
+            <div>
+              <span class="side-cat">${a.category || 'रचना'}</span>
+              <div class="side-title">${a.title}</div>
+              <span class="side-date">${fmtDate(a.published_at)}</span>
+            </div>
+          </div>`).join('')}
+      </div>`;
+  } catch (e) {
+    hero.innerHTML = `<div class="error-msg"><span>⚠️</span>${e.message}</div>`;
+  }
+}
+
+// ── FEED ───────────────────────────────────────────────────────────
+function feedCardHTML(a) {
+  return `
+    <div class="feed-card" onclick="openArticle('${a.slug}')">
+      <div class="fc-img">${a.thumbnail_url ? `<img src="${a.thumbnail_url}" alt="${a.title}" loading="lazy">` : `<div class="ph">📜</div>`}</div>
+      <span class="fc-cat">${a.category || 'रचना'}</span>
+      <div class="fc-title">${a.title}</div>
+      <p class="fc-excerpt">${a.excerpt || ''}</p>
+      <div class="fc-meta">
+        <span>${a.author?.username || '—'}</span>
+        ${(a.tags || []).slice(0, 2).map(t => `<span class="fc-tag">${t}</span>`).join('')}
+        <span class="fc-read">${a.read_time || 5} मिनट</span>
+      </div>
+    </div>`;
+}
+
+async function loadFeed(reset = false) {
+  const grid = document.getElementById('feedGrid');
+  const btn = document.getElementById('loadMoreBtn');
+  if (reset) { grid.innerHTML = '<div class="loading-spinner" style="grid-column:1/-1">रचनाएँ लोड हो रही हैं…</div>'; }
+  try {
+    let url = `/api/articles?skip=${state.skip}&limit=${state.limit}`;
+    if (state.category) url += `&category=${encodeURIComponent(state.category)}`;
+    const data = await apiFetch(url);
+    const arts = data.articles || [];
+    state.total = data.total || 0;
+    if (reset) state.articles = arts; else state.articles = [...state.articles, ...arts];
+    if (!state.articles.length) {
+      grid.innerHTML = '<div class="error-msg" style="grid-column:1/-1"><span>📭</span>इस विषय में अभी कोई रचना नहीं है।</div>';
+      btn.style.display = 'none'; return;
+    }
+    grid.innerHTML = state.articles.map(feedCardHTML).join('');
+    state.skip = state.articles.length;
+    btn.style.display = state.articles.length < state.total ? 'inline-block' : 'none';
+  } catch (e) {
+    grid.innerHTML = `<div class="error-msg" style="grid-column:1/-1"><span>⚠️</span>${e.message}</div>`;
+    btn.style.display = 'none';
+  }
+}
+
+async function loadMore() {
+  const btn = document.getElementById('loadMoreBtn');
+  btn.disabled = true; btn.textContent = 'लोड हो रही हैं…';
+  await loadFeed(false);
+  btn.disabled = false; btn.textContent = 'और रचनाएँ देखें';
+}
+
+// ── POPULAR ────────────────────────────────────────────────────────
+async function loadPopular() {
+  const list = document.getElementById('popularList');
+  try {
+    const data = await apiFetch('/api/articles/popular?limit=6');
+    const arts = data.articles || [];
+    if (!arts.length) { list.innerHTML = '<div class="error-msg">अभी कोई लोकप्रिय रचना नहीं।</div>'; return; }
+    list.innerHTML = arts.map((a, i) => `
+      <div class="pop-card" onclick="openArticle('${a.slug}')">
+        <div class="pop-num">0${i + 1}</div>
+        <div class="pop-body">
+          <div class="cat">${a.category || 'रचना'}</div>
+          <h3>${a.title}</h3>
+          <p class="exc">${a.excerpt ? a.excerpt.slice(0, 90) + '…' : ''}</p>
+          <div class="meta">${a.author?.username || '—'} · ${fmtDate(a.published_at)}</div>
+        </div>
+        <div class="pop-read">${a.read_time || 5} मिनट<br><small style="color:var(--ink-4)">${a.view_count || 0} बार</small></div>
+      </div>`).join('');
+  } catch (e) { list.innerHTML = `<div class="error-msg">${e.message}</div>`; }
+}
+
+// ── LATEST SIDEBAR ─────────────────────────────────────────────────
+async function loadLatestSidebar() {
+  const el = document.getElementById('latestList');
+  try {
+    const data = await apiFetch('/api/articles/latest?limit=4');
+    const arts = data.articles || [];
+    el.className = '';
+    el.innerHTML = arts.map(a => `
+      <div style="padding:.6rem 0;border-bottom:1px solid var(--line);cursor:pointer" onclick="openArticle('${a.slug}')">
+        <span style="font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--saffron);font-weight:700">${a.category || '—'}</span>
+        <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:.83rem;color:var(--ink);margin-top:2px;line-height:1.4">${a.title}</div>
+        <div style="font-size:.65rem;color:var(--ink-4);margin-top:2px">${fmtDate(a.published_at)}</div>
+      </div>`).join('');
+  } catch (e) { el.innerHTML = `<div class="error-msg" style="padding:.5rem">${e.message}</div>`; }
+}
+
+// ── ARTICLE PAGE ────────────────────────────────────────────────────
+async function openArticle(slug) {
+  state.currentSlug = slug;
+  document.getElementById('homepage').classList.add('hidden');
+  document.getElementById('articlePage').classList.add('open');
+  const content = document.getElementById('articleContent');
+  content.innerHTML = '<div class="loading-spinner">रचना लोड हो रही है…</div>';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  try {
+    const a = await apiFetch(`/api/articles/${slug}`);
+    const liked = state.likedArticles.includes(slug);
+    content.innerHTML = `
+      <div class="art-header">
+        <span class="art-badge">${a.category || 'रचना'}</span>
+        <h1 class="art-title">${a.title}</h1>
+        ${a.subtitle ? `<p class="art-subtitle">${a.subtitle}</p>` : ''}
+        <div class="art-meta-bar">
+          <span class="art-author-name">${a.author?.username || '—'}</span>
+          <span class="meta-dot"></span>
+          <span>${fmtDate(a.published_at)}</span>
+          <span class="meta-dot"></span>
+          <span>${a.read_time || 5} मिनट पढ़ें</span>
+          <span class="meta-dot"></span>
+          <span>${a.view_count || 0} बार पढ़ा गया</span>
+        </div>
+      </div>
+      ${a.banner_url ? `<div class="art-banner"><img src="${a.banner_url}" alt="${a.title}"></div>` : ''}
+      <div class="art-content">${a.content || '<p>सामग्री उपलब्ध नहीं है।</p>'}</div>
+      <div class="art-footer">
+        <button class="art-like-btn ${liked ? 'liked' : ''}" id="likeBtn" onclick="toggleLike('${slug}')">
+          ${liked ? '♥' : '♡'} पसंद <span id="likeCount">${a.like_count || 0}</span>
+        </button>
+        <div class="art-tags">
+          ${(a.tags || []).map(t => `<span class="fc-tag">${t}</span>`).join('')}
+        </div>
+      </div>
+      <div class="comments-section">
+        <div class="sec-head"><h2>टिप्पणियाँ</h2><div class="sec-head-line"></div></div>
+        <div id="commentFormArea"></div>
+        <div id="commentsList"><div class="loading-spinner" style="padding:1rem">टिप्पणियाँ लोड हो रही हैं…</div></div>
+      </div>`;
+    renderCommentForm(slug);
+    loadComments(slug);
+  } catch (e) {
+    content.innerHTML = `<div class="error-msg"><span>⚠️</span>${e.message}</div>`;
+  }
+}
+
+function showHome() {
+  document.getElementById('homepage').classList.remove('hidden');
+  document.getElementById('articlePage').classList.remove('open');
+  state.currentSlug = null;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── LIKE ───────────────────────────────────────────────────────────
+async function toggleLike(slug) {
+  if (!state.user) { openModal(); showToast('पसंद करने के लिए लॉग-इन करें।'); return; }
+  try {
+    const data = await apiFetch(`/api/articles/${slug}/like`, { method: 'POST' });
+    const liked = data.liked;
+    if (liked) state.likedArticles.push(slug); else state.likedArticles = state.likedArticles.filter(s => s !== slug);
+    localStorage.setItem('bargad_likes', JSON.stringify(state.likedArticles));
+    const btn = document.getElementById('likeBtn');
+    const cnt = document.getElementById('likeCount');
+    if (btn) { btn.className = 'art-like-btn ' + (liked ? 'liked' : ''); btn.firstChild.textContent = liked ? ' ♥ पसंद ' : ' ♡ पसंद '; }
+    if (cnt) cnt.textContent = data.like_count;
+    showToast(liked ? 'पसंद किया! ♥' : 'पसंद हटाई।');
+  } catch (e) { showToast(e.message); }
+}
+
+// ── COMMENTS ───────────────────────────────────────────────────────
+function renderCommentForm(slug) {
+  const area = document.getElementById('commentFormArea');
+  if (state.user) {
+    area.innerHTML = `
+      <div class="comment-form">
+        <textarea id="commentText" placeholder="अपनी टिप्पणी लिखें…"></textarea>
+        <div class="comment-form-actions">
+          <button class="btn-comment" onclick="postComment('${slug}')">भेजें</button>
+        </div>
+      </div>`;
+  } else {
+    area.innerHTML = `<div class="login-notice">टिप्पणी करने के लिए <a href="#" onclick="openModal();return false" style="color:var(--saffron);font-weight:600">लॉग-इन करें</a>।</div>`;
+  }
+}
+
+async function loadComments(slug) {
+  const list = document.getElementById('commentsList');
+  try {
+    const data = await apiFetch(`/api/comments/${encodeURIComponent(slug)}?limit=20`);
+    const comments = data.comments || [];
+    if (!comments.length) { list.innerHTML = '<p style="font-size:.8rem;color:var(--ink-4);padding:.5rem 0">अभी कोई टिप्पणी नहीं।</p>'; return; }
+    list.innerHTML = comments.map(c => `
+      <div class="comment-item" id="cmt-${c.id}">
+        <div class="comment-header">
+          <div class="comment-avatar">${c.avatar || c.username[0].toUpperCase()}</div>
+          <span class="comment-username">${c.username}</span>
+          <span class="comment-date">${fmtDate(c.created_at)}</span>
+          ${state.user && state.user.id === c.user_id ? `<button onclick="deleteComment('${c.id}','${slug}')" style="margin-left:auto;background:none;border:none;font-size:.65rem;color:var(--ink-4);cursor:pointer">हटाएँ</button>` : ''}
+        </div>
+        <div class="comment-text">${c.text}</div>
+        <button class="comment-like-btn ${c.liked_by_me ? 'liked' : ''}" id="cl-${c.id}" onclick="likeComment('${c.id}')">
+          ${c.liked_by_me ? '♥' : '♡'} <span id="clc-${c.id}">${c.likes}</span>
+        </button>
+      </div>`).join('');
+  } catch (e) { list.innerHTML = `<div class="error-msg">${e.message}</div>`; }
+}
+
+async function postComment(slug) {
+  const txt = document.getElementById('commentText');
+  if (!txt || !txt.value.trim()) { showToast('टिप्पणी लिखें।'); return; }
+  try {
+    await apiFetch('/api/comments', { method: 'POST', body: JSON.stringify({ page_id: slug, text: txt.value.trim() }) });
+    txt.value = '';
+    loadComments(slug);
+    showToast('टिप्पणी जोड़ी गई!');
+  } catch (e) { showToast(e.message); }
+}
+
+async function likeComment(id) {
+  if (!state.user) { openModal(); return; }
+  try {
+    const data = await apiFetch(`/api/comments/${id}/like`, { method: 'POST' });
+    const btn = document.getElementById('cl-' + id);
+    const cnt = document.getElementById('clc-' + id);
+    if (btn) { btn.className = 'comment-like-btn ' + (data.liked_by_me ? 'liked' : ''); btn.firstChild.textContent = data.liked_by_me ? ' ♥ ' : ' ♡ '; }
+    if (cnt) cnt.textContent = data.likes;
+  } catch (e) { showToast(e.message); }
+}
+
+async function deleteComment(id, slug) {
+  if (!confirm('टिप्पणी हटाएँ?')) return;
+  try {
+    await apiFetch(`/api/comments/${id}`, { method: 'DELETE' });
+    loadComments(slug);
+    showToast('टिप्पणी हटाई गई।');
+  } catch (e) { showToast(e.message); }
+}
+
+// ── NEWSLETTER ─────────────────────────────────────────────────────
+function nlSubscribe() {
+  const email = document.getElementById('nlEmail').value.trim();
+  if (!email || !email.includes('@')) { showToast('सही ई-मेल डालें।'); return; }
+  document.getElementById('nlMsg').style.display = 'block';
+  document.getElementById('nlEmail').value = '';
+  showToast('सब्सक्राइब हो गए! 🌿');
+}
+
+// ── INIT ───────────────────────────────────────────────────────────
+async function init() {
+  renderAuthArea();
+  // verify stored token
+  if (state.token) {
+    apiFetch('/api/auth/me').then(u => {
+      state.user = u;
+      localStorage.setItem('bargad_user', JSON.stringify(u));
+      renderAuthArea();
+    }).catch(() => {
+      state.token = null; state.user = null;
+      localStorage.removeItem('bargad_token');
+      localStorage.removeItem('bargad_user');
+      renderAuthArea();
+    });
+  }
+  await Promise.all([loadHero(), loadFeed(true), loadPopular(), loadLatestSidebar()]);
+}
+
+// close mobile menu on resize
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 640) document.getElementById('mobileMenu').classList.remove('open');
+});
+
+init();
+</script>
 </body>
 </html>
