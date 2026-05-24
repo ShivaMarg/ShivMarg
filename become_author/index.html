@@ -369,7 +369,7 @@ async function submitForm(e) {
 
     showMessage('🎉 लेखक प्रोफ़ाइल बन गई! आप अब रचनाएँ प्रकाशित कर सकते हैं।', 'success');
     setTimeout(() => {
-      window.location.href = `author-profile.html?username=${state.user.username}`;
+      window.location.href = `/author?username=${state.user.username}`;
     }, 2000);
   } catch (e) {
     showMessage(e.message, 'error');
