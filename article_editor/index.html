@@ -776,6 +776,38 @@
     </div>
   </div>
 </div>
+
+<!-- ── TOAST ──────────────────────────────– -->
+<div class="toast" id="toast"></div>
+
+<!-- ── JAVASCRIPT ──────────────────────────– -->
+<script>
+  // ─────────────────────────────────────────────
+  // CONFIG & STATE
+  // ─────────────────────────────────────────────
+  const API_BASE = 'https://shivamargbackend.onrender.com'; // Change for production
+  let currentUser = null;
+  let isPublishing = false;
+  let tags = [];
+
+  // ─────────────────────────────────────────────
+  // UTILITY: Local Storage & Auth
+  // ─────────────────────────────────────────────
+  function getToken() {
+    return localStorage.getItem('sm_token') || null;
+  }
+
+  function getCurrentUser() {
+    const user = localStorage.getItem('currentUser');
+    return user ? JSON.parse(user) : null;
+  }
+
+  function logout() {
+    localStorage.removeItem('sm_token');
+    localStorage.removeItem('currentUser');
+    window.location.href = '/';
+  }
+
   // ─────────────────────────────────────────────
   // INIT: Check Auth & Load User
   // ─────────────────────────────────────────────
