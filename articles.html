@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>लेख | बेला</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── TOKENS ─────────────────────────────── */
+    :root {
+      --ink:       #1a1410;
+      --ink-soft:  #4a3f35;
+      --ink-muted: #8a7a6e;
+      --paper:     #faf8f5;
+      --paper-warm:#f5f0e8;
+      --accent:    #c0392b;
+      --accent-2:  #e8a87c;
+      --border:    #e2d9ce;
+      --sidebar-w: 320px;
+      --content-w: 720px;
+      --serif:     'Noto Serif Devanagari', 'Georgia', serif;
+      --display:   'Playfair Display', serif;
+      --mono:      'DM Mono', monospace;
+    }
+
+    /* ── RESET ──────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--serif);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ─────────────────────────────── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--ink);
+      border-bottom: 3px solid var(--accent);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+      animation: slideDown .4s ease;
+    }
+    @keyframes slideDown { from{transform:translateY(-100%)} to{transform:translateY(0)} }
+
+    .logo {
+      font-family: var(--display);
+      font-size: 1.5rem;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: .04em;
+    }
+    .logo span { color: var(--accent); }
+
+    nav.hdr-nav { display: flex; gap: 1.5rem; }
+    nav.hdr-nav a {
+      color: rgba(255,255,255,.7);
+      text-decoration: none;
+      font-size: .85rem;
+      font-family: var(--mono);
+      letter-spacing: .05em;
+      transition: color .2s;
+    }
+    nav.hdr-nav a:hover { color: var(--accent-2); }
+
+    .hdr-actions { display: flex; gap: .75rem; align-items: center; }
+    .btn-login {
+      background: var(--accent); color: #fff;
+      border: none; padding: .4rem 1rem;
+      font-size: .8rem; font-family: var(--mono);
+      cursor: pointer; letter-spacing: .05em;
+      transition: opacity .2s;
+    }
+    .btn-login:hover { opacity: .85; }
+
+    /* ── LAYOUT ─────────────────────────────── */
+    .page-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr var(--sidebar-w);
+      gap: 4rem;
+      align-items: start;
+    }
+
+    /* ── ARTICLE MAIN ───────────────────────── */
+    .article-main { min-width: 0; }
+
+    /* breadcrumb */
+    .breadcrumb {
+      display: flex; gap: .5rem; align-items: center;
+      font-family: var(--mono); font-size: .75rem;
+      color: var(--ink-muted); margin-bottom: 2rem;
+      animation: fadeUp .5s .1s both;
+    }
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .breadcrumb-sep { opacity: .4; }
+
+    /* tags */
+    .tag-row { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.5rem; animation: fadeUp .5s .15s both; }
+    .tag {
+      display: inline-block;
+      padding: .25rem .75rem;
+      font-size: .72rem; font-family: var(--mono);
+      letter-spacing: .08em; text-transform: uppercase;
+      border: 1px solid var(--border);
+      color: var(--ink-muted); text-decoration: none;
+      transition: all .2s;
+    }
+    .tag:hover, .tag.active {
+      background: var(--accent); color: #fff; border-color: var(--accent);
+    }
+
+    /* title */
+    h1.article-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+      animation: fadeUp .5s .2s both;
+    }
+
+    /* author bar */
+    .author-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
+      animation: fadeUp .5s .25s both;
+    }
+    .author-info { display: flex; align-items: center; gap: .85rem; }
+    .author-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+    }
+    .author-name { font-weight: 600; font-size: .95rem; color: var(--ink); }
+    .author-name a { color: inherit; text-decoration: none; }
+    .author-name a:hover { color: var(--accent); }
+    .article-meta {
+      font-size: .78rem; color: var(--ink-muted);
+      font-family: var(--mono);
+      display: flex; gap: 1rem; align-items: center;
+    }
+    .meta-dot { opacity: .3; }
+
+    /* actions */
+    .article-actions { display: flex; gap: .75rem; align-items: center; }
+    .btn-action {
+      display: flex; align-items: center; gap: .4rem;
+      padding: .45rem .9rem;
+      border: 1px solid var(--border);
+      background: none; cursor: pointer;
+      font-family: var(--mono); font-size: .75rem;
+      color: var(--ink-muted);
+      transition: all .2s;
+    }
+    .btn-action:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-action.liked { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn-action svg { width: 15px; height: 15px; fill: currentColor; }
+
+    /* banner image */
+    .article-banner {
+      width: 100%; height: 420px; object-fit: cover;
+      display: block; margin-bottom: 2.5rem;
+      animation: fadeUp .6s .3s both;
+    }
+
+    /* article body */
+    .article-body {
+      animation: fadeUp .5s .35s both;
+    }
+    .article-body p {
+      font-size: 1.1rem; line-height: 1.9;
+      color: var(--ink-soft);
+      margin-bottom: 1.5rem;
+    }
+    .article-body p strong {
+      color: var(--ink); font-weight: 700;
+      font-size: 1.2rem; display: block; margin-bottom: .5rem;
+      border-left: 3px solid var(--accent); padding-left: .75rem;
+    }
+    .article-body blockquote {
+      border-left: 4px solid var(--accent);
+      margin: 2rem 0;
+      padding: 1.2rem 1.5rem;
+      background: var(--paper-warm);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--ink);
+      line-height: 1.7;
+    }
+    .article-body em { font-style: italic; color: var(--ink); }
+
+    /* bottom tags */
+    .bottom-tags { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+    .bottom-tags h4 {
+      font-family: var(--mono); font-size: .75rem;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--ink-muted); margin-bottom: 1rem;
+    }
+
+    /* ── SHARE BAR ──────────────────────────── */
+    .share-bar {
+      display: flex; gap: .6rem; align-items: center;
+      margin-top: 2rem; flex-wrap: wrap;
+    }
+    .share-label { font-family: var(--mono); font-size: .75rem; color: var(--ink-muted); margin-right: .4rem; }
+    .share-btn {
+      padding: .4rem .9rem; border: 1px solid var(--border);
+      background: none; cursor: pointer;
+      font-size: .78rem; font-family: var(--mono);
+      color: var(--ink-muted); text-decoration: none;
+      display: inline-flex; align-items: center; gap: .4rem;
+      transition: all .2s;
+    }
+    .share-btn:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .share-btn.whatsapp:hover { background: #25d366; border-color: #25d366; }
+    .share-btn.twitter:hover { background: #1da1f2; border-color: #1da1f2; }
+
+    /* ── COMMENTS ───────────────────────────── */
+    .comments-section { margin-top: 4rem; }
+    .comments-section h2 {
+      font-family: var(--display); font-size: 1.5rem;
+      margin-bottom: .5rem; color: var(--ink);
+    }
+    .comment-count {
+      font-family: var(--mono); font-size: .8rem;
+      color: var(--ink-muted); margin-bottom: 2rem;
+      padding-bottom: 1.5rem; border-bottom: 1px solid var(--border);
+    }
+
+    /* comment form */
+    .comment-form { margin-bottom: 2.5rem; }
+    .comment-form textarea {
+      width: 100%; min-height: 100px;
+      border: 1px solid var(--border);
+      background: var(--paper-warm);
+      padding: 1rem; resize: vertical;
+      font-family: var(--serif); font-size: 1rem;
+      color: var(--ink); outline: none;
+      transition: border-color .2s;
+    }
+    .comment-form textarea:focus { border-color: var(--accent); }
+    .comment-form-row { display: flex; gap: .75rem; margin-bottom: .75rem; }
+    .comment-form input {
+      flex: 1; border: 1px solid var(--border);
+      background: var(--paper-warm);
+      padding: .6rem 1rem; font-family: var(--serif);
+      font-size: .95rem; color: var(--ink); outline: none;
+      transition: border-color .2s;
+    }
+    .comment-form input:focus { border-color: var(--accent); }
+    .btn-comment {
+      background: var(--accent); color: #fff;
+      border: none; padding: .65rem 1.5rem;
+      font-family: var(--mono); font-size: .82rem;
+      letter-spacing: .05em; cursor: pointer;
+      transition: opacity .2s; white-space: nowrap;
+    }
+    .btn-comment:hover { opacity: .85; }
+
+    /* comment list */
+    .comment-item {
+      display: flex; gap: 1rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+      animation: fadeUp .4s ease;
+    }
+    .comment-avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: .82rem;
+      font-weight: 600; flex-shrink: 0;
+    }
+    .comment-author { font-weight: 600; font-size: .9rem; margin-bottom: .25rem; }
+    .comment-time { font-family: var(--mono); font-size: .72rem; color: var(--ink-muted); }
+    .comment-text { margin-top: .5rem; font-size: .95rem; color: var(--ink-soft); line-height: 1.7; }
+    .comment-like {
+      background: none; border: 1px solid var(--border);
+      padding: .25rem .6rem; font-family: var(--mono);
+      font-size: .72rem; cursor: pointer; color: var(--ink-muted);
+      margin-top: .75rem; transition: all .2s; display: inline-flex;
+      align-items: center; gap: .3rem;
+    }
+    .comment-like:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* loading state */
+    .skeleton {
+      background: linear-gradient(90deg, var(--border) 25%, var(--paper-warm) 50%, var(--border) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.2s infinite;
+      border-radius: 2px;
+    }
+    @keyframes shimmer { to { background-position: -200% 0; } }
+
+    /* ── SIDEBAR ─────────────────────────────── */
+    .sidebar {
+      position: sticky; top: 80px;
+      animation: fadeUp .5s .4s both;
+    }
+    .sidebar-block { margin-bottom: 3rem; }
+    .sidebar-title {
+      font-family: var(--mono);
+      font-size: .72rem; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--ink-muted);
+      margin-bottom: 1.25rem;
+      padding-bottom: .6rem;
+      border-bottom: 2px solid var(--accent);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    /* popular post card */
+    .pop-card {
+      display: flex; gap: .85rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none; color: inherit;
+      transition: opacity .2s;
+    }
+    .pop-card:hover { opacity: .75; }
+    .pop-card:hover .pop-title { color: var(--accent); }
+    .pop-thumb {
+      width: 72px; height: 72px; object-fit: cover;
+      flex-shrink: 0;
+      background: var(--border);
+    }
+    .pop-title {
+      font-weight: 600; font-size: .9rem;
+      line-height: 1.4; transition: color .2s;
+      margin-bottom: .3rem;
+    }
+    .pop-meta { font-family: var(--mono); font-size: .7rem; color: var(--ink-muted); }
+
+    /* latest post */
+    .lat-item {
+      display: flex; gap: .75rem;
+      padding: .85rem 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none; color: inherit;
+    }
+    .lat-item:hover .lat-title { color: var(--accent); }
+    .lat-thumb {
+      width: 52px; height: 52px; object-fit: cover;
+      flex-shrink: 0;
+      background: var(--border);
+    }
+    .lat-title { font-weight: 600; font-size: .85rem; line-height: 1.35; transition: color .2s; }
+
+    /* newsletter */
+    .newsletter-block {
+      background: var(--ink); padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .newsletter-block h3 {
+      color: #fff; font-size: 1rem;
+      margin-bottom: .4rem;
+      font-family: var(--serif);
+    }
+    .newsletter-block p { color: rgba(255,255,255,.6); font-size: .82rem; margin-bottom: 1rem; }
+    .nl-input { width: 100%; padding: .6rem .85rem; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); color: #fff; font-family: var(--serif); margin-bottom: .6rem; outline: none; }
+    .nl-input::placeholder { color: rgba(255,255,255,.4); }
+    .nl-btn { width: 100%; background: var(--accent); color: #fff; border: none; padding: .65rem; font-family: var(--mono); font-size: .8rem; cursor: pointer; transition: opacity .2s; }
+    .nl-btn:hover { opacity: .85; }
+
+    /* ── PROGRESS BAR ───────────────────────── */
+    .read-progress {
+      position: fixed; top: 60px; left: 0;
+      height: 3px; background: var(--accent);
+      width: 0%; z-index: 200;
+      transition: width .1s linear;
+    }
+
+    /* ── BACK TO TOP ────────────────────────– */
+    .back-top {
+      position: fixed; bottom: 2rem; right: 2rem;
+      width: 44px; height: 44px;
+      background: var(--accent); color: #fff;
+      border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; opacity: 0; pointer-events: none;
+      transition: opacity .3s, transform .3s;
+      transform: translateY(10px);
+    }
+    .back-top.visible { opacity: 1; pointer-events: all; transform: translateY(0); }
+
+    /* ── TOAST ──────────────────────────────── */
+    .toast {
+      position: fixed; bottom: 2rem; left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--ink); color: #fff;
+      padding: .75rem 1.5rem; font-family: var(--mono);
+      font-size: .82rem; opacity: 0;
+      transition: all .3s; pointer-events: none; z-index: 999;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ── FOOTER ─────────────────────────────── */
+    footer {
+      background: var(--ink); color: rgba(255,255,255,.5);
+      text-align: center; padding: 2rem;
+      font-family: var(--mono); font-size: .78rem;
+      margin-top: 4rem;
+    }
+    footer a { color: var(--accent-2); text-decoration: none; }
+
+    /* ── ANIMATIONS ─────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ─────────────────────────── */
+    @media (max-width: 900px) {
+      .page-wrap { grid-template-columns: 1fr; gap: 2rem; }
+      .sidebar { position: static; }
+      nav.hdr-nav { display: none; }
+      .article-banner { height: 260px; }
+    }
+    @media (max-width: 600px) {
+      .page-wrap { padding: 1.5rem 1rem; }
+      .author-bar { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .article-body p { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- READ PROGRESS -->
+<div class="read-progress" id="readProgress"></div>
+
+<!-- ── HEADER ─────────────────────────────────── -->
+<header>
+  <a href="/" class="logo">बेला<span>.</span></a>
+  <nav class="hdr-nav">
+    <a href="#">कवि</a>
+    <a href="#">कविता</a>
+    <a href="#">गद्य</a>
+    <a href="#">ई-पुस्तक</a>
+    <a href="#">शब्दकोश</a>
+  </nav>
+  <div class="hdr-actions">
+    <button class="btn-login">लॉग-इन</button>
+  </div>
+</header>
+
+<!-- ── MAIN LAYOUT ───────────────────────────── -->
+<div class="page-wrap">
+
+  <!-- ── LEFT: ARTICLE ──────────────────────– -->
+  <main class="article-main">
+
+    <!-- breadcrumb -->
+    <div class="breadcrumb">
+      <a href="/">बेला</a>
+      <span class="breadcrumb-sep">›</span>
+      <span>लेख</span>
+    </div>
+
+    <!-- tags -->
+    <div class="tag-row"></div>
+
+    <!-- title -->
+    <h1 class="article-title">लोड हो रहा है...</h1>
+
+    <!-- author bar -->
+    <div class="author-bar"></div>
+
+    <!-- banner -->
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E" alt="" class="article-banner" id="articleBanner">
+
+    <!-- body content -->
+    <article class="article-body" id="articleBody">
+      <div class="skeleton" style="height:100px;margin-bottom:1rem;"></div>
+      <div class="skeleton" style="height:100px;margin-bottom:1rem;opacity:.7;"></div>
+      <div class="skeleton" style="height:60px;opacity:.5;"></div>
+    </article>
+
+    <!-- bottom tags -->
+    <div class="bottom-tags"></div>
+
+    <!-- share bar -->
+    <div class="share-bar"></div>
+
+    <!-- ── COMMENTS ─────────────────────────– -->
+    <section class="comments-section">
+      <h2>कमेंट</h2>
+      <div class="comment-count" id="commentCount">लोड हो रहा है...</div>
+
+      <!-- comment form -->
+      <div class="comment-form">
+        <textarea id="cmtText" placeholder="अपना कमेंट लिखिए..."></textarea>
+        <div style="display:flex;justify-content:flex-end;margin-top:.6rem;">
+          <button class="btn-comment" onclick="postComment()">कमेंट करें</button>
+        </div>
+      </div>
+
+      <!-- comment list -->
+      <div id="commentList">
+        <div class="skeleton" style="height:80px;margin-bottom:1rem;"></div>
+        <div class="skeleton" style="height:80px;margin-bottom:1rem;opacity:.6;"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── RIGHT: SIDEBAR ──────────────────────– -->
+  <aside class="sidebar">
+
+    <!-- newsletter -->
+    <div class="newsletter-block">
+      <h3>'बेला' की नई पोस्ट्स पाने के लिए</h3>
+      <p>सब्सक्राइब कीजिए — स्पैम नहीं भेजेंगे।</p>
+      <input type="email" class="nl-input" placeholder="आपका ई-मेल">
+      <button class="nl-btn" onclick="showToast('सब्सक्राइब के लिए धन्यवाद!')">सब्सक्राइब</button>
+    </div>
+
+    <!-- popular posts -->
+    <div class="sidebar-block">
+      <div class="sidebar-title">
+        <span>बेला पॉपुलर</span>
+        <span style="font-size:.65rem;opacity:.5;">सबसे पढ़ी गई</span>
+      </div>
+      <div id="popularPosts">
+        <div class="skeleton" style="height:72px;margin-bottom:.75rem;"></div>
+        <div class="skeleton" style="height:72px;margin-bottom:.75rem;opacity:.7;"></div>
+        <div class="skeleton" style="height:72px;opacity:.5;"></div>
+      </div>
+    </div>
+
+    <!-- latest posts -->
+    <div class="sidebar-block">
+      <div class="sidebar-title"><span>बेला लेटेस्ट</span></div>
+      <div id="latestPosts">
+        <div class="skeleton" style="height:52px;margin-bottom:.75rem;"></div>
+        <div class="skeleton" style="height:52px;margin-bottom:.75rem;opacity:.7;"></div>
+        <div class="skeleton" style="height:52px;opacity:.5;"></div>
+      </div>
+    </div>
+
+    <!-- author card -->
+    <div class="sidebar-block">
+      <div class="sidebar-title"><span>लेखक के बारे में</span></div>
+      <div style="display:flex;gap:.85rem;align-items:center;margin-bottom:.85rem;">
+        <div style="width:56px;height:56px;border-radius:50%;border:2px solid var(--accent);background:var(--border);"></div>
+        <div>
+          <div style="font-weight:700;font-size:.95rem;">-</div>
+          <div style="font-family:var(--mono);font-size:.72rem;color:var(--ink-muted);">लेखक</div>
+        </div>
+      </div>
+      <p style="font-size:.88rem;color:var(--ink-soft);line-height:1.6;"></p>
+    </div>
+
+  </aside>
+</div>
+
+<!-- BACK TO TOP -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- ── FOOTER ──────────────────────────────── -->
+<footer>
+  <p>© 2026 बेला · <a href="#">प्राइवेसी पॉलिसी</a> · <a href="#">संपर्क</a></p>
+</footer>
+
+<!-- ── JAVASCRIPT ──────────────────────────– -->
+<script>
+  // ─────────────────────────────────────────────
+  // CONFIG
+  // ─────────────────────────────────────────────
+  const API_BASE = 'http://localhost:8000'; // Change to your backend URL in production
+  let CURRENT_ARTICLE_SLUG = '';
+
+  // ─────────────────────────────────────────────
+  // UTILITY FUNCTIONS
+  // ─────────────────────────────────────────────
+  function getArticleSlug() {
+    // Get from URL: ?slug=ghar-ki-jagah
+    const params = new URLSearchParams(window.location.search);
+    return params.get('slug') || '';
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  function copyLink() {
+    navigator.clipboard.writeText(window.location.href);
+    showToast('लिंक कॉपी हो गया!');
+  }
+
+  function shareArticle() {
+    if (navigator.share) {
+      navigator.share({ title: document.title, url: window.location.href });
+    } else {
+      copyLink();
+    }
+  }
+
+  // ─────────────────────────────────────────────
+  // LOAD ARTICLE
+  // ─────────────────────────────────────────────
+  async function loadArticle() {
+    const slug = getArticleSlug();
+    if (!slug) {
+      document.querySelector('.article-title').textContent = 'लेख नहीं मिला';
+      return;
+    }
+
+    CURRENT_ARTICLE_SLUG = slug;
+
+    try {
+      const res = await fetch(`${API_BASE}/api/articles/${slug}`);
+      if (!res.ok) throw new Error('Not found');
+      const article = await res.json();
+      renderArticle(article);
+    } catch(e) {
+      document.querySelector('.article-title').textContent = 'लेख लोड नहीं हो सका';
+      console.error(e);
+    }
+  }
+
+  function renderArticle(a) {
+    // Page title
+    document.title = `${a.title} | बेला`;
+
+    // Breadcrumb
+    document.querySelector('.breadcrumb').innerHTML = `
+      <a href="/">बेला</a>
+      <span class="breadcrumb-sep">›</span>
+      <a href="/?category=${a.category_slug}">${a.category}</a>
+      <span class="breadcrumb-sep">›</span>
+      <span>${a.title}</span>
+    `;
+
+    // Tags
+    const tagRow = document.querySelector('.tag-row');
+    tagRow.innerHTML = `
+      <a href="/" class="tag">बेला</a>
+      <a href="/?category=${a.category_slug}" class="tag active">${a.category}</a>
+    `;
+
+    // Title
+    document.querySelector('.article-title').textContent = a.title;
+
+    // Author bar
+    const publishDate = new Date(a.published_at).toLocaleDateString('hi-IN');
+    document.querySelector('.author-bar').innerHTML = `
+      <div class="author-info">
+        <img src="${a.author.avatar || 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22%3E%3C/svg%3E'}" 
+             alt="${a.author.username}" class="author-avatar" 
+             onerror="this.style.background='var(--border)';this.style.display='none';">
+        <div>
+          <div class="author-name">
+            <a href="/?author=${a.author.id}">${a.author.username}</a>
+          </div>
+          <div class="article-meta">
+            <span>${publishDate}</span>
+            <span class="meta-dot">•</span>
+            <span>${a.read_time} पढ़ने में</span>
+          </div>
+        </div>
+      </div>
+      <div class="article-actions">
+        <button class="btn-action" id="likeBtn" onclick="toggleArticleLike('${a.slug}')">
+          <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <span id="likeCount">${a.like_count || 0}</span>
+        </button>
+        <button class="btn-action" onclick="shareArticle()">
+          <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>
+          शेयर
+        </button>
+      </div>
+    `;
+
+    // Banner
+    const banner = document.getElementById('articleBanner');
+    banner.src = a.banner_url || 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22%3E%3C/svg%3E';
+    banner.alt = a.title;
+
+    // Body (HTML safe — from backend)
+    document.getElementById('articleBody').innerHTML = a.content;
+
+    // Bottom tags
+    const bottomTags = document.querySelector('.bottom-tags');
+    bottomTags.innerHTML = `
+      <h4>संबंधित विषय</h4>
+      <div class="tag-row">
+        ${a.tags.map(t => `<a href="/?tag=${encodeURIComponent(t)}" class="tag">${t}</a>`).join('')}
+      </div>
+    `;
+
+    // Share bar
+    const title = encodeURIComponent(a.title);
+    const url = encodeURIComponent(window.location.href);
+    document.querySelector('.share-bar').innerHTML = `
+      <span class="share-label">शेयर करें :</span>
+      <a href="https://wa.me/?text=${title}%20${url}" target="_blank" class="share-btn whatsapp">📱 WhatsApp</a>
+      <a href="https://twitter.com/intent/tweet?text=${title}" target="_blank" class="share-btn twitter">🐦 Twitter</a>
+      <button class="share-btn" onclick="copyLink()">🔗 लिंक कॉपी करें</button>
+    `;
+
+    // Author card in sidebar
+    const authorCard = document.querySelectorAll('.sidebar-block')[2];
+    if (authorCard) {
+      authorCard.innerHTML = `
+        <div class="sidebar-title"><span>लेखक के बारे में</span></div>
+        <div style="display:flex;gap:.85rem;align-items:center;margin-bottom:.85rem;">
+          <img src="${a.author.avatar || 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22%3E%3C/svg%3E'}" 
+               style="width:56px;height:56px;border-radius:50%;border:2px solid var(--accent);" 
+               alt="" 
+               onerror="this.style.background='var(--border)';this.style.display='none';">
+          <div>
+            <div style="font-weight:700;font-size:.95rem;">${a.author.username}</div>
+            <div style="font-family:var(--mono);font-size:.72rem;color:var(--ink-muted);">लेखक</div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Load comments
+    loadComments(a.slug);
+  }
+
+  // ─────────────────────────────────────────────
+  // LOAD POPULAR POSTS
+  // ─────────────────────────────────────────────
+  async function loadPopularPosts() {
+    try {
+      const res = await fetch(`${API_BASE}/api/articles/popular?limit=6`);
+      const json = await res.json();
+      const el = document.getElementById('popularPosts');
+
+      if (!json.articles || !json.articles.length) {
+        el.innerHTML = '<p style="color:var(--ink-muted);font-size:.85rem;">कोई पोस्ट नहीं</p>';
+        return;
+      }
+
+      el.innerHTML = json.articles.map(p => `
+        <a href="/?slug=${p.slug}" class="pop-card">
+          <img src="${p.thumbnail_url || 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22%3E%3C/svg%3E'}" 
+               alt="${p.title}" class="pop-thumb"
+               onerror="this.style.background='var(--border)';this.style.display='none';">
+          <div>
+            <div class="pop-title">${p.title}</div>
+            <div class="pop-meta">${new Date(p.published_at).toLocaleDateString('hi-IN')} · ${p.author.username}</div>
+          </div>
+        </a>
+      `).join('');
+    } catch(e) {
+      console.error('Error loading popular posts:', e);
+      document.getElementById('popularPosts').innerHTML = '<p style="color:var(--ink-muted);font-size:.85rem;">लोड नहीं हो सका</p>';
+    }
+  }
+
+  // ─────────────────────────────────────────────
+  // LOAD LATEST POSTS
+  // ─────────────────────────────────────────────
+  async function loadLatestPosts() {
+    try {
+      const res = await fetch(`${API_BASE}/api/articles/latest?limit=5`);
+      const json = await res.json();
+      const el = document.getElementById('latestPosts');
+
+      if (!json.articles || !json.articles.length) {
+        el.innerHTML = '<p style="color:var(--ink-muted);font-size:.85rem;">कोई पोस्ट नहीं</p>';
+        return;
+      }
+
+      el.innerHTML = json.articles.map(p => `
+        <a href="/?slug=${p.slug}" class="lat-item">
+          <img src="${p.thumbnail_url || 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22%3E%3C/svg%3E'}" 
+               alt="${p.title}" class="lat-thumb"
+               onerror="this.style.background='var(--border)';this.style.display='none';">
+          <div>
+            <div class="lat-title">${p.title}</div>
+          </div>
+        </a>
+      `).join('');
+    } catch(e) {
+      console.error('Error loading latest posts:', e);
+    }
+  }
+
+  // ─────────────────────────────────────────────
+  // LOAD COMMENTS
+  // ─────────────────────────────────────────────
+  async function loadComments(slug) {
+    try {
+      const res = await fetch(`${API_BASE}/api/comments/${slug}`);
+      const json = await res.json();
+      const list = document.getElementById('commentList');
+      const count = document.getElementById('commentCount');
+
+      count.textContent = `${json.total} कमेंट`;
+
+      if (!json.comments || !json.comments.length) {
+        list.innerHTML = '<p style="color:var(--ink-muted);font-size:.9rem;padding:1rem 0;">पहले कमेंट करने वाले बनें!</p>';
+        return;
+      }
+
+      list.innerHTML = json.comments.map(c => `
+        <div class="comment-item" id="cmt-${c.id}">
+          <div class="comment-avatar">${c.username[0].toUpperCase()}</div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;">
+              <span class="comment-author">${c.username}</span>
+              <span class="comment-time">${new Date(c.created_at).toLocaleDateString('hi-IN')}</span>
+            </div>
+            <div class="comment-text">${c.text}</div>
+            <button class="comment-like" onclick="likeComment('${c.id}', this)">
+              ❤ <span>${c.likes}</span>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    } catch(e) {
+      console.error('Error loading comments:', e);
+      document.getElementById('commentList').innerHTML = '<p style="color:var(--ink-muted);font-size:.9rem;">लोड नहीं हो सका</p>';
+    }
+  }
+
+  // ─────────────────────────────────────────────
+  // POST COMMENT
+  // ─────────────────────────────────────────────
+  async function postComment() {
+    const text = document.getElementById('cmtText').value.trim();
+
+    if (!text) {
+      showToast('कमेंट खाली नहीं होना चाहिए');
+      return;
+    }
+
+    const btn = document.querySelector('.btn-comment');
+    btn.textContent = 'भेजा जा रहा है...';
+    btn.disabled = true;
+
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        showToast('कमेंट के लिए पहले लॉगइन करें');
+        btn.textContent = 'कमेंट करें';
+        btn.disabled = false;
+        return;
+      }
+
+      const res = await fetch(`${API_BASE}/api/comments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ page_id: CURRENT_ARTICLE_SLUG, text })
+      });
+
+      if (res.ok) {
+        document.getElementById('cmtText').value = '';
+        showToast('कमेंट हो गया! धन्यवाद।');
+        await loadComments(CURRENT_ARTICLE_SLUG);
+      } else {
+        showToast('कमेंट नहीं हो सका');
+      }
+    } catch(e) {
+      showToast('कुछ गड़बड़ हुई, फिर कोशिश करें');
+      console.error(e);
+    } finally {
+      btn.textContent = 'कमेंट करें';
+      btn.disabled = false;
+    }
+  }
+
+  // ─────────────────────────────────────────────
+  // LIKE COMMENT
+  // ─────────────────────────────────────────────
+  async function likeComment(id, btn) {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        showToast('लॉगइन करें');
+        return;
+      }
+
+      await fetch(`${API_BASE}/api/comments/${id}/like`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+
+      const count = btn.querySelector('span');
+      count.textContent = parseInt(count.textContent) + 1;
+      btn.style.borderColor = 'var(--accent)';
+      btn.style.color = 'var(--accent)';
+      btn.disabled = true;
+    } catch(e) {
+      showToast('लॉगइन करें');
+      console.error(e);
+    }
+  }
+
+  // ─────────────────────────────────────────────
+  // TOGGLE ARTICLE LIKE
+  // ─────────────────────────────────────────────
+  async function toggleArticleLike(slug) {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        showToast('लॉगइन करें');
+        return;
+      }
+
+      const res = await fetch(`${API_BASE}/api/articles/${slug}/like`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+
+      const json = await res.json();
+      const btn = document.getElementById('likeBtn');
+      const count = document.getElementById('likeCount');
+
+      if (json.liked) {
+        btn.classList.add('liked');
+        count.textContent = json.like_count;
+        showToast('पसंद किया! ❤');
+      } else {
+        btn.classList.remove('liked');
+        count.textContent = json.like_count;
+      }
+    } catch(e) {
+      showToast('लॉगइन करें');
+      console.error(e);
+    }
+  }
+
+  // ─────────────────────────────────────────────
+  // SCROLL PROGRESS & BACK TO TOP
+  // ─────────────────────────────────────────────
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const pct = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
+    document.getElementById('readProgress').style.width = pct + '%';
+    document.getElementById('backTop').classList.toggle('visible', doc.scrollTop > 400);
+  });
+
+  // ─────────────────────────────────────────────
+  // INIT: Load article + sidebar
+  // ─────────────────────────────────────────────
+  (async () => {
+    await loadArticle();
+    await Promise.all([
+      loadPopularPosts(),
+      loadLatestPosts()
+    ]);
+  })();
+</script>
+</body>
+</html>
