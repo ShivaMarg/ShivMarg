@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>लेखक प्रोफ़ाइल — बरगद</title>
+<meta name="description" content="बरगद पर लेखक की प्रोफ़ाइल">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --saffron:#C8540A;
+  --saffron-l:#F5EAE0;
+  --saffron-m:#E8935A;
+  --ink:#18120A;
+  --ink-2:#3D2E1E;
+  --ink-3:#7A6653;
+  --ink-4:#B0A090;
+  --paper:#FAF7F2;
+  --paper-2:#F3EDE3;
+  --paper-3:#E9E0D3;
+  --leaf:#2A6042;
+  --leaf-l:#DCF0E4;
+  --line:rgba(61,46,30,0.12);
+  --line-dark:rgba(61,46,30,0.22);
+  --radius:6px;
+}
+
+html{scroll-behavior:smooth}
+body{font-family:'Source Sans 3',sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;min-height:100vh}
+
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--paper-2)}
+::-webkit-scrollbar-thumb{background:var(--saffron-m);border-radius:3px}
+
+/* ── TOP STRIP ── */
+.top-strip{background:var(--saffron);color:#fff;text-align:center;font-size:.65rem;letter-spacing:3px;text-transform:uppercase;padding:.3rem 1rem;font-weight:600}
+
+/* ── HEADER ── */
+header{background:var(--paper);border-bottom:1px solid var(--line-dark);position:sticky;top:0;z-index:200;box-shadow:0 1px 8px rgba(24,18,10,0.06)}
+.header-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1rem;padding:.75rem 1.5rem}
+.logo{text-decoration:none;display:flex;flex-direction:column;line-height:1}
+.logo-hi{font-family:'Tiro Devanagari Hindi',serif;font-size:1.8rem;color:var(--saffron);letter-spacing:-1px}
+.logo-sub{font-size:.58rem;letter-spacing:3px;text-transform:uppercase;color:var(--ink-3);margin-top:1px}
+.btn-back{font-size:.75rem;padding:.35rem .9rem;border:1.5px solid var(--saffron);border-radius:4px;color:var(--saffron);background:none;cursor:pointer;font-family:'Source Sans 3',sans-serif;transition:all .15s;text-decoration:none}
+.btn-back:hover{background:var(--saffron);color:#fff}
+
+/* ── PROFILE HEADER ── */
+.profile-banner{width:100%;height:300px;background:linear-gradient(135deg, var(--saffron-m) 0%, var(--leaf) 100%);position:relative;overflow:hidden}
+.profile-banner::before{content:'';position:absolute;top:-50%;right:-10%;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,0.1)}
+
+.profile-header{max-width:1280px;margin:0 auto;padding:0 1.5rem}
+.profile-info{display:grid;grid-template-columns:180px 1fr 300px;gap:2rem;margin-top:-100px;position:relative;padding-bottom:2rem;align-items:start}
+
+.author-avatar{width:180px;height:180px;border-radius:12px;background:var(--paper);border:4px solid #fff;box-shadow:0 4px 20px rgba(24,18,10,0.2);display:flex;align-items:center;justify-content:center;font-size:80px}
+
+.author-details h1{font-family:'Tiro Devanagari Hindi',serif;font-size:2.5rem;color:var(--ink);margin-bottom:.3rem}
+.author-username{color:var(--saffron);font-weight:600;font-size:1rem;margin-bottom:1rem}
+.author-bio{color:var(--ink-3);font-size:1rem;line-height:1.7;margin-bottom:1.5rem}
+.author-stats{display:flex;gap:2rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.stat-item{display:flex;flex-direction:column}
+.stat-number{font-family:'Playfair Display',serif;font-size:2rem;color:var(--saffron);font-weight:700}
+.stat-label{font-size:.8rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:1px}
+
+.author-actions{display:flex;gap:1rem;flex-direction:column}
+.btn-follow{width:100%;padding:.7rem 1.5rem;background:var(--saffron);color:#fff;border:none;border-radius:6px;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:.9rem;font-weight:600;transition:all .15s}
+.btn-follow:hover{opacity:.9}
+.btn-follow.following{background:var(--paper-2);color:var(--ink);border:2px solid var(--saffron)}
+
+.social-links{display:flex;gap:.8rem;justify-content:center;margin-top:1rem}
+.social-link{width:40px;height:40px;border-radius:50%;background:var(--saffron-l);display:flex;align-items:center;justify-content:center;color:var(--saffron);text-decoration:none;transition:all .15s;font-size:1.2rem}
+.social-link:hover{background:var(--saffron);color:#fff}
+
+/* ── MAIN CONTENT ── */
+main{max-width:1280px;margin:0 auto;padding:2rem 1.5rem}
+
+.tabs{display:flex;gap:1rem;border-bottom:2px solid var(--line);margin-bottom:2rem;flex-wrap:wrap}
+.tab{padding:.8rem 1.5rem;background:none;border:none;font-family:'Source Sans 3',sans-serif;font-size:.95rem;color:var(--ink-3);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .15s;font-weight:600}
+.tab.active{color:var(--saffron);border-bottom-color:var(--saffron)}
+.tab:hover{color:var(--ink-2)}
+
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* ── BIOGRAPHY SECTION ── */
+.bio-section{background:var(--paper-2);border-radius:var(--radius);padding:2rem;margin-bottom:2rem;border-left:4px solid var(--saffron)}
+.bio-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1.5rem;color:var(--ink);margin-bottom:1rem}
+.bio-content{font-family:'Tiro Devanagari Hindi',serif;font-size:1rem;line-height:1.85;color:var(--ink-2)}
+.bio-content p{margin-bottom:1rem}
+
+/* ── ARTICLES GRID ── */
+.articles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;margin-bottom:2rem}
+.article-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 8px rgba(24,18,10,0.06);transition:all .3s;cursor:pointer;text-decoration:none;color:inherit;display:block}
+.article-card:hover{transform:translateY(-4px);box-shadow:0 8px 16px rgba(24,18,10,0.12)}
+.article-thumb{width:100%;aspect-ratio:16/9;background:var(--paper-3);overflow:hidden}
+.article-thumb img{width:100%;height:100%;object-fit:cover}
+.article-info{padding:1.2rem}
+.article-category{font-size:.65rem;text-transform:uppercase;letter-spacing:1px;color:var(--saffron);font-weight:700;margin-bottom:.3rem;display:block}
+.article-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1rem;line-height:1.5;color:var(--ink);margin-bottom:.5rem;font-weight:600}
+.article-excerpt{font-size:.85rem;color:var(--ink-3);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:.5rem}
+.article-meta{font-size:.75rem;color:var(--ink-4);display:flex;gap:.5rem;justify-content:space-between}
+
+/* ── BOOKS SECTION ── */
+.books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:2rem;margin-bottom:2rem}
+.book-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 8px rgba(24,18,10,0.06);transition:all .3s;text-decoration:none;color:inherit}
+.book-card:hover{transform:translateY(-4px);box-shadow:0 8px 16px rgba(24,18,10,0.12)}
+.book-cover{width:100%;aspect-ratio:3/4;background:linear-gradient(135deg, var(--saffron-m) 0%, var(--leaf) 100%);display:flex;align-items:center;justify-content:center;font-size:3rem;color:rgba(255,255,255,0.3)}
+.book-cover img{width:100%;height:100%;object-fit:cover}
+.book-info{padding:1rem}
+.book-title{font-family:'Tiro Devanagari Hindi',serif;font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:.3rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.book-year{font-size:.8rem;color:var(--ink-3)}
+
+/* ── CONTRIBUTIONS ── */
+.contributions-list{display:grid;gap:1.5rem}
+.contribution-item{background:#fff;border-radius:var(--radius);padding:1.5rem;border-left:4px solid var(--saffron);box-shadow:0 2px 8px rgba(24,18,10,0.06)}
+.contribution-year{font-size:.8rem;text-transform:uppercase;color:var(--saffron);font-weight:700;margin-bottom:.3rem}
+.contribution-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1.1rem;color:var(--ink);margin-bottom:.5rem;font-weight:600}
+.contribution-desc{font-size:.9rem;color:var(--ink-2);line-height:1.7}
+
+/* ── ACTIVITIES ── */
+.activities-timeline{position:relative;padding:2rem 0;padding-left:2rem}
+.activities-timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--saffron-m)}
+.activity-item{margin-bottom:2rem;position:relative}
+.activity-item::before{content:'';position:absolute;left:-2.5rem;top:.3rem;width:12px;height:12px;border-radius:50%;background:var(--saffron);border:3px solid var(--paper)}
+.activity-date{font-size:.85rem;color:var(--saffron);font-weight:700;margin-bottom:.3rem}
+.activity-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1.05rem;color:var(--ink);margin-bottom:.3rem;font-weight:600}
+.activity-desc{font-size:.9rem;color:var(--ink-2);line-height:1.7}
+
+/* ── CATEGORY BREAKDOWN ── */
+.category-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.5rem;margin-bottom:2rem}
+.category-card{background:#fff;border-radius:var(--radius);padding:1.5rem;text-align:center;box-shadow:0 2px 8px rgba(24,18,10,0.06)}
+.category-icon{font-size:2.5rem;margin-bottom:.5rem}
+.category-name{font-family:'Tiro Devanagari Hindi',serif;font-size:1rem;color:var(--ink);font-weight:600;margin-bottom:.3rem}
+.category-count{font-size:1.8rem;color:var(--saffron);font-weight:700}
+
+/* ── LOADING ── */
+.loading-spinner{text-align:center;padding:3rem;color:var(--ink-4);font-size:.85rem}
+.loading-spinner::before{content:'';display:inline-block;width:24px;height:24px;border:2px solid var(--line);border-top-color:var(--saffron);border-radius:50%;animation:spin .7s linear infinite;margin-right:.5rem;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.empty-state{text-align:center;padding:2rem;color:var(--ink-4)}
+.empty-state span{display:block;font-size:2rem;margin-bottom:.5rem}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5rem;margin-top:4rem}
+.footer-inner{max-width:1280px;margin:0 auto}
+.footer-brand-hi{font-family:'Tiro Devanagari Hindi',serif;font-size:1.5rem;color:#fff;margin-bottom:.5rem}
+.footer-copy{font-size:.7rem;color:rgba(255,255,255,.3);text-align:center}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--ink-2);color:#fff;padding:.6rem 1.2rem;border-radius:4px;font-size:.8rem;z-index:999;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .profile-info{grid-template-columns:1fr;margin-top:-50px}
+  .author-avatar{width:150px;height:150px;font-size:60px}
+  .articles-grid{grid-template-columns:repeat(2,1fr)}
+  .books-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:640px){
+  .profile-info{grid-template-columns:1fr}
+  .author-avatar{width:120px;height:120px;font-size:50px}
+  .author-details h1{font-size:1.8rem}
+  .articles-grid{grid-template-columns:1fr}
+  .books-grid{grid-template-columns:1fr}
+  .tabs{flex-direction:column}
+  .tab{padding:.6rem 1rem;border-bottom:none !important;border-right:3px solid transparent;margin-bottom:0;padding-left:1.5rem}
+  .tab.active{border-right-color:var(--saffron);border-bottom-color:transparent}
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- TOP STRIP -->
+<div class="top-strip">रचना · विचार · कला · संस्कृति</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a class="logo" href="index.html">
+      <span class="logo-hi">बरगद</span>
+      <span class="logo-sub">साहित्य का सफ़र</span>
+    </a>
+    <div></div>
+    <a class="btn-back" href="index.html">← होम</a>
+  </div>
+</header>
+
+<!-- PROFILE BANNER -->
+<div class="profile-banner"></div>
+
+<!-- PROFILE HEADER -->
+<div class="profile-header">
+  <div class="profile-info" id="profileInfo">
+    <div class="loading-spinner">लेखक की जानकारी लोड हो रही है…</div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main>
+  <!-- TABS -->
+  <div class="tabs" id="tabsContainer">
+    <button class="tab active" onclick="switchTab(this, 'biography')">परिचय</button>
+    <button class="tab" onclick="switchTab(this, 'articles')">रचनाएँ</button>
+    <button class="tab" onclick="switchTab(this, 'books')">किताबें</button>
+    <button class="tab" onclick="switchTab(this, 'contributions')">योगदान</button>
+    <button class="tab" onclick="switchTab(this, 'activities')">गतिविधियाँ</button>
+  </div>
+
+  <!-- BIOGRAPHY TAB -->
+  <div id="biography" class="tab-content active">
+    <div id="bioContainer" class="loading-spinner">लोड हो रहा है…</div>
+  </div>
+
+  <!-- ARTICLES TAB -->
+  <div id="articles" class="tab-content">
+    <h2 style="font-family:'Tiro Devanagari Hindi',serif;font-size:1.5rem;color:var(--ink);margin-bottom:1.5rem">रचनाएँ</h2>
+    <div class="category-stats" id="categoryStats"></div>
+    <div class="articles-grid" id="articlesGrid">
+      <div class="loading-spinner" style="grid-column:1/-1">रचनाएँ लोड हो रही हैं…</div>
+    </div>
+  </div>
+
+  <!-- BOOKS TAB -->
+  <div id="books" class="tab-content">
+    <h2 style="font-family:'Tiro Devanagari Hindi',serif;font-size:1.5rem;color:var(--ink);margin-bottom:1.5rem">किताबें</h2>
+    <div class="books-grid" id="booksGrid">
+      <div class="loading-spinner" style="grid-column:1/-1">किताबें लोड हो रही हैं…</div>
+    </div>
+  </div>
+
+  <!-- CONTRIBUTIONS TAB -->
+  <div id="contributions" class="tab-content">
+    <h2 style="font-family:'Tiro Devanagari Hindi',serif;font-size:1.5rem;color:var(--ink);margin-bottom:1.5rem">योगदान</h2>
+    <div class="contributions-list" id="contributionsList">
+      <div class="loading-spinner">योगदान लोड हो रहे हैं…</div>
+    </div>
+  </div>
+
+  <!-- ACTIVITIES TAB -->
+  <div id="activities" class="tab-content">
+    <h2 style="font-family:'Tiro Devanagari Hindi',serif;font-size:1.5rem;color:var(--ink);margin-bottom:1.5rem">सामाजिक गतिविधियाँ</h2>
+    <div class="activities-timeline" id="activitiesTimeline">
+      <div class="loading-spinner" style="margin-left:-2rem">गतिविधियाँ लोड हो रही हैं…</div>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand-hi">बरगद</div>
+    <p class="footer-copy">© 2026 बरगद. सर्वाधिकार सुरक्षित।</p>
+  </div>
+</footer>
+
+<script>
+const API = 'https://shivamargbackend.onrender.com';
+
+let state = {
+  token: localStorage.getItem('bargad_token') || null,
+  user: JSON.parse(localStorage.getItem('bargad_user') || 'null'),
+  authorId: null,
+  authorData: null,
+};
+
+// ── API HELPERS ────────────────────────────────────────────────────
+async function apiFetch(path, opts = {}) {
+  const headers = { 'Content-Type': 'application/json' };
+  if (state.token) headers['Authorization'] = 'Bearer ' + state.token;
+  try {
+    const res = await fetch(API + path, { headers, ...opts });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ detail: res.statusText }));
+      throw new Error(err.detail || 'Server error');
+    }
+    return await res.json();
+  } catch (e) {
+    if (e.name === 'TypeError') throw new Error('सर्वर से जुड़ नहीं पाए।');
+    throw e;
+  }
+}
+
+// ── TOAST ──────────────────────────────────────────────────────────
+function showToast(msg, dur = 2500) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), dur);
+}
+
+// ── DATE FORMATTER ─────────────────────────────────────────────────
+function fmtDate(iso) {
+  if (!iso) return '';
+  try {
+    return new Date(iso).toLocaleDateString('hi-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+  } catch { return iso.slice(0, 10); }
+}
+
+// ── TAB SWITCHING ──────────────────────────────────────────────────
+function switchTab(el, tabName) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(tabName).classList.add('active');
+  window.scrollTo({ top: document.querySelector('main').offsetTop, behavior: 'smooth' });
+}
+
+// ── LOAD AUTHOR PROFILE ────────────────────────────────────────────
+async function loadAuthorProfile() {
+  const params = new URLSearchParams(window.location.search);
+  const username = params.get('username') || 'lekha';
+  state.authorId = username;
+
+  try {
+    const author = await apiFetch(`/api/authors/${username}`);
+    state.authorData = author;
+    renderProfileHeader(author);
+    loadAuthorArticles();
+    loadAuthorBooks();
+    loadAuthorContributions();
+    loadAuthorActivities();
+  } catch (e) {
+    document.getElementById('profileInfo').innerHTML = `<div class="empty-state"><span>⚠️</span>${e.message}</div>`;
+  }
+}
+
+// ── RENDER PROFILE HEADER ──────────────────────────────────────────
+function renderProfileHeader(author) {
+  const profileInfo = document.getElementById('profileInfo');
+  const avatarInitial = author.display_name ? author.display_name[0].toUpperCase() : '👤';
+  
+  profileInfo.innerHTML = `
+    <div class="author-avatar">${author.avatar || avatarInitial}</div>
+    <div class="author-details">
+      <h1>${author.display_name || author.username}</h1>
+      <div class="author-username">@${author.username}</div>
+      <p class="author-bio">${author.bio || 'लेखक, विचारक और समाज सेवक'}</p>
+      <div class="author-stats">
+        <div class="stat-item">
+          <div class="stat-number">${author.articles_count || 0}</div>
+          <div class="stat-label">रचनाएँ</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">${author.followers_count || 0}</div>
+          <div class="stat-label">अनुयायी</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">${author.total_views || 0}</div>
+          <div class="stat-label">पाठक</div>
+        </div>
+      </div>
+    </div>
+    <div class="author-actions">
+      <button class="btn-follow" id="followBtn" onclick="toggleFollow()">${state.user && state.user.id === author.id ? 'आपकी प्रोफ़ाइल' : (author.is_following ? 'अनुसरण कर रहे हैं' : 'अनुसरण करें')}</button>
+      ${author.website ? `<a href="${author.website}" target="_blank" style="text-align:center;color:var(--saffron);text-decoration:none;font-weight:600">वेबसाइट</a>` : ''}
+      <div class="social-links">
+        ${author.twitter ? `<a href="https://twitter.com/${author.twitter}" target="_blank" class="social-link" title="Twitter">𝕏</a>` : ''}
+        ${author.facebook ? `<a href="https://facebook.com/${author.facebook}" target="_blank" class="social-link" title="Facebook">f</a>` : ''}
+        ${author.instagram ? `<a href="https://instagram.com/${author.instagram}" target="_blank" class="social-link" title="Instagram">📷</a>` : ''}
+      </div>
+    </div>
+  `;
+
+  // Load biography
+  const bioContainer = document.getElementById('bioContainer');
+  if (author.biography) {
+    bioContainer.innerHTML = `
+      <div class="bio-section">
+        <h3 class="bio-title">परिचय</h3>
+        <div class="bio-content">${author.biography.replace(/\n/g, '</p><p>')}</div>
+      </div>`;
+  }
+
+  document.title = `${author.display_name} — बरगद`;
+}
+
+// ── LOAD AUTHOR ARTICLES ────────────────────────────────────────────
+async function loadAuthorArticles() {
+  const grid = document.getElementById('articlesGrid');
+  const stats = document.getElementById('categoryStats');
+  
+  try {
+    const data = await apiFetch(`/api/authors/${state.authorId}/articles`);
+    const articles = data.articles || [];
+    
+    if (!articles.length) {
+      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><span>📝</span>अभी कोई रचना प्रकाशित नहीं है।</div>';
+      return;
+    }
+
+    // Category breakdown
+    const categories = {};
+    articles.forEach(a => {
+      categories[a.category] = (categories[a.category] || 0) + 1;
+    });
+
+    stats.innerHTML = Object.entries(categories).map(([cat, count]) => `
+      <div class="category-card">
+        <div class="category-icon">📄</div>
+        <div class="category-name">${cat || 'अन्य'}</div>
+        <div class="category-count">${count}</div>
+      </div>`).join('');
+
+    grid.innerHTML = articles.map(a => `
+      <a href="article.html?slug=${encodeURIComponent(a.slug)}" class="article-card">
+        <div class="article-thumb">${a.thumbnail_url ? `<img src="${a.thumbnail_url}" alt="${a.title}">` : `<div style="width:100%;height:100%;background:var(--paper-3);display:flex;align-items:center;justify-content:center">📖</div>`}</div>
+        <div class="article-info">
+          <span class="article-category">${a.category || 'रचना'}</span>
+          <h3 class="article-title">${a.title}</h3>
+          <p class="article-excerpt">${a.excerpt || ''}</p>
+          <div class="article-meta">
+            <span>${fmtDate(a.published_at)}</span>
+            <span>${a.read_time || 5} मिनट</span>
+          </div>
+        </div>
+      </a>`).join('');
+  } catch (e) {
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><span>⚠️</span>${e.message}</div>`;
+  }
+}
+
+// ── LOAD AUTHOR BOOKS ──────────────────────────────────────────────
+async function loadAuthorBooks() {
+  const grid = document.getElementById('booksGrid');
+  
+  try {
+    const data = await apiFetch(`/api/authors/${state.authorId}/books`);
+    const books = data.books || [];
+    
+    if (!books.length) {
+      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><span>📚</span>अभी कोई किताब प्रकाशित नहीं है।</div>';
+      return;
+    }
+
+    grid.innerHTML = books.map(b => `
+      <a href="${b.link || '#'}" target="_blank" class="book-card">
+        <div class="book-cover">${b.cover_url ? `<img src="${b.cover_url}" alt="${b.title}">` : '📕'}</div>
+        <div class="book-info">
+          <div class="book-title">${b.title}</div>
+          <div class="book-year">${b.year || new Date().getFullYear()}</div>
+          ${b.publisher ? `<div style="font-size:.75rem;color:var(--ink-4);margin-top:.3rem">${b.publisher}</div>` : ''}
+        </div>
+      </a>`).join('');
+  } catch (e) {
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><span>⚠️</span>${e.message}</div>`;
+  }
+}
+
+// ── LOAD AUTHOR CONTRIBUTIONS ──────────────────────────────────────
+async function loadAuthorContributions() {
+  const list = document.getElementById('contributionsList');
+  
+  try {
+    const data = await apiFetch(`/api/authors/${state.authorId}/contributions`);
+    const contributions = data.contributions || [];
+    
+    if (!contributions.length) {
+      list.innerHTML = '<div class="empty-state"><span>🤝</span>अभी कोई योगदान दर्ज नहीं है।</div>';
+      return;
+    }
+
+    list.innerHTML = contributions.map(c => `
+      <div class="contribution-item">
+        <div class="contribution-year">${c.year}</div>
+        <div class="contribution-title">${c.title}</div>
+        <div class="contribution-desc">${c.description}</div>
+      </div>`).join('');
+  } catch (e) {
+    list.innerHTML = `<div class="empty-state"><span>⚠️</span>${e.message}</div>`;
+  }
+}
+
+// ── LOAD AUTHOR ACTIVITIES ─────────────────────────────────────────
+async function loadAuthorActivities() {
+  const timeline = document.getElementById('activitiesTimeline');
+  
+  try {
+    const data = await apiFetch(`/api/authors/${state.authorId}/activities`);
+    const activities = data.activities || [];
+    
+    if (!activities.length) {
+      timeline.innerHTML = '<div class="empty-state"><span>📢</span>अभी कोई गतिविधि दर्ज नहीं है।</div>';
+      return;
+    }
+
+    timeline.innerHTML = activities.map(a => `
+      <div class="activity-item">
+        <div class="activity-date">${fmtDate(a.date)}</div>
+        <div class="activity-title">${a.title}</div>
+        <div class="activity-desc">${a.description}</div>
+      </div>`).join('');
+  } catch (e) {
+    timeline.innerHTML = `<div class="empty-state"><span>⚠️</span>${e.message}</div>`;
+  }
+}
+
+// ── FOLLOW AUTHOR ──────────────────────────────────────────────────
+async function toggleFollow() {
+  if (!state.user) {
+    showToast('अनुसरण करने के लिए लॉग-इन करें।');
+    return;
+  }
+
+  try {
+    const data = await apiFetch(`/api/authors/${state.authorId}/follow`, { method: 'POST' });
+    const btn = document.getElementById('followBtn');
+    if (btn) {
+      btn.textContent = data.is_following ? 'अनुसरण कर रहे हैं' : 'अनुसरण करें';
+      btn.classList.toggle('following', data.is_following);
+    }
+    showToast(data.is_following ? 'आप अब अनुसरण कर रहे हैं!' : 'अनुसरण रद्द किया गया।');
+  } catch (e) {
+    showToast(e.message);
+  }
+}
+
+// ── INIT ───────────────────────────────────────────────────────────
+loadAuthorProfile();
+</script>
+</body>
+</html>
