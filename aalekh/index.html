@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>बरगद — साहित्य · कला · विचार</title>
-<meta name="description" content="बरगद — हिंदी साहित्य, कविता, कहानी, सिनेमा, विज्ञान और विचार का संसार">
+<title>आलेख — साहित्य · कला · विचार</title>
+<meta name="description" content="आलेख — हिंदी साहित्य, कविता, कहानी, सिनेमा, विज्ञान और विचार का संसार">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
@@ -283,7 +283,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
 <header>
   <div class="header-inner">
     <a class="logo" href="index.html">
-      <span class="logo-hi">बरगद</span>
+      <span class="logo-hi">आलेख</span>
       <span class="logo-sub">साहित्य का सफ़र</span>
     </a>
     <nav class="main-nav" id="mainNav">
@@ -311,7 +311,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-header">
-    <span class="logo-hi" style="color:var(--saffron)">बरगद</span>
+    <span class="logo-hi" style="color:var(--saffron)">आलेख</span>
     <button class="mobile-menu-close" onclick="toggleMobileMenu()">✕</button>
   </div>
   <nav>
@@ -432,7 +432,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
       <div>
         <div class="widget-title">न्यूज़लेटर</div>
         <div class="newsletter-box">
-          <h4>बरगद से जुड़ें</h4>
+          <h4>आलेख से जुड़ें</h4>
           <p>हर हफ़्ते चुनिंदा रचनाएँ — सीधे आपके इनबॉक्स में।</p>
           <input class="nl-input" type="email" id="nlEmail" placeholder="आपका ई-मेल">
           <button class="nl-btn" onclick="nlSubscribe()">सब्सक्राइब करें</button>
@@ -451,7 +451,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-brand-hi">बरगद</div>
+    <div class="footer-brand-hi">आलेख</div>
     <div class="footer-brand-sub">साहित्य · कला · विचार · संस्कृति</div>
     <div class="footer-grid">
       <div class="footer-col">
@@ -483,7 +483,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
         <a onclick="openModal()">लेखक बनें</a>
       </div>
     </div>
-    <p class="footer-copy">© 2026 बरगद. सर्वाधिकार सुरक्षित।</p>
+    <p class="footer-copy">© 2026 आलेख. सर्वाधिकार सुरक्षित।</p>
   </div>
 </footer>
 
@@ -548,7 +548,7 @@ function renderAuthArea() {
   if (state.user) {
     area.innerHTML = `
       <div class="user-bar">
--       <div class="user-avatar" title="${state.user.display_name}">${state.user.avatar || state.user.username[0].toUpperCase()}</div>
+// -       <div class="user-avatar" title="${state.user.display_name}">${state.user.avatar || state.user.username[0].toUpperCase()}</div>
 +       <div class="user-avatar" title="${state.user.display_name}" onclick="window.location.href='/'" style="cursor:pointer;">${state.user.avatar || state.user.username[0].toUpperCase()}</div>
         <button class="btn-logout" onclick="doLogout()">लॉग-आउट</button>
       </div>`;
