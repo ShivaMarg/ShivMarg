@@ -549,7 +549,7 @@ function renderAuthArea() {
     area.innerHTML = `
       <div class="user-bar">
 -       <div class="user-avatar" title="${state.user.display_name}">${state.user.avatar || state.user.username[0].toUpperCase()}</div>
-+       <div class="user-avatar" title="${state.user.display_name}" onclick="window.location.href='profile.html'" style="cursor:pointer;">${state.user.avatar || state.user.username[0].toUpperCase()}</div>
++       <div class="user-avatar" title="${state.user.display_name}" onclick="window.location.href='/'" style="cursor:pointer;">${state.user.avatar || state.user.username[0].toUpperCase()}</div>
         <button class="btn-logout" onclick="doLogout()">लॉग-आउट</button>
       </div>`;
   } else {
@@ -772,7 +772,7 @@ async function loadLatestSidebar() {
     const arts = data.articles || [];
     el.className = '';
     el.innerHTML = arts.map(a => `
-      <a href="article.html?slug=${encodeURIComponent(a.slug)}" style="display:block;padding:.6rem 0;border-bottom:1px solid var(--line);cursor:pointer;text-decoration:none;color:inherit">
+      <a href="/articles?slug=${encodeURIComponent(a.slug)}" style="display:block;padding:.6rem 0;border-bottom:1px solid var(--line);cursor:pointer;text-decoration:none;color:inherit">
         <span style="font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--saffron);font-weight:700">${a.category || '—'}</span>
         <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:.83rem;color:var(--ink);margin-top:2px;line-height:1.4">${a.title}</div>
         <div style="font-size:.65rem;color:var(--ink-4);margin-top:2px">${fmtDate(a.published_at)}</div>
