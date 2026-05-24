@@ -5,7 +5,7 @@
 
 const SuggestedPosts = (() => {
   const API_BASE = 'https://shivamargbackend.onrender.com';
-  const POSTS_LIMIT = 10;
+  const POSTS_LIMIT = 8;
 
   /**
    * Fetch latest articles from backend (sorted by created_at DESC)
