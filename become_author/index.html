@@ -362,7 +362,7 @@ async function submitForm(e) {
       social_work: document.getElementById('socialWork').value.trim(),
     };
 
-    const result = await apiFetch('/api/authors/register', {
+    const result = await apiFetch('/api/lekhak/register', {
       method: 'POST',
       body: JSON.stringify(formData)
     });
