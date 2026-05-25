@@ -101,10 +101,10 @@
         <div class="nav-dropdown">
           <button class="nav-dropdown-btn" data-menu="articles-menu">लेख</button>
           <div class="dropdown-content" id="articles-menu">
-            <div class="dropdown-label">✦ लेख प्रबंधन ✦</div>
-            <a href="/articles">सभी लेख</a>
+            <div class="dropdown-label">✦ आलेख ✦</div>
+            <a href="/aalekh">आलेख</a>
             <a href="/article_editor">नया लेख लिखें</a>
-            <a href="/article_editor?edit=true">मेरे लेख</a>
+            <a href="/article_editor?edit=true">सभी लेख</a>
           </div>
         </div>
 
