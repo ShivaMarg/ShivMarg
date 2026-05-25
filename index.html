@@ -1239,6 +1239,116 @@ mantra for wealth
     ::-webkit-scrollbar-thumb:hover {
       background: var(--primary-color);
     }
+
+    /* ── CIRCULAR CARDS ── */
+    .circular-cards-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      max-width: 1280px;
+      margin: 50px auto;
+      padding: 0 24px;
+    }
+
+    .circular-card {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      border: 3px solid rgba(212,160,23,0.4);
+      background: linear-gradient(135deg, rgba(139,69,19,0.2) 0%, rgba(93,46,15,0.1) 100%);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3), inset 0 0 30px rgba(212,160,23,0.1);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .circular-card:hover {
+      transform: scale(1.1) translateY(-10px);
+      border-color: rgba(212,160,23,0.7);
+      box-shadow: 0 30px 80px rgba(212,160,23,0.3), inset 0 0 40px rgba(212,160,23,0.2);
+      background: linear-gradient(135deg, rgba(139,69,19,0.4) 0%, rgba(93,46,15,0.2) 100%);
+    }
+
+    .circular-card-icon {
+      font-size: 3.5rem;
+      margin-bottom: 12px;
+      display: block;
+      filter: drop-shadow(0 0 8px rgba(212,160,23,0.3));
+      transition: transform 0.4s ease;
+    }
+
+    .circular-card:hover .circular-card-icon {
+      transform: scale(1.2) rotate(-10deg);
+    }
+
+    .circular-card-title {
+      font-family: 'Tiro Devanagari Sanskrit', serif;
+      font-size: 1.2rem;
+      color: var(--gold-light);
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .circular-card-subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      color: rgba(212,160,23,0.6);
+      text-transform: uppercase;
+    }
+
+    .circular-card-glow {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,160,23,0.15) 0%, transparent 70%);
+      pointer-events: none;
+      animation: glow-pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    .circular-card-color-1 {
+      background: linear-gradient(135deg, rgba(139,69,19,0.3) 0%, rgba(212,160,23,0.1) 100%);
+      border-color: rgba(212,160,23,0.5);
+    }
+
+    .circular-card-color-1:hover {
+      background: linear-gradient(135deg, rgba(212,160,23,0.4) 0%, rgba(212,160,23,0.2) 100%);
+    }
+
+    .circular-card-color-2 {
+      background: linear-gradient(135deg, rgba(231,78,60,0.2) 0%, rgba(192,57,43,0.1) 100%);
+      border-color: rgba(231,78,60,0.4);
+    }
+
+    .circular-card-color-2:hover {
+      background: linear-gradient(135deg, rgba(231,78,60,0.3) 0%, rgba(192,57,43,0.2) 100%);
+      border-color: rgba(231,78,60,0.7);
+    }
+
+    .circular-card-color-3 {
+      background: linear-gradient(135deg, rgba(142,68,173,0.2) 0%, rgba(108,52,131,0.1) 100%);
+      border-color: rgba(153,102,255,0.4);
+    }
+
+    .circular-card-color-3:hover {
+      background: linear-gradient(135deg, rgba(142,68,173,0.3) 0%, rgba(108,52,131,0.2) 100%);
+      border-color: rgba(153,102,255,0.7);
+    }
   </style>
   	  <script>
 	window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -1614,6 +1724,106 @@ mantra for wealth
     <div style="padding: 2rem; text-align: center; color: var(--gold-pale); font-style: italic; grid-column: 1/-1;">पोस्ट्स लोड हो रहे हैं...</div>
   </div>
 
+  <div class="divider reveal">
+    <div class="divider-line"></div>
+    <div class="divider-text">✦ विशेष संग्रह ✦</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="cards-grid" id="specialCollectionContainer">
+    <!-- CARD 1 - PREMIUM STYLE -->
+    <div class="card card-shiv reveal" data-cat="all" style="animation-delay:0.05s; background: linear-gradient(135deg, rgba(139,69,19,0.3) 0%, rgba(93,46,15,0.2) 100%); border: 2px solid rgba(212,160,23,0.3); backdrop-filter: blur(10px);">
+      <div class="card-image" style="background: linear-gradient(135deg, #6B5344 0%, #3D2817 100%); display: flex; align-items: center; justify-content: center; font-size: 3rem;">
+        ✨
+      </div>
+      <div class="card-inner">
+        <div class="card-tag">आने वाले शीघ्र</div>
+        <div class="card-name-deva">नया संग्रह</div>
+        <div class="card-name-eng">COMING SOON</div>
+        <div class="card-mantra-preview">
+          यहाँ शीघ्र ही नया और विशेष<br>मंत्र संग्रह जुड़ेगा
+        </div>
+        <div class="card-count">
+          <span class="card-count-dot"></span> विशेष सामग्री
+        </div>
+      </div>
+      <div class="card-arrow">→</div>
+    </div>
+
+    <!-- CARD 2 - ELEGANT STYLE -->
+    <div class="card card-lakshmi reveal" data-cat="all" style="animation-delay:0.1s; background: linear-gradient(135deg, rgba(243,156,18,0.2) 0%, rgba(214,111,16,0.15) 100%); border: 2px solid rgba(255,215,0,0.2);">
+      <div class="card-image" style="background: linear-gradient(135deg, #D4A574 0%, #8B6F47 100%); display: flex; align-items: center; justify-content: center; font-size: 3rem;">
+        💎
+      </div>
+      <div class="card-inner">
+        <div class="card-tag">प्रिमियम कंटेंट</div>
+        <div class="card-name-deva">सोने का खजाना</div>
+        <div class="card-name-eng">GOLDEN TREASURES</div>
+        <div class="card-mantra-preview">
+          दुर्लभ और अमूल्य<br>आध्यात्मिक ज्ञान
+        </div>
+        <div class="card-count">
+          <span class="card-count-dot"></span> विशेषाधिकार सामग्री
+        </div>
+      </div>
+      <div class="card-arrow">→</div>
+    </div>
+
+    <!-- CARD 3 - MODERN STYLE -->
+    <div class="card card-krishna reveal" data-cat="all" style="animation-delay:0.15s; background: linear-gradient(135deg, rgba(142,68,173,0.2) 0%, rgba(108,52,131,0.15) 100%); border: 2px solid rgba(153,102,255,0.2);">
+      <div class="card-image" style="background: linear-gradient(135deg, #9966FF 0%, #6C3483 100%); display: flex; align-items: center; justify-content: center; font-size: 3rem;">
+        🌟
+      </div>
+      <div class="card-inner">
+        <div class="card-tag">नवीनतम अपडेट</div>
+        <div class="card-name-deva">अन्वेषण करें</div>
+        <div class="card-name-eng">EXPLORE MORE</div>
+        <div class="card-mantra-preview">
+          और भी बहुत कुछ खोजने के लिए<br>हमारे साथ रहें
+        </div>
+        <div class="card-count">
+          <span class="card-count-dot"></span> नई सामग्री शीघ्र
+        </div>
+      </div>
+      <div class="card-arrow">→</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       IMPORTANT LINKS & ITEMS (CIRCULAR CARDS)
+  ═══════════════════════════════════════════════════════════════ -->
+  <div class="divider reveal" style="margin-top: 80px;">
+    <div class="divider-line"></div>
+    <div class="divider-text">✦ महत्वपूर्ण लिंक्स ✦</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="circular-cards-wrapper reveal">
+    <!-- CIRCULAR CARD 1 -->
+    <a href="#" class="circular-card circular-card-color-1" style="animation-delay: 0.1s;">
+      <div class="circular-card-glow"></div>
+      <span class="circular-card-icon">🕉️</span>
+      <div class="circular-card-title">मंत्र जप</div>
+      <div class="circular-card-subtitle">दैनिक अभ्यास</div>
+    </a>
+
+    <!-- CIRCULAR CARD 2 -->
+    <a href="#" class="circular-card circular-card-color-2" style="animation-delay: 0.15s;">
+      <div class="circular-card-glow"></div>
+      <span class="circular-card-icon">🙏</span>
+      <div class="circular-card-title">पूजा विधि</div>
+      <div class="circular-card-subtitle">सही तरीका जानें</div>
+    </a>
+
+    <!-- CIRCULAR CARD 3 -->
+    <a href="#" class="circular-card circular-card-color-3" style="animation-delay: 0.2s;">
+      <div class="circular-card-glow"></div>
+      <span class="circular-card-icon">📿</span>
+      <div class="circular-card-title">आध्यात्मिक शिक्षा</div>
+      <div class="circular-card-subtitle">ज्ञान प्राप्त करें</div>
+    </a>
+  </div>
+
   <!-- ══════════════════════════════════════════════════════════════
        AUTHORS SECTION
   ═══════════════════════════════════════════════════════════════ -->
@@ -1646,6 +1856,7 @@ mantra for wealth
   <!-- ═══════════════════════════════════════════════════════════════ -->
 
   <div class="cards-grid" id="suggestedPostsContainer">
+
 
   
 </div>
