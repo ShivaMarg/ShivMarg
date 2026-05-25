@@ -684,6 +684,7 @@ async function loadHero() {
           <span>${fmtDate(main.published_at)}</span>
           <span class="meta-dot"></span>
           <span>${main.read_time || 5} मिनट</span>
+          <span>${main.view_count || 5} Views </span>
         </div>
       </div>
       <div class="hero-side">
@@ -711,7 +712,7 @@ function feedCardHTML(a) {
       <div class="fc-meta">
         <span>${a.author?.username || '—'}</span>
         ${(a.tags || []).slice(0,2).map(t=>`<span class="fc-tag">${t}</span>`).join('')}
-        <span class="fc-read">${a.read_time || 5} मिनट</span>
+        <span class="fc-read">${a.view_count || 5} Views</span>
       </div>
     </a>`;
 }
@@ -760,9 +761,9 @@ async function loadPopular() {
           <div class="cat">${a.category || 'रचना'}</div>
           <h3>${a.title}</h3>
           <p class="exc">${a.excerpt ? a.excerpt.slice(0,90)+'…' : ''}</p>
-          <div class="meta">${a.author?.username || '—'} · ${fmtDate(a.published_at)}</div>
+          <div class="meta">${a.author?.username || '—'} · ${fmtDate(a.view_count)}</div>
         </div>
-        <div class="pop-read">${a.read_time || 5} मिनट<br><small style="color:var(--ink-4)">${a.view_count || 0} बार</small></div>
+        <div class="pop-read">${a.read_time || 5} मिनट<br><small style="color:var(--ink-4)">${a.published_at || 0} Date</small></div>
       </a>`).join('');
   } catch (e) { list.innerHTML = `<div class="error-msg">${e.message}</div>`; }
 }
