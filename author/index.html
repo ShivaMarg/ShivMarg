@@ -45,8 +45,40 @@ header{background:var(--paper);border-bottom:1px solid var(--line-dark);position
 .logo{text-decoration:none;display:flex;flex-direction:column;line-height:1}
 .logo-hi{font-family:'Tiro Devanagari Hindi',serif;font-size:1.8rem;color:var(--saffron);letter-spacing:-1px}
 .logo-sub{font-size:.58rem;letter-spacing:3px;text-transform:uppercase;color:var(--ink-3);margin-top:1px}
-.btn-back{font-size:.75rem;padding:.35rem .9rem;border:1.5px solid var(--saffron);border-radius:4px;color:var(--saffron);background:none;cursor:pointer;font-family:'Source Sans 3',sans-serif;transition:all .15s;text-decoration:none}
-.btn-back:hover{background:var(--saffron);color:#fff}
+nav.main-nav{display:flex;align-items:center;gap:.1rem;flex-wrap:wrap;justify-content:center}
+nav.main-nav a{font-size:.78rem;color:var(--ink-2);text-decoration:none;padding:.35rem .65rem;border-radius:4px;transition:all .15s;letter-spacing:.2px;white-space:nowrap;cursor:pointer}
+nav.main-nav a:hover,nav.main-nav a.active{background:var(--saffron-l);color:var(--saffron)}
+.header-actions{display:flex;align-items:center;gap:.6rem}
+.btn-search{background:none;border:1.5px solid var(--line-dark);border-radius:50%;width:34px;height:34px;cursor:pointer;color:var(--ink-3);font-size:15px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.btn-search:hover{border-color:var(--saffron);color:var(--saffron)}
+.btn-login{font-size:.75rem;padding:.35rem .9rem;border:1.5px solid var(--saffron);border-radius:4px;color:var(--saffron);background:none;cursor:pointer;font-family:'Source Sans 3',sans-serif;transition:all .15s;text-decoration:none;white-space:nowrap}
+.btn-login:hover{background:var(--saffron);color:#fff}
+
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{display:block;width:22px;height:2px;background:var(--ink-2);border-radius:2px;transition:all .3s}
+.mobile-menu{display:none;position:fixed;inset:0;background:var(--paper);z-index:300;padding:2rem 1.5rem;overflow-y:auto}
+.mobile-menu.open{display:block}
+.mobile-menu-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--line)}
+.mobile-menu-close{background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--ink-2)}
+.mobile-menu nav a{display:block;font-family:'Tiro Devanagari Hindi',serif;font-size:1.2rem;color:var(--ink-2);text-decoration:none;padding:.7rem 0;border-bottom:1px solid var(--line);transition:color .15s}
+.mobile-menu nav a:hover{color:var(--saffron)}
+
+.search-overlay{display:none;position:fixed;inset:0;background:rgba(24,18,10,0.85);z-index:400;align-items:flex-start;justify-content:center;padding-top:10vh}
+.search-overlay.open{display:flex}
+.search-box{background:var(--paper);border-radius:var(--radius);padding:1.5rem;width:90%;max-width:600px}
+.search-box h3{font-family:'Tiro Devanagari Hindi',serif;font-size:1.1rem;color:var(--ink-2);margin-bottom:1rem}
+.search-input-wrap{display:flex;gap:.5rem}
+.search-input-wrap input{flex:1;padding:.6rem 1rem;border:1.5px solid var(--line-dark);border-radius:4px;font-size:.9rem;font-family:'Source Sans 3',sans-serif;background:var(--paper-2);color:var(--ink);outline:none}
+.search-input-wrap input:focus{border-color:var(--saffron)}
+.search-input-wrap button{padding:.6rem 1.2rem;background:var(--saffron);color:#fff;border:none;border-radius:4px;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:.85rem}
+#searchResults{margin-top:1rem;max-height:50vh;overflow-y:auto}
+.search-result-item{padding:.6rem 0;border-bottom:1px solid var(--line);cursor:pointer;display:block;text-decoration:none;color:inherit}
+.search-result-item:hover .sr-title{color:var(--saffron)}
+.sr-cat{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--saffron);display:block;margin-bottom:2px}
+.sr-title{font-family:'Tiro Devanagari Hindi',serif;font-size:.9rem;color:var(--ink);transition:color .15s}
+.sr-exc{font-size:.75rem;color:var(--ink-3);margin-top:2px}
+.search-close{background:none;border:none;float:right;font-size:1.2rem;cursor:pointer;color:var(--ink-3);margin-top:-0.2rem}
+
 
 /* ── PROFILE BANNER ── */
 .profile-banner{width:100%;height:300px;background:linear-gradient(135deg, var(--saffron-m) 0%, var(--leaf) 100%);position:relative;overflow:hidden}
@@ -210,8 +242,25 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
       <span class="logo-hi">आलेख</span>
       <span class="logo-sub">साहित्य का सफ़र</span>
     </a>
-    <div></div>
-    <a class="btn-back" href="index.html">← होम</a>
+    <nav class="main-nav" id="mainNav">
+      <a onclick="filterCat(this,'')">सभी</a>
+      <a onclick="filterCat(this,'kavita')">कविता</a>
+      <a onclick="filterCat(this,'kahani')">कहानी</a>
+      <a onclick="filterCat(this,'nibandh')">निबंध</a>
+      <a onclick="filterCat(this,'cinema')">सिनेमा</a>
+      <a onclick="filterCat(this,'science')">विज्ञान</a>
+      <a onclick="filterCat(this,'ai-it')">AI · IT</a>
+      <a onclick="filterCat(this,'vichar')">विचार</a>
+    </nav>
+    <div class="header-actions">
+      <button class="btn-search" onclick="toggleSearch()" title="खोजें">&#128269;</button>
+      <div id="authArea">
+        <a class="btn-login" href="#" onclick="openModal();return false">लॉग-इन</a>
+      </div>
+      <button class="hamburger" onclick="toggleMobileMenu()" aria-label="menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -328,6 +377,98 @@ function fmtDate(iso) {
   try { return new Date(iso).toLocaleDateString('hi-IN', { day: 'numeric', month: 'long', year: 'numeric' }); }
   catch { return iso.slice(0, 10); }
 }
+
+
+function renderAuthArea() {
+  const area = document.getElementById('authArea');
+  if (state.user) {
+    area.innerHTML = `
+      <div class="user-bar">
+        <div class="user-avatar" title="${state.user.display_name}">${state.user.avatar || state.user.username[0].toUpperCase()}</div>
+        <button class="btn-logout" onclick="doLogout()">लॉग-आउट</button>
+      </div>`;
+  } else {
+    area.innerHTML = `<a class="btn-login" href="#" onclick="openModal();return false">लॉग-इन</a>`;
+  }
+}
+
+function openModal() { document.getElementById('authModal').classList.add('open'); }
+function closeModal(e) {
+  if (!e || e.target === document.getElementById('authModal'))
+    document.getElementById('authModal').classList.remove('open');
+}
+function switchAuthTab(tab) {
+  document.getElementById('loginForm').style.display = tab === 'login' ? 'block' : 'none';
+  document.getElementById('registerForm').style.display = tab === 'register' ? 'block' : 'none';
+  document.querySelectorAll('.modal-tab').forEach((t, i) => t.classList.toggle('active', (i === 0) === (tab === 'login')));
+}
+
+async function doLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass  = document.getElementById('loginPass').value;
+  const msg   = document.getElementById('loginMsg');
+  msg.textContent = '…'; msg.className = 'form-msg';
+  try {
+    const data = await apiFetch('/api/auth/login', { method:'POST', body: JSON.stringify({ email, password: pass }) });
+    state.token = data.token; state.user = data.user;
+    localStorage.setItem('bargad_token', data.token);
+    localStorage.setItem('bargad_user', JSON.stringify(data.user));
+    renderAuthArea(); closeModal();
+    showToast('स्वागत है, ' + data.user.display_name + '!');
+  } catch (e) { msg.textContent = e.message; msg.className = 'form-msg error'; }
+}
+
+async function doRegister() {
+  const username = document.getElementById('regUsername').value.trim();
+  const display  = document.getElementById('regDisplay').value.trim();
+  const email    = document.getElementById('regEmail').value.trim();
+  const pass     = document.getElementById('regPass').value;
+  const msg      = document.getElementById('registerMsg');
+  msg.textContent = '…'; msg.className = 'form-msg';
+  try {
+    const data = await apiFetch('/api/auth/register', { method:'POST', body: JSON.stringify({ username, display_name: display, email, password: pass }) });
+    state.token = data.token; state.user = data.user;
+    localStorage.setItem('bargad_token', data.token);
+    localStorage.setItem('bargad_user', JSON.stringify(data.user));
+    renderAuthArea(); closeModal();
+    showToast('खाता बन गया! स्वागत है।');
+  } catch (e) { msg.textContent = e.message; msg.className = 'form-msg error'; }
+}
+
+function doLogout() {
+  state.token = null; state.user = null;
+  localStorage.removeItem('bargad_token');
+  localStorage.removeItem('bargad_user');
+  renderAuthArea(); showToast('लॉग-आउट हो गए।');
+}
+
+function toggleMobileMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+
+function toggleSearch() {
+  document.getElementById('searchOverlay').classList.toggle('open');
+  if (document.getElementById('searchOverlay').classList.contains('open'))
+    setTimeout(() => document.getElementById('searchInput').focus(), 100);
+}
+function closeSearch(e) {
+  if (e.target === document.getElementById('searchOverlay')) toggleSearch();
+}
+async function doSearch() {
+  const q = document.getElementById('searchInput').value.trim();
+  const results = document.getElementById('searchResults');
+  if (!q) { results.innerHTML = ''; return; }
+  results.innerHTML = '<div class="loading-spinner" style="padding:.5rem">खोज रहे हैं…</div>';
+  try {
+    const data = await apiFetch(`/api/articles/search?q=${encodeURIComponent(q)}&limit=8`);
+    if (!data.articles.length) { results.innerHTML = '<p style="font-size:.8rem;color:var(--ink-4);padding:.5rem 0">कोई रचना नहीं मिली।</p>'; return; }
+    results.innerHTML = data.articles.map(a => `
+      <a href="/articles?slug=${encodeURIComponent(a.slug)}" class="search-result-item">
+        <span class="sr-cat">${a.category || '—'}</span>
+        <div class="sr-title">${a.title}</div>
+        <div class="sr-exc">${a.excerpt ? a.excerpt.slice(0,80)+'…' : ''}</div>
+      </a>`).join('');
+  } catch (e) { results.innerHTML = `<div class="error-msg" style="padding:.5rem">${e.message}</div>`; }
+}
+
 
 function switchTab(el, tabName) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
