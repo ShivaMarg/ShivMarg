@@ -99,9 +99,9 @@
         </div>
 
         <div class="nav-dropdown">
-          <button class="nav-dropdown-btn" data-menu="articles-menu">लेख</button>
+          <button class="nav-dropdown-btn" data-menu="articles-menu">आलेख</button>
           <div class="dropdown-content" id="articles-menu">
-            <div class="dropdown-label">✦ आलेख ✦</div>
+            <div class="dropdown-label">✦ लेख ✦</div>
             <a href="/aalekh">आलेख</a>
             <a href="/article_editor">नया लेख लिखें</a>
             <a href="/article_editor?edit=true">सभी लेख</a>
