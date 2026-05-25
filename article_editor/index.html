@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   
-  <!-- TinyMCE Rich Text Editor - REPLACE YOUR_API_KEY_HERE WITH YOUR ACTUAL API KEY -->
+  <!-- TinyMCE Rich Text Editor -->
   <script src="https://cdn.tiny.cloud/1/7nli5k7kmjjg04pix9ly52ig04ti22ru7dwp9du1kxwl76oi/tinymce/6/tinymce.min.js"></script>
 
   <style>
@@ -23,6 +23,8 @@
       --border:    #e2d9ce;
       --success:   #27ae60;
       --warning:   #f39c12;
+      --pending:   #3498db;
+      --danger:    #e74c3c;
       --serif:     'Noto Serif Devanagari', 'Georgia', serif;
       --display:   'Playfair Display', serif;
       --mono:      'DM Mono', monospace;
@@ -70,11 +72,24 @@
     }
     nav.hdr-nav a:hover { color: var(--accent-2); }
 
-    .hdr-actions { display: flex; gap: .75rem; align-items: center; }
+    .hdr-actions { display: flex; gap: 1rem; align-items: center; }
     .hdr-user {
       color: rgba(255,255,255,.7);
       font-family: var(--mono);
       font-size: .8rem;
+    }
+    .hdr-role {
+      background: var(--accent-2);
+      color: var(--ink);
+      padding: .3rem .6rem;
+      border-radius: 2px;
+      font-size: .7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .hdr-role.admin {
+      background: var(--pending);
+      color: #fff;
     }
     .btn-logout {
       background: var(--accent); color: #fff;
@@ -86,7 +101,7 @@
 
     /* ── MAIN CONTAINER ─────────────────────── */
     .editor-wrap {
-      max-width: 1000px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 2rem;
     }
@@ -180,6 +195,13 @@
       resize: vertical;
       min-height: 100px;
     }
+    .form-group input:disabled,
+    .form-group select:disabled,
+    .form-group textarea:disabled {
+      background: #f0f0f0;
+      color: #999;
+      cursor: not-allowed;
+    }
 
     .form-help {
       font-family: var(--mono);
@@ -237,67 +259,6 @@
       font-size: .95rem;
     }
 
-    /* ── IMAGE UPLOAD ───────────────────────– */
-    .image-upload-area {
-      border: 2px dashed var(--border);
-      border-radius: 4px;
-      padding: 2rem;
-      text-align: center;
-      cursor: pointer;
-      transition: all .2s;
-      background: var(--paper-warm);
-    }
-    .image-upload-area:hover {
-      border-color: var(--accent);
-      background: #fff;
-    }
-    .image-upload-area.dragover {
-      border-color: var(--accent);
-      background: rgba(192, 57, 43, .05);
-    }
-    .upload-icon { font-size: 2rem; margin-bottom: .5rem; }
-    .upload-text { color: var(--ink-muted); font-size: .9rem; }
-    .image-preview {
-      margin-top: 1rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 1rem;
-    }
-    .preview-item {
-      position: relative;
-      background: var(--border);
-      aspect-ratio: 1;
-      border-radius: 4px;
-      overflow: hidden;
-    }
-    .preview-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .preview-item .remove-btn {
-      position: absolute; top: 4px; right: 4px;
-      background: var(--accent); color: #fff;
-      border: none; width: 24px; height: 24px;
-      border-radius: 50%; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      font-size: .8rem;
-    }
-
-    /* ── EDITOR TOOLBAR ─────────────────────– */
-    .tox.tox-tinymce {
-      border: 1px solid var(--border) !important;
-      border-radius: 4px !important;
-    }
-    .tox .tox-toolbar {
-      background: var(--paper-warm) !important;
-      border-bottom: 1px solid var(--border) !important;
-    }
-    .tox .tox-tbtn:hover,
-    .tox .tox-tbtn--active {
-      background: rgba(192, 57, 43, .1) !important;
-    }
-
     /* ── STATUS BAR ─────────────────────────– */
     .status-bar {
       display: flex; align-items: center; gap: 1rem;
@@ -307,6 +268,7 @@
       border-radius: 4px;
       margin-bottom: 1.5rem;
       font-size: .9rem;
+      flex-wrap: wrap;
     }
     .status-badge {
       display: inline-flex; align-items: center; gap: .4rem;
@@ -320,8 +282,16 @@
       background: var(--warning);
       color: #fff;
     }
+    .status-badge.pending-approval {
+      background: var(--pending);
+      color: #fff;
+    }
     .status-badge.published {
       background: var(--success);
+      color: #fff;
+    }
+    .status-badge.rejected {
+      background: var(--danger);
       color: #fff;
     }
     .word-count {
@@ -337,6 +307,7 @@
       margin-top: 2rem;
       padding-top: 1.5rem;
       border-top: 1px solid var(--border);
+      flex-wrap: wrap;
     }
 
     .btn {
@@ -349,6 +320,7 @@
       transition: all .2s;
       text-transform: uppercase;
       font-weight: 600;
+      display: inline-block;
     }
 
     .btn-secondary {
@@ -380,39 +352,15 @@
       opacity: .85;
     }
 
+    .btn-pending {
+      background: var(--pending);
+      color: #fff;
+      border: 1px solid var(--pending);
+    }
+
     .btn:disabled {
       opacity: .5;
       cursor: not-allowed;
-    }
-
-    /* ── TOGGLE SWITCH ──────────────────────– */
-    .toggle-group {
-      display: flex; align-items: center; gap: 1rem;
-    }
-    .toggle-switch {
-      position: relative;
-      width: 50px;
-      height: 28px;
-      background: var(--border);
-      border-radius: 14px;
-      cursor: pointer;
-      transition: background .2s;
-    }
-    .toggle-switch.active {
-      background: var(--success);
-    }
-    .toggle-switch::after {
-      content: '';
-      position: absolute;
-      width: 24px;
-      height: 24px;
-      background: #fff;
-      border-radius: 50%;
-      top: 2px; left: 2px;
-      transition: left .2s;
-    }
-    .toggle-switch.active::after {
-      left: 24px;
     }
 
     /* ── MODAL ──────────────────────────────– */
@@ -436,6 +384,8 @@
       max-width: 500px;
       width: 90%;
       box-shadow: 0 10px 40px rgba(0,0,0,.2);
+      max-height: 90vh;
+      overflow-y: auto;
     }
     .modal-title {
       font-family: var(--display);
@@ -448,6 +398,7 @@
     }
     .modal-actions {
       display: flex; gap: .75rem; justify-content: flex-end;
+      flex-wrap: wrap;
     }
 
     /* ── TOAST ──────────────────────────────– */
@@ -476,7 +427,10 @@
       background: var(--success);
     }
     .toast.error {
-      background: var(--accent);
+      background: var(--danger);
+    }
+    .toast.info {
+      background: var(--pending);
     }
 
     /* ── PREVIEW PANEL ──────────────────────– */
@@ -514,6 +468,70 @@
       color: var(--ink-soft);
     }
 
+    /* ── ARTICLE LIST ITEM ──────────────────– */
+    .article-item {
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      background: var(--paper-warm);
+      transition: all .2s;
+    }
+    .article-item:hover {
+      border-color: var(--accent);
+      background: #fff;
+    }
+    .article-header {
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .article-title {
+      color: var(--ink); 
+      margin: 0;
+      font-family: var(--display);
+      font-size: 1rem;
+    }
+    .article-meta {
+      color: var(--ink-muted); 
+      font-size: 0.8rem;
+      margin: 0.5rem 0;
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+    .article-meta span {
+      display: flex; align-items: center; gap: 0.3rem;
+    }
+    .article-excerpt {
+      color: var(--ink-soft); 
+      font-size: 0.9rem; 
+      line-height: 1.5;
+      margin: 0.75rem 0;
+    }
+    .article-actions {
+      display: flex; gap: 0.5rem; margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    .article-actions .btn {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.7rem;
+    }
+
+    /* ── APPROVAL INFO ──────────────────────– */
+    .approval-box {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      border-radius: 4px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+    }
+    .approval-box strong {
+      color: #856404;
+    }
+    .approval-box p {
+      margin: 0.5rem 0;
+      color: #856404;
+    }
+
     /* ── RESPONSIVE ─────────────────────────– */
     @media (max-width: 900px) {
       .editor-wrap { padding: 1.5rem 1rem; }
@@ -521,22 +539,11 @@
       .form-actions { flex-direction: column-reverse; }
       .btn { width: 100%; }
       .preview-panel { width: 100%; right: -100%; }
+      header { flex-wrap: wrap; height: auto; padding: 1rem; }
+      nav.hdr-nav { gap: 1rem; flex-basis: 100%; }
+      .hdr-actions { width: 100%; justify-content: space-between; margin-top: 0.5rem; }
     }
   </style>
-    <link rel="icon" type="image/png" href="/images/ShivMarg.png" />
-  <script defer src="/_vercel/speed-insights/script.js"></script>
-  <script>
-	window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-	</script>
-	<script defer src="/_vercel/insights/script.js"></script>
-	<script>
-	  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-	</script>
-	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5809900825917201"
-	crossorigin="anonymous">
-  </script>
-<link rel="stylesheet" href="/loder/loder.css">
-<script src="/loder/loder.js" defer></script>
 </head>
 <body>
 
@@ -545,11 +552,17 @@
   <a href="/" class="logo">शिव मार्ग<span>.</span></a>
   <nav class="hdr-nav">
     <a href="/">होम</a>
-    <a href="/" onclick="loadDrafts(); return false;">ड्राफ्ट्स</a>
-    <a href="/" onclick="loadArticles(); return false;">मेरे लेख</a>
+    <a href="#" onclick="loadDrafts(); return false;">ड्राफ्ट्स</a>
+    <a href="#" onclick="loadMyArticles(); return false;">मेरे लेख</a>
+    <span id="adminLink" style="display: none;">
+      <a href="#" onclick="loadApprovalQueue(); return false;">अनुमोदन (पेंडिंग)</a>
+    </span>
   </nav>
   <div class="hdr-actions">
-    <span class="hdr-user" id="userDisplay">लॉड हो रहा है...</span>
+    <span class="hdr-user">
+      <span id="userDisplay">लॉड हो रहा है...</span>
+      <span class="hdr-role" id="userRole" style="display: none;"></span>
+    </span>
     <button class="btn-logout" onclick="logout()">लॉग आउट</button>
   </div>
 </header>
@@ -561,17 +574,33 @@
   <div class="breadcrumb">
     <a href="/">शिव मार्ग</a>
     <span>›</span>
-    <span>नया लेख</span>
+    <span id="breadcrumbText">नया लेख</span>
   </div>
 
   <!-- Title -->
-  <h1 class="editor-title">नया लेख लिखें</h1>
-  <p class="editor-subtitle">अपने विचार, ज्ञान और अनुभव साझा करें</p>
+  <h1 class="editor-title" id="pageTitle">नया लेख लिखें</h1>
+  <p class="editor-subtitle" id="pageSubtitle">अपने विचार, ज्ञान और अनुभव साझा करें</p>
 
   <!-- Status Bar -->
-  <div class="status-bar">
-    <span class="status-badge draft" id="statusBadge">ड्राफ्ट</span>
+  <div class="status-bar" id="statusBar" style="display: none;">
+    <span class="status-badge" id="statusBadge">ड्राफ्ट</span>
+    <div id="approvalInfo" style="display: none; margin-left: auto; color: var(--ink-muted); font-family: var(--mono); font-size: 0.8rem;">
+      अनुमोदन के लिए प्रतीक्षा...
+    </div>
     <div class="word-count" id="wordCount">शब्द: 0</div>
+  </div>
+
+  <!-- Approval Info Box (for pending articles) -->
+  <div id="approvalInfoBox" style="display: none;" class="approval-box">
+    <strong>⏳ अनुमोदन के लिए प्रतीक्षा</strong>
+    <p>आपका लेख प्रशासक को अनुमोदन के लिए भेजा गया है। प्रकाशित होने से पहले कृपया प्रतीक्षा करें।</p>
+    <p id="submittedDate"></p>
+  </div>
+
+  <!-- Rejection Info Box -->
+  <div id="rejectionInfoBox" style="display: none;" class="approval-box" style="background: #f8d7da; border-color: #f5c6cb;">
+    <strong style="color: #721c24;">✗ अनुरोध अस्वीकृत</strong>
+    <p id="rejectionReason" style="color: #721c24;"></p>
   </div>
 
   <!-- Editor Form -->
@@ -608,7 +637,7 @@
       <div class="form-row">
         <div class="form-group">
           <label for="category">श्रेणी (Category) *</label>
-          <select id="category" name="category" required onchange="generateCategorySlug(); updatePreview();">
+          <select id="category" name="category" required onchange="updatePreview();">
             <option value="">— चुनें —</option>
             <option value="कविता">कविता</option>
             <option value="गद्य">गद्य</option>
@@ -681,27 +710,12 @@
       </div>
     </div>
 
-    <!-- ── PUBLISH SETTINGS ──────────────── -->
-    <div class="form-section">
-      <h3 class="form-section-title">
-        <span class="form-section-icon">🚀</span>
-        प्रकाशन सेटिंग्स
-      </h3>
-
-      <div class="form-group toggle-group">
-        <label>तुरंत प्रकाशित करें?</label>
-        <div class="toggle-switch" id="publishToggle" onclick="togglePublish()"></div>
-        <span id="publishStatus">ड्राफ्ट में रहेगा</span>
-      </div>
-      <div class="form-help">आप बाद में ड्राफ्ट को संपादित और प्रकाशित कर सकते हैं</div>
-    </div>
-
     <!-- ── ACTIONS ────────────────────────– -->
     <div class="form-actions">
       <button type="button" class="btn btn-secondary" onclick="window.history.back();">रद्द करें</button>
       <button type="button" class="btn btn-secondary" id="previewBtn" onclick="togglePreview();">पूर्वावलोकन</button>
-      <button type="submit" class="btn btn-primary" id="saveDraftBtn">ड्राफ्ट सहेजें</button>
-      <button type="submit" class="btn btn-success" id="publishBtn" style="display:none;">प्रकाशित करें</button>
+      <button type="submit" class="btn btn-primary" id="submitBtn">सहेजें और अनुमोदन के लिए भेजें</button>
+      <input type="hidden" id="editingArticleId" value="">
     </div>
   </form>
 </div>
@@ -717,23 +731,6 @@
 
 <!-- ── MODALS ─────────────────────────────– -->
 
-<!-- Confirm Publish Modal -->
-<div class="modal" id="publishModal">
-  <div class="modal-content">
-    <h2 class="modal-title">लेख को प्रकाशित करें?</h2>
-    <div class="modal-body">
-      <p>एक बार प्रकाशित होने के बाद, यह सबको दिखेगा। क्या आप निश्चित हैं?</p>
-      <p style="margin-top: 1rem; font-weight: 600;">
-        <span id="publishArticleTitle">लेख का शीर्षक</span>
-      </p>
-    </div>
-    <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal('publishModal')">रद्द करें</button>
-      <button class="btn btn-success" onclick="confirmPublish()">हाँ, प्रकाशित करें</button>
-    </div>
-  </div>
-</div>
-
 <!-- Success Modal -->
 <div class="modal" id="successModal">
   <div class="modal-content">
@@ -741,9 +738,10 @@
     <div class="modal-body" id="successMessage">
       लेख सफलतापूर्वक सहेजा गया।
     </div>
+    <p id="successDetail" style="color: var(--ink-muted); font-size: 0.85rem; margin-bottom: 1rem;"></p>
     <div class="modal-actions">
-      <button class="btn btn-primary" onclick="successRedirect()">लेख देखें</button>
       <button class="btn btn-secondary" onclick="successNew()">नया लेख लिखें</button>
+      <button class="btn btn-primary" onclick="successBack()">वापस जाएँ</button>
     </div>
   </div>
 </div>
@@ -774,6 +772,20 @@
   </div>
 </div>
 
+<!-- Approval Queue Modal (Admin Only) -->
+<div class="modal" id="approvalModal">
+  <div class="modal-content" style="max-width: 800px; max-height: 80vh; overflow-y: auto;">
+    <h2 class="modal-title">🔍 अनुमोदन कतार</h2>
+    <p style="color: var(--ink-muted); font-size: 0.9rem; margin-bottom: 1rem;">प्रकाशन के लिए अनुमोदन की प्रतीक्षा करने वाले लेख</p>
+    <div id="approvalList" style="margin-top: 1.5rem;">
+      <p style="text-align: center; color: var(--ink-muted);">लोड हो रहा है...</p>
+    </div>
+    <div class="modal-actions" style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1rem;">
+      <button class="btn btn-secondary" onclick="closeModal('approvalModal')">बंद करें</button>
+    </div>
+  </div>
+</div>
+
 <!-- Delete Confirmation Modal -->
 <div class="modal" id="deleteModal">
   <div class="modal-content">
@@ -791,6 +803,43 @@
   </div>
 </div>
 
+<!-- Approval Review Modal (Admin) -->
+<div class="modal" id="reviewModal">
+  <div class="modal-content" style="max-width: 700px; max-height: 90vh; overflow-y: auto;">
+    <h2 class="modal-title" id="reviewTitle">लेख समीक्षा</h2>
+    
+    <div id="reviewArticleContent" style="margin: 1.5rem 0; padding: 1rem; background: var(--paper-warm); border-radius: 4px;">
+      <h3 id="reviewArticleTitle" style="font-family: var(--display); font-size: 1.1rem; margin-bottom: 0.5rem;"></h3>
+      <p id="reviewArticleExcerpt" style="color: var(--ink-soft); font-size: 0.9rem;"></p>
+      <p id="reviewArticleAuthor" style="color: var(--ink-muted); font-size: 0.8rem; margin-top: 0.5rem;"></p>
+    </div>
+
+    <div style="margin: 1.5rem 0;">
+      <label style="display: block; font-weight: 600; color: var(--ink); margin-bottom: 0.5rem; font-family: var(--mono);">
+        निर्णय *
+      </label>
+      <select id="reviewDecision" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); font-family: var(--serif); font-size: 0.95rem;">
+        <option value="">— चुनें —</option>
+        <option value="approved">✓ मंजूरी दें</option>
+        <option value="rejected">✗ अस्वीकार करें</option>
+      </select>
+    </div>
+
+    <div style="margin: 1.5rem 0; display: none;" id="rejectionReasonDiv">
+      <label style="display: block; font-weight: 600; color: var(--ink); margin-bottom: 0.5rem; font-family: var(--mono);">
+        अस्वीकृति कारण
+      </label>
+      <textarea id="rejectionReason" placeholder="कृपया अस्वीकृति का कारण समझाएँ..."
+                style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); font-family: var(--serif); font-size: 0.95rem; min-height: 80px;"></textarea>
+    </div>
+
+    <div class="modal-actions" style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1rem;">
+      <button class="btn btn-secondary" onclick="closeModal('reviewModal')">रद्द करें</button>
+      <button class="btn btn-success" id="submitReviewBtn" onclick="submitReview()">निर्णय सहेजें</button>
+    </div>
+  </div>
+</div>
+
 <!-- ── TOAST ──────────────────────────────– -->
 <div class="toast" id="toast"></div>
 
@@ -799,10 +848,11 @@
   // ─────────────────────────────────────────────
   // CONFIG & STATE
   // ─────────────────────────────────────────────
-  const API_BASE = 'https://shivamargbackend.onrender.com'; // Change for production
+  const API_BASE = 'https://shivamargbackend.onrender.com';
   let currentUser = null;
-  let isPublishing = false;
   let tags = [];
+  let currentArticleId = null;
+  let isEditMode = false;
 
   // ─────────────────────────────────────────────
   // UTILITY: Local Storage & Auth
@@ -823,13 +873,17 @@
     window.location.href = '/admin-login';
   }
 
+  function hasAdminRole() {
+    return currentUser && (currentUser.role === 'admin' || currentUser.role === 'moderator');
+  }
+
   // ─────────────────────────────────────────────
   // INIT: Check Auth & Load User
   // ─────────────────────────────────────────────
   async function initPage() {
     const token = getToken();
     if (!token) {
-      window.location.href = '/admin-login'; // Redirect to login
+      window.location.href = '/admin-login';
       return;
     }
 
@@ -848,22 +902,123 @@
       }
     }
 
-    document.getElementById('userDisplay').textContent = `${currentUser.display_name || currentUser.username}`;
+    // Update UI with user info
+    document.getElementById('userDisplay').textContent = currentUser.display_name || currentUser.username;
+    const roleEl = document.getElementById('userRole');
+    if (hasAdminRole()) {
+      roleEl.textContent = currentUser.role === 'admin' ? 'Admin' : 'Moderator';
+      roleEl.style.display = 'inline-block';
+      roleEl.classList.add('admin');
+      document.getElementById('adminLink').style.display = 'inline';
+    } else {
+      roleEl.style.display = 'none';
+    }
 
-    // Initialize TinyMCE
-    initEditor();
+    // Check if editing an article
+    const params = new URLSearchParams(window.location.search);
+    const editId = params.get('edit');
+    if (editId) {
+      await loadArticleForEdit(editId);
+    } else {
+      // Initialize TinyMCE for new article
+      initEditor();
+      loadDraftFromStorage();
+    }
 
     // Auto-save to localStorage every 30 seconds
     setInterval(autoSave, 30000);
-    
-    // Load saved draft if exists
-    loadDraftFromStorage();
+  }
+
+  // ─────────────────────────────────────────────
+  // LOAD ARTICLE FOR EDITING
+  // ─────────────────────────────────────────────
+  async function loadArticleForEdit(articleId) {
+    const token = getToken();
+    try {
+      const res = await fetch(`${API_BASE}/api/articles/${articleId}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+
+      if (!res.ok) throw new Error('लेख नहीं मिला');
+      const article = await res.json();
+
+      // Check ownership
+      if (article.author_id !== currentUser._id && !hasAdminRole()) {
+        showToast('आपको यह लेख संपादित करने की अनुमति नहीं है', 'error');
+        window.location.href = '/';
+        return;
+      }
+
+      // Populate form
+      isEditMode = true;
+      currentArticleId = articleId;
+      document.getElementById('editingArticleId').value = articleId;
+      document.getElementById('title').value = article.title;
+      document.getElementById('subtitle').value = article.subtitle || '';
+      document.getElementById('excerpt').value = article.excerpt;
+      document.getElementById('category').value = article.category;
+      document.getElementById('bannerUrl').value = article.banner_url;
+      document.getElementById('thumbnailUrl').value = article.thumbnail_url || '';
+      document.getElementById('readTime').value = article.read_time || 5;
+      document.getElementById('slug').value = article.slug;
+      tags = article.tags || [];
+
+      // Update page title
+      document.getElementById('pageTitle').textContent = 'लेख संपादित करें';
+      document.getElementById('pageSubtitle').textContent = `"${article.title}" को संपादित करें`;
+      document.getElementById('breadcrumbText').textContent = 'संपादित करें';
+      document.getElementById('submitBtn').textContent = 'परिवर्तन सहेजें';
+
+      // Show status bar and set status
+      document.getElementById('statusBar').style.display = 'flex';
+      const statusBadge = document.getElementById('statusBadge');
+      if (article.status === 'draft') {
+        statusBadge.textContent = 'ड्राफ्ट';
+        statusBadge.className = 'status-badge draft';
+      } else if (article.status === 'pending_approval') {
+        statusBadge.textContent = 'अनुमोदन के लिए प्रतीक्षा';
+        statusBadge.className = 'status-badge pending-approval';
+        document.getElementById('approvalInfoBox').style.display = 'block';
+        document.getElementById('submittedDate').textContent = 
+          `सबमिट: ${new Date(article.submitted_at).toLocaleDateString('hi-IN')}`;
+      } else if (article.status === 'published') {
+        statusBadge.textContent = 'प्रकाशित';
+        statusBadge.className = 'status-badge published';
+      } else if (article.status === 'rejected') {
+        statusBadge.textContent = 'अस्वीकृत';
+        statusBadge.className = 'status-badge rejected';
+        document.getElementById('rejectionInfoBox').style.display = 'block';
+        document.getElementById('rejectionReason').textContent = article.rejection_reason || 'कोई कारण दिया नहीं गया';
+      }
+
+      // Disable editing if published
+      if (article.status === 'published') {
+        document.querySelectorAll('#editorForm input, #editorForm select, #editorForm textarea').forEach(el => {
+          el.disabled = true;
+        });
+        document.getElementById('submitBtn').disabled = true;
+        showToast('यह लेख प्रकाशित है। आप इसे संपादित नहीं कर सकते।', 'info');
+      }
+
+      // Initialize TinyMCE
+      initEditor(() => {
+        const editor = tinymce.get('content');
+        if (editor) {
+          editor.setContent(article.content);
+        }
+      });
+
+      renderTags();
+    } catch(e) {
+      showToast(e.message || 'लेख लोड नहीं हो सका', 'error');
+      setTimeout(() => window.location.href = '/', 2000);
+    }
   }
 
   // ─────────────────────────────────────────────
   // TINYMCE EDITOR INIT
   // ─────────────────────────────────────────────
-  function initEditor() {
+  function initEditor(callback) {
     tinymce.init({
       selector: '#content',
       height: 500,
@@ -885,6 +1040,9 @@
         blockquote { border-left: 4px solid #c0392b; padding: 15px; margin: 20px 0; background: #f5f0e8; }
       `,
       setup: function(editor) {
+        editor.on('init', function() {
+          if (callback) callback();
+        });
         editor.on('change', function() {
           updateWordCount();
           updatePreview();
@@ -910,7 +1068,6 @@
     const title = document.getElementById('title').value;
     if (!title) return;
     
-    // Slug: transliterate Hindi to ASCII-friendly, lowercase, hyphens
     let slug = title
       .toLowerCase()
       .replace(/[^\w\s-]/g, '')
@@ -919,11 +1076,6 @@
       .slice(0, 60);
     
     document.getElementById('slug').value = slug;
-  }
-
-  function generateCategorySlug() {
-    const category = document.getElementById('category').value;
-    // Store internally but user only sees category name
   }
 
   // ─────────────────────────────────────────────
@@ -954,7 +1106,7 @@
     tags.forEach(tag => {
       const el = document.createElement('span');
       el.className = 'tag';
-      el.innerHTML = `${tag} <button type="button" onclick="removeTag('${tag}')">×</button>`;
+      el.innerHTML = `${tag} <button type="button" onclick="removeTag('${tag.replace(/'/g, "\\'")}')">×</button>`;
       wrapper.appendChild(el);
     });
 
@@ -975,8 +1127,6 @@
     document.getElementById('previewTitle').textContent = title;
     document.getElementById('previewMeta').textContent = `${category} · ${readTime} मिनट पढ़ें`;
     document.getElementById('previewContent').innerHTML = content ? content.substring(0, 300) + '...' : excerpt;
-
-    updatePreviewInList();
   }
 
   function togglePreview() {
@@ -984,35 +1134,7 @@
   }
 
   // ─────────────────────────────────────────────
-  // PUBLISH TOGGLE
-  // ─────────────────────────────────────────────
-  function togglePublish() {
-    const toggle = document.getElementById('publishToggle');
-    const status = document.getElementById('publishStatus');
-    const badge = document.getElementById('statusBadge');
-    const saveDraftBtn = document.getElementById('saveDraftBtn');
-    const publishBtn = document.getElementById('publishBtn');
-
-    toggle.classList.toggle('active');
-    
-    if (toggle.classList.contains('active')) {
-      status.textContent = 'तुरंत प्रकाशित होगा';
-      badge.className = 'status-badge published';
-      badge.textContent = 'प्रकाशित';
-      saveDraftBtn.style.display = 'none';
-      publishBtn.style.display = 'inline-block';
-    } else {
-      status.textContent = 'ड्राफ्ट में रहेगा';
-      badge.className = 'status-badge draft';
-      badge.textContent = 'ड्राफ्ट';
-      saveDraftBtn.style.display = 'inline-block';
-      publishBtn.style.display = 'none';
-    }
-    isPublishing = toggle.classList.contains('active');
-  }
-
-  // ─────────────────────────────────────────────
-  // FORM SUBMISSION
+  // FORM SUBMISSION - Approval Workflow
   // ─────────────────────────────────────────────
   async function submitArticle(e) {
     e.preventDefault();
@@ -1046,21 +1168,26 @@
       banner_url: bannerUrl,
       thumbnail_url: document.getElementById('thumbnailUrl').value.trim() || null,
       category,
-      category_slug: slug.split('-')[0] || category.toLowerCase(),
       tags,
-      status: isPublishing ? 'published' : 'draft',
       read_time: parseInt(document.getElementById('readTime').value) || 5,
-      slug
+      slug,
+      // All non-admin articles go to pending approval
+      status: hasAdminRole() ? 'published' : 'pending_approval'
     };
 
     try {
-      const btn = e.target.querySelector('button[type="submit"]');
+      const btn = document.getElementById('submitBtn');
       const originalText = btn.textContent;
       btn.disabled = true;
       btn.textContent = 'भेजा जा रहा है...';
 
-      const res = await fetch(`${API_BASE}/api/articles`, {
-        method: 'POST',
+      const method = isEditMode ? 'PATCH' : 'POST';
+      const url = isEditMode ? 
+        `${API_BASE}/api/articles/${currentArticleId}` : 
+        `${API_BASE}/api/articles`;
+
+      const res = await fetch(url, {
+        method,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
@@ -1078,17 +1205,20 @@
       // Clear localStorage draft
       localStorage.removeItem('articleDraft');
 
-      // Show success
-      const statusText = isPublishing ? 'प्रकाशित' : 'ड्राफ्ट में सहेजा';
-      showToast(`लेख ${statusText} हो गया!`, 'success');
+      // Show success message
+      const isApprovalRequired = !hasAdminRole();
+      const statusMsg = isApprovalRequired ? 
+        'लेख सफलतापूर्वक सहेजा गया और अनुमोदन के लिए भेजा गया।' :
+        'लेख सफलतापूर्वक प्रकाशित किया गया।';
 
-      // Show success modal
-      document.getElementById('successMessage').textContent = 
-        `आपका लेख "${title}" ${statusText.toLowerCase()} हो गया।`;
-      document.getElementById('publishArticleTitle').textContent = title;
+      document.getElementById('successMessage').textContent = statusMsg;
+      document.getElementById('successDetail').textContent = isApprovalRequired ?
+        'प्रशासक द्वारा मंजूरी देने के बाद यह प्रकाशित होगा।' :
+        'लेख अब सार्वजनिक रूप से दृश्यमान है।';
+
+      showToast(statusMsg, 'success');
       openModal('successModal');
 
-      // Store for redirect
       window.articleSlug = article.slug;
 
     } catch(e) {
@@ -1111,27 +1241,31 @@
     document.getElementById(id).classList.remove('show');
   }
 
-  function confirmPublish() {
-    closeModal('publishModal');
-    document.getElementById('publishBtn').click();
-  }
-
-  function successRedirect() {
-    if (window.articleSlug) {
-      window.location.href = `/articles?slug=${window.articleSlug}`;
-    }
+  function successBack() {
+    closeModal('successModal');
+    window.history.back();
   }
 
   function successNew() {
     document.getElementById('editorForm').reset();
     tags = [];
     renderTags();
+    document.getElementById('statusBar').style.display = 'none';
+    document.getElementById('approvalInfoBox').style.display = 'none';
+    document.getElementById('rejectionInfoBox').style.display = 'none';
     updateWordCount();
     updatePreview();
     if (tinymce.get('content')) {
       tinymce.get('content').setContent('');
     }
+    isEditMode = false;
+    currentArticleId = null;
+    document.getElementById('editingArticleId').value = '';
+    document.getElementById('pageTitle').textContent = 'नया लेख लिखें';
+    document.getElementById('pageSubtitle').textContent = 'अपने विचार, ज्ञान और अनुभव साझा करें';
+    document.getElementById('submitBtn').textContent = 'सहेजें और अनुमोदन के लिए भेजें';
     closeModal('successModal');
+    localStorage.removeItem('articleDraft');
   }
 
   // ─────────────────────────────────────────────
@@ -1150,7 +1284,6 @@
       readTime: document.getElementById('readTime').value,
       tags,
       slug: document.getElementById('slug').value,
-      isPublishing,
       savedAt: new Date().toLocaleString('hi-IN')
     };
     localStorage.setItem('articleDraft', JSON.stringify(draft));
@@ -1181,18 +1314,10 @@
         }
       }, 1000);
 
-      if (data.isPublishing) {
-        document.getElementById('publishToggle').click();
-      }
-
-      showToast(`ड्राफ्ट लोड हुया: ${data.savedAt}`, 'success');
+      showToast(`ड्राफ्ट लोड हुया: ${data.savedAt}`, 'info');
     } catch(e) {
       console.error('Error loading draft:', e);
     }
-  }
-
-  function updatePreviewInList() {
-    // Can add live preview of what will show in article list
   }
 
   // ─────────────────────────────────────────────
@@ -1202,11 +1327,11 @@
     const toast = document.getElementById('toast');
     toast.textContent = msg;
     toast.className = `toast show ${type}`;
-    setTimeout(() => toast.classList.remove('show'), 3000);
+    setTimeout(() => toast.classList.remove('show'), 4000);
   }
 
   // ─────────────────────────────────────────────
-  // LOAD DRAFTS & ARTICLES
+  // LOAD DRAFTS - Only Own Drafts
   // ─────────────────────────────────────────────
   async function loadDrafts() {
     const token = getToken();
@@ -1219,7 +1344,8 @@
       const draftsList = document.getElementById('draftsList');
       draftsList.innerHTML = '<p style="text-align: center; color: var(--ink-muted);">लोड हो रहा है...</p>';
 
-      const res = await fetch(`${API_BASE}/api/articles?status=draft`, {
+      // Fetch only user's drafts
+      const res = await fetch(`${API_BASE}/api/articles?status=draft&author_id=${currentUser._id}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
 
@@ -1227,7 +1353,6 @@
 
       let articles = await res.json();
       
-      // Handle different response formats
       if (articles.articles && Array.isArray(articles.articles)) {
         articles = articles.articles;
       } else if (articles.data && Array.isArray(articles.data)) {
@@ -1236,37 +1361,26 @@
         articles = [];
       }
       
+      // Filter for current user
+      articles = articles.filter(a => a.author_id === currentUser._id);
+      
       if (!articles || articles.length === 0) {
         draftsList.innerHTML = '<p style="text-align: center; color: var(--ink-muted);">कोई ड्राफ्ट नहीं मिले</p>';
       } else {
         draftsList.innerHTML = articles.map(article => `
-          <div style="
-            padding: 1rem;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            margin-bottom: 1rem;
-            background: var(--paper-warm);
-          ">
-            <div style="display: flex; justify-content: space-between; align-items: start; gap: 1rem;">
-              <div style="flex: 1;">
-                <h4 style="color: var(--ink); margin-bottom: 0.5rem; font-family: var(--display);">
-                  ${article.title}
-                </h4>
-                <p style="color: var(--ink-muted); font-size: 0.85rem; margin-bottom: 0.5rem;">
-                  ${article.category} · सहेजा: ${new Date(article.updated_at || article.created_at).toLocaleDateString('hi-IN')}
-                </p>
-                <p style="color: var(--ink-soft); font-size: 0.9rem; line-height: 1.4;">
-                  ${article.excerpt}
-                </p>
-              </div>
+          <div class="article-item">
+            <div class="article-header">
+              <h4 class="article-title">${article.title}</h4>
             </div>
-            <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
-              <button class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;" 
-                      onclick="editArticle('${article._id}')">संपादित करें</button>
-              <button class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem; background: var(--success);" 
-                      onclick="publishFromDraft('${article._id}', '${article.title.replace(/'/g, "\\'")}')">प्रकाशित करें</button>
-              <button class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem; background: #e74c3c;" 
-                      onclick="deleteArticlePrompt('${article._id}', '${article.title.replace(/'/g, "\\'")}')">हटाएँ</button>
+            <div class="article-meta">
+              <span>${article.category}</span>
+              <span>सहेजा: ${new Date(article.updated_at || article.created_at).toLocaleDateString('hi-IN')}</span>
+            </div>
+            <p class="article-excerpt">${article.excerpt}</p>
+            <div class="article-actions">
+              <button class="btn btn-secondary" onclick="editArticle('${article._id}')">संपादित करें</button>
+              <button class="btn btn-pending" onclick="submitForApproval('${article._id}')">अनुमोदन के लिए भेजें</button>
+              <button class="btn btn-secondary" style="background: #e74c3c;" onclick="deleteArticlePrompt('${article._id}', '${article.title.replace(/'/g, "\\'")}')">हटाएँ</button>
             </div>
           </div>
         `).join('');
@@ -1279,7 +1393,10 @@
     }
   }
 
-  async function loadArticles() {
+  // ─────────────────────────────────────────────
+  // LOAD MY ARTICLES - Only Published Own Articles
+  // ─────────────────────────────────────────────
+  async function loadMyArticles() {
     const token = getToken();
     if (!token) {
       showToast('पहले लॉगिन करें', 'error');
@@ -1290,6 +1407,7 @@
       const articlesList = document.getElementById('articlesList');
       articlesList.innerHTML = '<p style="text-align: center; color: var(--ink-muted);">लोड हो रहा है...</p>';
 
+      // Fetch published articles
       const res = await fetch(`${API_BASE}/api/articles?status=published`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -1298,7 +1416,6 @@
 
       let articles = await res.json();
       
-      // Handle different response formats
       if (articles.articles && Array.isArray(articles.articles)) {
         articles = articles.articles;
       } else if (articles.data && Array.isArray(articles.data)) {
@@ -1307,37 +1424,27 @@
         articles = [];
       }
       
+      // Filter for current user's articles
+      articles = articles.filter(a => a.author_id === currentUser._id);
+      
       if (!articles || articles.length === 0) {
         articlesList.innerHTML = '<p style="text-align: center; color: var(--ink-muted);">कोई प्रकाशित लेख नहीं मिले</p>';
       } else {
         articlesList.innerHTML = articles.map(article => `
-          <div style="
-            padding: 1rem;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            margin-bottom: 1rem;
-            background: var(--paper-warm);
-          ">
-            <div style="display: flex; justify-content: space-between; align-items: start; gap: 1rem;">
-              <div style="flex: 1;">
-                <h4 style="color: var(--ink); margin-bottom: 0.5rem; font-family: var(--display);">
-                  ${article.title}
-                </h4>
-                <p style="color: var(--ink-muted); font-size: 0.85rem; margin-bottom: 0.5rem;">
-                  ${article.category} · ${article.read_time || 5} मिनट · प्रकाशित: ${new Date(article.created_at).toLocaleDateString('hi-IN')}
-                </p>
-                <p style="color: var(--ink-soft); font-size: 0.9rem; line-height: 1.4;">
-                  ${article.excerpt}
-                </p>
-              </div>
+          <div class="article-item">
+            <div class="article-header">
+              <h4 class="article-title">${article.title}</h4>
+              <span class="status-badge published">प्रकाशित</span>
             </div>
-            <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
-              <button class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;" 
-                      onclick="viewArticle('${article.slug}')">देखें</button>
-              <button class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;" 
-                      onclick="editArticle('${article._id}')">संपादित करें</button>
-              <button class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem; background: #e74c3c;" 
-                      onclick="deleteArticlePrompt('${article._id}', '${article.title.replace(/'/g, "\\'")}')">हटाएँ</button>
+            <div class="article-meta">
+              <span>${article.category}</span>
+              <span>${article.read_time || 5} मिनट</span>
+              <span>प्रकाशित: ${new Date(article.created_at).toLocaleDateString('hi-IN')}</span>
+            </div>
+            <p class="article-excerpt">${article.excerpt}</p>
+            <div class="article-actions">
+              <button class="btn btn-secondary" onclick="viewArticle('${article.slug}')">देखें</button>
+              <button class="btn btn-secondary" onclick="deleteArticlePrompt('${article._id}', '${article.title.replace(/'/g, "\\'")}')">हटाएँ</button>
             </div>
           </div>
         `).join('');
@@ -1351,16 +1458,109 @@
   }
 
   // ─────────────────────────────────────────────
+  // ADMIN: LOAD APPROVAL QUEUE
+  // ─────────────────────────────────────────────
+  async function loadApprovalQueue() {
+    if (!hasAdminRole()) {
+      showToast('आपको इस फीचर का एक्सेस नहीं है', 'error');
+      return;
+    }
+
+    const token = getToken();
+    try {
+      const approvalList = document.getElementById('approvalList');
+      approvalList.innerHTML = '<p style="text-align: center; color: var(--ink-muted);">लोड हो रहा है...</p>';
+
+      const res = await fetch(`${API_BASE}/api/articles?status=pending_approval`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+
+      if (!res.ok) throw new Error('कतार फेच नहीं हो सकी');
+
+      let articles = await res.json();
+      
+      if (articles.articles && Array.isArray(articles.articles)) {
+        articles = articles.articles;
+      } else if (articles.data && Array.isArray(articles.data)) {
+        articles = articles.data;
+      } else if (!Array.isArray(articles)) {
+        articles = [];
+      }
+      
+      if (!articles || articles.length === 0) {
+        approvalList.innerHTML = '<p style="text-align: center; color: var(--ink-muted);">कोई अनुमोदन अनुरोध नहीं हैं</p>';
+      } else {
+        approvalList.innerHTML = articles.map(article => `
+          <div class="article-item">
+            <div class="article-header">
+              <div style="flex: 1;">
+                <h4 class="article-title">${article.title}</h4>
+                <p style="color: var(--ink-muted); font-size: 0.8rem; margin-top: 0.3rem;">
+                  लेखक: ${article.author_name || 'अनाम'} · सबमिट: ${new Date(article.submitted_at || article.created_at).toLocaleDateString('hi-IN')}
+                </p>
+              </div>
+              <span class="status-badge pending-approval">पेंडिंग</span>
+            </div>
+            <div class="article-meta">
+              <span>${article.category}</span>
+              <span>${article.read_time || 5} मिनट</span>
+            </div>
+            <p class="article-excerpt">${article.excerpt}</p>
+            <div class="article-actions">
+              <button class="btn btn-secondary" onclick="previewArticleForApproval('${article._id}', '${article.title.replace(/'/g, "\\'")}')">पूर्वावलोकन</button>
+              <button class="btn btn-success" onclick="openReviewModal('${article._id}', '${article.title.replace(/'/g, "\\'")}', '${article.author_name || 'अनाम'.replace(/'/g, "\\'")}', '${article.excerpt.replace(/'/g, "\\'")}')">समीक्षा करें</button>
+              <button class="btn btn-secondary" style="background: #e74c3c;" onclick="deleteArticlePrompt('${article._id}', '${article.title.replace(/'/g, "\\'")}')">अस्वीकार करें</button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      openModal('approvalModal');
+    } catch(e) {
+      showToast(e.message || 'कुछ गड़बड़ हुई', 'error');
+      console.error(e);
+    }
+  }
+
+  // ─────────────────────────────────────────────
   // ARTICLE ACTIONS
   // ─────────────────────────────────────────────
   function viewArticle(slug) {
     window.open(`/articles?slug=${slug}`, '_blank');
   }
 
+  function previewArticleForApproval(articleId, title) {
+    window.open(`/articles?id=${articleId}`, '_blank');
+  }
+
   function editArticle(articleId) {
-    // Store the article ID to edit
-    sessionStorage.setItem('editArticleId', articleId);
     window.location.href = `?edit=${articleId}`;
+  }
+
+  async function submitForApproval(articleId) {
+    const token = getToken();
+    if (!token) {
+      showToast('पहले लॉगिन करें', 'error');
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_BASE}/api/articles/${articleId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ status: 'pending_approval' })
+      });
+
+      if (!res.ok) throw new Error('लेख भेजा नहीं जा सका');
+
+      showToast('लेख अनुमोदन के लिए भेजा गया!', 'success');
+      setTimeout(() => loadDrafts(), 1000);
+    } catch(e) {
+      showToast(e.message || 'कुछ गड़बड़ हुई', 'error');
+    }
   }
 
   function deleteArticlePrompt(articleId, title) {
@@ -1389,53 +1589,81 @@
       closeModal('deleteModal');
       showToast('लेख सफलतापूर्वक हटाया गया', 'success');
       
-      // Reload drafts/articles
       setTimeout(() => {
         loadDrafts();
       }, 500);
     } catch(e) {
       showToast(e.message || 'कुछ गड़बड़ हुई', 'error');
-      console.error(e);
     }
   }
 
-  function publishFromDraft(articleId, title) {
-    window.currentPublishId = articleId;
-    document.getElementById('publishArticleTitle').textContent = title;
-    openModal('publishModal');
+  // ─────────────────────────────────────────────
+  // ADMIN: REVIEW & APPROVAL
+  // ─────────────────────────────────────────────
+  function openReviewModal(articleId, title, author, excerpt) {
+    window.currentReviewId = articleId;
+    document.getElementById('reviewArticleTitle').textContent = title;
+    document.getElementById('reviewArticleExcerpt').textContent = excerpt;
+    document.getElementById('reviewArticleAuthor').textContent = `लेखक: ${author}`;
+    document.getElementById('reviewDecision').value = '';
+    document.getElementById('rejectionReason').value = '';
+    document.getElementById('rejectionReasonDiv').style.display = 'none';
+    openModal('reviewModal');
   }
 
-  async function confirmPublish() {
-    const articleId = window.currentPublishId;
+  document.addEventListener('DOMContentLoaded', function() {
+    const reviewDecision = document.getElementById('reviewDecision');
+    if (reviewDecision) {
+      reviewDecision.addEventListener('change', function() {
+        const rejectionDiv = document.getElementById('rejectionReasonDiv');
+        if (this.value === 'rejected') {
+          rejectionDiv.style.display = 'block';
+        } else {
+          rejectionDiv.style.display = 'none';
+        }
+      });
+    }
+  });
+
+  async function submitReview() {
+    const articleId = window.currentReviewId;
+    const decision = document.getElementById('reviewDecision').value;
+    const rejectionReason = document.getElementById('rejectionReason').value;
     const token = getToken();
 
-    if (!token || !articleId) {
-      showToast('कुछ गड़बड़ हुई', 'error');
+    if (!decision) {
+      showToast('कृपया निर्णय चुनें', 'error');
+      return;
+    }
+
+    if (decision === 'rejected' && !rejectionReason.trim()) {
+      showToast('कृपया अस्वीकृति का कारण दर्ज करें', 'error');
       return;
     }
 
     try {
+      const payload = { status: decision === 'approved' ? 'published' : 'rejected' };
+      if (decision === 'rejected') {
+        payload.rejection_reason = rejectionReason;
+      }
+
       const res = await fetch(`${API_BASE}/api/articles/${articleId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({ status: 'published' })
+        body: JSON.stringify(payload)
       });
 
-      if (!res.ok) throw new Error('लेख प्रकाशित नहीं हो सका');
+      if (!res.ok) throw new Error('समीक्षा सहेजी नहीं जा सकी');
 
-      closeModal('publishModal');
-      showToast('लेख प्रकाशित हो गया!', 'success');
+      closeModal('reviewModal');
+      showToast(decision === 'approved' ? 'लेख प्रकाशित किया गया!' : 'लेख अस्वीकार किया गया', 'success');
       
-      // Reload drafts
-      setTimeout(() => {
-        loadDrafts();
-      }, 500);
+      setTimeout(() => loadApprovalQueue(), 1000);
     } catch(e) {
       showToast(e.message || 'कुछ गड़बड़ हुई', 'error');
-      console.error(e);
     }
   }
 
