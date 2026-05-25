@@ -745,7 +745,7 @@ const API = 'https://shivamargbackend.onrender.com';
 
 // ── STATE ──────────────────────────────────────────────────────────
 const state = {
-  token:      localStorage.getItem('bargad_token') || null,
+  token:      localStorage.getItem('sm_token') || null,
   user:       JSON.parse(localStorage.getItem('bargad_user') || 'null'),
   authorSlug: null,
   authorData: null,
@@ -820,7 +820,7 @@ async function doLogin() {
   try {
     const data = await apiFetch('/api/auth/login', { method:'POST', body: JSON.stringify({ email, password: pass }) });
     state.token = data.token; state.user = data.user;
-    localStorage.setItem('bargad_token', data.token);
+    localStorage.setItem('sm_token', data.token);
     localStorage.setItem('bargad_user', JSON.stringify(data.user));
     renderAuthArea(); closeModal();
     showToast('स्वागत है, ' + data.user.display_name + '!');
@@ -837,7 +837,7 @@ async function doRegister() {
   try {
     const data = await apiFetch('/api/auth/register', { method:'POST', body: JSON.stringify({ username, display_name: display, email, password: pass }) });
     state.token = data.token; state.user = data.user;
-    localStorage.setItem('bargad_token', data.token);
+    localStorage.setItem('sm_token', data.token);
     localStorage.setItem('bargad_user', JSON.stringify(data.user));
     renderAuthArea(); closeModal();
     showToast('खाता बन गया! स्वागत है।');
@@ -846,7 +846,7 @@ async function doRegister() {
 
 function doLogout() {
   state.token = null; state.user = null;
-  localStorage.removeItem('bargad_token');
+  localStorage.removeItem('sm_token');
   localStorage.removeItem('bargad_user');
   renderAuthArea(); showToast('लॉग-आउट हो गए।');
 }
