@@ -35,15 +35,12 @@
 html{scroll-behavior:smooth}
 body{font-family:'Source Sans 3',sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;min-height:100vh;overflow-x:hidden}
 
-/* ── SCROLLBAR ── */
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-track{background:var(--paper-2)}
 ::-webkit-scrollbar-thumb{background:var(--saffron-m);border-radius:3px}
 
-/* ── TOP STRIP ── */
 .top-strip{background:var(--saffron);color:#fff;text-align:center;font-size:.65rem;letter-spacing:3px;text-transform:uppercase;padding:.3rem 1rem;font-weight:600}
 
-/* ── HEADER ── */
 header{background:var(--paper);border-bottom:1px solid var(--line-dark);position:sticky;top:0;z-index:200;box-shadow:0 1px 8px rgba(24,18,10,0.06)}
 .header-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1rem;padding:.75rem 1.5rem}
 .logo{text-decoration:none;display:flex;flex-direction:column;line-height:1}
@@ -58,7 +55,6 @@ nav.main-nav a:hover,nav.main-nav a.active{background:var(--saffron-l);color:var
 .btn-login{font-size:.75rem;padding:.35rem .9rem;border:1.5px solid var(--saffron);border-radius:4px;color:var(--saffron);background:none;cursor:pointer;font-family:'Source Sans 3',sans-serif;transition:all .15s;text-decoration:none;white-space:nowrap}
 .btn-login:hover{background:var(--saffron);color:#fff}
 
-/* ── HAMBURGER ── */
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
 .hamburger span{display:block;width:22px;height:2px;background:var(--ink-2);border-radius:2px;transition:all .3s}
 .mobile-menu{display:none;position:fixed;inset:0;background:var(--paper);z-index:300;padding:2rem 1.5rem;overflow-y:auto}
@@ -68,7 +64,6 @@ nav.main-nav a:hover,nav.main-nav a.active{background:var(--saffron-l);color:var
 .mobile-menu nav a{display:block;font-family:'Tiro Devanagari Hindi',serif;font-size:1.2rem;color:var(--ink-2);text-decoration:none;padding:.7rem 0;border-bottom:1px solid var(--line);transition:color .15s}
 .mobile-menu nav a:hover{color:var(--saffron)}
 
-/* ── SEARCH OVERLAY ── */
 .search-overlay{display:none;position:fixed;inset:0;background:rgba(24,18,10,0.85);z-index:400;align-items:flex-start;justify-content:center;padding-top:10vh}
 .search-overlay.open{display:flex}
 .search-box{background:var(--paper);border-radius:var(--radius);padding:1.5rem;width:90%;max-width:600px}
@@ -78,28 +73,25 @@ nav.main-nav a:hover,nav.main-nav a.active{background:var(--saffron-l);color:var
 .search-input-wrap input:focus{border-color:var(--saffron)}
 .search-input-wrap button{padding:.6rem 1.2rem;background:var(--saffron);color:#fff;border:none;border-radius:4px;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:.85rem}
 #searchResults{margin-top:1rem;max-height:50vh;overflow-y:auto}
-.search-result-item{padding:.6rem 0;border-bottom:1px solid var(--line);cursor:pointer}
+.search-result-item{padding:.6rem 0;border-bottom:1px solid var(--line);cursor:pointer;display:block;text-decoration:none;color:inherit}
 .search-result-item:hover .sr-title{color:var(--saffron)}
 .sr-cat{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--saffron);display:block;margin-bottom:2px}
 .sr-title{font-family:'Tiro Devanagari Hindi',serif;font-size:.9rem;color:var(--ink);transition:color .15s}
 .sr-exc{font-size:.75rem;color:var(--ink-3);margin-top:2px}
 .search-close{background:none;border:none;float:right;font-size:1.2rem;cursor:pointer;color:var(--ink-3);margin-top:-0.2rem}
 
-/* ── MAIN LAYOUT ── */
 main{max-width:1280px;margin:0 auto;padding:2rem 1.5rem}
 
-/* ── SECTION LABEL ── */
 .sec-label{display:inline-flex;align-items:center;gap:8px;font-size:.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--saffron);font-weight:700;margin-bottom:1.2rem}
 .sec-label::before{content:'';display:block;width:18px;height:2px;background:var(--saffron)}
 
-/* ── HERO ── */
 .hero{display:grid;grid-template-columns:1fr 360px;gap:2rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid var(--line)}
 .hero-main-img{width:100%;aspect-ratio:16/9;background:var(--paper-3);border-radius:var(--radius);overflow:hidden;margin-bottom:1rem;position:relative;cursor:pointer}
 .hero-main-img:hover{opacity:0.9}
 .hero-main-img img{width:100%;height:100%;object-fit:cover}
 .hero-main-img .img-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Tiro Devanagari Hindi',serif;font-size:4rem;color:var(--saffron-m);opacity:.4}
 .hero-badge{display:inline-block;background:var(--saffron);color:#fff;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;border-radius:2px;margin-bottom:.5rem;font-weight:700}
-.hero-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1.9rem;line-height:1.35;color:var(--ink);margin-bottom:.6rem;cursor:pointer;transition:color .2s}
+.hero-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1.9rem;line-height:1.35;color:var(--ink);margin-bottom:.6rem;cursor:pointer;transition:color .2s;display:block;text-decoration:none}
 .hero-title:hover{color:var(--saffron)}
 .hero-excerpt{font-size:.88rem;color:var(--ink-3);line-height:1.7;margin-bottom:.7rem;cursor:pointer}
 .hero-excerpt:hover{color:var(--ink)}
@@ -109,7 +101,7 @@ main{max-width:1280px;margin:0 auto;padding:2rem 1.5rem}
 .hero-side{display:flex;flex-direction:column;gap:0}
 .side-label{font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--saffron);font-weight:700;margin-bottom:.8rem;display:flex;align-items:center;gap:6px}
 .side-label::before{content:'';display:block;width:14px;height:2px;background:var(--saffron)}
-.side-card{display:grid;grid-template-columns:80px 1fr;gap:.7rem;padding:.9rem 0;border-bottom:1px solid var(--line);cursor:pointer;transition:opacity .15s}
+.side-card{display:grid;grid-template-columns:80px 1fr;gap:.7rem;padding:.9rem 0;border-bottom:1px solid var(--line);cursor:pointer;transition:opacity .15s;text-decoration:none;color:inherit}
 .side-card:last-child{border-bottom:none}
 .side-card:hover{opacity:.7}
 .side-thumb{width:80px;height:62px;background:var(--paper-3);border-radius:4px;overflow:hidden;flex-shrink:0}
@@ -119,12 +111,55 @@ main{max-width:1280px;margin:0 auto;padding:2rem 1.5rem}
 .side-title{font-family:'Tiro Devanagari Hindi',serif;font-size:.84rem;line-height:1.4;color:var(--ink)}
 .side-date{font-size:.68rem;color:var(--ink-4);margin-top:3px;display:block}
 
-/* ── CATEGORY TABS ── */
+/* ══════════════════════════════════════════════════════════════
+   FAMOUS AUTHORS SECTION  ← NEW
+══════════════════════════════════════════════════════════════ */
+.authors-section{margin:0 0 2.5rem;padding-bottom:2.5rem;border-bottom:2px solid var(--line)}
+
+.authors-section .sec-head{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+.authors-section .sec-head h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--ink);font-weight:400;white-space:nowrap}
+.authors-section .sec-head-line{flex:1;height:1px;background:var(--line)}
+.authors-section .sec-head-more{font-size:.68rem;color:var(--saffron);letter-spacing:.5px;text-decoration:none;text-transform:uppercase;font-weight:700;white-space:nowrap}
+.authors-section .sec-head-more:hover{text-decoration:underline}
+
+.authors-cat-nav{display:flex;gap:0;flex-wrap:wrap;margin-bottom:1.5rem;border-bottom:1px solid var(--line)}
+.authors-cat-btn{font-size:.72rem;padding:.4rem 1rem;border:none;background:transparent;color:var(--ink-3);cursor:pointer;font-family:'Source Sans 3',sans-serif;transition:all .15s;white-space:nowrap;border-bottom:2.5px solid transparent;margin-bottom:-1px;font-weight:600;letter-spacing:.2px}
+.authors-cat-btn:hover{color:var(--ink-2)}
+.authors-cat-btn.active{color:var(--saffron);border-bottom-color:var(--saffron)}
+
+.authors-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.2rem;transition:opacity .2s}
+.authors-grid.fading{opacity:0}
+
+.author-card{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 10px rgba(24,18,10,0.07);transition:all .28s;cursor:pointer;text-decoration:none;color:inherit;display:flex;flex-direction:column;border:1px solid var(--line);position:relative}
+.author-card:hover{transform:translateY(-5px);box-shadow:0 10px 24px rgba(24,18,10,0.14);border-color:var(--saffron-m)}
+
+.author-card-thumb{width:100%;aspect-ratio:3/4;overflow:hidden;background:var(--paper-3);position:relative;flex-shrink:0}
+.author-card-thumb img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .4s}
+.author-card:hover .author-card-thumb img{transform:scale(1.06)}
+.author-card-thumb .thumb-ph{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-family:'Tiro Devanagari Hindi',serif;font-size:3.5rem;color:#fff;font-weight:700}
+
+.author-card-cat-badge{position:absolute;top:.5rem;left:.5rem;font-size:.55rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;padding:2px 8px;border-radius:2px;color:#fff;z-index:1}
+
+.author-card-body{padding:.85rem .9rem .95rem;display:flex;flex-direction:column;flex:1}
+.author-card-name{font-family:'Tiro Devanagari Hindi',serif;font-size:.95rem;color:var(--ink);font-weight:600;margin-bottom:.12rem;line-height:1.3}
+.author-card-era{font-size:.65rem;color:var(--ink-4);margin-bottom:.35rem;letter-spacing:.2px}
+.author-card-bio{font-size:.74rem;color:var(--ink-3);line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:.5rem;flex:1}
+.author-card-tags{display:flex;flex-wrap:wrap;gap:.2rem;margin-top:auto}
+.author-card-tag{font-size:.55rem;padding:1px 6px;background:var(--paper-2);border:1px solid var(--line);border-radius:2px;color:var(--ink-3)}
+
+.author-card-footer{padding:.5rem .9rem .7rem;border-top:1px solid var(--line);display:flex;justify-content:flex-end}
+.author-card-link{font-size:.65rem;color:var(--saffron);font-weight:700;letter-spacing:.3px;text-transform:uppercase}
+
+.authors-view-all{text-align:center;margin-top:1.5rem}
+.authors-view-all a{font-size:.75rem;color:var(--saffron);font-weight:700;letter-spacing:.5px;text-transform:uppercase;text-decoration:none;border-bottom:1.5px solid var(--saffron-m);padding-bottom:1px;transition:all .15s}
+.authors-view-all a:hover{color:var(--ink);border-color:var(--ink)}
+
+/* ══════════════════════════════════════════════════════════════ */
+
 .cat-tabs{display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:1.8rem}
 .cat-tab{font-size:.72rem;padding:.3rem .85rem;border:1.5px solid var(--line-dark);border-radius:20px;cursor:pointer;color:var(--ink-2);background:transparent;font-family:'Source Sans 3',sans-serif;transition:all .15s;white-space:nowrap}
 .cat-tab:hover,.cat-tab.active{background:var(--saffron);border-color:var(--saffron);color:#fff}
 
-/* ── FEED GRID ── */
 .feed-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;margin-bottom:2.5rem}
 .feed-card{cursor:pointer;border-bottom:2px solid transparent;transition:border-color .2s;text-decoration:none;color:inherit;display:block}
 .feed-card:hover{border-color:var(--saffron)}
@@ -139,26 +174,21 @@ main{max-width:1280px;margin:0 auto;padding:2rem 1.5rem}
 .fc-tag{font-size:.6rem;background:var(--paper-2);border:1px solid var(--line);padding:1px 7px;border-radius:2px;color:var(--ink-3)}
 .fc-read{font-size:.65rem;color:var(--ink-4);margin-left:auto}
 
-/* ── LOAD MORE ── */
 .load-more-wrap{text-align:center;margin:1rem 0 2.5rem}
 .btn-load-more{padding:.6rem 2rem;border:1.5px solid var(--saffron);border-radius:4px;color:var(--saffron);background:none;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:.82rem;transition:all .15s}
 .btn-load-more:hover{background:var(--saffron);color:#fff}
 .btn-load-more:disabled{opacity:.4;cursor:not-allowed}
 
-/* ── DIVIDER ── */
 hr.divider{border:none;border-top:1px solid var(--line);margin:2rem 0}
 
-/* ── SECTION HEAD ── */
 .sec-head{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem}
 .sec-head h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--ink);font-weight:400;white-space:nowrap}
 .sec-head-line{flex:1;height:1px;background:var(--line)}
 .sec-head-more{font-size:.68rem;color:var(--saffron);letter-spacing:.5px;text-decoration:none;text-transform:uppercase;font-weight:700;white-space:nowrap;cursor:pointer}
 .sec-head-more:hover{text-decoration:underline}
 
-/* ── BOTTOM GRID ── */
 .bottom-grid{display:grid;grid-template-columns:1fr 300px;gap:2.5rem}
 
-/* ── POPULAR LIST ── */
 .popular-list{display:flex;flex-direction:column;gap:0}
 .pop-card{display:grid;grid-template-columns:52px 1fr 90px;gap:.8rem;padding:1rem 0;border-bottom:1px solid var(--line);cursor:pointer;transition:opacity .15s;align-items:start;text-decoration:none;color:inherit}
 .pop-card:last-child{border-bottom:none;padding-bottom:0}
@@ -170,7 +200,6 @@ hr.divider{border:none;border-top:1px solid var(--line);margin:2rem 0}
 .pop-body .meta{font-size:.65rem;color:var(--ink-4);margin-top:.3rem}
 .pop-read{font-size:.63rem;color:var(--ink-4);text-align:right;padding-top:2px}
 
-/* ── SIDEBAR ── */
 .sidebar{display:flex;flex-direction:column;gap:1.8rem}
 .widget-title{font-family:'Playfair Display',serif;font-size:1rem;color:var(--ink);margin-bottom:.9rem;padding-bottom:.4rem;border-bottom:2px solid var(--saffron);display:inline-block;font-weight:400}
 .tag-cloud{display:flex;flex-wrap:wrap;gap:.35rem}
@@ -192,19 +221,14 @@ hr.divider{border:none;border-top:1px solid var(--line);margin:2rem 0}
 .nl-btn:hover{opacity:.85}
 .nl-msg{font-size:.72rem;color:var(--leaf);margin-top:.3rem;display:none}
 
-/* ── LOADING / SKELETON ── */
 .skeleton{background:linear-gradient(90deg,var(--paper-2) 25%,var(--paper-3) 50%,var(--paper-2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:4px}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-.skel-img{aspect-ratio:3/2;margin-bottom:.75rem}
-.skel-line{height:.8rem;margin-bottom:.4rem}
-.skel-line.short{width:60%}
 .loading-spinner{text-align:center;padding:3rem;color:var(--ink-4);font-size:.85rem}
 .loading-spinner::before{content:'';display:inline-block;width:24px;height:24px;border:2px solid var(--line);border-top-color:var(--saffron);border-radius:50%;animation:spin .7s linear infinite;margin-right:.5rem;vertical-align:middle}
 @keyframes spin{to{transform:rotate(360deg)}}
 .error-msg{text-align:center;padding:2rem;color:var(--ink-4);font-size:.85rem}
 .error-msg span{display:block;font-size:2rem;margin-bottom:.5rem}
 
-/* ── FOOTER ── */
 footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5rem;margin-top:4rem}
 .footer-inner{max-width:1280px;margin:0 auto}
 .footer-brand-hi{font-family:'Tiro Devanagari Hindi',serif;font-size:2rem;color:#fff;margin-bottom:.2rem}
@@ -215,7 +239,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
 .footer-col a:hover{color:var(--saffron-m)}
 .footer-copy{font-size:.7rem;color:rgba(255,255,255,.3);text-align:center}
 
-/* ── AUTH MODAL ── */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(24,18,10,.8);z-index:500;align-items:center;justify-content:center}
 .modal-overlay.open{display:flex}
 .modal-box{background:var(--paper);border-radius:var(--radius);padding:2rem;width:90%;max-width:400px;position:relative}
@@ -234,16 +257,13 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
 .form-msg.error{color:#c0392b}
 .form-msg.success{color:var(--leaf)}
 
-/* ── USER BAR ── */
 .user-bar{display:flex;align-items:center;gap:.5rem}
 .user-avatar{width:30px;height:30px;border-radius:50%;background:var(--saffron-l);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:var(--saffron);cursor:pointer;border:1.5px solid var(--saffron-m)}
 .btn-logout{font-size:.7rem;color:var(--ink-3);background:none;border:none;cursor:pointer;font-family:'Source Sans 3',sans-serif;text-decoration:underline}
 
-/* ── TOAST ── */
 .toast{position:fixed;bottom:2rem;right:2rem;background:var(--ink-2);color:#fff;padding:.6rem 1.2rem;border-radius:4px;font-size:.8rem;z-index:999;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none}
 .toast.show{opacity:1;transform:translateY(0)}
 
-/* ── RESPONSIVE ── */
 @media(max-width:1024px){
   .hero{grid-template-columns:1fr}
   .hero-side{display:none}
@@ -253,6 +273,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
   .footer-grid{grid-template-columns:1fr 1fr}
   .pop-card{grid-template-columns:44px 1fr}
   .pop-read{display:none}
+  .authors-grid{grid-template-columns:repeat(3,1fr)}
 }
 @media(max-width:640px){
   .header-inner{grid-template-columns:auto 1fr auto;padding:.6rem 1rem}
@@ -263,23 +284,21 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
   .footer-grid{grid-template-columns:1fr 1fr}
   .bottom-grid{grid-template-columns:1fr}
   main{padding:1.5rem 1rem}
+  .authors-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:400px){
   .footer-grid{grid-template-columns:1fr}
   .cat-tabs{gap:.25rem}
+  .authors-grid{grid-template-columns:repeat(2,1fr);gap:.8rem}
 }
 </style>
 </head>
 
 <body>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
-
-<!-- TOP STRIP -->
 <div class="top-strip">रचना · विचार · कला · संस्कृति</div>
 
-<!-- HEADER -->
 <header>
   <div class="header-inner">
     <a class="logo" href="index.html">
@@ -308,7 +327,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
   </div>
 </header>
 
-<!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-header">
     <span class="logo-hi" style="color:var(--saffron)">आलेख</span>
@@ -323,10 +341,10 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
     <a onclick="filterCat(null,'science');toggleMobileMenu()">विज्ञान</a>
     <a onclick="filterCat(null,'ai-it');toggleMobileMenu()">AI · IT</a>
     <a onclick="filterCat(null,'vichar');toggleMobileMenu()">विचार</a>
+    <a href="authors.html">प्रसिद्ध लेखक</a>
   </nav>
 </div>
 
-<!-- SEARCH OVERLAY -->
 <div class="search-overlay" id="searchOverlay" onclick="closeSearch(event)">
   <div class="search-box" onclick="event.stopPropagation()">
     <button class="search-close" onclick="toggleSearch()">✕</button>
@@ -339,14 +357,13 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
   </div>
 </div>
 
-<!-- AUTH MODAL -->
 <div class="modal-overlay" id="authModal" onclick="closeModal(event)">
   <div class="modal-box" onclick="event.stopPropagation()">
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-title" id="modalTitle">स्वागत है</div>
     <div class="modal-tabs">
-      <button class="modal-tab active" onclick="switchTab('login')">लॉग-इन</button>
-      <button class="modal-tab" onclick="switchTab('register')">नया खाता</button>
+      <button class="modal-tab active" onclick="switchAuthTab('login')">लॉग-इन</button>
+      <button class="modal-tab" onclick="switchAuthTab('register')">नया खाता</button>
     </div>
     <div id="loginForm">
       <div class="form-field"><label>ई-मेल</label><input type="email" id="loginEmail" placeholder="आपका ई-मेल"></div>
@@ -365,7 +382,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
   </div>
 </div>
 
-<!-- HOMEPAGE -->
 <main>
 
   <!-- HERO -->
@@ -373,6 +389,35 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
   <div class="hero" id="heroSection">
     <div class="loading-spinner">रचनाएँ लोड हो रही हैं…</div>
   </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       FAMOUS AUTHORS SECTION
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="authors-section" id="authorsSection">
+
+    <div class="sec-label">प्रसिद्ध लेखक</div>
+    <div class="sec-head">
+      <h2>साहित्य के दीपस्तंभ</h2>
+      <div class="sec-head-line"></div>
+      <a class="sec-head-more" href="authors.html">सभी लेखक →</a>
+    </div>
+
+    <div class="authors-cat-nav">
+      <button class="authors-cat-btn active" onclick="showAuthorCat(this,'all')">सभी</button>
+      <button class="authors-cat-btn" onclick="showAuthorCat(this,'kavita')">कविता</button>
+      <button class="authors-cat-btn" onclick="showAuthorCat(this,'kahani')">कहानी</button>
+      <button class="authors-cat-btn" onclick="showAuthorCat(this,'nibandh')">निबंध</button>
+      <button class="authors-cat-btn" onclick="showAuthorCat(this,'natya')">नाटक</button>
+      <button class="authors-cat-btn" onclick="showAuthorCat(this,'darshan')">दर्शन</button>
+    </div>
+
+    <div class="authors-grid" id="authorsGrid"></div>
+
+    <div class="authors-view-all">
+      <a href="authors.html">सभी प्रसिद्ध लेखक देखें →</a>
+    </div>
+  </section>
+  <!-- ═══════════════════════════════════════════════════════ -->
 
   <!-- CATEGORY TABS -->
   <div class="cat-tabs" id="catTabs">
@@ -448,7 +493,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
 
 </main>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-brand-hi">आलेख</div>
@@ -479,7 +523,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
         <h4>जानकारी</h4>
         <a href="#">परिचय</a>
         <a href="#">संपर्क</a>
-        <a href="#">गोपनीयता नीति</a>
+        <a href="authors.html">प्रसिद्ध लेखक</a>
         <a onclick="openModal()">लेखक बनें</a>
       </div>
     </div>
@@ -488,10 +532,8 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
 </footer>
 
 <script>
-// ── CONFIG ─────────────────────────────────────────────────────────
-const API = 'https://shivamargbackend.onrender.com'; // ← change to your server URL
+const API = 'https://shivamargbackend.onrender.com';
 
-// ── STATE ──────────────────────────────────────────────────────────
 let state = {
   token: localStorage.getItem('bargad_token') || null,
   user: JSON.parse(localStorage.getItem('bargad_user') || 'null'),
@@ -500,10 +542,8 @@ let state = {
   limit: 9,
   total: 0,
   category: '',
-  likedArticles: JSON.parse(localStorage.getItem('bargad_likes') || '[]'),
 };
 
-// ── API HELPERS ────────────────────────────────────────────────────
 async function apiFetch(path, opts = {}) {
   const headers = { 'Content-Type': 'application/json' };
   if (state.token) headers['Authorization'] = 'Bearer ' + state.token;
@@ -515,41 +555,29 @@ async function apiFetch(path, opts = {}) {
     }
     return await res.json();
   } catch (e) {
-    if (e.name === 'TypeError') throw new Error('सर्वर से जुड़ नहीं पाए। कृपया जाँचें।');
+    if (e.name === 'TypeError') throw new Error('सर्वर से जुड़ नहीं पाए।');
     throw e;
   }
 }
 
-// ── DATE FORMATTER ─────────────────────────────────────────────────
 function fmtDate(iso) {
   if (!iso) return '';
-  try {
-    return new Date(iso).toLocaleDateString('hi-IN', { day: 'numeric', month: 'long', year: 'numeric' });
-  } catch { return iso.slice(0, 10); }
+  try { return new Date(iso).toLocaleDateString('hi-IN', { day: 'numeric', month: 'long', year: 'numeric' }); }
+  catch { return iso.slice(0, 10); }
 }
 
-// ── IMAGE ──────────────────────────────────────────────────────────
-function imgEl(url, alt, cls) {
-  if (url) return `<img src="${url}" alt="${alt||''}" class="${cls||''}" loading="lazy" onerror="this.style.display='none'">`;
-  return `<div class="ph">📖</div>`;
-}
-
-// ── TOAST ──────────────────────────────────────────────────────────
 function showToast(msg, dur = 2500) {
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), dur);
 }
 
-// ── AUTH UI ────────────────────────────────────────────────────────
-// ── AUTH UI ────────────────────────────────────────────────────────
 function renderAuthArea() {
   const area = document.getElementById('authArea');
   if (state.user) {
     area.innerHTML = `
       <div class="user-bar">
-// -       <div class="user-avatar" title="${state.user.display_name}">${state.user.avatar || state.user.username[0].toUpperCase()}</div>
-+       <div class="user-avatar" title="${state.user.display_name}" onclick="window.location.href='/'" style="cursor:pointer;">${state.user.avatar || state.user.username[0].toUpperCase()}</div>
+        <div class="user-avatar" title="${state.user.display_name}">${state.user.avatar || state.user.username[0].toUpperCase()}</div>
         <button class="btn-logout" onclick="doLogout()">लॉग-आउट</button>
       </div>`;
   } else {
@@ -562,7 +590,7 @@ function closeModal(e) {
   if (!e || e.target === document.getElementById('authModal'))
     document.getElementById('authModal').classList.remove('open');
 }
-function switchTab(tab) {
+function switchAuthTab(tab) {
   document.getElementById('loginForm').style.display = tab === 'login' ? 'block' : 'none';
   document.getElementById('registerForm').style.display = tab === 'register' ? 'block' : 'none';
   document.querySelectorAll('.modal-tab').forEach((t, i) => t.classList.toggle('active', (i === 0) === (tab === 'login')));
@@ -570,38 +598,32 @@ function switchTab(tab) {
 
 async function doLogin() {
   const email = document.getElementById('loginEmail').value.trim();
-  const pass = document.getElementById('loginPass').value;
-  const msg = document.getElementById('loginMsg');
+  const pass  = document.getElementById('loginPass').value;
+  const msg   = document.getElementById('loginMsg');
   msg.textContent = '…'; msg.className = 'form-msg';
   try {
-    const data = await apiFetch('/api/auth/login', {
-      method: 'POST', body: JSON.stringify({ email, password: pass })
-    });
+    const data = await apiFetch('/api/auth/login', { method:'POST', body: JSON.stringify({ email, password: pass }) });
     state.token = data.token; state.user = data.user;
     localStorage.setItem('bargad_token', data.token);
     localStorage.setItem('bargad_user', JSON.stringify(data.user));
-    renderAuthArea();
-    closeModal();
+    renderAuthArea(); closeModal();
     showToast('स्वागत है, ' + data.user.display_name + '!');
   } catch (e) { msg.textContent = e.message; msg.className = 'form-msg error'; }
 }
 
 async function doRegister() {
   const username = document.getElementById('regUsername').value.trim();
-  const display = document.getElementById('regDisplay').value.trim();
-  const email = document.getElementById('regEmail').value.trim();
-  const pass = document.getElementById('regPass').value;
-  const msg = document.getElementById('registerMsg');
+  const display  = document.getElementById('regDisplay').value.trim();
+  const email    = document.getElementById('regEmail').value.trim();
+  const pass     = document.getElementById('regPass').value;
+  const msg      = document.getElementById('registerMsg');
   msg.textContent = '…'; msg.className = 'form-msg';
   try {
-    const data = await apiFetch('/api/auth/register', {
-      method: 'POST', body: JSON.stringify({ username, display_name: display, email, password: pass })
-    });
+    const data = await apiFetch('/api/auth/register', { method:'POST', body: JSON.stringify({ username, display_name: display, email, password: pass }) });
     state.token = data.token; state.user = data.user;
     localStorage.setItem('bargad_token', data.token);
     localStorage.setItem('bargad_user', JSON.stringify(data.user));
-    renderAuthArea();
-    closeModal();
+    renderAuthArea(); closeModal();
     showToast('खाता बन गया! स्वागत है।');
   } catch (e) { msg.textContent = e.message; msg.className = 'form-msg error'; }
 }
@@ -610,16 +632,11 @@ function doLogout() {
   state.token = null; state.user = null;
   localStorage.removeItem('bargad_token');
   localStorage.removeItem('bargad_user');
-  renderAuthArea();
-  showToast('लॉग-आउट हो गए।');
+  renderAuthArea(); showToast('लॉग-आउट हो गए।');
 }
 
-// ── MOBILE MENU ────────────────────────────────────────────────────
-function toggleMobileMenu() {
-  document.getElementById('mobileMenu').classList.toggle('open');
-}
+function toggleMobileMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
 
-// ── SEARCH ─────────────────────────────────────────────────────────
 function toggleSearch() {
   document.getElementById('searchOverlay').classList.toggle('open');
   if (document.getElementById('searchOverlay').classList.contains('open'))
@@ -640,37 +657,38 @@ async function doSearch() {
       <a href="/articles?slug=${encodeURIComponent(a.slug)}" class="search-result-item">
         <span class="sr-cat">${a.category || '—'}</span>
         <div class="sr-title">${a.title}</div>
-        <div class="sr-exc">${a.excerpt ? a.excerpt.slice(0, 80) + '…' : ''}</div>
+        <div class="sr-exc">${a.excerpt ? a.excerpt.slice(0,80)+'…' : ''}</div>
       </a>`).join('');
   } catch (e) { results.innerHTML = `<div class="error-msg" style="padding:.5rem">${e.message}</div>`; }
 }
 
-// ── CATEGORY FILTER ────────────────────────────────────────────────
 function filterCat(el, cat) {
-  state.category = cat;
-  state.skip = 0; state.articles = [];
+  state.category = cat; state.skip = 0; state.articles = [];
   document.querySelectorAll('.cat-tab, nav.main-nav a').forEach(t => t.classList.remove('active'));
   if (el) el.classList.add('active');
   loadFeed(true);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ── HERO ───────────────────────────────────────────────────────────
 async function loadHero() {
   const hero = document.getElementById('heroSection');
   try {
-    const latest = await apiFetch('/api/articles/latest?limit=5');
-    const side = await apiFetch('/api/articles/latest?limit=4');
+    const [latest, side] = await Promise.all([
+      apiFetch('/api/articles/latest?limit=5'),
+      apiFetch('/api/articles/latest?limit=5'),
+    ]);
     const articles = latest.articles || [];
     if (!articles.length) { hero.innerHTML = '<div class="error-msg"><span>📭</span>अभी कोई रचना नहीं है।</div>'; return; }
-    const main = articles[0];
+    const main  = articles[0];
     const sides = (side.articles || []).slice(1, 5);
     hero.innerHTML = `
       <div class="hero-main">
-        <div class="hero-main-img" onclick="window.location.href='/articles?slug=${encodeURIComponent(main.slug)}'">${main.thumbnail_url ? `<img src="${main.thumbnail_url}" alt="${main.title}" loading="lazy">` : `<div class="img-ph">📜</div>`}</div>
+        <div class="hero-main-img" onclick="window.location.href='/articles?slug=${encodeURIComponent(main.slug)}'">
+          ${main.thumbnail_url ? `<img src="${main.thumbnail_url}" alt="${main.title}" loading="lazy">` : `<div class="img-ph">📜</div>`}
+        </div>
         <span class="hero-badge">${main.category || 'रचना'}</span>
         <a href="/articles?slug=${encodeURIComponent(main.slug)}" class="hero-title">${main.title}</a>
-        <p class="hero-excerpt" onclick="window.location.href='/articles?slug=${encodeURIComponent(main.slug)}'">${main.excerpt ? main.excerpt.slice(0, 150) + '…' : ''}</p>
+        <p class="hero-excerpt" onclick="window.location.href='/articles?slug=${encodeURIComponent(main.slug)}'">${main.excerpt ? main.excerpt.slice(0,150)+'…' : ''}</p>
         <div class="hero-meta">
           <span class="hero-author">${main.author?.username || '—'}</span>
           <span class="meta-dot"></span>
@@ -691,12 +709,9 @@ async function loadHero() {
             </div>
           </a>`).join('')}
       </div>`;
-  } catch (e) {
-    hero.innerHTML = `<div class="error-msg"><span>⚠️</span>${e.message}</div>`;
-  }
+  } catch (e) { hero.innerHTML = `<div class="error-msg"><span>⚠️</span>${e.message}</div>`; }
 }
 
-// ── FEED ───────────────────────────────────────────────────────────
 function feedCardHTML(a) {
   return `
     <a href="/articles?slug=${encodeURIComponent(a.slug)}" class="feed-card">
@@ -706,7 +721,7 @@ function feedCardHTML(a) {
       <p class="fc-excerpt">${a.excerpt || ''}</p>
       <div class="fc-meta">
         <span>${a.author?.username || '—'}</span>
-        ${(a.tags || []).slice(0, 2).map(t => `<span class="fc-tag">${t}</span>`).join('')}
+        ${(a.tags || []).slice(0,2).map(t=>`<span class="fc-tag">${t}</span>`).join('')}
         <span class="fc-read">${a.read_time || 5} मिनट</span>
       </div>
     </a>`;
@@ -714,8 +729,8 @@ function feedCardHTML(a) {
 
 async function loadFeed(reset = false) {
   const grid = document.getElementById('feedGrid');
-  const btn = document.getElementById('loadMoreBtn');
-  if (reset) { grid.innerHTML = '<div class="loading-spinner" style="grid-column:1/-1">रचनाएँ लोड हो रही हैं…</div>'; }
+  const btn  = document.getElementById('loadMoreBtn');
+  if (reset) grid.innerHTML = '<div class="loading-spinner" style="grid-column:1/-1">रचनाएँ लोड हो रही हैं…</div>';
   try {
     let url = `/api/articles?skip=${state.skip}&limit=${state.limit}`;
     if (state.category) url += `&category=${encodeURIComponent(state.category)}`;
@@ -743,20 +758,19 @@ async function loadMore() {
   btn.disabled = false; btn.textContent = 'और रचनाएँ देखें';
 }
 
-// ── POPULAR ────────────────────────────────────────────────────────
 async function loadPopular() {
   const list = document.getElementById('popularList');
   try {
     const data = await apiFetch('/api/articles/popular?limit=6');
     const arts = data.articles || [];
     if (!arts.length) { list.innerHTML = '<div class="error-msg">अभी कोई लोकप्रिय रचना नहीं।</div>'; return; }
-    list.innerHTML = arts.map((a, i) => `
-      <a href="articles?slug=${encodeURIComponent(a.slug)}" class="pop-card">
-        <div class="pop-num">0${i + 1}</div>
+    list.innerHTML = arts.map((a,i) => `
+      <a href="/articles?slug=${encodeURIComponent(a.slug)}" class="pop-card">
+        <div class="pop-num">0${i+1}</div>
         <div class="pop-body">
           <div class="cat">${a.category || 'रचना'}</div>
           <h3>${a.title}</h3>
-          <p class="exc">${a.excerpt ? a.excerpt.slice(0, 90) + '…' : ''}</p>
+          <p class="exc">${a.excerpt ? a.excerpt.slice(0,90)+'…' : ''}</p>
           <div class="meta">${a.author?.username || '—'} · ${fmtDate(a.published_at)}</div>
         </div>
         <div class="pop-read">${a.read_time || 5} मिनट<br><small style="color:var(--ink-4)">${a.view_count || 0} बार</small></div>
@@ -764,7 +778,6 @@ async function loadPopular() {
   } catch (e) { list.innerHTML = `<div class="error-msg">${e.message}</div>`; }
 }
 
-// ── LATEST SIDEBAR ─────────────────────────────────────────────────
 async function loadLatestSidebar() {
   const el = document.getElementById('latestList');
   try {
@@ -772,7 +785,7 @@ async function loadLatestSidebar() {
     const arts = data.articles || [];
     el.className = '';
     el.innerHTML = arts.map(a => `
-      <a href="/articles?slug=${encodeURIComponent(a.slug)}" style="display:block;padding:.6rem 0;border-bottom:1px solid var(--line);cursor:pointer;text-decoration:none;color:inherit">
+      <a href="/articles?slug=${encodeURIComponent(a.slug)}" style="display:block;padding:.6rem 0;border-bottom:1px solid var(--line);text-decoration:none;color:inherit">
         <span style="font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--saffron);font-weight:700">${a.category || '—'}</span>
         <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:.83rem;color:var(--ink);margin-top:2px;line-height:1.4">${a.title}</div>
         <div style="font-size:.65rem;color:var(--ink-4);margin-top:2px">${fmtDate(a.published_at)}</div>
@@ -780,7 +793,6 @@ async function loadLatestSidebar() {
   } catch (e) { el.innerHTML = `<div class="error-msg" style="padding:.5rem">${e.message}</div>`; }
 }
 
-// ── NEWSLETTER ─────────────────────────────────────────────────────
 function nlSubscribe() {
   const email = document.getElementById('nlEmail').value.trim();
   if (!email || !email.includes('@')) { showToast('सही ई-मेल डालें।'); return; }
@@ -789,7 +801,133 @@ function nlSubscribe() {
   showToast('सब्सक्राइब हो गए! 🌿');
 }
 
-// ── INIT ───────────────────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════
+//  FAMOUS AUTHORS  — static data + category filter
+// ══════════════════════════════════════════════════════════════
+
+// Category accent colors
+const CAT_COLORS = {
+  kavita:  '#C8540A',
+  kahani:  '#1E3A6E',
+  nibandh: '#2A6042',
+  natya:   '#7B3F00',
+  darshan: '#5C2A6E',
+};
+
+const FAMOUS_AUTHORS = [
+  {
+    name:'मुंशी प्रेमचंद', era:'1880 – 1936',
+    bio:'हिंदी-उर्दू के महानतम कथाकार। गोदान, निर्मला, गबन के रचयिता।',
+    tags:['कहानी','उपन्यास','यथार्थवाद'], cats:['kahani'],
+    slug:'munshi-premchand', catKey:'kahani', catLabel:'कहानी',
+    photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Premchand_2.jpg/440px-Premchand_2.jpg',
+  },
+  {
+    name:'महादेवी वर्मा', era:'1907 – 1987',
+    bio:'छायावाद की रानी। आधुनिक मीरा। यामा के लिए ज्ञानपीठ पुरस्कार।',
+    tags:['कविता','छायावाद','संस्मरण'], cats:['kavita'],
+    slug:'mahadevi-varma', catKey:'kavita', catLabel:'कविता',
+    photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Mahadevi_Verma.jpg/440px-Mahadevi_Verma.jpg',
+  },
+  {
+    name:'सूर्यकांत त्रिपाठी निराला', era:'1896 – 1961',
+    bio:'छायावाद के स्तंभ। राम की शक्तिपूजा और सरोज स्मृति के रचयिता।',
+    tags:['कविता','छायावाद','मुक्त छंद'], cats:['kavita'],
+    slug:'nirala', catKey:'kavita', catLabel:'कविता',
+    photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Suryakant_Tripathi_Nirala.jpg/440px-Suryakant_Tripathi_Nirala.jpg',
+  },
+  {
+    name:'जयशंकर प्रसाद', era:'1889 – 1937',
+    bio:'कामायनी के महाकवि। चंद्रगुप्त और स्कंदगुप्त के नाटककार।',
+    tags:['कविता','नाटक','उपन्यास'], cats:['kavita','natya'],
+    slug:'jaishankar-prasad', catKey:'natya', catLabel:'नाटक',
+    photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Jaishankar_Prasad.jpg/440px-Jaishankar_Prasad.jpg',
+  },
+  {
+    name:'हज़ारीप्रसाद द्विवेदी', era:'1907 – 1979',
+    bio:'हिंदी निबंध के शिखर पुरुष। बाणभट्ट की आत्मकथा के रचयिता।',
+    tags:['निबंध','उपन्यास','आलोचना'], cats:['nibandh'],
+    slug:'hazariprasad-dwivedi', catKey:'nibandh', catLabel:'निबंध',
+    photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Hazari_Prasad_Dwivedi.jpg/440px-Hazari_Prasad_Dwivedi.jpg',
+  },
+  {
+    name:'महात्मा गांधी', era:'1869 – 1948',
+    bio:'सत्य और अहिंसा के पुजारी। हिंद स्वराज और आत्मकथा के रचयिता।',
+    tags:['दर्शन','आत्मकथा','राजनीति'], cats:['darshan','nibandh'],
+    slug:'mahatma-gandhi', catKey:'darshan', catLabel:'दर्शन',
+    photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Mahatma-Gandhi%2C_studio%2C_1931.jpg/440px-Mahatma-Gandhi%2C_studio%2C_1931.jpg',
+  },
+  {
+    name:'मोहन राकेश', era:'1925 – 1972',
+    bio:'नई कहानी आंदोलन के नेता। आषाढ़ का एक दिन हिंदी रंगमंच की धरोहर।',
+    tags:['नाटक','कहानी','एकांकी'], cats:['natya','kahani'],
+    slug:'mohan-rakesh', catKey:'natya', catLabel:'नाटक',
+    photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Mohan_Rakesh.jpg/440px-Mohan_Rakesh.jpg',
+  },
+  {
+    name:'फणीश्वरनाथ रेणु', era:'1921 – 1977',
+    bio:'आंचलिक कथाकार। मैला आँचल — ग्रामीण भारत की अमर गाथा।',
+    tags:['कहानी','उपन्यास','आंचलिक'], cats:['kahani'],
+    slug:'phanishwarnath-renu', catKey:'kahani', catLabel:'कहानी',
+    photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Phanishwarnath_Renu.jpg/440px-Phanishwarnath_Renu.jpg',
+  },
+  {
+    name:'कबीरदास', era:'1440 – 1518',
+    bio:'संत कवि। समाज सुधारक। दोहों में जीवन-दर्शन के अप्रतिम प्रतीक।',
+    tags:['दोहा','भक्ति','दर्शन'], cats:['kavita','darshan'],
+    slug:'kabirdas', catKey:'darshan', catLabel:'दर्शन',
+    photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Kabir_-_Project_Gutenberg_13th_eBook.jpg/440px-Kabir_-_Project_Gutenberg_13th_eBook.jpg',
+  },
+  {
+    name:'रामचंद्र शुक्ल', era:'1884 – 1941',
+    bio:'आधुनिक हिंदी आलोचना के जनक। हिंदी साहित्य का इतिहास के लेखक।',
+    tags:['आलोचना','निबंध','इतिहास'], cats:['nibandh'],
+    slug:'ramchandra-shukla', catKey:'nibandh', catLabel:'निबंध',
+    photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Ramchandra_Shukla.jpg/440px-Ramchandra_Shukla.jpg',
+  },
+];
+
+function authorCardHTML(a) {
+  const color = CAT_COLORS[a.catKey] || '#C8540A';
+  return `
+    <a href="author-profile.html?slug=${encodeURIComponent(a.slug)}" class="author-card">
+      <div class="author-card-thumb">
+        <img src="${a.photo}" alt="${a.name}" loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="thumb-ph" style="background:${color}">${a.name[0]}</div>
+      </div>
+      <span class="author-card-cat-badge" style="background:${color}">${a.catLabel}</span>
+      <div class="author-card-body">
+        <div class="author-card-name">${a.name}</div>
+        <div class="author-card-era">${a.era}</div>
+        <div class="author-card-bio">${a.bio}</div>
+        <div class="author-card-tags">${a.tags.map(t=>`<span class="author-card-tag">${t}</span>`).join('')}</div>
+      </div>
+      <div class="author-card-footer">
+        <span class="author-card-link">प्रोफ़ाइल देखें →</span>
+      </div>
+    </a>`;
+}
+
+function showAuthorCat(btn, cat) {
+  document.querySelectorAll('.authors-cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const grid = document.getElementById('authorsGrid');
+  grid.style.opacity = '0';
+  setTimeout(() => {
+    const list = cat === 'all' ? FAMOUS_AUTHORS : FAMOUS_AUTHORS.filter(a => a.cats.includes(cat));
+    grid.innerHTML = list.length
+      ? list.map(authorCardHTML).join('')
+      : `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--ink-4);font-size:.85rem">इस श्रेणी में अभी लेखक उपलब्ध नहीं हैं।</div>`;
+    grid.style.opacity = '1';
+  }, 150);
+}
+
+// Init authors grid
+document.getElementById('authorsGrid').innerHTML = FAMOUS_AUTHORS.map(authorCardHTML).join('');
+
+// ══════════════════════════════════════════════════════════════
+
 async function init() {
   renderAuthArea();
   if (state.token) {
