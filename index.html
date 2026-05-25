@@ -1835,7 +1835,7 @@ mantra for wealth
     const grid = document.getElementById('authorsGrid');
     grid.innerHTML = '<div class="loading-spinner" style="grid-column:1/-1">लेखक लोड हो रहे हैं…</div>';
     try {
-      const data = await apiFetch('/api/lekhak?limit=20&featured=true');
+      const data = await apiFetch('/api/lekhak?limit=5&featured=true');
       ALL_AUTHORS = data.lekhak || data.authors || data || [];
       injectCounts();
       renderAuthorGrid('all');
