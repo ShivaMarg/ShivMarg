@@ -761,9 +761,9 @@ async function loadPopular() {
           <div class="cat">${a.category || 'रचना'}</div>
           <h3>${a.title}</h3>
           <p class="exc">${a.excerpt ? a.excerpt.slice(0,90)+'…' : ''}</p>
-          <div class="meta">${a.author?.username || '—'} · ${fmtDate(a.view_count)}</div>
+          <div class="meta">${a.author?.username || '—'} · ${a.view_count || 0} Views</div>
         </div>
-        <div class="pop-read">${a.read_time || 5} मिनट<br><small style="color:var(--ink-4)">${a.published_at || 0} Date</small></div>
+        <div class="pop-read">${a.read_time || 5} मिनट<br><small style="color:var(--ink-4)">${fmtDate(a.published_at || 0)} Date</small></div>
       </a>`).join('');
   } catch (e) { list.innerHTML = `<div class="error-msg">${e.message}</div>`; }
 }
