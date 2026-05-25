@@ -257,6 +257,271 @@ main{max-width:1280px;margin:0 auto;padding:2rem 1.5rem}
 #loginForm,#registerForm{display:none}
 #loginForm.show,#registerForm.show{display:block}
 
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--paper-2)}
+::-webkit-scrollbar-thumb{background:var(--saffron-m);border-radius:3px}
+
+.top-strip{background:var(--saffron);color:#fff;text-align:center;font-size:.65rem;letter-spacing:3px;text-transform:uppercase;padding:.3rem 1rem;font-weight:600}
+
+header{background:var(--paper);border-bottom:1px solid var(--line-dark);position:sticky;top:0;z-index:200;box-shadow:0 1px 8px rgba(24,18,10,0.06)}
+.header-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1rem;padding:.75rem 1.5rem}
+.logo{text-decoration:none;display:flex;flex-direction:column;line-height:1}
+.logo-hi{font-family:'Tiro Devanagari Hindi',serif;font-size:1.8rem;color:var(--saffron);letter-spacing:-1px}
+.logo-sub{font-size:.58rem;letter-spacing:3px;text-transform:uppercase;color:var(--ink-3);margin-top:1px}
+nav.main-nav{display:flex;align-items:center;gap:.1rem;flex-wrap:wrap;justify-content:center}
+nav.main-nav a{font-size:.78rem;color:var(--ink-2);text-decoration:none;padding:.35rem .65rem;border-radius:4px;transition:all .15s;letter-spacing:.2px;white-space:nowrap;cursor:pointer}
+nav.main-nav a:hover,nav.main-nav a.active{background:var(--saffron-l);color:var(--saffron)}
+.header-actions{display:flex;align-items:center;gap:.6rem}
+.btn-search{background:none;border:1.5px solid var(--line-dark);border-radius:50%;width:34px;height:34px;cursor:pointer;color:var(--ink-3);font-size:15px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.btn-search:hover{border-color:var(--saffron);color:var(--saffron)}
+.btn-login{font-size:.75rem;padding:.35rem .9rem;border:1.5px solid var(--saffron);border-radius:4px;color:var(--saffron);background:none;cursor:pointer;font-family:'Source Sans 3',sans-serif;transition:all .15s;text-decoration:none;white-space:nowrap}
+.btn-login:hover{background:var(--saffron);color:#fff}
+
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{display:block;width:22px;height:2px;background:var(--ink-2);border-radius:2px;transition:all .3s}
+.mobile-menu{display:none;position:fixed;inset:0;background:var(--paper);z-index:300;padding:2rem 1.5rem;overflow-y:auto}
+.mobile-menu.open{display:block}
+.mobile-menu-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--line)}
+.mobile-menu-close{background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--ink-2)}
+.mobile-menu nav a{display:block;font-family:'Tiro Devanagari Hindi',serif;font-size:1.2rem;color:var(--ink-2);text-decoration:none;padding:.7rem 0;border-bottom:1px solid var(--line);transition:color .15s}
+.mobile-menu nav a:hover{color:var(--saffron)}
+
+.search-overlay{display:none;position:fixed;inset:0;background:rgba(24,18,10,0.85);z-index:400;align-items:flex-start;justify-content:center;padding-top:10vh}
+.search-overlay.open{display:flex}
+.search-box{background:var(--paper);border-radius:var(--radius);padding:1.5rem;width:90%;max-width:600px}
+.search-box h3{font-family:'Tiro Devanagari Hindi',serif;font-size:1.1rem;color:var(--ink-2);margin-bottom:1rem}
+.search-input-wrap{display:flex;gap:.5rem}
+.search-input-wrap input{flex:1;padding:.6rem 1rem;border:1.5px solid var(--line-dark);border-radius:4px;font-size:.9rem;font-family:'Source Sans 3',sans-serif;background:var(--paper-2);color:var(--ink);outline:none}
+.search-input-wrap input:focus{border-color:var(--saffron)}
+.search-input-wrap button{padding:.6rem 1.2rem;background:var(--saffron);color:#fff;border:none;border-radius:4px;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:.85rem}
+#searchResults{margin-top:1rem;max-height:50vh;overflow-y:auto}
+.search-result-item{padding:.6rem 0;border-bottom:1px solid var(--line);cursor:pointer;display:block;text-decoration:none;color:inherit}
+.search-result-item:hover .sr-title{color:var(--saffron)}
+.sr-cat{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--saffron);display:block;margin-bottom:2px}
+.sr-title{font-family:'Tiro Devanagari Hindi',serif;font-size:.9rem;color:var(--ink);transition:color .15s}
+.sr-exc{font-size:.75rem;color:var(--ink-3);margin-top:2px}
+.search-close{background:none;border:none;float:right;font-size:1.2rem;cursor:pointer;color:var(--ink-3);margin-top:-0.2rem}
+
+main{max-width:1280px;margin:0 auto;padding:2rem 1.5rem}
+
+.sec-label{display:inline-flex;align-items:center;gap:8px;font-size:.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--saffron);font-weight:700;margin-bottom:1.2rem}
+.sec-label::before{content:'';display:block;width:18px;height:2px;background:var(--saffron)}
+
+.hero{display:grid;grid-template-columns:1fr 360px;gap:2rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid var(--line)}
+.hero-main-img{width:100%;aspect-ratio:16/9;background:var(--paper-3);border-radius:var(--radius);overflow:hidden;margin-bottom:1rem;position:relative;cursor:pointer}
+.hero-main-img:hover{opacity:0.9}
+.hero-main-img img{width:100%;height:100%;object-fit:cover}
+.hero-main-img .img-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Tiro Devanagari Hindi',serif;font-size:4rem;color:var(--saffron-m);opacity:.4}
+.hero-badge{display:inline-block;background:var(--saffron);color:#fff;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;border-radius:2px;margin-bottom:.5rem;font-weight:700}
+.hero-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1.9rem;line-height:1.35;color:var(--ink);margin-bottom:.6rem;cursor:pointer;transition:color .2s;display:block;text-decoration:none}
+.hero-title:hover{color:var(--saffron)}
+.hero-excerpt{font-size:.88rem;color:var(--ink-3);line-height:1.7;margin-bottom:.7rem;cursor:pointer}
+.hero-excerpt:hover{color:var(--ink)}
+.hero-meta{display:flex;align-items:center;gap:.6rem;font-size:.72rem;color:var(--ink-3);flex-wrap:wrap}
+.hero-author{font-weight:600;color:var(--ink-2)}
+.meta-dot{width:3px;height:3px;border-radius:50%;background:var(--saffron-m);display:inline-block;flex-shrink:0}
+.hero-side{display:flex;flex-direction:column;gap:0}
+.side-label{font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--saffron);font-weight:700;margin-bottom:.8rem;display:flex;align-items:center;gap:6px}
+.side-label::before{content:'';display:block;width:14px;height:2px;background:var(--saffron)}
+.side-card{display:grid;grid-template-columns:80px 1fr;gap:.7rem;padding:.9rem 0;border-bottom:1px solid var(--line);cursor:pointer;transition:opacity .15s;text-decoration:none;color:inherit}
+.side-card:last-child{border-bottom:none}
+.side-card:hover{opacity:.7}
+.side-thumb{width:80px;height:62px;background:var(--paper-3);border-radius:4px;overflow:hidden;flex-shrink:0}
+.side-thumb img{width:100%;height:100%;object-fit:cover}
+.side-thumb .ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--ink-4)}
+.side-cat{font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--saffron);font-weight:700;display:block;margin-bottom:2px}
+.side-title{font-family:'Tiro Devanagari Hindi',serif;font-size:.84rem;line-height:1.4;color:var(--ink)}
+.side-date{font-size:.68rem;color:var(--ink-4);margin-top:3px;display:block}
+
+/* ══════════════════════════════════════════════════════════════
+   FAMOUS AUTHORS SECTION  ← NEW
+══════════════════════════════════════════════════════════════ */
+.authors-section{margin:0 0 2.5rem;padding-bottom:2.5rem;border-bottom:2px solid var(--line)}
+
+.authors-section .sec-head{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+.authors-section .sec-head h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--ink);font-weight:400;white-space:nowrap}
+.authors-section .sec-head-line{flex:1;height:1px;background:var(--line)}
+.authors-section .sec-head-more{font-size:.68rem;color:var(--saffron);letter-spacing:.5px;text-decoration:none;text-transform:uppercase;font-weight:700;white-space:nowrap}
+.authors-section .sec-head-more:hover{text-decoration:underline}
+
+.authors-cat-nav{display:flex;gap:0;flex-wrap:wrap;margin-bottom:1.5rem;border-bottom:1px solid var(--line)}
+.authors-cat-btn{font-size:.72rem;padding:.4rem 1rem;border:none;background:transparent;color:var(--ink-3);cursor:pointer;font-family:'Source Sans 3',sans-serif;transition:all .15s;white-space:nowrap;border-bottom:2.5px solid transparent;margin-bottom:-1px;font-weight:600;letter-spacing:.2px}
+.authors-cat-btn:hover{color:var(--ink-2)}
+.authors-cat-btn.active{color:var(--saffron);border-bottom-color:var(--saffron)}
+
+.authors-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.2rem;transition:opacity .2s}
+.authors-grid.fading{opacity:0}
+
+.author-card{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 10px rgba(24,18,10,0.07);transition:all .28s;cursor:pointer;text-decoration:none;color:inherit;display:flex;flex-direction:column;border:1px solid var(--line);position:relative}
+.author-card:hover{transform:translateY(-5px);box-shadow:0 10px 24px rgba(24,18,10,0.14);border-color:var(--saffron-m)}
+
+.author-card-thumb{width:100%;aspect-ratio:3/4;overflow:hidden;background:var(--paper-3);position:relative;flex-shrink:0}
+.author-card-thumb img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .4s}
+.author-card:hover .author-card-thumb img{transform:scale(1.06)}
+.author-card-thumb .thumb-ph{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-family:'Tiro Devanagari Hindi',serif;font-size:3.5rem;color:#fff;font-weight:700}
+
+.author-card-cat-badge{position:absolute;top:.5rem;left:.5rem;font-size:.55rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;padding:2px 8px;border-radius:2px;color:#fff;z-index:1}
+
+.author-card-body{padding:.85rem .9rem .95rem;display:flex;flex-direction:column;flex:1}
+.author-card-name{font-family:'Tiro Devanagari Hindi',serif;font-size:.95rem;color:var(--ink);font-weight:600;margin-bottom:.12rem;line-height:1.3}
+.author-card-era{font-size:.65rem;color:var(--ink-4);margin-bottom:.35rem;letter-spacing:.2px}
+.author-card-bio{font-size:.74rem;color:var(--ink-3);line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:.5rem;flex:1}
+.author-card-tags{display:flex;flex-wrap:wrap;gap:.2rem;margin-top:auto}
+.author-card-tag{font-size:.55rem;padding:1px 6px;background:var(--paper-2);border:1px solid var(--line);border-radius:2px;color:var(--ink-3)}
+
+.author-card-footer{padding:.5rem .9rem .7rem;border-top:1px solid var(--line);display:flex;justify-content:flex-end}
+.author-card-link{font-size:.65rem;color:var(--saffron);font-weight:700;letter-spacing:.3px;text-transform:uppercase}
+
+.authors-view-all{text-align:center;margin-top:1.5rem}
+.authors-view-all a{font-size:.75rem;color:var(--saffron);font-weight:700;letter-spacing:.5px;text-transform:uppercase;text-decoration:none;border-bottom:1.5px solid var(--saffron-m);padding-bottom:1px;transition:all .15s}
+.authors-view-all a:hover{color:var(--ink);border-color:var(--ink)}
+
+/* ══════════════════════════════════════════════════════════════ */
+
+.cat-tabs{display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:1.8rem}
+.cat-tab{font-size:.72rem;padding:.3rem .85rem;border:1.5px solid var(--line-dark);border-radius:20px;cursor:pointer;color:var(--ink-2);background:transparent;font-family:'Source Sans 3',sans-serif;transition:all .15s;white-space:nowrap}
+.cat-tab:hover,.cat-tab.active{background:var(--saffron);border-color:var(--saffron);color:#fff}
+
+.feed-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;margin-bottom:2.5rem}
+.feed-card{cursor:pointer;border-bottom:2px solid transparent;transition:border-color .2s;text-decoration:none;color:inherit;display:block}
+.feed-card:hover{border-color:var(--saffron)}
+.feed-card:hover .fc-title{color:var(--saffron)}
+.fc-img{width:100%;aspect-ratio:3/2;background:var(--paper-3);border-radius:var(--radius);overflow:hidden;margin-bottom:.75rem}
+.fc-img img{width:100%;height:100%;object-fit:cover}
+.fc-img .ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--ink-4)}
+.fc-cat{font-size:.58rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--saffron);font-weight:700;display:block;margin-bottom:.25rem}
+.fc-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1rem;line-height:1.45;color:var(--ink);transition:color .15s;margin-bottom:.35rem}
+.fc-excerpt{font-size:.8rem;color:var(--ink-3);line-height:1.6;margin-bottom:.4rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.fc-meta{display:flex;align-items:center;gap:.5rem;font-size:.7rem;color:var(--ink-4);flex-wrap:wrap}
+.fc-tag{font-size:.6rem;background:var(--paper-2);border:1px solid var(--line);padding:1px 7px;border-radius:2px;color:var(--ink-3)}
+.fc-read{font-size:.65rem;color:var(--ink-4);margin-left:auto}
+
+.load-more-wrap{text-align:center;margin:1rem 0 2.5rem}
+.btn-load-more{padding:.6rem 2rem;border:1.5px solid var(--saffron);border-radius:4px;color:var(--saffron);background:none;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-size:.82rem;transition:all .15s}
+.btn-load-more:hover{background:var(--saffron);color:#fff}
+.btn-load-more:disabled{opacity:.4;cursor:not-allowed}
+
+hr.divider{border:none;border-top:1px solid var(--line);margin:2rem 0}
+
+.sec-head{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem}
+.sec-head h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--ink);font-weight:400;white-space:nowrap}
+.sec-head-line{flex:1;height:1px;background:var(--line)}
+.sec-head-more{font-size:.68rem;color:var(--saffron);letter-spacing:.5px;text-decoration:none;text-transform:uppercase;font-weight:700;white-space:nowrap;cursor:pointer}
+.sec-head-more:hover{text-decoration:underline}
+
+.bottom-grid{display:grid;grid-template-columns:1fr 300px;gap:2.5rem}
+
+.popular-list{display:flex;flex-direction:column;gap:0}
+.pop-card{display:grid;grid-template-columns:52px 1fr 90px;gap:.8rem;padding:1rem 0;border-bottom:1px solid var(--line);cursor:pointer;transition:opacity .15s;align-items:start;text-decoration:none;color:inherit}
+.pop-card:last-child{border-bottom:none;padding-bottom:0}
+.pop-card:hover{opacity:.7}
+.pop-num{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--paper-3);line-height:1;text-align:center;padding-top:2px}
+.pop-body .cat{font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--leaf);font-weight:700;margin-bottom:2px}
+.pop-body h3{font-family:'Tiro Devanagari Hindi',serif;font-size:.9rem;line-height:1.4;color:var(--ink);margin-bottom:.25rem}
+.pop-body .exc{font-size:.77rem;color:var(--ink-3);line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pop-body .meta{font-size:.65rem;color:var(--ink-4);margin-top:.3rem}
+.pop-read{font-size:.63rem;color:var(--ink-4);text-align:right;padding-top:2px}
+
+.sidebar{display:flex;flex-direction:column;gap:1.8rem}
+.widget-title{font-family:'Playfair Display',serif;font-size:1rem;color:var(--ink);margin-bottom:.9rem;padding-bottom:.4rem;border-bottom:2px solid var(--saffron);display:inline-block;font-weight:400}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:.35rem}
+.tag-pill{font-size:.68rem;padding:.28rem .7rem;border:1px solid var(--line-dark);border-radius:16px;color:var(--ink-2);cursor:pointer;transition:all .15s;font-family:'Source Sans 3',sans-serif;background:none}
+.tag-pill:hover{background:var(--saffron-l);border-color:var(--saffron-m);color:var(--saffron)}
+.highlight-card{background:var(--ink-2);border-radius:var(--radius);padding:1.4rem;cursor:pointer;transition:opacity .2s;position:relative;overflow:hidden}
+.highlight-card::before{content:'';position:absolute;top:-15px;right:-15px;width:80px;height:80px;border-radius:50%;background:rgba(200,84,10,.18)}
+.highlight-card:hover{opacity:.88}
+.hl-cat{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--saffron-m);font-weight:700;margin-bottom:.4rem}
+.hl-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1.05rem;color:#fff;line-height:1.4;margin-bottom:.5rem}
+.hl-exc{font-size:.78rem;color:rgba(255,255,255,.55);line-height:1.6;margin-bottom:.6rem}
+.hl-link{font-size:.7rem;color:var(--saffron-m);font-weight:700;letter-spacing:.3px;text-transform:uppercase}
+.newsletter-box{background:var(--saffron-l);border-radius:var(--radius);padding:1.2rem}
+.newsletter-box h4{font-family:'Tiro Devanagari Hindi',serif;font-size:.95rem;color:var(--saffron);margin-bottom:.35rem}
+.newsletter-box p{font-size:.75rem;color:var(--ink-2);line-height:1.6;margin-bottom:.7rem}
+.nl-input{width:100%;padding:.45rem .75rem;border:1.5px solid var(--saffron-m);border-radius:4px;font-size:.78rem;background:#fff;color:var(--ink);outline:none;margin-bottom:.4rem;font-family:'Source Sans 3',sans-serif}
+.nl-input:focus{border-color:var(--saffron)}
+.nl-btn{width:100%;padding:.45rem;background:var(--saffron);color:#fff;border:none;border-radius:4px;font-size:.76rem;font-weight:700;cursor:pointer;font-family:'Source Sans 3',sans-serif;transition:opacity .15s;letter-spacing:.3px}
+.nl-btn:hover{opacity:.85}
+.nl-msg{font-size:.72rem;color:var(--leaf);margin-top:.3rem;display:none}
+
+.skeleton{background:linear-gradient(90deg,var(--paper-2) 25%,var(--paper-3) 50%,var(--paper-2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:4px}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.loading-spinner{text-align:center;padding:3rem;color:var(--ink-4);font-size:.85rem}
+.loading-spinner::before{content:'';display:inline-block;width:24px;height:24px;border:2px solid var(--line);border-top-color:var(--saffron);border-radius:50%;animation:spin .7s linear infinite;margin-right:.5rem;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+.error-msg{text-align:center;padding:2rem;color:var(--ink-4);font-size:.85rem}
+.error-msg span{display:block;font-size:2rem;margin-bottom:.5rem}
+
+footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5rem;margin-top:4rem}
+.footer-inner{max-width:1280px;margin:0 auto}
+.footer-brand-hi{font-family:'Tiro Devanagari Hindi',serif;font-size:2rem;color:#fff;margin-bottom:.2rem}
+.footer-brand-sub{font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:2rem}
+.footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;padding:2rem 0;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:1.5rem}
+.footer-col h4{font-size:.62rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.7rem}
+.footer-col a{display:block;font-size:.8rem;color:rgba(255,255,255,.55);text-decoration:none;padding:2px 0;transition:color .15s;cursor:pointer}
+.footer-col a:hover{color:var(--saffron-m)}
+.footer-copy{font-size:.7rem;color:rgba(255,255,255,.3);text-align:center}
+
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(24,18,10,.8);z-index:500;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--paper);border-radius:var(--radius);padding:2rem;width:90%;max-width:400px;position:relative}
+.modal-close{position:absolute;top:.8rem;right:1rem;background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--ink-3)}
+.modal-title{font-family:'Tiro Devanagari Hindi',serif;font-size:1.3rem;color:var(--ink);margin-bottom:1.2rem}
+.modal-tabs{display:flex;gap:0;margin-bottom:1.5rem;border-bottom:1px solid var(--line)}
+.modal-tab{padding:.5rem 1rem;cursor:pointer;font-size:.8rem;color:var(--ink-3);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;background:none;border-top:none;border-left:none;border-right:none;font-family:'Source Sans 3',sans-serif}
+.modal-tab.active{color:var(--saffron);border-bottom-color:var(--saffron)}
+.form-field{margin-bottom:.9rem}
+.form-field label{display:block;font-size:.72rem;color:var(--ink-3);margin-bottom:.3rem;letter-spacing:.3px}
+.form-field input{width:100%;padding:.5rem .75rem;border:1.5px solid var(--line-dark);border-radius:4px;font-size:.85rem;font-family:'Source Sans 3',sans-serif;background:var(--paper-2);color:var(--ink);outline:none}
+.form-field input:focus{border-color:var(--saffron)}
+.btn-submit{width:100%;padding:.55rem;background:var(--saffron);color:#fff;border:none;border-radius:4px;font-size:.85rem;font-weight:600;cursor:pointer;font-family:'Source Sans 3',sans-serif;transition:opacity .15s;margin-top:.3rem}
+.btn-submit:hover{opacity:.85}
+.form-msg{font-size:.75rem;text-align:center;margin-top:.5rem;min-height:1.2em}
+.form-msg.error{color:#c0392b}
+.form-msg.success{color:var(--leaf)}
+
+
+.authors-cat-btn .cat-count{display:inline-block;font-size:.6rem;background:var(--paper-3);color:var(--ink-3);border-radius:10px;padding:1px 6px;margin-left:4px;font-weight:700;vertical-align:middle}
+.authors-cat-btn.active .cat-count{background:var(--saffron-l);color:var(--saffron)}
+.author-card-cats{display:flex;gap:.3rem;flex-wrap:wrap}
+.author-cat-pip{font-size:.55rem;padding:1px 7px;border-radius:10px;font-weight:700;color:#fff}
+.no-authors-msg{grid-column:1/-1;text-align:center;padding:2.5rem;color:var(--ink-4);font-size:.9rem}
+.no-authors-msg span{display:block;font-size:2rem;margin-bottom:.5rem}
+
+
+.user-bar{display:flex;align-items:center;gap:.5rem}
+.user-avatar{width:30px;height:30px;border-radius:50%;background:var(--saffron-l);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:var(--saffron);cursor:pointer;border:1.5px solid var(--saffron-m)}
+.btn-logout{font-size:.7rem;color:var(--ink-3);background:none;border:none;cursor:pointer;font-family:'Source Sans 3',sans-serif;text-decoration:underline}
+
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--ink-2);color:#fff;padding:.6rem 1.2rem;border-radius:4px;font-size:.8rem;z-index:999;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
+
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr}
+  .hero-side{display:none}
+  .feed-grid{grid-template-columns:1fr 1fr}
+  .bottom-grid{grid-template-columns:1fr}
+  .sidebar .highlight-card{display:none}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .pop-card{grid-template-columns:44px 1fr}
+  .pop-read{display:none}
+  .authors-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:640px){
+  .header-inner{grid-template-columns:auto 1fr auto;padding:.6rem 1rem}
+  nav.main-nav{display:none}
+  .hamburger{display:flex}
+  .feed-grid{grid-template-columns:1fr}
+  .hero-title{font-size:1.5rem}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .bottom-grid{grid-template-columns:1fr}
+  main{padding:1.5rem 1rem}
+  .authors-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:400px){
+  .footer-grid{grid-template-columns:1fr}
+  .cat-tabs{gap:.25rem}
+  .authors-grid{grid-template-columns:repeat(2,1fr);gap:.8rem}
+}
 /* ── FOOTER ── */
 footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5rem;margin-top:4rem}
 .footer-inner{max-width:1280px;margin:0 auto}
