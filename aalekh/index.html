@@ -257,6 +257,15 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
 .form-msg.error{color:#c0392b}
 .form-msg.success{color:var(--leaf)}
 
+
+.authors-cat-btn .cat-count{display:inline-block;font-size:.6rem;background:var(--paper-3);color:var(--ink-3);border-radius:10px;padding:1px 6px;margin-left:4px;font-weight:700;vertical-align:middle}
+.authors-cat-btn.active .cat-count{background:var(--saffron-l);color:var(--saffron)}
+.author-card-cats{display:flex;gap:.3rem;flex-wrap:wrap}
+.author-cat-pip{font-size:.55rem;padding:1px 7px;border-radius:10px;font-weight:700;color:#fff}
+.no-authors-msg{grid-column:1/-1;text-align:center;padding:2.5rem;color:var(--ink-4);font-size:.9rem}
+.no-authors-msg span{display:block;font-size:2rem;margin-bottom:.5rem}
+
+
 .user-bar{display:flex;align-items:center;gap:.5rem}
 .user-avatar{width:30px;height:30px;border-radius:50%;background:var(--saffron-l);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:var(--saffron);cursor:pointer;border:1.5px solid var(--saffron-m)}
 .btn-logout{font-size:.7rem;color:var(--ink-3);background:none;border:none;cursor:pointer;font-family:'Source Sans 3',sans-serif;text-decoration:underline}
@@ -402,13 +411,13 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
       <a class="sec-head-more" href="authors.html">सभी लेखक →</a>
     </div>
 
-    <div class="authors-cat-nav">
-      <button class="authors-cat-btn active" onclick="showAuthorCat(this,'all')">सभी</button>
-      <button class="authors-cat-btn" onclick="showAuthorCat(this,'kavita')">कविता</button>
-      <button class="authors-cat-btn" onclick="showAuthorCat(this,'kahani')">कहानी</button>
-      <button class="authors-cat-btn" onclick="showAuthorCat(this,'nibandh')">निबंध</button>
-      <button class="authors-cat-btn" onclick="showAuthorCat(this,'natya')">नाटक</button>
-      <button class="authors-cat-btn" onclick="showAuthorCat(this,'darshan')">दर्शन</button>
+    <div class="authors-cat-nav" id="authorsCatNav">
+      <button class="authors-cat-btn active" data-cat="all" onclick="showAuthorCat(this,'all')">सभी <span class="cat-count" id="cnt-all">0</span></button>
+      <button class="authors-cat-btn" data-cat="kavita" onclick="showAuthorCat(this,'kavita')">कविता <span class="cat-count" id="cnt-kavita">0</span></button>
+      <button class="authors-cat-btn" data-cat="kahani" onclick="showAuthorCat(this,'kahani')">कहानी <span class="cat-count" id="cnt-kahani">0</span></button>
+      <button class="authors-cat-btn" data-cat="nibandh" onclick="showAuthorCat(this,'nibandh')">निबंध <span class="cat-count" id="cnt-nibandh">0</span></button>
+      <button class="authors-cat-btn" data-cat="natya" onclick="showAuthorCat(this,'natya')">नाटक <span class="cat-count" id="cnt-natya">0</span></button>
+      <button class="authors-cat-btn" data-cat="darshan" onclick="showAuthorCat(this,'darshan')">दर्शन <span class="cat-count" id="cnt-darshan">0</span></button>
     </div>
 
     <div class="authors-grid" id="authorsGrid"></div>
@@ -814,119 +823,96 @@ const CAT_COLORS = {
   darshan: '#5C2A6E',
 };
 
-const FAMOUS_AUTHORS = [
-  {
-    name:'मुंशी प्रेमचंद', era:'1880 – 1936',
-    bio:'हिंदी-उर्दू के महानतम कथाकार। गोदान, निर्मला, गबन के रचयिता।',
-    tags:['कहानी','उपन्यास','यथार्थवाद'], cats:['kahani'],
-    slug:'munshi-premchand', catKey:'kahani', catLabel:'कहानी',
-    photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Premchand_2.jpg/440px-Premchand_2.jpg',
-  },
-  {
-    name:'महादेवी वर्मा', era:'1907 – 1987',
-    bio:'छायावाद की रानी। आधुनिक मीरा। यामा के लिए ज्ञानपीठ पुरस्कार।',
-    tags:['कविता','छायावाद','संस्मरण'], cats:['kavita'],
-    slug:'mahadevi-varma', catKey:'kavita', catLabel:'कविता',
-    photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Mahadevi_Verma.jpg/440px-Mahadevi_Verma.jpg',
-  },
-  {
-    name:'सूर्यकांत त्रिपाठी निराला', era:'1896 – 1961',
-    bio:'छायावाद के स्तंभ। राम की शक्तिपूजा और सरोज स्मृति के रचयिता।',
-    tags:['कविता','छायावाद','मुक्त छंद'], cats:['kavita'],
-    slug:'nirala', catKey:'kavita', catLabel:'कविता',
-    photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Suryakant_Tripathi_Nirala.jpg/440px-Suryakant_Tripathi_Nirala.jpg',
-  },
-  {
-    name:'जयशंकर प्रसाद', era:'1889 – 1937',
-    bio:'कामायनी के महाकवि। चंद्रगुप्त और स्कंदगुप्त के नाटककार।',
-    tags:['कविता','नाटक','उपन्यास'], cats:['kavita','natya'],
-    slug:'jaishankar-prasad', catKey:'natya', catLabel:'नाटक',
-    photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Jaishankar_Prasad.jpg/440px-Jaishankar_Prasad.jpg',
-  },
-  {
-    name:'हज़ारीप्रसाद द्विवेदी', era:'1907 – 1979',
-    bio:'हिंदी निबंध के शिखर पुरुष। बाणभट्ट की आत्मकथा के रचयिता।',
-    tags:['निबंध','उपन्यास','आलोचना'], cats:['nibandh'],
-    slug:'hazariprasad-dwivedi', catKey:'nibandh', catLabel:'निबंध',
-    photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Hazari_Prasad_Dwivedi.jpg/440px-Hazari_Prasad_Dwivedi.jpg',
-  },
-  {
-    name:'महात्मा गांधी', era:'1869 – 1948',
-    bio:'सत्य और अहिंसा के पुजारी। हिंद स्वराज और आत्मकथा के रचयिता।',
-    tags:['दर्शन','आत्मकथा','राजनीति'], cats:['darshan','nibandh'],
-    slug:'mahatma-gandhi', catKey:'darshan', catLabel:'दर्शन',
-    photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Mahatma-Gandhi%2C_studio%2C_1931.jpg/440px-Mahatma-Gandhi%2C_studio%2C_1931.jpg',
-  },
-  {
-    name:'मोहन राकेश', era:'1925 – 1972',
-    bio:'नई कहानी आंदोलन के नेता। आषाढ़ का एक दिन हिंदी रंगमंच की धरोहर।',
-    tags:['नाटक','कहानी','एकांकी'], cats:['natya','kahani'],
-    slug:'mohan-rakesh', catKey:'natya', catLabel:'नाटक',
-    photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Mohan_Rakesh.jpg/440px-Mohan_Rakesh.jpg',
-  },
-  {
-    name:'फणीश्वरनाथ रेणु', era:'1921 – 1977',
-    bio:'आंचलिक कथाकार। मैला आँचल — ग्रामीण भारत की अमर गाथा।',
-    tags:['कहानी','उपन्यास','आंचलिक'], cats:['kahani'],
-    slug:'phanishwarnath-renu', catKey:'kahani', catLabel:'कहानी',
-    photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Phanishwarnath_Renu.jpg/440px-Phanishwarnath_Renu.jpg',
-  },
-  {
-    name:'कबीरदास', era:'1440 – 1518',
-    bio:'संत कवि। समाज सुधारक। दोहों में जीवन-दर्शन के अप्रतिम प्रतीक।',
-    tags:['दोहा','भक्ति','दर्शन'], cats:['kavita','darshan'],
-    slug:'kabirdas', catKey:'darshan', catLabel:'दर्शन',
-    photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Kabir_-_Project_Gutenberg_13th_eBook.jpg/440px-Kabir_-_Project_Gutenberg_13th_eBook.jpg',
-  },
-  {
-    name:'रामचंद्र शुक्ल', era:'1884 – 1941',
-    bio:'आधुनिक हिंदी आलोचना के जनक। हिंदी साहित्य का इतिहास के लेखक।',
-    tags:['आलोचना','निबंध','इतिहास'], cats:['nibandh'],
-    slug:'ramchandra-shukla', catKey:'nibandh', catLabel:'निबंध',
-    photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Ramchandra_Shukla.jpg/440px-Ramchandra_Shukla.jpg',
-  },
-];
+// REMOVE the entire FAMOUS_AUTHORS array and replace showAuthorCat + authorCardHTML + injectCounts with:
+
+const CAT_LABELS = {
+  kavita:'कविता', kahani:'कहानी', nibandh:'निबंध', natya:'नाटक', darshan:'दर्शन',
+};
+
+let ALL_AUTHORS = [];
+
+async function loadAuthors() {
+  const grid = document.getElementById('authorsGrid');
+  grid.innerHTML = '<div class="loading-spinner" style="grid-column:1/-1">लेखक लोड हो रहे हैं…</div>';
+  try {
+    const data = await apiFetch('/api/lekhak?limit=20&featured=true');
+    ALL_AUTHORS = data.lekhak || data.authors || data || [];
+    injectCounts();
+    renderAuthorGrid('all');
+  } catch(e) {
+    grid.innerHTML = `<div class="no-authors-msg"><span>⚠️</span>${e.message}</div>`;
+  }
+}
+
+function injectCounts() {
+  const el = document.getElementById('cnt-all');
+  if (el) el.textContent = ALL_AUTHORS.length;
+  ['kavita','kahani','nibandh','natya','darshan'].forEach(k => {
+    const el = document.getElementById('cnt-' + k);
+    if (el) el.textContent = ALL_AUTHORS.filter(a => catMatch(a, k)).length;
+  });
+}
+
+// Match author to category key using their categories array
+function catMatch(a, key) {
+  const cats = (a.categories || []).map(c => c.toLowerCase());
+  const map = { kavita:['कविता','kavita'], kahani:['कहानी','kahani'], nibandh:['निबंध','nibandh'], natya:['नाटक','natya'], darshan:['दर्शन','darshan'] };
+  return (map[key] || []).some(v => cats.includes(v));
+}
+
+function getPrimaryColor(a) {
+  const keys = ['kavita','kahani','nibandh','natya','darshan'];
+  const match = keys.find(k => catMatch(a, k));
+  return CAT_COLORS[match] || '#888';
+}
+
+function getPrimaryLabel(a) {
+  const keys = ['kavita','kahani','nibandh','natya','darshan'];
+  const match = keys.find(k => catMatch(a, k));
+  return CAT_LABELS[match] || (a.categories?.[0] || 'लेखक');
+}
 
 function authorCardHTML(a) {
-  const color = CAT_COLORS[a.catKey] || '#C8540A';
+  const color = getPrimaryColor(a);
+  const label = getPrimaryLabel(a);
+  const avatar = a.avatar && a.avatar.startsWith('http')
+    ? `<img src="${a.avatar}" alt="${a.display_name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+    : '';
+  const initials = `<div class="thumb-ph" style="background:${color};${avatar?'display:none':'display:flex'}">${(a.display_name||a.username||'?')[0]}</div>`;
+
   return `
     <a href="author-profile.html?slug=${encodeURIComponent(a.slug)}" class="author-card">
-      <div class="author-card-thumb">
-        <img src="${a.photo}" alt="${a.name}" loading="lazy"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="thumb-ph" style="background:${color}">${a.name[0]}</div>
-      </div>
-      <span class="author-card-cat-badge" style="background:${color}">${a.catLabel}</span>
+      <div class="author-card-thumb">${avatar}${initials}</div>
+      <span class="author-card-cat-badge" style="background:${color}">${label}</span>
       <div class="author-card-body">
-        <div class="author-card-name">${a.name}</div>
-        <div class="author-card-era">${a.era}</div>
-        <div class="author-card-bio">${a.bio}</div>
-        <div class="author-card-tags">${a.tags.map(t=>`<span class="author-card-tag">${t}</span>`).join('')}</div>
+        <div class="author-card-name">${a.display_name || a.username}</div>
+        <div class="author-card-era">${a.birth_year ? a.birth_year + ' —' : ''} ${a.location || ''}</div>
+        <div class="author-card-bio">${a.bio || ''}</div>
+        <div class="author-card-tags">${(a.categories||[]).map(t=>`<span class="author-card-tag">${t}</span>`).join('')}</div>
       </div>
       <div class="author-card-footer">
-        <span class="author-card-link">प्रोफ़ाइल देखें →</span>
+        <span class="author-card-link">प्रोफ़ाइल →</span>
       </div>
     </a>`;
+}
+
+function renderAuthorGrid(cat) {
+  const grid = document.getElementById('authorsGrid');
+  const list = cat === 'all' ? ALL_AUTHORS : ALL_AUTHORS.filter(a => catMatch(a, cat));
+  grid.style.opacity = '0';
+  setTimeout(() => {
+    grid.innerHTML = list.length
+      ? list.map(authorCardHTML).join('')
+      : `<div class="no-authors-msg"><span>📚</span>इस श्रेणी में अभी लेखक उपलब्ध नहीं हैं।</div>`;
+    grid.style.opacity = '1';
+  }, 180);
 }
 
 function showAuthorCat(btn, cat) {
   document.querySelectorAll('.authors-cat-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  const grid = document.getElementById('authorsGrid');
-  grid.style.opacity = '0';
-  setTimeout(() => {
-    const list = cat === 'all' ? FAMOUS_AUTHORS : FAMOUS_AUTHORS.filter(a => a.cats.includes(cat));
-    grid.innerHTML = list.length
-      ? list.map(authorCardHTML).join('')
-      : `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--ink-4);font-size:.85rem">इस श्रेणी में अभी लेखक उपलब्ध नहीं हैं।</div>`;
-    grid.style.opacity = '1';
-  }, 150);
-}
-
-// Init authors grid
-document.getElementById('authorsGrid').innerHTML = FAMOUS_AUTHORS.map(authorCardHTML).join('');
-
-// ══════════════════════════════════════════════════════════════
+  renderAuthorGrid(cat);
+} 
 
 async function init() {
   renderAuthArea();
@@ -942,7 +928,7 @@ async function init() {
       renderAuthArea();
     });
   }
-  await Promise.all([loadHero(), loadFeed(true), loadPopular(), loadLatestSidebar()]);
+  await Promise.all([loadAuthors(), loadHero(), loadFeed(true), loadPopular(), loadLatestSidebar()]);
 }
 
 window.addEventListener('resize', () => {
