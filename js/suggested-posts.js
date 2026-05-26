@@ -125,8 +125,7 @@ const SuggestedPosts = (() => {
         <div class="card-name-deva">${escapeHtml(title)}</div>
         <div class="card-name-eng">${escapeHtml(title.toUpperCase())}</div>
         <div class="card-mantra-preview">${escapeHtml(description.substring(0, 60))}</div>
-        <div class="card-count"><span class="card-count-dot"></span> ${formattedDate}</div>
-        <div class="card-count"><span class="card-count-dot"></span> ${views} 👁️ views</div>
+        <div class="card-count"><span class="card-count-dot"></span> ${formattedDate} * ${views} 👁️ views</div>
       </div>
       <div class="card-arrow">→</div>
     `;
