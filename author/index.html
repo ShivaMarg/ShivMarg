@@ -791,9 +791,14 @@ function fmtDate(iso) {
 function renderAuthArea() {
   const area = document.getElementById('authArea');
   if (state.user) {
+    const avatarContent = state.user.avatar && state.user.avatar.startsWith('http')
+      ? `<img src="${state.user.avatar}" alt="${state.user.display_name}" style="width:100%;height:100%;object-fit:cover;border-radius:50%" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+      : '';
+    const initials = `<div style="width:100%;height:100%;display:${state.user.avatar && state.user.avatar.startsWith('http')?'none':'flex'};align-items:center;justify-content:center;font-size:.8rem;font-weight:700">${state.user.username[0].toUpperCase()}</div>`;
+    
     area.innerHTML = `
       <div class="user-bar">
-        <div class="user-avatar" title="${state.user.display_name}" onclick="window.location.href='/profile/${state.user.username}'" style="cursor:pointer">${state.user.avatar || state.user.username[0].toUpperCase()}</div>
+        <div class="user-avatar" title="${state.user.display_name}" onclick="window.location.href='/profile/${state.user.username}'" style="cursor:pointer;display:flex;align-items:center;justify-content:center;overflow:hidden">${avatarContent}${initials}</div>
         <button class="btn-logout" onclick="doLogout()">लॉग-आउट</button>
       </div>`;
   } else {
