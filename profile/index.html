@@ -323,12 +323,21 @@
   /* ── RENDER ── */
   function renderApp(user, comments, isOwnProfile) {
     const av = (user.avatar && user.avatar.length===1) ? user.avatar : user.username[0];
+    const isImageUrl = user.avatar && user.avatar.startsWith('http');
     const joined = new Date(user.created_at).toLocaleDateString('hi-IN',{year:'numeric',month:'long'});
     const uniquePages = [...new Set(comments.map(c=>c.page_id))];
     const totalLikes  = comments.reduce((s,c)=>s+(c.likes||0),0);
 
     // Update page title dynamically
     document.title = `${user.display_name || user.username} — ShivaMarg`;
+
+    // Build avatar HTML
+    let avatarHtml = '';
+    if (isImageUrl) {
+      avatarHtml = `<img src="${user.avatar}" alt="${user.display_name}" style="width:100%;height:100%;object-fit:cover;border-radius:50%" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div style="width:100%;height:100%;display:none;align-items:center;justify-content:center;background:${avatarBg(av)}">${av.toUpperCase()}</div>`;
+    } else {
+      avatarHtml = `${av.toUpperCase()}`;
+    }
 
     // Edit tabs only shown to profile owner
     const editTabs = isOwnProfile ? `
@@ -409,7 +418,7 @@
 
     document.getElementById('app').innerHTML = `
       <div class="hero">
-        <div class="hero-avatar" style="background:${avatarBg(av)}">${av.toUpperCase()}</div>
+        <div class="hero-avatar" style="${isImageUrl ? 'display:flex;align-items:center;justify-content:center;overflow:hidden;' : ''}background:${isImageUrl ? 'transparent' : avatarBg(av)}">${avatarHtml}</div>
         <div style="flex:1;min-width:140px">
           <div class="hero-name" id="hero-name">${user.display_name||user.username}</div>
           <div class="hero-username">@${user.username}</div>
