@@ -954,9 +954,10 @@
         <div class="comment-item" id="cmt-${c.id}">
           <div class="comment-avatar">
             <img src="${c.avatar || `data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22%3E%3C/svg%3E`}" 
-                 alt="${c.username}" 
+                 alt="${c.username}"
+                 style="width:100%;height:100%;object-fit:cover;border-radius:50%;"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div style="width:100%;height:100%;display:none;align-items:center;justify-content:center;background:var(--accent);font-family:'Cinzel',serif;font-size:0.8rem;color:#fff;font-weight:700">${c.username[0].toUpperCase()}</div>
+            <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;">${c.username[0].toUpperCase()}</div>
           </div>
           <div style="flex:1">
             <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;">
