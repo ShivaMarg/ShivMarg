@@ -92,7 +92,7 @@ const SuggestedPosts = (() => {
     const card = document.createElement('a');
     
     // Handle URL
-    const url = isPost ? (item.url || item.link || '#') : (`articles/?slug=${item.slug}` || '#');
+    const url = isPost ? (item.url || item.link || '#') : (`articles/${item.slug}` || '#');
     card.href = url;
     card.className = 'card reveal';
     card.setAttribute('data-cat', 'featured');

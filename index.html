@@ -2097,7 +2097,7 @@ mantra for wealth
     const initials = `<div class="thumb-ph" style="background:${color};${avatar?'display:none':'display:flex'}">${(a.display_name||a.username||'?')[0]}</div>`;
 
     return `
-      <a href="/author/?slug=${encodeURIComponent(a.slug)}" class="author-card">
+      <a href="/author/${encodeURIComponent(a.slug)}" class="author-card">
         <div class="author-card-thumb">${avatar}${initials}</div>
         <span class="author-card-cat-badge" style="background:${color}">${label}</span>
         <div class="author-card-body">

@@ -695,7 +695,7 @@ Register the current user as a Lekhak (author). Creates an entry in the `authors
 {
   ...serialize_author,
   "message": "बधाई हो! आपकी लेखक प्रोफ़ाइल बन गई।",
-  "profile_url": "author-profile.html?slug=ramesh-kumar"
+  "profile_url": "author-profile.htmlramesh-kumar"
 }
 ```
 
