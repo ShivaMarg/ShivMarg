@@ -457,11 +457,20 @@
     if (user) {
       const avatarChar = (user.avatar && user.avatar.length === 1) ? user.avatar : user.username[0];
       const avatarBg = window.SmAuth.getAvatarBg(avatarChar);
+      const isImageUrl = user.avatar && user.avatar.startsWith('http');
+
+      // Build avatar HTML
+      let avatarHtml = '';
+      if (isImageUrl) {
+        avatarHtml = `<div class="avatar" style="display:flex;align-items:center;justify-content:center;overflow:hidden;padding:0"><img src="${user.avatar}" alt="${user.username}" style="width:100%;height:100%;object-fit:cover;border-radius:50%" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div style="width:100%;height:100%;display:none;align-items:center;justify-content:center;background:${avatarBg};font-family:'Cinzel',serif;font-size:0.8rem;color:#fff;font-weight:700">${avatarChar.toUpperCase()}</div></div>`;
+      } else {
+        avatarHtml = `<div class="avatar" style="background:${avatarBg}">${avatarChar.toUpperCase()}</div>`;
+      }
 
       // Desktop: Show user chip in top-right
       widget.innerHTML = `
         <div class="user-chip" id="user-chip" onclick="event.stopPropagation();document.getElementById('user-menu').classList.toggle('active')">
-          <div class="avatar" style="background:${avatarBg}">${avatarChar.toUpperCase()}</div>
+          ${avatarHtml}
           <span class="user-name">${user.username}</span>
           <div class="user-menu" id="user-menu">
             <a href="/profile/${user.username}">👤 प्रोफाइल</a>
