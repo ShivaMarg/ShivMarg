@@ -952,7 +952,7 @@
 
       list.innerHTML = json.comments.map(c => `
         <div class="comment-item" id="cmt-${c.id}">
-          <div class="comment-avatar">${c.username[0].toUpperCase()}</div>
+          <div class="comment-avatar">${c.avatar || c.username[0].toUpperCase()}</div>
           <div style="flex:1">
             <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;">
               <span class="comment-author">${c.username}</span>
