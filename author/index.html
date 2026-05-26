@@ -754,7 +754,7 @@ const state = {
   articlesTotal: 0,
 };
 
-// Resolve slug from URL:  ramesh-kumar  OR (legacy) ?username=ramesh
+// Resolve slug from URL:  ?slug=ramesh-kumar  OR (legacy) ?username=ramesh
 const params     = new URLSearchParams(window.location.search);
 state.authorSlug = params.get('slug') || params.get('username') || '';
 
@@ -932,7 +932,7 @@ async function doSearch() {
     const data = await apiFetch(`/api/articles/search?q=${encodeURIComponent(q)}&limit=8`);
     if (!data.articles.length) { results.innerHTML = '<p style="font-size:.8rem;color:var(--ink-4);padding:.5rem 0">कोई रचना नहीं मिली।</p>'; return; }
     results.innerHTML = data.articles.map(a => `
-      <a href="/articles${encodeURIComponent(a.slug)}" class="search-result-item">
+      <a href="/articles?slug=${encodeURIComponent(a.slug)}" class="search-result-item">
         <span class="sr-cat">${a.category || '—'}</span>
         <div class="sr-title">${a.title}</div>
         <div class="sr-exc">${a.excerpt ? a.excerpt.slice(0,80)+'…' : ''}</div>
@@ -1110,7 +1110,7 @@ async function loadArticles(append = false) {
     }
 
     const html = articles.map(a => `
-      <a href="/articles${encodeURIComponent(a.slug)}" class="article-card">
+      <a href="/articles?slug=${encodeURIComponent(a.slug)}" class="article-card">
         <div class="article-thumb">
           ${a.thumbnail_url ? `<img src="${a.thumbnail_url}" alt="${a.title}" loading="lazy">` : '📖'}
         </div>
