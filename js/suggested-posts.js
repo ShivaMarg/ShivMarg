@@ -112,7 +112,7 @@ const SuggestedPosts = (() => {
     const title = isPost ? item.name : item.title;
     const description = isPost ? (item.description || item.desc || 'विस्तृत विवरण के लिए क्लिक करें') : (item.description || 'विस्तृत विवरण के लिए क्लिक करें');
     const category = item.category || 'मंत्र';
-    const views = item.views || 0;
+    const views = item.view_count || 0;
 
     const imageHTML = imageURL ? 
       `<img src="${imageURL}" alt="${title}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.background='var(--border)';this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22%3E%3C/svg%3E';">` :
@@ -125,7 +125,8 @@ const SuggestedPosts = (() => {
         <div class="card-name-deva">${escapeHtml(title)}</div>
         <div class="card-name-eng">${escapeHtml(title.toUpperCase())}</div>
         <div class="card-mantra-preview">${escapeHtml(description.substring(0, 60))}</div>
-        <div class="card-count"><span class="card-count-dot"></span> ${formattedDate} • ${views} 👁️ views</div>
+        <div class="card-count"><span class="card-count-dot"></span> ${formattedDate}</div>
+        <div class="card-count"><span class="card-count-dot"></span> ${views} 👁️ views</div>
       </div>
       <div class="card-arrow">→</div>
     `;
