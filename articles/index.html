@@ -104,6 +104,22 @@
       transition: opacity .2s;
     }
     .btn-login:hover { opacity: .85; }
+    
+    .user-bar { display: flex; align-items: center; gap: .5rem; }
+    .user-avatar {
+      width: 30px; height: 30px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem; font-weight: 700; color: #fff;
+      cursor: pointer; border: 1.5px solid var(--accent-2);
+      overflow: hidden;
+    }
+    .btn-logout {
+      font-size: .7rem; color: rgba(255,255,255,.7);
+      background: none; border: none; cursor: pointer;
+      font-family: var(--mono); text-decoration: underline;
+      transition: color .2s;
+    }
+    .btn-logout:hover { color: #fff; }
 
     /* ── LAYOUT ─────────────────────────────── */
     .page-wrap {
@@ -478,8 +494,8 @@
     <a href="#">ई-पुस्तक</a>
     <a href="/article_editor/">नया लेख लिखें</a>
   </nav>
-  <div class="hdr-actions">
-    <button class="btn-login">लॉग-इन</button>
+  <div class="hdr-actions" id="authArea">
+    <button class="btn-login" onclick="openAuthModal()">लॉग-इन</button>
   </div>
 </header>
 
@@ -619,6 +635,89 @@
   // ─────────────────────────────────────────────
   const API_BASE = 'https://shivamargbackend.onrender.com'; // Change to your backend URL in production
   let CURRENT_ARTICLE_SLUG = '';
+
+  // ─────────────────────────────────────────────
+  // AUTH AREA RENDERING
+  // ─────────────────────────────────────────────
+  function renderAuthArea() {
+    const area = document.getElementById('authArea');
+    const user = JSON.parse(localStorage.getItem('bargad_user') || 'null');
+    const token = localStorage.getItem('sm_token');
+    
+    area.innerHTML = '';
+    
+    if (user && token) {
+      const userBar = document.createElement('div');
+      userBar.className = 'user-bar';
+      
+      const avatar = document.createElement('div');
+      avatar.className = 'user-avatar';
+      avatar.title = user.display_name || user.username;
+      avatar.style.cursor = 'pointer';
+      avatar.style.display = 'flex';
+      avatar.style.alignItems = 'center';
+      avatar.style.justifyContent = 'center';
+      avatar.style.overflow = 'hidden';
+      avatar.onclick = () => window.location.href = `/profile/${user.username}`;
+      
+      const initials = document.createElement('div');
+      initials.textContent = user.username[0].toUpperCase();
+      initials.style.width = '100%';
+      initials.style.height = '100%';
+      initials.style.display = 'flex';
+      initials.style.alignItems = 'center';
+      initials.style.justifyContent = 'center';
+      initials.style.fontSize = '0.8rem';
+      initials.style.fontWeight = '700';
+      
+      avatar.appendChild(initials);
+      
+      if (user.avatar && user.avatar.startsWith('http')) {
+        const img = document.createElement('img');
+        img.src = user.avatar;
+        img.alt = user.display_name || user.username;
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.objectFit = 'cover';
+        img.style.borderRadius = '50%';
+        img.onerror = () => {
+          img.style.display = 'none';
+          initials.style.display = 'flex';
+        };
+        img.onload = () => {
+          initials.style.display = 'none';
+        };
+        avatar.insertBefore(img, initials);
+      }
+      
+      const logoutBtn = document.createElement('button');
+      logoutBtn.className = 'btn-logout';
+      logoutBtn.textContent = 'लॉग-आउट';
+      logoutBtn.onclick = doLogout;
+      
+      userBar.appendChild(avatar);
+      userBar.appendChild(logoutBtn);
+      area.appendChild(userBar);
+    } else {
+      const loginBtn = document.createElement('button');
+      loginBtn.className = 'btn-login';
+      loginBtn.textContent = 'लॉग-इन';
+      loginBtn.onclick = openAuthModal;
+      area.appendChild(loginBtn);
+    }
+  }
+
+  function openAuthModal() {
+    alert('लॉगिन सुविधा अभी सेटअप हो रही है। कृपया बाद में कोशिश करें।');
+  }
+
+  function doLogout() {
+    localStorage.removeItem('sm_token');
+    localStorage.removeItem('bargad_user');
+    renderAuthArea();
+    showToast('लॉग-आउट हो गए');
+    location.reload();
+  }
 
   // ─────────────────────────────────────────────
   // UTILITY FUNCTIONS
@@ -996,6 +1095,7 @@
   // INIT: Load article + sidebar
   // ─────────────────────────────────────────────
   (async () => {
+    renderAuthArea();
     await loadArticle();
     await Promise.all([
       loadPopularPosts(),
