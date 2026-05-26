@@ -84,6 +84,20 @@
       : (obj.username || '?')[0].toUpperCase();
   }
 
+  /**
+   * Returns HTML for avatar — image if URL, else letter with gradient
+   */
+  function renderAvatarHTML(obj) {
+    const char = avatarChar(obj);
+    const bg = getAvatarBg(char);
+    const isImageUrl = obj.avatar && obj.avatar.startsWith('http');
+
+    if (isImageUrl) {
+      return `<img src="${obj.avatar}" alt="${obj.username}" style="width:100%;height:100%;object-fit:cover;border-radius:50%" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div style="width:100%;height:100%;display:none;align-items:center;justify-content:center;background:${bg};font-size:0.9rem;color:#fff;font-weight:700">${char}</div>`;
+    }
+    return `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:${bg};font-size:0.9rem;color:#fff;font-weight:700">${char}</div>`;
+  }
+
   /* ─── STYLES ─── */
   function injectStyles() {
     if (document.getElementById('sm-comments-styles')) return;
@@ -416,9 +430,7 @@
     
     if (user) {
       // User is logged in - show avatar, username, and submit button
-      const char = avatarChar(user);
-      const bg   = getAvatarBg(char);
-      avatarHTML = `<div class="sm-c-avatar" style="background:${bg};font-size:0.75rem">${char}</div>`;
+      avatarHTML = `<div class="sm-c-avatar" style="display:flex;align-items:center;justify-content:center;overflow:hidden">${renderAvatarHTML(user)}</div>`;
       usernameHTML = `<span style="font-family:'Cinzel',serif;font-size:0.65rem;color:#B39DDB;letter-spacing:1px;">${user.username}</span>`;
       submitButton = `<button class="sm-post-btn" id="sm-post-btn" onclick="SmComments._submit()">
         <span>🙏 टिप्पणी भेजें</span>
@@ -451,13 +463,11 @@
   function renderCard(c, uid) {
     const isOwn      = uid === c.user_id;
     const isEditing  = editingId === c.id;
-    const char       = avatarChar(c);
-    const bg         = getAvatarBg(char);
 
     return `
       <div class="sm-comment-card${isEditing ? ' editing' : ''}" id="sm-card-${c.id}">
         <div class="sm-comment-hdr">
-          <div class="sm-c-avatar" style="background:${bg}">${char}</div>
+          <div class="sm-c-avatar" style="display:flex;align-items:center;justify-content:center;overflow:hidden">${renderAvatarHTML(c)}</div>
           <div class="sm-c-meta">
             <div class="sm-c-name">${escapeHtml(c.username)}</div>
             <div class="sm-c-date">
