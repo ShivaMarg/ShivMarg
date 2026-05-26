@@ -275,7 +275,7 @@
       }
 
       // Check if user is admin or editor
-      if (!['admin', 'editor'].includes(data.user.role)) {
+      if (!['admin'].includes(data.user.role)) {
         throw new Error('Admin access required');
       }
 

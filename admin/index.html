@@ -728,7 +728,39 @@ async function loadCurrentUser(){
     const initials=name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2)||'U';
     document.getElementById('userName').textContent=name;
     document.getElementById('userRole').textContent=role;
-    document.getElementById('userAvatar').textContent=initials;
+    
+    const avatarEl=document.getElementById('userAvatar');
+    avatarEl.innerHTML='';
+    
+    const initialsDiv=document.createElement('div');
+    initialsDiv.textContent=initials;
+    initialsDiv.style.width='100%';
+    initialsDiv.style.height='100%';
+    initialsDiv.style.display='flex';
+    initialsDiv.style.alignItems='center';
+    initialsDiv.style.justifyContent='center';
+    initialsDiv.style.fontSize='1rem';
+    initialsDiv.style.fontWeight='600';
+    
+    avatarEl.appendChild(initialsDiv);
+    
+    if(data.avatar&&data.avatar.startsWith('http')){
+      const img=document.createElement('img');
+      img.src=data.avatar;
+      img.alt=name;
+      img.style.width='100%';
+      img.style.height='100%';
+      img.style.objectFit='cover';
+      img.style.borderRadius='50%';
+      img.onerror=()=>{
+        img.style.display='none';
+        initialsDiv.style.display='flex';
+      };
+      img.onload=()=>{
+        initialsDiv.style.display='none';
+      };
+      avatarEl.insertBefore(img,initialsDiv);
+    }
   }
 }
 
