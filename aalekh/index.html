@@ -562,19 +562,67 @@ function showToast(msg, dur = 2500) {
 
 function renderAuthArea() {
   const area = document.getElementById('authArea');
+  area.innerHTML = '';
+  
   if (state.user) {
-    const avatarContent = state.user.avatar && state.user.avatar.startsWith('http')
-      ? `<img src="${state.user.avatar}" alt="${state.user.display_name}" style="width:100%;height:100%;object-fit:cover;border-radius:50%" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
-      : '';
-    const initials = `<div style="width:100%;height:100%;display:${state.user.avatar && state.user.avatar.startsWith('http')?'none':'flex'};align-items:center;justify-content:center;font-size:.8rem;font-weight:700">${state.user.username[0].toUpperCase()}</div>`;
+    const userBar = document.createElement('div');
+    userBar.className = 'user-bar';
     
-    area.innerHTML = `
-      <div class="user-bar">
-        <div class="user-avatar" title="${state.user.display_name}" onclick="window.location.href='/profile/${state.user.username}'" style="cursor:pointer;display:flex;align-items:center;justify-content:center;overflow:hidden">${avatarContent}${initials}</div>
-        <button class="btn-logout" onclick="doLogout()">लॉग-आउट</button>
-      </div>`;
+    const avatar = document.createElement('div');
+    avatar.className = 'user-avatar';
+    avatar.title = state.user.display_name;
+    avatar.style.cursor = 'pointer';
+    avatar.style.display = 'flex';
+    avatar.style.alignItems = 'center';
+    avatar.style.justifyContent = 'center';
+    avatar.style.overflow = 'hidden';
+    avatar.onclick = () => window.location.href = `/profile/${state.user.username}`;
+    
+    const initials = document.createElement('div');
+    initials.textContent = state.user.username[0].toUpperCase();
+    initials.style.width = '100%';
+    initials.style.height = '100%';
+    initials.style.display = 'flex';
+    initials.style.alignItems = 'center';
+    initials.style.justifyContent = 'center';
+    initials.style.fontSize = '0.8rem';
+    initials.style.fontWeight = '700';
+    
+    avatar.appendChild(initials);
+    
+    if (state.user.avatar && state.user.avatar.startsWith('http')) {
+      const img = document.createElement('img');
+      img.src = state.user.avatar;
+      img.alt = state.user.display_name;
+      img.style.width = '100%';
+      img.style.height = '100%';
+      img.style.objectFit = 'cover';
+      img.style.borderRadius = '50%';
+      img.onerror = () => {
+        img.style.display = 'none';
+        initials.style.display = 'flex';
+      };
+      img.onload = () => {
+        initials.style.display = 'none';
+      };
+      avatar.insertBefore(img, initials);
+    }
+    
+    const logoutBtn = document.createElement('button');
+    logoutBtn.className = 'btn-logout';
+    logoutBtn.textContent = 'लॉग-आउट';
+    logoutBtn.onclick = doLogout;
+    
+    userBar.appendChild(avatar);
+    userBar.appendChild(logoutBtn);
+    area.appendChild(userBar);
   } else {
-    area.innerHTML = `<a class="btn-login" href="#" onclick="openModal();return false">लॉग-इन</a>`;
+    const loginLink = document.createElement('a');
+    loginLink.className = 'btn-login';
+    loginLink.href = '#';
+    loginLink.textContent = 'लॉग-इन';
+    loginLink.onclick = (e) => { e.preventDefault(); openModal(); };
+    area.appendChild(loginLink);
   }
 }
 function switchAuthTab(tab) {
