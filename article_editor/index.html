@@ -1642,7 +1642,7 @@
     }
 
     try {
-      const payload = { status: decision === 'approved' ? 'published' : 'rejected' };
+      const payload = { status: decision === 'approve' ? 'published' : 'reject' };
       if (decision === 'rejected') {
         payload.rejection_reason = rejectionReason;
       }
