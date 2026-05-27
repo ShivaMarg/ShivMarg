@@ -1601,7 +1601,7 @@
   // ADMIN: REVIEW & APPROVAL
   // ─────────────────────────────────────────────
   function openReviewModal(slug, title, author, excerpt) {
-    window.currentReviewId = slug;
+    window.currentReviewId = title;
     document.getElementById('reviewArticleTitle').textContent = title;
     document.getElementById('reviewArticleExcerpt').textContent = excerpt;
     document.getElementById('reviewArticleAuthor').textContent = `लेखक: ${author}`;
