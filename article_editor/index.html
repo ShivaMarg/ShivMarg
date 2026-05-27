@@ -1647,8 +1647,8 @@
         payload.rejection_reason = rejectionReason;
       }
 
-      const res = await fetch(`${API_BASE}/api/articles/${slug}`, {
-        method: 'PATCH',
+      const res = await fetch(`${API_BASE}/api/articles/${slug}/review`, {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
