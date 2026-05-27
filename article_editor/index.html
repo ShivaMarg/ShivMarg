@@ -870,7 +870,7 @@
     localStorage.removeItem('admin_token');
     localStorage.removeItem('ed_token');
     localStorage.removeItem('currentUser');
-    window.location.href = '/admin-login';
+    window.location.href = '/editor-login';
   }
 
   function hasAdminRole() {
@@ -883,7 +883,7 @@
   async function initPage() {
     const token = getToken();
     if (!token) {
-      window.location.href = '/admin-login';
+      window.location.href = '/editor-login';
       return;
     }
 

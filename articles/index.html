@@ -793,6 +793,7 @@
 
     // Title
     document.querySelector('.article-title').textContent = a.title;
+    console.log(a);
 
     // Author bar
     const publishDate = new Date(a.published_at).toLocaleDateString('hi-IN');
@@ -803,7 +804,7 @@
              onerror="this.style.background='var(--border)';this.style.display='none';">
         <div>
           <div class="author-name">
-            <a href="/?author=${a.author.id}">${a.author.username}</a>
+            <a href="author/?slug=${a.author.id}">${a.author.username}</a>
           </div>
           <div class="article-meta">
             <span>${publishDate}</span>
