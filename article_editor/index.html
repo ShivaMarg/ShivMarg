@@ -820,8 +820,8 @@
       </label>
       <select id="reviewDecision" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); font-family: var(--serif); font-size: 0.95rem;">
         <option value="">— चुनें —</option>
-        <option value="approved">✓ मंजूरी दें</option>
-        <option value="rejected">✗ अस्वीकार करें</option>
+        <option value="approve">✓ मंजूरी दें</option>
+        <option value="reject">✗ अस्वीकार करें</option>
       </select>
     </div>
 
@@ -984,7 +984,7 @@
       } else if (article.status === 'published') {
         statusBadge.textContent = 'प्रकाशित';
         statusBadge.className = 'status-badge published';
-      } else if (article.status === 'rejected') {
+      } else if (article.status === 'reject') {
         statusBadge.textContent = 'अस्वीकृत';
         statusBadge.className = 'status-badge rejected';
         document.getElementById('rejectionInfoBox').style.display = 'block';
@@ -1616,7 +1616,7 @@
     if (reviewDecision) {
       reviewDecision.addEventListener('change', function() {
         const rejectionDiv = document.getElementById('rejectionReasonDiv');
-        if (this.value === 'rejected') {
+        if (this.value === 'reject') {
           rejectionDiv.style.display = 'block';
         } else {
           rejectionDiv.style.display = 'none';
@@ -1636,14 +1636,14 @@
       return;
     }
 
-    if (decision === 'rejected' && !rejectionReason.trim()) {
+    if (decision === 'reject' && !rejectionReason.trim()) {
       showToast('कृपया अस्वीकृति का कारण दर्ज करें', 'error');
       return;
     }
 
     try {
       const payload = { status: decision === 'approve' ? 'published' : 'reject' };
-      if (decision === 'rejected') {
+      if (decision === 'reject') {
         payload.rejection_reason = rejectionReason;
       }
 
@@ -1659,7 +1659,7 @@
       if (!res.ok) throw new Error('समीक्षा सहेजी नहीं जा सकी');
 
       closeModal('reviewModal');
-      showToast(decision === 'approved' ? 'लेख प्रकाशित किया गया!' : 'लेख अस्वीकार किया गया', 'success');
+      showToast(decision === 'approve' ? 'लेख प्रकाशित किया गया!' : 'लेख अस्वीकार किया गया', 'success');
       
       setTimeout(() => loadApprovalQueue(), 1000);
     } catch(e) {
