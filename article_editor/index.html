@@ -932,10 +932,10 @@
   // ─────────────────────────────────────────────
   // LOAD ARTICLE FOR EDITING
   // ─────────────────────────────────────────────
-  async function loadArticleForEdit(articleId) {
+  async function loadArticleForEdit(slug) {
     const token = getToken();
     try {
-      const res = await fetch(`${API_BASE}/api/articles/${articleId}`, {
+      const res = await fetch(`${API_BASE}/api/articles/${slug}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
 
@@ -951,8 +951,8 @@
 
       // Populate form
       isEditMode = true;
-      currentArticleId = articleId;
-      document.getElementById('editingArticleId').value = articleId;
+      currentArticleId = slug;
+      document.getElementById('editingArticleId').value = slug;
       document.getElementById('title').value = article.title;
       document.getElementById('subtitle').value = article.subtitle || '';
       document.getElementById('excerpt').value = article.excerpt;
@@ -1529,15 +1529,15 @@
     window.open(`/articles?slug=${slug}`, '_blank');
   }
 
-  function previewArticleForApproval(articleId, title) {
-    window.open(`/articles?id=${articleId}`, '_blank');
+  function previewArticleForApproval(slug, title) {
+    window.open(`/articles?id=${slug}`, '_blank');
   }
 
-  function editArticle(articleId) {
-    window.location.href = `?edit=${articleId}`;
+  function editArticle(slug) {
+    window.location.href = `?edit=${slug}`;
   }
 
-  async function submitForApproval(articleId) {
+  async function submitForApproval(slug) {
     const token = getToken();
     if (!token) {
       showToast('पहले लॉगिन करें', 'error');
@@ -1545,7 +1545,7 @@
     }
 
     try {
-      const res = await fetch(`${API_BASE}/api/articles/${articleId}`, {
+      const res = await fetch(`${API_BASE}/api/articles/${slug}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -1563,23 +1563,23 @@
     }
   }
 
-  function deleteArticlePrompt(articleId, title) {
-    window.currentDeleteId = articleId;
+  function deleteArticlePrompt(slug, title) {
+    window.currentDeleteId = slug;
     document.getElementById('deleteArticleTitle').textContent = title;
     openModal('deleteModal');
   }
 
   async function confirmDelete() {
-    const articleId = window.currentDeleteId;
+    const slug = window.currentDeleteId;
     const token = getToken();
 
-    if (!token || !articleId) {
+    if (!token || !slug) {
       showToast('कुछ गड़बड़ हुई', 'error');
       return;
     }
 
     try {
-      const res = await fetch(`${API_BASE}/api/articles/${articleId}`, {
+      const res = await fetch(`${API_BASE}/api/articles/${slug}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -1600,8 +1600,8 @@
   // ─────────────────────────────────────────────
   // ADMIN: REVIEW & APPROVAL
   // ─────────────────────────────────────────────
-  function openReviewModal(articleId, title, author, excerpt) {
-    window.currentReviewId = articleId;
+  function openReviewModal(slug, title, author, excerpt) {
+    window.currentReviewId = slug;
     document.getElementById('reviewArticleTitle').textContent = title;
     document.getElementById('reviewArticleExcerpt').textContent = excerpt;
     document.getElementById('reviewArticleAuthor').textContent = `लेखक: ${author}`;
@@ -1626,7 +1626,7 @@
   });
 
   async function submitReview() {
-    const articleId = window.currentReviewId;
+    const slug = window.currentReviewId;
     const decision = document.getElementById('reviewDecision').value;
     const rejectionReason = document.getElementById('rejectionReason').value;
     const token = getToken();
@@ -1647,7 +1647,7 @@
         payload.rejection_reason = rejectionReason;
       }
 
-      const res = await fetch(`${API_BASE}/api/articles/${articleId}`, {
+      const res = await fetch(`${API_BASE}/api/articles/${slug}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
