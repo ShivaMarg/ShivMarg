@@ -53,11 +53,11 @@ logger = logging.getLogger("bulk_emails_zoho")
 
 # Zoho SMTP
 ZOHO_EMAIL = "shivmarg@shivmarg.live"
-ZOHO_PASSWORD = "8dDAfXJrmvsX"
+ZOHO_PASSWORD = ""
 EMAIL_FROM_NAME = os.getenv("EMAIL_FROM_NAME", "ShivaMarg")
 
 # MongoDB
-MONGO_URI = "mongodb+srv://skjha9th:Saurabhjha@cluster0.ewg8cxv.mongodb.net/ShivaMarg?retryWrites=true&w=majority"
+MONGO_URI = ""
 DB_NAME = "ShivMarg"
 USERS_COLLECTION = "users"  # Change to your collection name
 
