@@ -3,11 +3,12 @@
 ShivaMarg Backend — Single-file FastAPI server
 Auth + Comments + Articles + Authors (MongoDB)
 
-Install: pip install fastapi uvicorn pymongo python-jose[cryptography] passlib[bcrypt] python-multipart python-slugify
+Install: pip install fastapi uvicorn pymongo python-jose[cryptography] passlib[bcrypt] python-multipart python-slugify resend
 Run:     uvicorn shivamarg_backend:app --host 0.0.0.0 --port 8000 --reload
 """
 
-from fastapi import FastAPI, HTTPException, Depends, status, Request, Query
+# ── CHANGE 1: Added BackgroundTasks to this import ────────────────────────────
+from fastapi import FastAPI, HTTPException, Depends, status, Request, Query, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel, Field
@@ -20,6 +21,9 @@ from typing import Optional, List
 import os
 import re
 import uvicorn
+
+# ── CHANGE 2: Import the welcome email utility ────────────────────────────────
+from email_utils import send_welcome_email
 
 # ─────────────────────────────────────────────
 #  CONFIG
@@ -69,7 +73,6 @@ articles_col.create_index("category_slug")
 articles_col.create_index("tags")
 articles_col.create_index([("view_count", DESCENDING)])
 articles_col.create_index("author_id")
-# NEW: index for pending_approval queue
 articles_col.create_index([("status", 1), ("author_id", 1)])
 articles_col.create_index([("status", 1), ("submitted_at", DESCENDING)])
 
@@ -132,17 +135,11 @@ def require_super_admin(current_user=Depends(require_user)):
 #  SLUG HELPERS
 # ─────────────────────────────────────────────
 def make_slug(text: str) -> str:
-    """URL-safe slug — works for Hindi, English, mixed."""
     cleaned = re.sub(r"[^\u0900-\u097F\w\s-]", " ", text)
     cleaned = re.sub(r"[\s_-]+", "-", cleaned).strip("-")
     return cleaned.lower()
 
 def make_author_slug(display_name: str, username: str) -> str:
-    """
-    Prefer English slug from display name for clean URLs.
-    Falls back to username. Keeps only ASCII letters/digits/hyphens
-    so the URL stays browser-friendly.
-    """
     base = re.sub(r"[^a-zA-Z0-9\s-]", "", display_name or username)
     base = re.sub(r"[\s_-]+", "-", base).strip("-").lower()
     if not base:
@@ -205,11 +202,6 @@ def serialize_post(p: dict) -> dict:
     }
 
 def serialize_article(a: dict, full: bool = True) -> dict:
-    """
-    Serializes an article document.
-    NEW fields added: status now includes 'pending_approval' and 'rejected',
-    plus rejection_reason, submitted_at, approved_at, approved_by.
-    """
     def _dt(val):
         if isinstance(val, datetime):
             return val.isoformat()
@@ -233,12 +225,10 @@ def serialize_article(a: dict, full: bool = True) -> dict:
         "category":         a.get("category", ""),
         "category_slug":    a.get("category_slug", ""),
         "tags":             a.get("tags", []),
-        # NEW: status can be draft | pending_approval | published | rejected | archived
         "status":           a.get("status", "draft"),
         "read_time":        a.get("read_time", 5),
         "view_count":       a.get("view_count", 0),
         "like_count":       a.get("like_count", 0),
-        # NEW: approval workflow timestamps
         "rejection_reason": a.get("rejection_reason"),
         "submitted_at":     _dt(a.get("submitted_at")),
         "approved_at":      _dt(a.get("approved_at")),
@@ -252,7 +242,6 @@ def serialize_article(a: dict, full: bool = True) -> dict:
     return base
 
 def serialize_author(a: dict, current_user_id: Optional[str] = None) -> dict:
-    """Full author document serializer."""
     followers    = a.get("followers", [])
     is_following = (current_user_id in followers) if current_user_id else False
     return {
@@ -289,7 +278,6 @@ def serialize_author(a: dict, current_user_id: Optional[str] = None) -> dict:
     }
 
 def serialize_author_card(a: dict) -> dict:
-    """Lightweight card — for listing pages."""
     return {
         "id":              str(a["_id"]),
         "username":        a.get("username", ""),
@@ -343,9 +331,6 @@ class PersonalDetails(BaseModel):
 class RoleUpdate(BaseModel):
     role: str = Field(..., description="Must be 'user', 'admin', 'editor', or 'lekhak'")
 
-# ── Article Schemas ───────────────────────────
-
-# VALID_ARTICLE_STATUSES now includes pending_approval and rejected
 VALID_ARTICLE_STATUSES = ["draft", "pending_approval", "published", "rejected", "archived"]
 
 class ArticleCreate(BaseModel):
@@ -374,21 +359,16 @@ class ArticleUpdate(BaseModel):
     tags:             Optional[List[str]] = None
     status:           Optional[str]       = None
     read_time:        Optional[int]       = None
-    # NEW: reason required when rejecting
     rejection_reason: Optional[str]       = None
 
-# NEW: schema for lekhak to submit their draft for review
 class ArticleSubmitForReview(BaseModel):
     slug: str = Field(..., description="Slug of the article to submit for review")
 
-# NEW: admin approve/reject schema
 class ArticleReviewAction(BaseModel):
     action:           str           = Field(..., description="'approve' or 'reject'")
     rejection_reason: Optional[str] = Field(None, description="Required when action is 'reject'")
 
-# ── Author Schemas ────────────────────────────
 class AuthorRegisterInput(BaseModel):
-    """Sent when a user applies to become a Lekhak."""
     display_name:  str            = Field(..., min_length=2, max_length=100)
     pen_name:      Optional[str]  = Field(None, max_length=100)
     tagline:       Optional[str]  = Field(None, max_length=200)
@@ -438,13 +418,16 @@ class ContributionInput(BaseModel):
 class ActivityInput(BaseModel):
     title:       str = Field(..., min_length=1, max_length=255)
     description: str = Field(..., min_length=1)
-    date:        str  # ISO date string e.g. "2024-01-15"
+    date:        str
 
 # ─────────────────────────────────────────────
 #  AUTH ROUTES
 # ─────────────────────────────────────────────
 @app.post("/api/auth/register", status_code=201)
-def register(body: RegisterInput):
+def register(
+    body: RegisterInput,
+    background_tasks: BackgroundTasks,          # ← CHANGE 3: Added BackgroundTasks
+):
     try:
         if not re.match(r"^[a-zA-Z0-9_]+$", body.username):
             raise HTTPException(400, "Username can only contain letters, numbers, underscores")
@@ -465,6 +448,18 @@ def register(body: RegisterInput):
         result     = users_col.insert_one(doc)
         doc["_id"] = result.inserted_id
         token      = create_token({"sub": str(result.inserted_id)})
+
+        # ── CHANGE 4: Queue welcome email (non-blocking background task) ──────
+        # Runs AFTER the HTTP response is sent — registration stays fast.
+        # Email failure logs an error but never prevents user creation.
+        background_tasks.add_task(
+            send_welcome_email,
+            to_email     = doc["email"],
+            display_name = doc.get("display_name") or doc["username"],
+            username     = doc["username"],
+        )
+        # ─────────────────────────────────────────────────────────────────────
+
         return {"token": token, "user": serialize_user(doc)}
     except HTTPException:
         raise
@@ -721,20 +716,7 @@ def get_post_detail(post_id: str):
 
 # ─────────────────────────────────────────────
 #  ARTICLES ROUTES
-#
-#  Article status flow:
-#    draft  ──(lekhak submits)──►  pending_approval
-#    pending_approval  ──(admin approves)──►  published
-#    pending_approval  ──(admin rejects)──►  rejected
-#    rejected  ──(lekhak resubmits)──►  pending_approval
-#    published  ──(admin archives)──►  archived
-#
-#  Who can do what:
-#    lekhak/editor : create (draft), edit own drafts/rejected,
-#                    submit for review, delete own draft/rejected
-#    admin         : all of the above + approve/reject/archive any article
 # ─────────────────────────────────────────────
-
 @app.get("/api/articles")
 def list_articles(
     skip:     int           = 0,
@@ -744,11 +726,6 @@ def list_articles(
     status:   Optional[str] = None,
     creds:    HTTPAuthorizationCredentials = Depends(bearer),
 ):
-    """
-    Public: returns published articles only.
-    Lekhak/editor: can also filter by status (sees own articles of that status).
-    Admin: can filter by any status across all authors.
-    """
     limit = min(int(limit), 50)
     skip  = max(int(skip),  0)
     current_user = get_current_user(creds)
@@ -757,16 +734,12 @@ def list_articles(
     is_lekhak    = role == "lekhak"
 
     if is_admin and status and status in VALID_ARTICLE_STATUSES:
-        # Admin: any status, all authors
         query: dict = {"status": status}
     elif is_lekhak and status and status in VALID_ARTICLE_STATUSES:
-        # Lekhak: any status but only own articles
         query = {"status": status, "author_id": str(current_user["_id"])}
     elif is_lekhak and not status:
-        # Lekhak without filter: show own articles of all statuses
         query = {"author_id": str(current_user["_id"])}
     else:
-        # Public / user: published only
         query = {"status": "published"}
 
     if category:
@@ -826,13 +799,47 @@ def search_articles(q: str = "", limit: int = 10):
     return {"articles": articles, "total": total, "query": q}
 
 
+@app.get("/api/articles/pending")
+def get_pending_articles(
+    skip:  int = 0,
+    limit: int = 20,
+    current_user=Depends(require_super_admin),
+):
+    limit  = min(int(limit), 50)
+    skip   = max(int(skip), 0)
+    query  = {"status": "pending_approval"}
+    cursor = articles_col.find(query, {"content": 0}).sort("submitted_at", 1).skip(skip).limit(limit)
+    total  = articles_col.count_documents(query)
+    return {
+        "articles": [serialize_article(a, full=False) for a in cursor],
+        "total":    total,
+        "limit":    limit,
+        "skip":     skip,
+    }
+
+
+@app.get("/api/articles/my")
+def get_my_articles(
+    skip:   int           = 0,
+    limit:  int           = 20,
+    status: Optional[str] = None,
+    current_user=Depends(require_user),
+):
+    limit = min(int(limit), 50)
+    skip  = max(int(skip), 0)
+
+    query: dict = {"author_id": str(current_user["_id"])}
+    if status and status in VALID_ARTICLE_STATUSES:
+        query["status"] = status
+
+    cursor   = articles_col.find(query, {"content": 0}).sort("updated_at", DESCENDING).skip(skip).limit(limit)
+    articles = [serialize_article(a, full=False) for a in cursor]
+    total    = articles_col.count_documents(query)
+    return {"articles": articles, "total": total, "limit": limit, "skip": skip}
+
+
 @app.get("/api/articles/{slug}")
 def get_article_by_slug(slug: str, creds: HTTPAuthorizationCredentials = Depends(bearer)):
-    """
-    Public: only published articles.
-    Lekhak: can view own articles of any status.
-    Admin: can view any article.
-    """
     current_user = get_current_user(creds)
     role         = current_user.get("role", "user") if current_user else "public"
     is_admin     = role in ["admin", "editor"]
@@ -842,13 +849,11 @@ def get_article_by_slug(slug: str, creds: HTTPAuthorizationCredentials = Depends
     if not is_admin:
         if not is_lekhak:
             query["status"] = "published"
-        # lekhak can see own articles only — enforced after fetch below
 
     article = articles_col.find_one(query)
     if not article:
         raise HTTPException(404, "Article not found")
 
-    # Lekhak can only see own non-published articles
     if is_lekhak and article.get("status") != "published":
         if article.get("author_id") != str(current_user["_id"]):
             raise HTTPException(403, "Access denied")
@@ -860,12 +865,6 @@ def get_article_by_slug(slug: str, creds: HTTPAuthorizationCredentials = Depends
 
 @app.post("/api/articles", status_code=201)
 def create_article(body: ArticleCreate, current_user=Depends(require_admin)):
-    """
-    Create a new article.
-    - Admin/editor: can publish directly (status='published')
-    - Lekhak: article is saved as 'draft' regardless of requested status
-      (they must submit via /api/articles/{slug}/submit)
-    """
     slug = body.slug if body.slug else make_slug(body.title)
     if articles_col.find_one({"slug": slug}):
         slug = f"{slug}-{int(datetime.utcnow().timestamp())}"
@@ -882,11 +881,9 @@ def create_article(body: ArticleCreate, current_user=Depends(require_admin)):
     is_admin    = role in ["admin", "editor"]
     now         = datetime.utcnow()
 
-    # Determine initial status
     if is_admin and body.status in VALID_ARTICLE_STATUSES:
         initial_status = body.status
     else:
-        # Lekhak always starts at draft
         initial_status = "draft"
 
     doc = {
@@ -910,7 +907,6 @@ def create_article(body: ArticleCreate, current_user=Depends(require_admin)):
         "view_count":      0,
         "like_count":      0,
         "likes":           [],
-        # NEW approval workflow fields
         "rejection_reason": None,
         "submitted_at":     None,
         "approved_at":      now if initial_status == "published" else None,
@@ -931,12 +927,6 @@ def create_article(body: ArticleCreate, current_user=Depends(require_admin)):
 
 @app.put("/api/articles/{slug}")
 def update_article(slug: str, body: ArticleUpdate, current_user=Depends(require_admin)):
-    """
-    Update article content/metadata.
-    - Lekhak: can only edit own articles that are in 'draft' or 'rejected' state.
-    - Admin/editor: can edit any article in any state.
-    - Status changes via this endpoint are admin-only; lekhak must use /submit or /resubmit.
-    """
     article = articles_col.find_one({"slug": slug})
     if not article:
         raise HTTPException(404, "Article not found")
@@ -944,7 +934,6 @@ def update_article(slug: str, body: ArticleUpdate, current_user=Depends(require_
     role     = current_user.get("role", "user")
     is_admin = role in ["admin", "editor"]
 
-    # Lekhak: ownership + status guard
     if not is_admin:
         if article.get("author_id") != str(current_user["_id"]):
             raise HTTPException(403, "आपको यह लेख संपादित करने की अनुमति नहीं है")
@@ -966,7 +955,6 @@ def update_article(slug: str, body: ArticleUpdate, current_user=Depends(require_
     if body.tags          is not None: updates["tags"]      = body.tags
     if body.read_time     is not None: updates["read_time"] = body.read_time
 
-    # Admin-only status transitions via this endpoint
     if is_admin and body.status is not None and body.status in VALID_ARTICLE_STATUSES:
         updates["status"] = body.status
         if body.status == "published" and not article.get("published_at"):
@@ -988,11 +976,6 @@ def update_article(slug: str, body: ArticleUpdate, current_user=Depends(require_
 
 @app.delete("/api/articles/{slug}", status_code=204)
 def delete_article(slug: str, current_user=Depends(require_user)):
-    """
-    Delete an article.
-    - Lekhak: can delete own articles only if status is 'draft' or 'rejected'.
-    - Admin: can delete any article.
-    """
     article = articles_col.find_one({"slug": slug})
     if not article:
         raise HTTPException(404, "Article not found")
@@ -1029,7 +1012,6 @@ def toggle_article_like(slug: str, current_user=Depends(require_user)):
 
 @app.patch("/api/articles/{slug}/status")
 def change_article_status(slug: str, body: dict, current_user=Depends(require_admin)):
-    """Admin-only quick status change."""
     new_status = body.get("status")
     if new_status not in VALID_ARTICLE_STATUSES:
         raise HTTPException(400, f"Status must be one of: {', '.join(VALID_ARTICLE_STATUSES)}")
@@ -1046,15 +1028,8 @@ def change_article_status(slug: str, body: dict, current_user=Depends(require_ad
     return {"slug": slug, "status": new_status}
 
 
-# ── NEW: Lekhak submits draft for admin review ────────────────────────────────
-
 @app.post("/api/articles/{slug}/submit")
 def submit_article_for_review(slug: str, current_user=Depends(require_user)):
-    """
-    Lekhak submits their draft (or rejected) article for admin review.
-    Transitions: draft → pending_approval
-                 rejected → pending_approval
-    """
     article = articles_col.find_one({"slug": slug})
     if not article:
         raise HTTPException(404, "Article not found")
@@ -1085,16 +1060,8 @@ def submit_article_for_review(slug: str, current_user=Depends(require_user)):
     }
 
 
-# ── NEW: Admin approves or rejects a pending article ─────────────────────────
-
 @app.post("/api/articles/{slug}/review")
 def review_article(slug: str, body: ArticleReviewAction, current_user=Depends(require_super_admin)):
-    """
-    Admin approves or rejects a pending_approval article.
-    - action='approve' → status becomes 'published'
-    - action='reject'  → status becomes 'rejected' (rejection_reason required)
-    Only super admin (role='admin') can approve/reject.
-    """
     if body.action not in ["approve", "reject"]:
         raise HTTPException(400, "action must be 'approve' or 'reject'")
 
@@ -1116,14 +1083,13 @@ def review_article(slug: str, body: ArticleReviewAction, current_user=Depends(re
         if not article.get("published_at"):
             updates["published_at"] = now
 
-        # Increment articles_count on author profile
         author_doc = authors_col.find_one({"user_id": article.get("author_id")})
         if author_doc:
             authors_col.update_one({"_id": author_doc["_id"]}, {"$inc": {"articles_count": 1}})
 
         message = "लेख प्रकाशित कर दिया गया है"
 
-    else:  # reject
+    else:
         if not body.rejection_reason or not body.rejection_reason.strip():
             raise HTTPException(400, "अस्वीकृति के लिए कारण आवश्यक है")
         updates["status"]           = "rejected"
@@ -1142,58 +1108,6 @@ def review_article(slug: str, body: ArticleReviewAction, current_user=Depends(re
     }
 
 
-# ── NEW: Admin queue — all pending articles ───────────────────────────────────
-
-@app.get("/api/articles/pending")
-def get_pending_articles(
-    skip:  int = 0,
-    limit: int = 20,
-    current_user=Depends(require_super_admin),
-):
-    """
-    Returns all articles awaiting admin review (status = pending_approval),
-    sorted by submission time (oldest first so nothing gets stuck).
-    Only accessible to super admin.
-    """
-    limit  = min(int(limit), 50)
-    skip   = max(int(skip), 0)
-    query  = {"status": "pending_approval"}
-    cursor = articles_col.find(query, {"content": 0}).sort("submitted_at", 1).skip(skip).limit(limit)
-    total  = articles_col.count_documents(query)
-    return {
-        "articles": [serialize_article(a, full=False) for a in cursor],
-        "total":    total,
-        "limit":    limit,
-        "skip":     skip,
-    }
-
-
-# ── NEW: Lekhak sees their own articles with all statuses ────────────────────
-
-@app.get("/api/articles/my")
-def get_my_articles(
-    skip:   int           = 0,
-    limit:  int           = 20,
-    status: Optional[str] = None,
-    current_user=Depends(require_user),
-):
-    """
-    Returns the logged-in lekhak's own articles.
-    Optionally filter by status: draft | pending_approval | published | rejected | archived
-    """
-    limit = min(int(limit), 50)
-    skip  = max(int(skip), 0)
-
-    query: dict = {"author_id": str(current_user["_id"])}
-    if status and status in VALID_ARTICLE_STATUSES:
-        query["status"] = status
-
-    cursor   = articles_col.find(query, {"content": 0}).sort("updated_at", DESCENDING).skip(skip).limit(limit)
-    articles = [serialize_article(a, full=False) for a in cursor]
-    total    = articles_col.count_documents(query)
-    return {"articles": articles, "total": total, "limit": limit, "skip": skip}
-
-
 # ─────────────────────────────────────────────
 #  LEKHAK (AUTHORS) ROUTES   /api/lekhak
 # ─────────────────────────────────────────────
@@ -1203,10 +1117,6 @@ def register_as_lekhak(
     body: AuthorRegisterInput,
     current_user=Depends(require_user),
 ):
-    """
-    Any logged-in user can register as a Lekhak (author).
-    Creates an authors document and promotes role to 'lekhak'.
-    """
     uid = str(current_user["_id"])
 
     if authors_col.find_one({"user_id": uid}):
@@ -1274,7 +1184,6 @@ def list_lekhak(
     search:   Optional[str] = None,
     creds:    HTTPAuthorizationCredentials = Depends(bearer),
 ):
-    """Public list of all authors, sorted by followers."""
     limit = min(int(limit), 50)
     skip  = max(int(skip),  0)
 
@@ -1297,7 +1206,6 @@ def list_lekhak(
 
 @app.get("/api/lekhak/me")
 def get_my_author_profile(current_user=Depends(require_user)):
-    """Returns the logged-in user's own author document."""
     uid    = str(current_user["_id"])
     author = authors_col.find_one({"user_id": uid})
     if not author:
@@ -1310,7 +1218,6 @@ def get_lekhak_by_slug(
     slug: str,
     creds: HTTPAuthorizationCredentials = Depends(bearer),
 ):
-    """Public author profile by slug."""
     author = authors_col.find_one({"slug": slug})
     if not author:
         raise HTTPException(404, "लेखक नहीं मिला")
@@ -1325,7 +1232,6 @@ def get_lekhak_articles(
     skip:  int = 0,
     limit: int = 20,
 ):
-    """Published articles by this author."""
     limit  = min(int(limit), 50)
     skip   = max(int(skip),  0)
     author = authors_col.find_one({"slug": slug})
@@ -1345,7 +1251,6 @@ def update_my_author_profile(
     body: AuthorUpdate,
     current_user=Depends(require_user),
 ):
-    """Author updates their own profile."""
     uid    = str(current_user["_id"])
     author = authors_col.find_one({"user_id": uid})
     if not author:
@@ -1369,7 +1274,6 @@ def update_my_author_profile(
     return serialize_author(updated, current_user_id=uid)
 
 
-# ── Books ─────────────────────────────────────
 @app.post("/api/lekhak/me/books", status_code=201)
 def add_book(body: BookInput, current_user=Depends(require_user)):
     uid    = str(current_user["_id"])
@@ -1392,7 +1296,6 @@ def delete_book(book_id: str, current_user=Depends(require_user)):
     uid = str(current_user["_id"])
     authors_col.update_one({"user_id": uid}, {"$pull": {"books": {"id": book_id}}})
 
-# ── Contributions ─────────────────────────────
 @app.post("/api/lekhak/me/contributions", status_code=201)
 def add_contribution(body: ContributionInput, current_user=Depends(require_user)):
     uid    = str(current_user["_id"])
@@ -1408,7 +1311,6 @@ def delete_contribution(item_id: str, current_user=Depends(require_user)):
     uid = str(current_user["_id"])
     authors_col.update_one({"user_id": uid}, {"$pull": {"contributions": {"id": item_id}}})
 
-# ── Activities ────────────────────────────────
 @app.post("/api/lekhak/me/activities", status_code=201)
 def add_activity(body: ActivityInput, current_user=Depends(require_user)):
     uid    = str(current_user["_id"])
@@ -1424,7 +1326,6 @@ def delete_activity(item_id: str, current_user=Depends(require_user)):
     uid = str(current_user["_id"])
     authors_col.update_one({"user_id": uid}, {"$pull": {"activities": {"id": item_id}}})
 
-# ── Follow / Unfollow ─────────────────────────
 @app.post("/api/lekhak/{slug}/follow")
 def toggle_follow(slug: str, current_user=Depends(require_user)):
     author = authors_col.find_one({"slug": slug})
@@ -1460,7 +1361,6 @@ def get_dashboard_stats(current_user=Depends(require_admin)):
             "total_articles":         articles_col.count_documents({}),
             "published_articles":     articles_col.count_documents({"status": "published"}),
             "draft_articles":         articles_col.count_documents({"status": "draft"}),
-            # NEW counters
             "pending_articles":       articles_col.count_documents({"status": "pending_approval"}),
             "rejected_articles":      articles_col.count_documents({"status": "rejected"}),
             "archived_articles":      articles_col.count_documents({"status": "archived"}),
