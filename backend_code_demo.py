@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
 ShivaMarg Backend — Single-file FastAPI server
-Auth (register/login/JWT) + Comments (CRUD) with MongoDB
-Install: pip install fastapi uvicorn pymongo python-jose[cryptography] passlib[bcrypt] python-multipart
-Run: uvicorn shivamarg_backend:app --host 0.0.0.0 --port 8000 --reload
+Auth + Comments + Articles + Authors (MongoDB)
+
+Install: pip install fastapi uvicorn pymongo python-jose[cryptography] passlib[bcrypt] python-multipart python-slugify
+Run:     uvicorn shivamarg_backend:app --host 0.0.0.0 --port 8000 --reload
 """
 
-from fastapi import FastAPI, HTTPException, Depends, status, Request
+from fastapi import FastAPI, HTTPException, Depends, status, Request, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel, Field
@@ -21,20 +22,19 @@ import re
 import uvicorn
 
 # ─────────────────────────────────────────────
-#  CONFIG  (change these via env vars in prod)
+#  CONFIG
 # ─────────────────────────────────────────────
-MONGO_URI        = os.getenv("MONGO_URI",  "mongodb://localhost:27017")
-DB_NAME          = os.getenv("DB_NAME",    "shivamarg")
-SECRET_KEY       = os.getenv("SECRET_KEY", "shiva-om-namah-supersecret-change-in-prod-2024")
-ALGORITHM        = "HS256"
+MONGO_URI                   = os.getenv("MONGO_URI",  "mongodb://localhost:27017")
+DB_NAME                     = os.getenv("DB_NAME",    "ShivaMarg")
+SECRET_KEY                  = os.getenv("SECRET_KEY", "shiva-om-namah-supersecret-change-in-prod-2024")
+ALGORITHM                   = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7   # 7 days
-
-ALLOWED_ORIGINS  = os.getenv("ALLOWED_ORIGINS", "*").split(",")
+ALLOWED_ORIGINS             = os.getenv("ALLOWED_ORIGINS", "*").split(",")
 
 # ─────────────────────────────────────────────
 #  APP + CORS
 # ─────────────────────────────────────────────
-app = FastAPI(title="ShivaMarg API", version="1.0.0")
+app = FastAPI(title="ShivaMarg API", version="3.1.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -49,17 +49,36 @@ app.add_middleware(
 # ─────────────────────────────────────────────
 client = MongoClient(MONGO_URI)
 db     = client[DB_NAME]
+
 users_col           = db["users"]
 comments_col        = db["comments"]
 vidyapati_posts_col = db["VidyapatiGeetSangrah"]
+articles_col        = db["articles"]
+authors_col         = db["authors"]
 
-# Indexes
+# ── Indexes ────────────────────────────────────
 users_col.create_index("email",    unique=True)
 users_col.create_index("username", unique=True)
 comments_col.create_index([("page_id", 1), ("created_at", DESCENDING)])
 comments_col.create_index("user_id")
 vidyapati_posts_col.create_index([("createdAt", DESCENDING)])
 vidyapati_posts_col.create_index("featured")
+articles_col.create_index("slug",                          unique=True)
+articles_col.create_index([("status", 1), ("published_at", DESCENDING)])
+articles_col.create_index("category_slug")
+articles_col.create_index("tags")
+articles_col.create_index([("view_count", DESCENDING)])
+articles_col.create_index("author_id")
+# NEW: index for pending_approval queue
+articles_col.create_index([("status", 1), ("author_id", 1)])
+articles_col.create_index([("status", 1), ("submitted_at", DESCENDING)])
+
+# ── Authors indexes ───────────────────────────
+authors_col.create_index("user_id",  unique=True)
+authors_col.create_index("slug",     unique=True)
+authors_col.create_index("username", unique=True)
+authors_col.create_index([("followers_count", DESCENDING)])
+authors_col.create_index("categories")
 
 # ─────────────────────────────────────────────
 #  PASSWORD + JWT
@@ -74,7 +93,7 @@ def verify_password(plain: str, hashed: str) -> bool:
     return pwd_ctx.verify(plain, hashed)
 
 def create_token(data: dict) -> str:
-    payload = data.copy()
+    payload        = data.copy()
     payload["exp"] = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
 
@@ -88,7 +107,7 @@ def get_current_user(creds: HTTPAuthorizationCredentials = Depends(bearer)):
     if not creds:
         return None
     payload = decode_token(creds.credentials)
-    user = users_col.find_one({"_id": ObjectId(payload["sub"])})
+    user    = users_col.find_one({"_id": ObjectId(payload["sub"])})
     if not user:
         raise HTTPException(status_code=401, detail="User not found")
     return user
@@ -100,36 +119,57 @@ def require_user(creds: HTTPAuthorizationCredentials = Depends(bearer)):
     return user
 
 def require_admin(current_user=Depends(require_user)):
-    """Check if user is admin or editor"""
-    role = current_user.get("role", "user")
-    if role not in ["admin", "editor"]:
-        raise HTTPException(status_code=403, detail="Admin access required")
+    if current_user.get("role", "user") not in ["admin", "editor", "lekhak"]:
+        raise HTTPException(status_code=403, detail="Access required")
     return current_user
 
 def require_super_admin(current_user=Depends(require_user)):
-    """Check if user is super admin only"""
-    role = current_user.get("role", "user")
-    if role != "admin":
+    if current_user.get("role", "user") != "admin":
         raise HTTPException(status_code=403, detail="Super admin access required")
     return current_user
 
 # ─────────────────────────────────────────────
-#  HELPERS
+#  SLUG HELPERS
+# ─────────────────────────────────────────────
+def make_slug(text: str) -> str:
+    """URL-safe slug — works for Hindi, English, mixed."""
+    cleaned = re.sub(r"[^\u0900-\u097F\w\s-]", " ", text)
+    cleaned = re.sub(r"[\s_-]+", "-", cleaned).strip("-")
+    return cleaned.lower()
+
+def make_author_slug(display_name: str, username: str) -> str:
+    """
+    Prefer English slug from display name for clean URLs.
+    Falls back to username. Keeps only ASCII letters/digits/hyphens
+    so the URL stays browser-friendly.
+    """
+    base = re.sub(r"[^a-zA-Z0-9\s-]", "", display_name or username)
+    base = re.sub(r"[\s_-]+", "-", base).strip("-").lower()
+    if not base:
+        base = username.lower()
+    return base
+
+# ─────────────────────────────────────────────
+#  SERIALIZERS
 # ─────────────────────────────────────────────
 def serialize_user(u: dict) -> dict:
     return {
-        "id":           str(u["_id"]),
-        "username":     u["username"],
-        "display_name": u.get("display_name", u["username"]),
-        "email":        u["email"],
-        "avatar":       u.get("avatar", u["username"][0].upper()),
-        "role":         u.get("role", "user"),
-        "mobile":       u.get("mobile"),
-        "created_at":   u["created_at"].isoformat(),
+        "id": str(u.get("_id")),
+        "username": u.get("username"),
+        "display_name": u.get("display_name", u.get("username")),
+        "email": u.get("email"),
+        "avatar": u.get("avatar", u.get("username", "U")[0].upper()),
+        "role": u.get("role", "user"),
+        "mobile": u.get("mobile"),
+        "dob": u.get("dob"),
+        "address": u.get("address"),
+        "is_author": u.get("role") in ["lekhak", "admin", "editor"],
+        "author_slug": u.get("author_slug"),
+        "created_at": u.get("created_at").isoformat() if u.get("created_at") else None,
     }
 
 def serialize_comment(c: dict, current_user_id: Optional[str] = None) -> dict:
-    likes      = c.get("likes", [])
+    likes       = c.get("likes", [])
     liked_by_me = (current_user_id in likes) if current_user_id else False
     return {
         "id":          str(c["_id"]),
@@ -145,11 +185,10 @@ def serialize_comment(c: dict, current_user_id: Optional[str] = None) -> dict:
     }
 
 def serialize_post(p: dict) -> dict:
-    """Serialize Vidyapati Geet post for API response"""
     return {
         "id":          str(p["_id"]),
         "name":        p.get("name") or p.get("eng", "Unknown"),
-        "title":       p.get("eng") or p.get("name", "Unknown"),
+        "title":       p.get("eng")  or p.get("name", "Unknown"),
         "description": p.get("preview", ""),
         "desc":        p.get("preview", ""),
         "category":    p.get("category", ""),
@@ -165,69 +204,127 @@ def serialize_post(p: dict) -> dict:
         "updatedAt":   p.get("updatedAt", datetime.utcnow()).isoformat() if isinstance(p.get("updatedAt"), datetime) else p.get("updatedAt", ""),
     }
 
+def serialize_article(a: dict, full: bool = True) -> dict:
+    """
+    Serializes an article document.
+    NEW fields added: status now includes 'pending_approval' and 'rejected',
+    plus rejection_reason, submitted_at, approved_at, approved_by.
+    """
+    def _dt(val):
+        if isinstance(val, datetime):
+            return val.isoformat()
+        return val or ""
+
+    base = {
+        "id":               str(a["_id"]),
+        "title":            a.get("title", ""),
+        "slug":             a.get("slug", ""),
+        "subtitle":         a.get("subtitle", ""),
+        "excerpt":          a.get("excerpt", ""),
+        "banner_url":       a.get("banner_url", ""),
+        "thumbnail_url":    a.get("thumbnail_url", ""),
+        "author": {
+            "id":          a.get("author_id", ""),
+            "username":    a.get("author_username", ""),
+            "avatar":      a.get("author_avatar", ""),
+            "author_slug": a.get("author_slug", ""),
+            "author_bio" : a.get("author_bio", "")
+        },
+        "category":         a.get("category", ""),
+        "category_slug":    a.get("category_slug", ""),
+        "tags":             a.get("tags", []),
+        # NEW: status can be draft | pending_approval | published | rejected | archived
+        "status":           a.get("status", "draft"),
+        "read_time":        a.get("read_time", 5),
+        "view_count":       a.get("view_count", 0),
+        "like_count":       a.get("like_count", 0),
+        # NEW: approval workflow timestamps
+        "rejection_reason": a.get("rejection_reason"),
+        "submitted_at":     _dt(a.get("submitted_at")),
+        "approved_at":      _dt(a.get("approved_at")),
+        "approved_by":      a.get("approved_by", ""),
+        "published_at":     _dt(a.get("published_at")),
+        "created_at":       _dt(a.get("created_at")),
+        "updated_at":       _dt(a.get("updated_at")),
+    }
+    if full:
+        base["content"] = a.get("content", "")
+    return base
+
+def serialize_author(a: dict, current_user_id: Optional[str] = None) -> dict:
+    """Full author document serializer."""
+    followers    = a.get("followers", [])
+    is_following = (current_user_id in followers) if current_user_id else False
+    return {
+        "id":              str(a["_id"]),
+        "user_id":         a.get("user_id", ""),
+        "username":        a.get("username", ""),
+        "slug":            a.get("slug", ""),
+        "display_name":    a.get("display_name", ""),
+        "pen_name":        a.get("pen_name", ""),
+        "tagline":         a.get("tagline", ""),
+        "bio":             a.get("bio", ""),
+        "biography":       a.get("biography", ""),
+        "avatar":          a.get("avatar", ""),
+        "cover_image":     a.get("cover_image", ""),
+        "website":         a.get("website", ""),
+        "twitter":         a.get("twitter", ""),
+        "instagram":       a.get("instagram", ""),
+        "facebook":        a.get("facebook", ""),
+        "youtube":         a.get("youtube", ""),
+        "categories":      a.get("categories", []),
+        "expertise":       a.get("expertise", ""),
+        "location":        a.get("location", ""),
+        "birth_year":      a.get("birth_year"),
+        "books":           a.get("books", []),
+        "contributions":   a.get("contributions", []),
+        "activities":      a.get("activities", []),
+        "articles_count":  a.get("articles_count", 0),
+        "followers_count": len(followers),
+        "total_views":     a.get("total_views", 0),
+        "is_following":    is_following,
+        "is_verified":     a.get("is_verified", False),
+        "joined_at":       a["joined_at"].isoformat() if isinstance(a.get("joined_at"), datetime) else a.get("joined_at", ""),
+        "updated_at":      a["updated_at"].isoformat() if isinstance(a.get("updated_at"), datetime) else a.get("updated_at", ""),
+    }
+
+def serialize_author_card(a: dict) -> dict:
+    """Lightweight card — for listing pages."""
+    return {
+        "id":              str(a["_id"]),
+        "username":        a.get("username", ""),
+        "slug":            a.get("slug", ""),
+        "display_name":    a.get("display_name", ""),
+        "pen_name":        a.get("pen_name", ""),
+        "tagline":         a.get("tagline", ""),
+        "bio":             a.get("bio", ""),
+        "avatar":          a.get("avatar", ""),
+        "categories":      a.get("categories", []),
+        "articles_count":  a.get("articles_count", 0),
+        "followers_count": len(a.get("followers", [])),
+        "is_verified":     a.get("is_verified", False),
+    }
+
 # ─────────────────────────────────────────────
 #  SCHEMAS
 # ─────────────────────────────────────────────
 class RegisterInput(BaseModel):
-    username: str = Field(..., min_length=3, max_length=30)
-    email: str
-    password: str = Field(..., min_length=6)
+    username:     str           = Field(..., min_length=3, max_length=30)
+    email:        str
+    password:     str           = Field(..., min_length=6)
     display_name: Optional[str] = None
-    role: Optional[str] = "user"  # default user role
+    role:         Optional[str] = "user"
 
 class LoginInput(BaseModel):
-    email: str
+    email:    str
     password: str
 
 class CommentInput(BaseModel):
-    page_id: str = Field(..., description="Unique page identifier e.g. 'shiv-aarti'")
-    text: str    = Field(..., min_length=1, max_length=1000)
+    page_id: str = Field(..., description="Unique page id e.g. 'shiv-aarti'")
+    text:    str = Field(..., min_length=1, max_length=1000)
 
 class CommentUpdate(BaseModel):
     text: str = Field(..., min_length=1, max_length=1000)
-
-# ─────────────────────────────────────────────
-#  AUTH ROUTES
-# ─────────────────────────────────────────────
-@app.post("/api/auth/register", status_code=201)
-def register(body: RegisterInput):
-    try:
-        # Validate username
-        if not re.match(r"^[a-zA-Z0-9_]+$", body.username):
-            raise HTTPException(400, "Username can only contain letters, numbers, underscores")
-
-        # Check duplicates
-        if users_col.find_one({"email": body.email.lower()}):
-            raise HTTPException(400, "Email already registered")
-        if users_col.find_one({"username": body.username}):
-            raise HTTPException(400, "Username already taken")
-
-        doc = {
-            "username":     body.username,
-            "display_name": body.display_name or body.username,
-            "email":        body.email.lower(),
-            "password":     hash_password(body.password),
-            "avatar":       body.username[0].upper(),
-            "role":         "user",
-            "created_at":   datetime.utcnow(),
-        }
-        result = users_col.insert_one(doc)
-        doc["_id"] = result.inserted_id
-
-        token = create_token({"sub": str(result.inserted_id)})
-        return {"token": token, "user": serialize_user(doc)}
-
-    except HTTPException:
-        raise
-    except Exception as e:
-        print(f"REGISTER ERROR: {type(e).__name__}: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-
-# ─────────────────────────────────────────────
-#  EXTENDED SCHEMAS  (add these with your existing schemas)
-# ─────────────────────────────────────────────
 
 class ProfileUpdate(BaseModel):
     display_name: Optional[str] = Field(None, min_length=1, max_length=60)
@@ -239,41 +336,163 @@ class PasswordChange(BaseModel):
     new_password: str = Field(..., min_length=6)
 
 class PersonalDetails(BaseModel):
-    mobile:   Optional[str] = Field(None, max_length=20)
-    dob:      Optional[str] = None          # ISO date string  "YYYY-MM-DD"
-    address:  Optional[dict] = None         # {line1, city, state, pin, country}
+    mobile:  Optional[str]  = Field(None, max_length=20)
+    dob:     Optional[str]  = None
+    address: Optional[dict] = None
 
+class RoleUpdate(BaseModel):
+    role: str = Field(..., description="Must be 'user', 'admin', 'editor', or 'lekhak'")
+
+# ── Article Schemas ───────────────────────────
+
+# VALID_ARTICLE_STATUSES now includes pending_approval and rejected
+VALID_ARTICLE_STATUSES = ["draft", "pending_approval", "published", "rejected", "archived"]
+
+class ArticleCreate(BaseModel):
+    title:         str            = Field(..., min_length=3, max_length=300)
+    subtitle:      Optional[str]  = None
+    content:       str            = Field(..., min_length=10)
+    excerpt:       Optional[str]  = None
+    banner_url:    Optional[str]  = None
+    thumbnail_url: Optional[str]  = None
+    category:      Optional[str]  = None
+    category_slug: Optional[str]  = None
+    tags:          Optional[List[str]] = []
+    status:        Optional[str]  = "draft"
+    read_time:     Optional[int]  = 5
+    slug:          Optional[str]  = None
+
+class ArticleUpdate(BaseModel):
+    title:            Optional[str]       = Field(None, min_length=3, max_length=300)
+    subtitle:         Optional[str]       = None
+    content:          Optional[str]       = None
+    excerpt:          Optional[str]       = None
+    banner_url:       Optional[str]       = None
+    thumbnail_url:    Optional[str]       = None
+    category:         Optional[str]       = None
+    category_slug:    Optional[str]       = None
+    tags:             Optional[List[str]] = None
+    status:           Optional[str]       = None
+    read_time:        Optional[int]       = None
+    # NEW: reason required when rejecting
+    rejection_reason: Optional[str]       = None
+
+# NEW: schema for lekhak to submit their draft for review
+class ArticleSubmitForReview(BaseModel):
+    slug: str = Field(..., description="Slug of the article to submit for review")
+
+# NEW: admin approve/reject schema
+class ArticleReviewAction(BaseModel):
+    action:           str           = Field(..., description="'approve' or 'reject'")
+    rejection_reason: Optional[str] = Field(None, description="Required when action is 'reject'")
+
+# ── Author Schemas ────────────────────────────
+class AuthorRegisterInput(BaseModel):
+    """Sent when a user applies to become a Lekhak."""
+    display_name:  str            = Field(..., min_length=2, max_length=100)
+    pen_name:      Optional[str]  = Field(None, max_length=100)
+    tagline:       Optional[str]  = Field(None, max_length=200)
+    bio:           str            = Field(..., min_length=10, max_length=500)
+    biography:     Optional[str]  = None
+    categories:    Optional[List[str]] = []
+    expertise:     Optional[str]  = None
+    location:      Optional[str]  = None
+    birth_year:    Optional[int]  = None
+    website:       Optional[str]  = None
+    twitter:       Optional[str]  = None
+    instagram:     Optional[str]  = None
+    facebook:      Optional[str]  = None
+    youtube:       Optional[str]  = None
+    slug:          Optional[str]  = None
+
+class AuthorUpdate(BaseModel):
+    display_name:  Optional[str] = Field(None, max_length=100)
+    pen_name:      Optional[str] = Field(None, max_length=100)
+    tagline:       Optional[str] = Field(None, max_length=200)
+    bio:           Optional[str] = Field(None, max_length=500)
+    biography:     Optional[str] = None
+    categories:    Optional[List[str]] = None
+    expertise:     Optional[str] = None
+    location:      Optional[str] = None
+    birth_year:    Optional[int] = None
+    website:       Optional[str] = None
+    twitter:       Optional[str] = None
+    instagram:     Optional[str] = None
+    facebook:      Optional[str] = None
+    youtube:       Optional[str] = None
+    avatar:        Optional[str] = None
+    cover_image:   Optional[str] = None
+
+class BookInput(BaseModel):
+    title:     str           = Field(..., min_length=1, max_length=255)
+    year:      Optional[int] = None
+    publisher: Optional[str] = None
+    cover_url: Optional[str] = None
+    link:      Optional[str] = None
+
+class ContributionInput(BaseModel):
+    title:       str = Field(..., min_length=1, max_length=255)
+    description: str = Field(..., min_length=1)
+    year:        int
+
+class ActivityInput(BaseModel):
+    title:       str = Field(..., min_length=1, max_length=255)
+    description: str = Field(..., min_length=1)
+    date:        str  # ISO date string e.g. "2024-01-15"
 
 # ─────────────────────────────────────────────
-#  EXTENDED serialize_user  (replace your existing one)
+#  AUTH ROUTES
 # ─────────────────────────────────────────────
+@app.post("/api/auth/register", status_code=201)
+def register(body: RegisterInput):
+    try:
+        if not re.match(r"^[a-zA-Z0-9_]+$", body.username):
+            raise HTTPException(400, "Username can only contain letters, numbers, underscores")
+        if users_col.find_one({"email": body.email.lower()}):
+            raise HTTPException(400, "Email already registered")
+        if users_col.find_one({"username": body.username}):
+            raise HTTPException(400, "Username already taken")
+        doc = {
+            "username":     body.username,
+            "display_name": body.display_name or body.username,
+            "email":        body.email.lower(),
+            "password":     hash_password(body.password),
+            "avatar":       body.username[0].upper(),
+            "role":         "user",
+            "author_slug":  None,
+            "created_at":   datetime.utcnow(),
+        }
+        result     = users_col.insert_one(doc)
+        doc["_id"] = result.inserted_id
+        token      = create_token({"sub": str(result.inserted_id)})
+        return {"token": token, "user": serialize_user(doc)}
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
-def serialize_user(u: dict) -> dict:
-    return {
-        "id":           str(u["_id"]),
-        "username":     u["username"],
-        "display_name": u.get("display_name", u["username"]),
-        "email":        u["email"],
-        "avatar":       u.get("avatar", u["username"][0].upper()),
-        "mobile":       u.get("mobile"),
-        "dob":          u.get("dob"),
-        "address":      u.get("address"),
-        "created_at":   u["created_at"].isoformat(),
-    }
+@app.post("/api/auth/login")
+def login(body: LoginInput):
+    try:
+        user = users_col.find_one({"email": body.email.lower()})
+        if not user or not verify_password(body.password, user["password"]):
+            raise HTTPException(401, "Invalid email or password")
+        token = create_token({"sub": str(user["_id"])})
+        return {"token": token, "user": serialize_user(user)}
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
+@app.get("/api/auth/me")
+def me(current_user=Depends(require_user)):
+    return serialize_user(current_user)
 
-# ─────────────────────────────────────────────
-#  NEW ROUTES  (add after your existing routes)
-# ─────────────────────────────────────────────
-
-# 1. Edit display name / username / email
 @app.patch("/api/auth/profile")
 def update_profile(body: ProfileUpdate, current_user=Depends(require_user)):
     updates = {}
-
     if body.display_name is not None:
         updates["display_name"] = body.display_name.strip()
-
     if body.username is not None:
         if not re.match(r"^[a-zA-Z0-9_]+$", body.username):
             raise HTTPException(400, "Username can only contain letters, numbers, underscores")
@@ -281,24 +500,18 @@ def update_profile(body: ProfileUpdate, current_user=Depends(require_user)):
         if existing and str(existing["_id"]) != str(current_user["_id"]):
             raise HTTPException(400, "Username already taken")
         updates["username"] = body.username
-        updates["avatar"]   = body.username[0].upper()   # keep avatar letter in sync
-
+        updates["avatar"]   = body.username[0].upper()
     if body.email is not None:
         existing = users_col.find_one({"email": body.email.lower()})
         if existing and str(existing["_id"]) != str(current_user["_id"]):
             raise HTTPException(400, "Email already registered")
         updates["email"] = body.email.lower()
-
     if not updates:
         raise HTTPException(400, "Nothing to update")
-
     updates["updated_at"] = datetime.utcnow()
     users_col.update_one({"_id": current_user["_id"]}, {"$set": updates})
-    updated = users_col.find_one({"_id": current_user["_id"]})
-    return serialize_user(updated)
+    return serialize_user(users_col.find_one({"_id": current_user["_id"]}))
 
-
-# 2. Change password
 @app.post("/api/auth/password")
 def change_password(body: PasswordChange, current_user=Depends(require_user)):
     if not verify_password(body.old_password, current_user["password"]):
@@ -309,8 +522,6 @@ def change_password(body: PasswordChange, current_user=Depends(require_user)):
     )
     return {"message": "Password updated successfully"}
 
-
-# 3. Save / update personal details (mobile, DOB, address)
 @app.put("/api/auth/details")
 def update_details(body: PersonalDetails, current_user=Depends(require_user)):
     updates = {}
@@ -321,108 +532,59 @@ def update_details(body: PersonalDetails, current_user=Depends(require_user)):
         raise HTTPException(400, "Nothing to update")
     updates["updated_at"] = datetime.utcnow()
     users_col.update_one({"_id": current_user["_id"]}, {"$set": updates})
-    updated = users_col.find_one({"_id": current_user["_id"]})
-    return serialize_user(updated)
+    return serialize_user(users_col.find_one({"_id": current_user["_id"]}))
 
-
-# 4. Get all comments by a specific user, with page title lookup
-#    page_titles is an optional dict you pass from your frontend config
-#    e.g. {"shiv-aarti": "Shiv Aarti", "maha-mrityunjaya": "Maha Mrityunjaya"}
-PAGE_TITLES: dict = {}   # populate this from an env var or a DB collection if you have one
+# ─────────────────────────────────────────────
+#  USER ROUTES
+# ─────────────────────────────────────────────
+PAGE_TITLES: dict = {}
 
 @app.get("/api/users/{user_id}/comments")
 def get_user_comments(
     user_id: str,
-    skip: int = 0,
-    limit: int = 50,
-    creds: HTTPAuthorizationCredentials = Depends(bearer),
+    skip:    int = 0,
+    limit:   int = 50,
+    creds:   HTTPAuthorizationCredentials = Depends(bearer),
 ):
     try:
-        uid_obj = ObjectId(user_id)
+        ObjectId(user_id)
     except Exception:
         raise HTTPException(400, "Invalid user id")
-
     current_user = get_current_user(creds)
-    viewer_id    = str(current_user["_id"]) if current_user else None
-
-    cursor = (
-        comments_col
-        .find({"user_id": user_id})
-        .sort("created_at", DESCENDING)
-        .skip(skip)
-        .limit(limit)
-    )
-    total = comments_col.count_documents({"user_id": user_id})
-
-    comments = []
+    uid          = str(current_user["_id"]) if current_user else None
+    cursor       = comments_col.find({"user_id": user_id}).sort("created_at", DESCENDING).skip(skip).limit(limit)
+    total        = comments_col.count_documents({"user_id": user_id})
+    comments     = []
     for c in cursor:
-        serialized            = serialize_comment(c, viewer_id)
-        serialized["page_title"] = PAGE_TITLES.get(c["page_id"], c["page_id"])  # fallback to page_id slug
-        comments.append(serialized)
-
-    # unique pages the user has commented on
+        s               = serialize_comment(c, uid)
+        s["page_title"] = PAGE_TITLES.get(c["page_id"], c["page_id"])
+        comments.append(s)
     unique_pages = comments_col.distinct("page_id", {"user_id": user_id})
-    page_summary = [
-        {"page_id": p, "page_title": PAGE_TITLES.get(p, p)}
-        for p in unique_pages
-    ]
+    page_summary = [{"page_id": p, "page_title": PAGE_TITLES.get(p, p)} for p in unique_pages]
+    return {"total": total, "pages": page_summary, "comments": comments}
 
-    return {
-        "total":     total,
-        "pages":     page_summary,
-        "comments":  comments,
-    }
-
-
-# 5. Public profile — anyone can view basic info + comment count
 @app.get("/api/users/{user_id}/profile")
 def get_public_profile(user_id: str):
     try:
         uid_obj = ObjectId(user_id)
     except Exception:
         raise HTTPException(400, "Invalid user id")
-
     user = users_col.find_one({"_id": uid_obj})
     if not user:
         raise HTTPException(404, "User not found")
-
-    comment_count = comments_col.count_documents({"user_id": user_id})
-    pages_count   = len(comments_col.distinct("page_id", {"user_id": user_id}))
-
     return {
         "id":           str(user["_id"]),
         "username":     user["username"],
         "display_name": user.get("display_name", user["username"]),
         "avatar":       user.get("avatar", user["username"][0].upper()),
         "created_at":   user["created_at"].isoformat(),
+        "is_author":    user.get("role") in ["lekhak", "admin", "editor"],
+        "author_slug":  user.get("author_slug"),
         "stats": {
-            "comments": comment_count,
-            "pages":    pages_count,
-        }
+            "comments": comments_col.count_documents({"user_id": user_id}),
+            "pages":    len(comments_col.distinct("page_id", {"user_id": user_id})),
+        },
     }
-
-
-@app.post("/api/auth/login")
-def login(body: LoginInput):
-    try:
-        user = users_col.find_one({"email": body.email.lower()})
-        if not user or not verify_password(body.password, user["password"]):
-            raise HTTPException(401, "Invalid email or password")
-
-        token = create_token({"sub": str(user["_id"])})
-        return {"token": token, "user": serialize_user(user)}
-
-    except HTTPException:
-        raise
-    except Exception as e:
-        print(f"LOGIN ERROR: {type(e).__name__}: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-@app.get("/api/auth/me")
-def me(current_user=Depends(require_user)):
-    return serialize_user(current_user)
-
 
 # ─────────────────────────────────────────────
 #  COMMENT ROUTES
@@ -430,24 +592,15 @@ def me(current_user=Depends(require_user)):
 @app.get("/api/comments/{page_id}")
 def get_comments(
     page_id: str,
-    skip: int = 0,
-    limit: int = 20,
-    creds: HTTPAuthorizationCredentials = Depends(bearer),
+    skip:    int = 0,
+    limit:   int = 20,
+    creds:   HTTPAuthorizationCredentials = Depends(bearer),
 ):
     current_user = get_current_user(creds)
-    uid = str(current_user["_id"]) if current_user else None
-
-    cursor = (
-        comments_col
-        .find({"page_id": page_id})
-        .sort("created_at", DESCENDING)
-        .skip(skip)
-        .limit(limit)
-    )
-    total = comments_col.count_documents({"page_id": page_id})
-    items = [serialize_comment(c, uid) for c in cursor]
-    return {"total": total, "comments": items}
-
+    uid          = str(current_user["_id"]) if current_user else None
+    cursor       = comments_col.find({"page_id": page_id}).sort("created_at", DESCENDING).skip(skip).limit(limit)
+    total        = comments_col.count_documents({"page_id": page_id})
+    return {"total": total, "comments": [serialize_comment(c, uid) for c in cursor]}
 
 @app.post("/api/comments", status_code=201)
 def post_comment(body: CommentInput, current_user=Depends(require_user)):
@@ -461,35 +614,23 @@ def post_comment(body: CommentInput, current_user=Depends(require_user)):
         "created_at": datetime.utcnow(),
         "updated_at": datetime.utcnow(),
     }
-    result = comments_col.insert_one(doc)
+    result     = comments_col.insert_one(doc)
     doc["_id"] = result.inserted_id
     return serialize_comment(doc, str(current_user["_id"]))
 
-
 @app.put("/api/comments/{comment_id}")
-def update_comment(
-    comment_id: str,
-    body: CommentUpdate,
-    current_user=Depends(require_user),
-):
+def update_comment(comment_id: str, body: CommentUpdate, current_user=Depends(require_user)):
     try:
         oid = ObjectId(comment_id)
     except Exception:
         raise HTTPException(400, "Invalid comment id")
-
     comment = comments_col.find_one({"_id": oid})
     if not comment:
         raise HTTPException(404, "Comment not found")
     if comment["user_id"] != str(current_user["_id"]):
         raise HTTPException(403, "Cannot edit another user's comment")
-
-    comments_col.update_one(
-        {"_id": oid},
-        {"$set": {"text": body.text.strip(), "updated_at": datetime.utcnow()}}
-    )
-    updated = comments_col.find_one({"_id": oid})
-    return serialize_comment(updated, str(current_user["_id"]))
-
+    comments_col.update_one({"_id": oid}, {"$set": {"text": body.text.strip(), "updated_at": datetime.utcnow()}})
+    return serialize_comment(comments_col.find_one({"_id": oid}), str(current_user["_id"]))
 
 @app.delete("/api/comments/{comment_id}", status_code=204)
 def delete_comment(comment_id: str, current_user=Depends(require_user)):
@@ -497,16 +638,12 @@ def delete_comment(comment_id: str, current_user=Depends(require_user)):
         oid = ObjectId(comment_id)
     except Exception:
         raise HTTPException(400, "Invalid comment id")
-
     comment = comments_col.find_one({"_id": oid})
     if not comment:
         raise HTTPException(404, "Comment not found")
     if comment["user_id"] != str(current_user["_id"]):
         raise HTTPException(403, "Cannot delete another user's comment")
-
     comments_col.delete_one({"_id": oid})
-    return None
-
 
 @app.post("/api/comments/{comment_id}/like")
 def toggle_like(comment_id: str, current_user=Depends(require_user)):
@@ -514,421 +651,944 @@ def toggle_like(comment_id: str, current_user=Depends(require_user)):
         oid = ObjectId(comment_id)
     except Exception:
         raise HTTPException(400, "Invalid comment id")
-
     comment = comments_col.find_one({"_id": oid})
     if not comment:
         raise HTTPException(404, "Comment not found")
-
-    uid  = str(current_user["_id"])
+    uid   = str(current_user["_id"])
     likes = comment.get("likes", [])
-
     if uid in likes:
         comments_col.update_one({"_id": oid}, {"$pull": {"likes": uid}})
-        liked = False
     else:
         comments_col.update_one({"_id": oid}, {"$push": {"likes": uid}})
-        liked = True
-
-    updated = comments_col.find_one({"_id": oid})
-    return serialize_comment(updated, uid)
-
+    return serialize_comment(comments_col.find_one({"_id": oid}), uid)
 
 # ─────────────────────────────────────────────
-#  POSTS ROUTES (Vidyapati Geet)
+#  POSTS ROUTES
 # ─────────────────────────────────────────────
 @app.get("/api/posts/latest")
-def get_latest_posts(limit: int = 5, skip: int = 0):
-    """
-    Fetch latest Vidyapati Geet posts from VidyapatiGeetSangrah collection
-    
-    Query params:
-    - limit: number of posts to return (default: 5, max: 20)
-    - skip: number of posts to skip for pagination (default: 0)
-    
-    Returns:
-    {
-        "posts": [
-            {
-                "id": "...",
-                "name": "गीत का नाम",
-                "title": "English Title",
-                "description": "preview text",
-                "image": "https://url/to/image",
-                "url": "https://shivmarg.live/...",
-                "createdAt": "2024-01-01T00:00:00",
-                "hashtags": [...]
-            }
-        ],
-        "total": 42
-    }
-    """
+def get_latest_posts(limit: int = 15, skip: int = 0):
     try:
-        # Validate limit (max 20)
-        limit = min(int(limit), 20)
-        skip = max(int(skip), 0)
-        
-        # Query latest posts, sorted by createdAt descending
-        cursor = (
-            vidyapati_posts_col
-            .find({})
-            .sort("createdAt", DESCENDING)
-            .skip(skip)
-            .limit(limit)
-        )
-        
-        posts = [serialize_post(post) for post in cursor]
-        total = vidyapati_posts_col.count_documents({})
-        
-        return {
-            "posts": posts,
-            "total": total,
-            "limit": limit,
-            "skip": skip
-        }
-    
+        limit  = min(int(limit), 20)
+        skip   = max(int(skip),  0)
+        cursor = vidyapati_posts_col.find({}).sort([("createdAt", DESCENDING), ("updatedAt", DESCENDING)]).skip(skip).limit(limit)
+        posts  = [serialize_post(p) for p in cursor]
+        total  = vidyapati_posts_col.count_documents({})
+        return {"posts": posts, "total": total, "limit": limit, "skip": skip}
     except Exception as e:
-        print(f"GET LATEST POSTS ERROR: {type(e).__name__}: {e}")
         raise HTTPException(status_code=500, detail=str(e))
-
 
 @app.get("/api/posts/featured")
-def get_featured_posts(limit: int = 5):
-    """
-    Fetch featured Vidyapati Geet posts
-    
-    Query params:
-    - limit: number of posts to return (default: 5, max: 20)
-    
-    Returns: Same format as /api/posts/latest
-    """
+def get_featured_posts(limit: int = 15):
     try:
-        limit = min(int(limit), 20)
-        
-        cursor = (
-            vidyapati_posts_col
-            .find({"featured": True})
-            .sort("updatedAt", DESCENDING)
-            .limit(limit)
-        )
-        
-        posts = [serialize_post(post) for post in cursor]
-        total = vidyapati_posts_col.count_documents({"featured": True})
-        
-        return {
-            "posts": posts,
-            "total": total,
-            "limit": limit
-        }
-    
+        limit  = min(int(limit), 20)
+        cursor = vidyapati_posts_col.find({"featured": True}).sort("updatedAt", DESCENDING).limit(limit)
+        posts  = [serialize_post(p) for p in cursor]
+        total  = vidyapati_posts_col.count_documents({"featured": True})
+        return {"posts": posts, "total": total, "limit": limit}
     except Exception as e:
-        print(f"GET FEATURED POSTS ERROR: {type(e).__name__}: {e}")
         raise HTTPException(status_code=500, detail=str(e))
-
 
 @app.get("/api/posts/search")
 def search_posts(q: str = "", category: str = "", limit: int = 10):
-    """
-    Search Vidyapati Geet posts by name, title, or category
-    
-    Query params:
-    - q: search query (searches in name, eng, preview)
-    - category: filter by category (e.g., "shiv", "durga")
-    - limit: number of results (default: 10, max: 50)
-    
-    Returns: Same format as /api/posts/latest
-    """
     try:
         limit = min(int(limit), 50)
-        
-        # Build query
-        query = {}
-        
+        query: dict = {}
         if q:
-            # Search in multiple fields
             query["$or"] = [
-                {"name": {"$regex": q, "$options": "i"}},
-                {"eng": {"$regex": q, "$options": "i"}},
+                {"name":    {"$regex": q, "$options": "i"}},
+                {"eng":     {"$regex": q, "$options": "i"}},
                 {"preview": {"$regex": q, "$options": "i"}},
             ]
-        
         if category:
             query["category"] = category
-        
-        cursor = (
-            vidyapati_posts_col
-            .find(query)
-            .sort("createdAt", DESCENDING)
-            .limit(limit)
-        )
-        
-        posts = [serialize_post(post) for post in cursor]
-        total = vidyapati_posts_col.count_documents(query)
-        
-        return {
-            "posts": posts,
-            "total": total,
-            "query": q,
-            "category": category,
-            "limit": limit
-        }
-    
+        cursor = vidyapati_posts_col.find(query).sort("createdAt", DESCENDING).limit(limit)
+        posts  = [serialize_post(p) for p in cursor]
+        total  = vidyapati_posts_col.count_documents(query)
+        return {"posts": posts, "total": total, "query": q, "category": category, "limit": limit}
     except Exception as e:
-        print(f"SEARCH POSTS ERROR: {type(e).__name__}: {e}")
         raise HTTPException(status_code=500, detail=str(e))
-
 
 @app.get("/api/posts/{post_id}")
 def get_post_detail(post_id: str):
-    """
-    Get detailed view of a single post
-    
-    Params:
-    - post_id: MongoDB ObjectId of the post
-    
-    Returns: Full post object with all fields
-    """
     try:
         oid = ObjectId(post_id)
     except Exception:
         raise HTTPException(400, "Invalid post id")
-    
     post = vidyapati_posts_col.find_one({"_id": oid})
     if not post:
         raise HTTPException(404, "Post not found")
-    
     return serialize_post(post)
 
+# ─────────────────────────────────────────────
+#  ARTICLES ROUTES
+#
+#  Article status flow:
+#    draft  ──(lekhak submits)──►  pending_approval
+#    pending_approval  ──(admin approves)──►  published
+#    pending_approval  ──(admin rejects)──►  rejected
+#    rejected  ──(lekhak resubmits)──►  pending_approval
+#    published  ──(admin archives)──►  archived
+#
+#  Who can do what:
+#    lekhak/editor : create (draft), edit own drafts/rejected,
+#                    submit for review, delete own draft/rejected
+#    admin         : all of the above + approve/reject/archive any article
+# ─────────────────────────────────────────────
+
+@app.get("/api/articles")
+def list_articles(
+    skip:     int           = 0,
+    limit:    int           = 10,
+    category: Optional[str] = None,
+    tag:      Optional[str] = None,
+    status:   Optional[str] = None,
+    creds:    HTTPAuthorizationCredentials = Depends(bearer),
+):
+    """
+    Public: returns published articles only.
+    Lekhak/editor: can also filter by status (sees own articles of that status).
+    Admin: can filter by any status across all authors.
+    """
+    limit = min(int(limit), 50)
+    skip  = max(int(skip),  0)
+    current_user = get_current_user(creds)
+    role         = current_user.get("role", "user") if current_user else "public"
+    is_admin     = role in ["admin", "editor"]
+    is_lekhak    = role == "lekhak"
+
+    if is_admin and status and status in VALID_ARTICLE_STATUSES:
+        # Admin: any status, all authors
+        query: dict = {"status": status}
+    elif is_lekhak and status and status in VALID_ARTICLE_STATUSES:
+        # Lekhak: any status but only own articles
+        query = {"status": status, "author_id": str(current_user["_id"])}
+    elif is_lekhak and not status:
+        # Lekhak without filter: show own articles of all statuses
+        query = {"author_id": str(current_user["_id"])}
+    else:
+        # Public / user: published only
+        query = {"status": "published"}
+
+    if category:
+        query["category_slug"] = category
+    if tag:
+        query["tags"] = tag
+
+    cursor   = articles_col.find(query, {"content": 0}).sort("published_at", DESCENDING).skip(skip).limit(limit)
+    articles = [serialize_article(a, full=False) for a in cursor]
+    total    = articles_col.count_documents(query)
+    return {"articles": articles, "total": total, "limit": limit, "skip": skip}
+
+
+@app.get("/api/articles/popular")
+def get_popular_articles(limit: int = 6):
+    limit  = min(int(limit), 20)
+    cursor = articles_col.find({"status": "published"}, {"content": 0}).sort("view_count", DESCENDING).limit(limit)
+    return {"articles": [serialize_article(a, full=False) for a in cursor]}
+
+
+@app.get("/api/articles/latest")
+def get_latest_articles(limit: int = 5):
+    limit  = min(int(limit), 20)
+    cursor = articles_col.find({"status": "published"}, {"content": 0}).sort("published_at", DESCENDING).limit(limit)
+    return {"articles": [serialize_article(a, full=False) for a in cursor]}
+
+
+@app.get("/api/articles/categories")
+def get_categories():
+    pipeline = [
+        {"$match": {"status": "published"}},
+        {"$group": {"_id": "$category_slug", "name": {"$first": "$category"}, "article_count": {"$sum": 1}}},
+        {"$sort": {"article_count": -1}},
+    ]
+    result = list(articles_col.aggregate(pipeline))
+    return {"categories": [{"slug": r["_id"], "name": r["name"], "count": r["article_count"]} for r in result if r["_id"]]}
+
+
+@app.get("/api/articles/search")
+def search_articles(q: str = "", limit: int = 10):
+    limit = min(int(limit), 50)
+    if not q:
+        return {"articles": [], "total": 0}
+    query = {
+        "status": "published",
+        "$or": [
+            {"title":    {"$regex": q, "$options": "i"}},
+            {"subtitle": {"$regex": q, "$options": "i"}},
+            {"excerpt":  {"$regex": q, "$options": "i"}},
+            {"tags":     {"$regex": q, "$options": "i"}},
+            {"category": {"$regex": q, "$options": "i"}},
+        ],
+    }
+    cursor   = articles_col.find(query, {"content": 0}).sort("view_count", DESCENDING).limit(limit)
+    articles = [serialize_article(a, full=False) for a in cursor]
+    total    = articles_col.count_documents(query)
+    return {"articles": articles, "total": total, "query": q}
+
+
+@app.get("/api/articles/{slug}")
+def get_article_by_slug(slug: str, creds: HTTPAuthorizationCredentials = Depends(bearer)):
+    """
+    Public: only published articles.
+    Lekhak: can view own articles of any status.
+    Admin: can view any article.
+    """
+    current_user = get_current_user(creds)
+    role         = current_user.get("role", "user") if current_user else "public"
+    is_admin     = role in ["admin", "editor"]
+    is_lekhak    = role == "lekhak"
+
+    query = {"slug": slug}
+    if not is_admin:
+        if not is_lekhak:
+            query["status"] = "published"
+        # lekhak can see own articles only — enforced after fetch below
+
+    article = articles_col.find_one(query)
+    if not article:
+        raise HTTPException(404, "Article not found")
+
+    # Lekhak can only see own non-published articles
+    if is_lekhak and article.get("status") != "published":
+        if article.get("author_id") != str(current_user["_id"]):
+            raise HTTPException(403, "Access denied")
+
+    articles_col.update_one({"_id": article["_id"]}, {"$inc": {"view_count": 1}})
+    article["view_count"] = article.get("view_count", 0) + 1
+    return serialize_article(article, full=True)
+
+
+@app.post("/api/articles", status_code=201)
+def create_article(body: ArticleCreate, current_user=Depends(require_admin)):
+    """
+    Create a new article.
+    - Admin/editor: can publish directly (status='published')
+    - Lekhak: article is saved as 'draft' regardless of requested status
+      (they must submit via /api/articles/{slug}/submit)
+    """
+    slug = body.slug if body.slug else make_slug(body.title)
+    if articles_col.find_one({"slug": slug}):
+        slug = f"{slug}-{int(datetime.utcnow().timestamp())}"
+
+    excerpt = body.excerpt
+    if not excerpt and body.content:
+        plain   = re.sub(r"<[^>]+>", " ", body.content)
+        plain   = re.sub(r"\s+", " ", plain).strip()
+        excerpt = plain[:200] + ("..." if len(plain) > 200 else "")
+
+    author_doc  = authors_col.find_one({"user_id": str(current_user["_id"])})
+    author_slug = author_doc["slug"] if author_doc else ""
+    role        = current_user.get("role", "user")
+    is_admin    = role in ["admin", "editor"]
+    now         = datetime.utcnow()
+
+    # Determine initial status
+    if is_admin and body.status in VALID_ARTICLE_STATUSES:
+        initial_status = body.status
+    else:
+        # Lekhak always starts at draft
+        initial_status = "draft"
+
+    doc = {
+        "title":           body.title.strip(),
+        "slug":            slug,
+        "subtitle":        body.subtitle or "",
+        "content":         body.content,
+        "excerpt":         excerpt,
+        "banner_url":      body.banner_url    or "",
+        "thumbnail_url":   body.thumbnail_url or "",
+        "author_id":       str(current_user["_id"]),
+        "author_username": current_user["username"],
+        "author_avatar":   current_user.get("avatar", current_user["avatar"]),
+        "author_slug":     author_slug,
+        "author_bio" :     authors_col.find_one({"user_id": current_user["_id"]})["bio"],
+        "category":        body.category      or "",
+        "category_slug":   body.category_slug or (make_slug(body.category) if body.category else ""),
+        "tags":            body.tags          or [],
+        "status":          initial_status,
+        "read_time":       body.read_time     or 5,
+        "view_count":      0,
+        "like_count":      0,
+        "likes":           [],
+        # NEW approval workflow fields
+        "rejection_reason": None,
+        "submitted_at":     None,
+        "approved_at":      now if initial_status == "published" else None,
+        "approved_by":      str(current_user["_id"]) if initial_status == "published" else None,
+        "published_at":     now if initial_status == "published" else None,
+        "created_at":       now,
+        "updated_at":       now,
+    }
+
+    result     = articles_col.insert_one(doc)
+    doc["_id"] = result.inserted_id
+
+    if author_doc and initial_status == "published":
+        authors_col.update_one({"_id": author_doc["_id"]}, {"$inc": {"articles_count": 1}})
+
+    return serialize_article(doc, full=True)
+
+
+@app.put("/api/articles/{slug}")
+def update_article(slug: str, body: ArticleUpdate, current_user=Depends(require_admin)):
+    """
+    Update article content/metadata.
+    - Lekhak: can only edit own articles that are in 'draft' or 'rejected' state.
+    - Admin/editor: can edit any article in any state.
+    - Status changes via this endpoint are admin-only; lekhak must use /submit or /resubmit.
+    """
+    article = articles_col.find_one({"slug": slug})
+    if not article:
+        raise HTTPException(404, "Article not found")
+
+    role     = current_user.get("role", "user")
+    is_admin = role in ["admin", "editor"]
+
+    # Lekhak: ownership + status guard
+    if not is_admin:
+        if article.get("author_id") != str(current_user["_id"]):
+            raise HTTPException(403, "आपको यह लेख संपादित करने की अनुमति नहीं है")
+        if article.get("status") not in ["draft", "rejected"]:
+            raise HTTPException(403, "केवल ड्राफ्ट या अस्वीकृत लेख संपादित किए जा सकते हैं")
+        if body.status is not None:
+            raise HTTPException(403, "आप लेख की स्थिति इस तरह नहीं बदल सकते। /submit का उपयोग करें।")
+
+    updates: dict = {"updated_at": datetime.utcnow()}
+    if body.title         is not None: updates["title"]         = body.title.strip()
+    if body.subtitle      is not None: updates["subtitle"]      = body.subtitle
+    if body.content       is not None: updates["content"]       = body.content
+    if body.excerpt       is not None: updates["excerpt"]       = body.excerpt
+    if body.banner_url    is not None: updates["banner_url"]    = body.banner_url
+    if body.thumbnail_url is not None: updates["thumbnail_url"] = body.thumbnail_url
+    if body.category      is not None:
+        updates["category"]      = body.category
+        updates["category_slug"] = body.category_slug or make_slug(body.category)
+    if body.tags          is not None: updates["tags"]      = body.tags
+    if body.read_time     is not None: updates["read_time"] = body.read_time
+
+    # Admin-only status transitions via this endpoint
+    if is_admin and body.status is not None and body.status in VALID_ARTICLE_STATUSES:
+        updates["status"] = body.status
+        if body.status == "published" and not article.get("published_at"):
+            updates["published_at"] = datetime.utcnow()
+            updates["approved_at"]  = datetime.utcnow()
+            updates["approved_by"]  = str(current_user["_id"])
+            updates["rejection_reason"] = None
+        elif body.status == "rejected":
+            if not body.rejection_reason:
+                raise HTTPException(400, "अस्वीकृति के लिए कारण आवश्यक है")
+            updates["rejection_reason"] = body.rejection_reason
+            updates["approved_at"]      = None
+            updates["approved_by"]      = None
+
+    articles_col.update_one({"slug": slug}, {"$set": updates})
+    updated = articles_col.find_one({"slug": slug})
+    return serialize_article(updated, full=True)
+
+
+@app.delete("/api/articles/{slug}", status_code=204)
+def delete_article(slug: str, current_user=Depends(require_user)):
+    """
+    Delete an article.
+    - Lekhak: can delete own articles only if status is 'draft' or 'rejected'.
+    - Admin: can delete any article.
+    """
+    article = articles_col.find_one({"slug": slug})
+    if not article:
+        raise HTTPException(404, "Article not found")
+
+    role     = current_user.get("role", "user")
+    is_admin = role in ["admin", "editor"]
+
+    if not is_admin:
+        if article.get("author_id") != str(current_user["_id"]):
+            raise HTTPException(403, "आपको यह लेख हटाने की अनुमति नहीं है")
+        if article.get("status") not in ["draft", "rejected"]:
+            raise HTTPException(403, "केवल ड्राफ्ट या अस्वीकृत लेख हटाए जा सकते हैं")
+
+    articles_col.delete_one({"slug": slug})
+    comments_col.delete_many({"page_id": slug})
+
+
+@app.post("/api/articles/{slug}/like")
+def toggle_article_like(slug: str, current_user=Depends(require_user)):
+    article = articles_col.find_one({"slug": slug, "status": "published"})
+    if not article:
+        raise HTTPException(404, "Article not found")
+    uid   = str(current_user["_id"])
+    likes = article.get("likes", [])
+    if uid in likes:
+        articles_col.update_one({"slug": slug}, {"$pull": {"likes": uid}, "$inc": {"like_count": -1}})
+        liked = False
+    else:
+        articles_col.update_one({"slug": slug}, {"$push": {"likes": uid}, "$inc": {"like_count": 1}})
+        liked = True
+    updated = articles_col.find_one({"slug": slug})
+    return {"liked": liked, "like_count": updated.get("like_count", 0)}
+
+
+@app.patch("/api/articles/{slug}/status")
+def change_article_status(slug: str, body: dict, current_user=Depends(require_admin)):
+    """Admin-only quick status change."""
+    new_status = body.get("status")
+    if new_status not in VALID_ARTICLE_STATUSES:
+        raise HTTPException(400, f"Status must be one of: {', '.join(VALID_ARTICLE_STATUSES)}")
+    article = articles_col.find_one({"slug": slug})
+    if not article:
+        raise HTTPException(404, "Article not found")
+    updates = {"status": new_status, "updated_at": datetime.utcnow()}
+    if new_status == "published" and not article.get("published_at"):
+        updates["published_at"] = datetime.utcnow()
+        updates["approved_at"]  = datetime.utcnow()
+        updates["approved_by"]  = str(current_user["_id"])
+        updates["rejection_reason"] = None
+    articles_col.update_one({"slug": slug}, {"$set": updates})
+    return {"slug": slug, "status": new_status}
+
+
+# ── NEW: Lekhak submits draft for admin review ────────────────────────────────
+
+@app.post("/api/articles/{slug}/submit")
+def submit_article_for_review(slug: str, current_user=Depends(require_user)):
+    """
+    Lekhak submits their draft (or rejected) article for admin review.
+    Transitions: draft → pending_approval
+                 rejected → pending_approval
+    """
+    article = articles_col.find_one({"slug": slug})
+    if not article:
+        raise HTTPException(404, "Article not found")
+
+    if article.get("author_id") != str(current_user["_id"]):
+        raise HTTPException(403, "यह आपका लेख नहीं है")
+
+    if article.get("status") not in ["draft", "rejected"]:
+        raise HTTPException(400, f"केवल ड्राफ्ट या अस्वीकृत लेख समीक्षा के लिए भेजे जा सकते हैं। वर्तमान स्थिति: {article.get('status')}")
+
+    now = datetime.utcnow()
+    articles_col.update_one(
+        {"slug": slug},
+        {"$set": {
+            "status":           "pending_approval",
+            "submitted_at":     now,
+            "rejection_reason": None,
+            "updated_at":       now,
+        }}
+    )
+    updated = articles_col.find_one({"slug": slug})
+    return {
+        "message":      "लेख समीक्षा के लिए भेज दिया गया है",
+        "slug":         slug,
+        "status":       "pending_approval",
+        "submitted_at": now.isoformat(),
+        "article":      serialize_article(updated, full=False),
+    }
+
+
+# ── NEW: Admin approves or rejects a pending article ─────────────────────────
+
+@app.post("/api/articles/{slug}/review")
+def review_article(slug: str, body: ArticleReviewAction, current_user=Depends(require_super_admin)):
+    """
+    Admin approves or rejects a pending_approval article.
+    - action='approve' → status becomes 'published'
+    - action='reject'  → status becomes 'rejected' (rejection_reason required)
+    Only super admin (role='admin') can approve/reject.
+    """
+    if body.action not in ["approve", "reject"]:
+        raise HTTPException(400, "action must be 'approve' or 'reject'")
+
+    article = articles_col.find_one({"slug": slug})
+    if not article:
+        raise HTTPException(404, "Article not found")
+
+    if article.get("status") != "pending_approval":
+        raise HTTPException(400, f"केवल 'pending_approval' लेखों की समीक्षा की जा सकती है। वर्तमान स्थिति: {article.get('status')}")
+
+    now     = datetime.utcnow()
+    updates = {"updated_at": now}
+
+    if body.action == "approve":
+        updates["status"]           = "published"
+        updates["approved_at"]      = now
+        updates["approved_by"]      = str(current_user["_id"])
+        updates["rejection_reason"] = None
+        if not article.get("published_at"):
+            updates["published_at"] = now
+
+        # Increment articles_count on author profile
+        author_doc = authors_col.find_one({"user_id": article.get("author_id")})
+        if author_doc:
+            authors_col.update_one({"_id": author_doc["_id"]}, {"$inc": {"articles_count": 1}})
+
+        message = "लेख प्रकाशित कर दिया गया है"
+
+    else:  # reject
+        if not body.rejection_reason or not body.rejection_reason.strip():
+            raise HTTPException(400, "अस्वीकृति के लिए कारण आवश्यक है")
+        updates["status"]           = "rejected"
+        updates["rejection_reason"] = body.rejection_reason.strip()
+        updates["approved_at"]      = None
+        updates["approved_by"]      = None
+        message = "लेख अस्वीकृत कर दिया गया है"
+
+    articles_col.update_one({"slug": slug}, {"$set": updates})
+    updated = articles_col.find_one({"slug": slug})
+    return {
+        "message": message,
+        "slug":    slug,
+        "status":  updates["status"],
+        "article": serialize_article(updated, full=False),
+    }
+
+
+# ── NEW: Admin queue — all pending articles ───────────────────────────────────
+
+@app.get("/api/articles/pending")
+def get_pending_articles(
+    skip:  int = 0,
+    limit: int = 20,
+    current_user=Depends(require_super_admin),
+):
+    """
+    Returns all articles awaiting admin review (status = pending_approval),
+    sorted by submission time (oldest first so nothing gets stuck).
+    Only accessible to super admin.
+    """
+    limit  = min(int(limit), 50)
+    skip   = max(int(skip), 0)
+    query  = {"status": "pending_approval"}
+    cursor = articles_col.find(query, {"content": 0}).sort("submitted_at", 1).skip(skip).limit(limit)
+    total  = articles_col.count_documents(query)
+    return {
+        "articles": [serialize_article(a, full=False) for a in cursor],
+        "total":    total,
+        "limit":    limit,
+        "skip":     skip,
+    }
+
+
+# ── NEW: Lekhak sees their own articles with all statuses ────────────────────
+
+@app.get("/api/articles/my")
+def get_my_articles(
+    skip:   int           = 0,
+    limit:  int           = 20,
+    status: Optional[str] = None,
+    current_user=Depends(require_user),
+):
+    """
+    Returns the logged-in lekhak's own articles.
+    Optionally filter by status: draft | pending_approval | published | rejected | archived
+    """
+    limit = min(int(limit), 50)
+    skip  = max(int(skip), 0)
+
+    query: dict = {"author_id": str(current_user["_id"])}
+    if status and status in VALID_ARTICLE_STATUSES:
+        query["status"] = status
+
+    cursor   = articles_col.find(query, {"content": 0}).sort("updated_at", DESCENDING).skip(skip).limit(limit)
+    articles = [serialize_article(a, full=False) for a in cursor]
+    total    = articles_col.count_documents(query)
+    return {"articles": articles, "total": total, "limit": limit, "skip": skip}
+
+
+# ─────────────────────────────────────────────
+#  LEKHAK (AUTHORS) ROUTES   /api/lekhak
+# ─────────────────────────────────────────────
+
+@app.post("/api/lekhak/register", status_code=201)
+def register_as_lekhak(
+    body: AuthorRegisterInput,
+    current_user=Depends(require_user),
+):
+    """
+    Any logged-in user can register as a Lekhak (author).
+    Creates an authors document and promotes role to 'lekhak'.
+    """
+    uid = str(current_user["_id"])
+
+    if authors_col.find_one({"user_id": uid}):
+        raise HTTPException(409, "आप पहले से एक लेखक हैं")
+
+    base_slug = body.slug if body.slug else make_author_slug(body.display_name, current_user["username"])
+    slug      = base_slug
+    counter   = 1
+    while authors_col.find_one({"slug": slug}):
+        slug = f"{base_slug}-{counter}"
+        counter += 1
+
+    now = datetime.utcnow()
+    doc = {
+        "user_id":        uid,
+        "username":       current_user["username"],
+        "slug":           slug,
+        "display_name":   body.display_name.strip(),
+        "pen_name":       body.pen_name or "",
+        "tagline":        body.tagline  or "",
+        "bio":            body.bio.strip(),
+        "biography":      body.biography or "",
+        "avatar":         current_user.get("avatar", current_user["avatar"]),
+        "cover_image":    "",
+        "website":        body.website   or "",
+        "twitter":        body.twitter   or "",
+        "instagram":      body.instagram or "",
+        "facebook":       body.facebook  or "",
+        "youtube":        body.youtube   or "",
+        "categories":     body.categories or [],
+        "expertise":      body.expertise  or "",
+        "location":       body.location   or "",
+        "birth_year":     body.birth_year,
+        "books":          [],
+        "contributions":  [],
+        "activities":     [],
+        "articles_count": articles_col.count_documents({"author_id": uid, "status": "published"}),
+        "followers":      [],
+        "total_views":    0,
+        "is_verified":    False,
+        "joined_at":      now,
+        "updated_at":     now,
+    }
+
+    result     = authors_col.insert_one(doc)
+    doc["_id"] = result.inserted_id
+
+    users_col.update_one(
+        {"_id": current_user["_id"]},
+        {"$set": {"role": "lekhak", "author_slug": slug, "updated_at": now}}
+    )
+
+    return {
+        **serialize_author(doc),
+        "message":     "बधाई हो! आपकी लेखक प्रोफ़ाइल बन गई।",
+        "profile_url": f"author-profile.html?slug={slug}",
+    }
+
+
+@app.get("/api/lekhak")
+def list_lekhak(
+    skip:     int           = 0,
+    limit:    int           = 20,
+    category: Optional[str] = None,
+    search:   Optional[str] = None,
+    creds:    HTTPAuthorizationCredentials = Depends(bearer),
+):
+    """Public list of all authors, sorted by followers."""
+    limit = min(int(limit), 50)
+    skip  = max(int(skip),  0)
+
+    query: dict = {}
+    if category:
+        query["categories"] = category
+    if search:
+        query["$or"] = [
+            {"display_name": {"$regex": search, "$options": "i"}},
+            {"pen_name":     {"$regex": search, "$options": "i"}},
+            {"username":     {"$regex": search, "$options": "i"}},
+            {"bio":          {"$regex": search, "$options": "i"}},
+        ]
+
+    cursor  = authors_col.find(query, {"books": 0, "contributions": 0, "activities": 0, "biography": 0}).sort("followers_count", DESCENDING).skip(skip).limit(limit)
+    authors = [serialize_author_card(a) for a in cursor]
+    total   = authors_col.count_documents(query)
+    return {"authors": authors, "total": total, "limit": limit, "skip": skip}
+
+
+@app.get("/api/lekhak/me")
+def get_my_author_profile(current_user=Depends(require_user)):
+    """Returns the logged-in user's own author document."""
+    uid    = str(current_user["_id"])
+    author = authors_col.find_one({"user_id": uid})
+    if not author:
+        raise HTTPException(404, "आपकी लेखक प्रोफ़ाइल नहीं है। पहले /api/lekhak/register करें।")
+    return serialize_author(author, current_user_id=uid)
+
+
+@app.get("/api/lekhak/{slug}")
+def get_lekhak_by_slug(
+    slug: str,
+    creds: HTTPAuthorizationCredentials = Depends(bearer),
+):
+    """Public author profile by slug."""
+    author = authors_col.find_one({"slug": slug})
+    if not author:
+        raise HTTPException(404, "लेखक नहीं मिला")
+    current_user    = get_current_user(creds)
+    current_user_id = str(current_user["_id"]) if current_user else None
+    return serialize_author(author, current_user_id=current_user_id)
+
+
+@app.get("/api/lekhak/{slug}/articles")
+def get_lekhak_articles(
+    slug:  str,
+    skip:  int = 0,
+    limit: int = 20,
+):
+    """Published articles by this author."""
+    limit  = min(int(limit), 50)
+    skip   = max(int(skip),  0)
+    author = authors_col.find_one({"slug": slug})
+    if not author:
+        raise HTTPException(404, "लेखक नहीं मिला")
+    query  = {"author_id": author["user_id"], "status": "published"}
+    cursor = articles_col.find(query, {"content": 0}).sort("published_at", DESCENDING).skip(skip).limit(limit)
+    total  = articles_col.count_documents(query)
+    return {
+        "articles": [serialize_article(a, full=False) for a in cursor],
+        "total":    total,
+    }
+
+
+@app.patch("/api/lekhak/me")
+def update_my_author_profile(
+    body: AuthorUpdate,
+    current_user=Depends(require_user),
+):
+    """Author updates their own profile."""
+    uid    = str(current_user["_id"])
+    author = authors_col.find_one({"user_id": uid})
+    if not author:
+        raise HTTPException(404, "लेखक प्रोफ़ाइल नहीं मिली")
+
+    updates: dict = {"updated_at": datetime.utcnow()}
+    for field in ["display_name", "pen_name", "tagline", "bio", "biography",
+                  "categories", "expertise", "location", "birth_year",
+                  "website", "twitter", "instagram", "facebook", "youtube",
+                  "avatar", "cover_image"]:
+        val = getattr(body, field, None)
+        if val is not None:
+            updates[field] = val
+
+    authors_col.update_one({"_id": author["_id"]}, {"$set": updates})
+
+    if body.display_name:
+        users_col.update_one({"_id": current_user["_id"]}, {"$set": {"display_name": body.display_name}})
+
+    updated = authors_col.find_one({"_id": author["_id"]})
+    return serialize_author(updated, current_user_id=uid)
+
+
+# ── Books ─────────────────────────────────────
+@app.post("/api/lekhak/me/books", status_code=201)
+def add_book(body: BookInput, current_user=Depends(require_user)):
+    uid    = str(current_user["_id"])
+    author = authors_col.find_one({"user_id": uid})
+    if not author:
+        raise HTTPException(404, "लेखक प्रोफ़ाइल नहीं मिली")
+    book = {
+        "id":        str(ObjectId()),
+        "title":     body.title,
+        "year":      body.year,
+        "publisher": body.publisher or "",
+        "cover_url": body.cover_url or "",
+        "link":      body.link or "",
+    }
+    authors_col.update_one({"_id": author["_id"]}, {"$push": {"books": book}, "$set": {"updated_at": datetime.utcnow()}})
+    return {"book": book, "message": "किताब जोड़ी गई"}
+
+@app.delete("/api/lekhak/me/books/{book_id}", status_code=204)
+def delete_book(book_id: str, current_user=Depends(require_user)):
+    uid = str(current_user["_id"])
+    authors_col.update_one({"user_id": uid}, {"$pull": {"books": {"id": book_id}}})
+
+# ── Contributions ─────────────────────────────
+@app.post("/api/lekhak/me/contributions", status_code=201)
+def add_contribution(body: ContributionInput, current_user=Depends(require_user)):
+    uid    = str(current_user["_id"])
+    author = authors_col.find_one({"user_id": uid})
+    if not author:
+        raise HTTPException(404, "लेखक प्रोफ़ाइल नहीं मिली")
+    item = {"id": str(ObjectId()), "title": body.title, "description": body.description, "year": body.year}
+    authors_col.update_one({"_id": author["_id"]}, {"$push": {"contributions": item}, "$set": {"updated_at": datetime.utcnow()}})
+    return {"contribution": item, "message": "योगदान जोड़ा गया"}
+
+@app.delete("/api/lekhak/me/contributions/{item_id}", status_code=204)
+def delete_contribution(item_id: str, current_user=Depends(require_user)):
+    uid = str(current_user["_id"])
+    authors_col.update_one({"user_id": uid}, {"$pull": {"contributions": {"id": item_id}}})
+
+# ── Activities ────────────────────────────────
+@app.post("/api/lekhak/me/activities", status_code=201)
+def add_activity(body: ActivityInput, current_user=Depends(require_user)):
+    uid    = str(current_user["_id"])
+    author = authors_col.find_one({"user_id": uid})
+    if not author:
+        raise HTTPException(404, "लेखक प्रोफ़ाइल नहीं मिली")
+    item = {"id": str(ObjectId()), "title": body.title, "description": body.description, "date": body.date}
+    authors_col.update_one({"_id": author["_id"]}, {"$push": {"activities": item}, "$set": {"updated_at": datetime.utcnow()}})
+    return {"activity": item, "message": "गतिविधि जोड़ी गई"}
+
+@app.delete("/api/lekhak/me/activities/{item_id}", status_code=204)
+def delete_activity(item_id: str, current_user=Depends(require_user)):
+    uid = str(current_user["_id"])
+    authors_col.update_one({"user_id": uid}, {"$pull": {"activities": {"id": item_id}}})
+
+# ── Follow / Unfollow ─────────────────────────
+@app.post("/api/lekhak/{slug}/follow")
+def toggle_follow(slug: str, current_user=Depends(require_user)):
+    author = authors_col.find_one({"slug": slug})
+    if not author:
+        raise HTTPException(404, "लेखक नहीं मिला")
+    uid       = str(current_user["_id"])
+    followers = author.get("followers", [])
+    if uid in followers:
+        authors_col.update_one({"slug": slug}, {"$pull": {"followers": uid}})
+        is_following = False
+    else:
+        authors_col.update_one({"slug": slug}, {"$push": {"followers": uid}})
+        is_following = True
+    updated = authors_col.find_one({"slug": slug})
+    return {
+        "is_following":    is_following,
+        "followers_count": len(updated.get("followers", [])),
+        "message":         "अनुसरण की स्थिति बदली",
+    }
 
 # ─────────────────────────────────────────────
 #  ADMIN DASHBOARD ROUTES
 # ─────────────────────────────────────────────
-
 @app.get("/api/admin/dashboard/stats")
 def get_dashboard_stats(current_user=Depends(require_admin)):
-    """Get overall dashboard statistics"""
     try:
-        total_users = users_col.count_documents({})
-        total_comments = comments_col.count_documents({})
-        total_posts = vidyapati_posts_col.count_documents({})
-        featured_posts = vidyapati_posts_col.count_documents({"featured": True})
-        
-        # Get recent activity (last 7 days)
         seven_days_ago = datetime.utcnow() - timedelta(days=7)
-        recent_users = users_col.count_documents({"created_at": {"$gte": seven_days_ago}})
-        recent_comments = comments_col.count_documents({"created_at": {"$gte": seven_days_ago}})
-        
         return {
-            "total_users": total_users,
-            "total_comments": total_comments,
-            "total_posts": total_posts,
-            "featured_posts": featured_posts,
-            "recent_users_7d": recent_users,
-            "recent_comments_7d": recent_comments,
+            "total_users":            users_col.count_documents({}),
+            "total_comments":         comments_col.count_documents({}),
+            "total_posts":            vidyapati_posts_col.count_documents({}),
+            "featured_posts":         vidyapati_posts_col.count_documents({"featured": True}),
+            "total_articles":         articles_col.count_documents({}),
+            "published_articles":     articles_col.count_documents({"status": "published"}),
+            "draft_articles":         articles_col.count_documents({"status": "draft"}),
+            # NEW counters
+            "pending_articles":       articles_col.count_documents({"status": "pending_approval"}),
+            "rejected_articles":      articles_col.count_documents({"status": "rejected"}),
+            "archived_articles":      articles_col.count_documents({"status": "archived"}),
+            "total_authors":          authors_col.count_documents({}),
+            "recent_users_7d":        users_col.count_documents({"created_at":    {"$gte": seven_days_ago}}),
+            "recent_comments_7d":     comments_col.count_documents({"created_at": {"$gte": seven_days_ago}}),
+            "recent_articles_7d":     articles_col.count_documents({"created_at": {"$gte": seven_days_ago}}),
+            "recent_authors_7d":      authors_col.count_documents({"joined_at":   {"$gte": seven_days_ago}}),
+            "pending_articles_7d":    articles_col.count_documents({"status": "pending_approval", "submitted_at": {"$gte": seven_days_ago}}),
         }
     except Exception as e:
-        print(f"DASHBOARD STATS ERROR: {e}")
         raise HTTPException(status_code=500, detail=str(e))
-
 
 @app.get("/api/admin/users")
-def get_all_users(
-    skip: int = 0,
-    limit: int = 100,
-    role: Optional[str] = None,
-    current_user=Depends(require_admin)
-):
-    """Get all users with pagination and optional role filter"""
+def get_all_users(skip: int = 0, limit: int = 100, role: Optional[str] = None, current_user=Depends(require_admin)):
     try:
         limit = min(int(limit), 100)
-        skip = max(int(skip), 0)
-        
-        query = {}
-        if role and role in ["user", "admin", "editor"]:
+        skip  = max(int(skip),  0)
+        query: dict = {}
+        if role and role in ["user", "admin", "editor", "lekhak"]:
             query["role"] = role
-        
-        cursor = (
-            users_col
-            .find(query)
-            .sort("created_at", DESCENDING)
-            .skip(skip)
-            .limit(limit)
-        )
-        
-        users = [serialize_user(u) for u in cursor]
-        total = users_col.count_documents(query)
-        
-        return {
-            "users": users,
-            "total": total,
-            "limit": limit,
-            "skip": skip
-        }
+        cursor = users_col.find(query).sort("created_at", DESCENDING).skip(skip).limit(limit)
+        users  = [serialize_user(u) for u in cursor]
+        total  = users_col.count_documents(query)
+        return {"users": users, "total": total, "limit": limit, "skip": skip}
     except Exception as e:
-        print(f"GET USERS ERROR: {e}")
         raise HTTPException(status_code=500, detail=str(e))
-
 
 @app.get("/api/admin/comments")
-def get_all_comments(
-    skip: int = 0,
-    limit: int = 50,
-    page_id: Optional[str] = None,
-    current_user=Depends(require_admin)
-):
-    """Get all comments with pagination and optional page filter"""
+def get_all_comments(skip: int = 0, limit: int = 50, page_id: Optional[str] = None, current_user=Depends(require_admin)):
     try:
         limit = min(int(limit), 50)
-        skip = max(int(skip), 0)
-        
-        query = {}
+        skip  = max(int(skip),  0)
+        query: dict = {}
         if page_id:
             query["page_id"] = page_id
-        
-        cursor = (
-            comments_col
-            .find(query)
-            .sort("created_at", DESCENDING)
-            .skip(skip)
-            .limit(limit)
-        )
-        
+        cursor   = comments_col.find(query).sort("created_at", DESCENDING).skip(skip).limit(limit)
         comments = [serialize_comment(c, str(current_user["_id"])) for c in cursor]
-        total = comments_col.count_documents(query)
-        
-        # Get unique pages
-        pages = comments_col.distinct("page_id", {})
-        
-        return {
-            "comments": comments,
-            "total": total,
-            "pages": pages,
-            "limit": limit,
-            "skip": skip
-        }
+        total    = comments_col.count_documents(query)
+        pages    = comments_col.distinct("page_id", {})
+        return {"comments": comments, "total": total, "pages": pages, "limit": limit, "skip": skip}
     except Exception as e:
-        print(f"GET COMMENTS ERROR: {e}")
         raise HTTPException(status_code=500, detail=str(e))
-
 
 @app.get("/api/admin/posts")
-def get_all_posts(
-    skip: int = 0,
-    limit: int = 50,
-    category: Optional[str] = None,
-    current_user=Depends(require_admin)
-):
-    """Get all Vidyapati posts with pagination and optional category filter"""
+def get_all_posts(skip: int = 0, limit: int = 50, category: Optional[str] = None, current_user=Depends(require_admin)):
     try:
         limit = min(int(limit), 50)
-        skip = max(int(skip), 0)
-        
-        query = {}
+        skip  = max(int(skip),  0)
+        query: dict = {}
         if category:
             query["category"] = category
-        
-        cursor = (
-            vidyapati_posts_col
-            .find(query)
-            .sort("createdAt", DESCENDING)
-            .skip(skip)
-            .limit(limit)
-        )
-        
-        posts = [serialize_post(p) for p in cursor]
-        total = vidyapati_posts_col.count_documents(query)
-        
-        # Get unique categories
+        cursor     = vidyapati_posts_col.find(query).sort("createdAt", DESCENDING).skip(skip).limit(limit)
+        posts      = [serialize_post(p) for p in cursor]
+        total      = vidyapati_posts_col.count_documents(query)
         categories = vidyapati_posts_col.distinct("category", {})
-        
-        return {
-            "posts": posts,
-            "total": total,
-            "categories": categories,
-            "limit": limit,
-            "skip": skip
-        }
+        return {"posts": posts, "total": total, "categories": categories, "limit": limit, "skip": skip}
     except Exception as e:
-        print(f"GET POSTS ERROR: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-
 @app.patch("/api/admin/users/{user_id}/role")
-def update_user_role(
-    user_id: str,
-    role: str = Field(..., description="user, admin, or editor"),
-    current_user=Depends(require_super_admin)
-):
-    """Update user role - super admin only"""
+def update_user_role(user_id: str, body: RoleUpdate, current_user=Depends(require_super_admin)):
     try:
-        if role not in ["user", "admin", "editor"]:
-            raise HTTPException(400, "Invalid role. Must be 'user', 'admin', or 'editor'")
-        
-        oid = ObjectId(user_id)
+        if body.role not in ["user", "admin", "editor", "lekhak"]:
+            raise HTTPException(400, "Invalid role")
+        oid  = ObjectId(user_id)
         user = users_col.find_one({"_id": oid})
         if not user:
             raise HTTPException(404, "User not found")
-        
-        users_col.update_one({"_id": oid}, {"$set": {"role": role, "updated_at": datetime.utcnow()}})
-        updated = users_col.find_one({"_id": oid})
-        return serialize_user(updated)
+        users_col.update_one({"_id": oid}, {"$set": {"role": body.role, "updated_at": datetime.utcnow()}})
+        return serialize_user(users_col.find_one({"_id": oid}))
     except HTTPException:
         raise
     except Exception as e:
-        print(f"UPDATE ROLE ERROR: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-
 @app.delete("/api/admin/comments/{comment_id}")
-def admin_delete_comment(
-    comment_id: str,
-    current_user=Depends(require_admin)
-):
-    """Admin delete any comment"""
+def admin_delete_comment(comment_id: str, current_user=Depends(require_admin)):
     try:
         oid = ObjectId(comment_id)
     except Exception:
         raise HTTPException(400, "Invalid comment id")
-
     comment = comments_col.find_one({"_id": oid})
     if not comment:
         raise HTTPException(404, "Comment not found")
-
     comments_col.delete_one({"_id": oid})
     return {"status": "deleted", "id": str(oid)}
 
-
 @app.delete("/api/admin/users/{user_id}")
-def admin_delete_user(
-    user_id: str,
-    current_user=Depends(require_super_admin)
-):
-    """Super admin delete user"""
+def admin_delete_user(user_id: str, current_user=Depends(require_super_admin)):
     try:
         oid = ObjectId(user_id)
     except Exception:
         raise HTTPException(400, "Invalid user id")
-
     if str(oid) == str(current_user["_id"]):
         raise HTTPException(400, "Cannot delete yourself")
-
     user = users_col.find_one({"_id": oid})
     if not user:
         raise HTTPException(404, "User not found")
-
-    users_col.delete_one({"_id": oid})
-    # Also delete user's comments
+    comments_deleted = comments_col.count_documents({"user_id": user_id})
     comments_col.delete_many({"user_id": user_id})
-    
-    return {"status": "deleted", "id": str(oid), "comments_deleted": comments_col.count_documents({"user_id": user_id})}
-
+    authors_col.delete_one({"user_id": user_id})
+    users_col.delete_one({"_id": oid})
+    return {"status": "deleted", "id": str(oid), "comments_deleted": comments_deleted}
 
 # ─────────────────────────────────────────────
 #  HEALTH
 # ─────────────────────────────────────────────
 @app.get("/api/health")
 def health():
-    return {"status": "ok", "db": DB_NAME}
-
+    return {
+        "status": "ok",
+        "db":     DB_NAME,
+        "version": "3.1.0",
+        "collections": {
+            "users":    users_col.count_documents({}),
+            "comments": comments_col.count_documents({}),
+            "articles": articles_col.count_documents({}),
+            "authors":  authors_col.count_documents({}),
+        },
+        "articles_by_status": {
+            "draft":            articles_col.count_documents({"status": "draft"}),
+            "pending_approval": articles_col.count_documents({"status": "pending_approval"}),
+            "published":        articles_col.count_documents({"status": "published"}),
+            "rejected":         articles_col.count_documents({"status": "rejected"}),
+            "archived":         articles_col.count_documents({"status": "archived"}),
+        }
+    }
 
 # ─────────────────────────────────────────────
 #  RUN

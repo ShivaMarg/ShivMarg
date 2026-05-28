@@ -887,7 +887,6 @@
         el.innerHTML = '<p style="color:var(--ink-muted);font-size:.85rem;">कोई पोस्ट नहीं</p>';
         return;
       }
-
       el.innerHTML = json.articles.map(p => `
         <a href="/articles/?slug=${p.slug}" class="pop-card">
           <img src="${p.thumbnail_url || 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22%3E%3C/svg%3E'}" 
@@ -908,6 +907,7 @@
   // ─────────────────────────────────────────────
   // LOAD LATEST POSTS
   // ─────────────────────────────────────────────
+  
   async function loadLatestPosts() {
     try {
       const res = await fetch(`${API_BASE}/api/articles/latest?limit=7`);

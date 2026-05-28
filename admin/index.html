@@ -656,7 +656,7 @@ function _renderArticles(){
       <td><div class="act-row">
         <a class="act-btn act-view" href="https://shivmarg.live/articles?slug=${esc(a.slug)}" target="_blank"><i class="ti ti-external-link" style="font-size:11px" aria-hidden="true"></i> View</a>
         <button class="act-btn act-edit" onclick="alert('Edit functionality: Article ${esc(a.title)}')" style="cursor:pointer">Edit</button>
-        <button class="act-btn act-del" onclick="if(confirm('Delete article: ${esc(a.title)}?')){apiFetch('/api/articles/${a._id}',{method:'DELETE'}).then(()=>{state.articles=state.articles.filter(x=>x._id!=='${a._id}');renderArticles();})}" style="cursor:pointer">Delete</button>
+        <button class="act-btn act-del" onclick="if(confirm('Delete article: ${esc(a.title)}?')){apiFetch('/api/articles/${a.title}',{method:'DELETE'}).then(()=>{state.articles=state.articles.filter(x=>x._id!=='${a.title}');renderArticles();})}" style="cursor:pointer">Delete</button>
       </div></td>
     </tr>`).join('');
 }
