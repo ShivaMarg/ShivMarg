@@ -637,8 +637,14 @@ function renderAuthArea() {
     loginLink.className = 'btn-login';
     loginLink.href = '#';
     loginLink.textContent = 'लॉग-इन';
-    loginLink.onclick = (e) => { e.preventDefault(); openModal(); };
+    loginLink.onclick = (e) => { e.preventDefault(); document.getElementById('authModal').classList.add('open'); };
     area.appendChild(loginLink);
+  }
+}
+function openModal()  { document.getElementById('authModal').classList.add('open'); }
+function closeModal(e) {
+  if (!e || e.target === document.getElementById('authModal') || !e.target) {
+    document.getElementById('authModal').classList.remove('open');
   }
 }
 function switchAuthTab(tab) {
