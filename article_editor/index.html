@@ -961,6 +961,7 @@
       document.getElementById('thumbnailUrl').value = article.thumbnail_url || '';
       document.getElementById('readTime').value = article.read_time || 5;
       document.getElementById('slug').value = article.slug;
+      // loadArticleForEdit() में:
       tags = article.tags || [];
 
       // Update page title
@@ -1064,19 +1065,30 @@
   // ─────────────────────────────────────────────
   // SLUG GENERATION
   // ─────────────────────────────────────────────
-  function generateSlug() {
-    const title = document.getElementById('title').value;
-    if (!title) return;
-    
-    let slug = title
-      .toLowerCase()
-      .replace(/[^\w\s-]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-')
-      .slice(0, 60);
-    
-    document.getElementById('slug').value = slug;
-  }
+function generateSlug() {
+  const title = document.getElementById('title').value;
+  if (!title) return;
+
+  // Transliteration map (basic)
+  const map = {
+    'अ':'a','आ':'aa','इ':'i','ई':'ee','उ':'u','ऊ':'oo','ए':'e','ऐ':'ai','ओ':'o','औ':'au',
+    'क':'k','ख':'kh','ग':'g','घ':'gh','च':'ch','छ':'chh','ज':'j','झ':'jh',
+    'ट':'t','ठ':'th','ड':'d','ढ':'dh','ण':'n','त':'t','थ':'th','द':'d','ध':'dh',
+    'न':'n','प':'p','फ':'ph','ब':'b','भ':'bh','म':'m','य':'y','र':'r','ल':'l',
+    'व':'v','श':'sh','ष':'sh','स':'s','ह':'h','ं':'n','ः':'','ा':'a','ि':'i',
+    'ी':'ee','ु':'u','ू':'oo','े':'e','ै':'ai','ो':'o','ौ':'au','्':''
+  };
+
+  let slug = title.split('').map(ch => map[ch] || ch).join('')
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
+    .slice(0, 60);
+
+  document.getElementById('slug').value = slug;
+}
 
   // ─────────────────────────────────────────────
   // TAG HANDLING
@@ -1100,17 +1112,17 @@
 
   function renderTags() {
     const wrapper = document.getElementById('tagInput');
+    // पुराने tags हटाएँ (input को नहीं)
+    wrapper.querySelectorAll('.tag').forEach(el => el.remove());
+    
     const input = wrapper.querySelector('input');
-    wrapper.innerHTML = '';
     
     tags.forEach(tag => {
       const el = document.createElement('span');
       el.className = 'tag';
       el.innerHTML = `${tag} <button type="button" onclick="removeTag('${tag.replace(/'/g, "\\'")}')">×</button>`;
-      wrapper.appendChild(el);
+      wrapper.insertBefore(el, input); // input से पहले insert करें
     });
-
-    wrapper.appendChild(input);
   }
 
   // ─────────────────────────────────────────────
@@ -1172,7 +1184,9 @@
       read_time: parseInt(document.getElementById('readTime').value) || 5,
       slug,
       // All non-admin articles go to pending approval
-      status: hasAdminRole() ? 'published' : 'pending_approval'
+      status: hasAdminRole() ? 'published' : 'pending_approval',
+      submitted_at: new Date().toISOString(), // ← यह add करें
+
     };
 
     try {
