@@ -1186,7 +1186,7 @@ function generateSlug() {
       // All non-admin articles go to pending approval
       status: hasAdminRole() ? 'published' : 'pending_approval',
       submitted_at: new Date().toISOString(), // ← यह add करें
-      status: hasAdminRole() ? 'published' : 'pending_approval'
+
     };
 
     try {
