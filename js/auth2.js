@@ -285,6 +285,11 @@
           <button class="sm-tab"        id="sm-tab-register" onclick="SmAuth._switchTab('register')">नया खाता</button>
         </div>
         <div id="sm-login-form" class="sm-form">
+          <button class="sm-google-btn" id="sm-google-login-btn" onclick="SmAuth._doGoogleAuth()">
+            <img src="https://developers.google.com/identity/images/g-logo.png" alt="G">
+            Google से लॉगिन करें
+          </button>
+          <div class="sm-or-divider">या</div>
           <input type="email"    id="sm-l-email" placeholder="ईमेल पता"  autocomplete="email">
           <input type="password" id="sm-l-pass"  placeholder="पासवर्ड"   autocomplete="current-password">
           <div class="sm-error" id="sm-l-error"></div>
@@ -292,14 +297,15 @@
             <span>🔱 लॉगिन करें</span>
           </button>
           <div class="sm-toggle-link">नया भक्त? <a onclick="SmAuth._switchTab('register')">खाता बनाएँ</a></div>
-          <div class="sm-or-divider">या</div>
-          <button class="sm-google-btn" id="sm-google-login-btn" onclick="SmAuth._doGoogleAuth()">
-            <img src="https://developers.google.com/identity/images/g-logo.png" alt="G">
-            Google से लॉगिन करें
-          </button>
+
         </div>
 
         <div id="sm-register-form" class="sm-form" style="display:none">
+          <button class="sm-google-btn" id="sm-google-reg-btn" onclick="SmAuth._doGoogleAuth()">
+            <img src="https://developers.google.com/identity/images/g-logo.png" alt="G">
+            Google से खाता बनाएँ
+          </button>
+          <div class="sm-or-divider">या</div>
           <input type="text"     id="sm-r-name"  placeholder="उपयोगकर्ता नाम (Username)" autocomplete="username">
           <input type="email"    id="sm-r-email" placeholder="ईमेल पता"                  autocomplete="email">
           <input type="password" id="sm-r-pass"  placeholder="पासवर्ड (न्यूनतम ६ अक्षर)" autocomplete="new-password">
@@ -310,10 +316,7 @@
           </button>
           <div class="sm-toggle-link">पहले से खाता है? <a onclick="SmAuth._switchTab('login')">लॉगिन करें</a></div>
           <div class="sm-or-divider">या</div>
-          <button class="sm-google-btn" id="sm-google-reg-btn" onclick="SmAuth._doGoogleAuth()">
-            <img src="https://developers.google.com/identity/images/g-logo.png" alt="G">
-            Google से खाता बनाएँ
-          </button>
+
         </div>
       </div>`;
     document.body.appendChild(overlay);
