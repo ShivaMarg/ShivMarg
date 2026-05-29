@@ -152,6 +152,24 @@
         transition:opacity .4s;white-space:nowrap;pointer-events:none;
       }
       #sm-toast.show{opacity:1;}
+
+      .sm-google-btn{
+        display:flex;align-items:center;justify-content:center;gap:10px;
+        width:100%;padding:11px;margin-top:4px;
+        background:#fff;border:1px solid rgba(124,77,255,0.22);
+        color:#3c4043;font-family:'Cinzel',serif;font-size:0.72rem;
+        letter-spacing:2px;text-transform:uppercase;cursor:pointer;
+        transition:all .3s;border-radius:1px;
+      }
+      .sm-google-btn:hover{background:#f7f7f7;border-color:#9575CD;box-shadow:0 2px 12px rgba(124,77,255,0.15);}
+      .sm-google-btn img{width:18px;height:18px;}
+      .sm-or-divider{
+        display:flex;align-items:center;gap:10px;margin:4px 0;
+        color:rgba(243,238,255,0.25);font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:3px;
+      }
+      .sm-or-divider::before,.sm-or-divider::after{
+        content:'';flex:1;height:1px;background:rgba(124,77,255,0.18);
+      }
     `;
     document.head.appendChild(style);
   }
@@ -274,7 +292,13 @@
             <span>🔱 लॉगिन करें</span>
           </button>
           <div class="sm-toggle-link">नया भक्त? <a onclick="SmAuth._switchTab('register')">खाता बनाएँ</a></div>
+          <div class="sm-or-divider">या</div>
+          <button class="sm-google-btn" id="sm-google-login-btn" onclick="SmAuth._doGoogleAuth()">
+            <img src="https://developers.google.com/identity/images/g-logo.png" alt="G">
+            Google से लॉगिन करें
+          </button>
         </div>
+
         <div id="sm-register-form" class="sm-form" style="display:none">
           <input type="text"     id="sm-r-name"  placeholder="उपयोगकर्ता नाम (Username)" autocomplete="username">
           <input type="email"    id="sm-r-email" placeholder="ईमेल पता"                  autocomplete="email">
@@ -285,6 +309,11 @@
             <span>🌸 खाता बनाएँ</span>
           </button>
           <div class="sm-toggle-link">पहले से खाता है? <a onclick="SmAuth._switchTab('login')">लॉगिन करें</a></div>
+          <div class="sm-or-divider">या</div>
+          <button class="sm-google-btn" id="sm-google-reg-btn" onclick="SmAuth._doGoogleAuth()">
+            <img src="https://developers.google.com/identity/images/g-logo.png" alt="G">
+            Google से खाता बनाएँ
+          </button>
         </div>
       </div>`;
     document.body.appendChild(overlay);
@@ -392,6 +421,66 @@
     }
   }
 
+
+  /* ─── GOOGLE AUTH ─── */
+  const GOOGLE_CLIENT_ID = '299436963033-5u4k118211j4jbeum45r67omn10d0g7g.apps.googleusercontent.com'; // ← paste your Client ID here
+
+  function _loadGoogleScript() {
+    return new Promise((resolve) => {
+      if (window.google) { resolve(); return; }
+      const s = document.createElement('script');
+      s.src = 'https://accounts.google.com/gsi/client';
+      s.onload = resolve;
+      document.head.appendChild(s);
+    });
+  }
+
+  async function _doGoogleAuth() {
+    if (!GOOGLE_CLIENT_ID) {
+      toast('⚠️ Google लॉगिन अभी उपलब्ध नहीं है');
+      return;
+    }
+    // Disable both Google buttons while working
+    ['sm-google-login-btn','sm-google-reg-btn'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) { el.disabled = true; el.textContent = '⏳ प्रतीक्षा करें…'; }
+    });
+    try {
+      await _loadGoogleScript();
+      window.google.accounts.id.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: async (response) => {
+          try {
+            const data = await apiPost('/api/auth/google', { id_token: response.credential });
+            saveSession(data.token, data.user);
+            _closeModal();
+            renderWidget();
+            toast(data.is_new
+              ? '🌸 खाता बन गया! जय महादेव, ' + data.user.username
+              : '🙏 जय शिव! स्वागत है, ' + data.user.username
+            );
+          } catch (e) {
+            // Show error in whichever tab is active
+            const isLogin = document.getElementById('sm-login-form').style.display !== 'none';
+            document.getElementById(isLogin ? 'sm-l-error' : 'sm-r-error').textContent = e.message;
+          } finally {
+            ['sm-google-login-btn','sm-google-reg-btn'].forEach(id => {
+              const el = document.getElementById(id);
+              if (el) {
+                el.disabled = false;
+                el.innerHTML = '<img src="https://developers.google.com/identity/images/g-logo.png" alt="G" style="width:18px;height:18px"> Google से ' + (id.includes('login') ? 'लॉगिन' : 'खाता बनाएँ');
+              }
+            });
+          }
+        },
+      });
+      window.google.accounts.id.prompt(); // shows the Google One Tap popup
+    } catch (e) {
+      toast('⚠️ Google लॉगिन में समस्या हुई');
+    }
+  }
+
+
   function logout() {
     clearSession();
     renderWidget();
@@ -431,6 +520,6 @@
       return false;
     },
     getAvatarBg,
-    _openModal, _closeModal, _switchTab, _doLogin, _doRegister,
+    _openModal, _closeModal, _switchTab, _doLogin, _doRegister,_doGoogleAuth,
   };
 })();
