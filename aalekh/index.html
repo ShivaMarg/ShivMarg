@@ -273,6 +273,12 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
 .toast{position:fixed;bottom:2rem;right:2rem;background:var(--ink-2);color:#fff;padding:.6rem 1.2rem;border-radius:4px;font-size:.8rem;z-index:999;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none}
 .toast.show{opacity:1;transform:translateY(0)}
 
+.google-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:.5rem .75rem;background:#fff;border:1.5px solid var(--line-dark);border-radius:4px;font-size:.78rem;font-family:'Source Sans 3',sans-serif;color:#3c4043;cursor:pointer;transition:all .15s;margin-top:.3rem}
+.google-btn:hover{background:#f7f7f7;border-color:var(--saffron-m);box-shadow:0 2px 8px rgba(200,84,10,.1)}
+.google-btn img{width:16px;height:16px;flex-shrink:0}
+.or-divider{display:flex;align-items:center;gap:8px;margin:.5rem 0;color:var(--ink-4);font-size:.72rem}
+.or-divider::before,.or-divider::after{content:'';flex:1;height:1px;background:var(--line)}
+
 @media(max-width:1024px){
   .hero{grid-template-columns:1fr}
   .hero-side{display:none}
@@ -377,8 +383,13 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
     <div id="loginForm">
       <div class="form-field"><label>ई-मेल</label><input type="email" id="loginEmail" placeholder="आपका ई-मेल"></div>
       <div class="form-field"><label>पासवर्ड</label><input type="password" id="loginPass" placeholder="पासवर्ड"></div>
-      <button class="btn-submit" onclick="doLogin()">लॉग-इन करें</button>
+<button class="btn-submit" onclick="doLogin()">लॉग-इन करें</button>
       <div class="form-msg" id="loginMsg"></div>
+      <div class="or-divider">या</div>
+      <button class="google-btn" id="gLoginBtn" onclick="doGoogleAuth('loginMsg')">
+        <img src="https://developers.google.com/identity/images/g-logo.png" alt="G">
+        Google से लॉग-इन करें
+      </button>
     </div>
     <div id="registerForm" style="display:none">
       <div class="form-field"><label>उपयोगकर्ता नाम</label><input type="text" id="regUsername" placeholder="username (केवल अंग्रेज़ी)"></div>
@@ -387,6 +398,11 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
       <div class="form-field"><label>पासवर्ड</label><input type="password" id="regPass" placeholder="कम से कम 6 अक्षर"></div>
       <button class="btn-submit" onclick="doRegister()">खाता बनाएँ</button>
       <div class="form-msg" id="registerMsg"></div>
+      <div class="or-divider">या</div>
+      <button class="google-btn" id="gRegBtn" onclick="doGoogleAuth('registerMsg')">
+        <img src="https://developers.google.com/identity/images/g-logo.png" alt="G">
+        Google से खाता बनाएँ
+      </button>
     </div>
   </div>
 </div>
@@ -828,6 +844,66 @@ async function loadLatestSidebar() {
       </a>`).join('');
   } catch (e) { el.innerHTML = `<div class="error-msg" style="padding:.5rem">${e.message}</div>`; }
 }
+
+// ── GOOGLE AUTH ──────────────────────────────────────────
+const GOOGLE_CLIENT_ID = '299436963033-5u4k118211j4jbeum45r67omn10d0g7g.apps.googleusercontent.com'; // ← paste here
+
+function _loadGsi() {
+  return new Promise(resolve => {
+    if (window.google) { resolve(); return; }
+    const s = document.createElement('script');
+    s.src = 'https://accounts.google.com/gsi/client';
+    s.onload = resolve;
+    document.head.appendChild(s);
+  });
+}
+
+async function doGoogleAuth(msgElId) {
+  if (!GOOGLE_CLIENT_ID || GOOGLE_CLIENT_ID === 'YOUR_CLIENT_ID_HERE') {
+    showToast('Google लॉगिन अभी उपलब्ध नहीं है'); return;
+  }
+  const msgEl = document.getElementById(msgElId);
+  ['gLoginBtn','gRegBtn'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.disabled = true; el.textContent = '⏳ प्रतीक्षा करें…'; }
+  });
+  const resetBtns = () => {
+    const lb = document.getElementById('gLoginBtn');
+    const rb = document.getElementById('gRegBtn');
+    if (lb) { lb.disabled = false; lb.innerHTML = '<img src="https://developers.google.com/identity/images/g-logo.png" alt="G" style="width:16px;height:16px"> Google से लॉग-इन करें'; }
+    if (rb) { rb.disabled = false; rb.innerHTML = '<img src="https://developers.google.com/identity/images/g-logo.png" alt="G" style="width:16px;height:16px"> Google से खाता बनाएँ'; }
+  };
+  try {
+    await _loadGsi();
+    window.google.accounts.id.initialize({
+      client_id: GOOGLE_CLIENT_ID,
+      callback: async (response) => {
+        try {
+          const res = await fetch(API + '/api/auth/google', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id_token: response.credential })
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.detail || 'Google लॉगिन विफल');
+          state.token = data.token; state.user = data.user;
+          localStorage.setItem('sm_token', data.token);
+          localStorage.setItem('bargad_user', JSON.stringify(data.user));
+          renderAuthArea(); closeModal();
+          showToast(data.is_new ? '🌸 खाता बन गया! स्वागत है, ' + data.user.display_name : '🙏 स्वागत है, ' + data.user.display_name + '!');
+        } catch(e) {
+          if (msgEl) { msgEl.textContent = e.message; msgEl.className = 'form-msg error'; }
+          resetBtns();
+        }
+      }
+    });
+    window.google.accounts.id.prompt();
+  } catch(e) {
+    showToast('Google लॉगिन में समस्या हुई');
+    resetBtns();
+  }
+}
+// ─────────────────────────────────────────────────────────
 
 function nlSubscribe() {
   const email = document.getElementById('nlEmail').value.trim();
