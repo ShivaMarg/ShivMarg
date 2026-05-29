@@ -962,8 +962,6 @@
       document.getElementById('readTime').value = article.read_time || 5;
       document.getElementById('slug').value = article.slug;
       // loadArticleForEdit() में:
-      document.getElementById('submittedDate').textContent = 
-        `सबमिट: ${new Date(article.submitted_at || article.created_at || Date.now()).toLocaleDateString('hi-IN')}`;
       tags = article.tags || [];
 
       // Update page title
