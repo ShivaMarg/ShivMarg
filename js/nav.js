@@ -435,7 +435,7 @@
     function trySetupAuth() {
       if (window.SmAuth) {
         window.SmAuth.init({
-          apiBase: 'https://api.shivmarg.live',
+          apiBase: 'https://www.api.shivmarg.live',
           noWidget: true
         });
         renderNavAuth();

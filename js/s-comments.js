@@ -20,7 +20,7 @@
   'use strict';
 
   const TOKEN_KEY = 'sm_token';
-  let API_BASE    = 'https://api.shivmarg.live';
+  let API_BASE    = 'https://www.api.shivmarg.live';
   const LIMIT     = 15;
 
   let pageId    = null;
