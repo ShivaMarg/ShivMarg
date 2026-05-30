@@ -419,7 +419,7 @@
     function trySetupAuth() {
       if (window.SmAuth) {
         window.SmAuth.init({
-          apiBase: 'https://shivamargbackend.onrender.com',
+          apiBase: 'https://api.shivmarg.live',
           noWidget: true
         });
         renderNavAuth();

@@ -4,7 +4,7 @@
  */
 
 const SuggestedPosts = (() => {
-  const API_BASE = 'https://shivamargbackend.onrender.com';
+  const API_BASE = 'https://api.shivmarg.live';
   const POSTS_LIMIT = 4;
 
   /**

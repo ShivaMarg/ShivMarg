@@ -3,7 +3,7 @@
  * Handles all admin functionality and API interactions
  */
 
-const API_BASE = 'https://shivamargbackend.onrender.com'; // Update this to your backend URL
+const API_BASE = 'https://api.shivmarg.live'; // Update this to your backend URL
 const LIMIT_USERS = 100;
 const LIMIT_COMMENTS = 50;
 const LIMIT_POSTS = 50;

@@ -18,7 +18,7 @@
   /* ─── CONFIG ─── */
   const TOKEN_KEY = 'sm_token';
   const USER_KEY  = 'sm_user';
-  let   API_BASE  = 'https://shivamargbackend.onrender.com';
+  let   API_BASE  = 'https://api.shivmarg.live';
   let   NO_WIDGET = false; // set true when the page navbar manages its own auth UI
 
   /* ─── STATE ─── */
