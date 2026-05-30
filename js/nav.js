@@ -16,7 +16,7 @@
 <nav id="sm-navbar">
   <div class="nav-container">
     <!-- LOGO -->
-    <a href="/" class="logo">Shiva<em>Marg</em></a>
+    <a href="/" class="logo">Shiv<em>Marg</em></a>
 
     <!-- HAMBURGER (Mobile) -->
     <button class="hamburger" id="hamburger" aria-label="Menu">
