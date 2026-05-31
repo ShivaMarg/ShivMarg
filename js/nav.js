@@ -105,7 +105,7 @@
             <div class="dropdown-label">✦ लेख ✦</div>
             <a href="/aalekh">आलेख</a>
             <a href="/article_editor">नया लेख लिखें</a>
-            <a href="/article_editor?edit=true">सभी लेख</a>
+            <a href="/become_author/">लेख संपादित करें</a>
           </div>
         </div>
 
@@ -162,7 +162,7 @@
       transition: color 0.2s ease;
     }
     #sm-navbar .logo-img {
-      height: 38px; width: auto; object-fit: contain;
+      height: 25px; width: auto; object-fit: contain;
       display: block; flex-shrink: 0;
     }
     #sm-navbar .logo em { color: var(--saffron); font-style: normal; }
@@ -201,7 +201,7 @@
       border: 1px solid var(--nav-border);
       border-top: 2px solid var(--saffron);
       min-width: 300px;
-      max-height: 0; overflow: hidden;
+      max-height: 100; overflow: hidden;
       transition: max-height 0.38s ease, opacity 0.38s ease;
       opacity: 0; z-index: 1000;
     }
@@ -379,7 +379,7 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 1050px) {
       #sm-navbar .nav-search { width: 115px; }
-      #sm-navbar .nav-dropdown-btn { padding: 0 10px; font-size: 0.65rem; }
+      #sm-navbar .nav-dropdown-btn { padding: 0 30px; font-size: 0.65rem; }
     }
     @media (max-width: 800px) {
       #sm-navbar .nav-center { display: none; }
@@ -395,6 +395,7 @@
       #sm-navbar .logo { font-size: 0.95rem; gap: 7px; }
       #sm-navbar .logo-img { height: 30px; }
     }
+
   `;
 
   /* ─── INITIALIZE ─── */
@@ -552,8 +553,11 @@
       }
     } else {
       widget.innerHTML = `
-        <button class="auth-btn" onclick="window.SmAuth._switchTab('register');window.SmAuth._openModal()">खाता बनाएँ</button>
-        <button class="auth-btn primary" onclick="window.SmAuth._switchTab('login');window.SmAuth._openModal()">लॉगिन</button>`;
+        
+        <button class="auth-btn primary"
+        onclick="window.SmAuth._switchTab('login');window.SmAuth._openModal()">
+        <img src="/images/user-interface.png" alt="Login Icon" class="nav-btn-icon" onerror="this.style.display='none'">
+        </button>`;
 
       if (mobileAuth) {
         mobileAuth.innerHTML = `
