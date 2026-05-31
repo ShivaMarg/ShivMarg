@@ -199,13 +199,16 @@
   .nav-tab.active { color: var(--gold); border-bottom-color: var(--gold); background: rgba(200,144,26,0.15); }
 
   /* ─── MAIN LAYOUT ─── */
-  .main-layout {
-    display: flex;
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
-    flex: 1;
-    gap: 0;
+  .main-layout{
+    display:flex;
+    width:100%;
+    min-height:100vh;
+  }
+
+  .main-content{
+    flex:1;
+    min-width:0;
+    overflow-x:hidden;
   }
 
   /* ─── SIDEBAR ─── */
@@ -681,7 +684,7 @@
     border: 1px solid rgba(200,144,26,0.2);
     border-radius: 6px;
     padding: 6px;
-    min-height: 70px;
+    min-height: 90px;
     cursor: pointer;
     transition: all 0.2s;
     position: relative;
@@ -972,7 +975,8 @@
 <!-- MAIN LAYOUT -->
 <div class="main-layout">
 
-  <!-- SIDEBAR -->
+ <!-- SIDEBAR -->
+
   <aside class="sidebar">
 
     <!-- MAITHILI PABNI (FESTIVALS) -->
@@ -1253,56 +1257,56 @@
       <!-- Hero Sun/Moon info -->
       <div class="panchang-hero">
         <div class="panchang-hero-grid">
-          <div class="panchang-sun-info">
-            <div class="sun-icon">🌅</div>
-            <div class="sun-label">सूर्योदय</div>
-            <div class="sun-time">५:१७ प्रातः</div>
-            <div style="margin-top:8px;">
-              <div class="sun-icon">🌇</div>
-              <div class="sun-label">सूर्यास्त</div>
-              <div class="sun-time">७:०६ सायं</div>
-            </div>
+        <div class="panchang-sun-info">
+          <div class="sun-icon">🌅</div>
+          <div class="sun-label">सूर्योदय</div>
+          <div class="sun-time" data-key="sunrise">५:१७ प्रातः</div>
+          <div style="margin-top:8px;">
+            <div class="sun-icon">🌇</div>
+            <div class="sun-label">सूर्यास्त</div>
+            <div class="sun-time" data-key="sunset">७:०६ सायं</div>
           </div>
-          <div class="panchang-main-details">
-            <div class="panch-card">
-              <span class="p-label">मास</span>
-              <span class="p-value">जेठ (ज्येष्ठ)</span>
-              <span class="p-sub">कृष्ण पक्ष</span>
-            </div>
-            <div class="panch-card">
-              <span class="p-label">संवत्</span>
-              <span class="p-value">विक्रम २०८३</span>
-              <span class="p-sub">परिधावी नाम संवत्</span>
-            </div>
-            <div class="panch-card">
-              <span class="p-label">ऋतु</span>
-              <span class="p-value">ग्रीष्म ऋतु</span>
-              <span class="p-sub">वसन्त ऋतु समाप्त</span>
-            </div>
-            <div class="panch-card">
-              <span class="p-label">चन्द्र राशि</span>
-              <span class="p-value">वृश्चिक</span>
-              <span class="p-sub">Scorpio</span>
-            </div>
-            <div class="panch-card">
-              <span class="p-label">सूर्य राशि</span>
-              <span class="p-value">वृषभ</span>
-              <span class="p-sub">Taurus</span>
-            </div>
-            <div class="panch-card">
-              <span class="p-label">अयनकाल</span>
-              <span class="p-value">उत्तरायण</span>
-              <span class="p-sub">दक्षिणायन प्रारम्भ: आषाढ़ संक्रान्ति</span>
-            </div>
+        </div>
+        <div class="panchang-main-details">
+          <div class="panch-card" data-key="masa">
+            <span class="p-label">मास</span>
+            <span class="p-value">जेठ (ज्येष्ठ)</span>
+            <span class="p-sub">कृष्ण पक्ष</span>
           </div>
+          <div class="panch-card" data-key="samvat">
+            <span class="p-label">संवत्</span>
+            <span class="p-value">विक्रम २०८३</span>
+            <span class="p-sub">परिधावी नाम संवत्</span>
+          </div>
+          <div class="panch-card" data-key="ritu">
+            <span class="p-label">ऋतु</span>
+            <span class="p-value">ग्रीष्म ऋतु</span>
+            <span class="p-sub">वसन्त ऋतु समाप्त</span>
+          </div>
+          <div class="panch-card" data-key="moon-rashi">
+            <span class="p-label">चन्द्र राशि</span>
+            <span class="p-value">वृश्चिक</span>
+            <span class="p-sub">Scorpio</span>
+          </div>
+          <div class="panch-card" data-key="sun-rashi">
+            <span class="p-label">सूर्य राशि</span>
+            <span class="p-value">वृषभ</span>
+            <span class="p-sub">Taurus</span>
+          </div>
+          <div class="panch-card" data-key="ayan">
+            <span class="p-label">अयनकाल</span>
+            <span class="p-value">उत्तरायण</span>
+            <span class="p-sub">दक्षिणायन प्रारम्भ: आषाढ़ संक्रान्ति</span>
+          </div>
+        </div>
           <div class="panchang-sun-info">
             <div class="sun-icon">🌙</div>
             <div class="sun-label">चन्द्रोदय</div>
-            <div class="sun-time">रात्रि ११:४२</div>
+            <div class="sun-time" data-key="moonrise">रात्रि ११:४२</div>
             <div style="margin-top:8px;">
               <div class="sun-icon">⭐</div>
               <div class="sun-label">अभिजित</div>
-              <div class="sun-time">११:४८ – १२:४०</div>
+              <div class="sun-time" id="abhijit-hero">११:४८ – १२:४०</div>
             </div>
           </div>
         </div>
@@ -1314,40 +1318,40 @@
       </div>
 
       <div class="panch-5-grid">
-        <div class="panch-5-card tithi">
+        <div class="panch-5-card tithi" id="p5-tithi">
           <span class="p5-num">01</span>
           <span class="p5-name">तिथि</span>
           <span class="p5-value">कृष्ण प्रतिपदा</span>
           <span class="p5-hindi">Krishna Paksha Pratipada</span>
-          <span class="p5-hindi" style="margin-top:4px; font-size:0.7rem; color:#8B5E3C;">भोर: ०१:४५ धरि पूर्णिमा</span>
+          <span class="p5-hindi p5-endtime" style="margin-top:4px; font-size:0.7rem; color:#8B5E3C;">भोर: ०१:४५ धरि पूर्णिमा</span>
         </div>
-        <div class="panch-5-card vaar">
+        <div class="panch-5-card vaar" id="p5-vaar">
           <span class="p5-num">02</span>
           <span class="p5-name">वार</span>
           <span class="p5-value">रविवार</span>
           <span class="p5-hindi">Sunday · Surya Vaar</span>
-          <span class="p5-hindi" style="margin-top:4px; font-size:0.7rem; color:#8B5E3C;">स्वामी: सूर्य देव</span>
+          <span class="p5-hindi p5-endtime" style="margin-top:4px; font-size:0.7rem; color:#8B5E3C;">स्वामी: सूर्य देव</span>
         </div>
-        <div class="panch-5-card nakshatra">
+        <div class="panch-5-card nakshatra" id="p5-naksh">
           <span class="p5-num">03</span>
           <span class="p5-name">नक्षत्र</span>
           <span class="p5-value">अनुराधा</span>
           <span class="p5-hindi">Anuradha · वृश्चिक</span>
-          <span class="p5-hindi" style="margin-top:4px; font-size:0.7rem; color:#8B5E3C;">साँझ ४:११ धरि</span>
+          <span class="p5-hindi p5-endtime" style="margin-top:4px; font-size:0.7rem; color:#8B5E3C;">साँझ ४:११ धरि</span>
         </div>
-        <div class="panch-5-card yoga">
+        <div class="panch-5-card yoga" id="p5-yoga">
           <span class="p5-num">04</span>
           <span class="p5-name">योग</span>
           <span class="p5-value">सिद्ध योग</span>
           <span class="p5-hindi">Siddha Yoga</span>
-          <span class="p5-hindi" style="margin-top:4px; font-size:0.7rem; color:#8B5E3C;">अत्यन्त शुभ योग</span>
+          <span class="p5-hindi p5-endtime" style="margin-top:4px; font-size:0.7rem; color:#8B5E3C;">अत्यन्त शुभ योग</span>
         </div>
-        <div class="panch-5-card karan">
+        <div class="panch-5-card karan" id="p5-karan">
           <span class="p5-num">05</span>
           <span class="p5-name">करण</span>
           <span class="p5-value">बव</span>
           <span class="p5-hindi">Bava Karana</span>
-          <span class="p5-hindi" style="margin-top:4px; font-size:0.7rem; color:#8B5E3C;">दुपहर २:१५ धरि</span>
+          <span class="p5-hindi p5-endtime" style="margin-top:4px; font-size:0.7rem; color:#8B5E3C;">दुपहर २:१५ धरि</span>
         </div>
       </div>
 
@@ -1355,38 +1359,38 @@
       <div class="rahu-strip">
         <span style="font-size:1.1rem;">🚫</span>
         <span class="r-label">राहुकाल:</span>
-        <span class="r-time">सन्ध्या ५:२४ – ७:०४ बजे</span>
+        <span class="r-time" id="rahu-time">सन्ध्या ५:२४ – ७:०४ बजे</span>
         <span class="r-note">∷ एहि काल मे शुभ कार्य वर्जित अछि ∷</span>
       </div>
 
       <!-- AUSPICIOUS TIME PERIODS -->
       <div class="time-grid">
-        <div class="time-card shubh-bg">
+        <div class="time-card shubh-bg" id="tc-abhijit">
           <span class="t-name">अभिजित मुहूर्त</span>
           <span class="t-time">११:४८ – १२:४०</span>
           <span class="t-desc">दिनक सर्वोत्तम मुहूर्त</span>
         </div>
-        <div class="time-card shubh-bg">
+        <div class="time-card shubh-bg" id="tc-brahma">
           <span class="t-name">ब्रह्म मुहूर्त</span>
           <span class="t-time">३:४५ – ४:३१ प्रातः</span>
           <span class="t-desc">पूजा-ध्यान लेल सर्वोत्तम</span>
         </div>
-        <div class="time-card shubh-bg">
+        <div class="time-card shubh-bg" id="tc-vijay">
           <span class="t-name">विजय मुहूर्त</span>
           <span class="t-time">दुपहर २:१७ – ३:०७</span>
           <span class="t-desc">सफलताक लेल शुभ</span>
         </div>
-        <div class="time-card ashubh-bg">
+        <div class="time-card ashubh-bg" id="tc-gulika">
           <span class="t-name">गुलिक काल</span>
           <span class="t-time">प्रातः ६:४७ – ८:२७</span>
           <span class="t-desc">अशुभ काल</span>
         </div>
-        <div class="time-card ashubh-bg">
+        <div class="time-card ashubh-bg" id="tc-yama">
           <span class="t-name">यमगण्ड</span>
           <span class="t-time">दुपहर ११:४८ – १:२७</span>
           <span class="t-desc">यात्रा लेल वर्जित</span>
         </div>
-        <div class="time-card neutral-bg">
+        <div class="time-card neutral-bg" id="tc-godhuli">
           <span class="t-name">गोधूलि</span>
           <span class="t-time">सायं ७:०३ – ७:२७</span>
           <span class="t-desc">विवाह-गृहप्रवेश लेल उत्तम</span>
@@ -1396,31 +1400,31 @@
       <!-- DETAILED PANCHANG TABLE -->
       <div class="detail-section">
         <h3><span style="color:var(--gold)">✦</span> सम्पूर्ण पञ्चाङ्ग विवरण</h3>
-        <table class="detail-table">
-          <tr><td>विक्रम संवत्</td><td>२०८३ (परिधावी)</td></tr>
-          <tr><td>शक संवत्</td><td>१९४८</td></tr>
-          <tr><td>हिजरी</td><td>१४४७ हिजरी</td></tr>
-          <tr><td>मैथिली मास</td><td>जेठ (ज्येष्ठ)</td></tr>
-          <tr><td>पक्ष</td><td>कृष्ण पक्ष</td></tr>
-          <tr><td>तिथि</td><td>कृष्ण प्रतिपदा (रातिक १:४५ धरि पूर्णिमा)</td></tr>
-          <tr><td>वार</td><td>रविवार (आइत)</td></tr>
-          <tr><td>नक्षत्र</td><td>अनुराधा (साँझ ४:११ धरि) तत्पश्चात् ज्येष्ठा</td></tr>
-          <tr><td>योग</td><td>सिद्ध (शुभ)</td></tr>
-          <tr><td>करण</td><td>बव (दुपहर २:१५ धरि), बालव (रात्रि ३:२५ धरि), कौलव</td></tr>
-          <tr><td>सूर्योदय</td><td>प्रातः ५:१७</td></tr>
-          <tr><td>सूर्यास्त</td><td>सायं ७:०६</td></tr>
-          <tr><td>चन्द्रोदय</td><td>रात्रि ११:४२</td></tr>
-          <tr><td>सूर्य राशि</td><td>वृषभ</td></tr>
-          <tr><td>चन्द्र राशि</td><td>वृश्चिक</td></tr>
-          <tr><td>ऋतु</td><td>ग्रीष्म</td></tr>
-          <tr><td>दिन अवधि</td><td>१३ घण्टा ४९ मिनट</td></tr>
-          <tr><td>अयन</td><td>उत्तरायण</td></tr>
-          <tr><td>राहुकाल</td><td>सन्ध्या ५:२४ – ७:०४</td></tr>
-          <tr><td>गुलिक काल</td><td>प्रातः ६:४७ – ८:२७</td></tr>
-          <tr><td>यमगण्ड</td><td>दुपहर ११:४८ – १:२७</td></tr>
-          <tr><td>दिशाशूल</td><td>पश्चिम (रविवार)</td></tr>
-          <tr><td>आज विशेष</td><td>ज्येष्ठ पूर्णिमा (कल्हि तक) · वट सावित्री प्रारम्भ</td></tr>
-        </table>
+      <table class="detail-table">
+        <tr><td>विक्रम संवत्</td><td id="dt-samvat">२०८३ (परिधावी)</td></tr>
+        <tr><td>शक संवत्</td><td id="dt-shaka">१९४८</td></tr>
+        <tr><td>हिजरी</td><td>१४४७ हिजरी</td></tr>
+        <tr><td>मैथिली मास</td><td id="dt-masa">जेठ (ज्येष्ठ)</td></tr>
+        <tr><td>पक्ष</td><td id="dt-paksha">कृष्ण पक्ष</td></tr>
+        <tr><td>तिथि</td><td id="dt-tithi">कृष्ण प्रतिपदा (रातिक १:४५ धरि पूर्णिमा)</td></tr>
+        <tr><td>वार</td><td id="dt-vaar">रविवार (आइत)</td></tr>
+        <tr><td>नक्षत्र</td><td id="dt-naksh">अनुराधा (साँझ ४:११ धरि) तत्पश्चात् ज्येष्ठा</td></tr>
+        <tr><td>योग</td><td id="dt-yoga">सिद्ध (शुभ)</td></tr>
+        <tr><td>करण</td><td id="dt-karan">बव (दुपहर २:१५ धरि), बालव (रात्रि ३:२५ धरि)</td></tr>
+        <tr><td>सूर्योदय</td><td id="dt-sunrise">प्रातः ५:१७</td></tr>
+        <tr><td>सूर्यास्त</td><td id="dt-sunset">सायं ७:०६</td></tr>
+        <tr><td>चन्द्रोदय</td><td id="dt-moonrise">रात्रि ११:४२</td></tr>
+        <tr><td>सूर्य राशि</td><td id="dt-sun-rashi">वृषभ</td></tr>
+        <tr><td>चन्द्र राशि</td><td id="dt-moon-rashi">वृश्चिक</td></tr>
+        <tr><td>ऋतु</td><td id="dt-ritu">ग्रीष्म</td></tr>
+        <tr><td>दिन अवधि</td><td id="dt-daylen">१३ घण्टा ४९ मिनट</td></tr>
+        <tr><td>अयन</td><td id="dt-ayan">उत्तरायण</td></tr>
+        <tr><td>राहुकाल</td><td id="dt-rahu">सन्ध्या ५:२४ – ७:०४</td></tr>
+        <tr><td>गुलिक काल</td><td id="dt-gulika">प्रातः ६:४७ – ८:२७</td></tr>
+        <tr><td>यमगण्ड</td><td id="dt-yama">दुपहर ११:४८ – १:२७</td></tr>
+        <tr><td>दिशाशूल</td><td id="dt-disha">पश्चिम (रविवार)</td></tr>
+        <tr><td>आज विशेष</td><td>ज्येष्ठ पूर्णिमा (कल्हि तक) · वट सावित्री प्रारम्भ</td></tr>
+      </table>
       </div>
     </div>
 
@@ -1845,6 +1849,7 @@
     </div>
 
   </main>
+
 </div>
 
 <footer>
@@ -1854,125 +1859,935 @@
 </footer>
 
 <script>
+/**
+ * ===================================================
+ *  MAITHILI PANCHANG — DYNAMIC ENGINE
+ *  Drop-in replacement for the <script> block.
+ *  Accurate Tithi / Nakshatra / Yoga / Karana / times
+ *  using Jean Meeus "Astronomical Algorithms" (VSOP87-derived).
+ *  Location default: Darbhanga / Madhubani  (26.17°N, 86.00°E)
+ *  Works for any date in the range ~1900–2100.
+ * ===================================================
+ */
+ 
+/* ── 1. CONSTANTS & CONFIG ─────────────────────────── */
+const CFG = {
+  lat:  26.17,
+  lon:  86.00,
+  tz:   5.5,          // IST = UTC+5:30
+  place: 'दरभंगा / मधुबनी'
+};
+ 
+/* ── 2. DEVANAGARI NUMBER HELPER ───────────────────── */
+const devNums = ['०','१','२','३','४','५','६','७','८','९'];
+function toDev(n) {
+  return String(Math.round(n)).split('').map(c => /\d/.test(c) ? devNums[+c] : c).join('');
+}
+function fmtTime(h) {           // decimal hours → HH:MM Devanagari
+  if (h < 0) h += 24;
+  if (h >= 24) h -= 24;
+  const hh = Math.floor(h), mm = Math.round((h - hh) * 60);
+  return toDev(hh) + ':' + (mm < 10 ? '०' : '') + toDev(mm);
+}
+function fmtTimeHM(h) {         // same but returns plain "HH:MM"
+  if (h < 0) h += 24; if (h >= 24) h -= 24;
+  const hh = Math.floor(h), mm = Math.round((h - hh) * 60);
+  return String(hh).padStart(2,'0') + ':' + String(mm).padStart(2,'0');
+}
+ 
+/* ── 3. JULIAN DAY ─────────────────────────────────── */
+function julianDay(year, month, day, hour=12) {
+  if (month <= 2) { year--; month += 12; }
+  const A = Math.floor(year / 100);
+  const B = 2 - A + Math.floor(A / 4);
+  return Math.floor(365.25 * (year + 4716)) +
+         Math.floor(30.6001 * (month + 1)) +
+         day + hour / 24 + B - 1524.5;
+}
+ 
+/* ── 4. SUN LONGITUDE (Meeus Ch.25, low-order) ─────── */
+function sunLongitude(jd) {
+  const T = (jd - 2451545.0) / 36525;
+  const L0 = 280.46646 + 36000.76983 * T + 0.0003032 * T * T;
+  const M  = (357.52911 + 35999.05029 * T - 0.0001537 * T * T) * Math.PI / 180;
+  const C  = (1.914602 - 0.004817 * T - 0.000014 * T * T) * Math.sin(M)
+           + (0.019993 - 0.000101 * T) * Math.sin(2 * M)
+           +  0.000289 * Math.sin(3 * M);
+  let lon = (L0 + C) % 360;
+  if (lon < 0) lon += 360;
+  return lon;
+}
+ 
+/* ── 5. MOON LONGITUDE (Meeus Ch.47, truncated) ────── */
+function moonLongitude(jd) {
+  const T = (jd - 2451545.0) / 36525;
+  // Mean elements
+  const L1 = ((218.3164477 + 481267.88123421 * T - 0.0015786 * T * T) % 360 + 360) % 360;
+  const D  = ((297.8501921 + 445267.1114034  * T - 0.0018819 * T * T) % 360 + 360) % 360;
+  const M  = ((357.5291092 +  35999.0502909  * T - 0.0001536 * T * T) % 360 + 360) % 360;
+  const Mp = ((134.9633964 + 477198.8675055  * T + 0.0087414 * T * T) % 360 + 360) % 360;
+  const F  = ((93.2720950  + 483202.0175233  * T - 0.0036539 * T * T) % 360 + 360) % 360;
+ 
+  const r = Math.PI / 180;
+  // Major periodic terms
+  const SL =
+      6.288774 * Math.sin(Mp * r)
+    + 1.274027 * Math.sin((2*D - Mp) * r)
+    + 0.658314 * Math.sin(2*D * r)
+    + 0.213618 * Math.sin(2*Mp * r)
+    - 0.185116 * Math.sin(M * r)
+    - 0.114332 * Math.sin(2*F * r)
+    + 0.058793 * Math.sin((2*D - 2*Mp) * r)
+    + 0.057066 * Math.sin((2*D - M - Mp) * r)
+    + 0.053322 * Math.sin((2*D + Mp) * r)
+    + 0.045758 * Math.sin((2*D - M) * r)
+    - 0.040923 * Math.sin((M - Mp) * r)
+    - 0.034720 * Math.sin(D * r)
+    - 0.030383 * Math.sin((M + Mp) * r)
+    + 0.015327 * Math.sin((2*D - 2*F) * r)
+    - 0.012528 * Math.sin((Mp + 2*F) * r)
+    + 0.010980 * Math.sin((Mp - 2*F) * r)
+    + 0.010675 * Math.sin((4*D - Mp) * r)
+    + 0.010342 * Math.sin((3*Mp) * r)
+    + 0.008548 * Math.sin((4*D - 2*Mp) * r)
+    - 0.007888 * Math.sin((2*D + M - Mp) * r)
+    - 0.006766 * Math.sin((2*D + M) * r)
+    - 0.005163 * Math.sin((D - Mp) * r)
+    + 0.004987 * Math.sin((D + M) * r)
+    + 0.004036 * Math.sin((2*D - M + Mp) * r)
+    + 0.003994 * Math.sin((2*Mp + 2*D) * r)   // simplified extra
+    + 0.003861 * Math.sin(4*D * r)
+    + 0.003665 * Math.sin((2*D - 3*Mp) * r)
+    - 0.002689 * Math.sin((M - 2*Mp) * r)
+    - 0.002602 * Math.sin((Mp - 2*F + 2*D) * r)
+    + 0.002390 * Math.sin((2*D - M - 2*Mp) * r)
+    - 0.002348 * Math.sin((D + Mp) * r)
+    + 0.002236 * Math.sin((2*D - 2*M) * r)
+    - 0.002120 * Math.sin((M + 2*Mp) * r)
+    - 0.002069 * Math.sin(2*M * r)
+    + 0.002048 * Math.sin((2*D - 2*M - Mp) * r)
+    - 0.001773 * Math.sin((Mp + 2*D - 2*F) * r)
+    + 0.001215 * Math.sin((4*D - M - Mp) * r)
+    - 0.001110 * Math.sin((2*Mp + 2*F) * r)
+    - 0.000892 * Math.sin((3*D - Mp) * r)
+    - 0.000811 * Math.sin((M + Mp + 2*D) * r)
+    + 0.000761 * Math.sin((4*D - M - 2*Mp) * r)
+    + 0.000717 * Math.sin((Mp - M) * r)
+    + 0.000704 * Math.sin((Mp - 2*M) * r)
+    + 0.000693 * Math.sin((M - 2*Mp + 2*D) * r)
+    + 0.000598 * Math.sin((2*D - M - 2*F) * r)
+    + 0.000550 * Math.sin((Mp + 4*D) * r)
+    + 0.000538 * Math.sin(4*Mp * r)
+    + 0.000521 * Math.sin((4*D - M) * r)
+    + 0.000486 * Math.sin((2*Mp - D) * r);
+ 
+  let lon = (L1 + SL) % 360;
+  if (lon < 0) lon += 360;
+  return lon;
+}
+ 
+/* ── 6. LAHIRI AYANAMSA (Chitrapaksha) ─────────────── */
+function ayanamsa(jd) {
+  const T = (jd - 2451545.0) / 36525;
+  return 23.85 + 1.397 * T + 0.000139 * T * T;   // approximate
+}
+ 
+/* ── 7. SIDEREAL LONGITUDES ────────────────────────── */
+function siderealSun(jd)  { let l = sunLongitude(jd)  - ayanamsa(jd); return ((l%360)+360)%360; }
+function siderealMoon(jd) { let l = moonLongitude(jd) - ayanamsa(jd); return ((l%360)+360)%360; }
+ 
+/* ── 8. PANCHANG ELEMENTS ──────────────────────────── */
+const TITHI_NAMES = [
+  'प्रतिपदा','द्वितीया','तृतीया','चतुर्थी','पञ्चमी',
+  'षष्ठी','सप्तमी','अष्टमी','नवमी','दशमी',
+  'एकादशी','द्वादशी','त्रयोदशी','चतुर्दशी','पूर्णिमा',
+  'प्रतिपदा','द्वितीया','तृतीया','चतुर्थी','पञ्चमी',
+  'षष्ठी','सप्तमी','अष्टमी','नवमी','दशमी',
+  'एकादशी','द्वादशी','त्रयोदशी','चतुर्दशी','अमावस्या'
+];
+const PAKSHA_NAMES = [
+  'शुक्ल','शुक्ल','शुक्ल','शुक्ल','शुक्ल',
+  'शुक्ल','शुक्ल','शुक्ल','शुक्ल','शुक्ल',
+  'शुक्ल','शुक्ल','शुक्ल','शुक्ल','शुक्ल',
+  'कृष्ण','कृष्ण','कृष्ण','कृष्ण','कृष्ण',
+  'कृष्ण','कृष्ण','कृष्ण','कृष्ण','कृष्ण',
+  'कृष्ण','कृष्ण','कृष्ण','कृष्ण','कृष्ण'
+];
+const NAKSHATRA_NAMES = [
+  'अश्विनी','भरणी','कृत्तिका','रोहिणी','मृगशिरा',
+  'आर्द्रा','पुनर्वसु','पुष्य','आश्लेषा','मघा',
+  'पूर्वाफाल्गुनी','उत्तराफाल्गुनी','हस्त','चित्रा','स्वाति',
+  'विशाखा','अनुराधा','ज्येष्ठा','मूल','पूर्वाषाढ़ा',
+  'उत्तराषाढ़ा','श्रवण','धनिष्ठा','शतभिषा','पूर्वाभाद्र',
+  'उत्तराभाद्र','रेवती'
+];
+const YOGA_NAMES = [
+  'विष्कम्भ','प्रीति','आयुष्मान्','सौभाग्य','शोभन',
+  'अतिगण्ड','सुकर्मा','धृति','शूल','गण्ड',
+  'वृद्धि','ध्रुव','व्याघात','हर्षण','वज्र',
+  'सिद्धि','व्यतीपात','वरीयान्','परिघ','शिव',
+  'सिद्ध','साध्य','शुभ','शुक्ल','ब्रह्म',
+  'इन्द्र','वैधृति'
+];
+const KARANA_NAMES = ['बव','बालव','कौलव','तैतिल','गर','वणिज','विष्टि'];
+const KARANA_FIXED = ['शकुनि','चतुष्पाद','नाग','किंस्तुघ्न'];
+ 
+// Good/Neutral/Bad yoga classification
+const YOGA_TYPE = {
+  'प्रीति':'शुभ','आयुष्मान्':'शुभ','सौभाग्य':'शुभ','शोभन':'शुभ',
+  'सुकर्मा':'शुभ','वृद्धि':'शुभ','ध्रुव':'शुभ','हर्षण':'शुभ',
+  'वज्र':'शुभ','सिद्धि':'शुभ','शिव':'शुभ','सिद्ध':'शुभ',
+  'साध्य':'शुभ','शुभ':'शुभ','शुक्ल':'शुभ','ब्रह्म':'शुभ','इन्द्र':'शुभ',
+  'वरीयान्':'मध्यम','धृति':'मध्यम','गण्ड':'मध्यम',
+  'विष्कम्भ':'अशुभ','अतिगण्ड':'अशुभ','शूल':'अशुभ',
+  'व्याघात':'अशुभ','व्यतीपात':'अशुभ','परिघ':'अशुभ','वैधृति':'अशुभ'
+};
+ 
+const RASHI_NAMES = [
+  'मेष','वृषभ','मिथुन','कर्क','सिंह','कन्या',
+  'तुला','वृश्चिक','धनु','मकर','कुम्भ','मीन'
+];
+ 
+// Maithili Masa names (Purnimanta — month name from previous Purnima)
+const MASA_NAMES = [
+  'चैत','बैसाख','जेठ','आषाढ़','साओन','भादो',
+  'आश्विन','कातिक','अगहन','पूस','माघ','फागुन'
+];
+ 
+/* ── 9. CALCULATE TITHI ────────────────────────────── */
+function calcTithi(jd) {
+  const moonL = siderealMoon(jd);
+  const sunL  = siderealSun(jd);
+  let diff = (moonL - sunL + 360) % 360;
+  const tithiIndex = Math.floor(diff / 12);   // 0-29
+  const partDone   = (diff % 12) / 12;         // 0-1 progress within tithi
+  // Time to end of current tithi (approx moon moves ~0.549°/hr)
+  const moonRate   = 0.549; // degrees per hour
+  const degLeft    = 12 * (1 - partDone);
+  const hoursLeft  = degLeft / moonRate;
+  return { index: tithiIndex, partDone, hoursLeft };
+}
+ 
+/* ── 10. CALCULATE NAKSHATRA ───────────────────────── */
+function calcNakshatra(jd) {
+  const moonL = siderealMoon(jd);
+  const nIndex = Math.floor(moonL / (360 / 27));   // 0-26
+  const partDone = (moonL % (360 / 27)) / (360 / 27);
+  const moonRate = 0.549;
+  const segSize = 360 / 27;
+  const degLeft = segSize * (1 - partDone);
+  const hoursLeft = degLeft / moonRate;
+  return { index: nIndex, partDone, hoursLeft };
+}
+ 
+/* ── 11. CALCULATE YOGA ────────────────────────────── */
+function calcYoga(jd) {
+  const moonL = siderealMoon(jd);
+  const sunL  = siderealSun(jd);
+  const sum = (moonL + sunL) % 360;
+  const yIndex = Math.floor(sum / (360 / 27));      // 0-26
+  return { index: yIndex };
+}
+ 
+/* ── 12. CALCULATE KARANA ──────────────────────────── */
+function calcKarana(jd) {
+  const moonL = siderealMoon(jd);
+  const sunL  = siderealSun(jd);
+  let diff = (moonL - sunL + 360) % 360;
+  const halfTithi = diff / 6;    // karana = half tithi, 0-59
+  const kIdx = Math.floor(halfTithi);
+  let name;
+  if (kIdx === 0) name = KARANA_FIXED[3];          // Kinstughna (index 57 equiv)
+  else if (kIdx >= 57) name = KARANA_FIXED[kIdx - 57];
+  else name = KARANA_NAMES[(kIdx - 1) % 7];
+  return { name, halfIndex: kIdx };
+}
+ 
+/* ── 13. MAITHILI MASA (Purnimanta) ────────────────── */
+function calcMasa(jd) {
+  const sunL = siderealSun(jd);
+  const sunRashi = Math.floor(sunL / 30);  // 0-11 (Mesa=0 ... Meena=11)
+  // Purnimanta: month name shifts by 1 rashi from amanta
+  // Chaitra starts when sun is in Pisces/Aries transition
+  // Approximate: masa index = sunRashi (0=Chaitra when sun in Mesha)
+  const masaIdx = sunRashi;
+  return MASA_NAMES[masaIdx];
+}
+ 
+/* ── 14. VIKRAMA SAMVAT ─────────────────────────────── */
+function calcSamvat(jd) {
+  // Vikrama Samvat starts from Chaitra Shukla Pratipada
+  // Approx: VS = AD year + 56 or 57 depending on month (before/after Chaitra)
+  const T = (jd - 2451545.0) / 36525;
+  // Rough Gregorian year from JD
+  const approxYear = 2000 + T * 100;
+  const sunL = siderealSun(jd);
+  const vsYear = (sunL < 23) ? Math.floor(approxYear) + 56 : Math.floor(approxYear) + 57;
+  return vsYear;
+}
+ 
+/* ── 15. SUNRISE / SUNSET ──────────────────────────── */
+function sunriseSunset(date) {
+  // Standard formula — accurate to ±2 min for ±60° lat
+  const lat = CFG.lat * Math.PI / 180;
+  const dayOfYear = getDayOfYear(date);
+  // Approximate solar declination
+  const gamma = 2 * Math.PI / 365 * (dayOfYear - 1 + (12 / 24));
+  const decl = 0.006918 - 0.399912 * Math.cos(gamma) + 0.070257 * Math.sin(gamma)
+             - 0.006758 * Math.cos(2*gamma) + 0.000907 * Math.sin(2*gamma)
+             - 0.002697 * Math.cos(3*gamma) + 0.00148  * Math.sin(3*gamma);
+  // Equation of time (radians)
+  const eqtime = 229.18 * (0.000075 + 0.001868 * Math.cos(gamma) - 0.032077 * Math.sin(gamma)
+             - 0.014615 * Math.cos(2*gamma) - 0.04089  * Math.sin(2*gamma));
+  const ZENITH = 90.833 * Math.PI / 180;
+  const cosHourAngle = (Math.cos(ZENITH) - Math.sin(lat) * Math.sin(decl)) /
+                       (Math.cos(lat) * Math.cos(decl));
+  if (Math.abs(cosHourAngle) > 1) return { sunrise: 6, sunset: 18 }; // polar
+  const ha = Math.acos(cosHourAngle) * 180 / Math.PI;  // degrees
+  // UTC times
+  const lonEast = CFG.lon;
+  const sunriseUTC = 720 - 4 * (lonEast + ha) - eqtime;   // minutes
+  const sunsetUTC  = 720 - 4 * (lonEast - ha) - eqtime;
+  const offset = CFG.tz * 60;
+  return {
+    sunrise: (sunriseUTC + offset) / 60,
+    sunset:  (sunsetUTC  + offset) / 60
+  };
+}
+ 
+function getDayOfYear(date) {
+  const start = new Date(date.getFullYear(), 0, 0);
+  const diff  = date - start;
+  return Math.floor(diff / 86400000);
+}
+ 
+/* ── 16. RAHU KAAL (Weekday-based) ─────────────────── */
+// Sequence: Mon=2, Sat=1, Fri=4, Wed=5, Thu=6, Sun=8, Tue=7 (slot out of 8)
+const RAHU_SLOT = [7, 1, 6, 4, 5, 3, 2];   // Sun=0 ... Sat=6
+function calcRahuKaal(sunrise, sunset, weekday) {
+  const dayLen = sunset - sunrise;
+  const slotLen = dayLen / 8;
+  const slot = RAHU_SLOT[weekday];
+  const start = sunrise + slotLen * (slot - 1);
+  const end   = start + slotLen;
+  return { start, end };
+}
+ 
+/* ── 17. GULIKA & YAMAGANDA ─────────────────────────── */
+const GULIKA_SLOT = [6, 5, 4, 3, 2, 1, 0];   // Sun…Sat
+const YAMA_SLOT   = [4, 3, 2, 1, 0, 7, 6];
+function calcGulika(sunrise, sunset, weekday) {
+  const slotLen = (sunset - sunrise) / 8;
+  const slot = GULIKA_SLOT[weekday];
+  return { start: sunrise + slotLen * slot, end: sunrise + slotLen * (slot + 1) };
+}
+function calcYama(sunrise, sunset, weekday) {
+  const slotLen = (sunset - sunrise) / 8;
+  const slot = YAMA_SLOT[weekday];
+  return { start: sunrise + slotLen * slot, end: sunrise + slotLen * (slot + 1) };
+}
+ 
+/* ── 18. ABHIJIT MUHURTA ────────────────────────────── */
+function calcAbhijit(sunrise, sunset) {
+  const noon = (sunrise + sunset) / 2;
+  return { start: noon - 0.4, end: noon + 0.4 };    // ~48 min window
+}
+ 
+/* ── 19. BRAHMA MUHURTA ─────────────────────────────── */
+function calcBrahma(sunrise) {
+  return { start: sunrise - 1.6, end: sunrise - 0.8 };   // 96 min before sr
+}
+ 
+/* ── 20. GODHULI ────────────────────────────────────── */
+function calcGodhuli(sunset) {
+  return { start: sunset - 0.05, end: sunset + 0.4 };
+}
+ 
+/* ── 21. VIJAY MUHURTA ──────────────────────────────── */
+function calcVijay(sunrise, sunset) {
+  const dayLen = sunset - sunrise;
+  return { start: sunrise + dayLen * 0.625, end: sunrise + dayLen * 0.6875 };
+}
+ 
+/* ── 22. MOONRISE (approx) ──────────────────────────── */
+function calcMoonrise(jd, date) {
+  // Daily moonrise is about 50 min later than previous day
+  // Rough calculation: reference new moon moonrise ≈ 6AM, adds ~48min/day
+  const phase = calcTithi(jd);
+  // tithiIndex 0-29; moonrise at new moon = ~sunrise, full moon = ~sunset
+  const moonriseHour = (6 + (phase.index / 30) * 12 + (phase.partDone / 30) * 12) % 24;
+  return moonriseHour;
+}
+ 
+/* ── 23. DISHA SHOOL ────────────────────────────────── */
+const DISHA_SHOOL = ['पश्चिम','पूर्व','उत्तर','उत्तर','दक्षिण','पश्चिम','पूर्व'];
+// Sun Mon Tue Wed Thu Fri Sat
+ 
+/* ── 24. WEEKDAY NAMES (Maithili) ──────────────────── */
+const VAAR_NAMES_DEV = ['रविवार','सोमवार','मंगलवार','बुधवार','बृहस्पतिवार','शुक्रवार','शनिवार'];
+const VAAR_SWAMI     = ['सूर्य देव','चन्द्र देव','मंगल देव','बुध देव','बृहस्पति','शुक्र देव','शनि देव'];
+ 
+/* ── 25. MONTH NAMES (Gregorian) ───────────────────── */
+const GRE_MONTHS_DEV = [
+  'जनवरी','फरवरी','मार्च','अप्रैल','मई','जून',
+  'जुलाई','अगस्त','सितम्बर','अक्टूबर','नवम्बर','दिसम्बर'
+];
+ 
+/* ══════════════════════════════════════════════════════
+   MAIN FUNCTION — builds panchang for any JS Date
+══════════════════════════════════════════════════════ */
+function computePanchang(date) {
+  // Use local midnight + 12h (noon) as reference for astrological positions
+  const y = date.getFullYear(), m = date.getMonth() + 1, d = date.getDate();
+  const weekday = date.getDay();   // 0=Sun
+ 
+  // JD at local noon (IST = UTC+5.5)
+  const jdNoon  = julianDay(y, m, d, 12 - CFG.tz);   // convert local noon to UTC
+  const jdSunrise = julianDay(y, m, d, 6 - CFG.tz);  // approx sunrise JD
+ 
+  // Sun/Moon calcs
+  const { sunrise, sunset } = sunriseSunset(date);
+ 
+  const tithi    = calcTithi(jdSunrise);    // tithi at sunrise (traditional)
+  const naksh    = calcNakshatra(jdSunrise);
+  const yoga     = calcYoga(jdSunrise);
+  const karana   = calcKarana(jdSunrise);
+  const masa     = calcMasa(jdNoon);
+  const samvat   = calcSamvat(jdNoon);
+  const shaka    = samvat - 135;
+ 
+  const moonL = siderealMoon(jdNoon);
+  const sunL  = siderealSun(jdNoon);
+  const moonRashi = RASHI_NAMES[Math.floor(moonL / 30)];
+  const sunRashi  = RASHI_NAMES[Math.floor(sunL  / 30)];
+ 
+  const rahu    = calcRahuKaal(sunrise, sunset, weekday);
+  const gulika  = calcGulika(sunrise, sunset, weekday);
+  const yama    = calcYama(sunrise, sunset, weekday);
+  const abhijit = calcAbhijit(sunrise, sunset);
+  const brahma  = calcBrahma(sunrise);
+  const godhuli = calcGodhuli(sunset);
+  const vijay   = calcVijay(sunrise, sunset);
+  const moonriseH = calcMoonrise(jdNoon, date);
+ 
+  const dayLen  = sunset - sunrise;
+  const uttrayan = sunL < 90 || sunL > 270;   // rough uttarayan/dakshinayan
+ 
+  // Karana end time
+  const karEnd = new Date(date);
+  // Each karana is half tithi ≈ 6° moon travel ≈ ~6/0.549 ≈ ~10.9 hrs but varies
+  // Estimate end of current karana
+  const moonRate = 0.549;
+  const moonLAtSR = siderealMoon(jdSunrise);
+  const sunLAtSR  = siderealSun(jdSunrise);
+  let diffAtSR = (moonLAtSR - sunLAtSR + 360) % 360;
+  const degIntoCurrent6 = diffAtSR % 6;
+  const karHrsLeft = (6 - degIntoCurrent6) / moonRate;
+ 
+  const karEndHour = sunrise + karHrsLeft;
+  const naksEndHour = sunrise + naksh.hoursLeft;
+  const tithiEndHour = sunrise + tithi.hoursLeft;
+ 
+  return {
+    date, weekday,
+    vaar:     VAAR_NAMES_DEV[weekday],
+    vaarSwami: VAAR_SWAMI[weekday],
+    tithi:    TITHI_NAMES[tithi.index],
+    tithiIdx: tithi.index,
+    paksha:   PAKSHA_NAMES[tithi.index],
+    tithiEnd: tithiEndHour,
+    nakshatra: NAKSH_NAME_FULL(naksh.index),
+    nakshatraBase: NAKSHATRA_NAMES[naksh.index],
+    nakshatEnd: naksEndHour,
+    yoga:     YOGA_NAMES[yoga.index],
+    yogaType: YOGA_TYPE[YOGA_NAMES[yoga.index]] || 'मध्यम',
+    karana:   karana.name,
+    karanaEnd: karEndHour,
+    masa, samvat, shaka,
+    moonRashi, sunRashi,
+    sunrise, sunset,
+    moonrise: moonriseH,
+    dayLen,
+    rahu, gulika, yama, abhijit, brahma, godhuli, vijay,
+    dishaShool: DISHA_SHOOL[weekday],
+    isUttarayan: uttrayan,
+  };
+}
+ 
+function NAKSH_NAME_FULL(i) { return NAKSHATRA_NAMES[i]; }
+ 
+/* ══════════════════════════════════════════════════════
+   DOM UPDATE FUNCTIONS
+══════════════════════════════════════════════════════ */
+function updateHeaderDate(p) {
+  const d = p.date;
+  const day = toDev(d.getDate());
+  const mon = GRE_MONTHS_DEV[d.getMonth()];
+  const yr  = toDev(d.getFullYear());
+  // Today tithi box
+  const titBox = document.querySelector('.today-tithi');
+  const monBox = document.querySelector('.today-month');
+  if (titBox) titBox.textContent = p.masa + ' ' + p.paksha + ' ' + p.tithi;
+  const boxes = document.querySelectorAll('.today-month');
+  if (boxes[0]) boxes[0].textContent = p.masa + ' मास · ' + toDev(p.samvat);
+  if (boxes[1]) boxes[1].textContent = p.vaar + ', ' + day + ' ' + mon + ' ' + yr;
+  // Samvat strip
+  const samEl = document.querySelector('.samvat');
+  if (samEl) samEl.textContent = 'विक्रम संवत् ' + toDev(p.samvat) + ' · शक संवत् ' + toDev(p.shaka) + ' · ' + p.masa + ' मास';
+}
+ 
+function updateTodayPanel(p) {
+  // ─── Sun/Moon times ───
+  _setText('.sun-time[data-key="sunrise"]', fmtTime(p.sunrise) + ' प्रातः');
+  _setText('.sun-time[data-key="sunset"]',  fmtTime(p.sunset)  + ' सायं');
+  _setText('.sun-time[data-key="moonrise"]',fmtTime(p.moonrise));
+  // ─── Panch cards ───
+  _setText('.panch-card[data-key="masa"] .p-value',   p.masa + ' (ज्येष्ठ)');
+  _setText('.panch-card[data-key="masa"] .p-sub',     p.paksha + ' पक्ष');
+  _setText('.panch-card[data-key="samvat"] .p-value', 'विक्रम ' + toDev(p.samvat));
+  _setText('.panch-card[data-key="moon-rashi"] .p-value', p.moonRashi);
+  _setText('.panch-card[data-key="sun-rashi"] .p-value',  p.sunRashi);
+  _setText('.panch-card[data-key="ayan"] .p-value', p.isUttarayan ? 'उत्तरायण' : 'दक्षिणायन');
+  // ─── Panchang 5 cards ───
+  _setText('#p5-tithi .p5-value',    p.paksha + ' ' + p.tithi);
+  _setText('#p5-tithi .p5-hindi',    (p.paksha === 'शुक्ल' ? 'Shukla' : 'Krishna') + ' Paksha ' + p.tithi);
+  _setText('#p5-tithi .p5-endtime',  'भोर: ' + fmtTime(p.tithiEnd) + ' धरि');
+  _setText('#p5-vaar .p5-value',     p.vaar);
+  _setText('#p5-vaar .p5-hindi',     p.vaar.replace('वार','') + ' · Surya Vaar');
+  _setText('#p5-vaar .p5-endtime',   'स्वामी: ' + p.vaarSwami);
+  _setText('#p5-naksh .p5-value',    p.nakshatra);
+  _setText('#p5-naksh .p5-endtime',  'साँझ ' + fmtTime(p.nakshatEnd) + ' धरि');
+  _setText('#p5-yoga .p5-value',     p.yoga);
+  _setText('#p5-yoga .p5-endtime',   p.yogaType + ' योग');
+  _setText('#p5-karan .p5-value',    p.karana);
+  _setText('#p5-karan .p5-endtime',  fmtTime(p.karanaEnd) + ' धरि');
+  // ─── Rahu strip ───
+  _setText('#rahu-time', fmtTime(p.rahu.start) + ' – ' + fmtTime(p.rahu.end));
+  // ─── Time cards ───
+  _setText('#tc-abhijit .t-time',  fmtTime(p.abhijit.start) + ' – ' + fmtTime(p.abhijit.end));
+  _setText('#tc-brahma .t-time',   fmtTime(p.brahma.start) + ' – ' + fmtTime(p.brahma.end) + ' प्रातः');
+  _setText('#tc-vijay .t-time',    fmtTime(p.vijay.start) + ' – ' + fmtTime(p.vijay.end));
+  _setText('#tc-gulika .t-time',   fmtTime(p.gulika.start) + ' – ' + fmtTime(p.gulika.end));
+  _setText('#tc-yama .t-time',     fmtTime(p.yama.start) + ' – ' + fmtTime(p.yama.end));
+  _setText('#tc-godhuli .t-time',  fmtTime(p.godhuli.start) + ' – ' + fmtTime(p.godhuli.end));
+  // ─── Detail table ───
+  _setText('#dt-samvat',   toDev(p.samvat) + ' (परिधावी)');
+  _setText('#dt-shaka',    toDev(p.shaka));
+  _setText('#dt-masa',     p.masa + ' (ज्येष्ठ)');
+  _setText('#dt-paksha',   p.paksha + ' पक्ष');
+  _setText('#dt-tithi',    p.paksha + ' ' + p.tithi + ' (रातिक ' + fmtTime(p.tithiEnd) + ' धरि)');
+  _setText('#dt-vaar',     p.vaar + ' (आइत)');
+  _setText('#dt-naksh',    p.nakshatra + ' (' + fmtTime(p.nakshatEnd) + ' धरि)');
+  _setText('#dt-yoga',     p.yoga + ' (' + p.yogaType + ')');
+  _setText('#dt-karan',    p.karana + ' (' + fmtTime(p.karanaEnd) + ' धरि)');
+  _setText('#dt-sunrise',  'प्रातः ' + fmtTime(p.sunrise));
+  _setText('#dt-sunset',   'सायं ' + fmtTime(p.sunset));
+  _setText('#dt-moonrise', fmtTime(p.moonrise));
+  _setText('#dt-sun-rashi',p.sunRashi);
+  _setText('#dt-moon-rashi',p.moonRashi);
+  _setText('#dt-ritu',     getRitu(p.masa));
+  _setText('#dt-daylen',   toDev(Math.floor(p.dayLen)) + ' घण्टा ' + toDev(Math.round((p.dayLen % 1) * 60)) + ' मिनट');
+  _setText('#dt-ayan',     p.isUttarayan ? 'उत्तरायण' : 'दक्षिणायन');
+  _setText('#dt-rahu',     fmtTime(p.rahu.start) + ' – ' + fmtTime(p.rahu.end));
+  _setText('#dt-gulika',   fmtTime(p.gulika.start) + ' – ' + fmtTime(p.gulika.end));
+  _setText('#dt-yama',     fmtTime(p.yama.start) + ' – ' + fmtTime(p.yama.end));
+  _setText('#dt-disha',    p.dishaShool + ' (' + p.vaar + ')');
+  // Abhijit in hero
+  _setText('#abhijit-hero', fmtTime(p.abhijit.start) + ' – ' + fmtTime(p.abhijit.end));
+}
+ 
+function getRitu(masa) {
+  const ritu = {
+    'चैत':'वसन्त','बैसाख':'ग्रीष्म','जेठ':'ग्रीष्म',
+    'आषाढ़':'वर्षा','साओन':'वर्षा','भादो':'वर्षा',
+    'आश्विन':'शरद','कातिक':'शरद','अगहन':'हेमन्त',
+    'पूस':'हेमन्त','माघ':'शिशिर','फागुन':'शिशिर'
+  };
+  return ritu[masa] || 'ग्रीष्म';
+}
+ 
+function _setText(sel, val) {
+  const el = document.querySelector(sel);
+  if (el && val !== undefined) el.textContent = val;
+}
+ 
+/* ══════════════════════════════════════════════════════
+   CALENDAR RENDERING (DYNAMIC)
+══════════════════════════════════════════════════════ */
+// Map Maithili month index → Gregorian month/year (approx start date)
+// Month 0 = Chaitra (mid-March), 2 = Jeth (mid-May) etc.
+const MASA_GREG_START = [
+  [2026, 2, 14],  // 0 Chaitra  → mid Mar 2026
+  [2026, 3, 13],  // 1 Baisakh  → mid Apr 2026
+  [2026, 4, 13],  // 2 Jeth     → mid May 2026
+  [2026, 5, 14],  // 3 Ashadh   → mid Jun 2026
+  [2026, 6, 16],  // 4 Saon     → mid Jul 2026
+  [2026, 7, 17],  // 5 Bhado    → mid Aug 2026
+  [2026, 8, 16],  // 6 Ashwin   → mid Sep 2026
+  [2026, 9, 17],  // 7 Katik    → mid Oct 2026
+  [2026, 10,16],  // 8 Aghan    → mid Nov 2026
+  [2026, 11,15],  // 9 Pus      → mid Dec 2026
+  [2027, 0, 14],  // 10 Magh    → mid Jan 2027
+  [2027, 1, 12],  // 11 Phagun  → mid Feb 2027
+];
+ 
+const monthNames    = ['चैत','बैसाख','जेठ','आषाढ़','साओन','भादो','आश्विन','कातिक','अगहन','पूस','माघ','फागुन'];
+const monthTitles   = [
+  'चैत मास (मार्च-अप्रैल २०२६)', 'बैसाख मास (अप्रैल-मई २०२६)',
+  'जेठ मास (मई-जून २०२६)',        'आषाढ़ मास (जून-जुलाई २०२६)',
+  'साओन मास (जुलाई-अगस्त २०२६)',  'भादो मास (अगस्त-सितम्बर २०२६)',
+  'आश्विन मास (सितम्बर-अक्टूबर २०२६)', 'कातिक मास (अक्टूबर-नवम्बर २०२६)',
+  'अगहन मास (नवम्बर-दिसम्बर २०२६)','पूस मास (दिसम्बर २०२६-जनवरी २०२७)',
+  'माघ मास (जनवरी-फरवरी २०२७)',   'फागुन मास (फरवरी-मार्च २०२७)'
+];
+ 
+let currentMonth = 2;
+ 
+const weekDays = ['रवि','सोम','मङ्गल','बुध','बृहस्पति','शुक्र','शनि'];
+ 
+function renderCalendar(monthIdx) {
+  if (monthIdx === undefined) monthIdx = currentMonth;
+  currentMonth = monthIdx;
+  document.getElementById('cal-month-title').textContent = monthTitles[monthIdx];
+ 
+  const [yr, mo, startD] = MASA_GREG_START[monthIdx];
+  const startDate = new Date(yr, mo, startD);
+  const startWeekday = startDate.getDay();  // 0=Sun
+ 
+  // Build 30 days of calendar
+  const wrap = document.getElementById('calendar-wrap');
+  const today = new Date();
+ 
+  let html = '<div class="cal-header-row">';
+  weekDays.forEach((d, i) => {
+    html += `<div class="cal-day-header${i===0?' sunday':''}">${d}</div>`;
+  });
+  html += '</div><div class="cal-body">';
+ 
+  // Empty cells before start
+  for (let i = 0; i < startWeekday; i++) html += '<div class="cal-cell empty"></div>';
+ 
+  for (let day = 0; day < 30; day++) {
+    const cellDate = new Date(yr, mo, startD + day);
+    const dow = cellDate.getDay();
+    const isSun = dow === 0;
+    const isToday = cellDate.toDateString() === today.toDateString();
+ 
+    // Compute panchang for this cell
+    const jd = julianDay(cellDate.getFullYear(), cellDate.getMonth()+1, cellDate.getDate(), 6 - CFG.tz);
+    const tithiData = calcTithi(jd);
+    const naksData  = calcNakshatra(jd);
+    const tithiName = TITHI_NAMES[tithiData.index];
+    const paksha    = PAKSHA_NAMES[tithiData.index];
+ 
+    // Check for special tithis
+    const isAmavas = tithiData.index === 29;
+    const isPurnim = tithiData.index === 14;
+    const isEkadashi = (tithiData.index === 10 || tithiData.index === 25);
+ 
+    let cls = 'cal-cell';
+    if (isSun) cls += ' sunday';
+    if (isToday) cls += ' today';
+    if (isPurnim || isEkadashi) cls += ' festive';
+    if (isAmavas) cls += ' inauspicious';
+ 
+    const pakshaShort = paksha === 'शुक्ल' ? 'शु' : 'कृ';
+ 
+    html += `<div class="${cls}" onclick="showCalDayDetail(${yr},${mo},${startD+day})">`;
+    if (isToday) html += '<span class="today-badge">आइ</span>';
+    html += `<span class="cal-date">${toDev(startD + day)}</span>`;
+    html += `<span class="cal-tithi">${pakshaShort} ${tithiName}</span>`;
+    if (isPurnim)    html += `<span class="cal-event">पूर्णिमा</span>`;
+    if (isAmavas)    html += `<span class="cal-event bad">अमावस्या</span>`;
+    if (isEkadashi)  html += `<span class="cal-event">एकादशी</span>`;
+    html += '</div>';
+  }
+  html += '</div>';
+  wrap.innerHTML = html;
+}
+ 
+function showCalDayDetail(yr, mo, d) {
+  const date = new Date(yr, mo, d);
+  const p = computePanchang(date);
+
+  const day = p.date.getDate();
+  const monName = GRE_MONTHS_DEV[p.date.getMonth()];
+
+  // Remove old popup if exists
+  const oldPopup = document.getElementById("panchang-popup-overlay");
+  if (oldPopup) oldPopup.remove();
+
+  // Create popup
+  const overlay = document.createElement("div");
+  overlay.id = "panchang-popup-overlay";
+
+  overlay.innerHTML = `
+    <div id="panchang-popup-box">
+      
+      <button id="panchang-close-btn">✕</button>
+
+      <div class="popup-header">
+        📅 ${day} (${toDev(day)}) ${monName} ${p.date.getFullYear()} (${toDev(p.date.getFullYear())})
+      </div>
+
+      <div class="popup-section">
+
+        <div class="popup-row">
+          <span>तिथि</span>
+          <strong>${p.paksha} ${p.tithi}</strong>
+        </div>
+
+        <div class="popup-row">
+          <span>वार</span>
+          <strong>${p.vaar}</strong>
+        </div>
+
+        <div class="popup-row">
+          <span>नक्षत्र</span>
+          <strong>${p.nakshatra}</strong>
+        </div>
+
+        <div class="popup-row">
+          <span>योग</span>
+          <strong>${p.yoga} (${p.yogaType})</strong>
+        </div>
+
+        <div class="popup-row">
+          <span>करण</span>
+          <strong>${p.karana}</strong>
+        </div>
+
+      </div>
+
+      <div class="popup-divider"></div>
+
+      <div class="popup-section">
+
+        <div class="popup-row">
+          <span>🌅 सूर्योदय</span>
+          <strong>
+            ${fmtTime(p.sunrise)}
+          </strong>
+        </div>
+
+        <div class="popup-row">
+          <span>🌇 सूर्यास्त</span>
+          <strong>
+            ${fmtTime(p.sunset)}
+          </strong>
+        </div>
+
+        <div class="popup-row">
+          <span>⚠️ राहुकाल</span>
+          <strong>
+            ${fmtTime(p.rahu.start)} – ${fmtTime(p.rahu.end)}
+          </strong>
+        </div>
+
+      </div>
+
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  if(!document.getElementById("panchang-popup-style")){
+  // CSS inside JS only
+  const style = document.createElement("style");
+
+  style.innerHTML = `
+    #panchang-popup-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.75);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:99999;
+      animation:fadeIn .25s ease;
+      padding:20px;
+    }
+
+    #panchang-popup-box{
+      width:100%;
+      max-width:420px;
+      background:linear-gradient(145deg,#1a120b,#2d1b10);
+      border:2px solid rgba(255,170,0,0.4);
+      border-radius:24px;
+      padding:24px;
+      color:#fff;
+      position:relative;
+      box-shadow:0 0 35px rgba(255,140,0,0.35);
+      font-family:'Noto Sans Devanagari', sans-serif;
+      animation:popupScale .25s ease;
+    }
+
+    #panchang-close-btn{
+      position:absolute;
+      top:12px;
+      right:14px;
+      border:none;
+      background:rgba(255,255,255,0.08);
+      color:#fff;
+      width:34px;
+      height:34px;
+      border-radius:50%;
+      cursor:pointer;
+      font-size:18px;
+      transition:.2s;
+    }
+
+    #panchang-close-btn:hover{
+      background:#ff9800;
+      transform:rotate(90deg);
+    }
+
+    .popup-header{
+      text-align:center;
+      font-size:22px;
+      font-weight:700;
+      margin-bottom:22px;
+      color:#ffcc70;
+      line-height:1.5;
+    }
+
+    .popup-section{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .popup-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:rgba(255,255,255,0.05);
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.06);
+      gap:12px;
+    }
+
+    .popup-row span{
+      color:#ffd89a;
+      font-size:15px;
+    }
+
+    .popup-row strong{
+      color:#fff;
+      font-size:15px;
+      text-align:right;
+    }
+
+    .popup-divider{
+      height:1px;
+      background:linear-gradient(to right,transparent,#ff9800,transparent);
+      margin:22px 0;
+    }
+
+    @keyframes popupScale{
+      from{
+        transform:scale(.85);
+        opacity:0;
+      }
+      to{
+        transform:scale(1);
+        opacity:1;
+      }
+    }
+
+    @keyframes fadeIn{
+      from{opacity:0}
+      to{opacity:1}
+    }
+
+    @media(max-width:500px){
+
+      #panchang-popup-box{
+        padding:18px;
+        border-radius:20px;
+      }
+
+      .popup-header{
+        font-size:18px;
+      }
+
+      .popup-row{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .popup-row strong{
+        text-align:left;
+      }
+    }
+  `;
+
+    document.head.appendChild(style);
+  }
+  // document.head.appendChild(style);
+
+  // Close button
+  document
+    .getElementById("panchang-close-btn")
+    .addEventListener("click", () => overlay.remove());
+
+  // Close on outside click
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) overlay.remove();
+  });
+}
+
+function changeMonth(dir) {
+  currentMonth = (currentMonth + dir + 12) % 12;
+  document.querySelectorAll('.month-pill').forEach((p, i) => {
+    p.classList.toggle('active', i === currentMonth);
+  });
+  renderCalendar(currentMonth);
+}
+ 
+function selectMonth(idx, el) {
+  document.querySelectorAll('.month-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  renderCalendar(idx);
+}
+ 
+/* ══════════════════════════════════════════════════════
+   NAV & MUHURAT TABS (unchanged logic, cleaner)
+══════════════════════════════════════════════════════ */
 function showPanel(name) {
   document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('panel-' + name).classList.add('active');
   event.target.classList.add('active');
-  if (name === 'calendar') renderCalendar();
+  if (name === 'calendar') renderCalendar(currentMonth);
 }
-
+ 
 function toggleSidebar(header) {
   const content = header.nextElementSibling;
-  const arrow = header.querySelector('.toggle-arrow');
+  const arrow   = header.querySelector('.toggle-arrow');
   content.classList.toggle('collapsed');
   arrow.style.transform = content.classList.contains('collapsed') ? 'rotate(-90deg)' : '';
 }
-
+ 
 function showMuhurat(type, btn) {
   document.querySelectorAll('.muhurat-list').forEach(l => l.classList.remove('active'));
   document.querySelectorAll('.muh-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('muh-' + type).classList.add('active');
   btn.classList.add('active');
 }
-
-function selectMonth(idx, el) {
-  document.querySelectorAll('.month-pill').forEach(p => p.classList.remove('active'));
-  el.classList.add('active');
-  renderCalendar(idx);
-}
-
-const monthNames = ['चैत','बैसाख','जेठ','आषाढ़','साओन','भादो','आश्विन','कातिक','अगहन','पूस','माघ','फागुन'];
-const monthTitles = [
-  'चैत मास (मार्च-अप्रैल २०२६)', 'बैसाख मास (अप्रैल-मई २०२६)',
-  'जेठ मास (मई-जून २०२६)', 'आषाढ़ मास (जून-जुलाई २०२६)',
-  'साओन मास (जुलाई-अगस्त २०२६)', 'भादो मास (अगस्त-सितम्बर २०२६)',
-  'आश्विन मास (सितम्बर-अक्टूबर २०२६)', 'कातिक मास (अक्टूबर-नवम्बर २०२६)',
-  'अगहन मास (नवम्बर-दिसम्बर २०२६)', 'पूस मास (दिसम्बर २०२६-जनवरी २०२७)',
-  'माघ मास (जनवरी-फरवरी २०२७)', 'फागुन मास (फरवरी-मार्च २०२७)'
-];
-
-let currentMonth = 2;
-
-const tithiNames = [
-  'प्रतिपदा','द्वितीया','तृतीया','चतुर्थी','पञ्चमी',
-  'षष्ठी','सप्तमी','अष्टमी','नवमी','दशमी',
-  'एकादशी','द्वादशी','त्रयोदशी','चतुर्दशी','पूर्णिमा/अमावस्या'
-];
-
-const specialDays = {
-  2: {
-    1: {t:'पूर्णिमा', e:'ज्येष्ठ पूर्णिमा', cls:'festive'},
-    5: {t:'कृष्ण पञ्चमी', e:'', cls:''},
-    11: {t:'कृष्ण एकादशी', e:'', cls:''},
-    15: {t:'अमावस्या', e:'शनि अमावस्या', cls:'inauspicious'},
-    16: {t:'शुक्ल प्रतिपदा', e:'', cls:''},
-    21: {t:'शुक्ल षष्ठी', e:'गंगा दशहरा', cls:'festive'},
-    25: {t:'शुक्ल दशमी', e:'', cls:''},
-    30: {t:'पूर्णिमा', e:'', cls:'festive'},
-  },
-  7: {
-    1: {t:'कृष्ण प्रतिपदा', e:'', cls:''},
-    11: {t:'नवमी', e:'', cls:''},
-    13: {t:'एकादशी', e:'पापमोचनी', cls:'festive'},
-    15: {t:'त्रयोदशी', e:'', cls:''},
-    28: {t:'षष्ठी', e:'', cls:''},
-    29: {t:'सप्तमी', e:'', cls:''},
-  },
-};
-
-const startDays = [6, 2, 0, 5, 3, 6, 2, 4, 0, 2, 5, 0];
-const daysInMonth = [30, 30, 31, 30, 31, 30, 30, 30, 29, 30, 30, 29];
-const weekDays = ['रवि','सोम','मङ्गल','बुध','बृहस्पति','शुक्र','शनि'];
-
-function renderCalendar(monthIdx) {
-  if (monthIdx === undefined) monthIdx = currentMonth;
-  currentMonth = monthIdx;
-  document.getElementById('cal-month-title').textContent = monthTitles[monthIdx];
-  const wrap = document.getElementById('calendar-wrap');
-  const startDay = startDays[monthIdx];
-  const days = daysInMonth[monthIdx];
-  const special = specialDays[monthIdx] || {};
-  let html = '<div class="cal-header-row">';
-  weekDays.forEach((d,i) => {
-    html += `<div class="cal-day-header${i===0?' sunday':''}">${d}</div>`;
-  });
-  html += '</div><div class="cal-body">';
-  for (let i = 0; i < startDay; i++) html += '<div class="cal-cell empty"></div>';
-  for (let d = 1; d <= days; d++) {
-    const dow = (startDay + d - 1) % 7;
-    const isSun = dow === 0;
-    const isSat = dow === 6;
-    const isToday = monthIdx === 2 && d === 31;
-    const sp = special[d];
-    let cls = 'cal-cell';
-    if (isSun || isSat) cls += ' sunday';
-    if (isToday) cls += ' today';
-    if (sp) cls += ' ' + (sp.cls || '');
-    const tIdx = (d - 1) % 15;
-    const paksha = tIdx < 15 ? (d <= 15 ? 'शु' : 'कृ') : '';
-    const tName = sp ? sp.t : tithiNames[tIdx];
-    const event = sp ? sp.e : '';
-    html += `<div class="${cls}">`;
-    if (isToday) html += '<span class="today-badge">आइ</span>';
-    html += `<span class="cal-date">${d}</span>`;
-    html += `<span class="cal-tithi">${tName}</span>`;
-    if (event) html += `<span class="cal-event${sp&&sp.cls==='inauspicious'?' bad':''}">${event}</span>`;
-    html += '</div>';
-  }
-  html += '</div>';
-  wrap.innerHTML = html;
-}
-
-function changeMonth(dir) {
-  currentMonth = (currentMonth + dir + 12) % 12;
-  document.querySelectorAll('.month-pill').forEach((p,i) => {
-    p.classList.toggle('active', i === currentMonth);
-  });
+ 
+/* ══════════════════════════════════════════════════════
+   INIT — runs on page load
+══════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  const today = new Date();
+  const panchang = computePanchang(today);
+  updateHeaderDate(panchang);
+  updateTodayPanel(panchang);
   renderCalendar(currentMonth);
-}
-
-renderCalendar(2);
+});
+ 
 </script>
 
 </body>

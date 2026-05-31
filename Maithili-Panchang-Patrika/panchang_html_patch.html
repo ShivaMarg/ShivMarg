@@ -1,0 +1,242 @@
+<!-- ================================================================
+  MAITHILI PANCHANG — HTML PATCH GUIDE
+  Apply these targeted changes to your existing HTML.
+  The JS engine (panchang_engine.js) does all computation.
+  ================================================================ -->
+
+
+<!-- ════════════════════════════════════════
+  PATCH 1 — SUN/MOON TIMES in .panchang-hero
+  Find the existing .panchang-sun-info divs and replace
+  their inner content as shown below.
+  KEY CHANGE: add data-key and id attributes so JS can target them.
+════════════════════════════════════════ -->
+
+<!-- LEFT sun-info block — replace existing inner HTML -->
+<div class="panchang-sun-info">
+  <div class="sun-icon">🌅</div>
+  <div class="sun-label">सूर्योदय</div>
+  <div class="sun-time" data-key="sunrise">५:१७ प्रातः</div>
+  <div style="margin-top:8px;">
+    <div class="sun-icon">🌇</div>
+    <div class="sun-label">सूर्यास्त</div>
+    <div class="sun-time" data-key="sunset">७:०६ सायं</div>
+  </div>
+</div>
+
+<!-- RIGHT sun-info block — replace existing inner HTML -->
+<div class="panchang-sun-info">
+  <div class="sun-icon">🌙</div>
+  <div class="sun-label">चन्द्रोदय</div>
+  <div class="sun-time" data-key="moonrise">रात्रि ११:४२</div>
+  <div style="margin-top:8px;">
+    <div class="sun-icon">⭐</div>
+    <div class="sun-label">अभिजित</div>
+    <div class="sun-time" id="abhijit-hero">११:४८ – १२:४०</div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+  PATCH 2 — PANCH CARDS (6 cards in .panchang-main-details)
+  Add data-key to each .panch-card div.
+  Replace existing 6 .panch-card divs with these:
+════════════════════════════════════════ -->
+
+<div class="panchang-main-details">
+  <div class="panch-card" data-key="masa">
+    <span class="p-label">मास</span>
+    <span class="p-value">जेठ (ज्येष्ठ)</span>
+    <span class="p-sub">कृष्ण पक्ष</span>
+  </div>
+  <div class="panch-card" data-key="samvat">
+    <span class="p-label">संवत्</span>
+    <span class="p-value">विक्रम २०८३</span>
+    <span class="p-sub">परिधावी नाम संवत्</span>
+  </div>
+  <div class="panch-card" data-key="ritu">
+    <span class="p-label">ऋतु</span>
+    <span class="p-value">ग्रीष्म ऋतु</span>
+    <span class="p-sub">वसन्त ऋतु समाप्त</span>
+  </div>
+  <div class="panch-card" data-key="moon-rashi">
+    <span class="p-label">चन्द्र राशि</span>
+    <span class="p-value">वृश्चिक</span>
+    <span class="p-sub">Scorpio</span>
+  </div>
+  <div class="panch-card" data-key="sun-rashi">
+    <span class="p-label">सूर्य राशि</span>
+    <span class="p-value">वृषभ</span>
+    <span class="p-sub">Taurus</span>
+  </div>
+  <div class="panch-card" data-key="ayan">
+    <span class="p-label">अयनकाल</span>
+    <span class="p-value">उत्तरायण</span>
+    <span class="p-sub">दक्षिणायन प्रारम्भ: आषाढ़ संक्रान्ति</span>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+  PATCH 3 — PANCHANG 5 CARDS (.panch-5-grid)
+  Add id attributes to each .panch-5-card and
+  add a span with class p5-endtime inside each card.
+  Replace the full .panch-5-grid with this:
+════════════════════════════════════════ -->
+
+<div class="panch-5-grid">
+  <div class="panch-5-card tithi" id="p5-tithi">
+    <span class="p5-num">01</span>
+    <span class="p5-name">तिथि</span>
+    <span class="p5-value">कृष्ण प्रतिपदा</span>
+    <span class="p5-hindi">Krishna Paksha Pratipada</span>
+    <span class="p5-hindi p5-endtime" style="margin-top:4px; font-size:0.7rem; color:#8B5E3C;">भोर: ०१:४५ धरि पूर्णिमा</span>
+  </div>
+  <div class="panch-5-card vaar" id="p5-vaar">
+    <span class="p5-num">02</span>
+    <span class="p5-name">वार</span>
+    <span class="p5-value">रविवार</span>
+    <span class="p5-hindi">Sunday · Surya Vaar</span>
+    <span class="p5-hindi p5-endtime" style="margin-top:4px; font-size:0.7rem; color:#8B5E3C;">स्वामी: सूर्य देव</span>
+  </div>
+  <div class="panch-5-card nakshatra" id="p5-naksh">
+    <span class="p5-num">03</span>
+    <span class="p5-name">नक्षत्र</span>
+    <span class="p5-value">अनुराधा</span>
+    <span class="p5-hindi">Anuradha · वृश्चिक</span>
+    <span class="p5-hindi p5-endtime" style="margin-top:4px; font-size:0.7rem; color:#8B5E3C;">साँझ ४:११ धरि</span>
+  </div>
+  <div class="panch-5-card yoga" id="p5-yoga">
+    <span class="p5-num">04</span>
+    <span class="p5-name">योग</span>
+    <span class="p5-value">सिद्ध योग</span>
+    <span class="p5-hindi">Siddha Yoga</span>
+    <span class="p5-hindi p5-endtime" style="margin-top:4px; font-size:0.7rem; color:#8B5E3C;">अत्यन्त शुभ योग</span>
+  </div>
+  <div class="panch-5-card karan" id="p5-karan">
+    <span class="p5-num">05</span>
+    <span class="p5-name">करण</span>
+    <span class="p5-value">बव</span>
+    <span class="p5-hindi">Bava Karana</span>
+    <span class="p5-hindi p5-endtime" style="margin-top:4px; font-size:0.7rem; color:#8B5E3C;">दुपहर २:१५ धरि</span>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+  PATCH 4 — RAHU STRIP
+  Add id="rahu-time" to the rahu time span.
+  Replace existing .rahu-strip with:
+════════════════════════════════════════ -->
+
+<div class="rahu-strip">
+  <span style="font-size:1.1rem;">🚫</span>
+  <span class="r-label">राहुकाल:</span>
+  <span class="r-time" id="rahu-time">सन्ध्या ५:२४ – ७:०४ बजे</span>
+  <span class="r-note">∷ एहि काल मे शुभ कार्य वर्जित अछि ∷</span>
+</div>
+
+
+<!-- ════════════════════════════════════════
+  PATCH 5 — TIME GRID CARDS (6 cards)
+  Add id to each .time-card.
+  Replace entire .time-grid with:
+════════════════════════════════════════ -->
+
+<div class="time-grid">
+  <div class="time-card shubh-bg" id="tc-abhijit">
+    <span class="t-name">अभिजित मुहूर्त</span>
+    <span class="t-time">११:४८ – १२:४०</span>
+    <span class="t-desc">दिनक सर्वोत्तम मुहूर्त</span>
+  </div>
+  <div class="time-card shubh-bg" id="tc-brahma">
+    <span class="t-name">ब्रह्म मुहूर्त</span>
+    <span class="t-time">३:४५ – ४:३१ प्रातः</span>
+    <span class="t-desc">पूजा-ध्यान लेल सर्वोत्तम</span>
+  </div>
+  <div class="time-card shubh-bg" id="tc-vijay">
+    <span class="t-name">विजय मुहूर्त</span>
+    <span class="t-time">दुपहर २:१७ – ३:०७</span>
+    <span class="t-desc">सफलताक लेल शुभ</span>
+  </div>
+  <div class="time-card ashubh-bg" id="tc-gulika">
+    <span class="t-name">गुलिक काल</span>
+    <span class="t-time">प्रातः ६:४७ – ८:२७</span>
+    <span class="t-desc">अशुभ काल</span>
+  </div>
+  <div class="time-card ashubh-bg" id="tc-yama">
+    <span class="t-name">यमगण्ड</span>
+    <span class="t-time">दुपहर ११:४८ – १:२७</span>
+    <span class="t-desc">यात्रा लेल वर्जित</span>
+  </div>
+  <div class="time-card neutral-bg" id="tc-godhuli">
+    <span class="t-name">गोधूलि</span>
+    <span class="t-time">सायं ७:०३ – ७:२७</span>
+    <span class="t-desc">विवाह-गृहप्रवेश लेल उत्तम</span>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+  PATCH 6 — DETAIL TABLE
+  Add id to each <td> value cell.
+  Replace the entire .detail-table <tbody> with:
+════════════════════════════════════════ -->
+
+<table class="detail-table">
+  <tr><td>विक्रम संवत्</td><td id="dt-samvat">२०८३ (परिधावी)</td></tr>
+  <tr><td>शक संवत्</td><td id="dt-shaka">१९४८</td></tr>
+  <tr><td>हिजरी</td><td>१४४७ हिजरी</td></tr>
+  <tr><td>मैथिली मास</td><td id="dt-masa">जेठ (ज्येष्ठ)</td></tr>
+  <tr><td>पक्ष</td><td id="dt-paksha">कृष्ण पक्ष</td></tr>
+  <tr><td>तिथि</td><td id="dt-tithi">कृष्ण प्रतिपदा (रातिक १:४५ धरि पूर्णिमा)</td></tr>
+  <tr><td>वार</td><td id="dt-vaar">रविवार (आइत)</td></tr>
+  <tr><td>नक्षत्र</td><td id="dt-naksh">अनुराधा (साँझ ४:११ धरि) तत्पश्चात् ज्येष्ठा</td></tr>
+  <tr><td>योग</td><td id="dt-yoga">सिद्ध (शुभ)</td></tr>
+  <tr><td>करण</td><td id="dt-karan">बव (दुपहर २:१५ धरि), बालव (रात्रि ३:२५ धरि)</td></tr>
+  <tr><td>सूर्योदय</td><td id="dt-sunrise">प्रातः ५:१७</td></tr>
+  <tr><td>सूर्यास्त</td><td id="dt-sunset">सायं ७:०६</td></tr>
+  <tr><td>चन्द्रोदय</td><td id="dt-moonrise">रात्रि ११:४२</td></tr>
+  <tr><td>सूर्य राशि</td><td id="dt-sun-rashi">वृषभ</td></tr>
+  <tr><td>चन्द्र राशि</td><td id="dt-moon-rashi">वृश्चिक</td></tr>
+  <tr><td>ऋतु</td><td id="dt-ritu">ग्रीष्म</td></tr>
+  <tr><td>दिन अवधि</td><td id="dt-daylen">१३ घण्टा ४९ मिनट</td></tr>
+  <tr><td>अयन</td><td id="dt-ayan">उत्तरायण</td></tr>
+  <tr><td>राहुकाल</td><td id="dt-rahu">सन्ध्या ५:२४ – ७:०४</td></tr>
+  <tr><td>गुलिक काल</td><td id="dt-gulika">प्रातः ६:४७ – ८:२७</td></tr>
+  <tr><td>यमगण्ड</td><td id="dt-yama">दुपहर ११:४८ – १:२७</td></tr>
+  <tr><td>दिशाशूल</td><td id="dt-disha">पश्चिम (रविवार)</td></tr>
+  <tr><td>आज विशेष</td><td>ज्येष्ठ पूर्णिमा (कल्हि तक) · वट सावित्री प्रारम्भ</td></tr>
+</table>
+
+
+<!-- ════════════════════════════════════════
+  PATCH 7 — REPLACE THE ENTIRE <script> BLOCK
+  At the bottom of <body>, remove the existing <script>...</script>
+  and replace with these two lines:
+════════════════════════════════════════ -->
+
+<script src="panchang_engine.js"></script>
+
+<!--
+  ─── OR if you want it inline (single file) ───
+  Copy the full contents of panchang_engine.js
+  and paste it between <script> ... </script>
+  at the bottom of <body>, replacing the old script.
+-->
+
+
+<!-- ════════════════════════════════════════
+  NOTES ON ACCURACY
+  ─────────────────────────────────────────
+  The engine uses Jean Meeus "Astronomical Algorithms"
+  (VSOP87 truncated) + Lahiri Ayanamsa. Accuracy:
+  • Tithi end time:    ±10–15 min  (good for practical use)
+  • Nakshatra end:     ±15 min
+  • Sunrise/Sunset:    ±2 min  (for Darbhanga lat/lon)
+  • Rahu/Gulika/Yama:  derived from sunrise, so same ±2 min
+
+  For higher precision (±1 min), integrate the
+  astronomy-engine npm package (available on CDN):
+  https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js
+════════════════════════════════════════ -->
