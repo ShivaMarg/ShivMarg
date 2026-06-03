@@ -2522,72 +2522,84 @@ function showCalDayDetail(yr, mo, d) {
   overlay.id = "panchang-popup-overlay";
 
   overlay.innerHTML = `
-    <div id="panchang-popup-box">
-      
-      <button id="panchang-close-btn">✕</button>
+<div id="panchang-popup-box">
 
-      <div class="popup-header">
-        📅 ${day} (${toDev(day)}) ${monName} ${p.date.getFullYear()} (${toDev(p.date.getFullYear())})
+  <button id="panchang-close-btn">✕</button>
+
+  <!-- HEADER -->
+  <div class="popup-top">
+    <div class="popup-date">
+      <div class="popup-day">${toDev(day)}</div>
+      <div>
+        <h2>${day} ${monName}</h2>
+        <p>${toDev(p.date.getFullYear())}</p>
       </div>
-
-      <div class="popup-section">
-
-        <div class="popup-row">
-          <span>तिथि</span>
-          <strong>${p.paksha} ${p.tithi}</strong>
-        </div>
-
-        <div class="popup-row">
-          <span>वार</span>
-          <strong>${p.vaar}</strong>
-        </div>
-
-        <div class="popup-row">
-          <span>नक्षत्र</span>
-          <strong>${p.nakshatra}</strong>
-        </div>
-
-        <div class="popup-row">
-          <span>योग</span>
-          <strong>${p.yoga} (${p.yogaType})</strong>
-        </div>
-
-        <div class="popup-row">
-          <span>करण</span>
-          <strong>${p.karana}</strong>
-        </div>
-
-      </div>
-
-      <div class="popup-divider"></div>
-
-      <div class="popup-section">
-
-        <div class="popup-row">
-          <span>🌅 सूर्योदय</span>
-          <strong>
-            ${fmtTime(p.sunrise)}
-          </strong>
-        </div>
-
-        <div class="popup-row">
-          <span>🌇 सूर्यास्त</span>
-          <strong>
-            ${fmtTime(p.sunset)}
-          </strong>
-        </div>
-
-        <div class="popup-row">
-          <span>⚠️ राहुकाल</span>
-          <strong>
-            ${fmtTime(p.rahu.start)} – ${fmtTime(p.rahu.end)}
-          </strong>
-        </div>
-
-      </div>
-
     </div>
-  `;
+  </div>
+
+  <!-- TITHI CARD -->
+  <div class="popup-main-card">
+    <div class="popup-paksha">${p.paksha}</div>
+    <div class="popup-tithi">${p.tithi}</div>
+  </div>
+
+  <!-- GRID INFO -->
+  <div class="popup-grid">
+
+    <div class="info-card">
+      <span>वार</span>
+      <strong>${p.vaar}</strong>
+    </div>
+
+    <div class="info-card">
+      <span>नक्षत्र</span>
+      <strong>${p.nakshatra}</strong>
+    </div>
+
+    <div class="info-card">
+      <span>योग</span>
+      <strong>${p.yoga}</strong>
+      <small>${p.yogaType}</small>
+    </div>
+
+    <div class="info-card">
+      <span>करण</span>
+      <strong>${p.karana}</strong>
+    </div>
+
+  </div>
+
+  <!-- SUN SECTION -->
+  <div class="sun-section">
+
+    <div class="sun-card sunrise">
+      <div class="sun-icon">🌅</div>
+      <div>
+        <span>सूर्योदय</span>
+        <strong>${fmtTime(p.sunrise)}</strong>
+      </div>
+    </div>
+
+    <div class="sun-card sunset">
+      <div class="sun-icon">🌇</div>
+      <div>
+        <span>सूर्यास्त</span>
+        <strong>${fmtTime(p.sunset)}</strong>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RAHUKAL -->
+  <div class="rahu-card">
+    <div class="rahu-title">⚠️ राहुकाल</div>
+    <div class="rahu-time">
+      ${fmtTime(p.rahu.start)} – ${fmtTime(p.rahu.end)}
+    </div>
+  </div>
+
+</div>
+`;
 
   document.body.appendChild(overlay);
 
@@ -2595,134 +2607,391 @@ function showCalDayDetail(yr, mo, d) {
   // CSS inside JS only
   const style = document.createElement("style");
 
-  style.innerHTML = `
-    #panchang-popup-overlay{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,0.75);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      z-index:99999;
-      animation:fadeIn .25s ease;
-      padding:20px;
+style.innerHTML = `
+
+  /* OVERLAY */
+  #panchang-overlay{
+    position:fixed;
+    inset:0;
+
+    width:100%;
+    height:100vh;
+
+    background:rgba(0,0,0,.65);
+    backdrop-filter:blur(8px);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    z-index:999999;
+
+    padding:18px;
+
+    animation:fadeIn .25s ease;
+  }
+
+  /* POPUP */
+  #panchang-popup-box{
+    width:min(92vw,420px);
+    max-height:90vh;
+
+    overflow-y:auto;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(30,30,32,.98),
+        rgba(15,15,15,.98)
+      );
+
+    border:1px solid rgba(255,255,255,.06);
+
+    border-radius:26px;
+
+    padding:22px;
+
+    position:relative;
+
+    color:#fff;
+
+    box-shadow:
+      0 20px 60px rgba(0,0,0,.45),
+      inset 0 1px 0 rgba(255,255,255,.04);
+
+    font-family:'Noto Sans Devanagari',sans-serif;
+
+    animation:popupScale .28s ease;
+  }
+
+  /* SCROLLBAR */
+  #panchang-popup-box::-webkit-scrollbar{
+    width:6px;
+  }
+
+  #panchang-popup-box::-webkit-scrollbar-thumb{
+    background:rgba(255,255,255,.18);
+    border-radius:20px;
+  }
+
+  /* CLOSE BUTTON */
+  #panchang-close-btn{
+    position:absolute;
+    top:14px;
+    right:14px;
+
+    width:38px;
+    height:38px;
+
+    border:none;
+    border-radius:50%;
+
+    background:rgba(255,255,255,.08);
+
+    color:#fff;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    transition:.2s ease;
+  }
+
+  #panchang-close-btn:hover{
+    background:rgba(255,255,255,.16);
+    transform:scale(1.05);
+  }
+
+  /* HEADER */
+  .popup-top{
+    margin-bottom:22px;
+  }
+
+  .popup-date{
+    display:flex;
+    align-items:center;
+    gap:16px;
+  }
+
+  .popup-day{
+    min-width:68px;
+    height:68px;
+
+    border-radius:20px;
+
+    background:
+      linear-gradient(
+        135deg,
+        #ff9800,
+        #ff5722
+      );
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:28px;
+    font-weight:700;
+
+    box-shadow:
+      0 10px 25px rgba(255,87,34,.35);
+  }
+
+  .popup-date h2{
+    margin:0;
+    font-size:22px;
+    line-height:1.2;
+    font-weight:700;
+  }
+
+  .popup-date p{
+    margin-top:6px;
+    opacity:.7;
+    font-size:14px;
+  }
+
+  /* MAIN CARD */
+  .popup-main-card{
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255,152,0,.18),
+        rgba(255,87,34,.10)
+      );
+
+    border:1px solid rgba(255,255,255,.06);
+
+    border-radius:22px;
+
+    padding:22px;
+
+    text-align:center;
+
+    margin-bottom:18px;
+  }
+
+  .popup-paksha{
+    font-size:14px;
+    opacity:.8;
+    margin-bottom:8px;
+    letter-spacing:.5px;
+  }
+
+  .popup-tithi{
+    font-size:30px;
+    font-weight:700;
+    line-height:1.2;
+  }
+
+  /* GRID */
+  .popup-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+
+    margin-bottom:18px;
+  }
+
+  .info-card{
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.05);
+
+    border-radius:18px;
+
+    padding:15px;
+  }
+
+  .info-card span{
+    display:block;
+
+    font-size:12px;
+
+    opacity:.65;
+
+    margin-bottom:8px;
+
+    letter-spacing:.4px;
+  }
+
+  .info-card strong{
+    display:block;
+
+    font-size:16px;
+
+    line-height:1.4;
+  }
+
+  .info-card small{
+    display:block;
+    margin-top:4px;
+    opacity:.65;
+    font-size:12px;
+  }
+
+  /* SUN SECTION */
+  .sun-section{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+
+    margin-bottom:18px;
+  }
+
+  .sun-card{
+    display:flex;
+    align-items:center;
+    gap:14px;
+
+    padding:16px 18px;
+
+    border-radius:18px;
+
+    border:1px solid rgba(255,255,255,.04);
+  }
+
+  .sunrise{
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255,193,7,.14),
+        rgba(255,152,0,.10)
+      );
+  }
+
+  .sunset{
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255,87,34,.14),
+        rgba(255,87,34,.08)
+      );
+  }
+
+  .sun-icon{
+    font-size:28px;
+  }
+
+  .sun-card span{
+    display:block;
+
+    font-size:12px;
+
+    opacity:.72;
+
+    margin-bottom:4px;
+  }
+
+  .sun-card strong{
+    font-size:18px;
+    font-weight:700;
+  }
+
+  /* RAHU */
+  .rahu-card{
+    background:
+      linear-gradient(
+        135deg,
+        rgba(244,67,54,.14),
+        rgba(183,28,28,.08)
+      );
+
+    border:1px solid rgba(244,67,54,.16);
+
+    border-radius:18px;
+
+    padding:18px;
+
+    text-align:center;
+  }
+
+  .rahu-title{
+    font-size:13px;
+    opacity:.78;
+    margin-bottom:8px;
+    letter-spacing:.5px;
+  }
+
+  .rahu-time{
+    font-size:18px;
+    font-weight:700;
+  }
+
+  /* MOBILE */
+  @media(max-width:480px){
+
+    #panchang-overlay{
+      padding:14px;
     }
 
     #panchang-popup-box{
       width:100%;
-      max-width:420px;
-      background:linear-gradient(145deg,#1a120b,#2d1b10);
-      border:2px solid rgba(255,170,0,0.4);
+      padding:18px;
       border-radius:24px;
-      padding:24px;
-      color:#fff;
-      position:relative;
-      box-shadow:0 0 35px rgba(255,140,0,0.35);
-      font-family:'Noto Sans Devanagari', sans-serif;
-      animation:popupScale .25s ease;
     }
 
-    #panchang-close-btn{
-      position:absolute;
-      top:12px;
-      right:14px;
-      border:none;
-      background:rgba(255,255,255,0.08);
-      color:#fff;
-      width:34px;
-      height:34px;
-      border-radius:50%;
-      cursor:pointer;
-      font-size:18px;
-      transition:.2s;
+    .popup-grid{
+      grid-template-columns:1fr;
     }
 
-    #panchang-close-btn:hover{
-      background:#ff9800;
-      transform:rotate(90deg);
-    }
-
-    .popup-header{
-      text-align:center;
-      font-size:22px;
-      font-weight:700;
-      margin-bottom:22px;
-      color:#ffcc70;
-      line-height:1.5;
-    }
-
-    .popup-section{
-      display:flex;
-      flex-direction:column;
+    .popup-date{
       gap:14px;
     }
 
-    .popup-row{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      background:rgba(255,255,255,0.05);
-      padding:12px 14px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,0.06);
-      gap:12px;
+    .popup-day{
+      min-width:58px;
+      height:58px;
+      font-size:24px;
+      border-radius:18px;
     }
 
-    .popup-row span{
-      color:#ffd89a;
-      font-size:15px;
+    .popup-date h2{
+      font-size:20px;
     }
 
-    .popup-row strong{
-      color:#fff;
-      font-size:15px;
-      text-align:right;
+    .popup-tithi{
+      font-size:26px;
     }
 
-    .popup-divider{
-      height:1px;
-      background:linear-gradient(to right,transparent,#ff9800,transparent);
-      margin:22px 0;
+    .sun-card{
+      padding:14px;
     }
 
-    @keyframes popupScale{
-      from{
-        transform:scale(.85);
-        opacity:0;
-      }
-      to{
-        transform:scale(1);
-        opacity:1;
-      }
+    .sun-icon{
+      font-size:24px;
     }
 
-    @keyframes fadeIn{
-      from{opacity:0}
-      to{opacity:1}
+    .sun-card strong{
+      font-size:16px;
     }
 
-    @media(max-width:500px){
-
-      #panchang-popup-box{
-        padding:18px;
-        border-radius:20px;
-      }
-
-      .popup-header{
-        font-size:18px;
-      }
-
-      .popup-row{
-        flex-direction:column;
-        align-items:flex-start;
-      }
-
-      .popup-row strong{
-        text-align:left;
-      }
+    .rahu-time{
+      font-size:16px;
     }
-  `;
+  }
 
+  /* ANIMATION */
+  @keyframes fadeIn{
+    from{
+      opacity:0;
+    }
+    to{
+      opacity:1;
+    }
+  }
+
+  @keyframes popupScale{
+    from{
+      opacity:0;
+      transform:scale(.92) translateY(12px);
+    }
+    to{
+      opacity:1;
+      transform:scale(1) translateY(0);
+    }
+  }
+
+`; 
     document.head.appendChild(style);
   }
   // document.head.appendChild(style);
