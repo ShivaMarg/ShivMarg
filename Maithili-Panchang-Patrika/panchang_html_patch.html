@@ -1,242 +1,1583 @@
-<!-- ================================================================
-  MAITHILI PANCHANG — HTML PATCH GUIDE
-  Apply these targeted changes to your existing HTML.
-  The JS engine (panchang_engine.js) does all computation.
-  ================================================================ -->
+<!DOCTYPE html>
+<html lang="mai">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#1A0000">
+<title>मैथिली पञ्चाङ्ग 2083 — Maithili Panchang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Serif+Devanagari:wght@400;600;700&family=Noto+Sans+Devanagari:wght@300;400;500;600;700&family=Crimson+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   DESIGN TOKENS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+:root{
+  --maroon:#1A0000;
+  --maroon-mid:#3D0A00;
+  --maroon-lite:#5C1500;
+  --saffron:#D4520A;
+  --saffron-deep:#A83D05;
+  --gold:#C8901A;
+  --gold-pale:#F5D9A0;
+  --cream:#FAF4E8;
+  --cream-pale:#FDF9F2;
+  --lotus:#D4527B;
+  --peacock:#1A5276;
+  --green-good:#2D6A4F;
+  --red-bad:#C0392B;
+  --text-dk:#1A0800;
+  --text-md:#3D1C0A;
+  --text-lt:#7A4520;
+  --sidebar-w:280px;
+  --header-h:0px;
+  --tab-h:44px;
+  --radius-sm:8px;
+  --radius-md:12px;
+  --radius-lg:18px;
+  --shadow-sm:0 2px 8px rgba(0,0,0,.10);
+  --shadow-md:0 4px 20px rgba(0,0,0,.14);
+  --shadow-lg:0 8px 40px rgba(0,0,0,.20);
+}
 
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:\'Noto Serif Devanagari\',\'Tiro Devanagari Hindi\',serif;
+  background:var(--cream);
+  color:var(--text-dk);
+  min-height:100vh;
+  overflow-x:hidden;
+}
 
-<!-- ════════════════════════════════════════
-  PATCH 1 — SUN/MOON TIMES in .panchang-hero
-  Find the existing .panchang-sun-info divs and replace
-  their inner content as shown below.
-  KEY CHANGE: add data-key and id attributes so JS can target them.
-════════════════════════════════════════ -->
+/* ━━ MITHILA BORDER ━━ */
+.mithila-stripe{
+  height:8px;
+  background:repeating-linear-gradient(90deg,#C8901A 0,#C8901A 8px,#D45200 8px,#D45200 16px,#C8901A 16px,#C8901A 24px,#7D1E0F 24px,#7D1E0F 32px);
+}
 
-<!-- LEFT sun-info block — replace existing inner HTML -->
-<div class="panchang-sun-info">
-  <div class="sun-icon">🌅</div>
-  <div class="sun-label">सूर्योदय</div>
-  <div class="sun-time" data-key="sunrise">५:१७ प्रातः</div>
-  <div style="margin-top:8px;">
-    <div class="sun-icon">🌇</div>
-    <div class="sun-label">सूर्यास्त</div>
-    <div class="sun-time" data-key="sunset">७:०६ सायं</div>
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HEADER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.top-header{
+  background:linear-gradient(135deg,#1A0000 0%,#3D0A00 45%,#1A0000 100%);
+  border-bottom:3px solid var(--gold);
+  position:relative;
+  overflow:hidden;
+}
+.top-header::before{
+  content:\'\';
+  position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(200,144,26,.06) 40px,rgba(200,144,26,.06) 41px),
+    repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(200,144,26,.06) 40px,rgba(200,144,26,.06) 41px);
+  pointer-events:none;
+}
+.header-top-strip{
+  background:var(--gold);
+  text-align:center;
+  padding:3px 0;
+  font-size:12px;
+  color:#1A0000;
+  font-family:\'Noto Sans Devanagari\',sans-serif;
+  letter-spacing:2px;
+  font-weight:700;
+}
+.header-main{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding:14px 20px;
+  max-width:1400px;
+  margin:0 auto;
+}
+.header-left{display:flex;align-items:center;gap:14px;}
+.om-symbol{
+  font-size:52px;color:var(--gold);line-height:1;
+  text-shadow:0 0 20px rgba(200,144,26,.5);
+  font-family:\'Noto Serif Devanagari\',serif;
+}
+.header-title-block h1{
+  font-size:1.9rem;color:var(--gold);font-weight:700;
+  line-height:1.1;font-family:\'Noto Serif Devanagari\',serif;
+  letter-spacing:.5px;
+}
+.header-title-block .subtitle{
+  color:var(--gold-pale);font-size:.9rem;margin-top:3px;
+  font-family:\'Noto Sans Devanagari\',sans-serif;font-weight:300;letter-spacing:.5px;
+}
+.header-title-block .samvat{
+  color:#FFA040;font-size:.78rem;margin-top:2px;
+  font-family:\'Noto Sans Devanagari\',sans-serif;font-weight:500;
+}
+.header-right .today-date-box{
+  background:rgba(200,144,26,.12);
+  border:1px solid rgba(200,144,26,.35);
+  border-radius:var(--radius-sm);
+  padding:10px 16px;text-align:center;
+}
+.today-date-box .today-label{
+  font-size:10px;color:var(--gold-pale);letter-spacing:2px;
+  font-family:\'Noto Sans Devanagari\',sans-serif;font-weight:600;
+  text-transform:uppercase;display:block;margin-bottom:3px;
+}
+.today-date-box .today-tithi{
+  font-size:1rem;color:var(--gold);font-weight:700;display:block;
+  font-family:\'Noto Serif Devanagari\',serif;
+}
+.today-date-box .today-month{
+  font-size:.78rem;color:#FFA040;display:block;margin-top:2px;
+  font-family:\'Noto Sans Devanagari\',sans-serif;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   NAV TABS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.nav-tabs{
+  background:#2D0A00;
+  border-bottom:2px solid var(--gold);
+  display:flex;
+  justify-content:center;
+  gap:0;
+  position:sticky;top:0;z-index:100;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.nav-tab{
+  color:#D4A87A;
+  padding:11px 18px;
+  cursor:pointer;
+  font-size:.85rem;
+  font-family:\'Noto Sans Devanagari\',sans-serif;
+  font-weight:600;
+  border:none;background:transparent;
+  border-bottom:3px solid transparent;
+  transition:all .2s;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.nav-tab:hover{color:var(--gold);background:rgba(200,144,26,.1);}
+.nav-tab.active{color:var(--gold);border-bottom-color:var(--gold);background:rgba(200,144,26,.15);}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   LAYOUT  (sidebar + main)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.main-layout{display:flex;width:100%;min-height:calc(100vh - 120px);}
+
+/* sidebar goes RIGHT on desktop */
+.sidebar{
+  width:var(--sidebar-w);min-width:var(--sidebar-w);
+  background:#1E0500;
+  border-left:3px solid var(--gold);
+  overflow-y:auto;
+  max-height:calc(100vh - 120px);
+  position:sticky;top:44px;align-self:flex-start;
+  order:2;
+}
+.sidebar::-webkit-scrollbar{width:4px;}
+.sidebar::-webkit-scrollbar-track{background:#1E0500;}
+.sidebar::-webkit-scrollbar-thumb{background:#5C1500;border-radius:2px;}
+
+.main-content{
+  flex:1;min-width:0;
+  background:var(--cream-pale);
+  overflow-x:hidden;
+  order:1;
+}
+
+/* ━━ SIDEBAR SECTIONS ━━ */
+.sidebar-section{border-bottom:1px solid rgba(200,144,26,.2);}
+.sidebar-section-header{
+  background:linear-gradient(90deg,#2D0A00,#4A1000);
+  padding:10px 14px;
+  display:flex;align-items:center;gap:8px;cursor:pointer;
+  border-left:4px solid var(--gold);
+}
+.sidebar-section-header h3{
+  color:var(--gold);font-size:.88rem;font-weight:600;flex:1;
+  font-family:\'Noto Serif Devanagari\',serif;
+}
+.sidebar-section-header .toggle-arrow{color:#D4A87A;font-size:11px;transition:transform .3s;}
+.sidebar-content{padding:10px 12px;}
+.sidebar-content.collapsed{display:none;}
+
+.festival-item{display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:1px solid rgba(200,144,26,.12);}
+.festival-item:last-child{border-bottom:none;}
+.festival-dot{width:7px;height:7px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+.dot-red{background:#E74C3C;}.dot-gold{background:var(--gold);}
+.dot-green{background:#27AE60;}.dot-blue{background:#2980B9;}.dot-pink{background:var(--lotus);}
+.festival-info .name{color:var(--gold-pale);font-size:.82rem;font-weight:600;display:block;line-height:1.3;font-family:\'Noto Sans Devanagari\',sans-serif;}
+.festival-info .date{color:var(--gold);font-size:.72rem;display:block;margin-top:1px;font-family:\'Noto Sans Devanagari\',sans-serif;}
+.festival-info .desc{color:#A07050;font-size:.68rem;display:block;margin-top:2px;line-height:1.3;font-family:\'Noto Sans Devanagari\',sans-serif;}
+
+.muhurat-item{padding:7px 0;border-bottom:1px solid rgba(200,144,26,.12);}
+.muhurat-item:last-child{border-bottom:none;}
+.muhurat-item .m-type{color:#FFA040;font-size:.75rem;font-family:\'Noto Sans Devanagari\',sans-serif;font-weight:600;display:block;margin-bottom:2px;}
+.muhurat-item .m-date{color:var(--gold-pale);font-size:.78rem;font-family:\'Noto Sans Devanagari\',sans-serif;display:block;line-height:1.4;}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   PANELS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.section-panel{display:none;padding:0;}
+.section-panel.active{display:block;}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TODAY PANEL — HERO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.panchang-hero{
+  background:linear-gradient(135deg,#FAF0D8,#FDF7EC);
+  border-bottom:2px solid rgba(200,144,26,.3);
+  padding:18px 20px;
+  position:relative;overflow:hidden;
+}
+.panchang-hero::before{
+  content:\'\';position:absolute;inset:0;
+  background:radial-gradient(circle at 10% 30%,rgba(200,144,26,.07) 0%,transparent 60%),
+             radial-gradient(circle at 85% 75%,rgba(212,82,10,.05) 0%,transparent 60%);
+  pointer-events:none;
+}
+.panchang-hero-grid{
+  display:grid;
+  grid-template-columns:130px 1fr 130px;
+  gap:16px;align-items:center;position:relative;
+}
+.panchang-sun-info{
+  text-align:center;
+  background:rgba(255,160,40,.1);
+  border:1px solid rgba(200,144,26,.25);
+  border-radius:var(--radius-md);
+  padding:12px;
+}
+.panchang-sun-info .sun-icon{font-size:1.8rem;}
+.panchang-sun-info .sun-label{font-size:.7rem;color:var(--text-lt);font-family:\'Noto Sans Devanagari\',sans-serif;}
+.panchang-sun-info .sun-time{font-size:1rem;font-weight:700;color:#D45200;font-family:\'Noto Sans Devanagari\',sans-serif;}
+.panchang-main-details{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+}
+.panch-card{
+  background:#fff;
+  border:1px solid rgba(200,144,26,.3);
+  border-top:3px solid var(--saffron);
+  border-radius:var(--radius-sm);
+  padding:10px 12px;text-align:center;
+}
+.panch-card .p-label{font-size:.68rem;color:var(--text-lt);text-transform:uppercase;letter-spacing:1.2px;font-family:\'Noto Sans Devanagari\',sans-serif;font-weight:600;display:block;margin-bottom:3px;}
+.panch-card .p-value{font-size:.95rem;color:var(--text-dk);font-weight:700;display:block;font-family:\'Noto Serif Devanagari\',serif;line-height:1.3;}
+.panch-card .p-sub{font-size:.68rem;color:var(--text-lt);font-family:\'Noto Sans Devanagari\',sans-serif;display:block;margin-top:1px;}
+
+/* ━━ PANCH-ANG 5 ELEMENTS ━━ */
+.panch-ang-title{text-align:center;padding:16px 20px 8px;}
+.panch-ang-title h2{font-size:1.2rem;color:#7D1E0F;font-family:\'Noto Serif Devanagari\',serif;display:inline-flex;align-items:center;gap:10px;}
+.ornament{color:var(--gold);font-size:1rem;}
+
+.panch-5-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:10px;padding:0 20px 16px;
+}
+.panch-5-card{
+  background:#fff;border-radius:var(--radius-md);
+  border:1px solid rgba(200,144,26,.25);
+  padding:12px 10px;text-align:center;position:relative;overflow:hidden;
+}
+.panch-5-card::before{content:\'\';position:absolute;top:0;left:0;right:0;height:4px;}
+.panch-5-card.tithi::before{background:var(--saffron);}
+.panch-5-card.vaar::before{background:var(--peacock);}
+.panch-5-card.nakshatra::before{background:var(--lotus);}
+.panch-5-card.yoga::before{background:var(--green-good);}
+.panch-5-card.karan::before{background:var(--gold);}
+.p5-num{font-size:.62rem;color:#BBB;letter-spacing:1.5px;display:block;margin-bottom:3px;font-family:\'Noto Sans Devanagari\',sans-serif;text-transform:uppercase;}
+.p5-name{font-size:.72rem;color:var(--text-lt);font-family:\'Noto Sans Devanagari\',sans-serif;font-weight:600;display:block;margin-bottom:5px;letter-spacing:.3px;text-transform:uppercase;}
+.p5-value{font-size:1rem;color:var(--text-dk);font-family:\'Noto Serif Devanagari\',serif;font-weight:700;display:block;line-height:1.3;margin-bottom:3px;}
+.p5-hindi{font-size:.65rem;color:var(--text-lt);font-family:\'Noto Sans Devanagari\',sans-serif;display:block;}
+.p5-endtime{font-size:.65rem!important;color:#8B5E3C!important;margin-top:3px;}
+
+/* ━━ RAHU STRIP ━━ */
+.rahu-strip{
+  background:linear-gradient(90deg,#3A0000,#5C0F00,#3A0000);
+  border:1px solid #7D1E0F;border-radius:var(--radius-sm);
+  padding:10px 16px;display:flex;align-items:center;gap:10px;
+  margin:0 20px 14px;
+}
+.rahu-strip .r-label{color:#FF8080;font-size:.78rem;font-family:\'Noto Sans Devanagari\',sans-serif;font-weight:700;}
+.rahu-strip .r-time{color:#FFB0B0;font-size:.82rem;font-family:\'Noto Sans Devanagari\',sans-serif;}
+.rahu-strip .r-note{color:#FF6060;font-size:.72rem;font-family:\'Noto Sans Devanagari\',sans-serif;flex:1;text-align:right;}
+
+/* ━━ TIME GRID ━━ */
+.time-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:10px;padding:0 20px 16px;
+}
+.time-card{background:#fff;border-radius:var(--radius-sm);border:1px solid rgba(200,144,26,.2);padding:10px 12px;text-align:center;}
+.time-card.shubh-bg{border-top:3px solid var(--green-good);}
+.time-card.ashubh-bg{border-top:3px solid var(--red-bad);}
+.time-card.neutral-bg{border-top:3px solid var(--gold);}
+.time-card .t-name{font-size:.7rem;color:var(--text-lt);font-family:\'Noto Sans Devanagari\',sans-serif;font-weight:700;display:block;margin-bottom:3px;text-transform:uppercase;letter-spacing:.3px;}
+.time-card .t-time{font-size:.85rem;color:var(--text-dk);font-family:\'Noto Sans Devanagari\',sans-serif;font-weight:600;display:block;}
+.time-card .t-desc{font-size:.62rem;color:var(--text-lt);font-family:\'Noto Sans Devanagari\',sans-serif;display:block;margin-top:2px;}
+
+/* ━━ DETAIL TABLE ━━ */
+.detail-section{padding:0 20px 20px;}
+.detail-section h3{
+  font-size:1rem;color:#7D1E0F;font-family:\'Noto Serif Devanagari\',serif;
+  padding:10px 0 7px;border-bottom:2px solid rgba(200,144,26,.25);
+  margin-bottom:10px;display:flex;align-items:center;gap:8px;
+}
+.detail-table{width:100%;border-collapse:collapse;font-family:\'Noto Sans Devanagari\',sans-serif;font-size:.84rem;}
+.detail-table tr:nth-child(even){background:rgba(200,144,26,.04);}
+.detail-table td{padding:8px 12px;border-bottom:1px solid rgba(200,144,26,.1);vertical-align:top;}
+.detail-table td:first-child{color:var(--text-lt);font-weight:600;width:40%;border-right:1px solid rgba(200,144,26,.12);}
+.detail-table td:last-child{color:var(--text-dk);font-weight:500;}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CALENDAR PANEL — ENGLISH STYLE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.month-selector{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 20px;
+  background:linear-gradient(90deg,#FAF0D8,#FDF7EC);
+  border-bottom:2px solid rgba(200,144,26,.25);
+}
+.month-selector h2{font-size:1.25rem;color:#7D1E0F;font-family:\'Noto Serif Devanagari\',serif;font-weight:700;}
+.month-nav-btn{
+  background:var(--saffron);color:#fff;border:none;
+  padding:7px 18px;border-radius:6px;cursor:pointer;
+  font-family:\'Noto Sans Devanagari\',sans-serif;font-size:.85rem;font-weight:600;
+  transition:background .2s;
+}
+.month-nav-btn:hover{background:var(--saffron-deep);}
+
+/* month pill strip */
+.month-names-strip{
+  display:grid;grid-template-columns:repeat(12,1fr);
+  gap:3px;padding:8px 20px;
+  background:#FDF7EC;border-bottom:1px solid rgba(200,144,26,.18);
+}
+.month-pill{
+  text-align:center;padding:5px 3px;border-radius:5px;cursor:pointer;
+  font-size:.68rem;font-family:\'Noto Sans Devanagari\',sans-serif;font-weight:600;
+  color:var(--text-lt);border:1px solid transparent;transition:all .2s;
+}
+.month-pill:hover{background:rgba(200,144,26,.12);border-color:rgba(200,144,26,.25);}
+.month-pill.active{background:var(--saffron);color:#fff;border-color:var(--saffron-deep);}
+.month-pill .mai-name{display:block;font-size:.75rem;color:inherit;}
+.month-pill .eng-month{display:block;font-size:.58rem;opacity:.7;}
+
+/* ENGLISH-STYLE CALENDAR */
+.calendar-grid-wrap{padding:12px 20px;}
+
+/* Day headers — English style: Sun Mon Tue ... */
+.cal-header-row{
+  display:grid;grid-template-columns:repeat(7,1fr);
+  gap:3px;margin-bottom:4px;
+}
+.cal-day-header{
+  text-align:center;font-size:.75rem;
+  font-family:\'Noto Sans Devanagari\',sans-serif;font-weight:700;
+  padding:6px 2px;color:#7D1E0F;
+  text-transform:uppercase;letter-spacing:.3px;
+}
+.cal-day-header.sunday{color:var(--saffron);}
+
+/* Calendar grid cells */
+.cal-body{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
+.cal-cell{
+  background:#fff;
+  border:1px solid rgba(200,144,26,.18);
+  border-radius:6px;
+  padding:6px 4px 5px;
+  min-height:80px;
+  cursor:pointer;
+  transition:all .15s;
+  position:relative;
+  overflow:hidden;
+}
+.cal-cell:hover{border-color:var(--gold);box-shadow:0 2px 10px rgba(200,144,26,.18);}
+.cal-cell.today{border:2px solid var(--saffron);background:#FFF8F0;}
+.cal-cell.empty{background:transparent;border-color:transparent;cursor:default;}
+.cal-cell.festive{background:#FFF5E5;border-color:rgba(200,144,26,.35);}
+.cal-cell.inauspicious{background:#FFF0F0;border-color:rgba(139,42,0,.18);}
+.cal-cell.sunday .cal-date{color:var(--saffron);}
+
+/* English-style date: large number on top-left */
+.cal-date{
+  font-size:1.15rem;font-weight:700;color:var(--text-dk);
+  font-family:\'Crimson Pro\',serif;
+  display:block;line-height:1;
+}
+/* Maithili tithi below in small */
+.cal-tithi{
+  font-size:.58rem;color:var(--text-lt);
+  font-family:\'Noto Sans Devanagari\',sans-serif;
+  margin-top:3px;display:block;line-height:1.25;
+}
+.cal-event{
+  font-size:.58rem;color:var(--green-good);
+  font-family:\'Noto Sans Devanagari\',sans-serif;
+  display:block;margin-top:2px;font-weight:600;line-height:1.2;
+}
+.cal-event.bad{color:var(--red-bad);}
+.today-badge{
+  position:absolute;top:3px;right:3px;
+  background:var(--saffron);color:#fff;
+  font-size:.48rem;border-radius:3px;padding:1px 4px;
+  font-family:\'Noto Sans Devanagari\',sans-serif;font-weight:700;
+}
+.cal-paksha-dot{
+  width:5px;height:5px;border-radius:50%;
+  display:inline-block;margin-top:3px;margin-right:2px;vertical-align:middle;
+}
+.shukla-dot{background:var(--gold);}
+.krishna-dot{background:#4A4A6A;}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   DAY DETAIL PANEL (inline, below calendar)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.day-detail-panel{
+  margin:12px 20px;
+  background:linear-gradient(135deg,#1E0500,#2D0A00);
+  border:1px solid rgba(200,144,26,.3);
+  border-radius:var(--radius-lg);
+  padding:18px;
+  color:#fff;
+  display:none;
+  animation:slideDown .25s ease;
+}
+.day-detail-panel.visible{display:block;}
+
+@keyframes slideDown{
+  from{opacity:0;transform:translateY(-10px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.ddp-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.ddp-date-badge{
+  background:linear-gradient(135deg,#ff9800,#ff5722);
+  border-radius:14px;padding:10px 18px;text-align:center;
+  min-width:70px;
+}
+.ddp-date-badge .ddp-day{font-size:2rem;font-weight:700;line-height:1;font-family:\'Crimson Pro\',serif;}
+.ddp-date-badge .ddp-mon{font-size:.75rem;opacity:.9;font-family:\'Noto Sans Devanagari\',sans-serif;}
+.ddp-title-info h3{font-size:1.1rem;color:var(--gold);font-family:\'Noto Serif Devanagari\',serif;}
+.ddp-title-info p{font-size:.78rem;opacity:.7;margin-top:3px;font-family:\'Noto Sans Devanagari\',sans-serif;}
+.ddp-close-btn{
+  background:rgba(255,255,255,.1);border:none;color:#fff;
+  width:34px;height:34px;border-radius:50%;font-size:14px;
+  cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;
+}
+.ddp-close-btn:hover{background:rgba(255,255,255,.2);}
+
+/* paksha + tithi big display */
+.ddp-tithi-card{
+  background:linear-gradient(135deg,rgba(255,152,0,.15),rgba(255,87,34,.08));
+  border:1px solid rgba(255,255,255,.08);border-radius:14px;
+  padding:14px;text-align:center;margin-bottom:12px;
+}
+.ddp-paksha{font-size:.8rem;opacity:.75;letter-spacing:.5px;margin-bottom:4px;font-family:\'Noto Sans Devanagari\',sans-serif;}
+.ddp-tithi-name{font-size:1.6rem;font-weight:700;line-height:1.2;font-family:\'Noto Serif Devanagari\',serif;}
+
+/* 2x2 info grid */
+.ddp-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+.ddp-info-card{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:12px;padding:11px;
+}
+.ddp-info-card .ddp-lbl{font-size:.7rem;opacity:.6;display:block;margin-bottom:5px;letter-spacing:.3px;font-family:\'Noto Sans Devanagari\',sans-serif;}
+.ddp-info-card strong{font-size:.95rem;display:block;line-height:1.4;font-family:\'Noto Serif Devanagari\',serif;}
+.ddp-info-card small{font-size:.68rem;display:block;margin-top:3px;opacity:.6;font-family:\'Noto Sans Devanagari\',sans-serif;}
+
+/* sun row */
+.ddp-sun-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+.ddp-sun-card{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 12px;border-radius:12px;
+  border:1px solid rgba(255,255,255,.05);
+}
+.ddp-sun-card.rise{background:linear-gradient(135deg,rgba(255,193,7,.12),rgba(255,152,0,.08));}
+.ddp-sun-card.set{background:linear-gradient(135deg,rgba(255,87,34,.12),rgba(255,87,34,.06));}
+.ddp-sun-card .sun-emoji{font-size:1.4rem;}
+.ddp-sun-card span{font-size:.65rem;opacity:.7;display:block;margin-bottom:2px;font-family:\'Noto Sans Devanagari\',sans-serif;}
+.ddp-sun-card strong{font-size:.95rem;font-weight:700;font-family:\'Noto Sans Devanagari\',sans-serif;}
+
+/* rahu inline */
+.ddp-rahu{
+  background:linear-gradient(135deg,rgba(244,67,54,.12),rgba(183,28,28,.06));
+  border:1px solid rgba(244,67,54,.2);border-radius:12px;
+  padding:11px;text-align:center;
+}
+.ddp-rahu .r-lbl{font-size:.7rem;opacity:.7;margin-bottom:4px;display:block;font-family:\'Noto Sans Devanagari\',sans-serif;}
+.ddp-rahu .r-val{font-size:1rem;font-weight:700;font-family:\'Noto Sans Devanagari\',sans-serif;}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MUHURAT PANEL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.muhurat-main{padding:16px 20px;}
+.muhurat-type-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+.muh-tab{
+  padding:7px 14px;border-radius:20px;
+  border:1.5px solid rgba(200,144,26,.35);
+  background:#fff;color:var(--text-lt);cursor:pointer;
+  font-size:.82rem;font-family:\'Noto Sans Devanagari\',sans-serif;
+  font-weight:600;transition:all .2s;
+}
+.muh-tab:hover{border-color:var(--gold);color:var(--text-dk);}
+.muh-tab.active{background:var(--saffron);border-color:var(--saffron-deep);color:#fff;}
+.muhurat-list{display:none;}.muhurat-list.active{display:block;}
+.muhurat-card{
+  background:#fff;border:1px solid rgba(200,144,26,.2);
+  border-radius:10px;padding:12px 14px;margin-bottom:9px;
+  display:flex;align-items:center;gap:14px;
+  border-left:4px solid var(--green-good);
+}
+.muhurat-card.shubh{border-left-color:var(--green-good);}
+.muhurat-card.madhyam{border-left-color:var(--gold);}
+.muhurat-card.warning{border-left-color:var(--red-bad);}
+.m-date-badge{
+  background:linear-gradient(135deg,#FAF0D8,#FEF9EE);
+  border:1px solid rgba(200,144,26,.35);border-radius:8px;
+  padding:8px 12px;text-align:center;min-width:80px;flex-shrink:0;
+}
+.m-date-badge .m-day{font-size:1.5rem;font-weight:700;color:#7D1E0F;font-family:\'Crimson Pro\',serif;line-height:1;}
+.m-date-badge .m-month{font-size:.68rem;color:var(--text-lt);font-family:\'Noto Sans Devanagari\',sans-serif;display:block;font-weight:600;}
+.m-date-badge .m-year{font-size:.62rem;color:var(--text-lt);font-family:\'Noto Sans Devanagari\',sans-serif;}
+.m-info{flex:1;}
+.m-info .m-vaar{font-size:.75rem;color:var(--text-lt);font-family:\'Noto Sans Devanagari\',sans-serif;font-weight:600;}
+.m-info .m-tithi{font-size:.95rem;color:var(--text-dk);font-family:\'Noto Serif Devanagari\',serif;font-weight:700;margin:2px 0;}
+.m-info .m-time{font-size:.78rem;color:var(--peacock);font-family:\'Noto Sans Devanagari\',sans-serif;}
+.m-info .m-naks{font-size:.72rem;color:var(--text-lt);font-family:\'Noto Sans Devanagari\',sans-serif;margin-top:3px;}
+.shubh-badge{
+  background:#E8F8F0;border:1px solid #A8DFC0;border-radius:16px;
+  padding:3px 10px;font-size:.68rem;color:var(--green-good);
+  font-family:\'Noto Sans Devanagari\',sans-serif;font-weight:700;flex-shrink:0;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MONTHS INFO PANEL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.months-info{padding:16px 20px;}
+.months-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.month-info-card{
+  background:#fff;border:1px solid rgba(200,144,26,.22);
+  border-radius:10px;overflow:hidden;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;
+}
+.month-info-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);}
+.mic-header{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;}
+.mic-header.chaita{background:linear-gradient(90deg,#FAE5D3,#FAF0E8);}
+.mic-header.baisakh{background:linear-gradient(90deg,#FFF9E5,#FAF5D8);}
+.mic-header.jeth{background:linear-gradient(90deg,#FFF5D5,#FFFAE8);}
+.mic-header.ashadh{background:linear-gradient(90deg,#E5F0FF,#EEF5FF);}
+.mic-header.saon{background:linear-gradient(90deg,#E5F5FF,#EEF8FF);}
+.mic-header.bhado{background:linear-gradient(90deg,#E5F0EE,#EEF8F5);}
+.mic-header.aswin{background:linear-gradient(90deg,#F0E8FA,#F5EEF8);}
+.mic-header.katik{background:linear-gradient(90deg,#FAF0D8,#FEF9EE);}
+.mic-header.aghan{background:linear-gradient(90deg,#F5E8D8,#FAF0E8);}
+.mic-header.pus{background:linear-gradient(90deg,#E8F0FA,#EEF5FF);}
+.mic-header.magh{background:linear-gradient(90deg,#F0E8F5,#F5EEF8);}
+.mic-header.phagun{background:linear-gradient(90deg,#FAE8E8,#FEF0F0);}
+.mic-num{font-size:1.8rem;font-weight:700;color:rgba(0,0,0,.08);font-family:\'Crimson Pro\',serif;}
+.mic-names .mai{font-size:1rem;font-weight:700;color:#7D1E0F;font-family:\'Noto Serif Devanagari\',serif;display:block;text-align:right;}
+.mic-names .hindi{font-size:.7rem;color:var(--text-lt);font-family:\'Noto Sans Devanagari\',sans-serif;display:block;text-align:right;}
+.mic-body{padding:8px 14px 12px;}
+.mic-eng{font-size:.75rem;color:var(--text-lt);font-family:\'Noto Sans Devanagari\',sans-serif;margin-bottom:5px;display:block;}
+.mic-feature{font-size:.74rem;color:var(--text-md);font-family:\'Noto Sans Devanagari\',sans-serif;line-height:1.5;}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   NAKSHATRA PANEL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.naks-section{padding:16px 20px;}
+.naks-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:12px;}
+.naks-card{
+  background:#fff;border:1px solid rgba(200,144,26,.18);
+  border-radius:8px;padding:9px 11px;display:flex;gap:8px;align-items:center;
+}
+.naks-num{font-size:.65rem;color:#BBB;font-family:\'Crimson Pro\',serif;min-width:16px;text-align:center;font-weight:700;}
+.naks-name{font-size:.78rem;color:var(--text-dk);font-family:\'Noto Serif Devanagari\',serif;font-weight:600;}
+.naks-dev{font-size:.64rem;color:var(--text-lt);font-family:\'Noto Sans Devanagari\',sans-serif;display:block;}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FOOTER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+footer{
+  background:#1E0500;border-top:3px solid var(--gold);
+  color:#A07050;text-align:center;
+  padding:14px 20px;font-size:.78rem;font-family:\'Noto Sans Devanagari\',sans-serif;
+}
+footer .footer-om{color:var(--gold);font-size:1rem;margin-bottom:4px;display:block;}
+footer a{color:var(--gold);text-decoration:none;}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION HEADINGS (shared)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.section-h3{
+  font-size:1rem;color:#7D1E0F;font-family:\'Noto Serif Devanagari\',serif;
+  padding:10px 0 7px;border-bottom:2px solid rgba(200,144,26,.25);
+  margin-bottom:12px;display:flex;align-items:center;gap:8px;
+}
+.nav-tabs{
+  display:flex;
+  gap:12px;
+
+  overflow-x:auto;
+  overflow-y:hidden;
+
+  padding:10px 4px 14px;
+
+  scrollbar-width:none;
+
+  -webkit-overflow-scrolling:touch;
+}
+
+.nav-tabs::-webkit-scrollbar{
+  display:none;
+}
+
+.nav-tab{
+  flex:0 0 auto;
+
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  padding:12px 18px;
+
+  border:none;
+  border-radius:18px;
+
+  background:rgba(255,255,255,.06);
+
+  color:#eaeaea;
+
+  font-size:15px;
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:.25s ease;
+
+  white-space:nowrap;
+
+  border:1px solid rgba(255,255,255,.05);
+
+  backdrop-filter:blur(10px);
+}
+
+.nav-tab:hover{
+  transform:translateY(-2px);
+
+  background:rgba(255,255,255,.1);
+}
+
+.nav-tab.active{
+  background:
+    linear-gradient(
+      135deg,
+      #ff9800,
+      #ff5722
+    );
+
+  color:white;
+
+  box-shadow:
+    0 10px 25px rgba(255,87,34,.35);
+}
+
+.nav-tab span:first-child{
+  font-size:16px;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+
+  .nav-tabs{
+    gap:10px;
+    padding-bottom:12px;
+  }
+
+  .nav-tab{
+    padding:11px 16px;
+
+    font-size:14px;
+
+    border-radius:16px;
+  }
+
+}
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   RESPONSIVE — TABLET (≤900px)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media(max-width:900px){
+  .main-layout{flex-direction:column;}
+  .sidebar{
+    width:100%;min-width:unset;
+    max-height:none;position:static;
+    order:2;border-left:none;border-top:3px solid var(--gold);
+  }
+  .main-content{order:1;}
+  .panch-5-grid{grid-template-columns:repeat(3,1fr);}
+  .months-grid{grid-template-columns:repeat(2,1fr);}
+  .naks-grid{grid-template-columns:repeat(2,1fr);}
+  .header-main{flex-direction:column;text-align:center;gap:10px;}
+  .month-names-strip{grid-template-columns:repeat(6,1fr);}
+  .panchang-hero-grid{grid-template-columns:1fr;gap:12px;}
+  .panchang-main-details{grid-template-columns:repeat(2,1fr);}
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   RESPONSIVE — MOBILE (≤600px)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media(max-width:600px){
+  /* HEADER */
+  .om-symbol{font-size:36px;}
+  .header-title-block h1{font-size:1.35rem;}
+  .header-title-block .subtitle{font-size:.78rem;}
+  .header-title-block .samvat{font-size:.68rem;}
+  .header-main{padding:10px 14px;}
+  .header-right .today-date-box{padding:7px 10px;}
+  .today-date-box .today-tithi{font-size:.88rem;}
+  .today-date-box .today-month{font-size:.7rem;}
+
+  /* NAV */
+  .nav-tab{padding:9px 12px;font-size:.78rem;}
+
+  /* MONTH STRIP */
+  .month-names-strip{
+    grid-template-columns:repeat(6,1fr);
+    gap:2px;padding:6px 12px;
+  }
+  .month-pill .mai-name{font-size:.65rem;}
+  .month-pill .eng-month{font-size:.5rem;}
+  .month-selector{padding:10px 14px;}
+  .month-selector h2{font-size:1rem;}
+  .month-nav-btn{padding:6px 12px;font-size:.78rem;}
+
+  /* CALENDAR */
+  .calendar-grid-wrap{padding:8px 12px;}
+  .cal-cell{min-height:58px;padding:4px 3px;}
+  .cal-date{font-size:.95rem;}
+  .cal-tithi{font-size:.5rem;}
+  .cal-event{font-size:.5rem;}
+  .today-badge{font-size:.42rem;padding:1px 3px;}
+  .cal-day-header{font-size:.65rem;padding:5px 1px;}
+
+  /* DAY DETAIL PANEL */
+  .day-detail-panel{margin:8px 12px;padding:14px;}
+  .ddp-date-badge .ddp-day{font-size:1.6rem;}
+  .ddp-tithi-name{font-size:1.3rem;}
+  .ddp-grid{gap:6px;}
+  .ddp-sun-row{gap:6px;}
+  .ddp-info-card strong{font-size:.85rem;}
+
+  /* TODAY PANEL */
+  .panchang-hero{padding:12px 14px;}
+  .panchang-sun-info{padding:10px;}
+  .panchang-sun-info .sun-icon{font-size:1.5rem;}
+  .panchang-sun-info .sun-time{font-size:.88rem;}
+  .panchang-main-details{grid-template-columns:repeat(2,1fr);gap:8px;}
+  .panch-card{padding:8px 10px;}
+  .panch-card .p-value{font-size:.85rem;}
+  .panch-ang-title{padding:12px 14px 6px;}
+  .panch-ang-title h2{font-size:1rem;}
+  .panch-5-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;padding:0 14px 12px;
+  }
+  .p5-value{font-size:.88rem;}
+  .rahu-strip{margin:0 14px 10px;padding:8px 12px;flex-wrap:wrap;}
+  .rahu-strip .r-note{width:100%;text-align:left;margin-top:3px;}
+  .time-grid{padding:0 14px 12px;gap:7px;}
+  .time-card{padding:8px 10px;}
+  .time-card .t-time{font-size:.78rem;}
+  .detail-section{padding:0 14px 16px;}
+  .detail-table td{padding:7px 10px;}
+  .detail-table td:first-child{width:44%;}
+
+  /* MUHURAT */
+  .muhurat-main{padding:12px 14px;}
+  .muhurat-type-tabs{gap:5px;}
+  .muh-tab{padding:6px 10px;font-size:.75rem;}
+  .muhurat-card{flex-direction:column;align-items:flex-start;gap:8px;}
+  .m-date-badge{display:flex;align-items:center;gap:10px;min-width:unset;width:100%;}
+  .m-date-badge .m-day{font-size:1.2rem;}
+  .shubh-badge{align-self:flex-start;}
+
+  /* MONTHS */
+  .months-info{padding:12px 14px;}
+  .months-grid{grid-template-columns:repeat(2,1fr);gap:8px;}
+  .mic-names .mai{font-size:.9rem;}
+
+  /* NAKSHATRA */
+  .naks-section{padding:12px 14px;}
+  .naks-grid{grid-template-columns:repeat(2,1fr);gap:6px;}
+
+  /* SIDEBAR on mobile */
+  .sidebar-section-header h3{font-size:.82rem;}
+  .festival-info .name{font-size:.78rem;}
+  .festival-info .date{font-size:.68rem;}
+}
+
+/* ━━ UTILITY ━━ */
+.gold-text{color:var(--gold);}
+.ornament{color:var(--gold);font-size:.9rem;}
+</style>
+</head>
+<body>
+
+<div class="mithila-stripe"></div>
+
+<!-- ── TOP HEADER ── -->
+<header class="top-header">
+  <div class="header-top-strip">॥ जय मिथिला ॥ शुभ दिन ॥ जय माँ जानकी ॥</div>
+  <div class="header-main">
+    <div class="header-left">
+      <div class="om-symbol">ॐ</div>
+      <div class="header-title-block">
+        <h1>मैथिली पञ्चाङ्ग</h1>
+        <div class="subtitle">मिथिला क पारम्परिक पतरा</div>
+        <div class="samvat">विक्रम संवत् 2083 · शक संवत् 1948 · वर्ष : परिधावी</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="today-date-box">
+        <span class="today-label">आइक तिथि</span>
+        <span class="today-tithi" id="hdr-tithi">जेठ कृष्ण प्रतिपदा</span>
+        <span class="today-month" id="hdr-masa">जेठ मास · 2083</span>
+        <span class="today-month" id="hdr-date" style="font-size:.72rem;color:#D4A87A;margin-top:3px;"></span>
+      </div>
+    </div>
   </div>
-</div>
+</header>
 
-<!-- RIGHT sun-info block — replace existing inner HTML -->
-<div class="panchang-sun-info">
-  <div class="sun-icon">🌙</div>
-  <div class="sun-label">चन्द्रोदय</div>
-  <div class="sun-time" data-key="moonrise">रात्रि ११:४२</div>
-  <div style="margin-top:8px;">
-    <div class="sun-icon">⭐</div>
-    <div class="sun-label">अभिजित</div>
-    <div class="sun-time" id="abhijit-hero">११:४८ – १२:४०</div>
-  </div>
-</div>
+<!-- ── NAV TABS ── -->
+<nav class="nav-tabs">
 
+  <button class="nav-tab active" onclick="showPanel('today',this)">
+    <span>📅</span>
+    <span>आइक पञ्चाङ्ग</span>
+  </button>
 
-<!-- ════════════════════════════════════════
-  PATCH 2 — PANCH CARDS (6 cards in .panchang-main-details)
-  Add data-key to each .panch-card div.
-  Replace existing 6 .panch-card divs with these:
-════════════════════════════════════════ -->
+  <button class="nav-tab" onclick="showPanel('calendar',this)">
+    <span>🗓️</span>
+    <span>मासिक पतरा</span>
+  </button>
 
-<div class="panchang-main-details">
-  <div class="panch-card" data-key="masa">
-    <span class="p-label">मास</span>
-    <span class="p-value">जेठ (ज्येष्ठ)</span>
-    <span class="p-sub">कृष्ण पक्ष</span>
-  </div>
-  <div class="panch-card" data-key="samvat">
-    <span class="p-label">संवत्</span>
-    <span class="p-value">विक्रम २०८३</span>
-    <span class="p-sub">परिधावी नाम संवत्</span>
-  </div>
-  <div class="panch-card" data-key="ritu">
-    <span class="p-label">ऋतु</span>
-    <span class="p-value">ग्रीष्म ऋतु</span>
-    <span class="p-sub">वसन्त ऋतु समाप्त</span>
-  </div>
-  <div class="panch-card" data-key="moon-rashi">
-    <span class="p-label">चन्द्र राशि</span>
-    <span class="p-value">वृश्चिक</span>
-    <span class="p-sub">Scorpio</span>
-  </div>
-  <div class="panch-card" data-key="sun-rashi">
-    <span class="p-label">सूर्य राशि</span>
-    <span class="p-value">वृषभ</span>
-    <span class="p-sub">Taurus</span>
-  </div>
-  <div class="panch-card" data-key="ayan">
-    <span class="p-label">अयनकाल</span>
-    <span class="p-value">उत्तरायण</span>
-    <span class="p-sub">दक्षिणायन प्रारम्भ: आषाढ़ संक्रान्ति</span>
-  </div>
-</div>
+  <button class="nav-tab" onclick="showPanel('muhurat',this)">
+    <span>✨</span>
+    <span>मुहूर्त</span>
+  </button>
 
+  <button class="nav-tab" onclick="showPanel('months',this)">
+    <span>🌙</span>
+    <span>मैथिली मास</span>
+  </button>
 
-<!-- ════════════════════════════════════════
-  PATCH 3 — PANCHANG 5 CARDS (.panch-5-grid)
-  Add id attributes to each .panch-5-card and
-  add a span with class p5-endtime inside each card.
-  Replace the full .panch-5-grid with this:
-════════════════════════════════════════ -->
+  <button class="nav-tab" onclick="showPanel('nakshatra',this)">
+    <span>⭐</span>
+    <span>नक्षत्र</span>
+  </button>
 
-<div class="panch-5-grid">
-  <div class="panch-5-card tithi" id="p5-tithi">
-    <span class="p5-num">01</span>
-    <span class="p5-name">तिथि</span>
-    <span class="p5-value">कृष्ण प्रतिपदा</span>
-    <span class="p5-hindi">Krishna Paksha Pratipada</span>
-    <span class="p5-hindi p5-endtime" style="margin-top:4px; font-size:0.7rem; color:#8B5E3C;">भोर: ०१:४५ धरि पूर्णिमा</span>
-  </div>
-  <div class="panch-5-card vaar" id="p5-vaar">
-    <span class="p5-num">02</span>
-    <span class="p5-name">वार</span>
-    <span class="p5-value">रविवार</span>
-    <span class="p5-hindi">Sunday · Surya Vaar</span>
-    <span class="p5-hindi p5-endtime" style="margin-top:4px; font-size:0.7rem; color:#8B5E3C;">स्वामी: सूर्य देव</span>
-  </div>
-  <div class="panch-5-card nakshatra" id="p5-naksh">
-    <span class="p5-num">03</span>
-    <span class="p5-name">नक्षत्र</span>
-    <span class="p5-value">अनुराधा</span>
-    <span class="p5-hindi">Anuradha · वृश्चिक</span>
-    <span class="p5-hindi p5-endtime" style="margin-top:4px; font-size:0.7rem; color:#8B5E3C;">साँझ ४:११ धरि</span>
-  </div>
-  <div class="panch-5-card yoga" id="p5-yoga">
-    <span class="p5-num">04</span>
-    <span class="p5-name">योग</span>
-    <span class="p5-value">सिद्ध योग</span>
-    <span class="p5-hindi">Siddha Yoga</span>
-    <span class="p5-hindi p5-endtime" style="margin-top:4px; font-size:0.7rem; color:#8B5E3C;">अत्यन्त शुभ योग</span>
-  </div>
-  <div class="panch-5-card karan" id="p5-karan">
-    <span class="p5-num">05</span>
-    <span class="p5-name">करण</span>
-    <span class="p5-value">बव</span>
-    <span class="p5-hindi">Bava Karana</span>
-    <span class="p5-hindi p5-endtime" style="margin-top:4px; font-size:0.7rem; color:#8B5E3C;">दुपहर २:१५ धरि</span>
-  </div>
-</div>
+</nav>
+<!-- ── MAIN LAYOUT ── -->
+<div class="main-layout">
 
+  <!-- MAIN CONTENT (left/top) -->
+  <main class="main-content">
 
-<!-- ════════════════════════════════════════
-  PATCH 4 — RAHU STRIP
-  Add id="rahu-time" to the rahu time span.
-  Replace existing .rahu-strip with:
-════════════════════════════════════════ -->
+    <!-- ════ TODAY PANEL ════ -->
+    <div class="section-panel active" id="panel-today">
 
-<div class="rahu-strip">
-  <span style="font-size:1.1rem;">🚫</span>
-  <span class="r-label">राहुकाल:</span>
-  <span class="r-time" id="rahu-time">सन्ध्या ५:२४ – ७:०४ बजे</span>
-  <span class="r-note">∷ एहि काल मे शुभ कार्य वर्जित अछि ∷</span>
-</div>
+      <!-- Hero grid: sun | cards | moon -->
+      <div class="panchang-hero">
+        <div class="panchang-hero-grid">
+          <div class="panchang-sun-info">
+            <div class="sun-icon">🌅</div>
+            <div class="sun-label">सूर्योदय</div>
+            <div class="sun-time" data-key="sunrise">5:17 प्रातः</div>
+            <div style="margin-top:10px;">
+              <div class="sun-icon">🌇</div>
+              <div class="sun-label">सूर्यास्त</div>
+              <div class="sun-time" data-key="sunset">7:06 सायं</div>
+            </div>
+          </div>
+          <div class="panchang-main-details">
+            <div class="panch-card" data-key="masa">
+              <span class="p-label">मास</span>
+              <span class="p-value">जेठ (ज्येष्ठ)</span>
+              <span class="p-sub">कृष्ण पक्ष</span>
+            </div>
+            <div class="panch-card" data-key="samvat">
+              <span class="p-label">संवत्</span>
+              <span class="p-value">विक्रम 2083</span>
+              <span class="p-sub">परिधावी नाम संवत्</span>
+            </div>
+            <div class="panch-card" data-key="ritu">
+              <span class="p-label">ऋतु</span>
+              <span class="p-value">ग्रीष्म ऋतु</span>
+              <span class="p-sub">वसन्त ऋतु समाप्त</span>
+            </div>
+            <div class="panch-card" data-key="moon-rashi">
+              <span class="p-label">चन्द्र राशि</span>
+              <span class="p-value">वृश्चिक</span>
+              <span class="p-sub">Scorpio</span>
+            </div>
+            <div class="panch-card" data-key="sun-rashi">
+              <span class="p-label">सूर्य राशि</span>
+              <span class="p-value">वृषभ</span>
+              <span class="p-sub">Taurus</span>
+            </div>
+            <div class="panch-card" data-key="ayan">
+              <span class="p-label">अयनकाल</span>
+              <span class="p-value">उत्तरायण</span>
+              <span class="p-sub">Uttarayan</span>
+            </div>
+          </div>
+          <div class="panchang-sun-info">
+            <div class="sun-icon">🌙</div>
+            <div class="sun-label">चन्द्रोदय</div>
+            <div class="sun-time" data-key="moonrise">रात्रि 11:42</div>
+            <div style="margin-top:10px;">
+              <div class="sun-icon">⭐</div>
+              <div class="sun-label">अभिजित</div>
+              <div class="sun-time" id="abhijit-hero">11:48–12:40</div>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <!-- Panchang 5 elements -->
+      <div class="panch-ang-title">
+        <h2><span class="ornament">✦</span> पञ्चाङ्गक पाँच अङ्ग <span class="ornament">✦</span></h2>
+      </div>
+      <div class="panch-5-grid">
+        <div class="panch-5-card tithi" id="p5-tithi">
+          <span class="p5-num">1</span>
+          <span class="p5-name">तिथि</span>
+          <span class="p5-value">कृष्ण प्रतिपदा</span>
+          <span class="p5-hindi">Krishna Paksha</span>
+          <span class="p5-hindi p5-endtime"></span>
+        </div>
+        <div class="panch-5-card vaar" id="p5-vaar">
+          <span class="p5-num">2</span>
+          <span class="p5-name">वार</span>
+          <span class="p5-value">रविवार</span>
+          <span class="p5-hindi">Sunday</span>
+          <span class="p5-hindi p5-endtime"></span>
+        </div>
+        <div class="panch-5-card nakshatra" id="p5-naksh">
+          <span class="p5-num">3</span>
+          <span class="p5-name">नक्षत्र</span>
+          <span class="p5-value">अनुराधा</span>
+          <span class="p5-hindi">Anuradha</span>
+          <span class="p5-hindi p5-endtime"></span>
+        </div>
+        <div class="panch-5-card yoga" id="p5-yoga">
+          <span class="p5-num">4</span>
+          <span class="p5-name">योग</span>
+          <span class="p5-value">सिद्ध योग</span>
+          <span class="p5-hindi">Siddha Yoga</span>
+          <span class="p5-hindi p5-endtime"></span>
+        </div>
+        <div class="panch-5-card karan" id="p5-karan">
+          <span class="p5-num">5</span>
+          <span class="p5-name">करण</span>
+          <span class="p5-value">बव</span>
+          <span class="p5-hindi">Bava Karana</span>
+          <span class="p5-hindi p5-endtime"></span>
+        </div>
+      </div>
 
-<!-- ════════════════════════════════════════
-  PATCH 5 — TIME GRID CARDS (6 cards)
-  Add id to each .time-card.
-  Replace entire .time-grid with:
-════════════════════════════════════════ -->
+      <!-- Rahu strip -->
+      <div class="rahu-strip">
+        <span style="font-size:1rem;">🚫</span>
+        <span class="r-label">राहुकाल:</span>
+        <span class="r-time" id="rahu-time">5:24–7:04</span>
+        <span class="r-note">एहि काल मे शुभ कार्य वर्जित</span>
+      </div>
 
-<div class="time-grid">
-  <div class="time-card shubh-bg" id="tc-abhijit">
-    <span class="t-name">अभिजित मुहूर्त</span>
-    <span class="t-time">११:४८ – १२:४०</span>
-    <span class="t-desc">दिनक सर्वोत्तम मुहूर्त</span>
-  </div>
-  <div class="time-card shubh-bg" id="tc-brahma">
-    <span class="t-name">ब्रह्म मुहूर्त</span>
-    <span class="t-time">३:४५ – ४:३१ प्रातः</span>
-    <span class="t-desc">पूजा-ध्यान लेल सर्वोत्तम</span>
-  </div>
-  <div class="time-card shubh-bg" id="tc-vijay">
-    <span class="t-name">विजय मुहूर्त</span>
-    <span class="t-time">दुपहर २:१७ – ३:०७</span>
-    <span class="t-desc">सफलताक लेल शुभ</span>
-  </div>
-  <div class="time-card ashubh-bg" id="tc-gulika">
-    <span class="t-name">गुलिक काल</span>
-    <span class="t-time">प्रातः ६:४७ – ८:२७</span>
-    <span class="t-desc">अशुभ काल</span>
-  </div>
-  <div class="time-card ashubh-bg" id="tc-yama">
-    <span class="t-name">यमगण्ड</span>
-    <span class="t-time">दुपहर ११:४८ – १:२७</span>
-    <span class="t-desc">यात्रा लेल वर्जित</span>
-  </div>
-  <div class="time-card neutral-bg" id="tc-godhuli">
-    <span class="t-name">गोधूलि</span>
-    <span class="t-time">सायं ७:०३ – ७:२७</span>
-    <span class="t-desc">विवाह-गृहप्रवेश लेल उत्तम</span>
-  </div>
-</div>
+      <!-- Auspicious times -->
+      <div class="time-grid">
+        <div class="time-card shubh-bg" id="tc-abhijit">
+          <span class="t-name">अभिजित मुहूर्त</span>
+          <span class="t-time">11:48–12:40</span>
+          <span class="t-desc">दिनक सर्वोत्तम मुहूर्त</span>
+        </div>
+        <div class="time-card shubh-bg" id="tc-brahma">
+          <span class="t-name">ब्रह्म मुहूर्त</span>
+          <span class="t-time">3:45–4:31</span>
+          <span class="t-desc">पूजा-ध्यान लेल सर्वोत्तम</span>
+        </div>
+        <div class="time-card shubh-bg" id="tc-vijay">
+          <span class="t-name">विजय मुहूर्त</span>
+          <span class="t-time">2:17–3:07</span>
+          <span class="t-desc">सफलताक लेल शुभ</span>
+        </div>
+        <div class="time-card ashubh-bg" id="tc-gulika">
+          <span class="t-name">गुलिक काल</span>
+          <span class="t-time">6:47–8:27</span>
+          <span class="t-desc">अशुभ काल</span>
+        </div>
+        <div class="time-card ashubh-bg" id="tc-yama">
+          <span class="t-name">यमगण्ड</span>
+          <span class="t-time">11:48–1:27</span>
+          <span class="t-desc">यात्रा लेल वर्जित</span>
+        </div>
+        <div class="time-card neutral-bg" id="tc-godhuli">
+          <span class="t-name">गोधूलि</span>
+          <span class="t-time">7:03–7:27</span>
+          <span class="t-desc">विवाह-गृहप्रवेश लेल उत्तम</span>
+        </div>
+      </div>
 
+      <!-- Full detail table -->
+      <div class="detail-section">
+        <h3 class="section-h3"><span class="gold-text">✦</span> सम्पूर्ण पञ्चाङ्ग विवरण</h3>
+        <table class="detail-table">
+          <tr><td>विक्रम संवत्</td><td id="dt-samvat">2083 (परिधावी)</td></tr>
+          <tr><td>शक संवत्</td><td id="dt-shaka">1948</td></tr>
+          <tr><td>मैथिली मास</td><td id="dt-masa">जेठ (ज्येष्ठ)</td></tr>
+          <tr><td>पक्ष</td><td id="dt-paksha">कृष्ण पक्ष</td></tr>
+          <tr><td>तिथि</td><td id="dt-tithi">कृष्ण प्रतिपदा</td></tr>
+          <tr><td>वार</td><td id="dt-vaar">रविवार</td></tr>
+          <tr><td>नक्षत्र</td><td id="dt-naksh">अनुराधा</td></tr>
+          <tr><td>योग</td><td id="dt-yoga">सिद्ध (शुभ)</td></tr>
+          <tr><td>करण</td><td id="dt-karan">बव</td></tr>
+          <tr><td>सूर्योदय</td><td id="dt-sunrise">5:17</td></tr>
+          <tr><td>सूर्यास्त</td><td id="dt-sunset">7:06</td></tr>
+          <tr><td>चन्द्रोदय</td><td id="dt-moonrise">23:42</td></tr>
+          <tr><td>सूर्य राशि</td><td id="dt-sun-rashi">वृषभ</td></tr>
+          <tr><td>चन्द्र राशि</td><td id="dt-moon-rashi">वृश्चिक</td></tr>
+          <tr><td>ऋतु</td><td id="dt-ritu">ग्रीष्म</td></tr>
+          <tr><td>दिन अवधि</td><td id="dt-daylen">13 घण्टा 49 मिनट</td></tr>
+          <tr><td>अयन</td><td id="dt-ayan">उत्तरायण</td></tr>
+          <tr><td>राहुकाल</td><td id="dt-rahu">5:24–7:04</td></tr>
+          <tr><td>गुलिक काल</td><td id="dt-gulika">6:47–8:27</td></tr>
+          <tr><td>यमगण्ड</td><td id="dt-yama">11:48–1:27</td></tr>
+          <tr><td>दिशाशूल</td><td id="dt-disha">पश्चिम</td></tr>
+        </table>
+      </div>
+    </div><!-- /panel-today -->
 
-<!-- ════════════════════════════════════════
-  PATCH 6 — DETAIL TABLE
-  Add id to each <td> value cell.
-  Replace the entire .detail-table <tbody> with:
-════════════════════════════════════════ -->
+    <!-- ════ CALENDAR PANEL ════ -->
+    <div class="section-panel" id="panel-calendar">
+      <div class="month-selector">
+        <button class="month-nav-btn" onclick="changeMonth(-1)">◀ पूर्व</button>
+        <h2 id="cal-month-title">जेठ मास (मई-जून 2026)</h2>
+        <button class="month-nav-btn" onclick="changeMonth(1)">अगिला ▶</button>
+      </div>
+      <div class="month-names-strip">
+        <div class="month-pill" onclick="selectMonth(0,this)"><span class="mai-name">चैत</span><span class="eng-month">Mar-Apr</span></div>
+        <div class="month-pill" onclick="selectMonth(1,this)"><span class="mai-name">बैसाख</span><span class="eng-month">Apr-May</span></div>
+        <div class="month-pill active" onclick="selectMonth(2,this)"><span class="mai-name">जेठ</span><span class="eng-month">May-Jun</span></div>
+        <div class="month-pill" onclick="selectMonth(3,this)"><span class="mai-name">आषाढ़</span><span class="eng-month">Jun-Jul</span></div>
+        <div class="month-pill" onclick="selectMonth(4,this)"><span class="mai-name">साओन</span><span class="eng-month">Jul-Aug</span></div>
+        <div class="month-pill" onclick="selectMonth(5,this)"><span class="mai-name">भादो</span><span class="eng-month">Aug-Sep</span></div>
+        <div class="month-pill" onclick="selectMonth(6,this)"><span class="mai-name">आश्विन</span><span class="eng-month">Sep-Oct</span></div>
+        <div class="month-pill" onclick="selectMonth(7,this)"><span class="mai-name">कातिक</span><span class="eng-month">Oct-Nov</span></div>
+        <div class="month-pill" onclick="selectMonth(8,this)"><span class="mai-name">अगहन</span><span class="eng-month">Nov-Dec</span></div>
+        <div class="month-pill" onclick="selectMonth(9,this)"><span class="mai-name">पूस</span><span class="eng-month">Dec-Jan</span></div>
+        <div class="month-pill" onclick="selectMonth(10,this)"><span class="mai-name">माघ</span><span class="eng-month">Jan-Feb</span></div>
+        <div class="month-pill" onclick="selectMonth(11,this)"><span class="mai-name">फागुन</span><span class="eng-month">Feb-Mar</span></div>
+      </div>
+      <div class="calendar-grid-wrap" id="calendar-wrap"><!-- dynamically rendered --></div>
+      <!-- Inline day detail panel (replaces popup) -->
+      <div class="day-detail-panel" id="day-detail-panel">
+        <div class="ddp-header">
+          <div class="ddp-date-badge">
+            <div class="ddp-day" id="ddp-day-num">1</div>
+            <div class="ddp-mon" id="ddp-mon-name">Jan</div>
+          </div>
+          <div class="ddp-title-info">
+            <h3 id="ddp-paksha-tithi">शुक्ल प्रतिपदा</h3>
+            <p id="ddp-vaar-full">रविवार · 2083</p>
+          </div>
+          <button class="ddp-close-btn" onclick="closeDayDetail()">✕</button>
+        </div>
+        <div class="ddp-tithi-card">
+          <div class="ddp-paksha" id="ddp-paksha">शुक्ल पक्ष</div>
+          <div class="ddp-tithi-name" id="ddp-tithi">प्रतिपदा</div>
+        </div>
+        <div class="ddp-grid">
+          <div class="ddp-info-card">
+            <span class="ddp-lbl">वार</span>
+            <strong id="ddp-vaar">रविवार</strong>
+          </div>
+          <div class="ddp-info-card">
+            <span class="ddp-lbl">नक्षत्र</span>
+            <strong id="ddp-naksh">अश्विनी</strong>
+          </div>
+          <div class="ddp-info-card">
+            <span class="ddp-lbl">योग</span>
+            <strong id="ddp-yoga">सिद्ध</strong>
+            <small id="ddp-yoga-type">शुभ</small>
+          </div>
+          <div class="ddp-info-card">
+            <span class="ddp-lbl">करण</span>
+            <strong id="ddp-karan">बव</strong>
+          </div>
+        </div>
+        <div class="ddp-sun-row">
+          <div class="ddp-sun-card rise">
+            <span class="sun-emoji">🌅</span>
+            <div>
+              <span>सूर्योदय</span>
+              <strong id="ddp-sunrise">5:17</strong>
+            </div>
+          </div>
+          <div class="ddp-sun-card set">
+            <span class="sun-emoji">🌇</span>
+            <div>
+              <span>सूर्यास्त</span>
+              <strong id="ddp-sunset">7:06</strong>
+            </div>
+          </div>
+        </div>
+        <div class="ddp-rahu">
+          <span class="r-lbl">⚠️ राहुकाल</span>
+          <span class="r-val" id="ddp-rahu">5:24–7:04</span>
+        </div>
+      </div>
+    </div><!-- /panel-calendar -->
 
-<table class="detail-table">
-  <tr><td>विक्रम संवत्</td><td id="dt-samvat">२०८३ (परिधावी)</td></tr>
-  <tr><td>शक संवत्</td><td id="dt-shaka">१९४८</td></tr>
-  <tr><td>हिजरी</td><td>१४४७ हिजरी</td></tr>
-  <tr><td>मैथिली मास</td><td id="dt-masa">जेठ (ज्येष्ठ)</td></tr>
-  <tr><td>पक्ष</td><td id="dt-paksha">कृष्ण पक्ष</td></tr>
-  <tr><td>तिथि</td><td id="dt-tithi">कृष्ण प्रतिपदा (रातिक १:४५ धरि पूर्णिमा)</td></tr>
-  <tr><td>वार</td><td id="dt-vaar">रविवार (आइत)</td></tr>
-  <tr><td>नक्षत्र</td><td id="dt-naksh">अनुराधा (साँझ ४:११ धरि) तत्पश्चात् ज्येष्ठा</td></tr>
-  <tr><td>योग</td><td id="dt-yoga">सिद्ध (शुभ)</td></tr>
-  <tr><td>करण</td><td id="dt-karan">बव (दुपहर २:१५ धरि), बालव (रात्रि ३:२५ धरि)</td></tr>
-  <tr><td>सूर्योदय</td><td id="dt-sunrise">प्रातः ५:१७</td></tr>
-  <tr><td>सूर्यास्त</td><td id="dt-sunset">सायं ७:०६</td></tr>
-  <tr><td>चन्द्रोदय</td><td id="dt-moonrise">रात्रि ११:४२</td></tr>
-  <tr><td>सूर्य राशि</td><td id="dt-sun-rashi">वृषभ</td></tr>
-  <tr><td>चन्द्र राशि</td><td id="dt-moon-rashi">वृश्चिक</td></tr>
-  <tr><td>ऋतु</td><td id="dt-ritu">ग्रीष्म</td></tr>
-  <tr><td>दिन अवधि</td><td id="dt-daylen">१३ घण्टा ४९ मिनट</td></tr>
-  <tr><td>अयन</td><td id="dt-ayan">उत्तरायण</td></tr>
-  <tr><td>राहुकाल</td><td id="dt-rahu">सन्ध्या ५:२४ – ७:०४</td></tr>
-  <tr><td>गुलिक काल</td><td id="dt-gulika">प्रातः ६:४७ – ८:२७</td></tr>
-  <tr><td>यमगण्ड</td><td id="dt-yama">दुपहर ११:४८ – १:२७</td></tr>
-  <tr><td>दिशाशूल</td><td id="dt-disha">पश्चिम (रविवार)</td></tr>
-  <tr><td>आज विशेष</td><td>ज्येष्ठ पूर्णिमा (कल्हि तक) · वट सावित्री प्रारम्भ</td></tr>
-</table>
+    <!-- ════ MUHURAT PANEL ════ -->
+    <div class="section-panel" id="panel-muhurat">
+      <div class="muhurat-main">
+        <div class="muhurat-type-tabs">
+          <button class="muh-tab active" onclick="showMuhurat(\'vivah\',this)">💍 विवाह</button>
+          <button class="muh-tab" onclick="showMuhurat(\'mundan\',this)">✂️ मुड़न</button>
+          <button class="muh-tab" onclick="showMuhurat(\'upnayan\',this)">🧵 उपनयन</button>
+          <button class="muh-tab" onclick="showMuhurat(\'grihapravesh\',this)">🏠 गृहप्रवेश</button>
+          <button class="muh-tab" onclick="showMuhurat(\'dwiragaman\',this)">🚗 द्विरागमन</button>
+        </div>
 
+        <div class="muhurat-list active" id="muh-vivah">
+          <h3 class="section-h3">✦ विवाहक शुभ मुहूर्त 2026-2027</h3>
+          <p style="font-size:.8rem;color:var(--text-lt);font-family:\'Noto Sans Devanagari\',sans-serif;margin-bottom:12px;background:#FFF8F0;padding:10px;border-radius:6px;border-left:3px solid var(--gold);">देवोत्थान एकादशी (नवम्बर) पश्चात् विवाह लेल शुभ काल। देवशयनी सँ देवोत्थान धरि वर्जित।</p>
+          <div class="muhurat-card shubh"><div class="m-date-badge"><div class="m-day">5</div><span class="m-month">जून</span><span class="m-year">2026</span></div><div class="m-info"><div class="m-vaar">शुक्रवार · ज्येष्ठ शुक्ल एकादशी</div><div class="m-tithi">निर्जला एकादशी · मृगशिरा नक्षत्र</div><div class="m-time">मुहूर्त: 7:00–12:30</div></div><span class="shubh-badge">परम शुभ</span></div>
+          <div class="muhurat-card shubh"><div class="m-date-badge"><div class="m-day">17</div><span class="m-month">नवम्बर</span><span class="m-year">2026</span></div><div class="m-info"><div class="m-vaar">सोमवार · कातिक शुक्ल सप्तमी</div><div class="m-tithi">रोहिणी नक्षत्र</div><div class="m-time">मुहूर्त: 18:00–22:30</div></div><span class="shubh-badge">अत्यन्त शुभ</span></div>
+          <div class="muhurat-card shubh"><div class="m-date-badge"><div class="m-day">23</div><span class="m-month">नवम्बर</span><span class="m-year">2026</span></div><div class="m-info"><div class="m-vaar">रविवार · कातिक शुक्ल त्रयोदशी</div><div class="m-tithi">उत्तराफाल्गुनी नक्षत्र</div><div class="m-time">मुहूर्त: 7:30–13:00</div></div><span class="shubh-badge">शुभ</span></div>
+          <div class="muhurat-card shubh"><div class="m-date-badge"><div class="m-day">3</div><span class="m-month">दिसम्बर</span><span class="m-year">2026</span></div><div class="m-info"><div class="m-vaar">गुरुवार · अगहन शुक्ल तृतीया</div><div class="m-tithi">रोहिणी नक्षत्र</div><div class="m-time">मुहूर्त: 17:00–23:00</div></div><span class="shubh-badge">शुभ</span></div>
+          <div class="muhurat-card shubh"><div class="m-date-badge"><div class="m-day">12</div><span class="m-month">फरवरी</span><span class="m-year">2027</span></div><div class="m-info"><div class="m-vaar">शुक्रवार · माघ शुक्ल तृतीया</div><div class="m-tithi">उत्तराफाल्गुनी नक्षत्र</div><div class="m-time">मुहूर्त: 12:00–17:30</div></div><span class="shubh-badge">परम शुभ</span></div>
+        </div>
 
-<!-- ════════════════════════════════════════
-  PATCH 7 — REPLACE THE ENTIRE <script> BLOCK
-  At the bottom of <body>, remove the existing <script>...</script>
-  and replace with these two lines:
-════════════════════════════════════════ -->
+        <div class="muhurat-list" id="muh-mundan">
+          <h3 class="section-h3">✦ मुड़न (मुण्डन) मुहूर्त 2026</h3>
+          <div class="muhurat-card shubh"><div class="m-date-badge"><div class="m-day">15</div><span class="m-month">जून</span><span class="m-year">2026</span></div><div class="m-info"><div class="m-vaar">सोमवार · ज्येष्ठ शुक्ल एकादशी</div><div class="m-tithi">मृगशिरा नक्षत्र</div><div class="m-time">प्रातः 7:00–10:00</div></div><span class="shubh-badge">शुभ</span></div>
+          <div class="muhurat-card shubh"><div class="m-date-badge"><div class="m-day">22</div><span class="m-month">अक्टूबर</span><span class="m-year">2026</span></div><div class="m-info"><div class="m-vaar">गुरुवार · आश्विन शुक्ल पञ्चमी</div><div class="m-tithi">पुष्य नक्षत्र</div><div class="m-time">प्रातः 9:00–12:00</div></div><span class="shubh-badge">शुभ</span></div>
+        </div>
 
-<script src="panchang_engine.js"></script>
+        <div class="muhurat-list" id="muh-upnayan">
+          <h3 class="section-h3">✦ उपनयन मुहूर्त 2026</h3>
+          <div class="muhurat-card shubh"><div class="m-date-badge"><div class="m-day">29</div><span class="m-month">जनवरी</span><span class="m-year">2026</span></div><div class="m-info"><div class="m-vaar">गुरुवार · माघ शुक्ल एकादशी</div><div class="m-tithi">मृगशिरा नक्षत्र</div><div class="m-time">प्रातः 8:00–12:00</div></div><span class="shubh-badge">परम शुभ</span></div>
+          <div class="muhurat-card shubh"><div class="m-date-badge"><div class="m-day">12</div><span class="m-month">मार्च</span><span class="m-year">2026</span></div><div class="m-info"><div class="m-vaar">गुरुवार · फाल्गुन शुक्ल चतुर्दशी</div><div class="m-tithi">रोहिणी नक्षत्र</div><div class="m-time">प्रातः 9:00–13:00</div></div><span class="shubh-badge">शुभ</span></div>
+        </div>
 
-<!--
-  ─── OR if you want it inline (single file) ───
-  Copy the full contents of panchang_engine.js
-  and paste it between <script> ... </script>
-  at the bottom of <body>, replacing the old script.
--->
+        <div class="muhurat-list" id="muh-grihapravesh">
+          <h3 class="section-h3">✦ गृहप्रवेश मुहूर्त 2026</h3>
+          <div class="muhurat-card shubh"><div class="m-date-badge"><div class="m-day">18</div><span class="m-month">अप्रैल</span><span class="m-year">2026</span></div><div class="m-info"><div class="m-vaar">शनिवार · वैशाख शुक्ल तृतीया</div><div class="m-tithi">रोहिणी नक्षत्र</div><div class="m-time">7:30–11:00</div></div><span class="shubh-badge">शुभ</span></div>
+          <div class="muhurat-card shubh"><div class="m-date-badge"><div class="m-day">14</div><span class="m-month">नवम्बर</span><span class="m-year">2026</span></div><div class="m-info"><div class="m-vaar">शनिवार · कातिक शुक्ल चतुर्थी</div><div class="m-tithi">उत्तराभाद्र नक्षत्र</div><div class="m-time">8:00–11:30</div></div><span class="shubh-badge">अत्यन्त शुभ</span></div>
+        </div>
 
+        <div class="muhurat-list" id="muh-dwiragaman">
+          <h3 class="section-h3">✦ द्विरागमन मुहूर्त 2026</h3>
+          <div class="muhurat-card shubh"><div class="m-date-badge"><div class="m-day">20</div><span class="m-month">नवम्बर</span><span class="m-year">2026</span></div><div class="m-info"><div class="m-vaar">शुक्रवार · कातिक शुक्ल दशमी</div><div class="m-tithi">हस्त नक्षत्र</div><div class="m-time">8:00–12:00</div></div><span class="shubh-badge">शुभ</span></div>
+        </div>
+      </div>
+    </div><!-- /panel-muhurat -->
 
-<!-- ════════════════════════════════════════
-  NOTES ON ACCURACY
-  ─────────────────────────────────────────
-  The engine uses Jean Meeus "Astronomical Algorithms"
-  (VSOP87 truncated) + Lahiri Ayanamsa. Accuracy:
-  • Tithi end time:    ±10–15 min  (good for practical use)
-  • Nakshatra end:     ±15 min
-  • Sunrise/Sunset:    ±2 min  (for Darbhanga lat/lon)
-  • Rahu/Gulika/Yama:  derived from sunrise, so same ±2 min
+    <!-- ════ MAITHILI MONTHS PANEL ════ -->
+    <div class="section-panel" id="panel-months">
+      <div class="months-info">
+        <h3 class="section-h3">✦ मैथिली बारह मास</h3>
+        <div class="months-grid">
+          <div class="month-info-card"><div class="mic-header chaita"><span class="mic-num">1</span><div class="mic-names"><span class="mai">चैत</span><span class="hindi">Chaitra</span></div></div><div class="mic-body"><span class="mic-eng">Mar–Apr</span><span class="mic-feature">रामनवमी, होलिका दहन। नव वर्षक प्रारम्भ।</span></div></div>
+          <div class="month-info-card"><div class="mic-header baisakh"><span class="mic-num">2</span><div class="mic-names"><span class="mai">बैसाख</span><span class="hindi">Vaishakh</span></div></div><div class="mic-body"><span class="mic-eng">Apr–May</span><span class="mic-feature">अक्षय तृतीया, परशुराम जयन्ती।</span></div></div>
+          <div class="month-info-card"><div class="mic-header jeth"><span class="mic-num">3</span><div class="mic-names"><span class="mai">जेठ</span><span class="hindi">Jyeshtha</span></div></div><div class="mic-body"><span class="mic-eng">May–Jun</span><span class="mic-feature">निर्जला एकादशी, वट सावित्री।</span></div></div>
+          <div class="month-info-card"><div class="mic-header ashadh"><span class="mic-num">4</span><div class="mic-names"><span class="mai">आषाढ़</span><span class="hindi">Ashadha</span></div></div><div class="mic-body"><span class="mic-eng">Jun–Jul</span><span class="mic-feature">देवशयनी एकादशी, रथ यात्रा।</span></div></div>
+          <div class="month-info-card"><div class="mic-header saon"><span class="mic-num">5</span><div class="mic-names"><span class="mai">साओन</span><span class="hindi">Shravan</span></div></div><div class="mic-body"><span class="mic-eng">Jul–Aug</span><span class="mic-feature">मधुश्रावणी, श्रवण व्रत।</span></div></div>
+          <div class="month-info-card"><div class="mic-header bhado"><span class="mic-num">6</span><div class="mic-names"><span class="mai">भादो</span><span class="hindi">Bhadra</span></div></div><div class="mic-body"><span class="mic-eng">Aug–Sep</span><span class="mic-feature">तीज, कृष्ण जन्माष्टमी, हरितालिका।</span></div></div>
+          <div class="month-info-card"><div class="mic-header aswin"><span class="mic-num">7</span><div class="mic-names"><span class="mai">आश्विन</span><span class="hindi">Ashwin</span></div></div><div class="mic-body"><span class="mic-eng">Sep–Oct</span><span class="mic-feature">जितिया, कोजागरा, नवरात्र, दुर्गा पूजा।</span></div></div>
+          <div class="month-info-card"><div class="mic-header katik"><span class="mic-num">8</span><div class="mic-names"><span class="mai">कातिक</span><span class="hindi">Kartik</span></div></div><div class="mic-body"><span class="mic-eng">Oct–Nov</span><span class="mic-feature">छठ पूजा, दीवाली, सामा-चकेवा।</span></div></div>
+          <div class="month-info-card"><div class="mic-header aghan"><span class="mic-num">9</span><div class="mic-names"><span class="mai">अगहन</span><span class="hindi">Agahan</span></div></div><div class="mic-body"><span class="mic-eng">Nov–Dec</span><span class="mic-feature">विवाह पञ्चमी, श्री राम-सीता विवाहोत्सव।</span></div></div>
+          <div class="month-info-card"><div class="mic-header pus"><span class="mic-num">10</span><div class="mic-names"><span class="mai">पूस</span><span class="hindi">Paush</span></div></div><div class="mic-body"><span class="mic-eng">Dec–Jan</span><span class="mic-feature">पुत्रदा एकादशी। शीत ऋतु।</span></div></div>
+          <div class="month-info-card"><div class="mic-header magh"><span class="mic-num">11</span><div class="mic-names"><span class="mai">माघ</span><span class="hindi">Magha</span></div></div><div class="mic-body"><span class="mic-eng">Jan–Feb</span><span class="mic-feature">बसन्त पञ्चमी, तिला संक्रान्ति।</span></div></div>
+          <div class="month-info-card"><div class="mic-header phagun"><span class="mic-num">12</span><div class="mic-names"><span class="mai">फागुन</span><span class="hindi">Phalgun</span></div></div><div class="mic-body"><span class="mic-eng">Feb–Mar</span><span class="mic-feature">महाशिवरात्रि, फगुआ (होली)।</span></div></div>
+        </div>
+      </div>
+    </div><!-- /panel-months -->
 
-  For higher precision (±1 min), integrate the
-  astronomy-engine npm package (available on CDN):
-  https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js
-════════════════════════════════════════ -->
+    <!-- ════ NAKSHATRA PANEL ════ -->
+    <div class="section-panel" id="panel-nakshatra">
+      <div class="naks-section">
+        <h3 class="section-h3">✦ सत्ताइस नक्षत्र</h3>
+        <div class="naks-grid">
+          <div class="naks-card"><span class="naks-num">1</span><div><span class="naks-name">अश्विनी</span><span class="naks-dev">Ashwini · मेष</span></div></div>
+          <div class="naks-card"><span class="naks-num">2</span><div><span class="naks-name">भरणी</span><span class="naks-dev">Bharani · मेष</span></div></div>
+          <div class="naks-card"><span class="naks-num">3</span><div><span class="naks-name">कृत्तिका</span><span class="naks-dev">Kritika · वृषभ</span></div></div>
+          <div class="naks-card"><span class="naks-num">4</span><div><span class="naks-name">रोहिणी</span><span class="naks-dev">Rohini · वृषभ</span></div></div>
+          <div class="naks-card"><span class="naks-num">5</span><div><span class="naks-name">मृगशिरा</span><span class="naks-dev">Mrigashira · मिथुन</span></div></div>
+          <div class="naks-card"><span class="naks-num">6</span><div><span class="naks-name">आर्द्रा</span><span class="naks-dev">Ardra · मिथुन</span></div></div>
+          <div class="naks-card"><span class="naks-num">7</span><div><span class="naks-name">पुनर्वसु</span><span class="naks-dev">Punarvasu · कर्क</span></div></div>
+          <div class="naks-card"><span class="naks-num">8</span><div><span class="naks-name">पुष्य</span><span class="naks-dev">Pushya · कर्क</span></div></div>
+          <div class="naks-card"><span class="naks-num">9</span><div><span class="naks-name">आश्लेषा</span><span class="naks-dev">Ashlesha · कर्क</span></div></div>
+          <div class="naks-card"><span class="naks-num">10</span><div><span class="naks-name">मघा</span><span class="naks-dev">Magha · सिंह</span></div></div>
+          <div class="naks-card"><span class="naks-num">11</span><div><span class="naks-name">पूर्वाफाल्गुनी</span><span class="naks-dev">Purva Phalguni · सिंह</span></div></div>
+          <div class="naks-card"><span class="naks-num">12</span><div><span class="naks-name">उत्तराफाल्गुनी</span><span class="naks-dev">Uttara Phalguni · कन्या</span></div></div>
+          <div class="naks-card"><span class="naks-num">13</span><div><span class="naks-name">हस्त</span><span class="naks-dev">Hasta · कन्या</span></div></div>
+          <div class="naks-card"><span class="naks-num">14</span><div><span class="naks-name">चित्रा</span><span class="naks-dev">Chitra · तुला</span></div></div>
+          <div class="naks-card"><span class="naks-num">15</span><div><span class="naks-name">स्वाति</span><span class="naks-dev">Swati · तुला</span></div></div>
+          <div class="naks-card"><span class="naks-num">16</span><div><span class="naks-name">विशाखा</span><span class="naks-dev">Vishakha · वृश्चिक</span></div></div>
+          <div class="naks-card"><span class="naks-num">17</span><div><span class="naks-name">अनुराधा</span><span class="naks-dev">Anuradha · वृश्चिक</span></div></div>
+          <div class="naks-card"><span class="naks-num">18</span><div><span class="naks-name">ज्येष्ठा</span><span class="naks-dev">Jyeshtha · वृश्चिक</span></div></div>
+          <div class="naks-card"><span class="naks-num">19</span><div><span class="naks-name">मूल</span><span class="naks-dev">Mula · धनु</span></div></div>
+          <div class="naks-card"><span class="naks-num">20</span><div><span class="naks-name">पूर्वाषाढ़ा</span><span class="naks-dev">Purva Ashadha · धनु</span></div></div>
+          <div class="naks-card"><span class="naks-num">21</span><div><span class="naks-name">उत्तराषाढ़ा</span><span class="naks-dev">Uttara Ashadha · मकर</span></div></div>
+          <div class="naks-card"><span class="naks-num">22</span><div><span class="naks-name">श्रवण</span><span class="naks-dev">Shravana · मकर</span></div></div>
+          <div class="naks-card"><span class="naks-num">23</span><div><span class="naks-name">धनिष्ठा</span><span class="naks-dev">Dhanishtha · कुम्भ</span></div></div>
+          <div class="naks-card"><span class="naks-num">24</span><div><span class="naks-name">शतभिषा</span><span class="naks-dev">Shatabhisha · कुम्भ</span></div></div>
+          <div class="naks-card"><span class="naks-num">25</span><div><span class="naks-name">पूर्वाभाद्र</span><span class="naks-dev">Purva Bhadra · मीन</span></div></div>
+          <div class="naks-card"><span class="naks-num">26</span><div><span class="naks-name">उत्तराभाद्र</span><span class="naks-dev">Uttara Bhadra · मीन</span></div></div>
+          <div class="naks-card"><span class="naks-num">27</span><div><span class="naks-name">रेवती</span><span class="naks-dev">Revati · मीन</span></div></div>
+        </div>
+      </div>
+    </div><!-- /panel-nakshatra -->
+
+  </main><!-- /main-content -->
+
+  <!-- SIDEBAR (RIGHT on desktop, below on mobile) -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-section-header" onclick="toggleSidebar(this)">
+        <span>🪔</span>
+        <h3>मैथिली पाबनि</h3>
+        <span class="toggle-arrow">▼</span>
+      </div>
+      <div class="sidebar-content">
+        <div class="festival-item"><span class="festival-dot dot-red"></span><div class="festival-info"><span class="name">छठ पूजा (उषा अर्घ्य)</span><span class="date">16 नवम्बर 2026 · कातिक शुक्ल सप्तमी</span><span class="desc">सूर्य देव आ छठी माइक आराधना।</span></div></div>
+        <div class="festival-item"><span class="festival-dot dot-gold"></span><div class="festival-info"><span class="name">सामा-चकेवा</span><span class="date">कातिक पूर्णिमा</span><span class="desc">बहिन-भाइ प्रेमक मैथिली पाबनि।</span></div></div>
+        <div class="festival-item"><span class="festival-dot dot-pink"></span><div class="festival-info"><span class="name">मधुश्रावणी</span><span class="date">साओन कृष्ण पञ्चमी</span><span class="desc">नव विवाहित वधू लेल 15 दिनक व्रत।</span></div></div>
+        <div class="festival-item"><span class="festival-dot dot-green"></span><div class="festival-info"><span class="name">जितिया (जीवितपुत्रिका)</span><span class="date">आश्विन कृष्ण अष्टमी</span><span class="desc">माता अपन पुत्रक दीर्घायुक लेल।</span></div></div>
+        <div class="festival-item"><span class="festival-dot dot-gold"></span><div class="festival-info"><span class="name">विवाह पञ्चमी</span><span class="date">अगहन शुक्ल पञ्चमी · दिसम्बर</span><span class="desc">राम-सीताक विवाहक उत्सव।</span></div></div>
+        <div class="festival-item"><span class="festival-dot dot-red"></span><div class="festival-info"><span class="name">रामनवमी</span><span class="date">चैत शुक्ल नवमी · अप्रैल</span><span class="desc">प्रभु श्री रामचन्द्रक जन्मोत्सव।</span></div></div>
+        <div class="festival-item"><span class="festival-dot dot-blue"></span><div class="festival-info"><span class="name">कोजागरा (लक्ष्मी पूजा)</span><span class="date">आश्विन पूर्णिमा</span><span class="desc">माँ लक्ष्मीक पूजा।</span></div></div>
+        <div class="festival-item"><span class="festival-dot dot-pink"></span><div class="festival-info"><span class="name">तिला संक्रान्ति</span><span class="date">14 जनवरी 2027</span><span class="desc">तिल-गुड़ दान। मिथिला मे विशेष।</span></div></div>
+        <div class="festival-item"><span class="festival-dot dot-gold"></span><div class="festival-info"><span class="name">फगुआ (होली)</span><span class="date">फाल्गुन पूर्णिमा</span><span class="desc">मैथिली "फाग" लोकगीत संग।</span></div></div>
+        <div class="festival-item"><span class="festival-dot dot-green"></span><div class="festival-info"><span class="name">महाशिवरात्रि</span><span class="date">फाल्गुन कृष्ण चतुर्दशी</span><span class="desc">शिव-पार्वतीक विवाह महोत्सव।</span></div></div>
+        <div class="festival-item"><span class="festival-dot dot-red"></span><div class="festival-info"><span class="name">बसन्त पञ्चमी</span><span class="date">माघ शुक्ल पञ्चमी</span><span class="desc">माँ सरस्वतीक आराधना।</span></div></div>
+      </div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-header" onclick="toggleSidebar(this)">
+        <span>💍</span>
+        <h3>विवाह मुहूर्त</h3>
+        <span class="toggle-arrow">▼</span>
+      </div>
+      <div class="sidebar-content">
+        <div class="muhurat-item"><span class="m-type">✦ 5 जून 2026</span><span class="m-date">शुक्रवार · निर्जला एकादशी · परम शुभ</span></div>
+        <div class="muhurat-item"><span class="m-type">✦ 17 नवम्बर 2026</span><span class="m-date">सोमवार · रोहिणी नक्षत्र · अत्यन्त शुभ</span></div>
+        <div class="muhurat-item"><span class="m-type">✦ 23 नवम्बर 2026</span><span class="m-date">रविवार · उत्तराफाल्गुनी</span></div>
+        <div class="muhurat-item"><span class="m-type">✦ 3 दिसम्बर 2026</span><span class="m-date">गुरुवार · रोहिणी नक्षत्र</span></div>
+        <div class="muhurat-item"><span class="m-type">✦ 12 फरवरी 2027</span><span class="m-date">शुक्रवार · परम शुभ मुहूर्त</span></div>
+      </div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-header" onclick="toggleSidebar(this)">
+        <span>🧵</span>
+        <h3>उपनयन मुहूर्त</h3>
+        <span class="toggle-arrow">▼</span>
+      </div>
+      <div class="sidebar-content">
+        <div class="muhurat-item"><span class="m-type">✦ 29 जनवरी 2026</span><span class="m-date">गुरुवार · माघ शुक्ल एकादशी · परम शुभ</span></div>
+        <div class="muhurat-item"><span class="m-type">✦ 12 मार्च 2026</span><span class="m-date">गुरुवार · रोहिणी नक्षत्र</span></div>
+        <div class="muhurat-item"><span class="m-type">✦ 11 जून 2026</span><span class="m-date">गुरुवार · हस्त नक्षत्र</span></div>
+        <p style="font-size:.68rem;color:#807050;font-family:\'Noto Sans Devanagari\',sans-serif;margin-top:8px;line-height:1.5;">* माघ-फाल्गुन मास सर्वोत्तम। गुरुवार शुभ।</p>
+      </div>
+    </div>
+  </aside>
+
+</div><!-- /main-layout -->
+
+<footer>
+  <span class="footer-om">ॐ नमः शिवाय · ॐ जय माँ जानकी · जय मिथिला</span>
+  मैथिली पञ्चाङ्ग 2083 · मिथिलाञ्चल (दरभंगा/मधुबनी) आधारित · सभ तिथि एवं मुहूर्त पारम्परिक गणना अनुसार
+  <br><span style="color:#5C3A20;margin-top:4px;display:block;font-size:.72rem;">जय सियाराम · जय माँ दुर्गा · जय छठी मैया</span>
+</footer>
+
+<script>
+/**
+ * ═══════════════════════════════════════════════
+ *  MAITHILI PANCHANG — DYNAMIC ENGINE (preserved)
+ * ═══════════════════════════════════════════════
+ */
+// ''' + js_engine + '''
+
+/* ─── OVERRIDE: use plain numbers everywhere ─── */
+function fmtTime(h) {
+  if (h < 0) h += 24;
+  if (h >= 24) h -= 24;
+  const hh = Math.floor(h), mm = Math.round((h - hh) * 60);
+  return String(hh).padStart(2, '0') + ':' + String(mm).padStart(2, '0');
+}
+
+/* ─── CALENDAR ─── */
+const monthTitles = [
+  'Chaitra — March/April 2026',    'Baisakh — April/May 2026',
+  'Jeth — May/June 2026',          'Ashadh — June/July 2026',
+  'Saon — July/August 2026',       'Bhado — August/September 2026',
+  'Ashwin — September/October 2026','Katik — October/November 2026',
+  'Agahan — November/December 2026','Pus — December 2026/January 2027',
+  'Magh — January/February 2027',  'Phagun — February/March 2027'
+];
+
+const MASA_GREG_START = [
+  [2026,2,14],[2026,3,13],[2026,4,13],[2026,5,14],[2026,6,16],[2026,7,17],
+  [2026,8,16],[2026,9,17],[2026,10,16],[2026,11,15],[2027,0,14],[2027,1,12]
+];
+
+let currentMonth = 2;
+
+/* English-style weekday headers */
+const weekDaysEng = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+function renderCalendar(monthIdx) {
+  if (monthIdx === undefined) monthIdx = currentMonth;
+  currentMonth = monthIdx;
+
+  const titleEl = document.getElementById('cal-month-title');
+  if (titleEl) titleEl.textContent = monthTitles[monthIdx];
+
+  const [yr, mo, startD] = MASA_GREG_START[monthIdx];
+  const startDate = new Date(yr, mo, startD);
+  const startWeekday = startDate.getDay();
+  const wrap = document.getElementById('calendar-wrap');
+  const today = new Date();
+
+  let html = '<div class="cal-header-row">';
+  weekDaysEng.forEach((d, i) => {
+    html += `<div class="cal-day-header${i===0?' sunday':''}">${d}</div>`;
+  });
+  html += '</div><div class="cal-body">';
+
+  for (let i = 0; i < startWeekday; i++) html += '<div class="cal-cell empty"></div>';
+
+  for (let day = 0; day < 30; day++) {
+    const cellDate = new Date(yr, mo, startD + day);
+    const dow = cellDate.getDay();
+    const isSun = dow === 0;
+    const isToday = cellDate.toDateString() === today.toDateString();
+
+    const jd = julianDay(cellDate.getFullYear(), cellDate.getMonth()+1, cellDate.getDate(), 6 - CFG.tz);
+    const tithiData = calcTithi(jd);
+    const tithiName = TITHI_NAMES[tithiData.index];
+    const paksha = PAKSHA_NAMES[tithiData.index];
+
+    const isAmavas  = tithiData.index === 29;
+    const isPurnim  = tithiData.index === 14;
+    const isEkadashi = (tithiData.index === 10 || tithiData.index === 25);
+
+    let cls = 'cal-cell';
+    if (isSun) cls += ' sunday';
+    if (isToday) cls += ' today';
+    if (isPurnim || isEkadashi) cls += ' festive';
+    if (isAmavas) cls += ' inauspicious';
+
+    const pakshaShort = paksha === 'शुक्ल' ? 'शु' : 'कृ';
+    const engDate = startD + day;
+    const dotCls = paksha === 'शुक्ल' ? 'shukla-dot' : 'krishna-dot';
+
+    html += `<div class="${cls}" onclick="showCalDayDetail(${yr},${mo},${engDate})">`;
+    if (isToday) html += '<span class="today-badge">Today</span>';
+    /* Plain Arabic numeral for date */
+    html += `<span class="cal-date">${engDate}</span>`;
+    html += `<span class="cal-tithi"><span class="cal-paksha-dot ${dotCls}"></span>${pakshaShort} ${tithiName}</span>`;
+    if (isPurnim)   html += `<span class="cal-event">पूर्णिमा</span>`;
+    if (isAmavas)   html += `<span class="cal-event bad">अमावस्या</span>`;
+    if (isEkadashi) html += `<span class="cal-event">एकादशी</span>`;
+    html += '</div>';
+  }
+  html += '</div>';
+  wrap.innerHTML = html;
+}
+
+/* Day detail — INLINE below calendar (no popup) */
+function showCalDayDetail(yr, mo, d) {
+  const date = new Date(yr, mo, d);
+  const p = computePanchang(date);
+
+  const panel = document.getElementById('day-detail-panel');
+  panel.classList.add('visible');
+
+  const engMonths = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  document.getElementById('ddp-day-num').textContent = d;
+  document.getElementById('ddp-mon-name').textContent = engMonths[date.getMonth()] + ' ' + date.getFullYear();
+  document.getElementById('ddp-paksha-tithi').textContent = p.paksha + ' ' + p.tithi;
+  document.getElementById('ddp-vaar-full').textContent = p.vaar + ' · विक्रम ' + p.samvat;
+  document.getElementById('ddp-paksha').textContent = p.paksha + ' पक्ष';
+  document.getElementById('ddp-tithi').textContent = p.tithi;
+  document.getElementById('ddp-vaar').textContent = p.vaar;
+  document.getElementById('ddp-naksh').textContent = p.nakshatra;
+  document.getElementById('ddp-yoga').textContent = p.yoga;
+  document.getElementById('ddp-yoga-type').textContent = p.yogaType;
+  document.getElementById('ddp-karan').textContent = p.karana;
+  document.getElementById('ddp-sunrise').textContent = fmtTime(p.sunrise);
+  document.getElementById('ddp-sunset').textContent = fmtTime(p.sunset);
+  document.getElementById('ddp-rahu').textContent = fmtTime(p.rahu.start) + ' – ' + fmtTime(p.rahu.end);
+
+  /* Scroll panel into view on mobile */
+  setTimeout(() => panel.scrollIntoView({behavior:'smooth', block:'nearest'}), 50);
+}
+
+function closeDayDetail() {
+  document.getElementById('day-detail-panel').classList.remove('visible');
+}
+
+function changeMonth(dir) {
+  currentMonth = (currentMonth + dir + 12) % 12;
+  document.querySelectorAll('.month-pill').forEach((p, i) => p.classList.toggle('active', i === currentMonth));
+  renderCalendar(currentMonth);
+  closeDayDetail();
+}
+
+function selectMonth(idx, el) {
+  document.querySelectorAll('.month-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  currentMonth = idx;
+  renderCalendar(idx);
+  closeDayDetail();
+}
+
+/* Panel switching */
+function showPanel(name, btn) {
+  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  if (btn) btn.classList.add('active');
+  if (name === 'calendar') renderCalendar(currentMonth);
+}
+
+function toggleSidebar(header) {
+  const content = header.nextElementSibling;
+  const arrow = header.querySelector('.toggle-arrow');
+  content.classList.toggle('collapsed');
+  arrow.style.transform = content.classList.contains('collapsed') ? 'rotate(-90deg)' : '';
+}
+
+function showMuhurat(type, btn) {
+  document.querySelectorAll('.muhurat-list').forEach(l => l.classList.remove('active'));
+  document.querySelectorAll('.muh-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('muh-' + type).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* Header updater — plain numbers */
+function updateHeaderDate(p) {
+  const d = p.date;
+  const engMonths = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const el1 = document.getElementById('hdr-tithi');
+  const el2 = document.getElementById('hdr-masa');
+  const el3 = document.getElementById('hdr-date');
+  if (el1) el1.textContent = p.masa + ' ' + p.paksha + ' ' + p.tithi;
+  if (el2) el2.textContent = p.masa + ' मास · ' + p.samvat;
+  if (el3) el3.textContent = p.vaar + ', ' + d.getDate() + ' ' + engMonths[d.getMonth()] + ' ' + d.getFullYear();
+
+  const samEl = document.querySelector('.samvat');
+  if (samEl) samEl.textContent = 'विक्रम संवत् ' + p.samvat + ' · शक संवत् ' + p.shaka + ' · ' + p.masa + ' मास';
+}
+
+/* today panel updater — plain numbers */
+function updateTodayPanel(p) {
+  const set = (sel, val) => { const e = document.querySelector(sel); if (e && val !== undefined) e.textContent = val; };
+  set('.sun-time[data-key="sunrise"]', fmtTime(p.sunrise));
+  set('.sun-time[data-key="sunset"]',  fmtTime(p.sunset));
+  set('.sun-time[data-key="moonrise"]', fmtTime(p.moonrise));
+
+  set('.panch-card[data-key="masa"] .p-value', p.masa);
+  set('.panch-card[data-key="masa"] .p-sub',   p.paksha + ' पक्ष');
+  set('.panch-card[data-key="samvat"] .p-value','विक्रम ' + p.samvat);
+  set('.panch-card[data-key="moon-rashi"] .p-value', p.moonRashi);
+  set('.panch-card[data-key="sun-rashi"] .p-value',  p.sunRashi);
+  set('.panch-card[data-key="ayan"] .p-value', p.isUttarayan ? 'उत्तरायण' : 'दक्षिणायन');
+
+  set('#p5-tithi .p5-value', p.paksha + ' ' + p.tithi);
+  set('#p5-tithi .p5-hindi', (p.paksha === 'शुक्ल' ? 'Shukla' : 'Krishna') + ' Paksha');
+  set('#p5-tithi .p5-endtime', 'ends ' + fmtTime(p.tithiEnd));
+  set('#p5-vaar .p5-value',  p.vaar);
+  set('#p5-vaar .p5-hindi',  '');
+  set('#p5-vaar .p5-endtime', 'स्वामी: ' + p.vaarSwami);
+  set('#p5-naksh .p5-value', p.nakshatra);
+  set('#p5-naksh .p5-endtime', 'until ' + fmtTime(p.nakshatEnd));
+  set('#p5-yoga .p5-value',  p.yoga);
+  set('#p5-yoga .p5-endtime', p.yogaType + ' योग');
+  set('#p5-karan .p5-value', p.karana);
+  set('#p5-karan .p5-endtime', 'until ' + fmtTime(p.karanaEnd));
+
+  set('#rahu-time', fmtTime(p.rahu.start) + ' – ' + fmtTime(p.rahu.end));
+
+  set('#tc-abhijit .t-time',  fmtTime(p.abhijit.start) + ' – ' + fmtTime(p.abhijit.end));
+  set('#tc-brahma .t-time',   fmtTime(p.brahma.start)  + ' – ' + fmtTime(p.brahma.end));
+  set('#tc-vijay .t-time',    fmtTime(p.vijay.start)   + ' – ' + fmtTime(p.vijay.end));
+  set('#tc-gulika .t-time',   fmtTime(p.gulika.start)  + ' – ' + fmtTime(p.gulika.end));
+  set('#tc-yama .t-time',     fmtTime(p.yama.start)    + ' – ' + fmtTime(p.yama.end));
+  set('#tc-godhuli .t-time',  fmtTime(p.godhuli.start) + ' – ' + fmtTime(p.godhuli.end));
+
+  set('#dt-samvat',  p.samvat + ' (परिधावी)');
+  set('#dt-shaka',   p.shaka);
+  set('#dt-masa',    p.masa);
+  set('#dt-paksha',  p.paksha + ' पक्ष');
+  set('#dt-tithi',   p.paksha + ' ' + p.tithi + '  (until ' + fmtTime(p.tithiEnd) + ')');
+  set('#dt-vaar',    p.vaar);
+  set('#dt-naksh',   p.nakshatra + '  (until ' + fmtTime(p.nakshatEnd) + ')');
+  set('#dt-yoga',    p.yoga + ' (' + p.yogaType + ')');
+  set('#dt-karan',   p.karana + '  (until ' + fmtTime(p.karanaEnd) + ')');
+  set('#dt-sunrise', fmtTime(p.sunrise));
+  set('#dt-sunset',  fmtTime(p.sunset));
+  set('#dt-moonrise',fmtTime(p.moonrise));
+  set('#dt-sun-rashi', p.sunRashi);
+  set('#dt-moon-rashi', p.moonRashi);
+  set('#dt-ritu',    getRitu(p.masa));
+  set('#dt-daylen',  Math.floor(p.dayLen) + 'h ' + Math.round((p.dayLen%1)*60) + 'm');
+  set('#dt-ayan',    p.isUttarayan ? 'उत्तरायण' : 'दक्षिणायन');
+  set('#dt-rahu',    fmtTime(p.rahu.start) + ' – ' + fmtTime(p.rahu.end));
+  set('#dt-gulika',  fmtTime(p.gulika.start) + ' – ' + fmtTime(p.gulika.end));
+  set('#dt-yama',    fmtTime(p.yama.start) + ' – ' + fmtTime(p.yama.end));
+  set('#dt-disha',   p.dishaShool + ' (' + p.vaar + ')');
+  set('#abhijit-hero', fmtTime(p.abhijit.start) + ' – ' + fmtTime(p.abhijit.end));
+}
+
+function getRitu(masa) {
+  const m = {'चैत':'वसन्त','बैसाख':'ग्रीष्म','जेठ':'ग्रीष्म','आषाढ़':'वर्षा','साओन':'वर्षा','भादो':'वर्षा','आश्विन':'शरद','कातिक':'शरद','अगहन':'हेमन्त','पूस':'हेमन्त','माघ':'शिशिर','फागुन':'शिशिर'};
+  return m[masa] || 'ग्रीष्म';
+}
+
+/* INIT */
+document.addEventListener('DOMContentLoaded', () => {
+  const today = new Date();
+  const p = computePanchang(today);
+  updateHeaderDate(p);
+  updateTodayPanel(p);
+
+  /* Auto-select current Maithili month */
+  const moMap = [2,2,2,3,3,3,3,4,4,4,5,5,5,5,6,6,6,7,7,7,8,8,8,8,9,9,9,10,10,10,10,11,11,11,0,0,0,0,1,1,1,1,2,2,2];
+  const todayM = today.getMonth();
+  if (todayM >= 4 && todayM <= 5) currentMonth = 2;
+  renderCalendar(currentMonth);
+
+  /* Mark active pill */
+  document.querySelectorAll('.month-pill')[currentMonth]?.classList.add('active');
+  document.querySelectorAll('.month-pill').forEach((p,i) => p.classList.toggle('active', i === currentMonth));
+});
+</script>
+
+<script src="/js/auth2.js" defer></script>
+<script src="/js/s-comments.js" defer></script>
+<script src="/js/nav.js" defer></script>
+<script src="/js/search.js" defer></script>
+<script src="/js/suggested-posts.js" defer></script>
+<script>
+  const SM_API = 'https://www.api.shivmarg.live';
+  if (typeof SmComments !== 'undefined') SmComments.init({ apiBase: SM_API });
+</script>
+
+</body>
+</html>
