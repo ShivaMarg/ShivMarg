@@ -2600,7 +2600,7 @@ function showCalDayDetail(yr, mo, d) {
 
 </div>
 `;
-
+  
   document.body.appendChild(overlay);
 
   if(!document.getElementById("panchang-popup-style")){
@@ -2610,7 +2610,7 @@ function showCalDayDetail(yr, mo, d) {
 style.innerHTML = `
 
   /* OVERLAY */
-  #panchang-overlay{
+  #panchang-popup-overlay{
     position:fixed;
     inset:0;
 
@@ -2918,57 +2918,137 @@ style.innerHTML = `
   }
 
   /* MOBILE */
-  @media(max-width:480px){
+/* MOBILE */
+@media(max-width:480px){
 
-    #panchang-overlay{
-      padding:14px;
-    }
-
-    #panchang-popup-box{
-      width:100%;
-      padding:18px;
-      border-radius:24px;
-    }
-
-    .popup-grid{
-      grid-template-columns:1fr;
-    }
-
-    .popup-date{
-      gap:14px;
-    }
-
-    .popup-day{
-      min-width:58px;
-      height:58px;
-      font-size:24px;
-      border-radius:18px;
-    }
-
-    .popup-date h2{
-      font-size:20px;
-    }
-
-    .popup-tithi{
-      font-size:26px;
-    }
-
-    .sun-card{
-      padding:14px;
-    }
-
-    .sun-icon{
-      font-size:24px;
-    }
-
-    .sun-card strong{
-      font-size:16px;
-    }
-
-    .rahu-time{
-      font-size:16px;
-    }
+  #panchang-popup-overlay{
+    padding:10px;
+    align-items:flex-end;        /* slides up from bottom like a sheet */
   }
+
+  #panchang-popup-box{
+    width:100%;
+    max-height:82vh;             /* leaves breathing room at top */
+    padding:14px;
+    border-radius:22px 22px 14px 14px;  /* rounded only at top */
+  }
+
+  /* CLOSE BTN */
+  #panchang-close-btn{
+    width:32px;
+    height:32px;
+    font-size:13px;
+    top:10px;
+    right:10px;
+  }
+
+  /* HEADER */
+  .popup-top{
+    margin-bottom:14px;
+  }
+
+  .popup-date{
+    gap:10px;
+  }
+
+  .popup-day{
+    min-width:50px;
+    height:50px;
+    font-size:20px;
+    border-radius:14px;
+  }
+
+  .popup-date h2{
+    font-size:17px;
+  }
+
+  .popup-date p{
+    font-size:12px;
+    margin-top:3px;
+  }
+
+  /* TITHI CARD */
+  .popup-main-card{
+    padding:14px;
+    margin-bottom:12px;
+    border-radius:16px;
+  }
+
+  .popup-paksha{
+    font-size:12px;
+    margin-bottom:5px;
+  }
+
+  .popup-tithi{
+    font-size:22px;
+  }
+
+  /* GRID — single column, compact */
+  .popup-grid{
+    grid-template-columns:1fr 1fr;  /* keep 2-col but smaller */
+    gap:8px;
+    margin-bottom:12px;
+  }
+
+  .info-card{
+    padding:10px;
+    border-radius:14px;
+  }
+
+  .info-card span{
+    font-size:10px;
+    margin-bottom:5px;
+  }
+
+  .info-card strong{
+    font-size:13px;
+  }
+
+  .info-card small{
+    font-size:10px;
+  }
+
+  /* SUN */
+  .sun-section{
+    gap:8px;
+    margin-bottom:12px;
+  }
+
+  .sun-card{
+    padding:11px 13px;
+    border-radius:14px;
+    gap:10px;
+  }
+
+  .sun-icon{
+    font-size:22px;
+  }
+
+  .sun-card span{
+    font-size:10px;
+    margin-bottom:2px;
+  }
+
+  .sun-card strong{
+    font-size:15px;
+  }
+
+  /* RAHU */
+  .rahu-card{
+    padding:12px;
+    border-radius:14px;
+  }
+
+  .rahu-title{
+    font-size:11px;
+    margin-bottom:5px;
+  }
+
+  .rahu-time{
+    font-size:15px;
+  }
+
+}
 
   /* ANIMATION */
   @keyframes fadeIn{
@@ -2991,8 +3071,10 @@ style.innerHTML = `
     }
   }
 
+
 `; 
-    document.head.appendChild(style);
+    
+document.head.appendChild(style);
   }
   // document.head.appendChild(style);
 
