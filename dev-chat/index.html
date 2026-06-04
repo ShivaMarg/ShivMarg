@@ -759,9 +759,18 @@ body {
 <div id="toast"></div>
 
 <script>
-const API     = 'https://api.shivmarg.live';
-const WS_BASE = 'wss://api.shivmarg.live';
-
+const API     = 'http://127.0.0.1:8000';
+const WS_BASE = 'ws://127.0.0.1:8000';  // ws not wss for localhost
+ 
+// ── TOKEN: pick whichever key your main site stored ──
+let token = localStorage.getItem('admin_token')
+         || localStorage.getItem('ed_token')
+         || localStorage.getItem('bargad_token')
+         || null;
+ 
+// ── CURRENT USER: fetch fresh from API if token exists ──
+let currentUser = null;
+ 
 const USER_COLORS = [
   ['var(--u1)','var(--u1b)'],['var(--u2)','var(--u2b)'],
   ['var(--u3)','var(--u3b)'],['var(--u4)','var(--u4b)'],
@@ -777,27 +786,24 @@ function getUserColor(userId) {
   }
   return colorCache[userId];
 }
-
+ 
 const CHANNEL_DESCS = {
-  general: 'Team general discussion',
+  general:     'Team general discussion',
   development: 'Dev tasks, PRs, code reviews',
-  bugs: 'Bug reports and fixes',
-  design: 'UI/UX and frontend design',
+  bugs:        'Bug reports and fixes',
+  design:      'UI/UX and frontend design',
   deployments: 'Deploy logs and release notes',
-  random: 'Off-topic, memes, chai breaks ☕',
+  random:      'Off-topic, memes, chai breaks ☕',
 };
-
-let token = localStorage.getItem('sm_token');
-let currentUser = null;
+ 
 let ws = null;
 let currentChannel = 'general';
 let typingTimer = null;
 let typingUsers = {};
 let typingTimeout = {};
-let messageCache = {};
 let onlineUsers = {};
 let editingId = null;
-
+ 
 // ── AUTH ──────────────────────────────────────────
 async function doLogin() {
   const email = document.getElementById('auth-email').value.trim();
@@ -808,9 +814,9 @@ async function doLogin() {
   btn.textContent = 'Signing in…'; btn.disabled = true;
   try {
     const r = await fetch(`${API}/api/auth/login`, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({email, password: pass})
+      method:  'POST',
+      headers: {'Content-Type': 'application/json'},
+      body:    JSON.stringify({email, password: pass})
     });
     const d = await r.json();
     if (!r.ok) throw new Error(d.detail || 'Login failed');
@@ -818,10 +824,11 @@ async function doLogin() {
     if (!['admin','editor','lekhak'].includes(role)) {
       throw new Error('Access denied. Admin, Editor, or Lekhak role required.');
     }
-    token = d.access_token || d.token;
+    if (!d.token) throw new Error('No token received from server');
+    token       = d.token;
     currentUser = d.user;
-    localStorage.setItem('sm_token', token);
-    localStorage.setItem('sm_user', JSON.stringify(currentUser));
+    localStorage.setItem('bargad_token', token);
+    localStorage.setItem('bargad_user',  JSON.stringify(currentUser));
     initChat();
   } catch(e) {
     err.textContent = e.message;
@@ -829,56 +836,83 @@ async function doLogin() {
     btn.textContent = 'Sign in'; btn.disabled = false;
   }
 }
-
+ 
 function doLogout() {
-  localStorage.removeItem('sm_token');
-  localStorage.removeItem('sm_user');
+  localStorage.removeItem('bargad_token');
+  localStorage.removeItem('bargad_user');
+  localStorage.removeItem('admin_token');
+  localStorage.removeItem('ed_token');
+  token       = null;
+  currentUser = null;
   if (ws) ws.close();
   location.reload();
 }
-
+ 
 document.getElementById('auth-pass').addEventListener('keydown', e => {
   if (e.key === 'Enter') doLogin();
 });
-
+ 
 // ── INIT ──────────────────────────────────────────
-function initChat() {
-  if (!token) return;
-  const stored = localStorage.getItem('sm_user');
-  if (stored) currentUser = JSON.parse(stored);
+async function initChat() {
+  if (!token) {
+    document.getElementById('auth-overlay').style.display = 'flex';
+    return;
+  }
+ 
+  // Always fetch fresh user from API using the token
+  try {
+    const r = await fetch(`${API}/api/auth/me`, {
+      headers: {'Authorization': `Bearer ${token}`}
+    });
+    if (!r.ok) {
+      // Token is invalid/expired — show login
+      token = null;
+      document.getElementById('auth-overlay').style.display = 'flex';
+      return;
+    }
+    currentUser = await r.json();
+    // Check role
+    if (!['admin','editor','lekhak'].includes(currentUser.role)) {
+      document.getElementById('auth-overlay').style.display = 'flex';
+      document.getElementById('auth-err').textContent = 'Access denied. Admin, Editor, or Lekhak role required.';
+      return;
+    }
+  } catch(e) {
+    document.getElementById('auth-overlay').style.display = 'flex';
+    return;
+  }
+ 
   document.getElementById('auth-overlay').style.display = 'none';
-  document.getElementById('my-username-sidebar').textContent = currentUser?.display_name || currentUser?.username || 'Me';
+  document.getElementById('my-username-sidebar').textContent =
+    currentUser?.display_name || currentUser?.username || 'Me';
   loadHistory(currentChannel);
   connectWS();
 }
-
+ 
 // ── WEBSOCKET ──────────────────────────────────────
 function connectWS() {
-  if (ws) ws.close();
+  if (ws) { ws.onclose = null; ws.close(); }
   setBadge('connecting');
   ws = new WebSocket(`${WS_BASE}/api/chat/ws/${currentChannel}?token=${token}`);
-
+ 
   ws.onopen = () => {
     setBadge('connected');
     showToast('Connected to #' + currentChannel);
-    ws.send(JSON.stringify({type:'join', channel: currentChannel}));
+    ws.send(JSON.stringify({type: 'join', channel: currentChannel}));
   };
-
+ 
   ws.onmessage = (ev) => {
-    try {
-      const data = JSON.parse(ev.data);
-      handleWSMessage(data);
-    } catch(e) {}
+    try { handleWSMessage(JSON.parse(ev.data)); } catch(e) {}
   };
-
+ 
   ws.onclose = () => {
     setBadge('disconnected');
-    setTimeout(() => connectWS(), 3000);
+    setTimeout(() => { if (token) connectWS(); }, 3000);
   };
-
+ 
   ws.onerror = () => setBadge('disconnected');
 }
-
+ 
 function handleWSMessage(data) {
   switch(data.type) {
     case 'message':
@@ -900,18 +934,25 @@ function handleWSMessage(data) {
     case 'presence':
       updatePresence(data.user_id, data.username, data.status);
       break;
+    case 'presence_list':
+      if (Array.isArray(data.users)) {
+        data.users.forEach(u => updatePresence(u.user_id, u.username, 'online'));
+      }
+      break;
     case 'history':
       renderHistory(data.messages);
       break;
   }
 }
-
+ 
 function setBadge(state) {
   const b = document.getElementById('conn-badge');
   b.className = 'connection-badge ' + state;
-  b.textContent = state === 'connected' ? '● live' : state === 'connecting' ? '● connecting…' : '● offline';
+  b.textContent = state === 'connected' ? '● live'
+                : state === 'connecting' ? '● connecting…'
+                : '● offline';
 }
-
+ 
 // ── HISTORY ──────────────────────────────────────
 async function loadHistory(channel) {
   const msgs = document.getElementById('messages');
@@ -920,7 +961,11 @@ async function loadHistory(channel) {
     const r = await fetch(`${API}/api/chat/history/${channel}?limit=60`, {
       headers: {'Authorization': `Bearer ${token}`}
     });
-    if (r.status === 401) { doLogout(); return; }
+    if (r.status === 401) {
+      token = null;
+      document.getElementById('auth-overlay').style.display = 'flex';
+      return;
+    }
     const d = await r.json();
     msgs.innerHTML = '';
     if (!d.messages || d.messages.length === 0) {
@@ -933,17 +978,17 @@ async function loadHistory(channel) {
     msgs.innerHTML = `<div style="padding:40px;text-align:center;color:#f87171;font-size:13px;">Could not load messages. Check connection.</div>`;
   }
 }
-
+ 
 function renderHistory(messages) {
   const msgs = document.getElementById('messages');
   msgs.innerHTML = '';
   let lastDate = '';
   messages.forEach(m => {
-    const d = new Date(m.created_at);
+    const d       = new Date(m.created_at);
     const dateStr = d.toLocaleDateString('en-IN', {weekday:'long', day:'numeric', month:'long'});
     if (dateStr !== lastDate) {
       const div = document.createElement('div');
-      div.className = 'day-divider';
+      div.className   = 'day-divider';
       div.textContent = dateStr;
       msgs.appendChild(div);
       lastDate = dateStr;
@@ -952,41 +997,34 @@ function renderHistory(messages) {
   });
   scrollToBottom();
 }
-
+ 
 // ── RENDER MESSAGE ────────────────────────────────
 function appendMessage(m, scroll = true) {
   const msgs = document.getElementById('messages');
-  const el = buildMessageEl(m);
-  msgs.appendChild(el);
+  msgs.appendChild(buildMessageEl(m));
   if (scroll) scrollToBottom();
 }
-
+ 
 function buildMessageEl(m) {
   const isMine = m.sender_id === currentUser?.id;
   const [color, bgColor] = getUserColor(m.sender_id || m.username || '0');
   const row = document.createElement('div');
-  row.className = 'msg-row' + (isMine ? ' own-msg' : '');
-  row.dataset.id = m.id;
-  // FIX: store raw text in data attribute — avoids all inline quote-escaping issues
+  row.className    = 'msg-row' + (isMine ? ' own-msg' : '');
+  row.dataset.id   = m.id;
   row.dataset.text = m.text || '';
-
-  const initials = (m.sender_name || m.username || '?').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-  const avatarHtml = `<div class="avatar" style="background:${bgColor};color:${color};">${initials}</div>`;
-
-  const time = new Date(m.created_at).toLocaleTimeString('en-IN', {hour:'2-digit', minute:'2-digit'});
-  const roleTag = m.sender_role && m.sender_role !== 'user'
+ 
+  const initials   = (m.sender_name || m.username || '?').split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+  const time       = new Date(m.created_at).toLocaleTimeString('en-IN', {hour:'2-digit', minute:'2-digit'});
+  const roleTag    = m.sender_role && m.sender_role !== 'user'
     ? `<span class="tag-badge">${m.sender_role}</span>` : '';
-
-  const bubbleText = formatMessage(m.text || '');
+  const bubbleText  = formatMessage(m.text || '');
   const bubbleClass = m.is_system ? 'system-msg' : (isMine ? 'mine' : 'theirs');
   const bubbleStyle = isMine ? `background:${bgColor};border:1px solid ${color}33;color:${color};` : '';
-
-  const reactions = m.reactions ? buildReactionsHtml(m.reactions, m.id) : '';
+  const reactions   = m.reactions ? buildReactionsHtml(m.reactions, m.id) : '';
   const readReceipt = isMine ? `<div class="read-receipt">✓ sent</div>` : '';
-
-  // FIX: use startEditById / copyMsgById — reads text from data attribute, no escaping needed
+ 
   row.innerHTML = `
-    ${avatarHtml}
+    <div class="avatar" style="background:${bgColor};color:${color};">${initials}</div>
     <div class="msg-body">
       <div class="msg-meta">
         <span class="msg-author" style="color:${color};">${escHtml(m.sender_name || m.username || 'Unknown')} ${roleTag}</span>
@@ -997,28 +1035,27 @@ function buildMessageEl(m) {
       ${readReceipt}
     </div>
     <div class="msg-actions">
-      <button class="action-btn" title="React" onclick="quickReact('${m.id}')">😊</button>
-      ${isMine ? `<button class="action-btn" title="Edit" onclick="startEditById('${m.id}')">✏️</button>
+      <button class="action-btn" title="React"  onclick="quickReact('${m.id}')">😊</button>
+      ${isMine ? `
+      <button class="action-btn" title="Edit"   onclick="startEditById('${m.id}')">✏️</button>
       <button class="action-btn" title="Delete" onclick="deleteMessage('${m.id}')" style="color:#f87171;">🗑</button>` : ''}
-      <button class="action-btn" title="Copy" onclick="copyMsgById('${m.id}')">📋</button>
+      <button class="action-btn" title="Copy"   onclick="copyMsgById('${m.id}')">📋</button>
     </div>`;
   return row;
 }
-
-// FIX: helper — reads raw text from data attribute, no escaping issues
+ 
 function startEditById(id) {
-  const row = document.querySelector(`.msg-row[data-id="${id}"]`);
+  const row  = document.querySelector(`.msg-row[data-id="${id}"]`);
   const text = row ? row.dataset.text : '';
   startEdit(id, text);
 }
-
-// FIX: helper — reads raw text from data attribute, no escaping issues
+ 
 function copyMsgById(id) {
-  const row = document.querySelector(`.msg-row[data-id="${id}"]`);
+  const row  = document.querySelector(`.msg-row[data-id="${id}"]`);
   const text = row ? row.dataset.text : '';
   copyMsg(text);
 }
-
+ 
 function buildReactionsHtml(reactions, msgId) {
   if (!reactions || Object.keys(reactions).length === 0) return '';
   const myId = currentUser?.id;
@@ -1026,181 +1063,157 @@ function buildReactionsHtml(reactions, msgId) {
   for (const [emoji, users] of Object.entries(reactions)) {
     if (!users || users.length === 0) continue;
     const reacted = users.includes(myId);
-    html += `<button class="reaction-pill ${reacted?'reacted':''}" onclick="toggleReaction('${msgId}','${emoji}')">${emoji} <span class="reaction-count">${users.length}</span></button>`;
+    html += `<button class="reaction-pill ${reacted ? 'reacted' : ''}" onclick="toggleReaction('${msgId}','${emoji}')">${emoji} <span class="reaction-count">${users.length}</span></button>`;
   }
-  html += '</div>';
-  return html;
+  return html + '</div>';
 }
-
+ 
 // ── SEND ──────────────────────────────────────────
 async function sendMessage() {
   const input = document.getElementById('msg-input');
   const text  = input.value.trim();
   if (!text || !ws || ws.readyState !== 1) return;
-
+ 
   if (editingId) {
-    ws.send(JSON.stringify({ type: 'edit', message_id: editingId, new_text: text, channel: currentChannel }));
-    editingId = null;
+    ws.send(JSON.stringify({type: 'edit', message_id: editingId, new_text: text, channel: currentChannel}));
+    editingId         = null;
     input.placeholder = `Message #${currentChannel} — Shift+Enter for new line`;
-    input.style.borderColor = '';
   } else {
-    ws.send(JSON.stringify({ type: 'message', text, channel: currentChannel }));
+    ws.send(JSON.stringify({type: 'message', text, channel: currentChannel}));
   }
   input.value = '';
   autoResize(input);
   clearTyping();
 }
-
+ 
 function handleKeydown(e) {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    sendMessage();
-  }
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
   if (e.key === 'Escape' && editingId) {
     editingId = null;
-    document.getElementById('msg-input').value = '';
-    document.getElementById('msg-input').placeholder = `Message #${currentChannel}`;
+    const input       = document.getElementById('msg-input');
+    input.value       = '';
+    input.placeholder = `Message #${currentChannel}`;
   }
 }
-
-function handleInput(el) {
-  autoResize(el);
-}
-
-function autoResize(el) {
-  el.style.height = 'auto';
-  el.style.height = Math.min(el.scrollHeight, 140) + 'px';
-}
-
+ 
+function handleInput(el)  { autoResize(el); }
+function autoResize(el)   { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 140) + 'px'; }
+ 
 // ── TYPING ──────────────────────────────────────
 function handleTyping() {
   if (!ws || ws.readyState !== 1) return;
-  ws.send(JSON.stringify({ type: 'typing', is_typing: true, channel: currentChannel }));
+  ws.send(JSON.stringify({type: 'typing', is_typing: true, channel: currentChannel}));
   clearTimeout(typingTimer);
   typingTimer = setTimeout(clearTyping, 2000);
 }
-
+ 
 function clearTyping() {
-  if (ws && ws.readyState === 1) {
-    ws.send(JSON.stringify({ type: 'typing', is_typing: false, channel: currentChannel }));
-  }
+  if (ws && ws.readyState === 1)
+    ws.send(JSON.stringify({type: 'typing', is_typing: false, channel: currentChannel}));
 }
-
+ 
 function showTyping(userId, username, isTyping) {
   if (isTyping) {
     typingUsers[userId] = username;
     clearTimeout(typingTimeout[userId]);
-    typingTimeout[userId] = setTimeout(() => {
-      delete typingUsers[userId];
-      renderTyping();
-    }, 3000);
+    typingTimeout[userId] = setTimeout(() => { delete typingUsers[userId]; renderTyping(); }, 3000);
   } else {
     delete typingUsers[userId];
     clearTimeout(typingTimeout[userId]);
   }
   renderTyping();
 }
-
+ 
 function renderTyping() {
-  const area = document.getElementById('typing-area');
+  const area  = document.getElementById('typing-area');
   const names = Object.values(typingUsers);
-  if (names.length === 0) { area.innerHTML = ''; return; }
-  const label = names.length === 1 ? `${names[0]} is typing` : `${names.slice(0,-1).join(', ')} and ${names.slice(-1)[0]} are typing`;
+  if (!names.length) { area.innerHTML = ''; return; }
+  const label = names.length === 1
+    ? `${names[0]} is typing`
+    : `${names.slice(0,-1).join(', ')} and ${names.slice(-1)[0]} are typing`;
   area.innerHTML = `<div class="typing-dots"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div><span>${label}…</span>`;
 }
-
+ 
 // ── EDIT / DELETE ────────────────────────────────
 function startEdit(id, text) {
   editingId = id;
-  const input = document.getElementById('msg-input');
-  input.value = text;
-  input.focus();
+  const input       = document.getElementById('msg-input');
+  input.value       = text;
   input.placeholder = '✏️ Editing message — Esc to cancel';
+  input.focus();
   autoResize(input);
 }
-
+ 
 async function deleteMessage(id) {
   if (!confirm('Delete this message?')) return;
-  if (ws && ws.readyState === 1) {
-    ws.send(JSON.stringify({ type: 'delete', message_id: id, channel: currentChannel }));
-  }
+  if (ws && ws.readyState === 1)
+    ws.send(JSON.stringify({type: 'delete', message_id: id, channel: currentChannel}));
 }
-
+ 
 function updateMessageDOM(id, newText) {
   const b = document.getElementById('bubble-' + id);
-  if (b) {
-    b.innerHTML = formatMessage(newText);
-    // Also update the data-text attribute so edit/copy still work after an edit
-    const row = b.closest('.msg-row');
-    if (row) row.dataset.text = newText;
-    const meta = row?.querySelector('.msg-time');
-    if (meta) meta.textContent = meta.textContent.replace(' · edited','') + ' · edited';
-  }
+  if (!b) return;
+  b.innerHTML = formatMessage(newText);
+  const row = b.closest('.msg-row');
+  if (row) row.dataset.text = newText;
+  const meta = row?.querySelector('.msg-time');
+  if (meta) meta.textContent = meta.textContent.replace(' · edited','') + ' · edited';
 }
-
+ 
 function removeMessageDOM(id) {
-  const row = document.querySelector(`.msg-row[data-id="${id}"]`);
-  if (row) row.remove();
+  document.querySelector(`.msg-row[data-id="${id}"]`)?.remove();
 }
-
+ 
 // ── REACTIONS ────────────────────────────────────
 function quickReact(msgId) {
   const emojis = ['👍','✅','🔥','😂','❤️','🎉'];
-  const emoji = emojis[Math.floor(Math.random() * emojis.length)];
-  toggleReaction(msgId, emoji);
+  toggleReaction(msgId, emojis[Math.floor(Math.random() * emojis.length)]);
 }
-
+ 
 function toggleReaction(msgId, emoji) {
-  if (ws && ws.readyState === 1) {
-    ws.send(JSON.stringify({ type: 'reaction', message_id: msgId, emoji, channel: currentChannel }));
-  }
+  if (ws && ws.readyState === 1)
+    ws.send(JSON.stringify({type: 'reaction', message_id: msgId, emoji, channel: currentChannel}));
 }
-
+ 
 function updateReactionDOM(msgId, reactions) {
   const row = document.querySelector(`.msg-row[data-id="${msgId}"]`);
   if (!row) return;
-  let reactionRow = row.querySelector('.reactions-row');
-  const html = buildReactionsHtml(reactions, msgId);
-  if (reactionRow) {
-    reactionRow.outerHTML = html;
-  } else {
-    const bubble = row.querySelector('.msg-bubble');
-    if (bubble) bubble.insertAdjacentHTML('afterend', html);
-  }
+  const existing = row.querySelector('.reactions-row');
+  const html     = buildReactionsHtml(reactions, msgId);
+  if (existing) existing.outerHTML = html;
+  else row.querySelector('.msg-bubble')?.insertAdjacentHTML('afterend', html);
 }
-
+ 
 // ── PRESENCE ─────────────────────────────────────
 function updatePresence(userId, username, status) {
-  onlineUsers[userId] = { username, status };
+  onlineUsers[userId] = {username, status};
   renderOnlineList();
 }
-
+ 
 function renderOnlineList() {
-  const list = document.getElementById('online-list');
-  const myEntry = `<div class="online-user"><div class="online-dot"></div><span style="font-size:12px;">${currentUser?.display_name || currentUser?.username || 'Me'}</span><span style="font-size:10px;color:var(--text3);margin-left:auto;">You</span></div>`;
+  const list    = document.getElementById('online-list');
+  const myEntry = `<div class="online-user"><div class="online-dot"></div><span style="font-size:12px;">${escHtml(currentUser?.display_name || currentUser?.username || 'Me')}</span><span style="font-size:10px;color:var(--text3);margin-left:auto;">You</span></div>`;
   let others = '';
   for (const [uid, u] of Object.entries(onlineUsers)) {
     if (uid === currentUser?.id) continue;
-    const dotClass = u.status === 'online' ? '' : 'away';
-    others += `<div class="online-user"><div class="online-dot ${dotClass}"></div><span style="font-size:12px;">${escHtml(u.username)}</span></div>`;
+    others += `<div class="online-user"><div class="online-dot ${u.status === 'online' ? '' : 'away'}"></div><span style="font-size:12px;">${escHtml(u.username)}</span></div>`;
   }
   list.innerHTML = myEntry + others;
 }
-
+ 
 // ── CHANNEL SWITCH ────────────────────────────────
 function switchChannel(channel, el) {
   document.querySelectorAll('.channel-item').forEach(i => i.classList.remove('active'));
   el.classList.add('active');
   currentChannel = channel;
-  document.getElementById('channel-name').textContent = channel;
-  document.getElementById('channel-desc').textContent = CHANNEL_DESCS[channel] || '';
-  document.getElementById('msg-input').placeholder = `Message #${channel} — Shift+Enter for new line`;
-  document.querySelector('.unread-badge')?.remove();
+  document.getElementById('channel-name').textContent  = channel;
+  document.getElementById('channel-desc').textContent  = CHANNEL_DESCS[channel] || '';
+  document.getElementById('msg-input').placeholder     = `Message #${channel} — Shift+Enter for new line`;
   loadHistory(channel);
   connectWS();
   document.getElementById('sidebar').classList.remove('open');
 }
-
+ 
 // ── FORMAT ────────────────────────────────────────
 function formatMessage(text) {
   let t = escHtml(text);
@@ -1212,66 +1225,64 @@ function formatMessage(text) {
   t = t.replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener" style="color:var(--accent2);">$1</a>');
   return t;
 }
-
+ 
 function escHtml(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
-
+ 
 // ── HELPERS ──────────────────────────────────────
 function scrollToBottom() {
   const msgs = document.getElementById('messages');
   requestAnimationFrame(() => { msgs.scrollTop = msgs.scrollHeight; });
 }
-
+ 
 function wrapText(before, after) {
   const ta = document.getElementById('msg-input');
-  const s = ta.selectionStart, e = ta.selectionEnd;
-  const selected = ta.value.substring(s, e);
-  ta.value = ta.value.substring(0, s) + before + selected + after + ta.value.substring(e);
+  const s  = ta.selectionStart, e = ta.selectionEnd;
+  ta.value = ta.value.substring(0, s) + before + ta.value.substring(s, e) + after + ta.value.substring(e);
   ta.focus();
   ta.selectionStart = s + before.length;
   ta.selectionEnd   = e + before.length;
   autoResize(ta);
 }
-
+ 
 function insertAtCursor(ch) {
   const ta = document.getElementById('msg-input');
-  const s = ta.selectionStart;
-  ta.value = ta.value.substring(0,s) + ch + ta.value.substring(s);
+  const s  = ta.selectionStart;
+  ta.value = ta.value.substring(0, s) + ch + ta.value.substring(s);
   ta.focus();
   ta.selectionStart = ta.selectionEnd = s + ch.length;
 }
-
+ 
 function insertEmoji(em) {
   insertAtCursor(em);
   document.getElementById('emoji-picker').classList.remove('show');
 }
-
+ 
 function toggleEmojiPicker() {
   document.getElementById('emoji-picker').classList.toggle('show');
 }
-
+ 
 document.addEventListener('click', e => {
-  if (!e.target.closest('#emoji-picker') && !e.target.closest('.emoji-btn')) {
+  if (!e.target.closest('#emoji-picker') && !e.target.closest('.emoji-btn'))
     document.getElementById('emoji-picker').classList.remove('show');
-  }
 });
-
+ 
 function copyMsg(text) {
   navigator.clipboard.writeText(text).then(() => showToast('Copied!'));
 }
-
+ 
 function showToast(msg, duration = 2500) {
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), duration);
 }
-
+ 
 function playPing() {
   try {
-    const ctx = new AudioContext();
-    const osc = ctx.createOscillator();
+    const ctx  = new AudioContext();
+    const osc  = ctx.createOscillator();
     const gain = ctx.createGain();
     osc.connect(gain); gain.connect(ctx.destination);
     osc.frequency.value = 880;
@@ -1280,13 +1291,11 @@ function playPing() {
     osc.start(); osc.stop(ctx.currentTime + 0.3);
   } catch(e) {}
 }
-
+ 
 // ── BOOT ─────────────────────────────────────────
-if (token) {
-  const stored = localStorage.getItem('sm_user');
-  if (stored) { currentUser = JSON.parse(stored); }
-  initChat();
-}
+initChat();
+
+
 </script>
 </body>
 </html>
