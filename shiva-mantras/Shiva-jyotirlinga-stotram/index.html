@@ -270,6 +270,18 @@
       text-shadow:0 0 18px rgba(201,168,76,0.2);
       margin-bottom:9px;
     }
+    a.q-m {
+      color: inherit;
+      display: block;
+    }
+    a.q-m:hover .q-mt {
+      color: var(--gold-light);
+    }
+    a.q-m:hover {
+      background: rgba(255,143,0,0.06);
+      padding-left: 4px;
+      transition: all .25s;
+    }
     .verse-roman {
       font-family:'Cinzel',serif; font-size:0.72rem;
       color:rgba(255,204,128,0.45); letter-spacing:1.5px;
@@ -343,6 +355,78 @@
     .sig-text { font-size:0.88rem; color:var(--soft); line-height:1.65; }
     .sig-text strong { color:var(--fire); display:block; font-family:'Cinzel',serif; font-size:0.73rem; letter-spacing:1px; margin-bottom:2px; }
 
+    /* Suggested Posts in Sidebar */
+    #suggestedPostsContainer .card {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px;
+      background: rgba(255,143,0,0.05);
+      border: 1px solid rgba(255,143,0,0.14);
+      border-radius: 2px;
+      text-decoration: none;
+      color: inherit;
+      transition: background .3s;
+    }
+    #suggestedPostsContainer .card:hover {
+      background: rgba(255,143,0,0.12);
+    }
+    #suggestedPostsContainer .card-image {
+      width: 60px;
+      height: 60px;
+      flex-shrink: 0;
+      overflow: hidden;
+      border-radius: 2px;
+      background: rgba(255,143,0,0.08);
+    }
+    #suggestedPostsContainer .card-inner {
+      flex: 1;
+      min-width: 0;
+    }
+    #suggestedPostsContainer .card-tag {
+      font-family: 'Cinzel', serif;
+      font-size: 0.55rem;
+      letter-spacing: 2px;
+      color: rgba(255,143,0,0.6);
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    #suggestedPostsContainer .card-name-deva {
+      font-family: 'Tiro Devanagari Sanskrit', serif;
+      font-size: 0.88rem;
+      color: var(--gold-light);
+      line-height: 1.3;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    #suggestedPostsContainer .card-name-eng { display: none; }
+    #suggestedPostsContainer .card-mantra-preview {
+      font-size: 0.78rem;
+      color: rgba(255,248,240,0.42);
+      line-height: 1.4;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    #suggestedPostsContainer .card-count {
+      font-family: 'Cinzel', serif;
+      font-size: 0.58rem;
+      color: rgba(255,248,240,0.28);
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+    #suggestedPostsContainer .card-arrow { display: none; }
+    #suggestedPostsContainer .card-count-dot {
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      background: var(--amber);
+      border-radius: 50%;
+      vertical-align: middle;
+      margin-right: 4px;
+    }
     /* ── SIDEBAR ── */
     .sidebar { display:flex; flex-direction:column; gap:20px; }
     .widget {
@@ -765,11 +849,26 @@
     <div class="widget reveal">
       <div class="widget-title">✦ संबंधित स्तोत्र ✦</div>
       <div style="display:flex;flex-direction:column;gap:2px;">
-        <div class="q-m"><div class="q-mt">🏛️ लिंगाष्टकम्</div><div class="q-ms">Lingashtakam</div></div>
-        <div class="q-m"><div class="q-mt">🍃 बिल्वाष्टकम्</div><div class="q-ms">Bilvashtakam</div></div>
-        <div class="q-m"><div class="q-mt">🔱 शिव ताण्डव</div><div class="q-ms">Tandava Stotram</div></div>
-        <div class="q-m"><div class="q-mt">🕉️ रुद्राष्टकम्</div><div class="q-ms">Rudra Ashtakam</div></div>
-        <div class="q-m"><div class="q-mt">☽ महामृत्युंजय</div><div class="q-ms">Maha Mantra</div></div>
+        <a href="/shiva-mantras/lingashtakam/" class="q-m" style="text-decoration:none;">
+          <div class="q-mt">🏛️ लिंगाष्टकम्</div>
+          <div class="q-ms">Lingashtakam</div>
+        </a>
+        <a href="/shiva-mantras/bilvashtakam/" class="q-m" style="text-decoration:none;">
+          <div class="q-mt">🍃 बिल्वाष्टकम्</div>
+          <div class="q-ms">Bilvashtakam</div>
+        </a>
+        <a href="/shiva-mantras/shiva-tandava-stotram/" class="q-m" style="text-decoration:none;">
+          <div class="q-mt">🔱 शिव ताण्डव</div>
+          <div class="q-ms">Tandava Stotram</div>
+        </a>
+        <a href="/shiva-mantras/rudrashtakam/" class="q-m" style="text-decoration:none;">
+          <div class="q-mt">🕉️ रुद्राष्टकम्</div>
+          <div class="q-ms">Rudra Ashtakam</div>
+        </a>
+        <a href="/shiva-mantras/mahamrityunjay-mantra/" class="q-m" style="text-decoration:none;">
+          <div class="q-mt">☽ महामृत्युंजय</div>
+          <div class="q-ms">Maha Mantra</div>
+        </a>
       </div>
     </div>
 
@@ -793,8 +892,20 @@
       <div class="q-m"><div class="q-mt">🌿 श्रावण मास</div><div class="q-ms">विशेष फलदायी</div></div>
       <div class="q-m"><div class="q-mt">⚡ महाशिवरात्रि</div><div class="q-ms">सर्वोत्तम अवसर</div></div>
     </div>
+  <!-- Suggested Posts Widget -->
+    <div class="widget reveal">
+      <div class="widget-title">✦ सुझाए गए लेख ✦</div>
+      <div id="suggestedPostsContainer" style="display:flex;flex-direction:column;gap:10px;">
+        <!-- Loading state -->
+        <div style="padding:14px 0;text-align:center;color:rgba(255,248,240,0.3);font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:2px;">
+          लेख लोड हो रहे हैं…
+        </div>
+      </div>
+    </div>
 
   </div>
+
+
 </div>
 
 <!-- COMMENTS -->
