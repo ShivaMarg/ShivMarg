@@ -4,11 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>लेखक प्रोफ़ाइल — आलेख</title>
+<link rel="icon" href="/images/shivmarg_logo.png" type="image/png">
+<!-- Apple -->
+<link rel="apple-touch-icon" href="/images/shivmarg_logo.png">
+
+<!-- Android -->
+<link rel="manifest" href="/manifest.json">
 <meta name="description" content="आलेख पर लेखक की प्रोफ़ाइल">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="canonical" href="https://shivmarg.live/">
 
+<link rel="stylesheet" href="/loder/loder.css">
+<script src="/loder/loder.js" defer></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -732,6 +742,15 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:3rem 1.5rem 1.5
   </div>
 </div>
 
+<div id="sm-comments" data-page-id=""></div>
+
+<!-- Footer -->
+<div id="page-loader">
+    <div class="loader-content">
+        <img src="/images/ShivMarg.png" alt="Logo">
+    </div>
+</div>
+
 <footer>
   <div class="footer-inner">
     <div class="footer-brand-hi">आलेख</div>
@@ -1219,5 +1238,6 @@ async function toggleFollow() {
 renderAuthArea()
 loadAuthorProfile();
 </script>
+<script src="https://www.shivmarg.live/js/sm-comments.js"></script>
 </body>
 </html>
