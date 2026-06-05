@@ -85,6 +85,13 @@ body {
   flex: 1;
   overflow-y: auto;
 }
+img.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
 .channel-label {
   font-size: 10px;
   color: var(--text3);
@@ -759,9 +766,14 @@ body {
 <div id="toast"></div>
 
 <script>
-const API     = 'https://www.api.shivmarg.live';  // change to https://api.shivmarg.live in production
+const API     = 'https://www.api.shivmarg.live' ;  // change to https://api.shivmarg.live in production
 const WS_BASE = 'wss://www.api.shivmarg.live';  // ws not wss for localhost
- 
+
+
+// const API     = 'http://127.0.0.1:8000' ;  // change to https://api.shivmarg.live in production
+// const WS_BASE = 'ws://127.0.0.1:8000';  // ws not wss for localhost
+
+
 // ── TOKEN: pick whichever key your main site stored ──
 let token = localStorage.getItem('admin_token')
          || localStorage.getItem('ed_token')
@@ -881,6 +893,8 @@ async function initChat() {
     document.getElementById('auth-overlay').style.display = 'flex';
     return;
   }
+
+  console.log('Avatar URL:', currentUser.avatar_url, currentUser.avatar);
  
   document.getElementById('auth-overlay').style.display = 'none';
   document.getElementById('my-username-sidebar').textContent =
@@ -974,7 +988,8 @@ async function loadHistory(channel) {
       renderHistory(d.messages);
     }
     scrollToBottom();
-  } catch(e) {
+  }  catch(e) {
+    console.error('loadHistory error:', e);  // ADD THIS
     msgs.innerHTML = `<div style="padding:40px;text-align:center;color:#f87171;font-size:13px;">Could not load messages. Check connection.</div>`;
   }
 }
@@ -1012,9 +1027,15 @@ function buildMessageEl(m) {
   row.className    = 'msg-row' + (isMine ? ' own-msg' : '');
   row.dataset.id   = m.id;
   row.dataset.text = m.text || '';
- 
-  const initials   = (m.sender_name || m.username || '?').split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
-  const time       = new Date(m.created_at).toLocaleTimeString('en-IN', {hour:'2-digit', minute:'2-digit'});
+  
+  const initials = (m.sender_name || m.username || '?').split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+
+  const avatarHtml = m.sender_avatar
+    ? `<img class="avatar" src="${escHtml(m.sender_avatar)}" alt="${initials}" style="object-fit:cover;width:34px;height:34px;border-radius:8px;flex-shrink:0;margin-top:2px;" onerror="this.style.display='none'">`
+    : `<div class="avatar" style="background:${bgColor};color:${color};">${initials}</div>`;
+
+  const time = new Date(m.created_at).toLocaleTimeString('en-IN', {hour:'2-digit', minute:'2-digit'});
+
   const roleTag    = m.sender_role && m.sender_role !== 'user'
     ? `<span class="tag-badge">${m.sender_role}</span>` : '';
   const bubbleText  = formatMessage(m.text || '');
@@ -1024,7 +1045,7 @@ function buildMessageEl(m) {
   const readReceipt = isMine ? `<div class="read-receipt">✓ sent</div>` : '';
  
   row.innerHTML = `
-    <div class="avatar" style="background:${bgColor};color:${color};">${initials}</div>
+    ${avatarHtml}
     <div class="msg-body">
       <div class="msg-meta">
         <span class="msg-author" style="color:${color};">${escHtml(m.sender_name || m.username || 'Unknown')} ${roleTag}</span>
