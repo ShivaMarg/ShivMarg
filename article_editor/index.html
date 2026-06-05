@@ -849,6 +849,7 @@
   // CONFIG & STATE
   // ─────────────────────────────────────────────
   const API_BASE = 'https://www.api.shivmarg.live';
+  // const API_BASE = 'http://127.0.0.1:8000' ;
   let currentUser = null;
   let tags = [];
   let currentArticleId = null;
@@ -934,6 +935,8 @@
   // ─────────────────────────────────────────────
   async function loadArticleForEdit(slug) {
     const token = getToken();
+    // At top of loadArticleForEdit, after const article = await res.json():
+    
     try {
       const res = await fetch(`${API_BASE}/api/articles/${slug}`, {
         headers: { 'Authorization': `Bearer ${token}` }
@@ -941,7 +944,7 @@
 
       if (!res.ok) throw new Error('लेख नहीं मिला');
       const article = await res.json();
-
+      window.currentEditingArticle = article;  // ← ADD THIS
       // Check ownership
       if (article.author_id !== currentUser._id && !hasAdminRole()) {
         showToast('आपको यह लेख संपादित करने की अनुमति नहीं है', 'error');
@@ -992,13 +995,9 @@
         document.getElementById('rejectionReason').textContent = article.rejection_reason || 'कोई कारण दिया नहीं गया';
       }
 
-      // Disable editing if published
+            // ADD after the status badge section:
       if (article.status === 'published') {
-        document.querySelectorAll('#editorForm input, #editorForm select, #editorForm textarea').forEach(el => {
-          el.disabled = true;
-        });
-        document.getElementById('submitBtn').disabled = true;
-        showToast('यह लेख प्रकाशित है। आप इसे संपादित नहीं कर सकते।', 'info');
+          document.getElementById('submitBtn').textContent = 'परिवर्तन सहेजें और पुनः प्रकाशित करें';
       }
 
       // Initialize TinyMCE
@@ -1173,22 +1172,20 @@ function generateSlug() {
 
     // Prepare payload
     const payload = {
-      title,
-      subtitle: document.getElementById('subtitle').value.trim() || null,
-      content,
-      excerpt,
-      banner_url: bannerUrl,
-      thumbnail_url: document.getElementById('thumbnailUrl').value.trim() || null,
-      category,
-      tags,
-      read_time: parseInt(document.getElementById('readTime').value) || 5,
-      slug,
-      // All non-admin articles go to pending approval
-      status: hasAdminRole() ? 'published' : 'pending_approval',
-      submitted_at: new Date().toISOString(), // ← यह add करें
-
+        title,
+        subtitle: document.getElementById('subtitle').value.trim() || null,
+        content,
+        excerpt,
+        banner_url: bannerUrl,
+        thumbnail_url: document.getElementById('thumbnailUrl').value.trim() || null,
+        category,
+        tags,
+        read_time: parseInt(document.getElementById('readTime').value) || 5,
+        slug,
+        status: isEditMode && window.currentEditingArticle?.status === 'published'
+            ? 'published'
+            : hasAdminRole() ? 'published' : 'pending_approval',
     };
-
     try {
       const btn = document.getElementById('submitBtn');
       const originalText = btn.textContent;
@@ -1392,9 +1389,9 @@ function generateSlug() {
             </div>
             <p class="article-excerpt">${article.excerpt}</p>
             <div class="article-actions">
-              <button class="btn btn-secondary" onclick="editArticle('${article._id}')">संपादित करें</button>
-              <button class="btn btn-pending" onclick="submitForApproval('${article._id}')">अनुमोदन के लिए भेजें</button>
-              <button class="btn btn-secondary" style="background: #e74c3c;" onclick="deleteArticlePrompt('${article._id}', '${article.title.replace(/'/g, "\\'")}')">हटाएँ</button>
+              <button class="btn btn-secondary" onclick="editArticle('${article.slug}')">संपादित करें</button>
+              <button class="btn btn-pending" onclick="submitForApproval('${article.slug}')">अनुमोदन के लिए भेजें</button>
+              <button class="btn btn-secondary" style="background: #e74c3c;" onclick="deleteArticlePrompt('${article.slug}', '${article.title.replace(/'/g, "\\'")}')">हटाएँ</button>
             </div>
           </div>
         `).join('');
@@ -1458,7 +1455,8 @@ function generateSlug() {
             <p class="article-excerpt">${article.excerpt}</p>
             <div class="article-actions">
               <button class="btn btn-secondary" onclick="viewArticle('${article.slug}')">देखें</button>
-              <button class="btn btn-secondary" onclick="deleteArticlePrompt('${article._id}', '${article.title.replace(/'/g, "\\'")}')">हटाएँ</button>
+              <button class="btn btn-pending" onclick="editArticle('${article.slug}')">संपादित करें</button>
+              <button class="btn btn-secondary" style="background: #e74c3c;" onclick="deleteArticlePrompt('${article.slug}', '${article.title.replace(/'/g, "\\'")}')">हटाएँ</button>
             </div>
           </div>
         `).join('');
@@ -1521,9 +1519,9 @@ function generateSlug() {
             </div>
             <p class="article-excerpt">${article.excerpt}</p>
             <div class="article-actions">
-              <button class="btn btn-secondary" onclick="previewArticleForApproval('${article._id}', '${article.title.replace(/'/g, "\\'")}')">पूर्वावलोकन</button>
-              <button class="btn btn-success" onclick="openReviewModal('${article._id}', '${article.title.replace(/'/g, "\\'")}', '${article.author_name || 'अनाम'.replace(/'/g, "\\'")}', '${article.excerpt.replace(/'/g, "\\'")}')">समीक्षा करें</button>
-              <button class="btn btn-secondary" style="background: #e74c3c;" onclick="deleteArticlePrompt('${article._id}', '${article.title.replace(/'/g, "\\'")}')">अस्वीकार करें</button>
+              <button class="btn btn-secondary" onclick="previewArticleForApproval('${article.slug}', '${article.title.replace(/'/g, "\\'")}')">पूर्वावलोकन</button>
+              <button class="btn btn-success" onclick="openReviewModal('${article.slug}', '${article.title.replace(/'/g, "\\'")}', '${article.author_name || 'अनाम'.replace(/'/g, "\\'")}', '${article.excerpt.replace(/'/g, "\\'")}')">समीक्षा करें</button>
+              <button class="btn btn-secondary" style="background: #e74c3c;" onclick="deleteArticlePrompt('${article.slug}', '${article.title.replace(/'/g, "\\'")}')">अस्वीकार करें</button>
             </div>
           </div>
         `).join('');
@@ -1615,7 +1613,7 @@ function generateSlug() {
   // ADMIN: REVIEW & APPROVAL
   // ─────────────────────────────────────────────
   function openReviewModal(slug, title, author, excerpt) {
-    window.currentReviewId = title;
+    window.currentReviewId = slug;
     document.getElementById('reviewArticleTitle').textContent = title;
     document.getElementById('reviewArticleExcerpt').textContent = excerpt;
     document.getElementById('reviewArticleAuthor').textContent = `लेखक: ${author}`;
