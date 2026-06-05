@@ -355,7 +355,64 @@
     .sig-text { font-size:0.88rem; color:var(--soft); line-height:1.65; }
     .sig-text strong { color:var(--fire); display:block; font-family:'Cinzel',serif; font-size:0.73rem; letter-spacing:1px; margin-bottom:2px; }
 
-    /* Suggested Posts in Sidebar */
+
+    /* ── SIDEBAR ── */
+    .sidebar { display:flex; flex-direction:column; gap:20px; }
+    .widget {
+      background:linear-gradient(142deg, rgba(20,8,0,0.6), rgba(8,3,0,0.82));
+      border:1px solid rgba(255,204,128,0.15); border-radius:2px; padding:20px; position:relative;
+    }
+    .widget::before { content:''; position:absolute; top:0;left:0;right:0; height:2px; background:linear-gradient(90deg, transparent, var(--fire-soft), transparent); opacity:0.5; }
+    .widget-title { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:4px; color:var(--fire-soft); text-transform:uppercase; margin-bottom:14px; padding-bottom:9px; border-bottom:1px solid rgba(255,204,128,0.12); }
+
+    /* pilgrimage map list */
+    .pilgrimage-list { display:flex; flex-direction:column; gap:2px; }
+    .p-item { display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:1px; transition:background .3s; cursor:default; }
+    .p-item:hover { background:rgba(255,143,0,0.08); }
+    .p-num  { font-family:'Cinzel',serif; font-size:0.58rem; letter-spacing:1px; color:rgba(255,143,0,0.5); width:18px; flex-shrink:0; }
+    .p-icon { font-size:1rem; flex-shrink:0; }
+    .p-name { font-family:'Tiro Devanagari Sanskrit',serif; font-size:0.9rem; color:var(--gold-light); flex:1; }
+    .p-state{ font-family:'Cinzel',serif; font-size:0.56rem; letter-spacing:1px; color:rgba(255,204,128,0.38); text-transform:uppercase; }
+
+    .benefit-grid { display:flex; flex-direction:column; gap:8px; }
+    .benefit-item { display:flex; align-items:center; gap:10px; padding:9px 11px; background:rgba(255,143,0,0.06); border:1px solid rgba(255,143,0,0.14); border-radius:1px; }
+    .benefit-icon { font-size:1.1rem; flex-shrink:0; }
+    .benefit-text { font-size:0.83rem; color:var(--soft); font-family:'EB Garamond',serif; line-height:1.4; }
+
+    .q-m { padding:9px 0; border-bottom:1px solid rgba(255,204,128,0.07); }
+    .q-m:last-child { border-bottom:none; }
+    .q-mt { font-family:'Tiro Devanagari Sanskrit',serif; font-size:0.95rem; color:var(--gold-light); margin-bottom:3px; }
+    .q-ms { font-size:0.71rem; color:rgba(255,248,240,0.4); font-family:'Cinzel',serif; letter-spacing:1px; }
+
+    .names-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+    .name-chip { font-family:'Tiro Devanagari Sanskrit',serif; font-size:0.82rem; color:var(--gold-light); background:rgba(201,168,76,0.07); border:1px solid rgba(201,168,76,0.15); padding:5px 6px; text-align:center; border-radius:1px; cursor:pointer; transition:all .3s; }
+    .name-chip:hover { background:rgba(255,143,0,0.2); border-color:var(--amber); color:var(--fire); }
+
+    /* ── COMMENTS ── */
+    .comments-section { position:relative; z-index:10; max-width:800px; margin:0 auto; padding:0 20px 80px; }
+    .comments-heading { font-family:'Cinzel',serif; font-size:1.28rem; color:var(--gold); letter-spacing:3px; margin-bottom:26px; padding-bottom:13px; border-bottom:1px solid rgba(255,204,128,0.18); }
+    .comment-card { background:linear-gradient(142deg, rgba(20,8,0,0.5), rgba(8,3,0,0.7)); border:1px solid rgba(255,204,128,0.1); padding:20px 24px; margin-bottom:13px; border-radius:1px; position:relative; }
+    .comment-card::before { content:'"'; position:absolute; top:-8px; left:16px; font-size:3.8rem; color:rgba(255,143,0,0.1); font-family:'EB Garamond',serif; line-height:1; }
+    .c-hdr { display:flex; align-items:center; gap:11px; margin-bottom:11px; }
+    .avatar { width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#301200,#0A0400); display:flex; align-items:center; justify-content:center; font-family:'Cinzel',serif; font-size:0.95rem; color:#fff; font-weight:700; flex-shrink:0; }
+    .c-name { font-family:'Cinzel',serif; font-size:0.81rem; color:var(--gold-light); letter-spacing:1px; }
+    .c-date { font-size:0.71rem; color:rgba(255,248,240,0.33); }
+    .c-txt  { font-size:0.93rem; color:var(--soft); line-height:1.82; }
+    .c-like { margin-top:10px; font-size:0.74rem; color:rgba(255,248,240,0.34); cursor:pointer; transition:color .3s; display:inline-block; }
+    .c-like:hover { color:var(--fire-soft); }
+    .c-form { background:linear-gradient(142deg, rgba(20,8,0,0.5), rgba(8,3,0,0.7)); border:1px solid rgba(255,204,128,0.15); padding:26px; margin-top:26px; }
+    .c-form-title { font-family:'Cinzel',serif; font-size:0.88rem; color:var(--gold); letter-spacing:2px; margin-bottom:16px; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
+    @media(max-width:500px){ .form-row{ grid-template-columns:1fr; } }
+    input, textarea { width:100%; background:rgba(0,0,0,0.5); border:1px solid rgba(255,204,128,0.18); color:var(--cream); padding:10px 14px; font-family:'EB Garamond',serif; font-size:0.94rem; outline:none; transition:border-color .3s; border-radius:1px; }
+    input::placeholder, textarea::placeholder { color:rgba(255,248,240,0.28); }
+    input:focus, textarea:focus { border-color:var(--amber); }
+    textarea { height:110px; resize:vertical; margin-bottom:12px; }
+    .submit-btn { background:linear-gradient(135deg,#1A0800,#0A0300); border:1px solid rgba(255,143,0,0.4); color:var(--fire); padding:12px 32px; font-family:'Cinzel',serif; font-size:0.78rem; letter-spacing:3px; text-transform:uppercase; cursor:pointer; transition:all .3s; position:relative; overflow:hidden; }
+    .submit-btn::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg, rgba(255,143,0,0.3), rgba(180,80,0,0.3)); opacity:0; transition:opacity .3s; }
+    .submit-btn:hover::before { opacity:1; }
+    .submit-btn span { position:relative; z-index:1; }
+        /* Suggested Posts in Sidebar */
     #suggestedPostsContainer .card {
       display: flex;
       gap: 10px;
@@ -427,63 +484,6 @@
       vertical-align: middle;
       margin-right: 4px;
     }
-    /* ── SIDEBAR ── */
-    .sidebar { display:flex; flex-direction:column; gap:20px; }
-    .widget {
-      background:linear-gradient(142deg, rgba(20,8,0,0.6), rgba(8,3,0,0.82));
-      border:1px solid rgba(255,204,128,0.15); border-radius:2px; padding:20px; position:relative;
-    }
-    .widget::before { content:''; position:absolute; top:0;left:0;right:0; height:2px; background:linear-gradient(90deg, transparent, var(--fire-soft), transparent); opacity:0.5; }
-    .widget-title { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:4px; color:var(--fire-soft); text-transform:uppercase; margin-bottom:14px; padding-bottom:9px; border-bottom:1px solid rgba(255,204,128,0.12); }
-
-    /* pilgrimage map list */
-    .pilgrimage-list { display:flex; flex-direction:column; gap:2px; }
-    .p-item { display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:1px; transition:background .3s; cursor:default; }
-    .p-item:hover { background:rgba(255,143,0,0.08); }
-    .p-num  { font-family:'Cinzel',serif; font-size:0.58rem; letter-spacing:1px; color:rgba(255,143,0,0.5); width:18px; flex-shrink:0; }
-    .p-icon { font-size:1rem; flex-shrink:0; }
-    .p-name { font-family:'Tiro Devanagari Sanskrit',serif; font-size:0.9rem; color:var(--gold-light); flex:1; }
-    .p-state{ font-family:'Cinzel',serif; font-size:0.56rem; letter-spacing:1px; color:rgba(255,204,128,0.38); text-transform:uppercase; }
-
-    .benefit-grid { display:flex; flex-direction:column; gap:8px; }
-    .benefit-item { display:flex; align-items:center; gap:10px; padding:9px 11px; background:rgba(255,143,0,0.06); border:1px solid rgba(255,143,0,0.14); border-radius:1px; }
-    .benefit-icon { font-size:1.1rem; flex-shrink:0; }
-    .benefit-text { font-size:0.83rem; color:var(--soft); font-family:'EB Garamond',serif; line-height:1.4; }
-
-    .q-m { padding:9px 0; border-bottom:1px solid rgba(255,204,128,0.07); }
-    .q-m:last-child { border-bottom:none; }
-    .q-mt { font-family:'Tiro Devanagari Sanskrit',serif; font-size:0.95rem; color:var(--gold-light); margin-bottom:3px; }
-    .q-ms { font-size:0.71rem; color:rgba(255,248,240,0.4); font-family:'Cinzel',serif; letter-spacing:1px; }
-
-    .names-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
-    .name-chip { font-family:'Tiro Devanagari Sanskrit',serif; font-size:0.82rem; color:var(--gold-light); background:rgba(201,168,76,0.07); border:1px solid rgba(201,168,76,0.15); padding:5px 6px; text-align:center; border-radius:1px; cursor:pointer; transition:all .3s; }
-    .name-chip:hover { background:rgba(255,143,0,0.2); border-color:var(--amber); color:var(--fire); }
-
-    /* ── COMMENTS ── */
-    .comments-section { position:relative; z-index:10; max-width:800px; margin:0 auto; padding:0 20px 80px; }
-    .comments-heading { font-family:'Cinzel',serif; font-size:1.28rem; color:var(--gold); letter-spacing:3px; margin-bottom:26px; padding-bottom:13px; border-bottom:1px solid rgba(255,204,128,0.18); }
-    .comment-card { background:linear-gradient(142deg, rgba(20,8,0,0.5), rgba(8,3,0,0.7)); border:1px solid rgba(255,204,128,0.1); padding:20px 24px; margin-bottom:13px; border-radius:1px; position:relative; }
-    .comment-card::before { content:'"'; position:absolute; top:-8px; left:16px; font-size:3.8rem; color:rgba(255,143,0,0.1); font-family:'EB Garamond',serif; line-height:1; }
-    .c-hdr { display:flex; align-items:center; gap:11px; margin-bottom:11px; }
-    .avatar { width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#301200,#0A0400); display:flex; align-items:center; justify-content:center; font-family:'Cinzel',serif; font-size:0.95rem; color:#fff; font-weight:700; flex-shrink:0; }
-    .c-name { font-family:'Cinzel',serif; font-size:0.81rem; color:var(--gold-light); letter-spacing:1px; }
-    .c-date { font-size:0.71rem; color:rgba(255,248,240,0.33); }
-    .c-txt  { font-size:0.93rem; color:var(--soft); line-height:1.82; }
-    .c-like { margin-top:10px; font-size:0.74rem; color:rgba(255,248,240,0.34); cursor:pointer; transition:color .3s; display:inline-block; }
-    .c-like:hover { color:var(--fire-soft); }
-    .c-form { background:linear-gradient(142deg, rgba(20,8,0,0.5), rgba(8,3,0,0.7)); border:1px solid rgba(255,204,128,0.15); padding:26px; margin-top:26px; }
-    .c-form-title { font-family:'Cinzel',serif; font-size:0.88rem; color:var(--gold); letter-spacing:2px; margin-bottom:16px; }
-    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
-    @media(max-width:500px){ .form-row{ grid-template-columns:1fr; } }
-    input, textarea { width:100%; background:rgba(0,0,0,0.5); border:1px solid rgba(255,204,128,0.18); color:var(--cream); padding:10px 14px; font-family:'EB Garamond',serif; font-size:0.94rem; outline:none; transition:border-color .3s; border-radius:1px; }
-    input::placeholder, textarea::placeholder { color:rgba(255,248,240,0.28); }
-    input:focus, textarea:focus { border-color:var(--amber); }
-    textarea { height:110px; resize:vertical; margin-bottom:12px; }
-    .submit-btn { background:linear-gradient(135deg,#1A0800,#0A0300); border:1px solid rgba(255,143,0,0.4); color:var(--fire); padding:12px 32px; font-family:'Cinzel',serif; font-size:0.78rem; letter-spacing:3px; text-transform:uppercase; cursor:pointer; transition:all .3s; position:relative; overflow:hidden; }
-    .submit-btn::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg, rgba(255,143,0,0.3), rgba(180,80,0,0.3)); opacity:0; transition:opacity .3s; }
-    .submit-btn:hover::before { opacity:1; }
-    .submit-btn span { position:relative; z-index:1; }
-
     /* ── FOOTER ── */
     footer { position:relative; z-index:10; text-align:center; padding:36px 20px; border-top:1px solid rgba(255,204,128,0.1); }
     .foot-sym { font-size:2.8rem; color:rgba(201,168,76,0.22); display:block; margin-bottom:11px; }
