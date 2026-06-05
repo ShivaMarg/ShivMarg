@@ -1192,7 +1192,7 @@ function generateSlug() {
       btn.disabled = true;
       btn.textContent = 'भेजा जा रहा है...';
 
-      const method = isEditMode ? 'PATCH' : 'POST';
+      const method = isEditMode ? 'PUT' : 'POST';
       const url = isEditMode ? 
         `${API_BASE}/api/articles/${currentArticleId}` : 
         `${API_BASE}/api/articles`;
