@@ -1404,7 +1404,7 @@
     if (btn) btn.disabled = true;
 
     try {
-      const res = await fetch('https://shivmarg.live/api/newsletter/subscribe', {
+      const res = await fetch('https://www.api.shivmarg.live/api/newsletter/subscribe', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
         body:    JSON.stringify({ email }),
