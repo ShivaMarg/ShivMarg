@@ -1610,16 +1610,44 @@ async function doGoogleAuth(msgElId) {
   /* ════════════════════════════════════════════
      NEWSLETTER
      ════════════════════════════════════════════ */
-  function handleNewsletter() {
-    const email = document.getElementById('nlEmail').value.trim();
-    if (!email || !email.includes('@')) {
+  async function handleNewsletter() {
+    const input = document.getElementById('nlEmail');
+    const email = input.value.trim();
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       showToast('सही ई-मेल डालें');
       return;
     }
-    showToast('सब्सक्राइब के लिए धन्यवाद!');
-    document.getElementById('nlEmail').value = '';
-  }
 
+    // Optional: disable button to prevent double-submit
+    const btn = document.querySelector('[onclick="handleNewsletter()"]');
+    if (btn) btn.disabled = true;
+
+    try {
+      const res = await fetch('https://shivmarg.live/api/newsletter/subscribe', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        showToast(data.already
+          ? 'आप पहले से सब्सक्राइब हैं! 🙏'
+          : 'सब्सक्राइब के लिए धन्यवाद! ईमेल देखें 🕉'
+        );
+        input.value = '';
+      } else {
+        showToast(data.detail || 'कुछ गलत हुआ, फिर कोशिश करें।');
+      }
+    } catch (err) {
+      console.error('Newsletter subscribe error:', err);
+      showToast('नेटवर्क में समस्या है, बाद में कोशिश करें।');
+    } finally {
+      if (btn) btn.disabled = false;
+    }
+  }
   /* ════════════════════════════════════════════
      SCROLL: progress bar + back-to-top
      ════════════════════════════════════════════ */

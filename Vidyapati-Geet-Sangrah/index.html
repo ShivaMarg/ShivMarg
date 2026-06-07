@@ -462,9 +462,14 @@
 
   function createCardHTML(g, isFeat) {
     const slug = slugify(g.eng || g.name);
-    const href = `/Vidyapati-Geet-Sangrah/${slug}/`;
-    const cc = catClass[g.category]||'c-vidyapati';
-    const cardClass = `card ${isFeat?'feat ':''} reveal`;
+    let href = `/Vidyapati-Geet-Sangrah/${slug}/`;
+
+    if (slug === 'hum-nahi-aaju-rahab-ehi-aangan') {
+        href = `/articles/?slug=hm-nhin-aaju-rhb-ehi-aagn/`;
+    }
+
+    const cc = catClass[g.category] || 'c-vidyapati';
+    const cardClass = `card ${isFeat ? 'feat ' : ''} reveal`;
     return `
       <a href="${href}" class="${cardClass}" data-category="${g.category}" data-name="${(g.name+' '+g.eng).toLowerCase()}" data-preview="${g.preview.toLowerCase()}">
         <div class="card-img ${cc}">
