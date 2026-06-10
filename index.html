@@ -1371,7 +1371,599 @@ mantra for wealth
     }
 }
   </style>
-  	  <script>
+
+  <style id="PATCH_CSS">
+
+/* ── FESTIVAL BANNER ── */
+#festival-banner {
+  position: relative;
+  z-index: 190;
+  display: none; /* shown by JS when a festival matches */
+  overflow: hidden;
+  padding: 0;
+}
+.festival-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 13px 24px;
+  position: relative;
+  z-index: 1;
+  flex-wrap: wrap;
+  text-align: center;
+}
+.festival-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--fb-bg, linear-gradient(90deg, #3D0000, #7B0000, #3D0000));
+  z-index: 0;
+}
+/* Shimmering top & bottom border */
+#festival-banner::before,
+#festival-banner::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--fb-accent, #D4A017) 30%,
+    var(--fb-accent, #D4A017) 70%,
+    transparent 100%);
+  animation: banner-shine 3s ease-in-out infinite;
+  z-index: 2;
+}
+#festival-banner::before { top: 0; }
+#festival-banner::after  { bottom: 0; }
+@keyframes banner-shine {
+  0%,100% { opacity: 0.5; }
+  50%      { opacity: 1; }
+}
+.festival-icon {
+  font-size: 1.8rem;
+  filter: drop-shadow(0 0 8px rgba(212,160,23,0.6));
+  position: relative;
+  z-index: 1;
+  animation: icon-bob 2.5s ease-in-out infinite;
+}
+@keyframes icon-bob {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+.festival-text {
+  position: relative;
+  z-index: 1;
+}
+.festival-text-title {
+  font-family: 'Tiro Devanagari Sanskrit', serif;
+  font-size: 1.15rem;
+  color: var(--fb-accent, #F2C94C);
+  font-weight: 700;
+  letter-spacing: 1px;
+  display: block;
+  text-shadow: 0 0 20px rgba(212,160,23,0.5);
+}
+.festival-text-sub {
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(253,245,230,0.6);
+  display: block;
+  margin-top: 2px;
+}
+.festival-close {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: rgba(253,245,230,0.35);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.2s;
+  z-index: 2;
+  line-height: 1;
+}
+.festival-close:hover { color: rgba(253,245,230,0.7); }
+
+/* ── PANCHANG STRIP ── */
+#panchang-strip {
+  position: relative;
+  z-index: 10;
+  background: rgba(0,0,0,0.45);
+  border-bottom: 1px solid rgba(212,160,23,0.18);
+  padding: 0;
+  overflow: hidden;
+}
+.panchang-strip-inner {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 0 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.panchang-strip-inner::-webkit-scrollbar { display: none; }
+.panchang-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px 11px 0;
+  border-right: 1px solid rgba(212,160,23,0.12);
+  flex-shrink: 0;
+}
+.panchang-item:last-child { border-right: none; }
+.panchang-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--saffron);
+  white-space: nowrap;
+}
+.panchang-value {
+  font-family: 'Tiro Devanagari Sanskrit', serif;
+  font-size: 0.92rem;
+  color: rgba(242,201,76,0.85);
+  white-space: nowrap;
+}
+.panchang-divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(212,160,23,0.15);
+  flex-shrink: 0;
+  margin: 0 4px;
+}
+.panchang-link {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  color: var(--saffron);
+  text-decoration: none;
+  text-transform: uppercase;
+  margin-left: auto;
+  flex-shrink: 0;
+  padding-left: 20px;
+  border-left: 1px solid rgba(212,160,23,0.12);
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+.panchang-link:hover { color: var(--gold-light); }
+
+/* ── AAJ KA MANTRA ── */
+#aaj-ka-mantra {
+  position: relative;
+  z-index: 10;
+  max-width: 680px;
+  margin: 0 auto 48px;
+  padding: 0 20px;
+  animation: fadeUp 1.5s ease both;
+}
+.akm-card {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  padding: 28px 32px 24px;
+  text-align: center;
+  border: 1px solid rgba(212,160,23,0.3);
+  background: linear-gradient(135deg,
+    rgba(61,0,0,0.45) 0%,
+    rgba(20,5,0,0.55) 50%,
+    rgba(45,15,0,0.45) 100%);
+  backdrop-filter: blur(8px);
+}
+.akm-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent, var(--gold), var(--saffron), var(--gold), transparent);
+  animation: akm-shine 4s ease-in-out infinite;
+}
+@keyframes akm-shine {
+  0%,100% { opacity: 0.6; }
+  50%      { opacity: 1; }
+}
+.akm-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--saffron);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.akm-eyebrow::before,
+.akm-eyebrow::after {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212,160,23,0.4));
+}
+.akm-eyebrow::after {
+  background: linear-gradient(90deg, rgba(212,160,23,0.4), transparent);
+}
+.akm-deity {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(212,160,23,0.55);
+  margin-bottom: 12px;
+  display: block;
+}
+.akm-shloka {
+  font-family: 'Tiro Devanagari Sanskrit', serif;
+  font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+  color: var(--gold-light);
+  line-height: 1.9;
+  margin-bottom: 16px;
+  text-shadow: 0 0 20px rgba(212,160,23,0.2);
+}
+.akm-meaning {
+  font-family: 'Crimson Pro', serif;
+  font-size: 0.92rem;
+  color: rgba(253,245,230,0.5);
+  font-style: italic;
+  line-height: 1.6;
+  border-top: 1px solid rgba(212,160,23,0.15);
+  padding-top: 14px;
+  margin-bottom: 18px;
+}
+.akm-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.akm-date-badge {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  color: rgba(253,245,230,0.3);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.akm-date-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--saffron);
+  opacity: 0.5;
+}
+.akm-share-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: transparent;
+  border: 1px solid rgba(212,160,23,0.3);
+  color: rgba(212,160,23,0.7);
+  padding: 6px 14px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.akm-share-btn:hover {
+  background: rgba(212,160,23,0.1);
+  border-color: var(--gold);
+  color: var(--gold-light);
+}
+/* Prev/Next dots */
+.akm-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  justify-content: center;
+}
+.akm-nav-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(212,160,23,0.25);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.akm-nav-dot.active {
+  background: var(--saffron);
+  width: 18px;
+  border-radius: 3px;
+}
+
+/* ── STOTRA OF THE WEEK ── */
+#stotra-of-week {
+  position: relative;
+  z-index: 10;
+  max-width: 1280px;
+  margin: 0 auto 60px;
+  padding: 0 24px;
+}
+.sotw-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.sotw-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 5px;
+  color: var(--saffron);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+.sotw-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  color: var(--gold-light);
+}
+.sotw-card {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(212,160,23,0.25);
+  background: linear-gradient(135deg,
+    rgba(30,10,0,0.6) 0%,
+    rgba(15,5,0,0.7) 100%);
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+.sotw-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent, #FF6B00, #D4A017, #FF6B00, transparent);
+  opacity: 0.7;
+}
+@media (max-width: 700px) {
+  .sotw-card { grid-template-columns: 1fr; }
+}
+.sotw-image-side {
+  position: relative;
+  overflow: hidden;
+  min-height: 320px;
+}
+.sotw-image-side img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  opacity: 0.75;
+  transition: opacity 0.4s, transform 0.5s;
+}
+.sotw-card:hover .sotw-image-side img {
+  opacity: 0.9;
+  transform: scale(1.04);
+}
+.sotw-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 60%, rgba(15,5,0,0.8) 100%);
+}
+.sotw-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: rgba(255,107,0,0.85);
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 2px;
+  backdrop-filter: blur(4px);
+  z-index: 1;
+}
+.sotw-content-side {
+  padding: 36px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+.sotw-deity-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--saffron);
+  margin-bottom: 4px;
+}
+.sotw-name-deva {
+  font-family: 'Tiro Devanagari Sanskrit', serif;
+  font-size: 1.8rem;
+  color: var(--gold-light);
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.sotw-name-eng {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  color: rgba(253,245,230,0.35);
+  text-transform: uppercase;
+}
+.sotw-verse {
+  font-family: 'Tiro Devanagari Sanskrit', serif;
+  font-size: 1.05rem;
+  color: rgba(242,201,76,0.75);
+  line-height: 1.85;
+  border-left: 2px solid rgba(255,107,0,0.4);
+  padding-left: 18px;
+  font-style: italic;
+}
+.sotw-desc {
+  font-family: 'Crimson Pro', serif;
+  font-size: 0.96rem;
+  color: rgba(253,245,230,0.5);
+  line-height: 1.7;
+  font-style: italic;
+}
+.sotw-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.sotw-meta-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 1.5px;
+  color: rgba(212,160,23,0.6);
+  background: rgba(212,160,23,0.08);
+  border: 1px solid rgba(212,160,23,0.15);
+  padding: 4px 10px;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+.sotw-read-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: linear-gradient(135deg, rgba(255,107,0,0.7), rgba(180,60,0,0.7));
+  border: 1px solid rgba(255,107,0,0.4);
+  padding: 12px 24px;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: all 0.3s;
+  margin-top: auto;
+  align-self: flex-start;
+}
+.sotw-read-btn:hover {
+  background: linear-gradient(135deg, rgba(255,107,0,0.9), rgba(200,70,0,0.9));
+  transform: translateX(4px);
+}
+.sotw-read-btn::after { content: '→'; font-size: 1rem; }
+
+/* Panchang loading shimmer */
+.panchang-loading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 0;
+}
+.panchang-shimmer {
+  height: 14px;
+  border-radius: 7px;
+  background: linear-gradient(90deg,
+    rgba(212,160,23,0.08) 0%,
+    rgba(212,160,23,0.18) 50%,
+    rgba(212,160,23,0.08) 100%);
+  background-size: 200% 100%;
+  animation: pshimmer 1.4s ease infinite;
+}
+@keyframes pshimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .akm-card { padding: 22px 18px 18px; }
+  .akm-shloka { font-size: 1rem; }
+  .sotw-content-side { padding: 24px 20px 20px; }
+  .sotw-name-deva { font-size: 1.4rem; }
+  .panchang-item { padding: 11px 14px 11px 0; }
+}
+</style>
+
+<style id="MARQUEE_PATCH_CSS">
+/* Override existing marquee styles */
+.marquee-wrap {
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+  border-top: 1px solid rgba(212,160,23,0.15);
+  border-bottom: 1px solid rgba(212,160,23,0.15);
+  background: rgba(0,0,0,0.3);
+  padding: 14px 0;
+  margin-bottom: 70px;
+  /* pause on hover */
+  cursor: default;
+}
+.marquee-wrap:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* The track: two identical halves side by side */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  /* JS will set the animation-duration based on content width */
+  animation: marquee-infinite linear infinite;
+  will-change: transform;
+}
+
+/* Single keyframe — JS overrides duration */
+@keyframes marquee-infinite {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-item {
+  font-family: 'Tiro Devanagari Sanskrit', serif;
+  font-size: 1.1rem;
+  color: rgba(212,160,23,0.65);
+  padding: 0 36px;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.marquee-dot {
+  color: var(--saffron);
+  opacity: 0.55;
+  padding: 0 8px;
+  font-size: 0.75rem;
+  vertical-align: middle;
+}
+
+/* Fade edges */
+.marquee-wrap::before,
+.marquee-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+.marquee-wrap::before {
+  left: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,0.5), transparent);
+}
+.marquee-wrap::after {
+  right: 0;
+  background: linear-gradient(270deg, rgba(0,0,0,0.5), transparent);
+}
+</style>
+
+<script>
 	window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 	</script>
 	<script defer src="/_vercel/insights/script.js"></script>
@@ -1390,11 +1982,34 @@ mantra for wealth
 </head>
 <body>
 
+
+
+<div id="festival-banner" role="banner" aria-live="polite">
+  <div class="festival-inner">
+    <span class="festival-icon" id="fb-icon">🪔</span>
+    <div class="festival-text">
+      <span class="festival-text-title" id="fb-title">महाशिवरात्रि की शुभकामनाएं</span>
+      <span class="festival-text-sub" id="fb-sub">आज के विशेष मंत्र देखें</span>
+    </div>
+    <button class="festival-close" onclick="closeFestivalBanner()" aria-label="बंद करें">✕</button>
+  </div>
+</div>
 <!-- BG layers -->
 <div class="bg-fixed"></div>
 <div class="mandala-tex"></div>
 <div id="diyas"></div>
-
+<div id="panchang-strip" role="complementary" aria-label="आज का पंचांग">
+  <div class="panchang-strip-inner" id="panchang-content">
+    <!-- Loading shimmer -->
+    <div class="panchang-loading">
+      <div class="panchang-shimmer" style="width:80px"></div>
+      <div class="panchang-shimmer" style="width:110px"></div>
+      <div class="panchang-shimmer" style="width:90px"></div>
+      <div class="panchang-shimmer" style="width:120px"></div>
+      <div class="panchang-shimmer" style="width:100px"></div>
+    </div>
+  </div>
+</div>
 <!-- Hero -->
 <section class="hero">
   <span class="hero-om"><img src="images/ShivMarg.png" alt="logo" class="orb-logo"></span>
@@ -1403,7 +2018,47 @@ mantra for wealth
   <div class="hero-deva">भजन, मंत्र और आरती</div>
   <p class="hero-tagline">देवी-देवताओं के पवित्र मंत्र, भजन और आरती — एक ही स्थान पर। आस्था की राह पर चलें।</p>
   <div class="ornament-line">✦</div>
+
+  <div id="aaj-ka-mantra" role="region" aria-label="आज का मंत्र">
+  <div class="akm-card">
+    <div class="akm-eyebrow">आज का मंत्र</div>
+    <span class="akm-deity" id="akm-deity-label">भगवान शिव</span>
+    <div class="akm-shloka" id="akm-shloka">
+      ॐ नमः शिवाय
+    </div>
+    <div class="akm-meaning" id="akm-meaning">
+      मैं उस शिव को नमन करता हूँ जो सर्वव्यापी, शाश्वत और कल्याणकारी हैं।
+    </div>
+    <div class="akm-footer">
+      <div class="akm-date-badge">
+        <span class="akm-date-dot"></span>
+        <span id="akm-date-text">आज का मंत्र</span>
+      </div>
+      <button class="akm-share-btn" onclick="shareAajKaMantra()">
+        WhatsApp पर भेजें
+      </button>
+    </div>
+    <div class="akm-nav" id="akm-nav" aria-label="मंत्र चुनें"></div>
+  </div>
+</div>
+
 </section>
+
+
+    <section id="stotra-of-week" class="reveal" role="region" aria-label="सप्ताह का स्तोत्र">
+      <div class="sotw-header">
+        <span class="sotw-label">✦ सप्ताह का स्तोत्र ✦</span>
+        <div class="sotw-title">इस सप्ताह का विशेष स्तोत्र</div>
+      </div>
+      <div class="sotw-card" id="sotw-card">
+        <!-- Populated by JS -->
+        <div style="padding:40px;text-align:center;color:rgba(212,160,23,0.4);font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:2px;grid-column:1/-1;">
+          लोड हो रहा है…
+        </div>
+      </div>
+    </section>
+
+
 
 <!-- Filter Tabs -->
 <div class="filter-bar reveal">
@@ -1438,14 +2093,22 @@ mantra for wealth
   </div>
 </div>
 
+
+
+
+
+
 <!-- Featured Section -->
 <div class="section-header reveal">
   <div class="section-label">✦ विशेष मंत्र संग्रह ✦</div>
   <div class="section-title">प्रमुख देवी-देवता</div>
 </div>  
 
+
 <div class="cards-wrapper">
   <div class="featured-row" id="featured-row">
+
+
 
     <!-- SHIV FEATURED -->
     <a href="/shiva-mantras" class="card featured card-shiv reveal" data-cat="shiv" style="animation-delay:0.05s; text-decoration: none; color: inherit;">
@@ -1490,6 +2153,8 @@ mantra for wealth
     </div>
     <div class="card-arrow">→</div>
     </a>
+
+
 
   </div>
 
@@ -2182,5 +2847,551 @@ mantra for wealth
     
     SmComments.init({ apiBase: SM_API });
   </script>
+
+  <script id="PATCH_JS">
+(function() {
+'use strict';
+
+/* ── HELPERS ── */
+function hindDate() {
+  const now = new Date();
+  const months = ['जनवरी','फ़रवरी','मार्च','अप्रैल','मई','जून',
+                  'जुलाई','अगस्त','सितम्बर','अक्टूबर','नवम्बर','दिसम्बर'];
+  return now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+}
+
+function dayOfYear(d) {
+  const start = new Date(d.getFullYear(), 0, 0);
+  const diff = d - start;
+  return Math.floor(diff / 86400000);
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   FEATURE 1 — FESTIVAL BANNER
+   ════════════════════════════════════════════════════════════════════ */
+const FESTIVALS = [
+  // { month: 1-12, day: 1-31, window: days before/after, ... }
+  {
+    month: 2, day: 26, window: 3,
+    title: 'महाशिवरात्रि की शुभकामनाएं', sub: 'विशेष शिव मंत्र देखें',
+    icon: '🔱', url: '/shiva-mantras',
+    bg: 'linear-gradient(90deg, #1A0000, #3D0000, #1A0000)',
+    accent: '#D4A017'
+  },
+  {
+    month: 10, day: 2, window: 10,
+    title: 'नवरात्रि की शुभकामनाएं', sub: 'माँ दुर्गा के मंत्र पढ़ें',
+    icon: '🪔', url: '/durga-mantras/',
+    bg: 'linear-gradient(90deg, #1A0006, #4A0010, #1A0006)',
+    accent: '#F2C94C'
+  },
+  {
+    month: 11, day: 1, window: 3,
+    title: 'दीपावली की हार्दिक शुभकामनाएं', sub: 'माँ लक्ष्मी का आशीर्वाद पाएं',
+    icon: '✨', url: '/Lakshmi-mantras/',
+    bg: 'linear-gradient(90deg, #1A0E00, #3D2800, #1A0E00)',
+    accent: '#FFD700'
+  },
+  {
+    month: 3, day: 14, window: 2,
+    title: 'होली की रंगीन शुभकामनाएं', sub: 'श्री कृष्ण के भजन सुनें',
+    icon: '🎨', url: '/Krishna-Mahamantras/',
+    bg: 'linear-gradient(90deg, #0D1A00, #1A3300, #0D1A00)',
+    accent: '#FF6B00'
+  },
+  {
+    month: 8, day: 16, window: 3,
+    title: 'श्री कृष्ण जन्माष्टमी की शुभकामनाएं', sub: 'हरे कृष्ण मंत्र जपें',
+    icon: '🦚', url: '/Krishna-Mahamantras/',
+    bg: 'linear-gradient(90deg, #060010, #1A0035, #060010)',
+    accent: '#9966FF'
+  },
+  {
+    month: 9, day: 7, window: 3,
+    title: 'गणेश चतुर्थी की शुभकामनाएं', sub: 'श्री गणेश मंत्र देखें',
+    icon: '🐘', url: '/ganesh-mantras/',
+    bg: 'linear-gradient(90deg, #100A00, #2A1A00, #100A00)',
+    accent: '#F39C12'
+  },
+  {
+    month: 7, day: 22, window: 5,
+    title: 'श्रावण मास की शुभकामनाएं', sub: 'भगवान शिव को प्रिय है यह मास',
+    icon: '🔱', url: '/shiva-mantras',
+    bg: 'linear-gradient(90deg, #001010, #002535, #001010)',
+    accent: '#00CCDD'
+  }
+];
+
+(function initFestivalBanner() {
+  const dismissed = sessionStorage.getItem('sm_festival_dismissed');
+  if (dismissed) return;
+
+  const now = new Date();
+  const m = now.getMonth() + 1;
+  const d = now.getDate();
+
+  const fest = FESTIVALS.find(f => {
+    const diff = Math.abs(
+      new Date(now.getFullYear(), m - 1, d) -
+      new Date(now.getFullYear(), f.month - 1, f.day)
+    ) / 86400000;
+    return diff <= f.window;
+  });
+
+  if (!fest) return;
+
+  const banner = document.getElementById('festival-banner');
+  if (!banner) return;
+
+  document.getElementById('fb-icon').textContent  = fest.icon;
+  document.getElementById('fb-title').textContent = fest.title;
+  document.getElementById('fb-sub').textContent   = fest.sub;
+  banner.style.setProperty('--fb-bg', fest.bg);
+  banner.style.setProperty('--fb-accent', fest.accent);
+
+  // Make it link somewhere
+  const inner = banner.querySelector('.festival-inner');
+  banner.style.cursor = 'pointer';
+  inner.addEventListener('click', function(e) {
+    if (e.target.closest('.festival-close')) return;
+    window.location.href = fest.url;
+  });
+
+  banner.style.display = 'block';
+})();
+
+window.closeFestivalBanner = function() {
+  const b = document.getElementById('festival-banner');
+  if (b) {
+    b.style.transition = 'max-height 0.4s ease, opacity 0.3s ease';
+    b.style.opacity = '0';
+    b.style.maxHeight = '0';
+    b.style.overflow = 'hidden';
+    setTimeout(() => b.style.display = 'none', 400);
+  }
+  sessionStorage.setItem('sm_festival_dismissed', '1');
+};
+
+
+/* ════════════════════════════════════════════════════════════════════
+   FEATURE 2 — PANCHANG STRIP
+   Uses simple lunisolar approximation — replace the panchang() call
+   with your real engine (panchang_engine.js) if available.
+   ════════════════════════════════════════════════════════════════════ */
+(function initPanchangStrip() {
+  const strip = document.getElementById('panchang-content');
+  if (!strip) return;
+
+  /* ── Try to get data from your existing Panchang engine/API ── */
+  // If panchang_engine.js exposes a global, use it; otherwise fall back to static.
+  let data = null;
+
+  if (typeof window.getPanchangData === 'function') {
+    try { data = window.getPanchangData(); } catch(e) {}
+  }
+
+  /* ── Fallback: compute approximation ── */
+  if (!data) {
+    const now = new Date();
+    // Tithi: synodic month ~29.53d, new moon ~Jan 11 2024
+    const newMoon = new Date('2024-01-11');
+    const daysSince = (now - newMoon) / 86400000;
+    const tithi = Math.floor((daysSince % 29.53) * (30 / 29.53)) + 1;
+    const tithiNames = [
+      'प्रतिपदा','द्वितीया','तृतीया','चतुर्थी','पंचमी',
+      'षष्ठी','सप्तमी','अष्टमी','नवमी','दशमी',
+      'एकादशी','द्वादशी','त्रयोदशी','चतुर्दशी','पूर्णिमा/अमावस्या',
+      'प्रतिपदा','द्वितीया','तृतीया','चतुर्थी','पंचमी',
+      'षष्ठी','सप्तमी','अष्टमी','नवमी','दशमी',
+      'एकादशी','द्वादशी','त्रयोदशी','चतुर्दशी','अमावस्या'
+    ];
+    const nakshatraNames = [
+      'अश्विनी','भरणी','कृत्तिका','रोहिणी','मृगशिरा','आर्द्रा',
+      'पुनर्वसु','पुष्य','आश्लेषा','मघा','पूर्वफाल्गुनी','उत्तरफाल्गुनी',
+      'हस्त','चित्रा','स्वाति','विशाखा','अनुराधा','ज्येष्ठा',
+      'मूल','पूर्वाषाढ़ा','उत्तराषाढ़ा','श्रावण','धनिष्ठा','शतभिषा',
+      'पूर्वाभाद्रपद','उत्तराभाद्रपद','रेवती'
+    ];
+    const varNames = ['रविवार','सोमवार','मंगलवार','बुधवार','गुरुवार','शुक्रवार','शनिवार'];
+    const nakshIdx = Math.floor((daysSince * 27 / 29.53) % 27);
+    const tithiIdx = Math.min(Math.floor(tithi) - 1, 29);
+
+    // Sunrise/sunset approx for Delhi
+    const sunriseH = 6, sunriseM = 10, sunsetH = 18, sunsetM = 45;
+    // Rahukaal: changes by day
+    const rahukaal = ['4:30-6:00','7:30-9:00','15:00-16:30','12:00-13:30',
+                      '13:30-15:00','10:30-12:00','9:00-10:30'];
+    const rahu = rahukaal[now.getDay()];
+
+    data = {
+      var:    varNames[now.getDay()],
+      tithi:  tithiNames[tithiIdx] || 'द्वादशी',
+      naksh:  nakshatraNames[nakshIdx] || 'रोहिणी',
+      sunrise: `${sunriseH}:${String(sunriseM).padStart(2,'0')} AM`,
+      sunset:  `${sunsetH}:${String(sunsetM).padStart(2,'0')} PM`,
+      rahu:    rahu,
+    };
+  }
+
+  // Build strip HTML
+  const items = [
+    { label: 'वार',      value: data.var    || data.day    },
+    { label: 'तिथि',     value: data.tithi  || data.tithiName },
+    { label: 'नक्षत्र',  value: data.naksh  || data.nakshatraName },
+    { label: 'सूर्योदय', value: data.sunrise },
+    { label: 'सूर्यास्त', value: data.sunset },
+    { label: 'राहुकाल',  value: data.rahu   || data.rahukaal },
+  ].filter(i => i.value);
+
+  const html = items.map(i =>
+    `<div class="panchang-item">
+      <span class="panchang-label">${i.label}</span>
+      <span class="panchang-value">${i.value}</span>
+    </div>`
+  ).join('') +
+  `<a class="panchang-link" href="/Hindi-Panchang-Patara/">
+    पूर्ण पंचांग →
+  </a>`;
+
+  strip.innerHTML = html;
+})();
+
+
+/* ════════════════════════════════════════════════════════════════════
+   FEATURE 3 — AAJ KA MANTRA
+   Rotates through mantras based on day-of-year so it's consistent
+   for all users on a given day.
+   ════════════════════════════════════════════════════════════════════ */
+const AAJ_KA_MANTRAS = [
+  {
+    deity: 'भगवान शिव',
+    shloka: 'ॐ नमः शिवाय\nनमामि शमीशानं निर्वाण रूपम्।',
+    meaning: 'मैं उस शिव को नमन करता हूँ जो पञ्चतत्वों के स्वामी और मोक्ष के देनेवाले हैं।',
+    url: '/shiva-mantras',
+    whatsapp: 'ॐ नमः शिवाय 🔱\nShivMarg पर पढ़ें: https://shivmarg.live/shiva-mantras'
+  },
+  {
+    deity: 'माँ दुर्गा',
+    shloka: 'या देवी सर्वभूतेषु शक्तिरूपेण संस्थिता।\nनमस्तस्यै नमस्तस्यै नमस्तस्यै नमो नमः॥',
+    meaning: 'जो देवी सभी प्राणियों में शक्ति रूप में विराजमान हैं, उन्हें बार-बार नमन।',
+    url: '/durga-mantras/',
+    whatsapp: 'जय माता दी 🙏\nया देवी सर्वभूतेषु...\nपढ़ें: https://shivmarg.live/durga-mantras/'
+  },
+  {
+    deity: 'श्री गणेश',
+    shloka: 'ॐ गं गणपतये नमः।\nवक्रतुण्ड महाकाय सूर्यकोटि समप्रभ॥',
+    meaning: 'विघ्नहर्ता, महाकाय और करोड़ सूर्यों के समान तेजस्वी गणपति को प्रणाम।',
+    url: '/ganesh-mantras/',
+    whatsapp: 'ॐ गं गणपतये नमः 🐘\nपढ़ें: https://shivmarg.live/ganesh-mantras/'
+  },
+  {
+    deity: 'श्री राम',
+    shloka: 'श्री राम जय राम जय जय राम।\nरामाय रामभद्राय रामचन्द्राय वेधसे॥',
+    meaning: 'श्री राम की जय हो। राम, रामभद्र, और रामचंद्र — तीनों स्वरूपों को नमन।',
+    url: '/Shri-ram-mantra/',
+    whatsapp: 'जय श्री राम 🙏\nश्री राम जय राम...\nपढ़ें: https://shivmarg.live/Shri-ram-mantra/'
+  },
+  {
+    deity: 'श्री कृष्ण',
+    shloka: 'हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे।\nहरे राम हरे राम राम राम हरे हरे॥',
+    meaning: 'हे कृष्ण, हे राम — आपकी दिव्य शक्ति हमें अज्ञान के अंधकार से मुक्त करे।',
+    url: '/Krishna-Mahamantras/',
+    whatsapp: 'हरे कृष्ण 🦚\nपढ़ें: https://shivmarg.live/Krishna-Mahamantras/'
+  },
+  {
+    deity: 'भगवान विष्णु',
+    shloka: 'ॐ नमो भगवते वासुदेवाय।\nशान्ताकारं भुजगशयनं पद्मनाभं सुरेशम्॥',
+    meaning: 'शेषनाग पर विश्राम करने वाले, पद्मनाभ, शांतस्वरूप भगवान वासुदेव को नमन।',
+    url: '/bhagvan-vishnu-mantra/',
+    whatsapp: 'ॐ नमो भगवते वासुदेवाय 🙏\nपढ़ें: https://shivmarg.live/bhagvan-vishnu-mantra/'
+  },
+  {
+    deity: 'माँ लक्ष्मी',
+    shloka: 'ॐ श्रीं ह्रीं श्रीं महालक्ष्म्यै नमः।\nलक्ष्मीं क्षीरसमुद्र राज तनयां श्री रंग धामेश्वरीम्॥',
+    meaning: 'क्षीरसागर की पुत्री, श्रीरंग की स्वामिनी महालक्ष्मी को नमन। धन और सौभाग्य प्रदायिनी।',
+    url: '/Lakshmi-mantras/',
+    whatsapp: 'ॐ श्रीं महालक्ष्म्यै नमः 🌸\nपढ़ें: https://shivmarg.live/Lakshmi-mantras/'
+  },
+  {
+    deity: 'गायत्री माता',
+    shloka: 'ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यम्\nभर्गो देवस्य धीमहि। धियो यो नः प्रचोदयात्॥',
+    meaning: 'उस परम तेजस्वी सविता देव के श्रेष्ठ तेज का हम ध्यान करते हैं। वे हमारी बुद्धि को प्रेरित करें।',
+    url: '/Gayatri-mantra/',
+    whatsapp: 'गायत्री मंत्र 🌅\nॐ भूर्भुवः स्वः...\nपढ़ें: https://shivmarg.live/Gayatri-mantra/'
+  },
+  {
+    deity: 'हनुमान जी',
+    shloka: 'जय हनुमान ज्ञान गुण सागर।\nजय कपीस तिहु लोक उजागर॥',
+    meaning: 'ज्ञान और गुण के सागर, तीनों लोकों को प्रकाशित करने वाले श्री हनुमान जी की जय।',
+    url: '/hanumanji/',
+    whatsapp: 'जय हनुमान 🙏\nज्ञान गुण सागर...\nपढ़ें: https://shivmarg.live/hanumanji/'
+  },
+  {
+    deity: 'महामृत्युंजय',
+    shloka: 'ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्।\nउर्वारुकमिव बन्धनान् मृत्योर्मुक्षीय माऽमृतात्॥',
+    meaning: 'त्रिनेत्र शिव की हम पूजा करते हैं जो सुगंधित और पुष्टिवर्धक हैं। जैसे ककड़ी बंधन से मुक्त होती है, वैसे मुझे मृत्यु से मुक्त करें।',
+    url: '/shiva-mantras/Shiva-mahamrityunjaya-mantra/',
+    whatsapp: 'महामृत्युंजय मंत्र 🔱\nपढ़ें: https://shivmarg.live/shiva-mantras/'
+  },
+  {
+    deity: 'माँ सरस्वती',
+    shloka: 'या कुन्देन्दु तुषार हार धवला या शुभ्र वस्त्रावृता।\nया वीणावरदण्डमण्डितकरा या श्वेतपद्मासना॥',
+    meaning: 'जो कुंद-पुष्प, चंद्रमा और हिमराशि की तरह श्वेत हैं, श्वेत वस्त्र धारण किए हैं और वीणा सुशोभित करती हैं।',
+    url: '/Sharaswati-mantra/',
+    whatsapp: 'जय माँ सरस्वती 📚\nपढ़ें: https://shivmarg.live/Sharaswati-mantra/'
+  },
+  {
+    deity: 'माँ काली',
+    shloka: 'क्रीं काली क्रीं महाकाल्यै नमः।\nजय माँ काली, जय महाकाली॥',
+    meaning: 'महाकाली को प्रणाम। वे समय और अंधकार का नाश करने वाली, शक्ति की अधिष्ठात्री हैं।',
+    url: '/maha-kali-mantra/',
+    whatsapp: 'जय माँ काली 🙏\nपढ़ें: https://shivmarg.live/maha-kali-mantra/'
+  },
+  {
+    deity: 'भगवान सूर्य',
+    shloka: 'ॐ ह्रां ह्रीं ह्रौं सः सूर्याय नमः।\nआदित्यस्य नमस्कारं ये कुर्वन्ति दिने दिने॥',
+    meaning: 'सूर्यदेव को प्रणाम। जो प्रतिदिन सूर्य का नमस्कार करते हैं, उन्हें दीर्घायु और यश प्राप्त होता है।',
+    url: '/surya-dev/',
+    whatsapp: 'सूर्य नमस्कार 🌞\nपढ़ें: https://shivmarg.live/surya-dev/'
+  }
+];
+
+let currentMantraIdx = 0;
+
+(function initAajKaMantra() {
+  const el = document.getElementById('aaj-ka-mantra');
+  if (!el) return;
+
+  // Pick mantra based on day-of-year for consistency
+  const idx = dayOfYear(new Date()) % AAJ_KA_MANTRAS.length;
+  currentMantraIdx = idx;
+
+  renderMantra(idx);
+  buildNavDots();
+
+  // Set date text
+  const dateEl = document.getElementById('akm-date-text');
+  if (dateEl) dateEl.textContent = hindDate();
+})();
+
+function renderMantra(idx) {
+  const m = AAJ_KA_MANTRAS[idx];
+  if (!m) return;
+  const sl = document.getElementById('akm-shloka');
+  const me = document.getElementById('akm-meaning');
+  const de = document.getElementById('akm-deity-label');
+  if (sl) sl.innerHTML = m.shloka.replace(/\n/g, '<br>');
+  if (me) me.textContent = m.meaning;
+  if (de) de.textContent = m.deity;
+  updateNavDots(idx);
+}
+
+function buildNavDots() {
+  const nav = document.getElementById('akm-nav');
+  if (!nav) return;
+  // Show 5 dots: current + 2 on each side
+  nav.innerHTML = '';
+  const total = Math.min(5, AAJ_KA_MANTRAS.length);
+  for (let i = 0; i < total; i++) {
+    const d = document.createElement('span');
+    d.className = 'akm-nav-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('role', 'button');
+    d.setAttribute('aria-label', `मंत्र ${i + 1}`);
+    d.addEventListener('click', function() {
+      const newIdx = (currentMantraIdx - 2 + i + AAJ_KA_MANTRAS.length) % AAJ_KA_MANTRAS.length;
+      currentMantraIdx = newIdx;
+      renderMantra(newIdx);
+    });
+    nav.appendChild(d);
+  }
+}
+
+function updateNavDots(idx) {
+  const dots = document.querySelectorAll('.akm-nav-dot');
+  // Relative position: the current mantra is at dot index 2 (middle)
+  const offset = idx;
+  dots.forEach(function(d, i) {
+    const relIdx = (offset - 2 + i + AAJ_KA_MANTRAS.length) % AAJ_KA_MANTRAS.length;
+    d.classList.toggle('active', relIdx === idx);
+  });
+}
+
+window.shareAajKaMantra = function() {
+  const m = AAJ_KA_MANTRAS[currentMantraIdx];
+  if (!m) return;
+  const text = encodeURIComponent(m.whatsapp);
+  window.open('https://wa.me/?text=' + text, '_blank');
+};
+
+
+/* ════════════════════════════════════════════════════════════════════
+   FEATURE 4 — STOTRA OF THE WEEK
+   Rotates weekly (Mon = week start). Fully self-contained, no API.
+   ════════════════════════════════════════════════════════════════════ */
+const STOTRAS_OF_WEEK = [
+  {
+    deity: 'भगवान शिव',
+    tag: 'BHAGWAN SHIV',
+    name: 'शिव तांडव स्तोत्रम्',
+    type: 'तांडव स्तोत्र',
+    verse: 'जटाटवीगलज्जलप्रवाहपावितस्थले\nगलेऽवलम्ब्य लम्बितां भुजंगतुंगमालिकाम्।',
+    desc: 'रावण रचित शिव तांडव स्तोत्र — शिव के ब्रह्माण्डीय नृत्य का अद्भुत वर्णन। इसे पढ़ने से साहस और शक्ति की प्राप्ति होती है।',
+    tags: ['रावण रचित', 'अष्टादश श्लोक', 'शक्ति मंत्र'],
+    url: '/shiva-mantras',
+    img: '/images/home/namami-samisam.png',
+    imgColor: 'linear-gradient(135deg, #8B6F47, #3D1F00)',
+    badge: 'इस सप्ताह का मंत्र'
+  },
+  {
+    deity: 'माँ दुर्गा',
+    tag: 'MAA DURGA',
+    name: 'महिषासुरमर्दिनी स्तोत्रम्',
+    type: 'दुर्गा स्तुति',
+    verse: 'अयि गिरिनन्दिनि नन्दितमेदिनि\nविश्वविनोदिनि नन्दनुते।',
+    desc: 'महिषासुर का वध करने वाली माँ दुर्गा की स्तुति — नवरात्रि में अत्यंत फलदायी। पाठ से भय और संकट दूर होते हैं।',
+    tags: ['नवरात्रि', 'शक्ति पाठ', 'विजयी मंत्र'],
+    url: '/durga-mantras/',
+    img: '/images/home/MataDurga.png',
+    imgColor: 'linear-gradient(135deg, #E74C3C, #6A0000)',
+    badge: 'इस सप्ताह का मंत्र'
+  },
+  {
+    deity: 'श्री कृष्ण',
+    tag: 'SHRI KRISHNA',
+    name: 'माधुराष्टकम्',
+    type: 'अष्टपदी',
+    verse: 'अधरं मधुरं वदनं मधुरं\nनयनं मधुरं हसितं मधुरम्।',
+    desc: 'वल्लभाचार्य रचित माधुराष्टकम् — श्री कृष्ण के प्रत्येक अंग की माधुरी का अनुपम वर्णन। प्रेम भक्ति का सर्वोच्च उदाहरण।',
+    tags: ['वल्लभाचार्य', 'अष्ट श्लोक', 'प्रेम भक्ति'],
+    url: '/Krishna-Mahamantras/',
+    img: '/images/home/ShriKrishna.jpeg',
+    imgColor: 'linear-gradient(135deg, #8E44AD, #2C0060)',
+    badge: 'इस सप्ताह का मंत्र'
+  },
+  {
+    deity: 'श्री राम',
+    tag: 'SHRI RAM',
+    name: 'श्री रामरक्षा स्तोत्रम्',
+    type: 'रक्षा स्तोत्र',
+    verse: 'रामो राजमणिः सदा विजयते रामं रमेशं भजे\nरामेणाभिहता निशाचरचमू रामाय तस्मै नमः।',
+    desc: 'बुधकौशिक ऋषि रचित रामरक्षा स्तोत्र — सर्वरोग नाशक और शत्रुभय हरण करने वाला। प्रतिदिन पाठ से श्री राम की विशेष कृपा।',
+    tags: ['रक्षा मंत्र', '38 श्लोक', 'रोज़ पाठ'],
+    url: '/Shri-ram-mantra/',
+    img: '/images/home/ShriRam.png',
+    imgColor: 'linear-gradient(135deg, #27AE60, #0A3D1A)',
+    badge: 'इस सप्ताह का मंत्र'
+  }
+];
+
+(function initStotreOfWeek() {
+  const card = document.getElementById('sotw-card');
+  if (!card) return;
+
+  // Week number from epoch, consistent for all users
+  const now = new Date();
+  const weekNum = Math.floor(now.getTime() / (7 * 24 * 60 * 60 * 1000));
+  const s = STOTRAS_OF_WEEK[weekNum % STOTRAS_OF_WEEK.length];
+
+  card.innerHTML = `
+    <div class="sotw-image-side">
+      <img src="${s.img}" alt="${s.name}"
+           onerror="this.parentElement.style.background='${s.imgColor}';this.style.display='none'">
+      <div class="sotw-image-overlay"></div>
+      <span class="sotw-badge">${s.badge}</span>
+    </div>
+    <div class="sotw-content-side">
+      <div>
+        <div class="sotw-deity-tag">${s.tag}</div>
+        <div class="sotw-name-deva">${s.name}</div>
+        <div class="sotw-name-eng">${s.type}</div>
+      </div>
+      <div class="sotw-verse">${s.verse.replace(/\n/g,'<br>')}</div>
+      <div class="sotw-desc">${s.desc}</div>
+      <div>
+        <div class="sotw-meta" style="margin-bottom:16px;">
+          ${s.tags.map(t => `<span class="sotw-meta-tag">${t}</span>`).join('')}
+        </div>
+        <a class="sotw-read-btn" href="${s.url}">पूरा स्तोत्र पढ़ें</a>
+      </div>
+    </div>`;
+})();
+
+})(); // end IIFE
+</script>
+<script id="MARQUEE_PATCH_JS">
+(function () {
+
+  /* ── Mantra items to scroll ── */
+  const MANTRAS = [
+    { text: 'ॐ नमः शिवाय',             dot: true  },
+    { text: 'हरे कृष्ण हरे राम',        dot: true  },
+    { text: 'जय माता दी',              dot: true  },
+    { text: 'श्री राम जय राम जय जय राम', dot: true },
+    { text: 'ॐ गं गणपतये नमः',         dot: true  },
+    { text: 'ॐ श्रीं महालक्ष्म्यै नमः', dot: true  },
+    { text: 'सरस्वती नमस्तुभ्यम्',      dot: true  },
+    { text: 'हर हर महादेव',            dot: true  },
+    { text: 'ॐ नमो भगवते वासुदेवाय',   dot: true  },
+    { text: 'जय हनुमान',               dot: true  },
+    { text: 'ॐ भूर्भुवः स्वः',          dot: true  },
+    { text: 'क्रीं काली क्रीं',          dot: true  },
+    { text: 'ॐ ह्रां ह्रीं ह्रौं सः सूर्याय नमः', dot: true },
+    { text: 'जय श्री राम',             dot: true  },
+    { text: 'ॐ त्र्यम्बकं यजामहे',      dot: true  },
+    { text: 'विश्वं विष्णुर्वषट्कारः',  dot: true  },
+  ];
+
+  /* px per second — tweak to taste */
+  const SPEED = 55;
+
+  function buildMarquee() {
+    const wrap = document.querySelector('.marquee-wrap');
+    if (!wrap) return;
+
+    /* Remove old track if present */
+    const old = wrap.querySelector('.marquee-track');
+    if (old) old.remove();
+
+    /* Build one set of items */
+    function makeSet() {
+      return MANTRAS.map(m => {
+        let html = `<span class="marquee-item">${m.text}</span>`;
+        if (m.dot) html += `<span class="marquee-dot" aria-hidden="true">✦</span>`;
+        return html;
+      }).join('');
+    }
+
+    /* Duplicate the set so the seam is invisible */
+    const track = document.createElement('div');
+    track.className = 'marquee-track';
+    track.setAttribute('aria-hidden', 'true');
+    track.innerHTML = makeSet() + makeSet();
+    wrap.appendChild(track);
+
+    /* Measure one set width, set animation duration */
+    requestAnimationFrame(function () {
+      const totalWidth = track.scrollWidth;
+      const halfWidth  = totalWidth / 2;
+      const duration   = halfWidth / SPEED;
+      track.style.animationDuration = duration.toFixed(2) + 's';
+    });
+  }
+
+  /* Run on DOMContentLoaded or immediately if already loaded */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', buildMarquee);
+  } else {
+    buildMarquee();
+  }
+
+  /* Re-build if fonts load late (Devanagari font can shift widths) */
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () {
+      buildMarquee();
+    });
+  }
+
+})();
+</script>
 </body>
 </html>
