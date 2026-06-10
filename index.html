@@ -1375,101 +1375,196 @@ mantra for wealth
   <style id="PATCH_CSS">
 
 /* ── FESTIVAL BANNER ── */
-#festival-banner {
-  position: relative;
-  z-index: 190;
-  display: none; /* shown by JS when a festival matches */
-  overflow: hidden;
-  padding: 0;
+/* ── FESTIVAL POPUP ─────────────────────────────── */
+#festival-popup-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.6);
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
 }
-.festival-inner {
+#festival-popup-overlay.active {
+  display: flex;
+}
+.fpc-card {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  background: #0D0500;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid #3D2000;
+  animation: fpc-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes fpc-in {
+  from { opacity: 0; transform: scale(0.88) translateY(16px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+.fpc-topbar {
+  height: 3px;
+}
+.fpc-image {
+  width: 100%;
+  height: 148px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  background: linear-gradient(160deg, #3D0000 0%, #7B1500 45%, #3D0000 100%);
+}
+.fpc-image::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, #0D0500);
+}
+.fpc-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.55;
+}
+.fpc-big-icon {
+  font-size: 3.4rem;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 0 12px rgba(212,160,23,0.5));
+  animation: fpc-bob 3s ease-in-out infinite;
+}
+@keyframes fpc-bob {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-5px); }
+}
+.fpc-brand {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(212, 160, 23, 0.55);
+  position: relative;
+  z-index: 1;
+}
+.fpc-close {
+  position: absolute;
+  top: 10px; right: 10px;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.5);
+  border: 0.5px solid rgba(255,255,255,0.15);
+  color: rgba(253,245,230,0.6);
+  font-size: 15px;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  padding: 13px 24px;
-  position: relative;
-  z-index: 1;
-  flex-wrap: wrap;
-  text-align: center;
-}
-.festival-inner::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--fb-bg, linear-gradient(90deg, #3D0000, #7B0000, #3D0000));
-  z-index: 0;
-}
-/* Shimmering top & bottom border */
-#festival-banner::before,
-#festival-banner::after {
-  content: '';
-  position: absolute;
-  left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg,
-    transparent 0%,
-    var(--fb-accent, #D4A017) 30%,
-    var(--fb-accent, #D4A017) 70%,
-    transparent 100%);
-  animation: banner-shine 3s ease-in-out infinite;
-  z-index: 2;
-}
-#festival-banner::before { top: 0; }
-#festival-banner::after  { bottom: 0; }
-@keyframes banner-shine {
-  0%,100% { opacity: 0.5; }
-  50%      { opacity: 1; }
-}
-.festival-icon {
-  font-size: 1.8rem;
-  filter: drop-shadow(0 0 8px rgba(212,160,23,0.6));
-  position: relative;
-  z-index: 1;
-  animation: icon-bob 2.5s ease-in-out infinite;
-}
-@keyframes icon-bob {
-  0%,100% { transform: translateY(0); }
-  50%      { transform: translateY(-4px); }
-}
-.festival-text {
-  position: relative;
-  z-index: 1;
-}
-.festival-text-title {
-  font-family: 'Tiro Devanagari Sanskrit', serif;
-  font-size: 1.15rem;
-  color: var(--fb-accent, #F2C94C);
-  font-weight: 700;
-  letter-spacing: 1px;
-  display: block;
-  text-shadow: 0 0 20px rgba(212,160,23,0.5);
-}
-.festival-text-sub {
-  font-family: 'Cinzel', serif;
-  font-size: 0.68rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: rgba(253,245,230,0.6);
-  display: block;
-  margin-top: 2px;
-}
-.festival-close {
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  color: rgba(253,245,230,0.35);
-  font-size: 1.1rem;
-  cursor: pointer;
-  padding: 4px;
-  transition: color 0.2s;
-  z-index: 2;
+  z-index: 10;
+  transition: color 0.2s, background 0.2s;
   line-height: 1;
 }
-.festival-close:hover { color: rgba(253,245,230,0.7); }
+.fpc-close:hover {
+  background: rgba(255,255,255,0.1);
+  color: rgba(253,245,230,0.9);
+}
+.fpc-body {
+  padding: 16px 18px 14px;
+}
+.fpc-today-label {
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--fpc-accent, #D4A017);
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.fpc-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.fpc-left  { flex: 1; min-width: 0; }
+.fpc-right { flex-shrink: 0; display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+.fpc-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #FDF5E6;
+  margin: 0 0 4px;
+  line-height: 1.3;
+  font-family: 'Tiro Devanagari Sanskrit', 'Noto Sans Devanagari', serif;
+}
+.fpc-sub {
+  font-size: 12.5px;
+  color: rgba(253,245,230,0.5);
+  margin: 0 0 10px;
+  line-height: 1.5;
+}
+.fpc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  background: rgba(212,160,23,0.1);
+  border: 0.5px solid rgba(212,160,23,0.3);
+  border-radius: 20px;
+  font-size: 10.5px;
+  color: var(--fpc-accent, #D4A017);
+}
+.fpc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: var(--fpc-accent, #D4A017);
+  color: #1A0800;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.fpc-btn:hover { opacity: 0.88; }
+.fpc-divider {
+  height: 0.5px;
+  background: rgba(212,160,23,0.15);
+  margin: 12px 0;
+}
+.fpc-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.fpc-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 15px;
+  color: rgba(253,245,230,0.38);
+}
+.fpc-meta-item svg {
+  opacity: 0.6;
+  stroke: rgba(253,245,230,0.4);
+}
+.fpc-bottombar {
+  height: 2px;
+}
+
+/* Overlay click-outside closes */
+#festival-popup-overlay {
+  cursor: default;
+}
 
 /* ── PANCHANG STRIP ── */
 #panchang-strip {
@@ -1982,18 +2077,6 @@ mantra for wealth
 </head>
 <body>
 
-
-
-<div id="festival-banner" role="banner" aria-live="polite">
-  <div class="festival-inner">
-    <span class="festival-icon" id="fb-icon">🪔</span>
-    <div class="festival-text">
-      <span class="festival-text-title" id="fb-title">महाशिवरात्रि की शुभकामनाएं</span>
-      <span class="festival-text-sub" id="fb-sub">आज के विशेष मंत्र देखें</span>
-    </div>
-    <button class="festival-close" onclick="closeFestivalBanner()" aria-label="बंद करें">✕</button>
-  </div>
-</div>
 <!-- BG layers -->
 <div class="bg-fixed"></div>
 <div class="mandala-tex"></div>
@@ -2591,6 +2674,67 @@ mantra for wealth
         <img src="/images/ShivMarg.png" alt="Logo">
     </div>
 </div>
+<div id="festival-popup-overlay" role="dialog" aria-modal="true" aria-label="आज का पर्व">
+  <div class="fpc-card" id="festival-popup-card">
+    <div class="fpc-topbar" id="fpc-topbar"></div>
+
+    <div class="fpc-image" id="fpc-image">
+      <span class="fpc-big-icon" id="fpc-big-icon">🔱</span>
+      <span class="fpc-brand">ShivMarg</span>
+    </div>
+
+    <button class="fpc-close" onclick="closeFestivalPopup()" aria-label="बंद करें">✕</button>
+
+    <div class="fpc-body">
+      <div class="fpc-today-label">आज का पर्व</div>
+
+      <div class="fpc-row">
+        <div class="fpc-left">
+          <p class="fpc-title" id="fpc-title">सावन शिवरात्रि</p>
+          <p class="fpc-sub"   id="fpc-sub">शिव के पावन मंत्र जपें</p>
+          <span class="fpc-badge" id="fpc-badge">
+            <!-- filled by JS -->
+          </span>
+        </div>
+        <div class="fpc-right">
+          <a class="fpc-btn" id="fpc-btn" href="#">
+            <span>मंत्र देखें</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="fpc-divider"></div>
+
+      <div class="fpc-meta">
+        <span class="fpc-meta-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          <span id="fpc-date">आज</span>
+        </span>
+        <span class="fpc-meta-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <span id="fpc-tithi">शुभ तिथि</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="fpc-bottombar" id="fpc-bottombar"></div>
+  </div>
+</div>
+
+
 
 <footer>
   <span class="footer-om">ॐ</span>
@@ -2870,65 +3014,231 @@ function dayOfYear(d) {
    FEATURE 1 — FESTIVAL BANNER
    ════════════════════════════════════════════════════════════════════ */
 const FESTIVALS = [
-  // { month: 1-12, day: 1-31, window: days before/after, ... }
   {
-    month: 2, day: 26, window: 3,
-    title: 'महाशिवरात्रि की शुभकामनाएं', sub: 'विशेष शिव मंत्र देखें',
-    icon: '🔱', url: '/shiva-mantras',
-    bg: 'linear-gradient(90deg, #1A0000, #3D0000, #1A0000)',
-    accent: '#D4A017'
+    month: 6, day: 10, window: 2,
+    title: 'परमा एकादशी', sub: 'अधिक मास एकादशी व्रत',
+    icon: '🙏', url: '/vishnu-mantras/',
+    bg: 'linear-gradient(90deg, #001018, #002535, #001018)',
+    accent: '#5DCAA5',
+    tithiLabel: 'ज्येष्ठ अधिक, कृष्ण एकादशी',
+    tithiMeta: 'उपवास एवं विष्णु पूजा'
   },
   {
-    month: 10, day: 2, window: 10,
-    title: 'नवरात्रि की शुभकामनाएं', sub: 'माँ दुर्गा के मंत्र पढ़ें',
-    icon: '🪔', url: '/durga-mantras/',
-    bg: 'linear-gradient(90deg, #1A0006, #4A0010, #1A0006)',
-    accent: '#F2C94C'
+    month: 6, day: 29, window: 2,
+    title: 'ज्येष्ठ पूर्णिमा · कबीरदास जयंती', sub: 'गुरु स्मरण एवं सत्संग',
+    icon: '🌕', url: '/mantras/',
+    bg: 'linear-gradient(90deg, #100A00, #2A1800, #100A00)',
+    accent: '#EF9F27',
+    tithiLabel: 'ज्येष्ठ, शुक्ल पूर्णिमा',
+    tithiMeta: 'पूर्णिमा व्रत एवं स्नान-दान'
   },
   {
-    month: 11, day: 1, window: 3,
-    title: 'दीपावली की हार्दिक शुभकामनाएं', sub: 'माँ लक्ष्मी का आशीर्वाद पाएं',
-    icon: '✨', url: '/Lakshmi-mantras/',
-    bg: 'linear-gradient(90deg, #1A0E00, #3D2800, #1A0E00)',
-    accent: '#FFD700'
-  },
-  {
-    month: 3, day: 14, window: 2,
-    title: 'होली की रंगीन शुभकामनाएं', sub: 'श्री कृष्ण के भजन सुनें',
-    icon: '🎨', url: '/Krishna-Mahamantras/',
-    bg: 'linear-gradient(90deg, #0D1A00, #1A3300, #0D1A00)',
-    accent: '#FF6B00'
-  },
-  {
-    month: 8, day: 16, window: 3,
-    title: 'श्री कृष्ण जन्माष्टमी की शुभकामनाएं', sub: 'हरे कृष्ण मंत्र जपें',
-    icon: '🦚', url: '/Krishna-Mahamantras/',
+    month: 7, day: 16, window: 2,
+    title: 'जगन्नाथ रथयात्रा', sub: 'भगवान जगन्नाथ के मंत्र देखें',
+    icon: '🛕', url: '/vishnu-mantras/',
     bg: 'linear-gradient(90deg, #060010, #1A0035, #060010)',
-    accent: '#9966FF'
+    accent: '#9966FF',
+    tithiLabel: 'आषाढ़, शुक्ल द्वितीया',
+    tithiMeta: 'रथ पर विराजमान भगवान'
   },
   {
-    month: 9, day: 7, window: 3,
-    title: 'गणेश चतुर्थी की शुभकामनाएं', sub: 'श्री गणेश मंत्र देखें',
-    icon: '🐘', url: '/ganesh-mantras/',
-    bg: 'linear-gradient(90deg, #100A00, #2A1A00, #100A00)',
-    accent: '#F39C12'
+    month: 7, day: 25, window: 2,
+    title: 'देवशयनी एकादशी', sub: 'चातुर्मास आरंभ — भगवान विष्णु शयन',
+    icon: '🪷', url: '/vishnu-mantras/',
+    bg: 'linear-gradient(90deg, #001018, #003040, #001018)',
+    accent: '#1D9E75',
+    tithiLabel: 'आषाढ़, शुक्ल एकादशी',
+    tithiMeta: 'चातुर्मास व्रत आरंभ'
   },
   {
-    month: 7, day: 22, window: 5,
-    title: 'श्रावण मास की शुभकामनाएं', sub: 'भगवान शिव को प्रिय है यह मास',
+    month: 7, day: 29, window: 1,
+    title: 'गुरु पूर्णिमा · व्यास पूजा', sub: 'गुरु वंदना एवं आशीर्वाद',
+    icon: '🌕', url: '/mantras/',
+    bg: 'linear-gradient(90deg, #0A0A00, #252500, #0A0A00)',
+    accent: '#D4A017',
+    tithiLabel: 'आषाढ़, शुक्ल पूर्णिमा',
+    tithiMeta: 'गुरु चरण वंदना'
+  },
+  {
+    month: 8, day: 3, window: 2,
+    title: 'प्रथम श्रावण सोमवार', sub: 'भगवान शिव का प्रिय सोमवार व्रत',
     icon: '🔱', url: '/shiva-mantras',
     bg: 'linear-gradient(90deg, #001010, #002535, #001010)',
-    accent: '#00CCDD'
+    accent: '#00CCDD',
+    tithiLabel: 'श्रावण, प्रथम सोमवार',
+    tithiMeta: 'जलाभिषेक एवं रुद्राभिषेक'
+  },
+  {
+    month: 8, day: 11, window: 1,
+    title: 'सावन शिवरात्रि', sub: 'शिव के पावन मंत्र जपें',
+    icon: '🔱', url: '/shiva-mantras',
+    bg: 'linear-gradient(90deg, #1A0000, #3D0000, #1A0000)',
+    accent: '#D4A017',
+    tithiLabel: 'श्रावण, कृष्ण चतुर्दशी',
+    tithiMeta: 'निशीथ काल पूजा'
+  },
+  {
+    month: 8, day: 15, window: 1,
+    title: 'हरियाली तीज · स्वतंत्रता दिवस', sub: 'माँ पार्वती की पूजा एवं राष्ट्रीय पर्व',
+    icon: '🌿', url: '/parvati-mantras/',
+    bg: 'linear-gradient(90deg, #001A00, #003300, #001A00)',
+    accent: '#97C459',
+    tithiLabel: 'श्रावण, शुक्ल तृतीया',
+    tithiMeta: 'सौभाग्य व्रत एवं झूला उत्सव'
+  },
+  {
+    month: 8, day: 17, window: 1,
+    title: 'नाग पंचमी', sub: 'नाग देवता की पूजा करें',
+    icon: '🐍', url: '/shiva-mantras',
+    bg: 'linear-gradient(90deg, #001A00, #002A10, #001A00)',
+    accent: '#1D9E75',
+    tithiLabel: 'श्रावण, शुक्ल पंचमी',
+    tithiMeta: 'नाग देवता को दूध अर्पण'
+  },
+  {
+    month: 8, day: 23, window: 1,
+    title: 'श्रावण पुत्रदा एकादशी', sub: 'भगवान विष्णु की आराधना',
+    icon: '🙏', url: '/vishnu-mantras/',
+    bg: 'linear-gradient(90deg, #001018, #002535, #001018)',
+    accent: '#5DCAA5',
+    tithiLabel: 'श्रावण, शुक्ल एकादशी',
+    tithiMeta: 'संतान प्राप्ति हेतु व्रत'
+  },
+  {
+    month: 8, day: 28, window: 1,
+    title: 'रक्षाबंधन · गायत्री जयंती', sub: 'भाई-बहन के पवित्र बंधन का पर्व',
+    icon: '🪢', url: '/mantras/',
+    bg: 'linear-gradient(90deg, #100A00, #2A1400, #100A00)',
+    accent: '#F2C94C',
+    tithiLabel: 'श्रावण, शुक्ल पूर्णिमा',
+    tithiMeta: 'राखी बंधन एवं गायत्री जप'
+  },
+  {
+    month: 9, day: 4, window: 1,
+    title: 'श्री कृष्ण जन्माष्टमी', sub: 'हरे कृष्ण मंत्र जपें',
+    icon: '🦚', url: '/Krishna-Mahamantras/',
+    bg: 'linear-gradient(90deg, #060010, #1A0035, #060010)',
+    accent: '#9966FF',
+    tithiLabel: 'भाद्रपद, कृष्ण अष्टमी',
+    tithiMeta: 'मध्यरात्रि जन्मोत्सव'
+  },
+  {
+    month: 9, day: 14, window: 2,
+    title: 'गणेश चतुर्थी · हरतालिका तीज', sub: 'श्री गणेश मंत्र एवं माँ पार्वती पूजा',
+    icon: '🐘', url: '/ganesh-mantras/',
+    bg: 'linear-gradient(90deg, #100A00, #2A1A00, #100A00)',
+    accent: '#F39C12',
+    tithiLabel: 'भाद्रपद, शुक्ल चतुर्थी',
+    tithiMeta: '10 दिवसीय गणेशोत्सव आरंभ'
+  },
+  {
+    month: 9, day: 17, window: 1,
+    title: 'विश्वकर्मा पूजा · कन्या संक्रांति', sub: 'कौशल एवं शिल्प के देवता की पूजा',
+    icon: '⚙️', url: '/mantras/',
+    bg: 'linear-gradient(90deg, #001018, #002030, #001018)',
+    accent: '#378ADD',
+    tithiLabel: 'कन्या संक्रांति',
+    tithiMeta: 'यंत्र-औज़ार पूजन दिवस'
+  },
+  {
+    month: 9, day: 19, window: 1,
+    title: 'राधा अष्टमी', sub: 'राधा रानी की महिमा गाएं',
+    icon: '🌸', url: '/Krishna-Mahamantras/',
+    bg: 'linear-gradient(90deg, #1A0010, #35001A, #1A0010)',
+    accent: '#D4537E',
+    tithiLabel: 'भाद्रपद, शुक्ल अष्टमी',
+    tithiMeta: 'राधा रानी का प्राकट्य उत्सव'
+  },
+  {
+    month: 9, day: 25, window: 1,
+    title: 'अनंत चतुर्दशी · गणेश विसर्जन', sub: 'गणपति बप्पा मोरया!',
+    icon: '🐘', url: '/ganesh-mantras/',
+    bg: 'linear-gradient(90deg, #100A00, #2A1A00, #100A00)',
+    accent: '#F39C12',
+    tithiLabel: 'भाद्रपद, शुक्ल चतुर्दशी',
+    tithiMeta: 'गणपति विसर्जन महोत्सव'
+  },
+  {
+    month: 9, day: 27, window: 14,
+    title: 'पितृपक्ष आरंभ — श्राद्ध पक्ष', sub: 'पितरों का तर्पण एवं श्रद्धांजलि',
+    icon: '🪔', url: '/mantras/',
+    bg: 'linear-gradient(90deg, #0A0A00, #1A1A00, #0A0A00)',
+    accent: '#D4A017',
+    tithiLabel: 'आश्विन, कृष्ण प्रतिपदा',
+    tithiMeta: '15 दिवसीय श्राद्ध काल'
+  },
+  {
+    month: 10, day: 3, window: 1,
+    title: 'जीवित्पुत्रिका व्रत', sub: 'संतान की दीर्घायु हेतु माताओं का व्रत',
+    icon: '🌺', url: '/mantras/',
+    bg: 'linear-gradient(90deg, #1A0006, #350010, #1A0006)',
+    accent: '#ED93B1',
+    tithiLabel: 'आश्विन, कृष्ण अष्टमी',
+    tithiMeta: 'निर्जल व्रत — पुत्र की रक्षा'
+  },
+  {
+    month: 10, day: 6, window: 1,
+    title: 'इंदिरा एकादशी', sub: 'पितृपक्ष एकादशी — विष्णु आराधना',
+    icon: '🙏', url: '/vishnu-mantras/',
+    bg: 'linear-gradient(90deg, #001018, #002535, #001018)',
+    accent: '#5DCAA5',
+    tithiLabel: 'आश्विन, कृष्ण एकादशी',
+    tithiMeta: 'पितरों की मुक्ति हेतु व्रत'
+  },
+  {
+    month: 10, day: 10, window: 1,
+    title: 'सर्व पितृ अमावस्या', sub: 'सभी पितरों का श्राद्ध तर्पण',
+    icon: '🌑', url: '/mantras/',
+    bg: 'linear-gradient(90deg, #0A0A00, #1A1A00, #0A0A00)',
+    accent: '#D4A017',
+    tithiLabel: 'आश्विन, कृष्ण अमावस्या',
+    tithiMeta: 'सर्व पितृ तर्पण एवं पिंडदान'
+  },
+  {
+    month: 10, day: 11, window: 10,
+    title: 'नवरात्रि प्रारंभ — घटस्थापना', sub: 'माँ दुर्गा के नौ रूपों की आराधना',
+    icon: '🪔', url: '/durga-mantras/',
+    bg: 'linear-gradient(90deg, #1A0006, #4A0010, #1A0006)',
+    accent: '#F2C94C',
+    tithiLabel: 'आश्विन, शुक्ल प्रतिपदा',
+    tithiMeta: 'घटस्थापना — 9 दिवसीय पर्व'
+  },
+  {
+    month: 10, day: 20, window: 1,
+    title: 'विजयादशमी · दशहरा', sub: 'असत्य पर सत्य की विजय',
+    icon: '⚔️', url: '/mantras/',
+    bg: 'linear-gradient(90deg, #100500, #280A00, #100500)',
+    accent: '#D85A30',
+    tithiLabel: 'आश्विन, शुक्ल दशमी',
+    tithiMeta: 'श्रवण नक्षत्र में विजय मुहूर्त'
+  },
+  {
+    month: 10, day: 25, window: 1,
+    title: 'शरद पूर्णिमा · कोजागर पूजा', sub: 'माँ लक्ष्मी का आशीर्वाद पाएं',
+    icon: '🌕', url: '/Lakshmi-mantras/',
+    bg: 'linear-gradient(90deg, #1A0E00, #3D2800, #1A0E00)',
+    accent: '#FFD700',
+    tithiLabel: 'आश्विन, शुक्ल पूर्णिमा',
+    tithiMeta: 'खीर चन्द्र को अर्पण'
+  },
+  {
+    month: 10, day: 29, window: 2,
+    title: 'करवा चौथ', sub: 'सुहागिनों का पावन व्रत — शिव-पार्वती आशीर्वाद',
+    icon: '🌙', url: '/shiva-mantras',
+    bg: 'linear-gradient(90deg, #060010, #140020, #060010)',
+    accent: '#9966FF',
+    tithiLabel: 'कार्तिक, कृष्ण चतुर्थी',
+    tithiMeta: 'चन्द्रोदय पर व्रत पारण'
   }
 ];
 
-(function initFestivalBanner() {
-  const dismissed = sessionStorage.getItem('sm_festival_dismissed');
+(function initFestivalPopup() {
+  const dismissed = sessionStorage.getItem('sm_fpop_dismissed');
   if (dismissed) return;
 
-  const now = new Date();
-  const m = now.getMonth() + 1;
-  const d = now.getDate();
+  const now   = new Date();
+  const m     = now.getMonth() + 1;
+  const d     = now.getDate();
 
   const fest = FESTIVALS.find(f => {
     const diff = Math.abs(
@@ -2940,37 +3250,68 @@ const FESTIVALS = [
 
   if (!fest) return;
 
-  const banner = document.getElementById('festival-banner');
-  if (!banner) return;
+  const overlay = document.getElementById('festival-popup-overlay');
+  const card    = document.getElementById('festival-popup-card');
+  if (!overlay) return;
 
-  document.getElementById('fb-icon').textContent  = fest.icon;
-  document.getElementById('fb-title').textContent = fest.title;
-  document.getElementById('fb-sub').textContent   = fest.sub;
-  banner.style.setProperty('--fb-bg', fest.bg);
-  banner.style.setProperty('--fb-accent', fest.accent);
+  // Inject accent CSS variable
+  card.style.setProperty('--fpc-accent', fest.accent);
 
-  // Make it link somewhere
-  const inner = banner.querySelector('.festival-inner');
-  banner.style.cursor = 'pointer';
-  inner.addEventListener('click', function(e) {
-    if (e.target.closest('.festival-close')) return;
-    window.location.href = fest.url;
+  // Image background
+  const imgEl = card.querySelector('.fpc-image');
+  imgEl.style.background = fest.bg;
+
+  // If you have real images, set them per-festival:
+  // const realImg = imgEl.querySelector('img');
+  // realImg.src = `/static/festival/${fest.imgKey}.jpg`;
+
+  // Fill content
+  document.getElementById('fpc-big-icon').textContent = fest.icon;
+  document.getElementById('fpc-title').textContent    = fest.title;
+  document.getElementById('fpc-sub').textContent      = fest.sub;
+  document.getElementById('fpc-btn').href             = fest.url;
+
+  // Top & bottom accent bars
+  const barStyle = `linear-gradient(90deg, transparent, ${fest.accent} 30%, ${fest.accent} 70%, transparent)`;
+  document.getElementById('fpc-topbar').style.background    = barStyle;
+  document.getElementById('fpc-bottombar').style.background =
+    `linear-gradient(90deg, transparent, ${fest.accent}55 50%, transparent)`;
+
+  // Badge — tithi or window text
+  const badge = document.getElementById('fpc-badge');
+  badge.style.background   = `${fest.accent}18`;
+  badge.style.borderColor  = `${fest.accent}44`;
+  badge.style.color        = fest.accent;
+  badge.textContent        = fest.tithiLabel || '✦ विशेष पर्व';
+
+  // Meta — date
+  const months = ['','जनवरी','फ़रवरी','मार्च','अप्रैल','मई','जून',
+                  'जुलाई','अगस्त','सितम्बर','अक्टूबर','नवम्बर','दिसम्बर'];
+  document.getElementById('fpc-date').textContent  =
+    `${fest.day} ${months[fest.month]} ${now.getFullYear()}`;
+  document.getElementById('fpc-tithi').textContent = fest.tithiMeta || 'शुभ तिथि';
+
+  // Show with slight delay
+  setTimeout(() => overlay.classList.add('active'), 800);
+
+  // Close on overlay click outside card
+  overlay.addEventListener('click', function(e) {
+    if (!card.contains(e.target)) closeFestivalPopup();
   });
-
-  banner.style.display = 'block';
 })();
 
-window.closeFestivalBanner = function() {
-  const b = document.getElementById('festival-banner');
-  if (b) {
-    b.style.transition = 'max-height 0.4s ease, opacity 0.3s ease';
-    b.style.opacity = '0';
-    b.style.maxHeight = '0';
-    b.style.overflow = 'hidden';
-    setTimeout(() => b.style.display = 'none', 400);
-  }
-  sessionStorage.setItem('sm_festival_dismissed', '1');
+window.closeFestivalPopup = function() {
+  const overlay = document.getElementById('festival-popup-overlay');
+  if (!overlay) return;
+  overlay.style.transition = 'opacity 0.3s ease';
+  overlay.style.opacity = '0';
+  setTimeout(() => {
+    overlay.classList.remove('active');
+    overlay.style.opacity = '';
+  }, 300);
+  sessionStorage.setItem('sm_fpop_dismissed', '1');
 };
+
 
 
 /* ════════════════════════════════════════════════════════════════════
