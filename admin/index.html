@@ -239,6 +239,7 @@
       <div class="nav-item" onclick="showTab('comments',this)"><i class="ti ti-message-dots"></i> Comments</div>
       <div class="nav-item" onclick="showTab('posts',this)"><i class="ti ti-article"></i> Posts</div>
       <div class="nav-item" onclick="showTab('articles',this)"><i class="ti ti-file-text"></i> Articles</div>
+      <div class="nav-item" onclick="showTab('newsletter',this)"><i class="ti ti-mail"></i> Newsletter</div>
     </nav>
     <div class="nav-divider"></div>
     <div class="logout-wrap">
@@ -408,7 +409,35 @@
           <button class="pag-btn" id="articleNext" onclick="changePage('articles',1)">Next →</button>
         </div>
       </div>
-
+      <!-- NEWSLETTER TAB -->
+      <div id="tab-newsletter" class="tab-pane">
+        <div class="section-head">
+          <div class="section-title">Newsletter subscribers</div>
+          <div class="section-count" id="newsletterCount">— total</div>
+        </div>
+        <div class="filters">
+          <span class="filter-label">Status:</span>
+          <select class="filter-select" id="nlStatusFilter" onchange="renderNewsletter()">
+            <option value="">All</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+          <input type="text" class="search-input" id="nlSearch" placeholder="Search email or source…" oninput="renderNewsletter()">
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr>
+              <th>Email</th><th>Source</th><th>Subscribed on</th><th>Status</th><th style="text-align:right">Actions</th>
+            </tr></thead>
+            <tbody id="newsletterTbody"></tbody>
+          </table>
+        </div>
+        <div class="pag">
+          <button class="pag-btn" id="nlPrev" onclick="changePage('newsletter',-1)" disabled>← Prev</button>
+          <span class="pag-info" id="nlPageInfo">Page 1</span>
+          <button class="pag-btn" id="nlNext" onclick="changePage('newsletter',1)">Next →</button>
+        </div>
+      </div>
     </div><!-- /content -->
   </div><!-- /main -->
 </div><!-- /shell -->
@@ -824,11 +853,12 @@ function showTab(tab,el){
   document.getElementById('tab-'+tab).classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   if(el)el.classList.add('active');
-  const titles={dashboard:'Dashboard',users:'Manage users',comments:'Manage comments',posts:'Manage posts',articles:'Manage articles'};
+  const titles={dashboard:'Dashboard',users:'Manage users',comments:'Manage comments',posts:'Manage posts',articles:'Manage articles',newsletter:'Newsletter'};
   document.getElementById('pageTitle').textContent=titles[tab]||tab;
   closeSidebar();
   // Lazy-load articles
   if(tab==='articles'&&!state.articles.length)loadArticles();
+  if(tab==='newsletter' && !state.newsletter.length) loadNewsletter();
 }
 
 function refreshCurrent(){
@@ -857,6 +887,7 @@ function changePage(type,dir){
   if(type==='comments'){state.commentPage+=dir;_renderComments()}
   if(type==='posts'){state.postPage+=dir;_renderPosts()}
   if(type==='articles'){state.articlePage+=dir;_renderArticles()}
+  if(type==='newsletter'){state.nlPage+=dir;_renderNewsletter()}
 }
 
 /* ───────────────────────────── CURRENT USER ───────────────────────────── */
@@ -890,6 +921,85 @@ document.querySelectorAll('.modal-overlay').forEach(overlay=>{
     if(e.target===overlay) closeModal(overlay.id);
   });
 });
+
+
+/* ───────────────────────────── NEWSLETTER ───────────────────────────── */
+state.newsletter    = [];
+state.nlPage        = 1;
+
+async function loadNewsletter(){
+  const data = await apiFetch('/api/admin/newsletter?limit=200');
+  state.newsletter = (data && data.subscribers) || [];
+  renderNewsletter();
+}
+
+function renderNewsletter(){ state.nlPage = 1; _renderNewsletter(); }
+
+function _renderNewsletter(){
+  const statusFilter = document.getElementById('nlStatusFilter').value;   // 'active'|'inactive'|''
+  const q = (document.getElementById('nlSearch').value || '').toLowerCase();
+
+  const filtered = state.newsletter.filter(s => {
+    const matchStatus =
+      statusFilter === ''         ? true :
+      statusFilter === 'active'   ? s.active === true :
+                                    s.active === false;
+    const matchQ = !q || s.email.toLowerCase().includes(q) || (s.source||'').toLowerCase().includes(q);
+    return matchStatus && matchQ;
+  });
+
+  const { items, page, total } = paginate(filtered, state.nlPage);
+  document.getElementById('newsletterCount').textContent = filtered.length + ' total';
+  document.getElementById('nlPageInfo').textContent      = `Page ${page} of ${total}`;
+  document.getElementById('nlPrev').disabled = page <= 1;
+  document.getElementById('nlNext').disabled = page >= total;
+
+  const tbody = document.getElementById('newsletterTbody');
+  if (!items.length) {
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="5">No subscribers found</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = items.map(s => {
+    const isActive = s.active !== false;   // treat missing field as active
+    return `<tr>
+      <td><strong>${esc(s.email)}</strong></td>
+      <td style="color:var(--muted)">${esc(s.source || '—')}</td>
+      <td style="color:var(--muted)">${fmtDate(s.subscribed_at)}</td>
+      <td>
+        <span class="badge ${isActive ? 'badge-publish' : 'badge-archived'}">
+          ${isActive ? 'Active' : 'Inactive'}
+        </span>
+      </td>
+      <td><div class="act-row">
+        <button class="act-btn ${isActive ? 'act-del' : 'act-edit'}"
+          onclick="toggleNlStatus('${esc(s.id)}', ${isActive})">
+          ${isActive ? 'Deactivate' : 'Reactivate'}
+        </button>
+      </div></td>
+    </tr>`;
+  }).join('');
+}
+
+async function toggleNlStatus(id, currentlyActive){
+  const newActive = !currentlyActive;
+  const data = await apiFetch(`/api/admin/newsletter/${id}/status`, {
+    method: 'PATCH',
+    body: JSON.stringify({ active: newActive })
+  });
+
+  // Update local state regardless (API may be demo/unreachable)
+  const sub = state.newsletter.find(s => s.id === id);
+  if (sub) sub.active = newActive;
+  _renderNewsletter();
+
+  if (data) {
+    showToast(`Subscriber ${newActive ? 'reactivated' : 'deactivated'}`, 'success');
+  } else {
+    showToast(`Updated locally (API unreachable)`, 'success');
+  }
+}
+
 </script>
 
 </body>
