@@ -777,7 +777,7 @@ const WS_BASE = 'wss://www.api.shivmarg.live';  // ws not wss for localhost
 // ── TOKEN: pick whichever key your main site stored ──
 let token = localStorage.getItem('admin_token')
          || localStorage.getItem('ed_token')
-         || localStorage.getItem('bargad_token')
+         || localStorage.getItem('sm_token')
          || null;
  
 // ── CURRENT USER: fetch fresh from API if token exists ──
@@ -839,8 +839,8 @@ async function doLogin() {
     if (!d.token) throw new Error('No token received from server');
     token       = d.token;
     currentUser = d.user;
-    localStorage.setItem('bargad_token', token);
-    localStorage.setItem('bargad_user',  JSON.stringify(currentUser));
+    localStorage.setItem('sm_token', token);
+    localStorage.setItem('sm_user',  JSON.stringify(currentUser));
     initChat();
   } catch(e) {
     err.textContent = e.message;
@@ -850,8 +850,8 @@ async function doLogin() {
 }
  
 function doLogout() {
-  localStorage.removeItem('bargad_token');
-  localStorage.removeItem('bargad_user');
+  localStorage.removeItem('sm_token');
+  localStorage.removeItem('sm_user');
   localStorage.removeItem('admin_token');
   localStorage.removeItem('ed_token');
   token       = null;

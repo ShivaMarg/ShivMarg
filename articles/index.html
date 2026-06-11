@@ -1006,7 +1006,7 @@
       }
 
       localStorage.setItem('sm_token', json.token || json.access_token);
-      localStorage.setItem('bargad_user', JSON.stringify(json.user));
+      localStorage.setItem('sm_user', JSON.stringify(json.user));
       closeModal();
       renderAuthArea();
       showToast('लॉग-इन हो गए! स्वागत है।');
@@ -1048,7 +1048,7 @@
       }
 
       localStorage.setItem('sm_token', json.token || json.access_token);
-      localStorage.setItem('bargad_user', JSON.stringify(json.user));
+      localStorage.setItem('sm_user', JSON.stringify(json.user));
       closeModal();
       renderAuthArea();
       showToast('खाता बन गया! स्वागत है।');
@@ -1079,7 +1079,7 @@
   /* ── LOGOUT ─────────────────────────────────── */
   function doLogout() {
     localStorage.removeItem('sm_token');
-    localStorage.removeItem('bargad_user');
+    localStorage.removeItem('sm_user');
     renderAuthArea();
     showToast('लॉग-आउट हो गए');
   }
@@ -1087,7 +1087,7 @@
   /* ── RENDER AUTH AREA ───────────────────────── */
   function renderAuthArea() {
     const area = document.getElementById('authArea');
-    const user = JSON.parse(localStorage.getItem('bargad_user') || 'null');
+    const user = JSON.parse(localStorage.getItem('sm_user') || 'null');
     const token = localStorage.getItem('sm_token');
 
     area.innerHTML = '';
@@ -1591,7 +1591,7 @@ async function doGoogleAuth(msgElId) {
           if (!res.ok) throw new Error(data.detail || 'Google लॉगिन विफल');
           state.token = data.token; state.user = data.user;
           localStorage.setItem('sm_token', data.token);
-          localStorage.setItem('bargad_user', JSON.stringify(data.user));
+          localStorage.setItem('sm_user', JSON.stringify(data.user));
           renderAuthArea(); closeModal();
           showToast(data.is_new ? '🌸 खाता बन गया! स्वागत है, ' + data.user.display_name : '🙏 स्वागत है, ' + data.user.display_name + '!');
         } catch(e) {

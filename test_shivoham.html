@@ -1081,7 +1081,7 @@
       const json = await res.json();
       if (!res.ok) { setMsg('loginMsg', json.message || json.error || 'गलत ई-मेल या पासवर्ड।', 'error'); return; }
       localStorage.setItem('sm_token', json.token || json.access_token);
-      localStorage.setItem('bargad_user', JSON.stringify(json.user));
+      localStorage.setItem('sm_user', JSON.stringify(json.user));
       closeModal(); renderAuthArea(); showToast('लॉग-इन हो गए! स्वागत है।');
     } catch (e) { setMsg('loginMsg', 'सर्वर से जुड़ नहीं हो सका।', 'error'); }
   }
@@ -1102,7 +1102,7 @@
       const json = await res.json();
       if (!res.ok) { setMsg('registerMsg', json.message || json.error || 'खाता नहीं बन सका।', 'error'); return; }
       localStorage.setItem('sm_token', json.token || json.access_token);
-      localStorage.setItem('bargad_user', JSON.stringify(json.user));
+      localStorage.setItem('sm_user', JSON.stringify(json.user));
       closeModal(); renderAuthArea(); showToast('खाता बन गया! स्वागत है।');
     } catch (e) { setMsg('registerMsg', 'सर्वर से जुड़ नहीं हो सका।', 'error'); }
   }
@@ -1147,7 +1147,7 @@
             const data = await res.json();
             if (!res.ok) throw new Error(data.detail || 'Google लॉगिन विफल');
             localStorage.setItem('sm_token', data.token);
-            localStorage.setItem('bargad_user', JSON.stringify(data.user));
+            localStorage.setItem('sm_user', JSON.stringify(data.user));
             renderAuthArea(); closeModal();
             showToast(data.is_new ? '🌸 खाता बन गया! स्वागत है, ' + data.user.display_name : '🙏 स्वागत है, ' + data.user.display_name + '!');
           } catch(e) {
@@ -1162,14 +1162,14 @@
 
   function doLogout() {
     localStorage.removeItem('sm_token');
-    localStorage.removeItem('bargad_user');
+    localStorage.removeItem('sm_user');
     renderAuthArea();
     showToast('लॉग-आउट हो गए');
   }
 
   function renderAuthArea() {
     const area  = document.getElementById('authArea');
-    const user  = JSON.parse(localStorage.getItem('bargad_user') || 'null');
+    const user  = JSON.parse(localStorage.getItem('sm_user') || 'null');
     const token = localStorage.getItem('sm_token');
     area.innerHTML = '';
     if (user && token) {

@@ -558,7 +558,7 @@ const API = 'https://www.api.shivmarg.live';
 
 let state = {
   token: localStorage.getItem('sm_token') || null,
-  user: JSON.parse(localStorage.getItem('bargad_user') || 'null'),
+  user: JSON.parse(localStorage.getItem('sm_user') || 'null'),
   articles: [],
   skip: 0,
   limit: 9,
@@ -680,7 +680,7 @@ async function doLogin() {
     const data = await apiFetch('/api/auth/login', { method:'POST', body: JSON.stringify({ email, password: pass }) });
     state.token = data.token; state.user = data.user;
     localStorage.setItem('sm_token', data.token);
-    localStorage.setItem('bargad_user', JSON.stringify(data.user));
+    localStorage.setItem('sm_user', JSON.stringify(data.user));
     renderAuthArea(); closeModal();
     showToast('स्वागत है, ' + data.user.display_name + '!');
   } catch (e) { msg.textContent = e.message; msg.className = 'form-msg error'; }
@@ -697,7 +697,7 @@ async function doRegister() {
     const data = await apiFetch('/api/auth/register', { method:'POST', body: JSON.stringify({ username, display_name: display, email, password: pass }) });
     state.token = data.token; state.user = data.user;
     localStorage.setItem('sm_token', data.token);
-    localStorage.setItem('bargad_user', JSON.stringify(data.user));
+    localStorage.setItem('sm_user', JSON.stringify(data.user));
     renderAuthArea(); closeModal();
     showToast('खाता बन गया! स्वागत है।');
   } catch (e) { msg.textContent = e.message; msg.className = 'form-msg error'; }
@@ -706,7 +706,7 @@ async function doRegister() {
 function doLogout() {
   state.token = null; state.user = null;
   localStorage.removeItem('sm_token');
-  localStorage.removeItem('bargad_user');
+  localStorage.removeItem('sm_user');
   renderAuthArea(); showToast('लॉग-आउट हो गए।');
 }
 
@@ -912,7 +912,7 @@ async function doGoogleAuth(msgElId) {
           if (!res.ok) throw new Error(data.detail || 'Google लॉगिन विफल');
           state.token = data.token; state.user = data.user;
           localStorage.setItem('sm_token', data.token);
-          localStorage.setItem('bargad_user', JSON.stringify(data.user));
+          localStorage.setItem('sm_user', JSON.stringify(data.user));
           renderAuthArea(); closeModal();
           showToast(data.is_new ? '🌸 खाता बन गया! स्वागत है, ' + data.user.display_name : '🙏 स्वागत है, ' + data.user.display_name + '!');
         } catch(e) {
@@ -1046,12 +1046,12 @@ async function init() {
   if (state.token) {
     apiFetch('/api/auth/me').then(u => {
       state.user = u;
-      localStorage.setItem('bargad_user', JSON.stringify(u));
+      localStorage.setItem('sm_user', JSON.stringify(u));
       renderAuthArea();
     }).catch(() => {
       state.token = null; state.user = null;
       localStorage.removeItem('sm_token');
-      localStorage.removeItem('bargad_user');
+      localStorage.removeItem('sm_user');
       renderAuthArea();
     });
   }
