@@ -1146,7 +1146,7 @@
     /* <title> */
     document.title = title;
 
-    console.log(`${a.title} - Updating meta tags: title="${title}", description="${description}", image="${image}", url="${canonical}", author="${a.author_username}", published_at="${a.published_at}"`);
+    console.log(`${a.title} - Updating meta tags: title="${title}", description="${description}", image="${image}", url="${canonical}", author="${a.author?.username}", published_at="${a.published_at}"`);
 
     /* helper to set / create meta */
     function setMeta(sel, attr, val, content) {
@@ -1179,8 +1179,8 @@
     if (a.published_at) {
       setMeta('meta[property="article:published_time"]', 'property', 'article:published_time', a.published_at);
     }
-    if (a.author_username) {
-      setMeta('meta[property="article:author"]', 'property', 'article:author', a.author_username);
+    if (a.author?.username) {
+      setMeta('meta[property="article:author"]', 'property', 'article:author', a.author.username);
     }
 
     /* canonical */
@@ -1209,7 +1209,7 @@
       "keywords": Array.isArray(a.tags) ? a.tags.join(', ') : (a.tags || ''),   // ← NEW
       "author": {
         "@type": "Person",
-        "name": a.author_username || 'शिव मार्ग'
+        "name": a.author?.username || 'शिव मार्ग'
       },
       "publisher": {
         "@type": "Organization",
