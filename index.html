@@ -2143,18 +2143,18 @@ mantra for wealth
 </section>
 
 
-    <section id="stotra-of-week" class="reveal" role="region" aria-label="सप्ताह का स्तोत्र">
-      <div class="sotw-header">
-        <span class="sotw-label">✦ सप्ताह का स्तोत्र ✦</span>
-        <div class="sotw-title">इस सप्ताह का विशेष स्तोत्र</div>
+  <section id="stotra-of-week" class="reveal" role="region" aria-label="सप्ताह का स्तोत्र">
+    <div class="sotw-header">
+      <span class="sotw-label">✦ सप्ताह का स्तोत्र ✦</span>
+      <div class="sotw-title">इस सप्ताह का विशेष स्तोत्र</div>
+    </div>
+    <div class="sotw-card" id="sotw-card">
+      <!-- Populated by JS -->
+      <div style="padding:40px;text-align:center;color:rgba(212,160,23,0.4);font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:2px;grid-column:1/-1;">
+        लोड हो रहा है…
       </div>
-      <div class="sotw-card" id="sotw-card">
-        <!-- Populated by JS -->
-        <div style="padding:40px;text-align:center;color:rgba(212,160,23,0.4);font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:2px;grid-column:1/-1;">
-          लोड हो रहा है…
-        </div>
-      </div>
-    </section>
+    </div>
+  </section>
 
 
 
@@ -2443,34 +2443,70 @@ mantra for wealth
     <div class="divider-text">✦ मैथिली गीत ✦</div>
     <div class="divider-line"></div>
   </div>
-
-  <div class="cards-grid" id="cards-grid">
-        <!-- MAITHILI — VIDYAPATI GEET -->
-        <a href="/Vidyapati-Geet-Sangrah/" class="card card-krishna reveal" data-cat="krishna" style="animation-delay:0.7s; text-decoration: none; color: inherit;">
-        <div class="card-image"><img src="/images/Vidyapatee.jpg" alt="Vidyapati Geet"></div>
-        <div class="card-inner">
-          <div class="card-tag">Vidyapati Geet</div>
-          <div class="card-name-deva">विद्यापति गीत</div>
-          <div class="card-name-eng">VIDYAPATI GEET</div>
-          <div class="card-mantra-preview">तोहर मुख देखै सनु<br>भए प्रीति मोरा॥</div>
-          <div class="card-count"><span class="card-count-dot"></span> 12 गीत</div>
-        </div>
-        <div class="card-arrow">→</div>
-        </a>
-    
-        <!-- SHIV — BHAJANS -->
-        <a href="/Maithili-bhajan-geet/" class="card card-shiv reveal" data-cat="shiv" style="animation-delay:0.75s; text-decoration: none; color: inherit;">
-        <div class="card-image"><img src="/images/ShivParwatiMithilaPaiting.jpg" alt="Shiv Bhajan Maithili"></div>
-        <div class="card-inner">
-          <div class="card-tag">Shiv Bhajan Maithili</div>
-          <div class="card-name-deva">शिव भजन मैथिली गीत</div>
-          <div class="card-name-eng">SHIV BHAJANS Maithili Geet</div>
-          <div class="card-mantra-preview">हर हर महादेव बम बम भोले<br>जय शम्भो नीलकंठ देव॥</div>
-          <div class="card-count"><span class="card-count-dot"></span> 20 भजन</div>
-        </div>
-        <div class="card-arrow">→</div>
-        </a>
+<!-- VIDYAPATI GEET — STOTRA-STYLE CARD -->
+<!-- VIDYAPATI GEET — STOTRA-STYLE STATIC SECTION -->
+<section id="vidyapati-geet" class="reveal" role="region" aria-label="विद्यापति गीत">
+  <div class="sotw-header">
+    <span class="sotw-label">✦ मैथिली काव्य ✦</span>
+    <div class="sotw-title">विद्यापति गीत संग्रह</div>
   </div>
+  <div class="sotw-card">
+    <div class="sotw-image-side">
+      <img src="/images/Vidyapatee.jpg" alt="विद्यापति गीत">
+      <div class="sotw-image-overlay"></div>
+      <span class="sotw-badge">मैथिली</span>
+    </div>
+    <div class="sotw-content-side">
+      <div>
+        <div class="sotw-deity-tag">Vidyapati Geet</div>
+        <div class="sotw-name-deva">विद्यापति गीत</div>
+        <div class="sotw-name-eng">VIDYAPATI GEET</div>
+      </div>
+      <div class="sotw-verse">तोहर मुख देखै सनु<br>भए प्रीति मोरा॥</div>
+      <div class="sotw-desc">महाकवि विद्यापति द्वारा रचित मैथिली के अमर गीतों का संग्रह, जिनमें भक्ति, श्रृंगार और लोक-संस्कृति की अद्भुत झलक मिलती है।</div>
+      <div>
+        <div class="sotw-meta" style="margin-bottom:16px;">
+          <span class="sotw-meta-tag">मैथिली</span>
+          <span class="sotw-meta-tag">12 गीत</span>
+          <span class="sotw-meta-tag">भक्ति काव्य</span>
+        </div>
+        <a class="sotw-read-btn" href="/Vidyapati-Geet-Sangrah/">सभी गीत पढ़ें</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHIV BHAJAN MAITHILI — STOTRA-STYLE STATIC SECTION -->
+<section id="shiv-bhajan-maithili" class="reveal" role="region" aria-label="शिव भजन मैथिली गीत">
+  <div class="sotw-header">
+    <span class="sotw-label">✦ शिव भक्ति ✦</span>
+    <div class="sotw-title">शिव भजन मैथिली गीत</div>
+  </div>
+  <div class="sotw-card">
+    <div class="sotw-image-side">
+      <img src="/images/ShivParwatiMithilaPaiting.jpg" alt="शिव भजन मैथिली गीत">
+      <div class="sotw-image-overlay"></div>
+      <span class="sotw-badge">शिव भजन</span>
+    </div>
+    <div class="sotw-content-side">
+      <div>
+        <div class="sotw-deity-tag">Shiv Bhajan Maithili</div>
+        <div class="sotw-name-deva">शिव भजन मैथिली गीत</div>
+        <div class="sotw-name-eng">SHIV BHAJANS MAITHILI GEET</div>
+      </div>
+      <div class="sotw-verse">हर हर महादेव बम बम भोले<br>जय शम्भो नीलकंठ देव॥</div>
+      <div class="sotw-desc">भगवान शिव की महिमा में रचित मैथिली भजनों का संग्रह, जो भक्ति रस से परिपूर्ण होकर शिव भक्तों के हृदय को प्रसन्न करते हैं।</div>
+      <div>
+        <div class="sotw-meta" style="margin-bottom:16px;">
+          <span class="sotw-meta-tag">मैथिली</span>
+          <span class="sotw-meta-tag">20 भजन</span>
+          <span class="sotw-meta-tag">शिव भक्ति</span>
+        </div>
+        <a class="sotw-read-btn" href="/Maithili-bhajan-geet/">सभी भजन पढ़ें</a>
+      </div>
+    </div>
+  </div>
+</section>
 
   <div class="divider reveal">
     <div class="divider-line"></div>
