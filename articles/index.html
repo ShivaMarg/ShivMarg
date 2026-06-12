@@ -837,6 +837,7 @@
 <script>
   /* ── CONFIG ────────────────────────────────── */
   const API_BASE = 'https://www.api.shivmarg.live';
+  // const API_BASE = 'http://127.0.0.1:8000/';
   let CURRENT_ARTICLE_SLUG = '';
 
   /* ════════════════════════════════════════════
@@ -1145,6 +1146,8 @@
     /* <title> */
     document.title = title;
 
+    console.log(a);
+
     /* helper to set / create meta */
     function setMeta(sel, attr, val, content) {
       let el = document.querySelector(sel);
@@ -1166,6 +1169,11 @@
     setMeta('meta[name="twitter:title"]',        'name',     'twitter:title',       title);
     setMeta('meta[name="twitter:description"]',  'name',     'twitter:description', description);
     setMeta('meta[name="twitter:image"]',        'name',     'twitter:image',       image);
+
+    /* keywords meta tag */
+    if (a.tags?.length) {
+      setMeta('meta[name="keywords"]', 'name', 'keywords', a.tags.join(', '));
+    }
 
     /* article-specific open graph */
     if (a.published_at) {
@@ -1198,6 +1206,7 @@
       "headline": a.title,
       "description": description,
       "image": image,
+      "keywords": Array.isArray(a.tags) ? a.tags.join(', ') : (a.tags || ''),   // ← NEW
       "author": {
         "@type": "Person",
         "name": a.author?.username || 'शिव मार्ग'
