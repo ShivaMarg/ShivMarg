@@ -227,10 +227,13 @@
 <div class="shell" id="app">
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
-    <div class="logo">
-      <div class="logo-text">Shiva<span>Marg</span></div>
-      <span class="logo-close" onclick="closeSidebar()"><i class="ti ti-x"></i></span>
-    </div>
+    <div class="logo" onclick="window.location.href='/'" style="cursor:pointer;">
+  <div class="logo-text">Shiva<span>Marg</span></div>
+
+  <span class="logo-close" onclick="event.stopPropagation(); closeSidebar();">
+    <i class="ti ti-x"></i>
+  </span>
+</div>
     <div class="user-card">
       <div class="avatar-circle" id="userAvatar">A</div>
       <div class="u-name" id="userName">Loading…</div>
