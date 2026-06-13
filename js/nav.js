@@ -494,21 +494,41 @@
   }
 
   /* ─── AUTH INTEGRATION ─── */
-  function setupAuth() {
-    function trySetupAuth() {
-      if (window.SmAuth) {
-        window.SmAuth.init({
-          apiBase: 'https://www.api.shivmarg.live',
-          noWidget: true
-        });
-        renderNavAuth();
-        document.addEventListener('sm-auth-changed', renderNavAuth);
-      } else {
-        setTimeout(trySetupAuth, 100);
-      }
+function setupAuth() {
+  function trySetupAuth() {
+    if (window.SmAuth) {
+
+      window.SmAuth.init({
+        apiBase: 'https://www.api.shivmarg.live',
+        noWidget: true
+      });
+
+      // Track page view
+      const pageId =
+        new URLSearchParams(window.location.search).get('slug') ||
+        window.location.pathname ||
+        'home';
+
+      window.SmAuth.trackActivity({
+        page_id: pageId,
+        event_type: 'page_view',
+        meta: {
+          page_url: window.location.href,
+          page_title: document.title,
+          referrer: document.referrer
+        }
+      });
+
+      renderNavAuth();
+      document.addEventListener('sm-auth-changed', renderNavAuth);
+
+    } else {
+      setTimeout(trySetupAuth, 100);
     }
-    trySetupAuth();
   }
+
+  trySetupAuth();
+}
 
   function renderNavAuth() {
     const widget = document.getElementById('nav-auth-widget');
