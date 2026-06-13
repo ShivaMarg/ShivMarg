@@ -1047,6 +1047,7 @@ function renderActivityTable(){
   tbody.innerHTML=state.activityLog.map(a=>{
     const dot=eventDotMap[a.event_type]||'blue';
     const durationSuffix=a.duration?` (${a.duration}s)`:'';
+    console.log(a);
     return`
     <tr>
       <td style="color:var(--muted)">${esc(a.user_id?a.user_id.slice(-6):'Anon')}</td>
