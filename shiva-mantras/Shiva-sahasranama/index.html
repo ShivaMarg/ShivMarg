@@ -381,18 +381,6 @@
 <div class="glow-pulse"></div>
 <div id="cosmos"></div>
 
-<header>
-  <div class="site-nav">
-    <a href="/" class="logo">Shiva<em>Marg</em></a>
-    <nav>
-      <a href="#">शिव मंत्र</a>
-      <a href="#">स्तोत्र</a>
-      <a href="#">आरती</a>
-      <a href="#">चालीसा</a>
-    </nav>
-  </div>
-  <div class="breadcrumb">मुख्य पृष्ठ <span>🌿</span> शिव स्तोत्र <span>🌿</span> शिव सहस्रनाम</div>
-</header>
 
 <!-- HERO -->
 <div class="hero">
@@ -873,13 +861,14 @@ renderNames();
   });
 </script>
 
-<script src="/js/auth.js"></script>
-  <script src="/js/s-comments.js"></script>
-  <script>
-    const SM_API = 'https://www.api.shivmarg.live'; // ← change to your server URL in prod
-    SmAuth.init({ apiBase: SM_API });
-    SmComments.init({ apiBase: SM_API });
-  </script>
+<script src="/js/auth2.js"></script>
+<script src="/js/s-comments.js"></script>
+<script src="/js/nav.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/suggested-posts.js"></script>
+<script>
+  // const SM_API = 'https://www.api.shivmarg.live';
   
-<script src="/js/search.js"></script>\n</body>
+  SmComments.init({ apiBase: SM_API });
+</script>
 </html>
