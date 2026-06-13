@@ -1045,12 +1045,12 @@ function renderActivityTable(){
   };
 
   tbody.innerHTML=state.activityLog.map(a=>{
-    console.log(a);
+    // console.log(a);
     const dot=eventDotMap[a.event_type]||'blue';
     const durationSuffix=a.duration?` (${a.duration}s)`:'';
     return`
     <tr>
-      <td style="color:var(--muted)">${esc(a.user_id?a.user_id.slice(-6):'Anon')}</td>
+      <td style="color:var(--muted)">${esc(a.user_id?a.user_id:'Anon')}</td>
       <td><span class="trunc" title="${esc(a.page_id||'—')}">${esc(a.page_id||'—')}</span></td>
       <td><span class="act-dot ${dot}" style="display:inline-block;margin-right:6px"></span>${esc(a.event_type)}${durationSuffix}</td>
       <td style="color:var(--muted)">${esc(a.category||'—')}</td>
