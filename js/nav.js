@@ -555,7 +555,7 @@ function setupAuth() {
           <span class="user-name">${user.username}</span>
           <div class="user-menu" id="user-menu">
             <a href="/profile/${user.username}">👤 प्रोफाइल</a>
-            <a href="/settings.html">⚙️ सेटिंग्स</a>
+            <a href="/user/${user.username}/myactivity">⚙️ सेटिंग्स</a>
             <a href="/favorites.html">❤️ पसंद</a>
             <button class="logout-btn" onclick="event.stopPropagation();window.SmAuth.logout()">🚪 लॉगआउट</button>
           </div>
@@ -567,7 +567,7 @@ function setupAuth() {
           <div class="mobile-menu-item label">✦ खाता ✦</div>
           <div class="mobile-menu-item" style="color:#E8B84B;font-weight:bold;padding:8px 0;">👤 ${user.username}</div>
           <a href="/profile/${user.username}" class="mobile-menu-item">👤 प्रोफाइल</a>
-          <a href="/settings.html" class="mobile-menu-item">⚙️ सेटिंग्स</a>
+          <a href="/user/${user.username}/myactivity" class="mobile-menu-item">⚙️ सेटिंग्स</a>
           <a href="/favorites.html" class="mobile-menu-item">❤️ पसंद</a>
           <button class="mobile-menu-item logout-btn" onclick="window.SmAuth.logout()" style="color:#FF6B6B;padding:12px 0;border:none;background:none;text-align:left;cursor:pointer;font-family:'Tiro Devanagari Sanskrit',serif;font-size:0.93rem;width:100%;">🚪 लॉगआउट</button>`;
       }
