@@ -4,7 +4,7 @@
  */
 
 const SuggestedPosts = (() => {
-  const API_BASE = 'https://www.api.shivmarg.live';
+  let API_BASE = 'https://www.api.shivmarg.live';
   const POSTS_LIMIT = 4;
 
   /**
@@ -92,9 +92,9 @@ const SuggestedPosts = (() => {
     const card = document.createElement('a');
     
     // Handle URL
-    const url = isPost ? (item.url || item.link || '#') : (`articles/?slug=${item.slug}` || '#');
+    const url = isPost ? (item.url || item.link || '#') : (`/articles/?slug=${item.slug}` || '#');
     card.href = url;
-    card.className = 'card reveal';
+    card.className = 'card';
     card.setAttribute('data-cat', 'featured');
     card.style.textDecoration = 'none';
     card.style.color = 'inherit';
@@ -138,6 +138,7 @@ const SuggestedPosts = (() => {
    * Escape HTML to prevent XSS
    */
   function escapeHtml(text) {
+    if (!text) return '';  // ADD THIS LINE
     const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
     return text.replace(/[&<>"']/g, m => map[m]);
   }
