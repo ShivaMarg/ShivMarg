@@ -91,8 +91,7 @@
     .tab-pane.active{display:block}
 
     /* ── STATS ── */
-    .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}
-    @media(max-width:640px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}    @media(max-width:640px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
     .stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:16px;transition:all 0.25s;position:relative;overflow:hidden}
     .stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent-line,transparent)}
     .stat-card:hover{border-color:var(--border-hover);transform:translateY(-2px)}
@@ -194,7 +193,11 @@
     @keyframes dot-bounce{0%,80%,100%{transform:scale(0.6);opacity:0.4}40%{transform:scale(1);opacity:1}}
 
     /* ── ACTIVITY ── */
+/* ── ACTIVITY ── */
     .activity-list{display:flex;flex-direction:column;gap:8px}
+    .activity-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    @media(max-width:768px){.activity-grid{grid-template-columns:1fr}}
+    .rank-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;background:rgba(201,168,76,0.12);color:var(--gold);font-size:0.7rem;font-weight:700;margin-right:8px}
     .act-item{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px}
     .act-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
     .act-dot.green{background:var(--success)}
@@ -240,6 +243,7 @@
       <div class="nav-item" onclick="showTab('posts',this)"><i class="ti ti-article"></i> Posts</div>
       <div class="nav-item" onclick="showTab('articles',this)"><i class="ti ti-file-text"></i> Articles</div>
       <div class="nav-item" onclick="showTab('newsletter',this)"><i class="ti ti-mail"></i> Newsletter</div>
+      <div class="nav-item" onclick="showTab('activity',this)"><i class="ti ti-activity"></i> Activity</div>
     </nav>
     <div class="nav-divider"></div>
     <div class="logout-wrap">
@@ -279,6 +283,12 @@
             <div class="stat-value" id="s-posts">—</div>
             <div class="stat-sub" id="s-featured">—</div>
           </div>
+          <div class="stat-card purple">
+            <i class="ti ti-chart-line stat-icon" style="color:#A78BFA"></i>
+            <div class="stat-label">Page views (all time)</div>
+            <div class="stat-value" id="s-pageviews">—</div>
+            <div class="stat-sub" id="s-top-page">—</div>
+          </div>
         </div>
         <div class="section-head"><div class="section-title">Recent activity</div></div>
         <div class="activity-list" id="activityList">
@@ -305,7 +315,7 @@
         <div class="tbl-wrap">
           <table>
             <thead><tr>
-              <th>Username</th><th>Email</th><th>Role</th><th>Joined</th><th style="text-align:right">Actions</th>
+              <th>Username</th><th>Email</th><th>Role</th><th>Location</th><th>Lang</th><th>Logins</th><th>Last seen</th><th>Joined</th><th style="text-align:right">Actions</th>
             </tr></thead>
             <tbody id="usersTbody"></tbody>
           </table>
@@ -432,10 +442,76 @@
             <tbody id="newsletterTbody"></tbody>
           </table>
         </div>
-        <div class="pag">
+<div class="pag">
           <button class="pag-btn" id="nlPrev" onclick="changePage('newsletter',-1)" disabled>← Prev</button>
           <span class="pag-info" id="nlPageInfo">Page 1</span>
           <button class="pag-btn" id="nlNext" onclick="changePage('newsletter',1)">Next →</button>
+        </div>
+      </div>
+
+      <!-- ACTIVITY TAB -->
+      <div id="tab-activity" class="tab-pane">
+
+        <!-- Top pages + categories side by side -->
+        <div class="activity-grid">
+          <div>
+            <div class="section-head"><div class="section-title">Most visited pages</div></div>
+            <div class="tbl-wrap">
+              <table>
+                <thead><tr><th>Page</th><th style="text-align:right">Views</th></tr></thead>
+                <tbody id="topPagesTbody">
+                  <tr class="spinner-cell"><td colspan="2"><span class="dot-spin"></span><span class="dot-spin"></span><span class="dot-spin"></span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div>
+            <div class="section-head"><div class="section-title">Top categories / deities</div></div>
+            <div class="tbl-wrap">
+              <table>
+                <thead><tr><th>Category</th><th style="text-align:right">Events</th></tr></thead>
+                <tbody id="topCategoriesTbody">
+                  <tr class="spinner-cell"><td colspan="2"><span class="dot-spin"></span><span class="dot-spin"></span><span class="dot-spin"></span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Raw activity log -->
+        <div class="section-head" style="margin-top:24px">
+          <div class="section-title">Recent activity log</div>
+          <div class="section-count" id="activityLogCount">— total</div>
+        </div>
+        <div class="filters">
+          <span class="filter-label">Event:</span>
+          <select class="filter-select" id="activityEventFilter" onchange="renderActivityLog()">
+            <option value="">All events</option>
+            <option value="page_view">Page view</option>
+            <option value="comment">Comment</option>
+            <option value="like">Like</option>
+            <option value="share">Share</option>
+            <option value="audio_play">Audio play</option>
+            <option value="time_spent">Time spent</option>
+            <option value="login">Login</option>
+            <option value="signup">Signup</option>
+          </select>
+          <input type="text" class="search-input" id="activitySearch" placeholder="Search page id…" oninput="renderActivityLog()">
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr>
+              <th>User</th><th>Page</th><th>Event</th><th>Category</th><th>Location</th><th>Device</th><th>When</th>
+            </tr></thead>
+            <tbody id="activityTbody">
+              <tr class="spinner-cell"><td colspan="7"><span class="dot-spin"></span><span class="dot-spin"></span><span class="dot-spin"></span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pag">
+          <button class="pag-btn" id="activityPrev" onclick="changePage('activity',-1)" disabled>← Prev</button>
+          <span class="pag-info" id="activityPageInfo">Page 1</span>
+          <button class="pag-btn" id="activityNext" onclick="changePage('activity',1)">Next →</button>
         </div>
       </div>
     </div><!-- /content -->
@@ -507,6 +583,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadUsers();
   loadComments();
   loadPosts();
+  loadTopPages();   // populate "Page views" stat card on dashboard
 });
 
 let currentTab = 'dashboard';
@@ -514,7 +591,9 @@ const state = {
   users:[], comments:[], posts:[], articles:[],
   userPage:1, commentPage:1, postPage:1, articlePage:1,
   modalUserId:null,
-  articleModalSlug:null
+  articleModalSlug:null,
+  activityLog:[], activityPage:1, activityTotal:0,
+  topPages:[], topCategories:[]
 };
 
 /* ───────────────────────────── SIDEBAR MOBILE ───────────────────────────── */
@@ -543,6 +622,20 @@ function showToast(msg, type='success'){
 /* ───────────────────────────── HELPERS ───────────────────────────── */
 function esc(s){if(!s)return'';return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function fmtDate(s){if(!s)return'—';const d=new Date(s);return d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}
+function fmtDateTime(s){if(!s)return'—';const d=new Date(s);return d.toLocaleString('en-IN',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}
+function fmtRelativeTime(s){
+  if(!s)return'—';
+  const d=new Date(s);
+  const diffMs=Date.now()-d.getTime();
+  const mins=Math.floor(diffMs/60000);
+  if(mins<1)return'Just now';
+  if(mins<60)return mins+'m ago';
+  const hrs=Math.floor(mins/60);
+  if(hrs<24)return hrs+'h ago';
+  const days=Math.floor(hrs/24);
+  if(days<30)return days+'d ago';
+  return fmtDate(s);
+}
 function authorName(a){if(!a)return'—';if(typeof a==='string')return a;return a.display_name||a.username||'—';}
 
 async function apiFetch(path, opts={}){
@@ -615,18 +708,27 @@ function _renderUsers(){
   document.getElementById('userPrev').disabled=page<=1;
   document.getElementById('userNext').disabled=page>=total;
   const tbody=document.getElementById('usersTbody');
-  if(!items.length){tbody.innerHTML=`<tr class="empty-row"><td colspan="5">No users found</td></tr>`;return;}
-  tbody.innerHTML=items.map(u=>`
+  if(!items.length){tbody.innerHTML=`<tr class="empty-row"><td colspan="9">No users found</td></tr>`;return;}
+  tbody.innerHTML=items.map(u=>{
+    const location=[u.city,u.state].filter(Boolean).join(', ')||'—';
+    const lang=(u.preferred_language||'hindi').slice(0,4);
+    const lastSeen=fmtRelativeTime(u.last_seen_at);
+    return`
     <tr>
       <td><strong>${esc(u.username)}</strong></td>
       <td style="color:var(--muted)">${esc(u.email)}</td>
       <td><span class="badge badge-${u.role}">${u.role}</span></td>
+      <td style="color:var(--muted)" class="trunc" title="${esc(location)}">${esc(location)}</td>
+      <td style="color:var(--muted);text-transform:capitalize">${esc(lang)}</td>
+      <td style="color:var(--muted);text-align:center">${u.login_count ?? 0}</td>
+      <td style="color:var(--muted)">${lastSeen}</td>
       <td style="color:var(--muted)">${fmtDate(u.created_at)}</td>
       <td><div class="act-row">
         <button class="act-btn act-edit" onclick="openRoleModal('${u.id}','${esc(u.username)}','${u.role}')">Role</button>
         <button class="act-btn act-del" onclick="deleteUser('${u.id}','${esc(u.username)}')">Delete</button>
       </div></td>
-    </tr>`).join('');
+    </tr>`;
+  }).join('');
 }
 
 /* ───────────────────────────── COMMENTS ───────────────────────────── */
@@ -846,6 +948,115 @@ async function deleteComment(cid){
   showToast('Comment deleted','success');
 }
 
+/* ───────────────────────────── ACTIVITY ───────────────────────────── */
+async function loadActivityTab(){
+  await Promise.all([
+    loadTopPages(),
+    loadTopCategories(),
+    loadActivityLog()
+  ]);
+}
+
+async function loadTopPages(){
+  const data=await apiFetch('/api/admin/activity/top-pages?limit=10&event_type=page_view');
+  const tbody=document.getElementById('topPagesTbody');
+  const pages=(data&&data.top_pages)||[];
+  state.topPages=pages;
+  if(!pages.length){
+    tbody.innerHTML=`<tr class="empty-row"><td colspan="2">No page view data yet</td></tr>`;
+    return;
+  }
+  tbody.innerHTML=pages.map((p,i)=>`
+    <tr>
+      <td><span class="rank-num">${i+1}</span>${esc(p.page_id)}</td>
+      <td style="text-align:right;color:var(--gold);font-weight:600">${p.count.toLocaleString('en-IN')}</td>
+    </tr>`).join('');
+
+  // Update dashboard stat card with totals + top page
+  const totalViews=pages.reduce((sum,p)=>sum+p.count,0);
+  const totalEl=document.getElementById('s-pageviews');
+  const topEl=document.getElementById('s-top-page');
+  if(totalEl)totalEl.textContent=totalViews.toLocaleString('en-IN')+'+';
+  if(topEl)topEl.textContent='Top: '+(pages[0]?pages[0].page_id:'—');
+}
+
+async function loadTopCategories(){
+  const data=await apiFetch('/api/admin/activity/top-categories?limit=10');
+  const tbody=document.getElementById('topCategoriesTbody');
+  const cats=(data&&data.top_categories)||[];
+  state.topCategories=cats;
+  if(!cats.length){
+    tbody.innerHTML=`<tr class="empty-row"><td colspan="2">No category data yet</td></tr>`;
+    return;
+  }
+  tbody.innerHTML=cats.map((c,i)=>`
+    <tr>
+      <td><span class="rank-num">${i+1}</span>${esc(c.category)}</td>
+      <td style="text-align:right;color:var(--gold);font-weight:600">${c.count.toLocaleString('en-IN')}</td>
+    </tr>`).join('');
+}
+
+async function loadActivityLog(){
+  state.activityPage=1;
+  await fetchActivityPage();
+}
+
+async function fetchActivityPage(){
+  const skip=(state.activityPage-1)*PER_PAGE;
+  const eventType=document.getElementById('activityEventFilter').value;
+  const q=(document.getElementById('activitySearch').value||'').trim();
+
+  let url=`/api/admin/activity?skip=${skip}&limit=${PER_PAGE}`;
+  if(eventType)url+=`&event_type=${encodeURIComponent(eventType)}`;
+  if(q)url+=`&page_id=${encodeURIComponent(q)}`;
+
+  const data=await apiFetch(url);
+  const items=(data&&data.items)||[];
+  state.activityLog=items;
+  state.activityTotal=(data&&data.total)||0;
+  renderActivityTable();
+}
+
+function renderActivityLog(){
+  state.activityPage=1;
+  fetchActivityPage();
+}
+
+function renderActivityTable(){
+  const tbody=document.getElementById('activityTbody');
+  const totalPages=Math.ceil(state.activityTotal/PER_PAGE)||1;
+
+  document.getElementById('activityLogCount').textContent=state.activityTotal.toLocaleString('en-IN')+' total';
+  document.getElementById('activityPageInfo').textContent=`Page ${state.activityPage} of ${totalPages}`;
+  document.getElementById('activityPrev').disabled=state.activityPage<=1;
+  document.getElementById('activityNext').disabled=state.activityPage>=totalPages;
+
+  if(!state.activityLog.length){
+    tbody.innerHTML=`<tr class="empty-row"><td colspan="7">No activity found</td></tr>`;
+    return;
+  }
+
+  const eventDotMap={
+    page_view:'blue', comment:'green', like:'gold', share:'amber',
+    audio_play:'gold', time_spent:'blue', login:'green', signup:'green'
+  };
+
+  tbody.innerHTML=state.activityLog.map(a=>{
+    const dot=eventDotMap[a.event_type]||'blue';
+    const durationSuffix=a.duration?` (${a.duration}s)`:'';
+    return`
+    <tr>
+      <td style="color:var(--muted)">${esc(a.user_id?a.user_id.slice(-6):'Anon')}</td>
+      <td><span class="trunc" title="${esc(a.page_id||'—')}">${esc(a.page_id||'—')}</span></td>
+      <td><span class="act-dot ${dot}" style="display:inline-block;margin-right:6px"></span>${esc(a.event_type)}${durationSuffix}</td>
+      <td style="color:var(--muted)">${esc(a.category||'—')}</td>
+      <td style="color:var(--muted)" class="trunc" title="${esc(a.location||'')}">${esc(a.location||'—')}</td>
+      <td style="color:var(--muted)">${esc(a.device_type||'—')}</td>
+      <td style="color:var(--muted)">${fmtDateTime(a.created_at)}</td>
+    </tr>`;
+  }).join('');
+}
+
 /* ───────────────────────────── NAV ───────────────────────────── */
 function showTab(tab,el){
   currentTab=tab;
@@ -853,12 +1064,13 @@ function showTab(tab,el){
   document.getElementById('tab-'+tab).classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   if(el)el.classList.add('active');
-  const titles={dashboard:'Dashboard',users:'Manage users',comments:'Manage comments',posts:'Manage posts',articles:'Manage articles',newsletter:'Newsletter'};
+  const titles={dashboard:'Dashboard',users:'Manage users',comments:'Manage comments',posts:'Manage posts',articles:'Manage articles',newsletter:'Newsletter',activity:'User activity'};
   document.getElementById('pageTitle').textContent=titles[tab]||tab;
   closeSidebar();
   // Lazy-load articles
   if(tab==='articles'&&!state.articles.length)loadArticles();
   if(tab==='newsletter' && !state.newsletter.length) loadNewsletter();
+  if(tab==='activity' && !state.activityLog.length) loadActivityTab();
 }
 
 function refreshCurrent(){
@@ -867,6 +1079,8 @@ function refreshCurrent(){
   else if(currentTab==='comments')loadComments();
   else if(currentTab==='posts')loadPosts();
   else if(currentTab==='articles')loadArticles();
+  else if(currentTab==='newsletter')loadNewsletter();
+  else if(currentTab==='activity')loadActivityTab();
 }
 
 function handleLogout(){
@@ -888,6 +1102,7 @@ function changePage(type,dir){
   if(type==='posts'){state.postPage+=dir;_renderPosts()}
   if(type==='articles'){state.articlePage+=dir;_renderArticles()}
   if(type==='newsletter'){state.nlPage+=dir;_renderNewsletter()}
+  if(type==='activity'){state.activityPage+=dir;fetchActivityPage()}
 }
 
 /* ───────────────────────────── CURRENT USER ───────────────────────────── */
