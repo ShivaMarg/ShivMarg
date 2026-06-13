@@ -112,6 +112,16 @@
       }
       .sm-toggle-link a{color:#B39DDB;cursor:pointer;text-decoration:underline;}
 
+      .sm-forgot-link{
+        text-align:right;font-size:0.76rem;margin-top:-4px;
+        font-family:'EB Garamond',serif;
+      }
+      .sm-forgot-link a{
+        color:rgba(179,157,219,0.6);text-decoration:none;cursor:pointer;
+        transition:color .2s;
+      }
+      .sm-forgot-link a:hover{color:#B39DDB;text-decoration:underline;}
+
       /* Floating widget — only shown when noWidget is false */
       #sm-auth-widget{
         position:fixed;top:12px;right:16px;z-index:8000;
@@ -228,6 +238,22 @@
   const FETCH_TIMEOUT = 40000;
   const RETRY_DELAY   = 3000;
 
+  /* ─── ACTIVITY TRACKING ─── */
+  // Fire-and-forget event logger. Works for logged-in (adds Bearer token)
+  // and anonymous users (no token). Never blocks or throws to the caller.
+  function trackActivity({ page_id, event_type, category, duration, meta }) {
+    if (!page_id || !event_type) return;
+    const headers = { 'Content-Type': 'application/json' };
+    if (_token) headers['Authorization'] = 'Bearer ' + _token;
+
+    fetch(API_BASE + '/api/activity/track', {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ page_id, event_type, category, duration, meta }),
+      keepalive: true, // survives page unload (useful for time_spent)
+    }).catch(() => { /* best-effort, ignore failures */ });
+  }
+
   async function apiPost(path, body, attempt = 0) {
     const controller = new AbortController();
     const timeoutId  = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
@@ -292,6 +318,7 @@
           <div class="sm-or-divider">या</div>
           <input type="email"    id="sm-l-email" placeholder="ईमेल पता"  autocomplete="email">
           <input type="password" id="sm-l-pass"  placeholder="पासवर्ड"   autocomplete="current-password">
+          <div class="sm-forgot-link"><a href="/reset-password/">पासवर्ड भूल गए?</a></div>
           <div class="sm-error" id="sm-l-error"></div>
           <button class="sm-submit-btn" id="sm-l-btn" onclick="SmAuth._doLogin()">
             <span>🔱 लॉगिन करें</span>
@@ -412,7 +439,10 @@
     if (pass.length < 6) { errEl.textContent = 'पासवर्ड कम से कम 6 अक्षरों का हो।'; return; }
     btn.disabled = true; errEl.textContent = '';
     try {
-      const data = await apiPost('/api/auth/register', { username, email, password: pass });
+      const data = await apiPost('/api/auth/register', {
+        username, email, password: pass,
+        signup_page: window.location.pathname,
+      });
       saveSession(data.token, data.user);
       _closeModal();
       renderWidget();
@@ -454,7 +484,10 @@
         client_id: GOOGLE_CLIENT_ID,
         callback: async (response) => {
           try {
-            const data = await apiPost('/api/auth/google', { id_token: response.credential });
+            const data = await apiPost('/api/auth/google', {
+              id_token: response.credential,
+              signup_page: window.location.pathname,
+            });
             saveSession(data.token, data.user);
             _closeModal();
             renderWidget();
@@ -523,6 +556,7 @@
       return false;
     },
     getAvatarBg,
+    trackActivity,
     _openModal, _closeModal, _switchTab, _doLogin, _doRegister,_doGoogleAuth,
   };
 })();
