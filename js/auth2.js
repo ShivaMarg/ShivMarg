@@ -420,6 +420,7 @@
       _closeModal();
       renderWidget();
       toast('🙏 जय शिव! स्वागत है, ' + data.user.username);
+      if (window.ShivaMargStreak) ShivaMargStreak.onLogin(); 
     } catch (e) {
       errEl.textContent = e.message;
     } finally {
@@ -447,6 +448,7 @@
       _closeModal();
       renderWidget();
       toast('🌸 खाता बन गया! जय महादेव, ' + data.user.username);
+      if (window.ShivaMargStreak) ShivaMargStreak.onLogin(); 
     } catch (e) {
       errEl.textContent = e.message;
     } finally {
@@ -495,6 +497,7 @@
               ? '🌸 खाता बन गया! जय महादेव, ' + data.user.username
               : '🙏 जय शिव! स्वागत है, ' + data.user.username
             );
+            if (window.ShivaMargStreak) ShivaMargStreak.onLogin();
           } catch (e) {
             // Show error in whichever tab is active
             const isLogin = document.getElementById('sm-login-form').style.display !== 'none';
