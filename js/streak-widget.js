@@ -13,7 +13,7 @@
 (function () {
   "use strict";
 
-  const API_BASE        = "https://api.shivmarg.live"; // ← change if needed
+  const API_BASE        = "https://www.api.shivmarg.live"; // ← change if needed
   const TOKEN_KEY       = "sm_streak_token";           // localStorage key for anon token
   const LAST_PING_KEY   = "sm_last_ping_date";         // avoid double-pinging same day
 
