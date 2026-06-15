@@ -6,6 +6,13 @@
 (function () {
   'use strict';
 
+  if (!document.querySelector('script[src="/js/pwa.js"]')) {
+    const pwaScript = document.createElement('script');
+    pwaScript.src = '/js/pwa.js';
+    pwaScript.defer = true;
+    document.head.appendChild(pwaScript);
+  }
+
   const NAV_HTML = `
 <nav id="sm-navbar">
   <div class="nav-container">

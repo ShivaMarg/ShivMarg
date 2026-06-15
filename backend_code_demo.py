@@ -18,12 +18,17 @@ from passlib.context import CryptContext
 from jose import JWTError, jwt
 from datetime import datetime, timedelta
 from typing import Optional, List
+import json
 import os
 import re
 import uvicorn
 
 # ── CHANGE 2: Import the welcome email utility ────────────────────────────────
-from email_utils import send_welcome_email
+try:
+    from email_utils import send_welcome_email
+except ImportError:
+    def send_welcome_email(**kwargs):
+        print("Welcome email skipped: email_utils.py is not installed")
 
 # ─────────────────────────────────────────────
 #  CONFIG
@@ -59,6 +64,7 @@ comments_col        = db["comments"]
 vidyapati_posts_col = db["VidyapatiGeetSangrah"]
 articles_col        = db["articles"]
 authors_col         = db["authors"]
+notification_tokens_col = db["notification_tokens"]
 
 # ── Indexes ────────────────────────────────────
 users_col.create_index("email",    unique=True)
@@ -82,6 +88,8 @@ authors_col.create_index("slug",     unique=True)
 authors_col.create_index("username", unique=True)
 authors_col.create_index([("followers_count", DESCENDING)])
 authors_col.create_index("categories")
+notification_tokens_col.create_index("token", unique=True)
+notification_tokens_col.create_index("updated_at")
 
 # ─────────────────────────────────────────────
 #  PASSWORD + JWT
@@ -419,6 +427,15 @@ class ActivityInput(BaseModel):
     title:       str = Field(..., min_length=1, max_length=255)
     description: str = Field(..., min_length=1)
     date:        str
+
+class NotificationTokenInput(BaseModel):
+    token:    str = Field(..., min_length=20, max_length=4096)
+    platform: Optional[str] = Field("web", max_length=100)
+
+class NotificationSendInput(BaseModel):
+    title: str = Field(..., min_length=1, max_length=100)
+    body:  str = Field(..., min_length=1, max_length=300)
+    url:   str = Field("/", max_length=500)
 
 # ─────────────────────────────────────────────
 #  AUTH ROUTES
@@ -1349,6 +1366,114 @@ def toggle_follow(slug: str, current_user=Depends(require_user)):
 # ─────────────────────────────────────────────
 #  ADMIN DASHBOARD ROUTES
 # ─────────────────────────────────────────────
+def get_firebase_messaging():
+    try:
+        import firebase_admin
+        from firebase_admin import credentials, messaging
+    except ImportError:
+        raise HTTPException(503, "firebase-admin is not installed")
+
+    try:
+        firebase_admin.get_app()
+    except ValueError:
+        service_account_json = os.getenv("FIREBASE_SERVICE_ACCOUNT_JSON")
+        if service_account_json:
+            try:
+                service_account = json.loads(service_account_json)
+                firebase_admin.initialize_app(credentials.Certificate(service_account))
+            except (ValueError, TypeError, json.JSONDecodeError) as exc:
+                raise HTTPException(503, f"Invalid FIREBASE_SERVICE_ACCOUNT_JSON: {exc}")
+        else:
+            try:
+                firebase_admin.initialize_app()
+            except Exception:
+                raise HTTPException(
+                    503,
+                    "Firebase credentials are not configured. Set FIREBASE_SERVICE_ACCOUNT_JSON "
+                    "or GOOGLE_APPLICATION_CREDENTIALS.",
+                )
+    return messaging
+
+@app.post("/api/notifications/token")
+def save_notification_token(
+    body: NotificationTokenInput,
+    request: Request,
+    current_user=Depends(get_current_user),
+):
+    now = datetime.utcnow()
+    notification_tokens_col.update_one(
+        {"token": body.token},
+        {
+            "$set": {
+                "platform": body.platform or "web",
+                "user_id": str(current_user["_id"]) if current_user else None,
+                "user_agent": request.headers.get("user-agent", "")[:500],
+                "updated_at": now,
+                "active": True,
+            },
+            "$setOnInsert": {"created_at": now},
+        },
+        upsert=True,
+    )
+    return {"status": "saved"}
+
+@app.delete("/api/notifications/token")
+def delete_notification_token(body: NotificationTokenInput):
+    notification_tokens_col.delete_one({"token": body.token})
+    return {"status": "deleted"}
+
+@app.post("/api/admin/notifications/send")
+def send_push_notification(
+    body: NotificationSendInput,
+    current_user=Depends(require_super_admin),
+):
+    if not (body.url.startswith("/") or body.url.startswith("https://")):
+        raise HTTPException(400, "URL must start with / or https://")
+
+    messaging = get_firebase_messaging()
+    tokens = [
+        doc["token"]
+        for doc in notification_tokens_col.find({"active": True}, {"token": 1})
+        if doc.get("token")
+    ]
+    if not tokens:
+        return {"success": 0, "failed": 0, "removed": 0, "total": 0}
+
+    click_url = body.url if body.url.startswith("https://") else f"https://shivmarg.live{body.url}"
+    success = failed = 0
+    invalid_tokens = []
+
+    for start in range(0, len(tokens), 500):
+        chunk = tokens[start:start + 500]
+        message = messaging.MulticastMessage(
+            tokens=chunk,
+            data={"title": body.title, "body": body.body, "url": click_url},
+            webpush=messaging.WebpushConfig(
+                headers={"Urgency": "high"},
+                fcm_options=messaging.WebpushFCMOptions(link=click_url),
+            ),
+        )
+        response = messaging.send_each_for_multicast(message)
+        success += response.success_count
+        failed += response.failure_count
+        for token, item in zip(chunk, response.responses):
+            if item.success:
+                continue
+            error_text = str(item.exception).lower()
+            if "registration-token-not-registered" in error_text or "invalid-registration-token" in error_text:
+                invalid_tokens.append(token)
+
+    if invalid_tokens:
+        notification_tokens_col.delete_many({"token": {"$in": invalid_tokens}})
+
+    return {
+        "success": success,
+        "failed": failed,
+        "removed": len(invalid_tokens),
+        "total": len(tokens),
+        "sent_by": str(current_user["_id"]),
+    }
+
 @app.get("/api/admin/dashboard/stats")
 def get_dashboard_stats(current_user=Depends(require_admin)):
     try:

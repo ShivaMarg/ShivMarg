@@ -246,6 +246,7 @@
       <div class="nav-item" onclick="showTab('posts',this)"><i class="ti ti-article"></i> Posts</div>
       <div class="nav-item" onclick="showTab('articles',this)"><i class="ti ti-file-text"></i> Articles</div>
       <div class="nav-item" onclick="showTab('newsletter',this)"><i class="ti ti-mail"></i> Newsletter</div>
+      <div class="nav-item" onclick="showTab('notifications',this)"><i class="ti ti-bell"></i> Notifications</div>
       <div class="nav-item" onclick="showTab('activity',this)"><i class="ti ti-activity"></i> Activity</div>
     </nav>
     <div class="nav-divider"></div>
@@ -449,6 +450,31 @@
           <button class="pag-btn" id="nlPrev" onclick="changePage('newsletter',-1)" disabled>← Prev</button>
           <span class="pag-info" id="nlPageInfo">Page 1</span>
           <button class="pag-btn" id="nlNext" onclick="changePage('newsletter',1)">Next →</button>
+        </div>
+      </div>
+
+      <!-- NOTIFICATIONS TAB -->
+      <div id="tab-notifications" class="tab-pane">
+        <div class="section-head">
+          <div class="section-title">Send push notification</div>
+        </div>
+        <div class="tbl-wrap" style="padding:22px;max-width:680px">
+          <div class="form-row">
+            <label for="pushTitle">Title</label>
+            <input id="pushTitle" type="text" maxlength="100" value="New Shiv Article">
+          </div>
+          <div class="form-row">
+            <label for="pushBody">Message</label>
+            <textarea id="pushBody" maxlength="300" placeholder="Read today's Shiva wisdom."></textarea>
+          </div>
+          <div class="form-row">
+            <label for="pushUrl">Open URL</label>
+            <input id="pushUrl" type="text" maxlength="500" value="/">
+          </div>
+          <button class="btn-save" id="sendPushBtn" onclick="sendPushNotification()">
+            <i class="ti ti-send"></i> Send to all subscribers
+          </button>
+          <div id="pushResult" style="margin-top:14px;color:var(--muted);font-size:.83rem"></div>
         </div>
       </div>
 
@@ -1068,7 +1094,7 @@ function showTab(tab,el){
   document.getElementById('tab-'+tab).classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   if(el)el.classList.add('active');
-  const titles={dashboard:'Dashboard',users:'Manage users',comments:'Manage comments',posts:'Manage posts',articles:'Manage articles',newsletter:'Newsletter',activity:'User activity'};
+  const titles={dashboard:'Dashboard',users:'Manage users',comments:'Manage comments',posts:'Manage posts',articles:'Manage articles',newsletter:'Newsletter',notifications:'Push notifications',activity:'User activity'};
   document.getElementById('pageTitle').textContent=titles[tab]||tab;
   closeSidebar();
   // Lazy-load articles
@@ -1085,6 +1111,31 @@ function refreshCurrent(){
   else if(currentTab==='articles')loadArticles();
   else if(currentTab==='newsletter')loadNewsletter();
   else if(currentTab==='activity')loadActivityTab();
+}
+
+async function sendPushNotification(){
+  const title=document.getElementById('pushTitle').value.trim();
+  const body=document.getElementById('pushBody').value.trim();
+  const url=document.getElementById('pushUrl').value.trim()||'/';
+  const button=document.getElementById('sendPushBtn');
+  const result=document.getElementById('pushResult');
+  if(!title||!body){showToast('Title and message are required','error');return}
+  if(!confirm(`Send this notification to all subscribed devices?\n\n${title}\n${body}`))return;
+
+  button.disabled=true;
+  result.textContent='Sending...';
+  const data=await apiFetch('/api/admin/notifications/send',{
+    method:'POST',
+    body:JSON.stringify({title,body,url})
+  });
+  button.disabled=false;
+  if(!data){
+    result.textContent='Send failed. Check Firebase credentials and admin permissions.';
+    showToast('Notification send failed','error');
+    return;
+  }
+  result.textContent=`Delivered: ${data.success} · Failed: ${data.failed} · Removed stale tokens: ${data.removed}`;
+  showToast(`Sent to ${data.success} device(s)`,'success');
 }
 
 function handleLogout(){

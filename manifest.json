@@ -1,20 +1,27 @@
 {
-  "name": "ShivMarg",
+  "id": "/",
+  "name": "ShivMarg - Sanatan Dharma and Shiva Mantras",
   "short_name": "ShivMarg",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#07051a",
   "theme_color": "#ff6f00",
+  "description": "Shiva mantras, stotras, aartis and Sanatan Dharma articles.",
   "icons": [
     {
-      "src": "/images/shivmarg_logo.png",
+      "src": "/images/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "/images/shivmarg_logo.png",
+      "src": "/images/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
-  ]
+  ],
+  "categories": ["education", "lifestyle"],
+  "lang": "en-IN"
 }
