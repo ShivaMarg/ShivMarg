@@ -293,5 +293,6 @@
   const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*40);obs.unobserve(e.target);}});},{threshold:0.07});
   revEls.forEach(el=>obs.observe(el));
 </script>
+<script src=" js/chatbot.js"></script>
 </body>
 </html>
