@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>पृष्ठ नहीं मिला (404) - ShivMarg</title>
+<meta name="description" content="यह पृष्ठ उपलब्ध नहीं है। ShivMarg पर शिव मंत्र, हनुमान चालीसा, पंचांग और मैथिली सामग्री खोजें।">
+<meta name="robots" content="noindex,follow">
+
+<!-- Use your real site stylesheet so navbar/footer match exactly -->
+<link rel="stylesheet" href="/css/style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+
+<style>
+  /* ============================================
+     404 PAGE — scoped to .nf-* so it never clashes
+     with your existing site styles. Colors mirror
+     the ShivMarg "devotional light" palette —
+     adjust the variables below if your style.css
+     already defines these tokens globally.
+  ============================================ */
+  :root{
+    --nf-cream:        #FBF6EC;
+    --nf-cream-deep:   #F3E9D7;
+    --nf-saffron:      #FF9933;
+    --nf-gold:         #C9971C;
+    --nf-maroon:       #7A1F2B;
+    --nf-maroon-deep:  #59141D;
+    --nf-text:         #3D2B1F;
+    --nf-text-muted:   #8A7158;
+    --nf-border:       #E6D7BC;
+  }
+
+  .nf-wrap{
+    background: var(--nf-cream);
+    color: var(--nf-text);
+    font-family: 'Tiro Devanagari Hindi', 'Noto Sans Devanagari', serif;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 64px 20px 80px;
+  }
+
+  /* ---- Signature element: a flickering diya, the
+     light that helps a wanderer find the path again ---- */
+  .nf-diya{ width: 86px; height: auto; margin-bottom: 18px; }
+  .nf-flame{
+    transform-origin: 50% 100%;
+    animation: nf-flicker 2.4s ease-in-out infinite;
+  }
+  @keyframes nf-flicker{
+    0%, 100% { transform: scaleY(1) rotate(0deg); opacity: 1; }
+    25%      { transform: scaleY(1.06) rotate(-2deg); opacity: .92; }
+    50%      { transform: scaleY(0.94) rotate(1.5deg); opacity: 1; }
+    75%      { transform: scaleY(1.04) rotate(-1deg); opacity: .95; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .nf-flame{ animation: none; }
+  }
+
+  .nf-eyebrow{
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--nf-gold);
+    margin: 0 0 10px;
+  }
+
+  .nf-title{
+    font-family: 'Tiro Devanagari Hindi', serif;
+    font-size: clamp(28px, 5vw, 42px);
+    color: var(--nf-maroon);
+    margin: 0 0 14px;
+    line-height: 1.25;
+  }
+
+  .nf-sub{
+    max-width: 520px;
+    color: var(--nf-text-muted);
+    font-size: 16px;
+    line-height: 1.7;
+    margin: 0 0 30px;
+  }
+  .nf-sub .nf-path{
+    display: inline-block;
+    background: var(--nf-cream-deep);
+    border: 1px solid var(--nf-border);
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-family: monospace;
+    color: var(--nf-maroon-deep);
+    word-break: break-all;
+  }
+
+  /* ---- Search ---- */
+  .nf-search{
+    width: 100%;
+    max-width: 460px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border: 1.5px solid var(--nf-border);
+    border-radius: 999px;
+    padding: 6px 8px 6px 18px;
+    margin-bottom: 8px;
+  }
+  .nf-search input{
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--nf-text);
+    padding: 8px 0;
+  }
+  .nf-search input::placeholder{ color: #B7A488; }
+  .nf-search button{
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--nf-saffron), var(--nf-maroon));
+    color: #fff;
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: .04em;
+    border-radius: 999px;
+    padding: 10px 20px;
+    transition: opacity .2s ease;
+  }
+  .nf-search button:hover{ opacity: .88; }
+
+  .nf-suggestion{
+    min-height: 22px;
+    font-size: 14px;
+    color: var(--nf-maroon-deep);
+    margin: 10px 0 36px;
+  }
+  .nf-suggestion a{ color: var(--nf-maroon); font-weight: 600; text-decoration: underline; }
+
+  /* ---- Popular pages ---- */
+  .nf-popular-label{
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--nf-text-muted);
+    margin: 0 0 16px;
+  }
+  .nf-grid{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    max-width: 640px;
+    margin-bottom: 40px;
+  }
+  .nf-card{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--nf-cream-deep);
+    border: 1px solid var(--nf-border);
+    border-radius: 12px;
+    padding: 12px 18px;
+    color: var(--nf-maroon-deep);
+    text-decoration: none;
+    font-size: 15px;
+    transition: transform .15s ease, border-color .15s ease;
+  }
+  .nf-card:hover{
+    transform: translateY(-2px);
+    border-color: var(--nf-gold);
+  }
+  .nf-card .nf-icon{ font-size: 18px; }
+
+  /* ---- Home button ---- */
+  .nf-home-btn{
+    display: inline-block;
+    background: linear-gradient(135deg, var(--nf-maroon), var(--nf-maroon-deep));
+    color: #fff;
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    letter-spacing: .05em;
+    text-decoration: none;
+    padding: 14px 34px;
+    border-radius: 999px;
+    box-shadow: 0 6px 18px rgba(122,31,43,.25);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .nf-home-btn:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(122,31,43,.32);
+  }
+
+  @media (max-width: 480px){
+    .nf-search{ flex-wrap: wrap; border-radius: 18px; }
+    .nf-search button{ width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     Paste / include your normal site navbar here
+     (the same markup nav.js renders, or a static
+     include) so the user still feels on ShivMarg.
+============================================ -->
+<header id="site-navbar">
+  <!-- navbar markup / nav.js mount point -->
+</header>
+
+<main class="nf-wrap">
+
+  <svg class="nf-diya" viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="62" rx="38" ry="10" fill="#C9971C" opacity="0.25"/>
+    <path d="M14 50 Q50 78 86 50 Q86 66 50 70 Q14 66 14 50Z" fill="#7A1F2B"/>
+    <path d="M14 50 Q50 60 86 50 Q50 44 14 50Z" fill="#9A2E3C"/>
+    <ellipse cx="50" cy="50" rx="6" ry="3" fill="#FFE9B8"/>
+    <g class="nf-flame">
+      <path d="M50 16 C42 28 40 36 50 46 C60 36 58 28 50 16Z" fill="#FF9933"/>
+      <path d="M50 26 C46 33 45 38 50 44 C55 38 54 33 50 26Z" fill="#FFD27A"/>
+    </g>
+  </svg>
+
+  <p class="nf-eyebrow">त्रुटि 404</p>
+  <h1 class="nf-title">404 - पथ नहीं मिला</h1>
+  <p class="nf-sub">
+    जिस मार्ग की आप तलाश कर रहे हैं वह <span class="nf-path" id="nf-current-path"></span> अभी उपलब्ध नहीं है
+    या स्थानांतरित हो चुका है। नीचे खोजें या लोकप्रिय पृष्ठों पर जाएं।
+  </p>
+
+  <form class="nf-search" id="nf-search-form" role="search">
+    <input type="text" id="nf-search-input" placeholder="मंत्र, आरती, लेख खोजें...">
+    <button type="submit">खोजें</button>
+  </form>
+  <p class="nf-suggestion" id="nf-suggestion"></p>
+
+  <p class="nf-popular-label">लोकप्रिय पृष्ठ</p>
+  <div class="nf-grid">
+    <a class="nf-card" href="/"><span class="nf-icon">🏠</span>होम</a>
+    <a class="nf-card" href="/shiva-mantras"><span class="nf-icon">🔱</span>शिव मंत्र</a>
+    <a class="nf-card" href="/hanuman-mantras"><span class="nf-icon">🚩</span>हनुमान मंत्र</a>
+    <a class="nf-card" href="/mahamrityunjaya-mantra"><span class="nf-icon">🕉️</span>महामृत्युंजय मंत्र</a>
+    <a class="nf-card" href="/hanuman-chalisa"><span class="nf-icon">📿</span>हनुमान चालीसा</a>
+    <a class="nf-card" href="/panchang"><span class="nf-icon">🗓️</span>पंचांग</a>
+    <a class="nf-card" href="/articles"><span class="nf-icon">📚</span>लेख</a>
+  </div>
+
+  <a class="nf-home-btn" href="/">होम पर जाएं</a>
+
+</main>
+
+<!-- ============================================
+     Paste / include your normal site footer here
+============================================ -->
+<footer id="site-footer">
+  <!-- footer markup -->
+</footer>
+
+<script>
+(function(){
+  // Show the path the user actually hit, for context
+  var pathEl = document.getElementById('nf-current-path');
+  if (pathEl) pathEl.textContent = window.location.pathname;
+
+  // ---- Known good slugs. Keep this list short and high-value;
+  // it doesn't need to be exhaustive, just your top pages. ----
+  var KNOWN_PAGES = [
+    "/shiva-mantras",
+    "/hanuman-mantras",
+    "/durga-mantras",
+    "/vishnu-mantras",
+    "/ganesh-mantras",
+    "/mahamrityunjaya-mantra",
+    "/hanuman-chalisa",
+    "/panchang",
+    "/maithili-panchang",
+    "/articles"
+  ];
+
+  // Cheap Levenshtein distance, good enough for short slugs
+  function distance(a, b){
+    var m = a.length, n = b.length;
+    var dp = [];
+    for (var i = 0; i <= m; i++){ dp[i] = [i]; }
+    for (var j = 0; j <= n; j++){ dp[0][j] = j; }
+    for (i = 1; i <= m; i++){
+      for (j = 1; j <= n; j++){
+        var cost = a[i-1] === b[j-1] ? 0 : 1;
+        dp[i][j] = Math.min(
+          dp[i-1][j] + 1,
+          dp[i][j-1] + 1,
+          dp[i-1][j-1] + cost
+        );
+      }
+    }
+    return dp[m][n];
+  }
+
+  function suggestForPath(path){
+    var clean = path.replace(/^\/|\/$/g, '').toLowerCase();
+    if (!clean) return null;
+
+    var best = null, bestScore = Infinity;
+    KNOWN_PAGES.forEach(function(p){
+      var slug = p.replace(/^\//, '').toLowerCase();
+      var d = distance(clean, slug);
+      // Also reward simple substring / shared-prefix matches
+      if (slug.indexOf(clean.split('-')[0]) !== -1) d -= 1;
+      if (d < bestScore){ bestScore = d; best = p; }
+    });
+
+    // Only suggest if it's a plausible typo, not a wild guess
+    var threshold = Math.max(3, Math.floor(clean.length * 0.4));
+    return bestScore <= threshold ? best : null;
+  }
+
+  var suggestionEl = document.getElementById('nf-suggestion');
+  var suggestion = suggestForPath(window.location.pathname);
+  if (suggestion && suggestionEl){
+    suggestionEl.innerHTML = 'क्या आप <a href="' + suggestion + '">' + suggestion + '</a> ढूंढ रहे थे?';
+  }
+
+  // ---- Search submit. Point this at your real search route. ----
+  var form = document.getElementById('nf-search-form');
+  if (form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var q = document.getElementById('nf-search-input').value.trim();
+      if (q) window.location.href = '/search?q=' + encodeURIComponent(q);
+    });
+  }
+})();
+</script>
+<script src="/js/nav.js" defer></script>
+</body>
+</html>
