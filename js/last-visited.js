@@ -34,7 +34,8 @@
       image: null,
       expireAfterDays: 30,
       excludePaths: [],
-      storageKey: "lv_last_page"
+      storageKey: "lv_last_page",
+      debug: false
     },
     window.LAST_VISITED_CONFIG || {}
   );
@@ -84,11 +85,27 @@
     }
   }
 
+  function normalizeHost(host) {
+    return (host || "").replace(/^www\./, "").toLowerCase();
+  }
+
   function cameFromSameSite() {
-    if (!document.referrer) return false; // no referrer = direct visit, new tab, bookmark, etc.
+    if (!document.referrer) {
+      if (cfg.debug) console.log("[last-visited] no referrer -> treated as fresh visit");
+      return false; // no referrer = direct visit, new tab, bookmark, etc.
+    }
     try {
-      var refOrigin = new URL(document.referrer).origin;
-      return refOrigin === window.location.origin;
+      var refHost = normalizeHost(new URL(document.referrer).hostname);
+      var curHost = normalizeHost(window.location.hostname);
+      var same = refHost === curHost;
+      if (cfg.debug) {
+        console.log(
+          "[last-visited] referrer host:", refHost,
+          "| current host:", curHost,
+          "| same site:", same
+        );
+      }
+      return same;
     } catch (e) {
       return false;
     }
@@ -114,13 +131,26 @@
   }
 
   function shouldShowPopup(stored, isNewSess) {
-    if (!stored) return false;
-    if (!isNewSess) return false; // same tab/session, just navigating -> don't show
-    if (stored.path === window.location.pathname) return false; // already on that page
+    if (!stored) {
+      if (cfg.debug) console.log("[last-visited] no stored page -> skip");
+      return false;
+    }
+    if (!isNewSess) {
+      if (cfg.debug) console.log("[last-visited] same session/internal nav -> skip");
+      return false;
+    }
+    if (stored.path === window.location.pathname) {
+      if (cfg.debug) console.log("[last-visited] stored path same as current -> skip");
+      return false;
+    }
 
     var ageMs = Date.now() - stored.timestamp;
     var maxMs = cfg.expireAfterDays * 24 * 60 * 60 * 1000;
-    if (ageMs > maxMs) return false; // too old, forget it
+    if (ageMs > maxMs) {
+      if (cfg.debug) console.log("[last-visited] stored page too old -> skip");
+      return false;
+    }
+    if (cfg.debug) console.log("[last-visited] showing popup for:", stored.url);
     return true;
   }
 
@@ -167,9 +197,12 @@
   }
 
   function escapeHtml(str) {
-    var div = document.createElement("div");
-    div.textContent = str || "";
-    return div.innerHTML;
+    return String(str || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
   }
 
   function showPopup(data) {
