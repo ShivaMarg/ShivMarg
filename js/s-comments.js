@@ -404,7 +404,7 @@
         </div>
 
         ${comments.length < total
-          ? `<div class="sm-load-more"><button class="sm-load-btn" onclick="SmComments._loadMore()">और टिप्पणियाँ देखें (${total - comments.length} और)</button></div>`
+          ? `<div class="sm-load-more"><button type="button" class="sm-load-btn" onclick="SmComments._loadMore()">और टिप्पणियाँ देखें (${total - comments.length} और)</button></div>`
           : ''}
       </div>`;
 
@@ -432,12 +432,12 @@
       // User is logged in - show avatar, username, and submit button
       avatarHTML = `<div class="sm-c-avatar" style="display:flex;align-items:center;justify-content:center;overflow:hidden">${renderAvatarHTML(user)}</div>`;
       usernameHTML = `<span style="font-family:'Cinzel',serif;font-size:0.65rem;color:#B39DDB;letter-spacing:1px;">${user.username}</span>`;
-      submitButton = `<button class="sm-post-btn" id="sm-post-btn" onclick="SmComments._submit()">
+      submitButton = `<button type="button" class="sm-post-btn" id="sm-post-btn" onclick="SmComments._submit()">
         <span>🙏 टिप्पणी भेजें</span>
       </button>`;
     } else {
       // User is not logged in - show login button instead of submit
-      submitButton = `<button class="sm-login-prompt-btn" onclick="SmAuth.requireLogin()">
+      submitButton = `<button type="button" class="sm-login-prompt-btn" onclick="SmAuth.requireLogin()">
         🔱 लॉगिन / खाता बनाएँ
       </button>
       <span class="sm-login-helper">✦ टिप्पणी के लिए लॉगिन करें ✦</span>`;
@@ -477,17 +477,17 @@
           </div>
           <div class="sm-c-actions">
             <!-- Like -->
-            <button class="sm-action-btn like ${c.liked_by_me ? 'liked' : ''}"
+            <button type="button" class="sm-action-btn like ${c.liked_by_me ? 'liked' : ''}"
               onclick="SmComments._like('${c.id}')">
               ${c.liked_by_me ? '❤️' : '🤍'} ${c.likes}
             </button>
             <!-- Edit / Delete (own) -->
             ${isOwn && !isEditing ? `
-              <button class="sm-action-btn" onclick="SmComments._startEdit('${c.id}')">✏️</button>
-              <button class="sm-action-btn del" onclick="SmComments._delete('${c.id}')">🗑️</button>
+              <button type="button" class="sm-action-btn" onclick="SmComments._startEdit('${c.id}')">✏️</button>
+              <button type="button" class="sm-action-btn del" onclick="SmComments._delete('${c.id}')">🗑️</button>
             ` : ''}
             ${isEditing ? `
-              <button class="sm-action-btn" onclick="SmComments._cancelEdit()">✕ रद्द</button>
+              <button type="button" class="sm-action-btn" onclick="SmComments._cancelEdit()">✕ रद्द</button>
             ` : ''}
           </div>
         </div>
@@ -495,7 +495,7 @@
         ${isEditing
           ? `<textarea class="sm-edit-area" id="sm-edit-${c.id}" maxlength="1000">${escapeHtml(c.text)}</textarea>
              <div class="sm-edit-row">
-               <button class="sm-action-btn save-btn" onclick="SmComments._saveEdit('${c.id}')">💾 सहेजें</button>
+               <button type="button" class="sm-action-btn save-btn" onclick="SmComments._saveEdit('${c.id}')">💾 सहेजें</button>
              </div>`
           : `<div class="sm-c-text">${escapeHtml(c.text)}</div>`
         }
