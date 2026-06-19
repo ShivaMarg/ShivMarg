@@ -84,7 +84,25 @@
     }
   }
 
+  function cameFromSameSite() {
+    if (!document.referrer) return false; // no referrer = direct visit, new tab, bookmark, etc.
+    try {
+      var refOrigin = new URL(document.referrer).origin;
+      return refOrigin === window.location.origin;
+    } catch (e) {
+      return false;
+    }
+  }
+
   function isNewSession() {
+    // If the browser says we navigated here FROM another page on this
+    // same site, this is definitely just routing -> not a fresh visit.
+    if (cameFromSameSite()) {
+      try {
+        sessionStorage.setItem(SESSION_FLAG, "1");
+      } catch (e) {}
+      return false;
+    }
     try {
       if (sessionStorage.getItem(SESSION_FLAG)) return false;
       sessionStorage.setItem(SESSION_FLAG, "1");
