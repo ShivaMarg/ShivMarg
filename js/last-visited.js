@@ -11,13 +11,19 @@
  *   <script>
  *     window.LAST_VISITED_CONFIG = {
  *       image: "/images/custom-thumb.jpg", // overrides auto og:image detection
- *       minSecondsBetweenVisits: 5,         // don't show if user just refreshed (default 5s)
  *       expireAfterDays: 30,                // forget after N days of inactivity (default 30)
  *       excludePaths: ["/login", "/checkout"], // never store/show these paths
  *       storageKey: "lv_last_page"          // localStorage key
  *     };
  *   </script>
  *   <script src="/js/last-visited.js"></script>
+ *
+ * Behavior:
+ *   - Navigating between pages within the SAME tab/session: no popup,
+ *     just silently records the page (using sessionStorage as the flag).
+ *   - Closing the tab/browser and coming back later (new session) to
+ *     ANY page on the site: shows the "continue where you left off" card
+ *     pointing to whatever page they were last on.
  * --------------------------------------------------------
  */
 (function () {
@@ -26,7 +32,6 @@
   var cfg = Object.assign(
     {
       image: null,
-      minSecondsBetweenVisits: 5,
       expireAfterDays: 30,
       excludePaths: [],
       storageKey: "lv_last_page"
@@ -35,6 +40,7 @@
   );
 
   var STORAGE_KEY = cfg.storageKey;
+  var SESSION_FLAG = STORAGE_KEY + "_session_active";
 
   function getCurrentPageData() {
     var img = cfg.image;
@@ -78,15 +84,24 @@
     }
   }
 
-  function shouldShowPopup(stored) {
+  function isNewSession() {
+    try {
+      if (sessionStorage.getItem(SESSION_FLAG)) return false;
+      sessionStorage.setItem(SESSION_FLAG, "1");
+      return true;
+    } catch (e) {
+      // sessionStorage unavailable -> fall back to always showing
+      return true;
+    }
+  }
+
+  function shouldShowPopup(stored, isNewSess) {
     if (!stored) return false;
-    if (stored.path === window.location.pathname) return false; // same page, skip
+    if (!isNewSess) return false; // same tab/session, just navigating -> don't show
+    if (stored.path === window.location.pathname) return false; // already on that page
 
     var ageMs = Date.now() - stored.timestamp;
-    var minMs = cfg.minSecondsBetweenVisits * 1000;
     var maxMs = cfg.expireAfterDays * 24 * 60 * 60 * 1000;
-
-    if (ageMs < minMs) return false; // too soon, likely same session reload
     if (ageMs > maxMs) return false; // too old, forget it
     return true;
   }
@@ -203,14 +218,15 @@
 
   function init() {
     var stored = getStoredPage();
-    if (shouldShowPopup(stored)) {
+    var isNewSess = isNewSession();
+    if (shouldShowPopup(stored, isNewSess)) {
       // wait a tick so it doesn't fight with page's own load animations
       setTimeout(function () {
         showPopup(stored);
       }, 600);
     }
     // Always update storage to the page being viewed right now,
-    // so the *next* visit shows this one.
+    // so the *next* fresh session shows this one.
     saveCurrentPage();
   }
 
