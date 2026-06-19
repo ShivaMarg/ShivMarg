@@ -48,7 +48,7 @@
       var metaImg =
         document.querySelector('meta[property="og:image"]') ||
         document.querySelector('meta[name="og:image"]') ||
-        document.querySelector('meta[name="twitter:image"]');
+        document.querySelector('meta[name="twitter:image"]') || '/images/ShivMarg.png';
       img = metaImg ? metaImg.getAttribute("content") : null;
     }
     return {
