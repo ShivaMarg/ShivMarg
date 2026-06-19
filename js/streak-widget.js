@@ -210,7 +210,7 @@
       /* small dot indicator that persists on page (bottom-right) */
       #sm-streak-dot {
         position: fixed;
-        bottom: 100px; /* moved up a bit from 24px — tweak to taste */
+        bottom: 130px;                 /* moved up a bit from 24px — tweak to taste */
         right: 24px;
         z-index: 9998;
         background: linear-gradient(135deg, #1e0d04, #3d1a08);
