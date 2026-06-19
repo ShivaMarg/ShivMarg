@@ -1994,6 +1994,52 @@ mantra for wealth
   100% { background-position: 200% 0; }
 }
 
+#recent-visits-section {
+  position: relative;
+  z-index: 10;
+  max-width: 1280px;
+  margin: 18px auto 0;
+  padding: 0 24px;
+  display: none;
+}
+#recent-visits-section.has-items { display: block; }
+.rv-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.rv-label {
+  font-family: 'Cinzel', serif; font-size: 0.62rem; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--deep-saffron); white-space: nowrap;
+}
+.rv-header-line { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(201,150,46,0.3), transparent); }
+.rv-clear-btn {
+  font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 1.5px;
+  color: var(--text-light); background: none; border: none; cursor: pointer;
+  text-transform: uppercase; white-space: nowrap; transition: color 0.2s;
+}
+.rv-clear-btn:hover { color: var(--saffron); }
+.rv-track {
+  display: flex; gap: 12px; overflow-x: auto;
+  scrollbar-width: none; -ms-overflow-style: none; padding-bottom: 4px;
+}
+.rv-track::-webkit-scrollbar { display: none; }
+.rv-item {
+  flex-shrink: 0; display: flex; align-items: center; gap: 10px;
+  background: #FFFFFF; border: 1px solid var(--border-color); border-radius: 30px;
+  padding: 7px 16px 7px 8px; text-decoration: none; color: var(--text-main);
+  transition: all 0.25s; box-shadow: 0 3px 12px rgba(201,150,46,0.07); max-width: 220px;
+}
+.rv-item:hover { border-color: var(--gold); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(201,150,46,0.18); }
+.rv-item-icon {
+  width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--saffron), var(--gold-light));
+  color: #fff; font-size: 0.85rem;
+}
+.rv-item-text {
+  font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 0.85rem;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+
+
 /* Responsive tweaks */
 @media (max-width: 600px) {
   .akm-card { padding: 22px 18px 18px; }
@@ -2110,6 +2156,15 @@ mantra for wealth
     </div>
   </div>
 </div>
+
+<div id="recent-visits-section" aria-label="हाल ही में देखे गए पृष्ठ">
+  <div class="rv-header">
+    <span class="rv-label">✦ हाल ही में देखा गया ✦</span>
+    <div class="rv-header-line"></div>
+    <button class="rv-clear-btn" onclick="window.SMRecentVisits && SMRecentVisits.clear()">साफ़ करें</button>
+  </div>
+  <div class="rv-track" id="rv-track"></div>
+</div>
 <!-- Hero -->
 <section class="hero">
   <span class="hero-om"><img src="images/ShivMarg.png" alt="logo" class="orb-logo"></span>
@@ -2205,7 +2260,7 @@ mantra for wealth
 </div>  
 
 
-<div class="cards-wrapper">
+< class="cards-wrapper">
   <div class="featured-row" id="featured-row">
 
 
@@ -3790,5 +3845,6 @@ const STOTRAS_OF_WEEK = [
 </script>
 <script src="/js/chatbot.js"></script>
 <script src="/js/last-visited.js"></script>
+<script src="/js/recent-visits.js"></script>
 </body>
 </html>
