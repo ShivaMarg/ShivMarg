@@ -9,24 +9,33 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg-deep:    #04020E;
-    --bg-card:    #0C0520;
-    --bg-card2:   #110830;
-    --border:     rgba(124,77,255,0.22);
-    --border-h:   rgba(124,77,255,0.5);
-    --gold:       #C9A84C;
-    --gold-light: #E8C96A;
-    --violet:     #7C4DFF;
-    --violet-l:   #B39DDB;
-    --text:       #F3EEFF;
-    --text-muted: rgba(243,238,255,0.5);
-    --text-dim:   rgba(243,238,255,0.3);
-    --red:        #FF8A80;
-    --success:    #80CBC4;
+    --bg-page:    #FDF8F0;
+    --bg-card:    #FFFCF5;
+    --bg-card2:   #FFF9EE;
+    --bg-nav:     rgba(253,248,240,0.95);
+    --border:     rgba(160,120,60,0.18);
+    --border-h:   rgba(160,120,60,0.42);
+    --gold:       #9A6A10;
+    --gold-light: #7A4F08;
+    --gold-bg:    rgba(160,120,60,0.08);
+    --saffron:    #C8681A;
+    --saffron-l:  #E07830;
+    --violet:     #6B3FA0;
+    --violet-l:   #8B5FC0;
+    --violet-bg:  rgba(107,63,160,0.08);
+    --text:       #2C1A08;
+    --text-muted: rgba(44,26,8,0.55);
+    --text-dim:   rgba(44,26,8,0.38);
+    --red:        #C0392B;
+    --success:    #2E7D52;
+    --chip-page-bg:   rgba(107,63,160,0.07);
+    --chip-page-bdr:  rgba(107,63,160,0.22);
+    --chip-deity-bg:  rgba(160,120,60,0.08);
+    --chip-deity-bdr: rgba(160,120,60,0.28);
   }
   html { scroll-behavior: smooth; }
   body {
-    background: var(--bg-deep);
+    background: var(--bg-page);
     color: var(--text);
     font-family: 'EB Garamond', serif;
     min-height: 100vh;
@@ -36,15 +45,15 @@
     content: '';
     position: fixed; inset: 0; z-index: 0;
     background:
-      radial-gradient(ellipse 60% 40% at 20% 10%, rgba(124,77,255,0.08) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 50% at 80% 80%, rgba(201,168,76,0.05) 0%, transparent 60%);
+      radial-gradient(ellipse 55% 35% at 15% 8%, rgba(200,104,26,0.06) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 45% at 85% 85%, rgba(107,63,160,0.05) 0%, transparent 60%);
     pointer-events: none;
   }
   nav {
     position: sticky; top: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
     padding: 14px 28px;
-    background: rgba(4,2,16,0.92);
+    background: var(--bg-nav);
     border-bottom: 1px solid var(--border);
     backdrop-filter: blur(12px);
   }
@@ -61,6 +70,7 @@
     text-decoration: none; transition: all .25s;
   }
   .nav-back:hover { border-color: var(--border-h); color: var(--text); }
+
   .page { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
 
   /* Header */
@@ -70,20 +80,22 @@
     padding: 22px 28px; margin-bottom: 1.5rem;
     position: relative; overflow: hidden;
     display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    border-radius: 4px;
+    box-shadow: 0 1px 8px rgba(160,120,60,0.07);
   }
   .activity-hero::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, transparent, var(--violet), var(--gold), var(--violet), transparent);
+    background: linear-gradient(90deg, transparent, var(--saffron), var(--gold), var(--saffron), transparent);
   }
   .activity-title { font-family: 'Cinzel Decorative', serif; font-size: 1.15rem; color: var(--gold-light); }
   .activity-sub   { font-family: 'Cinzel', serif; font-size: 0.62rem; letter-spacing: 2px; color: var(--text-dim); text-transform: uppercase; margin-top: 6px; }
   .back-pill {
     font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--violet-l); background: rgba(124,77,255,0.1);
-    border: 1px solid rgba(124,77,255,0.3);
-    padding: 8px 16px; text-decoration: none; transition: all .2s;
+    color: var(--violet); background: var(--violet-bg);
+    border: 1px solid rgba(107,63,160,0.25);
+    padding: 8px 16px; text-decoration: none; transition: all .2s; border-radius: 3px;
   }
-  .back-pill:hover { background: rgba(124,77,255,0.2); border-color: rgba(124,77,255,0.5); }
+  .back-pill:hover { background: rgba(107,63,160,0.15); border-color: rgba(107,63,160,0.45); }
 
   /* Stat grid */
   .stats-grid {
@@ -92,16 +104,20 @@
   @media(max-width: 700px){ .stats-grid { grid-template-columns: repeat(2, 1fr); } }
   .stat-card {
     background: var(--bg-card); border: 1px solid var(--border);
-    padding: 18px 16px; text-align: center;
+    padding: 18px 16px; text-align: center; border-radius: 4px;
+    box-shadow: 0 1px 6px rgba(160,120,60,0.06);
+    transition: box-shadow .2s, border-color .2s;
   }
-  .stat-card .num { font-family: 'Cinzel Decorative', serif; font-size: 1.5rem; color: var(--gold); }
+  .stat-card:hover { box-shadow: 0 3px 14px rgba(160,120,60,0.12); border-color: var(--border-h); }
+  .stat-card .num { font-family: 'Cinzel Decorative', serif; font-size: 1.5rem; color: var(--saffron); }
   .stat-card .lbl { font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 2px; color: var(--text-dim); text-transform: uppercase; margin-top: 4px; }
 
-  /* Sections */
+  /* Cards */
   .card {
     background: var(--bg-card); border: 1px solid var(--border);
     padding: 24px 28px; margin-bottom: 1.25rem;
-    position: relative;
+    position: relative; border-radius: 4px;
+    box-shadow: 0 1px 6px rgba(160,120,60,0.05);
   }
   .card-title {
     font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 3px;
@@ -109,25 +125,28 @@
     padding-bottom: 10px; border-bottom: 1px solid var(--border);
   }
 
-  /* Info rows (meta details) */
+  /* Info rows */
   .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 28px; }
   @media(max-width:560px){ .info-grid { grid-template-columns: 1fr; } }
   .info-row { display: flex; flex-direction: column; gap: 4px; }
   .info-row .k { font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 2px; color: var(--text-dim); text-transform: uppercase; }
   .info-row .v { font-size: 0.95rem; color: var(--text); }
 
-  /* Tag chips - pages visited / favorite deities */
+  /* Chips */
   .chip-list { display: flex; flex-wrap: wrap; gap: 10px; }
   .chip {
     display: inline-flex; align-items: center; gap: 8px;
     font-family: 'Cinzel', serif; font-size: 0.62rem; letter-spacing: 1.5px; text-transform: uppercase;
-    color: var(--violet-l); background: rgba(124,77,255,0.1);
-    border: 1px solid rgba(124,77,255,0.25);
-    padding: 6px 12px;
+    color: var(--violet); background: var(--chip-page-bg);
+    border: 1px solid var(--chip-page-bdr);
+    padding: 6px 12px; border-radius: 3px; text-decoration: none;
+    transition: background .2s, border-color .2s;
   }
-  .chip .ct { color: var(--gold); font-family: 'Cinzel Decorative', serif; font-size: 0.75rem; }
-  .chip.deity { color: var(--gold-light); background: rgba(201,168,76,0.08); border-color: rgba(201,168,76,0.25); }
-  .chip.deity .ct { color: var(--violet-l); }
+  .chip:hover { background: rgba(107,63,160,0.14); border-color: rgba(107,63,160,0.4); }
+  .chip .ct { color: var(--saffron); font-family: 'Cinzel Decorative', serif; font-size: 0.75rem; }
+  .chip.deity { color: var(--gold-light); background: var(--chip-deity-bg); border-color: var(--chip-deity-bdr); }
+  .chip.deity .ct { color: var(--violet); }
+  .chip.deity:hover { background: rgba(160,120,60,0.15); border-color: rgba(160,120,60,0.45); }
 
   /* Activity timeline */
   .activity-item {
@@ -140,19 +159,19 @@
   .activity-icon {
     flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    background: rgba(124,77,255,0.12); border: 1px solid var(--border-h);
+    background: var(--gold-bg); border: 1px solid var(--border-h);
     font-size: 1rem;
   }
   .activity-body { flex: 1; min-width: 0; }
   .activity-page {
     display: inline-flex; align-items: center; gap: 5px;
     font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--gold); background: rgba(201,168,76,0.1);
-    border: 1px solid rgba(201,168,76,0.25);
+    color: var(--gold-light); background: var(--gold-bg);
+    border: 1px solid rgba(160,120,60,0.28);
     padding: 3px 10px; margin-bottom: 6px;
-    text-decoration: none; transition: all .2s;
+    text-decoration: none; transition: all .2s; border-radius: 3px;
   }
-  .activity-page:hover { background: rgba(201,168,76,0.2); border-color: rgba(201,168,76,0.5); }
+  .activity-page:hover { background: rgba(160,120,60,0.16); border-color: rgba(160,120,60,0.5); }
   .activity-desc { font-size: 0.92rem; color: var(--text); line-height: 1.5; }
   .activity-meta { font-size: 0.78rem; color: var(--text-dim); margin-top: 5px; font-style: italic; }
 
@@ -161,32 +180,58 @@
   .filter-btn {
     font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase;
     color: var(--text-muted); background: none; border: 1px solid var(--border);
-    padding: 7px 14px; cursor: pointer; transition: all .2s;
+    padding: 7px 14px; cursor: pointer; transition: all .2s; border-radius: 3px;
   }
-  .filter-btn.active { background: rgba(124,77,255,0.15); color: var(--violet-l); border-color: var(--border-h); }
-  .filter-btn:hover:not(.active) { color: var(--text); border-color: var(--border-h); }
+  .filter-btn.active { background: var(--violet-bg); color: var(--violet); border-color: rgba(107,63,160,0.35); }
+  .filter-btn:hover:not(.active) { color: var(--text); border-color: var(--border-h); background: var(--gold-bg); }
 
   .empty-state {
     text-align: center; padding: 3rem 1rem;
     color: var(--text-dim); font-style: italic; font-size: 0.95rem;
   }
   .empty-state .sym { font-size: 2rem; display: block; margin-bottom: 10px; opacity: .4; }
+
   .loader {
-    text-align: center; padding: 2rem;
+    text-align: center; padding: 3rem;
     font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 3px;
     color: var(--text-dim); text-transform: uppercase;
   }
-  .loader::after { content: ''; display: inline-block; width: 12px; height: 12px; border: 1px solid var(--violet); border-top-color: transparent; border-radius: 50%; animation: spin .7s linear infinite; margin-left: 10px; vertical-align: middle; }
+  .loader::after {
+    content: ''; display: inline-block; width: 12px; height: 12px;
+    border: 1.5px solid var(--saffron); border-top-color: transparent;
+    border-radius: 50%; animation: spin .7s linear infinite; margin-left: 10px; vertical-align: middle;
+  }
   @keyframes spin { to { transform: rotate(360deg); } }
 
   .load-more-wrap { text-align: center; margin-top: 16px; }
   .btn-load-more {
     font-family: 'Cinzel', serif; font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase;
-    background: rgba(124,77,255,0.1); border: 1px solid var(--border-h);
-    color: var(--violet-l); padding: 10px 24px; cursor: pointer; transition: all .25s;
+    background: var(--gold-bg); border: 1px solid var(--border-h);
+    color: var(--gold-light); padding: 10px 24px; cursor: pointer; transition: all .25s; border-radius: 3px;
   }
-  .btn-load-more:hover { background: rgba(124,77,255,0.2); }
+  .btn-load-more:hover { background: rgba(160,120,60,0.14); }
   .btn-load-more:disabled { opacity: 0.45; cursor: wait; }
+
+  /* Login/error message */
+  .msg-center {
+    text-align: center; padding: 4rem 1rem;
+  }
+  .msg-center .msg-icon {
+    font-size: 2.5rem; margin-bottom: 16px; display: block; opacity: .7;
+  }
+  .msg-center .msg-title {
+    font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 3px;
+    color: var(--text-muted); text-transform: uppercase; margin-bottom: 10px;
+  }
+  .msg-center .msg-sub { font-size: 0.92rem; color: var(--text-dim); margin-bottom: 24px; }
+  .msg-center .msg-btn {
+    font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase;
+    background: var(--violet-bg); border: 1px solid rgba(107,63,160,0.35);
+    color: var(--violet); padding: 12px 28px; cursor: pointer;
+    text-decoration: none; display: inline-block; border-radius: 3px;
+    transition: background .2s, border-color .2s;
+  }
+  .msg-center .msg-btn:hover { background: rgba(107,63,160,0.15); border-color: rgba(107,63,160,0.5); }
 </style>
 </head>
 <body>
@@ -201,19 +246,11 @@
 <script>
   const API = 'https://www.api.shivmarg.live';
 
-  /* ─────────────────────────────────────────
-     URL ROUTING
-     Expected pattern: /user/<username>/myactivity
-  ───────────────────────────────────────── */
   function getUsernameFromURL() {
     const parts = window.location.pathname.split('/').filter(Boolean);
-    // parts: ['user', 'username', 'myactivity']
     if (parts.length >= 2 && parts[0] === 'user') return parts[1];
-
-    // fallback: hash style /user/#username/myactivity (rare)
     const hash = window.location.hash.replace('#', '').split('/')[0].trim();
     if (hash) return hash;
-
     return null;
   }
 
@@ -231,7 +268,6 @@
     return data;
   }
 
-  /* ── PAGE TITLES (same map as profile page) ── */
   const PAGE_TITLES = {
     'shiv-aarti':         'शिव आरती',
     'maha-mrityunjaya':   'महा मृत्युंजय मंत्र',
@@ -282,7 +318,6 @@
     return prefix ? `/${prefix}/${page_id}` : `/${page_id}`;
   }
 
-  /* ── EVENT TYPE → icon / label ── */
   const EVENT_META = {
     'page_view':     { icon: '👁️', label: 'देखा' },
     'comment_posted':{ icon: '💬', label: 'टिप्पणी की' },
@@ -294,15 +329,14 @@
   };
   function eventMeta(t){ return EVENT_META[t] || { icon: '🔱', label: t || 'सक्रियता' }; }
 
-  /* ── UTILS ── */
   function escHtml(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
   function timeAgo(iso){
     if(!iso) return '';
     const d = (Date.now()-new Date(iso).getTime())/1000;
-    if(d<60)   return 'अभी';
-    if(d<3600) return Math.floor(d/60)+' मिनट पहले';
-    if(d<86400)return Math.floor(d/3600)+' घंटे पहले';
-    if(d<2592000)return Math.floor(d/86400)+' दिन पहले';
+    if(d<60)    return 'अभी';
+    if(d<3600)  return Math.floor(d/60)+' मिनट पहले';
+    if(d<86400) return Math.floor(d/3600)+' घंटे पहले';
+    if(d<2592000) return Math.floor(d/86400)+' दिन पहले';
     return new Date(iso).toLocaleDateString('hi-IN');
   }
   function fullDate(iso){
@@ -311,15 +345,13 @@
   }
   function getProfileUrl(username) { return `/profile/${username}`; }
 
-  /* ── STATE ── */
   let allActivity = [];
   let currentFilter = 'all';
 
-  /* ── RENDER ── */
   function renderApp(user, summary, activity) {
     document.title = `मेरी सक्रियता — ${user.display_name || user.username}`;
 
-    const pagesVisited   = summary.pages_visited || {};
+    const pagesVisited    = summary.pages_visited || {};
     const favoriteDeities = summary.favorite_deity_tags || {};
 
     const pagesVisitedEntries = Object.entries(pagesVisited).sort((a,b)=>b[1]-a[1]);
@@ -370,7 +402,7 @@
         <div class="card-title">सबसे ज्यादा देखे गए पृष्ठ</div>
         <div class="chip-list">
           ${pagesVisitedEntries.map(([page,count])=>`
-            <a class="chip" href="${getPageUrl(page)}" style="text-decoration:none">🔱 ${escHtml(pageTitle(page))} <span class="ct">${count}</span></a>
+            <a class="chip" href="${getPageUrl(page)}">🔱 ${escHtml(pageTitle(page))} <span class="ct">${count}</span></a>
           `).join('')}
         </div>
       </div>` : ''}
@@ -379,7 +411,7 @@
         <div class="card-title">हाल की सक्रियता</div>
         <div class="filter-row" id="filter-row">
           <button class="filter-btn active" data-filter="all">सभी</button>
-          ${eventTypes.map(t=>`<button class="filter-btn" data-filter="${t}">${eventMeta(t).icon} ${eventMeta(t).label}</button>`).join('')}
+          ${eventTypes.map(t=>`<button class="filter-btn" data-filter="${escHtml(t)}">${eventMeta(t).icon} ${eventMeta(t).label}</button>`).join('')}
         </div>
         <div id="activity-list"></div>
       </div>
@@ -399,6 +431,7 @@
 
   function renderActivityList() {
     const list = document.getElementById('activity-list');
+    if (!list) return;
     const items = currentFilter === 'all'
       ? allActivity
       : allActivity.filter(a => a.event_type === currentFilter);
@@ -412,48 +445,50 @@
       return;
     }
 
-    list.innerHTML = items.map(a=>{
+    list.innerHTML = items.map(a => {
       const meta = eventMeta(a.event_type);
-      const pageLine = a?.page_id
-  ? `<a class="activity-page" href="https://shivmarg.live/${getPageUrl?.(a.page_id) || '#'}">
-       🔱 ${escHtml(pageTitle?.(a.page_id) || 'Untitled')} →
-     </a><br>`
-  : '';
+      const pageUrl = a.page_id ? getPageUrl(a.page_id) : null;
+
+      /* FIX: removed accidental shivmarg.live double-domain prefix */
+      const pageLine = pageUrl
+        ? `<a class="activity-page" href="${pageUrl}">🔱 ${escHtml(pageTitle(a.page_id))} →</a><br>`
+        : '';
+
       const descParts = [];
       if (meta.label) descParts.push(meta.label);
       if (a.category) descParts.push(`(${escHtml(a.category)})`);
-      const desc = descParts.join(' ');
-      const durationStr = a.duration ? ` &middot; ${a.duration} सेकंड` : '';
+      const desc = descParts.join(' ') || 'सक्रियता';
+
+      /* FIX: guard duration display — only show if it's a non-zero number */
+      const durationStr = (a.duration && Number(a.duration) > 0)
+        ? ` &middot; ${a.duration} सेकंड`
+        : '';
 
       return `
         <div class="activity-item">
           <div class="activity-icon">${meta.icon}</div>
           <div class="activity-body">
             ${pageLine}
-            <div class="activity-desc">${desc || 'सक्रियता'}</div>
+            <div class="activity-desc">${desc}</div>
             <div class="activity-meta">${timeAgo(a.created_at)}${durationStr}</div>
           </div>
         </div>`;
     }).join('');
   }
 
-  /* ── NOT AUTHORIZED / NOT FOUND ── */
   function showMessage(title, sub, showLogin) {
     document.getElementById('app').innerHTML = `
-      <div style="text-align:center;padding:4rem 1rem">
-        <div style="font-family:'Cinzel Decorative',serif;font-size:1.3rem;color:var(--gold-light);margin-bottom:12px">🔱</div>
-        <div style="font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:3px;color:var(--text-muted);text-transform:uppercase;margin-bottom:8px">
-          ${title}
-        </div>
-        ${sub ? `<div style="font-size:.9rem;color:var(--text-dim);margin-bottom:24px">${sub}</div>` : ''}
+      <div class="msg-center">
+        <span class="msg-icon">🔱</span>
+        <div class="msg-title">${title}</div>
+        ${sub ? `<div class="msg-sub">${sub}</div>` : ''}
         ${showLogin
-          ? `<button onclick="SmAuth._switchTab('login');SmAuth._openModal()" style="font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;background:rgba(124,77,255,.15);border:1px solid rgba(124,77,255,.4);color:var(--violet-l);padding:12px 28px;cursor:pointer;margin-top:8px">🕉️ लॉगिन करें</button>`
-          : `<a href="/" style="font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;background:rgba(124,77,255,.15);border:1px solid rgba(124,77,255,.4);color:var(--violet-l);padding:12px 28px;text-decoration:none">🕉️ होम पर जाएँ</a>`
+          ? `<button class="msg-btn" onclick="SmAuth._switchTab('login');SmAuth._openModal()">🕉️ लॉगिन करें</button>`
+          : `<a class="msg-btn" href="/">🕉️ होम पर जाएँ</a>`
         }
       </div>`;
   }
 
-  /* ── BOOT ── */
   SmAuth.init({ apiBase: API });
 
   (async function boot() {
@@ -467,7 +502,6 @@
       return;
     }
 
-    // Private page: only owner can view their own activity
     if (!urlUsername || urlUsername !== loggedInUser.username) {
       showMessage('अनधिकृत', 'आप केवल अपनी सक्रियता देख सकते हैं।', false);
       return;
@@ -483,7 +517,6 @@
   })();
 </script>
 <script src="/js/streak-widget.js"></script>
-
 <script src="/js/chatbot.js"></script>
 <script src="/js/last-visited.js"></script>
 </body>
