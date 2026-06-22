@@ -415,7 +415,7 @@
     list.innerHTML = items.map(a=>{
       const meta = eventMeta(a.event_type);
       const pageLine = a.page_id
-        ? `<a class="activity-page" href="${getPageUrl(a.page_id)}">🔱 ${escHtml(pageTitle(a.page_id))} →</a><br>`
+        ? `<a class="activity-page" href="https://shivmarg.live/ ${getPageUrl(a.page_id)}">🔱 ${escHtml(pageTitle(a.page_id))} →</a><br>`
         : '';
       const descParts = [];
       if (meta.label) descParts.push(meta.label);
