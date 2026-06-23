@@ -6,20 +6,15 @@
   <title>लेख लिखें | शिव मार्ग</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="icon" href="/images/shivmarg_logo.png" type="image/png">
-<!-- Apple -->
-<link rel="apple-touch-icon" href="/images/shivmarg_logo.png">
-
-<!-- Android -->
-<link rel="manifest" href="/manifest.json">
-
+  <link rel="apple-touch-icon" href="/images/shivmarg_logo.png">
+  <link rel="manifest" href="/manifest.json">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  
-  <!-- TinyMCE Rich Text Editor -->
-  <script src="https://cdn.tiny.cloud/1/7nli5k7kmjjg04pix9ly52ig04ti22ru7dwp9du1kxwl76oi/tinymce/6/tinymce.min.js"></script>
   <link rel="canonical" href="https://www.shivmarg.live/article_editor/">
-
   <link rel="stylesheet" href="/loder/loder.css">
   <script src="/loder/loder.js" defer></script>
+
+  <!-- ✅ REMOVED: TinyMCE CDN script (was 300KB+ and required API key) -->
+
   <style>
     /* ── TOKENS ─────────────────────────────── */
     :root {
@@ -40,7 +35,6 @@
       --mono:      'DM Mono', monospace;
     }
 
-    /* ── RESET ──────────────────────────────– */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
@@ -51,7 +45,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── HEADER ─────────────────────────────── */
     header {
       position: sticky; top: 0; z-index: 100;
       background: var(--ink);
@@ -60,489 +53,287 @@
       display: flex; align-items: center; justify-content: space-between;
       height: 60px;
     }
-
-    .logo {
-      font-family: var(--display);
-      font-size: 1.5rem;
-      color: #fff;
-      text-decoration: none;
-      letter-spacing: .04em;
-    }
+    .logo { font-family: var(--display); font-size: 1.5rem; color: #fff; text-decoration: none; letter-spacing: .04em; }
     .logo span { color: var(--accent); }
-
     nav.hdr-nav { display: flex; gap: 1.5rem; }
-    nav.hdr-nav a {
-      color: rgba(255,255,255,.7);
-      text-decoration: none;
-      font-size: .85rem;
-      font-family: var(--mono);
-      letter-spacing: .05em;
-      cursor: pointer;
-      transition: color .2s;
-    }
+    nav.hdr-nav a { color: rgba(255,255,255,.7); text-decoration: none; font-size: .85rem; font-family: var(--mono); letter-spacing: .05em; cursor: pointer; transition: color .2s; }
     nav.hdr-nav a:hover { color: var(--accent-2); }
-
     .hdr-actions { display: flex; gap: 1rem; align-items: center; }
-    .hdr-user {
-      color: rgba(255,255,255,.7);
-      font-family: var(--mono);
-      font-size: .8rem;
-    }
-    .hdr-role {
-      background: var(--accent-2);
-      color: var(--ink);
-      padding: .3rem .6rem;
-      border-radius: 2px;
-      font-size: .7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-    .hdr-role.admin {
-      background: var(--pending);
-      color: #fff;
-    }
-    .btn-logout {
-      background: var(--accent); color: #fff;
-      border: none; padding: .4rem 1rem;
-      font-size: .8rem; font-family: var(--mono);
-      cursor: pointer; transition: opacity .2s;
-    }
+    .hdr-user { color: rgba(255,255,255,.7); font-family: var(--mono); font-size: .8rem; }
+    .hdr-role { background: var(--accent-2); color: var(--ink); padding: .3rem .6rem; border-radius: 2px; font-size: .7rem; font-weight: 600; text-transform: uppercase; }
+    .hdr-role.admin { background: var(--pending); color: #fff; }
+    .btn-logout { background: var(--accent); color: #fff; border: none; padding: .4rem 1rem; font-size: .8rem; font-family: var(--mono); cursor: pointer; transition: opacity .2s; }
     .btn-logout:hover { opacity: .85; }
 
-    /* ── MAIN CONTAINER ─────────────────────── */
-    .editor-wrap {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    /* ── BREADCRUMB ─────────────────────────── */
-    .breadcrumb {
-      display: flex; gap: .5rem; align-items: center;
-      font-family: var(--mono); font-size: .75rem;
-      color: var(--ink-muted); margin-bottom: 2rem;
-    }
+    .editor-wrap { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+    .breadcrumb { display: flex; gap: .5rem; align-items: center; font-family: var(--mono); font-size: .75rem; color: var(--ink-muted); margin-bottom: 2rem; }
     .breadcrumb a { color: var(--accent); text-decoration: none; cursor: pointer; }
+    .editor-title { font-family: var(--display); font-size: 2rem; margin-bottom: 0.5rem; color: var(--ink); }
+    .editor-subtitle { color: var(--ink-muted); font-family: var(--mono); font-size: .85rem; margin-bottom: 2rem; }
 
-    /* ── PAGE TITLE ─────────────────────────– */
-    .editor-title {
-      font-family: var(--display);
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-      color: var(--ink);
-    }
-    .editor-subtitle {
-      color: var(--ink-muted);
-      font-family: var(--mono);
-      font-size: .85rem;
-      margin-bottom: 2rem;
-    }
+    .editor-form { background: #fff; border: 1px solid var(--border); padding: 2rem; border-radius: 4px; }
+    .form-section { margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+    .form-section:last-child { border-bottom: none; }
+    .form-section-title { font-family: var(--display); font-size: 1.2rem; color: var(--ink); margin-bottom: 1.25rem; display: flex; align-items: center; gap: .5rem; }
+    .form-section-icon { font-size: 1.4rem; }
 
-    /* ── FORM CONTAINER ─────────────────────── */
-    .editor-form {
-      background: #fff;
-      border: 1px solid var(--border);
-      padding: 2rem;
-      border-radius: 4px;
-    }
-
-    .form-section {
-      margin-bottom: 2.5rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .form-section:last-child {
-      border-bottom: none;
-    }
-
-    .form-section-title {
-      font-family: var(--display);
-      font-size: 1.2rem;
-      color: var(--ink);
-      margin-bottom: 1.25rem;
-      display: flex; align-items: center; gap: .5rem;
-    }
-    .form-section-icon {
-      font-size: 1.4rem;
-    }
-
-    /* ── FORM FIELDS ────────────────────────── */
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-    .form-group label {
-      display: block;
-      font-weight: 600;
-      margin-bottom: .5rem;
-      color: var(--ink);
-      font-family: var(--mono);
-      font-size: .85rem;
-      letter-spacing: .05em;
-    }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label { display: block; font-weight: 600; margin-bottom: .5rem; color: var(--ink); font-family: var(--mono); font-size: .85rem; letter-spacing: .05em; }
     .form-group input[type="text"],
     .form-group input[type="email"],
     .form-group input[type="number"],
     .form-group input[type="url"],
     .form-group select,
     .form-group textarea {
-      width: 100%;
-      padding: .75rem 1rem;
-      border: 1px solid var(--border);
-      background: var(--paper-warm);
-      font-family: var(--serif);
-      font-size: .95rem;
-      color: var(--ink);
-      outline: none;
-      transition: border-color .2s, box-shadow .2s;
+      width: 100%; padding: .75rem 1rem; border: 1px solid var(--border);
+      background: var(--paper-warm); font-family: var(--serif); font-size: .95rem;
+      color: var(--ink); outline: none; transition: border-color .2s, box-shadow .2s;
     }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--accent); box-shadow: 0 0 0 2px rgba(192,57,43,.1);
+    }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-help { font-family: var(--mono); font-size: .75rem; color: var(--ink-muted); margin-top: .4rem; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 700px) { .form-row { grid-template-columns: 1fr; } }
+
+    /* ── TAG INPUT ── */
+    .tag-input-wrap { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .5rem; min-height: 40px; padding: .5rem; border: 1px solid var(--border); background: var(--paper-warm); border-radius: 2px; }
+    .tag { display: inline-flex; align-items: center; gap: .5rem; background: var(--accent); color: #fff; padding: .35rem .75rem; border-radius: 2px; font-size: .85rem; font-family: var(--mono); }
+    .tag button { background: none; border: none; color: #fff; cursor: pointer; font-size: 1rem; padding: 0; display: flex; align-items: center; }
+    .tag-input-wrap input { border: none; background: transparent; flex: 1; min-width: 100px; padding: .5rem 0; outline: none; font-family: var(--serif); font-size: .95rem; }
+
+    /* ── STATUS BAR ── */
+    .status-bar { display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--paper-warm); border: 1px solid var(--border); border-radius: 4px; margin-bottom: 1.5rem; font-size: .9rem; flex-wrap: wrap; }
+    .status-badge { display: inline-flex; align-items: center; gap: .4rem; padding: .35rem .75rem; border-radius: 2px; font-family: var(--mono); font-size: .8rem; font-weight: 600; }
+    .status-badge.draft { background: var(--warning); color: #fff; }
+    .status-badge.pending-approval { background: var(--pending); color: #fff; }
+    .status-badge.published { background: var(--success); color: #fff; }
+    .status-badge.rejected { background: var(--danger); color: #fff; }
+    .word-count { margin-left: auto; color: var(--ink-muted); font-family: var(--mono); font-size: .8rem; }
+
+    /* ── ACTION BUTTONS ── */
+    .form-actions { display: flex; gap: 1rem; justify-content: flex-end; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); flex-wrap: wrap; }
+    .btn { padding: .65rem 1.5rem; border: none; font-family: var(--mono); font-size: .85rem; letter-spacing: .05em; cursor: pointer; transition: all .2s; text-transform: uppercase; font-weight: 600; display: inline-block; }
+    .btn-secondary { background: var(--border); color: var(--ink); border: 1px solid var(--border); }
+    .btn-secondary:hover { background: var(--ink-muted); color: #fff; border-color: var(--ink-muted); }
+    .btn-primary { background: var(--accent); color: #fff; border: 1px solid var(--accent); }
+    .btn-primary:hover { opacity: .85; }
+    .btn-success { background: var(--success); color: #fff; border: 1px solid var(--success); }
+    .btn-success:hover { opacity: .85; }
+    .btn-pending { background: var(--pending); color: #fff; border: 1px solid var(--pending); }
+    .btn:disabled { opacity: .5; cursor: not-allowed; }
+
+    /* ── MODAL ── */
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,.5); z-index: 1000; align-items: center; justify-content: center; }
+    .modal.show { display: flex; }
+    .modal-content { background: #fff; border-radius: 4px; padding: 2rem; max-width: 500px; width: 90%; box-shadow: 0 10px 40px rgba(0,0,0,.2); max-height: 90vh; overflow-y: auto; }
+    .modal-title { font-family: var(--display); font-size: 1.5rem; margin-bottom: 1rem; }
+    .modal-body { margin-bottom: 1.5rem; color: var(--ink-soft); }
+    .modal-actions { display: flex; gap: .75rem; justify-content: flex-end; flex-wrap: wrap; }
+
+    /* ── TOAST ── */
+    .toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--ink); color: #fff; padding: 1rem 1.5rem; border-radius: 4px; font-family: var(--mono); font-size: .85rem; opacity: 0; transform: translateY(20px); transition: all .3s; pointer-events: none; z-index: 999; }
+    .toast.show { opacity: 1; transform: translateY(0); pointer-events: all; }
+    .toast.success { background: var(--success); }
+    .toast.error { background: var(--danger); }
+    .toast.info { background: var(--pending); }
+
+    /* ── PREVIEW PANEL ── */
+    .preview-panel { position: fixed; right: -400px; top: 60px; width: 400px; height: calc(100vh - 60px); background: #fff; border-left: 1px solid var(--border); overflow-y: auto; transition: right .3s; z-index: 99; padding: 2rem; }
+    .preview-panel.open { right: 0; }
+    .preview-title { font-family: var(--display); font-size: 1.4rem; margin-bottom: 1rem; line-height: 1.3; }
+    .preview-meta { font-family: var(--mono); font-size: .75rem; color: var(--ink-muted); margin-bottom: 1.5rem; }
+    .preview-content { font-size: .9rem; line-height: 1.6; color: var(--ink-soft); }
+
+    /* ── ARTICLE LIST ── */
+    .article-item { padding: 1.5rem; border: 1px solid var(--border); border-radius: 4px; margin-bottom: 1rem; background: var(--paper-warm); transition: all .2s; }
+    .article-item:hover { border-color: var(--accent); background: #fff; }
+    .article-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.75rem; }
+    .article-title { color: var(--ink); margin: 0; font-family: var(--display); font-size: 1rem; }
+    .article-meta { color: var(--ink-muted); font-size: 0.8rem; margin: 0.5rem 0; display: flex; gap: 1rem; flex-wrap: wrap; }
+    .article-meta span { display: flex; align-items: center; gap: 0.3rem; }
+    .article-excerpt { color: var(--ink-soft); font-size: 0.9rem; line-height: 1.5; margin: 0.75rem 0; }
+    .article-actions { display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
+    .article-actions .btn { padding: 0.4rem 0.8rem; font-size: 0.7rem; }
+
+    .approval-box { background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 4px; padding: 1rem; margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .approval-box strong { color: #856404; }
+    .approval-box p { margin: 0.5rem 0; color: #856404; }
+
+    /* ════════════════════════════════════════════
+       ✅ CUSTOM RICH EDITOR (replaces TinyMCE)
+    ════════════════════════════════════════════ */
+    .rich-editor-wrap {
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      background: var(--paper-warm);
+      overflow: hidden;
+    }
+    .rich-editor-wrap:focus-within {
       border-color: var(--accent);
-      box-shadow: 0 0 0 2px rgba(192, 57, 43, .1);
-    }
-    .form-group textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-    .form-group input:disabled,
-    .form-group select:disabled,
-    .form-group textarea:disabled {
-      background: #f0f0f0;
-      color: #999;
-      cursor: not-allowed;
+      box-shadow: 0 0 0 2px rgba(192,57,43,.1);
     }
 
-    .form-help {
-      font-family: var(--mono);
-      font-size: .75rem;
-      color: var(--ink-muted);
-      margin-top: .4rem;
-    }
-
-    /* ── TWO COLUMN LAYOUT ──────────────────– */
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-    @media (max-width: 700px) {
-      .form-row { grid-template-columns: 1fr; }
-    }
-
-    /* ── TAG INPUT ──────────────────────────– */
-    .tag-input-wrap {
-      display: flex; gap: .5rem; flex-wrap: wrap;
-      margin-top: .5rem;
-      min-height: 40px;
-      padding: .5rem;
-      border: 1px solid var(--border);
-      background: var(--paper-warm);
-      border-radius: 2px;
-    }
-    .tag {
-      display: inline-flex; align-items: center; gap: .5rem;
-      background: var(--accent);
-      color: #fff;
-      padding: .35rem .75rem;
-      border-radius: 2px;
-      font-size: .85rem;
-      font-family: var(--mono);
-    }
-    .tag button {
-      background: none;
-      border: none;
-      color: #fff;
-      cursor: pointer;
-      font-size: 1rem;
-      padding: 0;
-      display: flex; align-items: center;
-    }
-    .tag-input-wrap input {
-      border: none;
-      background: transparent;
-      flex: 1;
-      min-width: 100px;
-      padding: .5rem 0;
-      outline: none;
-      font-family: var(--serif);
-      font-size: .95rem;
-    }
-
-    /* ── STATUS BAR ─────────────────────────– */
-    .status-bar {
-      display: flex; align-items: center; gap: 1rem;
-      padding: 1rem;
-      background: var(--paper-warm);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      margin-bottom: 1.5rem;
-      font-size: .9rem;
-      flex-wrap: wrap;
-    }
-    .status-badge {
-      display: inline-flex; align-items: center; gap: .4rem;
-      padding: .35rem .75rem;
-      border-radius: 2px;
-      font-family: var(--mono);
-      font-size: .8rem;
-      font-weight: 600;
-    }
-    .status-badge.draft {
-      background: var(--warning);
-      color: #fff;
-    }
-    .status-badge.pending-approval {
-      background: var(--pending);
-      color: #fff;
-    }
-    .status-badge.published {
-      background: var(--success);
-      color: #fff;
-    }
-    .status-badge.rejected {
-      background: var(--danger);
-      color: #fff;
-    }
-    .word-count {
-      margin-left: auto;
-      color: var(--ink-muted);
-      font-family: var(--mono);
-      font-size: .8rem;
-    }
-
-    /* ── ACTION BUTTONS ────────────────────── */
-    .form-actions {
-      display: flex; gap: 1rem; justify-content: flex-end;
-      margin-top: 2rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: .65rem 1.5rem;
-      border: none;
-      font-family: var(--mono);
-      font-size: .85rem;
-      letter-spacing: .05em;
-      cursor: pointer;
-      transition: all .2s;
-      text-transform: uppercase;
-      font-weight: 600;
-      display: inline-block;
-    }
-
-    .btn-secondary {
-      background: var(--border);
-      color: var(--ink);
-      border: 1px solid var(--border);
-    }
-    .btn-secondary:hover {
-      background: var(--ink-muted);
-      color: #fff;
-      border-color: var(--ink-muted);
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-      border: 1px solid var(--accent);
-    }
-    .btn-primary:hover {
-      opacity: .85;
-    }
-
-    .btn-success {
-      background: var(--success);
-      color: #fff;
-      border: 1px solid var(--success);
-    }
-    .btn-success:hover {
-      opacity: .85;
-    }
-
-    .btn-pending {
-      background: var(--pending);
-      color: #fff;
-      border: 1px solid var(--pending);
-    }
-
-    .btn:disabled {
-      opacity: .5;
-      cursor: not-allowed;
-    }
-
-    /* ── MODAL ──────────────────────────────– */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,.5);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-    }
-    .modal.show {
+    /* Toolbar */
+    .rich-toolbar {
       display: flex;
-    }
-    .modal-content {
-      background: #fff;
-      border-radius: 4px;
-      padding: 2rem;
-      max-width: 500px;
-      width: 90%;
-      box-shadow: 0 10px 40px rgba(0,0,0,.2);
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-    .modal-title {
-      font-family: var(--display);
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-    .modal-body {
-      margin-bottom: 1.5rem;
-      color: var(--ink-soft);
-    }
-    .modal-actions {
-      display: flex; gap: .75rem; justify-content: flex-end;
       flex-wrap: wrap;
+      gap: 2px;
+      padding: 6px 8px;
+      background: #f0ebe3;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
     }
-
-    /* ── TOAST ──────────────────────────────– */
-    .toast {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      background: var(--ink);
+    .rich-toolbar button {
+      background: none;
+      border: 1px solid transparent;
+      border-radius: 3px;
+      padding: 4px 7px;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--ink-soft);
+      font-family: var(--mono);
+      line-height: 1;
+      transition: background .15s, border-color .15s;
+      min-width: 28px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .rich-toolbar button:hover {
+      background: #e2d9ce;
+      border-color: var(--border);
+      color: var(--ink);
+    }
+    .rich-toolbar button.active {
+      background: var(--accent);
       color: #fff;
-      padding: 1rem 1.5rem;
-      border-radius: 4px;
+      border-color: var(--accent);
+    }
+    .rich-toolbar .tb-sep {
+      width: 1px;
+      height: 20px;
+      background: var(--border);
+      margin: 0 4px;
+    }
+    .rich-toolbar select {
+      border: 1px solid var(--border);
+      background: #fff;
+      padding: 3px 6px;
       font-family: var(--mono);
-      font-size: .85rem;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all .3s;
-      pointer-events: none;
-      z-index: 999;
-    }
-    .toast.show {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: all;
-    }
-    .toast.success {
-      background: var(--success);
-    }
-    .toast.error {
-      background: var(--danger);
-    }
-    .toast.info {
-      background: var(--pending);
+      font-size: 12px;
+      color: var(--ink);
+      border-radius: 3px;
+      cursor: pointer;
     }
 
-    /* ── PREVIEW PANEL ──────────────────────– */
-    .preview-panel {
-      position: fixed;
-      right: -400px;
-      top: 60px;
-      width: 400px;
-      height: calc(100vh - 60px);
-      background: #fff;
-      border-left: 1px solid var(--border);
+    /* Editable content area */
+    .rich-content {
+      min-height: 420px;
+      max-height: 600px;
       overflow-y: auto;
-      transition: right .3s;
-      z-index: 99;
-      padding: 2rem;
+      padding: 1.2rem 1.5rem;
+      outline: none;
+      font-family: var(--serif);
+      font-size: 16px;
+      line-height: 1.85;
+      color: var(--ink);
+      background: var(--paper-warm);
     }
-    .preview-panel.open {
-      right: 0;
+    .rich-content:empty::before {
+      content: attr(data-placeholder);
+      color: #b0a090;
+      pointer-events: none;
     }
-    .preview-title {
-      font-family: var(--display);
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
-      line-height: 1.3;
-    }
-    .preview-meta {
-      font-family: var(--mono);
-      font-size: .75rem;
-      color: var(--ink-muted);
-      margin-bottom: 1.5rem;
-    }
-    .preview-content {
-      font-size: .9rem;
-      line-height: 1.6;
+    .rich-content blockquote {
+      border-left: 4px solid var(--accent);
+      padding: 12px 16px;
+      margin: 16px 0;
+      background: #f5f0e8;
+      font-style: italic;
       color: var(--ink-soft);
     }
-
-    /* ── ARTICLE LIST ITEM ──────────────────– */
-    .article-item {
-      padding: 1.5rem;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      margin-bottom: 1rem;
-      background: var(--paper-warm);
-      transition: all .2s;
-    }
-    .article-item:hover {
-      border-color: var(--accent);
-      background: #fff;
-    }
-    .article-header {
-      display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;
-      margin-bottom: 0.75rem;
-    }
-    .article-title {
-      color: var(--ink); 
-      margin: 0;
+    .rich-content h1, .rich-content h2, .rich-content h3 {
       font-family: var(--display);
-      font-size: 1rem;
+      margin: 20px 0 10px;
+      color: var(--ink);
     }
-    .article-meta {
-      color: var(--ink-muted); 
-      font-size: 0.8rem;
-      margin: 0.5rem 0;
-      display: flex; gap: 1rem; flex-wrap: wrap;
+    .rich-content a { color: var(--accent); }
+    .rich-content img { max-width: 100%; border-radius: 2px; }
+    .rich-content p { margin-bottom: 12px; }
+    .rich-content code {
+      background: #f0ebe3;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: var(--mono);
+      font-size: 0.9em;
     }
-    .article-meta span {
-      display: flex; align-items: center; gap: 0.3rem;
-    }
-    .article-excerpt {
-      color: var(--ink-soft); 
-      font-size: 0.9rem; 
-      line-height: 1.5;
-      margin: 0.75rem 0;
-    }
-    .article-actions {
-      display: flex; gap: 0.5rem; margin-top: 1rem;
-      flex-wrap: wrap;
-    }
-    .article-actions .btn {
-      padding: 0.4rem 0.8rem;
-      font-size: 0.7rem;
+    .rich-content pre {
+      background: #1a1410;
+      color: #f5f0e8;
+      padding: 16px;
+      border-radius: 4px;
+      overflow-x: auto;
+      margin: 16px 0;
     }
 
-    /* ── APPROVAL INFO ──────────────────────– */
-    .approval-box {
+    /* Fallback simple textarea (shown if rich editor fails) */
+    .fallback-textarea {
+      display: none;
+      width: 100%;
+      min-height: 420px;
+      padding: 1.2rem 1.5rem;
+      border: 1px solid var(--border);
+      background: var(--paper-warm);
+      font-family: var(--serif);
+      font-size: 16px;
+      line-height: 1.85;
+      color: var(--ink);
+      resize: vertical;
+      outline: none;
+    }
+    .fallback-textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(192,57,43,.1);
+    }
+
+    /* Fallback mode notice */
+    .fallback-notice {
+      display: none;
       background: #fff3cd;
       border: 1px solid #ffeaa7;
-      border-radius: 4px;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
-      font-size: 0.9rem;
-    }
-    .approval-box strong {
+      padding: 8px 12px;
+      font-family: var(--mono);
+      font-size: 0.75rem;
       color: #856404;
-    }
-    .approval-box p {
-      margin: 0.5rem 0;
-      color: #856404;
+      margin-bottom: 8px;
+      border-radius: 2px;
     }
 
-    /* ── RESPONSIVE ─────────────────────────– */
+    /* Link/image dialog overlay */
+    .editor-dialog {
+      display: none;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,.4); z-index: 2000;
+      align-items: center; justify-content: center;
+    }
+    .editor-dialog.show { display: flex; }
+    .editor-dialog-box {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 4px;
+      width: 340px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.2);
+    }
+    .editor-dialog-box h4 { font-family: var(--display); margin-bottom: 1rem; }
+    .editor-dialog-box input {
+      width: 100%; padding: .6rem .8rem;
+      border: 1px solid var(--border);
+      margin-bottom: .75rem;
+      font-family: var(--serif); font-size: .9rem;
+    }
+    .editor-dialog-actions { display: flex; gap: .5rem; justify-content: flex-end; }
+
     @media (max-width: 900px) {
       .editor-wrap { padding: 1.5rem 1rem; }
       .editor-form { padding: 1.5rem; }
@@ -557,7 +348,7 @@
 </head>
 <body>
 
-<!-- ── HEADER ─────────────────────────────── -->
+<!-- ── HEADER ── -->
 <header>
   <a href="/" class="logo">शिव मार्ग<span>.</span></a>
   <nav class="hdr-nav">
@@ -577,70 +368,56 @@
   </div>
 </header>
 
-<!-- ── MAIN EDITOR ────────────────────────– -->
+<!-- ── MAIN EDITOR ── -->
 <div class="editor-wrap">
 
-  <!-- Breadcrumb -->
   <div class="breadcrumb">
     <a href="/">शिव मार्ग</a>
     <span>›</span>
     <span id="breadcrumbText">नया लेख</span>
   </div>
 
-  <!-- Title -->
   <h1 class="editor-title" id="pageTitle">नया लेख लिखें</h1>
   <p class="editor-subtitle" id="pageSubtitle">अपने विचार, ज्ञान और अनुभव साझा करें</p>
 
-  <!-- Status Bar -->
   <div class="status-bar" id="statusBar" style="display: none;">
     <span class="status-badge" id="statusBadge">ड्राफ्ट</span>
-    <div id="approvalInfo" style="display: none; margin-left: auto; color: var(--ink-muted); font-family: var(--mono); font-size: 0.8rem;">
-      अनुमोदन के लिए प्रतीक्षा...
-    </div>
+    <div id="approvalInfo" style="display: none; margin-left: auto; color: var(--ink-muted); font-family: var(--mono); font-size: 0.8rem;">अनुमोदन के लिए प्रतीक्षा...</div>
     <div class="word-count" id="wordCount">शब्द: 0</div>
   </div>
 
-  <!-- Approval Info Box (for pending articles) -->
   <div id="approvalInfoBox" style="display: none;" class="approval-box">
     <strong>⏳ अनुमोदन के लिए प्रतीक्षा</strong>
     <p>आपका लेख प्रशासक को अनुमोदन के लिए भेजा गया है। प्रकाशित होने से पहले कृपया प्रतीक्षा करें।</p>
     <p id="submittedDate"></p>
   </div>
 
-  <!-- Rejection Info Box -->
-  <div id="rejectionInfoBox" style="display: none;" class="approval-box" style="background: #f8d7da; border-color: #f5c6cb;">
+  <div id="rejectionInfoBox" style="display: none;" class="approval-box">
     <strong style="color: #721c24;">✗ अनुरोध अस्वीकृत</strong>
     <p id="rejectionReason" style="color: #721c24;"></p>
   </div>
 
-  <!-- Editor Form -->
   <form class="editor-form" id="editorForm" onsubmit="submitArticle(event)">
 
-    <!-- ── BASIC INFO ─────────────────────– -->
+    <!-- BASIC INFO -->
     <div class="form-section">
-      <h3 class="form-section-title">
-        <span class="form-section-icon">📝</span>
-        मूल जानकारी
-      </h3>
+      <h3 class="form-section-title"><span class="form-section-icon">📝</span>मूल जानकारी</h3>
 
       <div class="form-group">
         <label for="title">लेख का शीर्षक *</label>
-        <input type="text" id="title" name="title" placeholder="जैसे: घर की जगह क्या होती है?"
-               maxlength="300" required onkeyup="updatePreview(); generateSlug();">
+        <input type="text" id="title" name="title" placeholder="जैसे: घर की जगह क्या होती है?" maxlength="300" required onkeyup="updatePreview(); generateSlug();">
         <div class="form-help">यह आपके लेख का मुख्य शीर्षक होगा</div>
       </div>
 
       <div class="form-group">
         <label for="subtitle">उपशीर्षक</label>
-        <input type="text" id="subtitle" name="subtitle" placeholder="लेख का संक्षिप्त परिचय"
-               maxlength="150" onkeyup="updatePreview();">
+        <input type="text" id="subtitle" name="subtitle" placeholder="लेख का संक्षिप्त परिचय" maxlength="150" onkeyup="updatePreview();">
         <div class="form-help">वैकल्पिक। लेख की सूची में दिखेगा</div>
       </div>
 
       <div class="form-group">
         <label for="excerpt">अंश (Excerpt) *</label>
-        <textarea id="excerpt" name="excerpt" placeholder="लेख का 2-3 लाइन का सारांश... यह सूची में दिखेगा"
-                  maxlength="200" required onkeyup="updatePreview();"></textarea>
+        <textarea id="excerpt" name="excerpt" placeholder="लेख का 2-3 लाइन का सारांश..." maxlength="200" required onkeyup="updatePreview();"></textarea>
         <div class="form-help">सूची और सर्च में दिखने वाला छोटा विवरण</div>
       </div>
 
@@ -664,55 +441,112 @@
       </div>
     </div>
 
-    <!-- ── CONTENT ────────────────────────– -->
+    <!-- ✅ CONTENT — Custom Rich Editor replaces TinyMCE -->
     <div class="form-section">
-      <h3 class="form-section-title">
-        <span class="form-section-icon">✍️</span>
-        लेख की सामग्री
-      </h3>
-      <textarea id="content" name="content" placeholder="यहाँ अपना लेख लिखें..." 
-                onkeyup="updateWordCount(); updatePreview();"></textarea>
-      <div class="form-help">HTML tags का उपयोग कर सकते हैं। <strong>, <em>, <p>, <blockquote> आदि।</div>
-    </div>
+      <h3 class="form-section-title"><span class="form-section-icon">✍️</span>लेख की सामग्री</h3>
 
-    <!-- ── MEDIA ──────────────────────────– -->
-    <div class="form-section">
-      <h3 class="form-section-title">
-        <span class="form-section-icon">🖼️</span>
-        बैनर और थंबनेल
-      </h3>
-
-      <div class="form-group">
-        <label for="bannerUrl">बैनर इमेज URL *</label>
-        <input type="url" id="bannerUrl" name="bannerUrl" placeholder="https://example.com/banner.jpg" required
-               onchange="updatePreview();">
-        <div class="form-help">लेख के ऊपर दिखने वाली बड़ी इमेज (अनुपात: 16:9 बेहतर है)</div>
+      <!-- Fallback notice (shown only if rich editor errors out) -->
+      <div class="fallback-notice" id="fallbackNotice">
+        ⚠️ रिच एडिटर लोड नहीं हो सका। सादे टेक्स्ट मोड में काम हो रहा है। HTML tags मैन्युअल रूप से लिखें।
       </div>
 
+      <!-- Rich Editor -->
+      <div class="rich-editor-wrap" id="richEditorWrap">
+        <!-- Toolbar -->
+        <div class="rich-toolbar" id="richToolbar">
+          <!-- Format -->
+          <select onchange="execCmd('formatBlock', this.value); this.value='';" title="शीर्षक">
+            <option value="">— शीर्षक —</option>
+            <option value="h1">H1</option>
+            <option value="h2">H2</option>
+            <option value="h3">H3</option>
+            <option value="p">सामान्य</option>
+          </select>
+          <div class="tb-sep"></div>
+          <!-- Text format -->
+          <button type="button" onclick="execCmd('bold')" title="बोल्ड (Ctrl+B)"><b>B</b></button>
+          <button type="button" onclick="execCmd('italic')" title="इटैलिक (Ctrl+I)"><i>I</i></button>
+          <button type="button" onclick="execCmd('underline')" title="अंडरलाइन (Ctrl+U)"><u>U</u></button>
+          <button type="button" onclick="execCmd('strikeThrough')" title="स्ट्राइकथ्रू"><s>S</s></button>
+          <div class="tb-sep"></div>
+          <!-- Align -->
+          <button type="button" onclick="execCmd('justifyLeft')" title="बाएं">⬛</button>
+          <button type="button" onclick="execCmd('justifyCenter')" title="मध्य">☰</button>
+          <button type="button" onclick="execCmd('justifyRight')" title="दाएं">⬛</button>
+          <div class="tb-sep"></div>
+          <!-- Lists -->
+          <button type="button" onclick="execCmd('insertUnorderedList')" title="बुलेट सूची">• ☰</button>
+          <button type="button" onclick="execCmd('insertOrderedList')" title="क्रमांकित सूची">1. ☰</button>
+          <div class="tb-sep"></div>
+          <!-- Indent -->
+          <button type="button" onclick="execCmd('outdent')" title="बाहर">⇤</button>
+          <button type="button" onclick="execCmd('indent')" title="अंदर">⇥</button>
+          <div class="tb-sep"></div>
+          <!-- Special -->
+          <button type="button" onclick="insertBlockquote()" title="उद्धरण">❝</button>
+          <button type="button" onclick="insertLink()" title="लिंक">🔗</button>
+          <button type="button" onclick="insertImageDialog()" title="इमेज">🖼️</button>
+          <button type="button" onclick="execCmd('removeFormat')" title="फॉर्मेट हटाएँ">✕</button>
+          <div class="tb-sep"></div>
+          <!-- HTML source toggle -->
+          <button type="button" id="htmlToggleBtn" onclick="toggleHtmlSource()" title="HTML सोर्स">⟨/⟩</button>
+        </div>
+
+        <!-- Editable area -->
+        <div
+          class="rich-content"
+          id="richContent"
+          contenteditable="true"
+          data-placeholder="यहाँ अपना लेख लिखें..."
+          oninput="onEditorInput()"
+          onkeydown="handleEditorKeydown(event)"
+        ></div>
+
+        <!-- HTML source textarea (hidden by default) -->
+        <textarea
+          id="htmlSource"
+          style="display:none; width:100%; min-height:420px; padding:1rem; font-family:var(--mono); font-size:13px; border:none; background:#1a1410; color:#f5f0e8; resize:vertical; outline:none;"
+          oninput="syncFromSource()"
+          placeholder="HTML सोर्स यहाँ संपादित करें..."
+        ></textarea>
+      </div>
+
+      <!-- Fallback plain textarea (shown if contenteditable fails) -->
+      <textarea
+        class="fallback-textarea"
+        id="fallbackEditor"
+        placeholder="यहाँ अपना लेख लिखें... (HTML tags उपयोग कर सकते हैं: &lt;strong&gt;, &lt;em&gt;, &lt;p&gt;, &lt;blockquote&gt; आदि)"
+        oninput="updateWordCount(); updatePreview();"
+      ></textarea>
+
+      <div class="form-help" id="editorHelp">बोल्ड, इटैलिक, लिंक, इमेज, हेडिंग, उद्धरण आदि टूलबार से जोड़ें।</div>
+    </div>
+
+    <!-- MEDIA -->
+    <div class="form-section">
+      <h3 class="form-section-title"><span class="form-section-icon">🖼️</span>बैनर और थंबनेल</h3>
+      <div class="form-group">
+        <label for="bannerUrl">बैनर इमेज URL *</label>
+        <input type="url" id="bannerUrl" name="bannerUrl" placeholder="https://example.com/banner.jpg" required onchange="updatePreview();">
+        <div class="form-help">लेख के ऊपर दिखने वाली बड़ी इमेज (अनुपात: 16:9 बेहतर है)</div>
+      </div>
       <div class="form-group">
         <label for="thumbnailUrl">थंबनेल इमेज URL</label>
-        <input type="url" id="thumbnailUrl" name="thumbnailUrl" placeholder="https://example.com/thumb.jpg"
-               onchange="updatePreview();">
+        <input type="url" id="thumbnailUrl" name="thumbnailUrl" placeholder="https://example.com/thumb.jpg" onchange="updatePreview();">
         <div class="form-help">सूची में दिखने वाली छोटी इमेज (अनुपात: 1:1 बेहतर है)</div>
       </div>
     </div>
 
-    <!-- ── METADATA ───────────────────────– -->
+    <!-- METADATA -->
     <div class="form-section">
-      <h3 class="form-section-title">
-        <span class="form-section-icon">🏷️</span>
-        टैग और विवरण
-      </h3>
-
+      <h3 class="form-section-title"><span class="form-section-icon">🏷️</span>टैग और विवरण</h3>
       <div class="form-group">
         <label>टैग्स</label>
         <div class="tag-input-wrap" id="tagInput">
-          <input type="text" id="tagField" placeholder="टैग दर्ज करें और Enter दबाएँ..." 
-                 onkeyup="handleTagInput(event);">
+          <input type="text" id="tagField" placeholder="टैग दर्ज करें और Enter दबाएँ..." onkeyup="handleTagInput(event);">
         </div>
         <div class="form-help">लेख को खोजने में मदद करने वाले कीवर्ड्स। Enter दबाएँ</div>
       </div>
-
       <div class="form-group">
         <label for="slug">स्लग (URL) *</label>
         <input type="text" id="slug" name="slug" placeholder="article-slug" required>
@@ -720,7 +554,7 @@
       </div>
     </div>
 
-    <!-- ── ACTIONS ────────────────────────– -->
+    <!-- ACTIONS -->
     <div class="form-actions">
       <button type="button" class="btn btn-secondary" onclick="window.history.back();">रद्द करें</button>
       <button type="button" class="btn btn-secondary" id="previewBtn" onclick="togglePreview();">पूर्वावलोकन</button>
@@ -730,24 +564,45 @@
   </form>
 </div>
 
-<!-- ── PREVIEW PANEL ──────────────────────– -->
+<!-- ── PREVIEW PANEL ── -->
 <div class="preview-panel" id="previewPanel">
   <h2 class="preview-title" id="previewTitle">लेख का शीर्षक</h2>
   <div class="preview-meta" id="previewMeta">कविता · 5 मिनट पढ़ें</div>
-  <div class="preview-content" id="previewContent">
-    यहाँ आपके लेख का पूर्वावलोकन दिखेगा
+  <div class="preview-content" id="previewContent">यहाँ आपके लेख का पूर्वावलोकन दिखेगा</div>
+</div>
+
+<!-- ── LINK DIALOG ── -->
+<div class="editor-dialog" id="linkDialog">
+  <div class="editor-dialog-box">
+    <h4>🔗 लिंक जोड़ें</h4>
+    <input type="url" id="linkUrl" placeholder="https://example.com" />
+    <input type="text" id="linkText" placeholder="लिंक का टेक्स्ट (खाली = चयनित टेक्स्ट)" />
+    <div class="editor-dialog-actions">
+      <button class="btn btn-secondary" type="button" onclick="closeLinkDialog()">रद्द करें</button>
+      <button class="btn btn-primary" type="button" onclick="confirmLink()">जोड़ें</button>
+    </div>
   </div>
 </div>
 
-<!-- ── MODALS ─────────────────────────────– -->
+<!-- ── IMAGE DIALOG ── -->
+<div class="editor-dialog" id="imageDialog">
+  <div class="editor-dialog-box">
+    <h4>🖼️ इमेज जोड़ें</h4>
+    <input type="url" id="imageUrl" placeholder="https://example.com/image.jpg" />
+    <input type="text" id="imageAlt" placeholder="Alt टेक्स्ट (विवरण)" />
+    <div class="editor-dialog-actions">
+      <button class="btn btn-secondary" type="button" onclick="closeImageDialog()">रद्द करें</button>
+      <button class="btn btn-primary" type="button" onclick="confirmImage()">जोड़ें</button>
+    </div>
+  </div>
+</div>
 
-<!-- Success Modal -->
+<!-- ── MODALS ── -->
+
 <div class="modal" id="successModal">
   <div class="modal-content">
     <h2 class="modal-title">✓ सफल!</h2>
-    <div class="modal-body" id="successMessage">
-      लेख सफलतापूर्वक सहेजा गया।
-    </div>
+    <div class="modal-body" id="successMessage">लेख सफलतापूर्वक सहेजा गया।</div>
     <p id="successDetail" style="color: var(--ink-muted); font-size: 0.85rem; margin-bottom: 1rem;"></p>
     <div class="modal-actions">
       <button class="btn btn-secondary" onclick="successNew()">नया लेख लिखें</button>
@@ -756,94 +611,72 @@
   </div>
 </div>
 
-<!-- My Drafts Modal -->
 <div class="modal" id="draftsModal">
   <div class="modal-content" style="max-width: 700px; max-height: 80vh; overflow-y: auto;">
     <h2 class="modal-title">📝 मेरे ड्राफ्ट्स</h2>
-    <div id="draftsList" style="margin-top: 1.5rem;">
-      <p style="text-align: center; color: var(--ink-muted);">लोड हो रहा है...</p>
-    </div>
+    <div id="draftsList" style="margin-top: 1.5rem;"><p style="text-align:center;color:var(--ink-muted)">लोड हो रहा है...</p></div>
     <div class="modal-actions" style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1rem;">
       <button class="btn btn-secondary" onclick="closeModal('draftsModal')">बंद करें</button>
     </div>
   </div>
 </div>
 
-<!-- My Articles Modal -->
 <div class="modal" id="articlesModal">
   <div class="modal-content" style="max-width: 700px; max-height: 80vh; overflow-y: auto;">
     <h2 class="modal-title">📚 मेरे लेख</h2>
-    <div id="articlesList" style="margin-top: 1.5rem;">
-      <p style="text-align: center; color: var(--ink-muted);">लोड हो रहा है...</p>
-    </div>
+    <div id="articlesList" style="margin-top: 1.5rem;"><p style="text-align:center;color:var(--ink-muted)">लोड हो रहा है...</p></div>
     <div class="modal-actions" style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1rem;">
       <button class="btn btn-secondary" onclick="closeModal('articlesModal')">बंद करें</button>
     </div>
   </div>
 </div>
 
-<!-- Approval Queue Modal (Admin Only) -->
 <div class="modal" id="approvalModal">
   <div class="modal-content" style="max-width: 800px; max-height: 80vh; overflow-y: auto;">
     <h2 class="modal-title">🔍 अनुमोदन कतार</h2>
-    <p style="color: var(--ink-muted); font-size: 0.9rem; margin-bottom: 1rem;">प्रकाशन के लिए अनुमोदन की प्रतीक्षा करने वाले लेख</p>
-    <div id="approvalList" style="margin-top: 1.5rem;">
-      <p style="text-align: center; color: var(--ink-muted);">लोड हो रहा है...</p>
-    </div>
+    <p style="color:var(--ink-muted);font-size:0.9rem;margin-bottom:1rem">प्रकाशन के लिए अनुमोदन की प्रतीक्षा करने वाले लेख</p>
+    <div id="approvalList" style="margin-top: 1.5rem;"><p style="text-align:center;color:var(--ink-muted)">लोड हो रहा है...</p></div>
     <div class="modal-actions" style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1rem;">
       <button class="btn btn-secondary" onclick="closeModal('approvalModal')">बंद करें</button>
     </div>
   </div>
 </div>
 
-<!-- Delete Confirmation Modal -->
 <div class="modal" id="deleteModal">
   <div class="modal-content">
     <h2 class="modal-title">⚠️ लेख हटाएँ?</h2>
     <div class="modal-body">
       <p>यह क्रिया वापस नहीं की जा सकती। क्या आप निश्चित हैं?</p>
-      <p style="margin-top: 1rem; font-weight: 600;">
-        <span id="deleteArticleTitle">लेख का शीर्षक</span>
-      </p>
+      <p style="margin-top:1rem;font-weight:600"><span id="deleteArticleTitle">लेख का शीर्षक</span></p>
     </div>
     <div class="modal-actions">
       <button class="btn btn-secondary" onclick="closeModal('deleteModal')">रद्द करें</button>
-      <button class="btn btn-primary" style="background: #e74c3c;" onclick="confirmDelete()">हाँ, हटाएँ</button>
+      <button class="btn btn-primary" style="background:#e74c3c" onclick="confirmDelete()">हाँ, हटाएँ</button>
     </div>
   </div>
 </div>
 
-<!-- Approval Review Modal (Admin) -->
 <div class="modal" id="reviewModal">
   <div class="modal-content" style="max-width: 700px; max-height: 90vh; overflow-y: auto;">
     <h2 class="modal-title" id="reviewTitle">लेख समीक्षा</h2>
-    
-    <div id="reviewArticleContent" style="margin: 1.5rem 0; padding: 1rem; background: var(--paper-warm); border-radius: 4px;">
-      <h3 id="reviewArticleTitle" style="font-family: var(--display); font-size: 1.1rem; margin-bottom: 0.5rem;"></h3>
-      <p id="reviewArticleExcerpt" style="color: var(--ink-soft); font-size: 0.9rem;"></p>
-      <p id="reviewArticleAuthor" style="color: var(--ink-muted); font-size: 0.8rem; margin-top: 0.5rem;"></p>
+    <div id="reviewArticleContent" style="margin:1.5rem 0;padding:1rem;background:var(--paper-warm);border-radius:4px">
+      <h3 id="reviewArticleTitle" style="font-family:var(--display);font-size:1.1rem;margin-bottom:0.5rem"></h3>
+      <p id="reviewArticleExcerpt" style="color:var(--ink-soft);font-size:0.9rem"></p>
+      <p id="reviewArticleAuthor" style="color:var(--ink-muted);font-size:0.8rem;margin-top:0.5rem"></p>
     </div>
-
-    <div style="margin: 1.5rem 0;">
-      <label style="display: block; font-weight: 600; color: var(--ink); margin-bottom: 0.5rem; font-family: var(--mono);">
-        निर्णय *
-      </label>
-      <select id="reviewDecision" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); font-family: var(--serif); font-size: 0.95rem;">
+    <div style="margin:1.5rem 0">
+      <label style="display:block;font-weight:600;color:var(--ink);margin-bottom:0.5rem;font-family:var(--mono)">निर्णय *</label>
+      <select id="reviewDecision" style="width:100%;padding:0.75rem;border:1px solid var(--border);font-family:var(--serif);font-size:0.95rem">
         <option value="">— चुनें —</option>
         <option value="approve">✓ मंजूरी दें</option>
         <option value="reject">✗ अस्वीकार करें</option>
       </select>
     </div>
-
-    <div style="margin: 1.5rem 0; display: none;" id="rejectionReasonDiv">
-      <label style="display: block; font-weight: 600; color: var(--ink); margin-bottom: 0.5rem; font-family: var(--mono);">
-        अस्वीकृति कारण
-      </label>
-      <textarea id="rejectionReason" placeholder="कृपया अस्वीकृति का कारण समझाएँ..."
-                style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); font-family: var(--serif); font-size: 0.95rem; min-height: 80px;"></textarea>
+    <div style="margin:1.5rem 0;display:none" id="rejectionReasonDiv">
+      <label style="display:block;font-weight:600;color:var(--ink);margin-bottom:0.5rem;font-family:var(--mono)">अस्वीकृति कारण</label>
+      <textarea id="rejectionReasonText" placeholder="कृपया अस्वीकृति का कारण समझाएँ..." style="width:100%;padding:0.75rem;border:1px solid var(--border);font-family:var(--serif);font-size:0.95rem;min-height:80px"></textarea>
     </div>
-
-    <div class="modal-actions" style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1rem;">
+    <div class="modal-actions" style="margin-top:2rem;border-top:1px solid var(--border);padding-top:1rem">
       <button class="btn btn-secondary" onclick="closeModal('reviewModal')">रद्द करें</button>
       <button class="btn btn-success" id="submitReviewBtn" onclick="submitReview()">निर्णय सहेजें</button>
     </div>
@@ -851,239 +684,348 @@
 </div>
 
 <div id="page-loader">
-    <div class="loader-content">
-        <img src="/images/ShivMarg.png" alt="Logo">
-    </div>
+  <div class="loader-content"><img src="/images/ShivMarg.png" alt="Logo"></div>
 </div>
-<!-- ── TOAST ──────────────────────────────– -->
+
 <div class="toast" id="toast"></div>
 
-<!-- ── JAVASCRIPT ──────────────────────────– -->
+<!-- ════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
 <script>
-  // ─────────────────────────────────────────────
-  // CONFIG & STATE
-  // ─────────────────────────────────────────────
-  const API_BASE = 'https://www.api.shivmarg.live';
-  // const API_BASE = 'http://127.0.0.1:8000' ;
-  let currentUser = null;
-  let tags = [];
-  let currentArticleId = null;
-  let isEditMode = false;
+// ── CONFIG & STATE ──
+const API_BASE = 'https://www.api.shivmarg.live';
+let currentUser = null;
+let tags = [];
+let currentArticleId = null;
+let isEditMode = false;
 
-  // ─────────────────────────────────────────────
-  // UTILITY: Local Storage & Auth
-  // ─────────────────────────────────────────────
-  function getToken() {
-    return localStorage.getItem('admin_token') || localStorage.getItem('ed_token');
+// ── EDITOR STATE ──
+let editorMode = 'rich';   // 'rich' | 'html' | 'fallback'
+let savedRange = null;     // saved selection before dialog opens
+
+// ════════════════════════════════════════════
+// RICH EDITOR — Core
+// ════════════════════════════════════════════
+
+/**
+ * Try to init contenteditable rich editor.
+ * Falls back to plain textarea if something goes wrong.
+ */
+function initEditor(initialContent = '') {
+  try {
+    const el = document.getElementById('richContent');
+    if (!el || !('contentEditable' in el)) throw new Error('no contenteditable');
+
+    // Test execCommand availability
+    document.execCommand('defaultParagraphSeparator', false, 'p');
+
+    el.innerHTML = initialContent || '';
+    editorMode = 'rich';
+    updateWordCount();
+  } catch (err) {
+    console.warn('Rich editor failed, falling back:', err);
+    activateFallback(initialContent);
+  }
+}
+
+function activateFallback(content = '') {
+  editorMode = 'fallback';
+  document.getElementById('richEditorWrap').style.display = 'none';
+  document.getElementById('fallbackNotice').style.display = 'block';
+  const fb = document.getElementById('fallbackEditor');
+  fb.style.display = 'block';
+  fb.value = content;
+}
+
+/** Get HTML content from whichever editor is active */
+function getEditorContent() {
+  if (editorMode === 'fallback') {
+    return document.getElementById('fallbackEditor').value;
+  }
+  if (editorMode === 'html') {
+    // sync from source textarea first
+    document.getElementById('richContent').innerHTML =
+      document.getElementById('htmlSource').value;
+  }
+  return document.getElementById('richContent').innerHTML;
+}
+
+/** Set HTML content */
+function setEditorContent(html) {
+  if (editorMode === 'fallback') {
+    document.getElementById('fallbackEditor').value = html;
+  } else {
+    document.getElementById('richContent').innerHTML = html;
+    if (editorMode === 'html') {
+      document.getElementById('htmlSource').value = html;
+    }
+  }
+}
+
+/** Called on every input in the rich area */
+function onEditorInput() {
+  updateWordCount();
+  updatePreview();
+}
+
+/** Handle tab key in editor (indent instead of focus-jump) */
+function handleEditorKeydown(e) {
+  if (e.key === 'Tab') {
+    e.preventDefault();
+    execCmd('insertHTML', '&nbsp;&nbsp;&nbsp;&nbsp;');
+  }
+}
+
+// ── TOOLBAR COMMANDS ──
+function execCmd(cmd, value = null) {
+  if (editorMode === 'fallback') return;
+  document.getElementById('richContent').focus();
+  document.execCommand(cmd, false, value);
+  updateWordCount();
+  updatePreview();
+}
+
+function insertBlockquote() {
+  if (editorMode === 'fallback') return;
+  const el = document.getElementById('richContent');
+  el.focus();
+  // Wrap selection in blockquote
+  const sel = window.getSelection();
+  const text = sel && sel.toString() ? sel.toString() : 'उद्धरण यहाँ लिखें';
+  document.execCommand('insertHTML', false,
+    `<blockquote>${text}</blockquote><p><br></p>`);
+  updateWordCount();
+  updatePreview();
+}
+
+// ── HTML SOURCE TOGGLE ──
+function toggleHtmlSource() {
+  const richEl   = document.getElementById('richContent');
+  const srcEl    = document.getElementById('htmlSource');
+  const btn      = document.getElementById('htmlToggleBtn');
+
+  if (editorMode === 'html') {
+    // Back to rich
+    richEl.innerHTML = srcEl.value;
+    srcEl.style.display = 'none';
+    richEl.style.display = '';
+    btn.classList.remove('active');
+    editorMode = 'rich';
+  } else {
+    // To HTML source
+    srcEl.value = richEl.innerHTML;
+    richEl.style.display = 'none';
+    srcEl.style.display = 'block';
+    btn.classList.add('active');
+    editorMode = 'html';
+  }
+}
+
+function syncFromSource() {
+  // Live-preview while typing in source (lightweight)
+  updateWordCount();
+}
+
+// ── LINK DIALOG ──
+function insertLink() {
+  if (editorMode === 'fallback') return;
+  // Save selection so we can restore after dialog
+  savedRange = saveSelection();
+  document.getElementById('linkUrl').value = '';
+  document.getElementById('linkText').value = window.getSelection()?.toString() || '';
+  document.getElementById('linkDialog').classList.add('show');
+}
+function closeLinkDialog() { document.getElementById('linkDialog').classList.remove('show'); }
+function confirmLink() {
+  const url  = document.getElementById('linkUrl').value.trim();
+  const text = document.getElementById('linkText').value.trim();
+  if (!url) return;
+  closeLinkDialog();
+  const el = document.getElementById('richContent');
+  el.focus();
+  restoreSelection(savedRange);
+  const html = `<a href="${escHtml(url)}" target="_blank" rel="noopener">${escHtml(text || url)}</a>`;
+  document.execCommand('insertHTML', false, html);
+  updateWordCount(); updatePreview();
+}
+
+// ── IMAGE DIALOG ──
+function insertImageDialog() {
+  if (editorMode === 'fallback') return;
+  savedRange = saveSelection();
+  document.getElementById('imageUrl').value = '';
+  document.getElementById('imageAlt').value = '';
+  document.getElementById('imageDialog').classList.add('show');
+}
+function closeImageDialog() { document.getElementById('imageDialog').classList.remove('show'); }
+function confirmImage() {
+  const url = document.getElementById('imageUrl').value.trim();
+  const alt = document.getElementById('imageAlt').value.trim();
+  if (!url) return;
+  closeImageDialog();
+  const el = document.getElementById('richContent');
+  el.focus();
+  restoreSelection(savedRange);
+  const html = `<figure style="margin:16px 0;"><img src="${escHtml(url)}" alt="${escHtml(alt)}" style="max-width:100%;border-radius:2px;"><figcaption style="font-size:0.85em;color:#8a7a6e;text-align:center;">${escHtml(alt)}</figcaption></figure>`;
+  document.execCommand('insertHTML', false, html);
+  updateWordCount(); updatePreview();
+}
+
+// ── SELECTION HELPERS ──
+function saveSelection() {
+  const sel = window.getSelection();
+  if (sel && sel.rangeCount > 0) return sel.getRangeAt(0).cloneRange();
+  return null;
+}
+function restoreSelection(range) {
+  if (!range) return;
+  const sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(range);
+}
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ════════════════════════════════════════════
+// WORD COUNT
+// ════════════════════════════════════════════
+function updateWordCount() {
+  let text = '';
+  if (editorMode === 'fallback') {
+    text = document.getElementById('fallbackEditor').value;
+  } else if (editorMode === 'html') {
+    const tmp = document.createElement('div');
+    tmp.innerHTML = document.getElementById('htmlSource').value;
+    text = tmp.textContent || tmp.innerText || '';
+  } else {
+    text = document.getElementById('richContent').innerText || '';
+  }
+  const words = text.trim().split(/\s+/).filter(w => w.length > 0).length;
+  document.getElementById('wordCount').textContent = `शब्द: ${words}`;
+}
+
+// ════════════════════════════════════════════
+// AUTH UTILITIES
+// ════════════════════════════════════════════
+function getToken()      { return localStorage.getItem('admin_token') || localStorage.getItem('ed_token'); }
+function getCurrentUser(){ const u = localStorage.getItem('currentUser'); return u ? JSON.parse(u) : null; }
+function logout() {
+  localStorage.removeItem('admin_token');
+  localStorage.removeItem('ed_token');
+  localStorage.removeItem('currentUser');
+  window.location.href = '/editor-login';
+}
+function hasAdminRole() { return currentUser && (currentUser.role === 'admin' || currentUser.role === 'moderator'); }
+
+// ════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════
+async function initPage() {
+  const token = getToken();
+  if (!token) { window.location.href = '/editor-login'; return; }
+
+  currentUser = getCurrentUser();
+  if (!currentUser) {
+    try {
+      const res = await fetch(`${API_BASE}/api/auth/me`, { headers: { 'Authorization': `Bearer ${token}` } });
+      if (!res.ok) throw new Error('Unauthorized');
+      currentUser = await res.json();
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+    } catch { logout(); return; }
   }
 
-  function getCurrentUser() {
-    const user = localStorage.getItem('currentUser');
-    return user ? JSON.parse(user) : null;
+  document.getElementById('userDisplay').textContent = currentUser.display_name || currentUser.username;
+  const roleEl = document.getElementById('userRole');
+  if (hasAdminRole()) {
+    roleEl.textContent = currentUser.role === 'admin' ? 'Admin' : 'Moderator';
+    roleEl.style.display = 'inline-block';
+    roleEl.classList.add('admin');
+    document.getElementById('adminLink').style.display = 'inline';
+  } else {
+    roleEl.style.display = 'none';
   }
 
-  function logout() {
-    localStorage.removeItem('admin_token');
-    localStorage.removeItem('ed_token');
-    localStorage.removeItem('currentUser');
-    window.location.href = '/editor-login';
+  const params = new URLSearchParams(window.location.search);
+  const editId = params.get('edit');
+  if (editId) {
+    await loadArticleForEdit(editId);
+  } else {
+    initEditor();
+    loadDraftFromStorage();
   }
 
-  function hasAdminRole() {
-    return currentUser && (currentUser.role === 'admin' || currentUser.role === 'moderator');
-  }
+  setInterval(autoSave, 30000);
+}
 
-  // ─────────────────────────────────────────────
-  // INIT: Check Auth & Load User
-  // ─────────────────────────────────────────────
-  async function initPage() {
-    const token = getToken();
-    if (!token) {
-      window.location.href = '/editor-login';
+// ════════════════════════════════════════════
+// LOAD ARTICLE FOR EDIT
+// ════════════════════════════════════════════
+async function loadArticleForEdit(slug) {
+  const token = getToken();
+  try {
+    const res = await fetch(`${API_BASE}/api/articles/${slug}`, { headers: { 'Authorization': `Bearer ${token}` } });
+    if (!res.ok) throw new Error('लेख नहीं मिला');
+    const article = await res.json();
+    window.currentEditingArticle = article;
+
+    if (article.author_id !== currentUser._id && !hasAdminRole()) {
+      showToast('आपको यह लेख संपादित करने की अनुमति नहीं है', 'error');
+      window.location.href = '/';
       return;
     }
 
-    currentUser = getCurrentUser();
-    if (!currentUser) {
-      try {
-        const res = await fetch(`${API_BASE}/api/auth/me`, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
-        if (!res.ok) throw new Error('Unauthorized');
-        currentUser = await res.json();
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
-      } catch(e) {
-        logout();
-        return;
-      }
+    isEditMode = true;
+    currentArticleId = slug;
+    document.getElementById('editingArticleId').value = slug;
+    document.getElementById('title').value       = article.title;
+    document.getElementById('subtitle').value    = article.subtitle || '';
+    document.getElementById('excerpt').value     = article.excerpt;
+    document.getElementById('category').value    = article.category;
+    document.getElementById('bannerUrl').value   = article.banner_url;
+    document.getElementById('thumbnailUrl').value= article.thumbnail_url || '';
+    document.getElementById('readTime').value    = article.read_time || 5;
+    document.getElementById('slug').value        = article.slug;
+    tags = article.tags || [];
+
+    document.getElementById('pageTitle').textContent    = 'लेख संपादित करें';
+    document.getElementById('pageSubtitle').textContent = `"${article.title}" को संपादित करें`;
+    document.getElementById('breadcrumbText').textContent = 'संपादित करें';
+    document.getElementById('submitBtn').textContent    = 'परिवर्तन सहेजें';
+
+    document.getElementById('statusBar').style.display = 'flex';
+    const statusBadge = document.getElementById('statusBadge');
+    if (article.status === 'draft') {
+      statusBadge.textContent = 'ड्राफ्ट'; statusBadge.className = 'status-badge draft';
+    } else if (article.status === 'pending_approval') {
+      statusBadge.textContent = 'अनुमोदन के लिए प्रतीक्षा'; statusBadge.className = 'status-badge pending-approval';
+      document.getElementById('approvalInfoBox').style.display = 'block';
+      document.getElementById('submittedDate').textContent = `सबमिट: ${new Date(article.submitted_at).toLocaleDateString('hi-IN')}`;
+    } else if (article.status === 'published') {
+      statusBadge.textContent = 'प्रकाशित'; statusBadge.className = 'status-badge published';
+      document.getElementById('submitBtn').textContent = 'परिवर्तन सहेजें और पुनः प्रकाशित करें';
+    } else if (article.status === 'reject') {
+      statusBadge.textContent = 'अस्वीकृत'; statusBadge.className = 'status-badge rejected';
+      document.getElementById('rejectionInfoBox').style.display = 'block';
+      document.getElementById('rejectionReason').textContent = article.rejection_reason || 'कोई कारण दिया नहीं गया';
     }
 
-    // Update UI with user info
-    document.getElementById('userDisplay').textContent = currentUser.display_name || currentUser.username;
-    const roleEl = document.getElementById('userRole');
-    if (hasAdminRole()) {
-      roleEl.textContent = currentUser.role === 'admin' ? 'Admin' : 'Moderator';
-      roleEl.style.display = 'inline-block';
-      roleEl.classList.add('admin');
-      document.getElementById('adminLink').style.display = 'inline';
-    } else {
-      roleEl.style.display = 'none';
-    }
-
-    // Check if editing an article
-    const params = new URLSearchParams(window.location.search);
-    const editId = params.get('edit');
-    if (editId) {
-      await loadArticleForEdit(editId);
-    } else {
-      // Initialize TinyMCE for new article
-      initEditor();
-      loadDraftFromStorage();
-    }
-
-    // Auto-save to localStorage every 30 seconds
-    setInterval(autoSave, 30000);
+    // Init editor with article content
+    initEditor(article.content || '');
+    renderTags();
+  } catch (e) {
+    showToast(e.message || 'लेख लोड नहीं हो सका', 'error');
+    setTimeout(() => window.location.href = '/', 2000);
   }
+}
 
-  // ─────────────────────────────────────────────
-  // LOAD ARTICLE FOR EDITING
-  // ─────────────────────────────────────────────
-  async function loadArticleForEdit(slug) {
-    const token = getToken();
-    // At top of loadArticleForEdit, after const article = await res.json():
-    
-    try {
-      const res = await fetch(`${API_BASE}/api/articles/${slug}`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-
-      if (!res.ok) throw new Error('लेख नहीं मिला');
-      const article = await res.json();
-      window.currentEditingArticle = article;  // ← ADD THIS
-      // Check ownership
-      if (article.author_id !== currentUser._id && !hasAdminRole()) {
-        showToast('आपको यह लेख संपादित करने की अनुमति नहीं है', 'error');
-        window.location.href = '/';
-        return;
-      }
-
-      // Populate form
-      isEditMode = true;
-      currentArticleId = slug;
-      document.getElementById('editingArticleId').value = slug;
-      document.getElementById('title').value = article.title;
-      document.getElementById('subtitle').value = article.subtitle || '';
-      document.getElementById('excerpt').value = article.excerpt;
-      document.getElementById('category').value = article.category;
-      document.getElementById('bannerUrl').value = article.banner_url;
-      document.getElementById('thumbnailUrl').value = article.thumbnail_url || '';
-      document.getElementById('readTime').value = article.read_time || 5;
-      document.getElementById('slug').value = article.slug;
-      // loadArticleForEdit() में:
-      tags = article.tags || [];
-
-      // Update page title
-      document.getElementById('pageTitle').textContent = 'लेख संपादित करें';
-      document.getElementById('pageSubtitle').textContent = `"${article.title}" को संपादित करें`;
-      document.getElementById('breadcrumbText').textContent = 'संपादित करें';
-      document.getElementById('submitBtn').textContent = 'परिवर्तन सहेजें';
-
-      // Show status bar and set status
-      document.getElementById('statusBar').style.display = 'flex';
-      const statusBadge = document.getElementById('statusBadge');
-      if (article.status === 'draft') {
-        statusBadge.textContent = 'ड्राफ्ट';
-        statusBadge.className = 'status-badge draft';
-      } else if (article.status === 'pending_approval') {
-        statusBadge.textContent = 'अनुमोदन के लिए प्रतीक्षा';
-        statusBadge.className = 'status-badge pending-approval';
-        document.getElementById('approvalInfoBox').style.display = 'block';
-        document.getElementById('submittedDate').textContent = 
-          `सबमिट: ${new Date(article.submitted_at).toLocaleDateString('hi-IN')}`;
-      } else if (article.status === 'published') {
-        statusBadge.textContent = 'प्रकाशित';
-        statusBadge.className = 'status-badge published';
-      } else if (article.status === 'reject') {
-        statusBadge.textContent = 'अस्वीकृत';
-        statusBadge.className = 'status-badge rejected';
-        document.getElementById('rejectionInfoBox').style.display = 'block';
-        document.getElementById('rejectionReason').textContent = article.rejection_reason || 'कोई कारण दिया नहीं गया';
-      }
-
-            // ADD after the status badge section:
-      if (article.status === 'published') {
-          document.getElementById('submitBtn').textContent = 'परिवर्तन सहेजें और पुनः प्रकाशित करें';
-      }
-
-      // Initialize TinyMCE
-      initEditor(() => {
-        const editor = tinymce.get('content');
-        if (editor) {
-          editor.setContent(article.content);
-        }
-      });
-
-      renderTags();
-    } catch(e) {
-      showToast(e.message || 'लेख लोड नहीं हो सका', 'error');
-      setTimeout(() => window.location.href = '/', 2000);
-    }
-  }
-
-  // ─────────────────────────────────────────────
-  // TINYMCE EDITOR INIT
-  // ─────────────────────────────────────────────
-  function initEditor(callback) {
-    tinymce.init({
-      selector: '#content',
-      height: 500,
-      plugins: [
-        'advlist', 'autolink', 'lists', 'link', 'image', 
-        'charmap', 'preview', 'anchor', 'searchreplace', 'visualblocks',
-        'code', 'fullscreen', 'insertdatetime', 'media', 'table', 'help', 'wordcount'
-      ],
-      toolbar: 'undo redo | formatselect | bold italic underline strikethrough | ' +
-        'alignleft aligncenter alignright alignjustify | ' +
-        'bullist numlist outdent indent | link image media | ' +
-        'blockquote code | removeformat | help',
-      content_css: 'default',
-      body_class: 'mce-content-body',
-      content_style: `
-        body { font-family: 'Noto Serif Devanagari', Georgia, serif; font-size: 16px; line-height: 1.8; }
-        p { margin-bottom: 15px; }
-        h1, h2, h3 { margin: 20px 0 10px; }
-        blockquote { border-left: 4px solid #c0392b; padding: 15px; margin: 20px 0; background: #f5f0e8; }
-      `,
-      setup: function(editor) {
-        editor.on('init', function() {
-          if (callback) callback();
-        });
-        editor.on('change', function() {
-          updateWordCount();
-          updatePreview();
-        });
-      }
-    });
-  }
-
-  // ─────────────────────────────────────────────
-  // WORD COUNT
-  // ─────────────────────────────────────────────
-  function updateWordCount() {
-    const editor = tinymce.get('content');
-    const text = editor ? editor.getContent({ format: 'text' }) : '';
-    const words = text.trim().split(/\s+/).filter(w => w.length > 0).length;
-    document.getElementById('wordCount').textContent = `शब्द: ${words}`;
-  }
-
-  // ─────────────────────────────────────────────
-  // SLUG GENERATION
-  // ─────────────────────────────────────────────
+// ════════════════════════════════════════════
+// SLUG GENERATION
+// ════════════════════════════════════════════
 function generateSlug() {
   const title = document.getElementById('title').value;
   if (!title) return;
-
-  // Transliteration map (basic)
   const map = {
     'अ':'a','आ':'aa','इ':'i','ई':'ee','उ':'u','ऊ':'oo','ए':'e','ऐ':'ai','ओ':'o','औ':'au',
     'क':'k','ख':'kh','ग':'g','घ':'gh','च':'ch','छ':'chh','ज':'j','झ':'jh',
@@ -1092,612 +1034,379 @@ function generateSlug() {
     'व':'v','श':'sh','ष':'sh','स':'s','ह':'h','ं':'n','ः':'','ा':'a','ि':'i',
     'ी':'ee','ु':'u','ू':'oo','े':'e','ै':'ai','ो':'o','ौ':'au','्':''
   };
-
-  let slug = title.split('').map(ch => map[ch] || ch).join('')
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '')
-    .slice(0, 60);
-
+  const slug = title.split('').map(ch => map[ch] || ch).join('')
+    .toLowerCase().replace(/[^\w\s-]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-')
+    .replace(/^-|-$/g,'').slice(0, 60);
   document.getElementById('slug').value = slug;
 }
 
-  // ─────────────────────────────────────────────
-  // TAG HANDLING
-  // ─────────────────────────────────────────────
-  function handleTagInput(e) {
-    if (e.key === 'Enter' && e.target.value.trim()) {
-      e.preventDefault();
-      const tag = e.target.value.trim();
-      if (!tags.includes(tag)) {
-        tags.push(tag);
-        renderTags();
-        e.target.value = '';
-      }
-    }
-  }
-
-  function removeTag(tag) {
-    tags = tags.filter(t => t !== tag);
-    renderTags();
-  }
-
-  function renderTags() {
-    const wrapper = document.getElementById('tagInput');
-    // पुराने tags हटाएँ (input को नहीं)
-    wrapper.querySelectorAll('.tag').forEach(el => el.remove());
-    
-    const input = wrapper.querySelector('input');
-    
-    tags.forEach(tag => {
-      const el = document.createElement('span');
-      el.className = 'tag';
-      el.innerHTML = `${tag} <button type="button" onclick="removeTag('${tag.replace(/'/g, "\\'")}')">×</button>`;
-      wrapper.insertBefore(el, input); // input से पहले insert करें
-    });
-  }
-
-  // ─────────────────────────────────────────────
-  // PREVIEW
-  // ─────────────────────────────────────────────
-  function updatePreview() {
-    const title = document.getElementById('title').value || 'लेख का शीर्षक';
-    const category = document.getElementById('category').value || 'श्रेणी';
-    const readTime = document.getElementById('readTime').value || 5;
-    const excerpt = document.getElementById('excerpt').value || 'यहाँ अंश दिखेगा';
-    const editor = tinymce.get('content');
-    const content = editor ? editor.getContent() : '';
-
-    document.getElementById('previewTitle').textContent = title;
-    document.getElementById('previewMeta').textContent = `${category} · ${readTime} मिनट पढ़ें`;
-    document.getElementById('previewContent').innerHTML = content ? content.substring(0, 300) + '...' : excerpt;
-  }
-
-  function togglePreview() {
-    document.getElementById('previewPanel').classList.toggle('open');
-  }
-
-  // ─────────────────────────────────────────────
-  // FORM SUBMISSION - Approval Workflow
-  // ─────────────────────────────────────────────
-  async function submitArticle(e) {
+// ════════════════════════════════════════════
+// TAGS
+// ════════════════════════════════════════════
+function handleTagInput(e) {
+  if (e.key === 'Enter' && e.target.value.trim()) {
     e.preventDefault();
-
-    const token = getToken();
-    if (!token) {
-      showToast('पहले लॉगिन करें', 'error');
-      return;
-    }
-
-    // Validate
-    const title = document.getElementById('title').value.trim();
-    const excerpt = document.getElementById('excerpt').value.trim();
-    const category = document.getElementById('category').value;
-    const bannerUrl = document.getElementById('bannerUrl').value.trim();
-    const slug = document.getElementById('slug').value.trim();
-    const editor = tinymce.get('content');
-    const content = editor ? editor.getContent() : '';
-
-    if (!title || !excerpt || !category || !bannerUrl || !slug || !content) {
-      showToast('कृपया सभी आवश्यक फील्ड भरें (*)', 'error');
-      return;
-    }
-
-    // Prepare payload
-    const payload = {
-        title,
-        subtitle: document.getElementById('subtitle').value.trim() || null,
-        content,
-        excerpt,
-        banner_url: bannerUrl,
-        thumbnail_url: document.getElementById('thumbnailUrl').value.trim() || null,
-        category,
-        tags,
-        read_time: parseInt(document.getElementById('readTime').value) || 5,
-        slug,
-        status: isEditMode && window.currentEditingArticle?.status === 'published'
-            ? 'published'
-            : hasAdminRole() ? 'published' : 'pending_approval',
-    };
-    try {
-      const btn = document.getElementById('submitBtn');
-      const originalText = btn.textContent;
-      btn.disabled = true;
-      btn.textContent = 'भेजा जा रहा है...';
-
-      const method = isEditMode ? 'PUT' : 'POST';
-      const url = isEditMode ? 
-        `${API_BASE}/api/articles/${currentArticleId}` : 
-        `${API_BASE}/api/articles`;
-
-      const res = await fetch(url, {
-        method,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify(payload)
-      });
-
-      if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.detail || 'कुछ गड़बड़ हुई');
-      }
-
-      const article = await res.json();
-
-      // Clear localStorage draft
-      localStorage.removeItem('articleDraft');
-
-      // Show success message
-      const isApprovalRequired = !hasAdminRole();
-      const statusMsg = isApprovalRequired ? 
-        'लेख सफलतापूर्वक सहेजा गया और अनुमोदन के लिए भेजा गया।' :
-        'लेख सफलतापूर्वक प्रकाशित किया गया।';
-
-      document.getElementById('successMessage').textContent = statusMsg;
-      document.getElementById('successDetail').textContent = isApprovalRequired ?
-        'प्रशासक द्वारा मंजूरी देने के बाद यह प्रकाशित होगा।' :
-        'लेख अब सार्वजनिक रूप से दृश्यमान है।';
-
-      showToast(statusMsg, 'success');
-      openModal('successModal');
-
-      window.articleSlug = article.slug;
-
-    } catch(e) {
-      showToast(e.message || 'लेख नहीं भेजा जा सका', 'error');
-      console.error(e);
-    } finally {
-      btn.disabled = false;
-      btn.textContent = originalText;
-    }
+    const tag = e.target.value.trim();
+    if (!tags.includes(tag)) { tags.push(tag); renderTags(); e.target.value = ''; }
   }
-
-  // ─────────────────────────────────────────────
-  // MODALS
-  // ─────────────────────────────────────────────
-  function openModal(id) {
-    document.getElementById(id).classList.add('show');
-  }
-
-  function closeModal(id) {
-    document.getElementById(id).classList.remove('show');
-  }
-
-  function successBack() {
-    closeModal('successModal');
-    window.history.back();
-  }
-
-  function successNew() {
-    document.getElementById('editorForm').reset();
-    tags = [];
-    renderTags();
-    document.getElementById('statusBar').style.display = 'none';
-    document.getElementById('approvalInfoBox').style.display = 'none';
-    document.getElementById('rejectionInfoBox').style.display = 'none';
-    updateWordCount();
-    updatePreview();
-    if (tinymce.get('content')) {
-      tinymce.get('content').setContent('');
-    }
-    isEditMode = false;
-    currentArticleId = null;
-    document.getElementById('editingArticleId').value = '';
-    document.getElementById('pageTitle').textContent = 'नया लेख लिखें';
-    document.getElementById('pageSubtitle').textContent = 'अपने विचार, ज्ञान और अनुभव साझा करें';
-    document.getElementById('submitBtn').textContent = 'सहेजें और अनुमोदन के लिए भेजें';
-    closeModal('successModal');
-    localStorage.removeItem('articleDraft');
-  }
-
-  // ─────────────────────────────────────────────
-  // AUTO-SAVE
-  // ─────────────────────────────────────────────
-  function autoSave() {
-    const editor = tinymce.get('content');
-    const draft = {
-      title: document.getElementById('title').value,
-      subtitle: document.getElementById('subtitle').value,
-      content: editor ? editor.getContent() : '',
-      excerpt: document.getElementById('excerpt').value,
-      category: document.getElementById('category').value,
-      bannerUrl: document.getElementById('bannerUrl').value,
-      thumbnailUrl: document.getElementById('thumbnailUrl').value,
-      readTime: document.getElementById('readTime').value,
-      tags,
-      slug: document.getElementById('slug').value,
-      savedAt: new Date().toLocaleString('hi-IN')
-    };
-    localStorage.setItem('articleDraft', JSON.stringify(draft));
-  }
-
-  function loadDraftFromStorage() {
-    const draft = localStorage.getItem('articleDraft');
-    if (!draft) return;
-
-    try {
-      const data = JSON.parse(draft);
-      document.getElementById('title').value = data.title || '';
-      document.getElementById('subtitle').value = data.subtitle || '';
-      document.getElementById('excerpt').value = data.excerpt || '';
-      document.getElementById('category').value = data.category || '';
-      document.getElementById('bannerUrl').value = data.bannerUrl || '';
-      document.getElementById('thumbnailUrl').value = data.thumbnailUrl || '';
-      document.getElementById('readTime').value = data.readTime || 5;
-      document.getElementById('slug').value = data.slug || '';
-      tags = data.tags || [];
-      renderTags();
-
-      // Restore editor content
-      setTimeout(() => {
-        const editor = tinymce.get('content');
-        if (editor && data.content) {
-          editor.setContent(data.content);
-        }
-      }, 1000);
-
-      showToast(`ड्राफ्ट लोड हुया: ${data.savedAt}`, 'info');
-    } catch(e) {
-      console.error('Error loading draft:', e);
-    }
-  }
-
-  // ─────────────────────────────────────────────
-  // TOAST NOTIFICATIONS
-  // ─────────────────────────────────────────────
-  function showToast(msg, type = 'info') {
-    const toast = document.getElementById('toast');
-    toast.textContent = msg;
-    toast.className = `toast show ${type}`;
-    setTimeout(() => toast.classList.remove('show'), 4000);
-  }
-
-  // ─────────────────────────────────────────────
-  // LOAD DRAFTS - Only Own Drafts
-  // ─────────────────────────────────────────────
-  async function loadDrafts() {
-    const token = getToken();
-    if (!token) {
-      showToast('पहले लॉगिन करें', 'error');
-      return;
-    }
-
-    try {
-      const draftsList = document.getElementById('draftsList');
-      draftsList.innerHTML = '<p style="text-align: center; color: var(--ink-muted);">लोड हो रहा है...</p>';
-
-      // Fetch only user's drafts
-      const res = await fetch(`${API_BASE}/api/articles?status=draft&author_id=${currentUser._id}`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-
-      if (!res.ok) throw new Error('ड्राफ्ट्स फेच नहीं हो सके');
-
-      let articles = await res.json();
-      
-      if (articles.articles && Array.isArray(articles.articles)) {
-        articles = articles.articles;
-      } else if (articles.data && Array.isArray(articles.data)) {
-        articles = articles.data;
-      } else if (!Array.isArray(articles)) {
-        articles = [];
-      }
-      
-      // Filter for current user
-      articles = articles.filter(a => a.author_id === currentUser._id);
-      
-      if (!articles || articles.length === 0) {
-        draftsList.innerHTML = '<p style="text-align: center; color: var(--ink-muted);">कोई ड्राफ्ट नहीं मिले</p>';
-      } else {
-        draftsList.innerHTML = articles.map(article => `
-          <div class="article-item">
-            <div class="article-header">
-              <h4 class="article-title">${article.title}</h4>
-            </div>
-            <div class="article-meta">
-              <span>${article.category}</span>
-              <span>सहेजा: ${new Date(article.updated_at || article.created_at).toLocaleDateString('hi-IN')}</span>
-            </div>
-            <p class="article-excerpt">${article.excerpt}</p>
-            <div class="article-actions">
-              <button class="btn btn-secondary" onclick="editArticle('${article.slug}')">संपादित करें</button>
-              <button class="btn btn-pending" onclick="submitForApproval('${article.slug}')">अनुमोदन के लिए भेजें</button>
-              <button class="btn btn-secondary" style="background: #e74c3c;" onclick="deleteArticlePrompt('${article.slug}', '${article.title.replace(/'/g, "\\'")}')">हटाएँ</button>
-            </div>
-          </div>
-        `).join('');
-      }
-
-      openModal('draftsModal');
-    } catch(e) {
-      showToast(e.message || 'कुछ गड़बड़ हुई', 'error');
-      console.error(e);
-    }
-  }
-
-  // ─────────────────────────────────────────────
-  // LOAD MY ARTICLES - Only Published Own Articles
-  // ─────────────────────────────────────────────
-  async function loadMyArticles() {
-    const token = getToken();
-    if (!token) {
-      showToast('पहले लॉगिन करें', 'error');
-      return;
-    }
-
-    try {
-      const articlesList = document.getElementById('articlesList');
-      articlesList.innerHTML = '<p style="text-align: center; color: var(--ink-muted);">लोड हो रहा है...</p>';
-
-      // Fetch published articles
-      const res = await fetch(`${API_BASE}/api/articles?status=published`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-
-      if (!res.ok) throw new Error('लेख फेच नहीं हो सके');
-
-      let articles = await res.json();
-      
-      if (articles.articles && Array.isArray(articles.articles)) {
-        articles = articles.articles;
-      } else if (articles.data && Array.isArray(articles.data)) {
-        articles = articles.data;
-      } else if (!Array.isArray(articles)) {
-        articles = [];
-      }
-      
-      // Filter for current user's articles
-      articles = articles.filter(a => a.author_id === currentUser._id);
-      
-      if (!articles || articles.length === 0) {
-        articlesList.innerHTML = '<p style="text-align: center; color: var(--ink-muted);">कोई प्रकाशित लेख नहीं मिले</p>';
-      } else {
-        articlesList.innerHTML = articles.map(article => `
-          <div class="article-item">
-            <div class="article-header">
-              <h4 class="article-title">${article.title}</h4>
-              <span class="status-badge published">प्रकाशित</span>
-            </div>
-            <div class="article-meta">
-              <span>${article.category}</span>
-              <span>${article.read_time || 5} मिनट</span>
-              <span>प्रकाशित: ${new Date(article.created_at).toLocaleDateString('hi-IN')}</span>
-            </div>
-            <p class="article-excerpt">${article.excerpt}</p>
-            <div class="article-actions">
-              <button class="btn btn-secondary" onclick="viewArticle('${article.slug}')">देखें</button>
-              <button class="btn btn-pending" onclick="editArticle('${article.slug}')">संपादित करें</button>
-              <button class="btn btn-secondary" style="background: #e74c3c;" onclick="deleteArticlePrompt('${article.slug}', '${article.title.replace(/'/g, "\\'")}')">हटाएँ</button>
-            </div>
-          </div>
-        `).join('');
-      }
-
-      openModal('articlesModal');
-    } catch(e) {
-      showToast(e.message || 'कुछ गड़बड़ हुई', 'error');
-      console.error(e);
-    }
-  }
-
-  // ─────────────────────────────────────────────
-  // ADMIN: LOAD APPROVAL QUEUE
-  // ─────────────────────────────────────────────
-  async function loadApprovalQueue() {
-    if (!hasAdminRole()) {
-      showToast('आपको इस फीचर का एक्सेस नहीं है', 'error');
-      return;
-    }
-
-    const token = getToken();
-    try {
-      const approvalList = document.getElementById('approvalList');
-      approvalList.innerHTML = '<p style="text-align: center; color: var(--ink-muted);">लोड हो रहा है...</p>';
-
-      const res = await fetch(`${API_BASE}/api/articles?status=pending_approval`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-
-      if (!res.ok) throw new Error('कतार फेच नहीं हो सकी');
-
-      let articles = await res.json();
-      
-      if (articles.articles && Array.isArray(articles.articles)) {
-        articles = articles.articles;
-      } else if (articles.data && Array.isArray(articles.data)) {
-        articles = articles.data;
-      } else if (!Array.isArray(articles)) {
-        articles = [];
-      }
-      
-      if (!articles || articles.length === 0) {
-        approvalList.innerHTML = '<p style="text-align: center; color: var(--ink-muted);">कोई अनुमोदन अनुरोध नहीं हैं</p>';
-      } else {
-        approvalList.innerHTML = articles.map(article => `
-          <div class="article-item">
-            <div class="article-header">
-              <div style="flex: 1;">
-                <h4 class="article-title">${article.title}</h4>
-                <p style="color: var(--ink-muted); font-size: 0.8rem; margin-top: 0.3rem;">
-                  लेखक: ${article.author_name || 'अनाम'} · सबमिट: ${new Date(article.submitted_at || article.created_at).toLocaleDateString('hi-IN')}
-                </p>
-              </div>
-              <span class="status-badge pending-approval">पेंडिंग</span>
-            </div>
-            <div class="article-meta">
-              <span>${article.category}</span>
-              <span>${article.read_time || 5} मिनट</span>
-            </div>
-            <p class="article-excerpt">${article.excerpt}</p>
-            <div class="article-actions">
-              <button class="btn btn-secondary" onclick="previewArticleForApproval('${article.slug}', '${article.title.replace(/'/g, "\\'")}')">पूर्वावलोकन</button>
-              <button class="btn btn-success" onclick="openReviewModal('${article.slug}', '${article.title.replace(/'/g, "\\'")}', '${article.author_name || 'अनाम'.replace(/'/g, "\\'")}', '${article.excerpt.replace(/'/g, "\\'")}')">समीक्षा करें</button>
-              <button class="btn btn-secondary" style="background: #e74c3c;" onclick="deleteArticlePrompt('${article.slug}', '${article.title.replace(/'/g, "\\'")}')">अस्वीकार करें</button>
-            </div>
-          </div>
-        `).join('');
-      }
-
-      openModal('approvalModal');
-    } catch(e) {
-      showToast(e.message || 'कुछ गड़बड़ हुई', 'error');
-      console.error(e);
-    }
-  }
-
-  // ─────────────────────────────────────────────
-  // ARTICLE ACTIONS
-  // ─────────────────────────────────────────────
-  function viewArticle(slug) {
-    window.open(`/articles?slug=${slug}`, '_blank');
-  }
-
-  function previewArticleForApproval(slug, title) {
-    window.open(`/articles?id=${slug}`, '_blank');
-  }
-
-  function editArticle(slug) {
-    window.location.href = `?edit=${slug}`;
-  }
-
-  async function submitForApproval(slug) {
-    const token = getToken();
-    if (!token) {
-      showToast('पहले लॉगिन करें', 'error');
-      return;
-    }
-
-    try {
-      const res = await fetch(`${API_BASE}/api/articles/${slug}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ status: 'pending_approval' })
-      });
-
-      if (!res.ok) throw new Error('लेख भेजा नहीं जा सका');
-
-      showToast('लेख अनुमोदन के लिए भेजा गया!', 'success');
-      setTimeout(() => loadDrafts(), 1000);
-    } catch(e) {
-      showToast(e.message || 'कुछ गड़बड़ हुई', 'error');
-    }
-  }
-
-  function deleteArticlePrompt(slug, title) {
-    window.currentDeleteId = slug;
-    document.getElementById('deleteArticleTitle').textContent = title;
-    openModal('deleteModal');
-  }
-
-  async function confirmDelete() {
-    const slug = window.currentDeleteId;
-    const token = getToken();
-
-    if (!token || !slug) {
-      showToast('कुछ गड़बड़ हुई', 'error');
-      return;
-    }
-
-    try {
-      const res = await fetch(`${API_BASE}/api/articles/${slug}`, {
-        method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-
-      if (!res.ok) throw new Error('लेख नहीं हटाया जा सका');
-
-      closeModal('deleteModal');
-      showToast('लेख सफलतापूर्वक हटाया गया', 'success');
-      
-      setTimeout(() => {
-        loadDrafts();
-      }, 500);
-    } catch(e) {
-      showToast(e.message || 'कुछ गड़बड़ हुई', 'error');
-    }
-  }
-
-  // ─────────────────────────────────────────────
-  // ADMIN: REVIEW & APPROVAL
-  // ─────────────────────────────────────────────
-  function openReviewModal(slug, title, author, excerpt) {
-    window.currentReviewId = slug;
-    document.getElementById('reviewArticleTitle').textContent = title;
-    document.getElementById('reviewArticleExcerpt').textContent = excerpt;
-    document.getElementById('reviewArticleAuthor').textContent = `लेखक: ${author}`;
-    document.getElementById('reviewDecision').value = '';
-    document.getElementById('rejectionReason').value = '';
-    document.getElementById('rejectionReasonDiv').style.display = 'none';
-    openModal('reviewModal');
-  }
-
-  document.addEventListener('DOMContentLoaded', function() {
-    const reviewDecision = document.getElementById('reviewDecision');
-    if (reviewDecision) {
-      reviewDecision.addEventListener('change', function() {
-        const rejectionDiv = document.getElementById('rejectionReasonDiv');
-        if (this.value === 'reject') {
-          rejectionDiv.style.display = 'block';
-        } else {
-          rejectionDiv.style.display = 'none';
-        }
-      });
-    }
+}
+function removeTag(tag) { tags = tags.filter(t => t !== tag); renderTags(); }
+function renderTags() {
+  const wrapper = document.getElementById('tagInput');
+  wrapper.querySelectorAll('.tag').forEach(el => el.remove());
+  const input = wrapper.querySelector('input');
+  tags.forEach(tag => {
+    const el = document.createElement('span');
+    el.className = 'tag';
+    el.innerHTML = `${tag} <button type="button" onclick="removeTag('${tag.replace(/'/g,"\\'")}')">&times;</button>`;
+    wrapper.insertBefore(el, input);
   });
+}
 
-  async function submitReview() {
-    const slug = window.currentReviewId;
-    const decision = document.getElementById('reviewDecision').value;
-    const rejectionReason = document.getElementById('rejectionReason').value;
-    const token = getToken();
+// ════════════════════════════════════════════
+// PREVIEW
+// ════════════════════════════════════════════
+function updatePreview() {
+  const title    = document.getElementById('title').value || 'लेख का शीर्षक';
+  const category = document.getElementById('category').value || 'श्रेणी';
+  const readTime = document.getElementById('readTime').value || 5;
+  const excerpt  = document.getElementById('excerpt').value || 'यहाँ अंश दिखेगा';
+  const content  = getEditorContent();
 
-    if (!decision) {
-      showToast('कृपया निर्णय चुनें', 'error');
-      return;
-    }
+  document.getElementById('previewTitle').textContent  = title;
+  document.getElementById('previewMeta').textContent   = `${category} · ${readTime} मिनट पढ़ें`;
+  document.getElementById('previewContent').innerHTML  = content ? content.substring(0, 400) + '...' : excerpt;
+}
+function togglePreview() { document.getElementById('previewPanel').classList.toggle('open'); }
 
-    if (decision === 'reject' && !rejectionReason.trim()) {
-      showToast('कृपया अस्वीकृति का कारण दर्ज करें', 'error');
-      return;
-    }
+// ════════════════════════════════════════════
+// FORM SUBMIT
+// ════════════════════════════════════════════
+async function submitArticle(e) {
+  e.preventDefault();
+  const token = getToken();
+  if (!token) { showToast('पहले लॉगिन करें', 'error'); return; }
 
-    try {
-      const payload = { action: decision === 'approve' ? 'approve' : 'reject' };
-      if (decision === 'reject') {
-        payload.rejection_reason = rejectionReason;
-      }
+  const title     = document.getElementById('title').value.trim();
+  const excerpt   = document.getElementById('excerpt').value.trim();
+  const category  = document.getElementById('category').value;
+  const bannerUrl = document.getElementById('bannerUrl').value.trim();
+  const slug      = document.getElementById('slug').value.trim();
+  const content   = getEditorContent();
 
-      const res = await fetch(`${API_BASE}/api/articles/${slug}/review`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify(payload)
-      });
-
-      if (!res.ok) throw new Error('समीक्षा सहेजी नहीं जा सकी');
-
-      closeModal('reviewModal');
-      showToast(decision === 'approve' ? 'लेख प्रकाशित किया गया!' : 'लेख अस्वीकार किया गया', 'success');
-      
-      setTimeout(() => loadApprovalQueue(), 1000);
-    } catch(e) {
-      showToast(e.message || 'कुछ गड़बड़ हुई', 'error');
-    }
+  if (!title || !excerpt || !category || !bannerUrl || !slug || !content.trim()) {
+    showToast('कृपया सभी आवश्यक फील्ड भरें (*)', 'error'); return;
   }
 
-  // ─────────────────────────────────────────────
-  // INIT ON PAGE LOAD
-  // ─────────────────────────────────────────────
-  window.addEventListener('DOMContentLoaded', initPage);
+  const payload = {
+    title,
+    subtitle:      document.getElementById('subtitle').value.trim() || null,
+    content,
+    excerpt,
+    banner_url:    bannerUrl,
+    thumbnail_url: document.getElementById('thumbnailUrl').value.trim() || null,
+    category, tags,
+    read_time:     parseInt(document.getElementById('readTime').value) || 5,
+    slug,
+    status: isEditMode && window.currentEditingArticle?.status === 'published'
+      ? 'published'
+      : hasAdminRole() ? 'published' : 'pending_approval',
+  };
+
+  const btn = document.getElementById('submitBtn');
+  const originalText = btn.textContent;
+  try {
+    btn.disabled = true; btn.textContent = 'भेजा जा रहा है...';
+    const method = isEditMode ? 'PUT' : 'POST';
+    const url    = isEditMode ? `${API_BASE}/api/articles/${currentArticleId}` : `${API_BASE}/api/articles`;
+    const res    = await fetch(url, {
+      method, headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) { const err = await res.json(); throw new Error(err.detail || 'कुछ गड़बड़ हुई'); }
+    const article = await res.json();
+    localStorage.removeItem('articleDraft');
+    const isApprovalRequired = !hasAdminRole();
+    const statusMsg = isApprovalRequired
+      ? 'लेख सफलतापूर्वक सहेजा गया और अनुमोदन के लिए भेजा गया।'
+      : 'लेख सफलतापूर्वक प्रकाशित किया गया।';
+    document.getElementById('successMessage').textContent = statusMsg;
+    document.getElementById('successDetail').textContent  = isApprovalRequired
+      ? 'प्रशासक द्वारा मंजूरी देने के बाद यह प्रकाशित होगा।'
+      : 'लेख अब सार्वजनिक रूप से दृश्यमान है।';
+    showToast(statusMsg, 'success');
+    openModal('successModal');
+    window.articleSlug = article.slug;
+  } catch (e) {
+    showToast(e.message || 'लेख नहीं भेजा जा सका', 'error');
+    console.error(e);
+  } finally {
+    btn.disabled = false; btn.textContent = originalText;
+  }
+}
+
+// ════════════════════════════════════════════
+// MODALS
+// ════════════════════════════════════════════
+function openModal(id)  { document.getElementById(id).classList.add('show'); }
+function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+
+function successBack() { closeModal('successModal'); window.history.back(); }
+function successNew() {
+  document.getElementById('editorForm').reset();
+  tags = []; renderTags();
+  document.getElementById('statusBar').style.display = 'none';
+  document.getElementById('approvalInfoBox').style.display = 'none';
+  document.getElementById('rejectionInfoBox').style.display = 'none';
+  setEditorContent('');
+  updateWordCount(); updatePreview();
+  isEditMode = false; currentArticleId = null;
+  document.getElementById('editingArticleId').value = '';
+  document.getElementById('pageTitle').textContent     = 'नया लेख लिखें';
+  document.getElementById('pageSubtitle').textContent  = 'अपने विचार, ज्ञान और अनुभव साझा करें';
+  document.getElementById('submitBtn').textContent     = 'सहेजें और अनुमोदन के लिए भेजें';
+  closeModal('successModal');
+  localStorage.removeItem('articleDraft');
+}
+
+// ════════════════════════════════════════════
+// AUTO-SAVE
+// ════════════════════════════════════════════
+function autoSave() {
+  const draft = {
+    title:        document.getElementById('title').value,
+    subtitle:     document.getElementById('subtitle').value,
+    content:      getEditorContent(),
+    excerpt:      document.getElementById('excerpt').value,
+    category:     document.getElementById('category').value,
+    bannerUrl:    document.getElementById('bannerUrl').value,
+    thumbnailUrl: document.getElementById('thumbnailUrl').value,
+    readTime:     document.getElementById('readTime').value,
+    tags, slug:   document.getElementById('slug').value,
+    savedAt:      new Date().toLocaleString('hi-IN')
+  };
+  localStorage.setItem('articleDraft', JSON.stringify(draft));
+}
+
+function loadDraftFromStorage() {
+  const draft = localStorage.getItem('articleDraft');
+  if (!draft) return;
+  try {
+    const data = JSON.parse(draft);
+    document.getElementById('title').value       = data.title || '';
+    document.getElementById('subtitle').value    = data.subtitle || '';
+    document.getElementById('excerpt').value     = data.excerpt || '';
+    document.getElementById('category').value    = data.category || '';
+    document.getElementById('bannerUrl').value   = data.bannerUrl || '';
+    document.getElementById('thumbnailUrl').value= data.thumbnailUrl || '';
+    document.getElementById('readTime').value    = data.readTime || 5;
+    document.getElementById('slug').value        = data.slug || '';
+    tags = data.tags || []; renderTags();
+    if (data.content) setEditorContent(data.content);
+    showToast(`ड्राफ्ट लोड हुया: ${data.savedAt}`, 'info');
+  } catch (e) { console.error('Draft load error:', e); }
+}
+
+// ════════════════════════════════════════════
+// TOAST
+// ════════════════════════════════════════════
+function showToast(msg, type = 'info') {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.className = `toast show ${type}`;
+  setTimeout(() => toast.classList.remove('show'), 4000);
+}
+
+// ════════════════════════════════════════════
+// DRAFTS & ARTICLES LISTS
+// ════════════════════════════════════════════
+async function loadDrafts() {
+  const token = getToken();
+  if (!token) { showToast('पहले लॉगिन करें', 'error'); return; }
+  try {
+    const draftsList = document.getElementById('draftsList');
+    draftsList.innerHTML = '<p style="text-align:center;color:var(--ink-muted)">लोड हो रहा है...</p>';
+    const res = await fetch(`${API_BASE}/api/articles?status=draft&author_id=${currentUser._id}`, { headers: { 'Authorization': `Bearer ${token}` } });
+    if (!res.ok) throw new Error('ड्राफ्ट्स फेच नहीं हो सके');
+    let articles = await res.json();
+    if (articles.articles && Array.isArray(articles.articles)) articles = articles.articles;
+    else if (articles.data && Array.isArray(articles.data)) articles = articles.data;
+    else if (!Array.isArray(articles)) articles = [];
+    articles = articles.filter(a => a.author_id === currentUser._id);
+    if (!articles.length) {
+      draftsList.innerHTML = '<p style="text-align:center;color:var(--ink-muted)">कोई ड्राफ्ट नहीं मिले</p>';
+    } else {
+      draftsList.innerHTML = articles.map(a => `
+        <div class="article-item">
+          <div class="article-header"><h4 class="article-title">${a.title}</h4></div>
+          <div class="article-meta"><span>${a.category}</span><span>सहेजा: ${new Date(a.updated_at||a.created_at).toLocaleDateString('hi-IN')}</span></div>
+          <p class="article-excerpt">${a.excerpt}</p>
+          <div class="article-actions">
+            <button class="btn btn-secondary" onclick="editArticle('${a.slug}')">संपादित करें</button>
+            <button class="btn btn-pending" onclick="submitForApproval('${a.slug}')">अनुमोदन के लिए भेजें</button>
+            <button class="btn btn-secondary" style="background:#e74c3c" onclick="deleteArticlePrompt('${a.slug}','${a.title.replace(/'/g,"\\'")}')">हटाएँ</button>
+          </div>
+        </div>`).join('');
+    }
+    openModal('draftsModal');
+  } catch (e) { showToast(e.message || 'कुछ गड़बड़ हुई', 'error'); }
+}
+
+async function loadMyArticles() {
+  const token = getToken();
+  if (!token) { showToast('पहले लॉगिन करें', 'error'); return; }
+  try {
+    const articlesList = document.getElementById('articlesList');
+    articlesList.innerHTML = '<p style="text-align:center;color:var(--ink-muted)">लोड हो रहा है...</p>';
+    const res = await fetch(`${API_BASE}/api/articles?status=published`, { headers: { 'Authorization': `Bearer ${token}` } });
+    if (!res.ok) throw new Error('लेख फेच नहीं हो सके');
+    let articles = await res.json();
+    if (articles.articles && Array.isArray(articles.articles)) articles = articles.articles;
+    else if (articles.data && Array.isArray(articles.data)) articles = articles.data;
+    else if (!Array.isArray(articles)) articles = [];
+    articles = articles.filter(a => a.author_id === currentUser._id);
+    if (!articles.length) {
+      articlesList.innerHTML = '<p style="text-align:center;color:var(--ink-muted)">कोई प्रकाशित लेख नहीं मिले</p>';
+    } else {
+      articlesList.innerHTML = articles.map(a => `
+        <div class="article-item">
+          <div class="article-header"><h4 class="article-title">${a.title}</h4><span class="status-badge published">प्रकाशित</span></div>
+          <div class="article-meta"><span>${a.category}</span><span>${a.read_time||5} मिनट</span><span>प्रकाशित: ${new Date(a.created_at).toLocaleDateString('hi-IN')}</span></div>
+          <p class="article-excerpt">${a.excerpt}</p>
+          <div class="article-actions">
+            <button class="btn btn-secondary" onclick="viewArticle('${a.slug}')">देखें</button>
+            <button class="btn btn-pending" onclick="editArticle('${a.slug}')">संपादित करें</button>
+            <button class="btn btn-secondary" style="background:#e74c3c" onclick="deleteArticlePrompt('${a.slug}','${a.title.replace(/'/g,"\\'")}')">हटाएँ</button>
+          </div>
+        </div>`).join('');
+    }
+    openModal('articlesModal');
+  } catch (e) { showToast(e.message || 'कुछ गड़बड़ हुई', 'error'); }
+}
+
+async function loadApprovalQueue() {
+  if (!hasAdminRole()) { showToast('आपको इस फीचर का एक्सेस नहीं है', 'error'); return; }
+  const token = getToken();
+  try {
+    const approvalList = document.getElementById('approvalList');
+    approvalList.innerHTML = '<p style="text-align:center;color:var(--ink-muted)">लोड हो रहा है...</p>';
+    const res = await fetch(`${API_BASE}/api/articles?status=pending_approval`, { headers: { 'Authorization': `Bearer ${token}` } });
+    if (!res.ok) throw new Error('कतार फेच नहीं हो सकी');
+    let articles = await res.json();
+    if (articles.articles && Array.isArray(articles.articles)) articles = articles.articles;
+    else if (articles.data && Array.isArray(articles.data)) articles = articles.data;
+    else if (!Array.isArray(articles)) articles = [];
+    if (!articles.length) {
+      approvalList.innerHTML = '<p style="text-align:center;color:var(--ink-muted)">कोई अनुमोदन अनुरोध नहीं हैं</p>';
+    } else {
+      approvalList.innerHTML = articles.map(a => `
+        <div class="article-item">
+          <div class="article-header">
+            <div style="flex:1"><h4 class="article-title">${a.title}</h4>
+              <p style="color:var(--ink-muted);font-size:0.8rem;margin-top:0.3rem">लेखक: ${a.author_name||'अनाम'} · सबमिट: ${new Date(a.submitted_at||a.created_at).toLocaleDateString('hi-IN')}</p>
+            </div><span class="status-badge pending-approval">पेंडिंग</span>
+          </div>
+          <div class="article-meta"><span>${a.category}</span><span>${a.read_time||5} मिनट</span></div>
+          <p class="article-excerpt">${a.excerpt}</p>
+          <div class="article-actions">
+            <button class="btn btn-secondary" onclick="previewArticleForApproval('${a.slug}')">पूर्वावलोकन</button>
+            <button class="btn btn-success" onclick="openReviewModal('${a.slug}','${a.title.replace(/'/g,"\\'")}','${(a.author_name||'अनाम').replace(/'/g,"\\'")}','${a.excerpt.replace(/'/g,"\\'")}')">समीक्षा करें</button>
+            <button class="btn btn-secondary" style="background:#e74c3c" onclick="deleteArticlePrompt('${a.slug}','${a.title.replace(/'/g,"\\'")}')">अस्वीकार करें</button>
+          </div>
+        </div>`).join('');
+    }
+    openModal('approvalModal');
+  } catch (e) { showToast(e.message || 'कुछ गड़बड़ हुई', 'error'); }
+}
+
+// ════════════════════════════════════════════
+// ARTICLE ACTIONS
+// ════════════════════════════════════════════
+function viewArticle(slug)                { window.open(`/articles?slug=${slug}`, '_blank'); }
+function previewArticleForApproval(slug)  { window.open(`/articles?id=${slug}`, '_blank'); }
+function editArticle(slug)                { window.location.href = `?edit=${slug}`; }
+
+async function submitForApproval(slug) {
+  const token = getToken();
+  if (!token) { showToast('पहले लॉगिन करें', 'error'); return; }
+  try {
+    const res = await fetch(`${API_BASE}/api/articles/${slug}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+      body: JSON.stringify({ status: 'pending_approval' })
+    });
+    if (!res.ok) throw new Error('लेख भेजा नहीं जा सका');
+    showToast('लेख अनुमोदन के लिए भेजा गया!', 'success');
+    setTimeout(() => loadDrafts(), 1000);
+  } catch (e) { showToast(e.message || 'कुछ गड़बड़ हुई', 'error'); }
+}
+
+function deleteArticlePrompt(slug, title) {
+  window.currentDeleteId = slug;
+  document.getElementById('deleteArticleTitle').textContent = title;
+  openModal('deleteModal');
+}
+
+async function confirmDelete() {
+  const slug = window.currentDeleteId;
+  const token = getToken();
+  if (!token || !slug) { showToast('कुछ गड़बड़ हुई', 'error'); return; }
+  try {
+    const res = await fetch(`${API_BASE}/api/articles/${slug}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
+    if (!res.ok) throw new Error('लेख नहीं हटाया जा सका');
+    closeModal('deleteModal');
+    showToast('लेख सफलतापूर्वक हटाया गया', 'success');
+    setTimeout(() => loadDrafts(), 500);
+  } catch (e) { showToast(e.message || 'कुछ गड़बड़ हुई', 'error'); }
+}
+
+// ════════════════════════════════════════════
+// ADMIN: REVIEW
+// ════════════════════════════════════════════
+function openReviewModal(slug, title, author, excerpt) {
+  window.currentReviewId = slug;
+  document.getElementById('reviewArticleTitle').textContent  = title;
+  document.getElementById('reviewArticleExcerpt').textContent= excerpt;
+  document.getElementById('reviewArticleAuthor').textContent = `लेखक: ${author}`;
+  document.getElementById('reviewDecision').value = '';
+  document.getElementById('rejectionReasonText').value = '';
+  document.getElementById('rejectionReasonDiv').style.display = 'none';
+  openModal('reviewModal');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const rd = document.getElementById('reviewDecision');
+  if (rd) rd.addEventListener('change', function() {
+    document.getElementById('rejectionReasonDiv').style.display = this.value === 'reject' ? 'block' : 'none';
+  });
+});
+
+async function submitReview() {
+  const slug   = window.currentReviewId;
+  const decision = document.getElementById('reviewDecision').value;
+  const reason   = document.getElementById('rejectionReasonText').value;
+  const token    = getToken();
+  if (!decision) { showToast('कृपया निर्णय चुनें', 'error'); return; }
+  if (decision === 'reject' && !reason.trim()) { showToast('कृपया अस्वीकृति का कारण दर्ज करें', 'error'); return; }
+  try {
+    const payload = { action: decision === 'approve' ? 'approve' : 'reject' };
+    if (decision === 'reject') payload.rejection_reason = reason;
+    const res = await fetch(`${API_BASE}/api/articles/${slug}/review`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) throw new Error('समीक्षा सहेजी नहीं जा सकी');
+    closeModal('reviewModal');
+    showToast(decision === 'approve' ? 'लेख प्रकाशित किया गया!' : 'लेख अस्वीकार किया गया', 'success');
+    setTimeout(() => loadApprovalQueue(), 1000);
+  } catch (e) { showToast(e.message || 'कुछ गड़बड़ हुई', 'error'); }
+}
+
+// ════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════
+window.addEventListener('DOMContentLoaded', initPage);
 </script>
 <script src="/js/streak-widget.js"></script>
 <script src="/js/chatbot.js"></script>
