@@ -975,7 +975,15 @@ mantra for wealth
       justify-content: center;
       color: rgba(200,140,50,0.5);
       font-size: 0.85rem;
+      overflow: hidden;
       transition: border-color 0.2s, color 0.2s;
+    }
+    .social-link img {
+      width: 18px;
+      height: 18px;
+      display: block;
+      object-fit: contain;
+      flex: 0 0 auto;
     }
     .social-link:hover {
       border-color: var(--marigold);
@@ -2292,6 +2300,287 @@ mantra for wealth
 }
 </style>
 
+<style id="HOMEPAGE_REDESIGN_CSS">
+/* Homepage redesign layer.
+   To add a background image later, set any section variable like:
+   --section-bg-image: url('/images/your-image.jpg');
+*/
+body {
+  background: #fff7ea;
+}
+
+#main-content {
+  position: relative;
+  z-index: 1;
+}
+
+.bg-fixed {
+  background:
+    radial-gradient(circle at 12% 12%, rgba(255, 122, 26, 0.16), transparent 28%),
+    radial-gradient(circle at 86% 24%, rgba(193, 67, 46, 0.10), transparent 30%),
+    linear-gradient(180deg, #fff8ec 0%, #f7e6c7 46%, #fffaf2 100%);
+}
+
+.mandala-tex {
+  opacity: 0.065;
+}
+
+#panchang-strip {
+  --section-bg-image: none;
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  padding: 12px clamp(18px, 5vw, 84px);
+  background:
+    linear-gradient(rgba(255, 250, 239, 0.88), rgba(255, 250, 239, 0.88)),
+    var(--section-bg-image),
+    linear-gradient(90deg, #5a160f 0%, #d88724 42%, #ffe2a6 100%);
+  border-bottom: 1px solid rgba(106, 31, 29, 0.16);
+}
+
+#panchang-strip .panchang-strip-inner {
+  max-width: 1260px;
+  margin-inline: auto;
+}
+
+#recent-visits-section {
+  --section-bg-image: none;
+  position: relative;
+  z-index: 2;
+  max-width: 1180px;
+  margin: 24px auto 0;
+  padding: 12px 18px;
+  border: 1px solid rgba(201, 146, 26, 0.18);
+  border-radius: 999px;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.82)),
+    var(--section-bg-image),
+    #fffdf7;
+  box-shadow: 0 16px 50px rgba(61, 26, 10, 0.08);
+}
+
+.hero {
+  --section-bg-image: none;
+  position: relative;
+  z-index: 1;
+  min-height: 760px;
+  padding: 112px clamp(22px, 6vw, 96px) 96px;
+  color: #fff0dc;
+  background:
+    linear-gradient(145deg, rgba(26, 12, 8, 0.94), rgba(74, 18, 16, 0.82)),
+    var(--section-bg-image),
+    radial-gradient(circle at 50% 18%, rgba(255, 140, 42, 0.22), transparent 35%),
+    #1a0c08;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(232, 184, 75, 0.08) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(232, 184, 75, 0.055) 1px, transparent 1px);
+  background-size: 58px 58px;
+  mask-image: radial-gradient(circle at 50% 30%, #000 0%, transparent 68%);
+  pointer-events: none;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-title {
+  color: #fff5df;
+  text-shadow: 0 10px 46px rgba(255, 122, 26, 0.28);
+}
+
+.hero-tagline,
+.hero-deva {
+  color: rgba(255, 240, 220, 0.78);
+}
+
+#aaj-ka-mantra .akm-card {
+  background: linear-gradient(145deg, rgba(255, 248, 236, 0.96), rgba(255, 225, 174, 0.88));
+  border: 1px solid rgba(232, 184, 75, 0.35);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+}
+
+#stotra-of-week {
+  --section-bg-image: none;
+  padding: 96px clamp(20px, 5vw, 90px);
+  background:
+    linear-gradient(rgba(251, 243, 226, 0.94), rgba(251, 243, 226, 0.94)),
+    var(--section-bg-image),
+    radial-gradient(circle at 12% 18%, rgba(232, 184, 75, 0.18), transparent 30%),
+    #fbf3e2;
+}
+
+.sotw-header,
+.section-header,
+.divider {
+  position: relative;
+  z-index: 1;
+}
+
+.sotw-card {
+  border-radius: 0;
+  border: 1px solid rgba(107, 58, 32, 0.18);
+  box-shadow: 0 28px 80px rgba(61, 26, 10, 0.14);
+}
+
+.filter-bar {
+  max-width: 1180px;
+  margin: 64px auto 34px;
+  padding: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(201, 146, 26, 0.20);
+  box-shadow: 0 16px 50px rgba(61, 26, 10, 0.08);
+}
+
+.filter-btn {
+  border-radius: 999px;
+}
+
+.marquee-wrap {
+  --section-bg-image: none;
+  margin: 0;
+  background:
+    linear-gradient(rgba(18, 10, 6, 0.92), rgba(18, 10, 6, 0.92)),
+    var(--section-bg-image),
+    #120a06;
+  border-block: 1px solid rgba(232, 184, 75, 0.24);
+}
+
+.section-header {
+  --section-bg-image: none;
+  padding: 92px 20px 30px;
+  margin: 0;
+  background:
+    linear-gradient(rgba(255, 248, 238, 0.92), rgba(255, 248, 238, 0.92)),
+    var(--section-bg-image),
+    linear-gradient(135deg, #fff8ee 0%, #f4dfb9 100%);
+}
+
+.cards-wrapper {
+  --section-bg-image: none;
+  padding: 24px clamp(18px, 4vw, 72px) 92px;
+  background:
+    linear-gradient(rgba(255, 248, 238, 0.93), rgba(255, 248, 238, 0.93)),
+    var(--section-bg-image),
+    #fff8ee;
+}
+
+.featured-row,
+.cards-grid {
+  max-width: 1280px;
+  margin-inline: auto;
+}
+
+.card {
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(139, 90, 43, 0.16);
+  box-shadow: 0 18px 56px rgba(61, 26, 10, 0.12);
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 28px 78px rgba(61, 26, 10, 0.18);
+}
+
+.card-image {
+  background: #28120a;
+}
+
+#vidyapati-geet {
+  --section-bg-image: none;
+  padding: 90px clamp(20px, 5vw, 90px);
+  background:
+    linear-gradient(rgba(245, 233, 208, 0.94), rgba(245, 233, 208, 0.94)),
+    var(--section-bg-image),
+    linear-gradient(135deg, #f5e9d0 0%, #fffaf0 100%);
+}
+
+#shiv-bhajan-maithili {
+  --section-bg-image: none;
+  padding: 90px clamp(20px, 5vw, 90px);
+  background:
+    linear-gradient(rgba(26, 12, 8, 0.88), rgba(26, 12, 8, 0.88)),
+    var(--section-bg-image),
+    radial-gradient(circle at 80% 20%, rgba(255, 122, 26, 0.22), transparent 32%),
+    #1a0c08;
+}
+
+#shiv-bhajan-maithili .sotw-title,
+#shiv-bhajan-maithili .sotw-label {
+  color: #fff0dc;
+}
+
+.circular-cards-wrapper {
+  --section-bg-image: none;
+  padding: 70px 20px 90px;
+  background:
+    linear-gradient(rgba(255, 251, 244, 0.9), rgba(255, 251, 244, 0.9)),
+    var(--section-bg-image),
+    #fffbf4;
+}
+
+.authors-section {
+  --section-bg-image: none;
+  padding: 96px 0;
+  background:
+    linear-gradient(rgba(251, 243, 226, 0.92), rgba(251, 243, 226, 0.92)),
+    var(--section-bg-image),
+    radial-gradient(circle at 15% 5%, rgba(193, 67, 46, 0.10), transparent 28%),
+    #fbf3e2;
+}
+
+.feature-strip {
+  --section-bg-image: none;
+  margin: 0;
+  padding: 54px clamp(20px, 6vw, 96px);
+  background:
+    linear-gradient(rgba(74, 18, 16, 0.92), rgba(26, 12, 8, 0.94)),
+    var(--section-bg-image),
+    #1a0c08;
+  color: #fff0dc;
+  border-top: 1px solid rgba(232, 184, 75, 0.18);
+  border-bottom: 1px solid rgba(232, 184, 75, 0.18);
+}
+
+.feature-num {
+  color: #e8b84b;
+}
+
+.feature-label {
+  color: rgba(255, 240, 220, 0.74);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    min-height: 680px;
+    padding-top: 84px;
+  }
+
+  #recent-visits-section,
+  .filter-bar {
+    border-radius: 12px;
+    margin-inline: 16px;
+  }
+
+  .cards-wrapper,
+  #stotra-of-week,
+  #vidyapati-geet,
+  #shiv-bhajan-maithili {
+    padding-inline: 18px;
+  }
+}
+</style>
+
 <script>
 	window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 	</script>
@@ -3032,9 +3321,9 @@ mantra for wealth
             भारत का प्रमुख हिंदी-मैथिली भक्ति पोर्टल। शिव की आराधना, मिथिला की परंपरा, और वैदिक ज्ञान — एक ही स्थान पर।
           </p>
           <div class="footer-social" aria-label="Social media links">
-            <a class="social-link" href="https://instagram.com/shivmarg.live" target="_blank" rel="noopener" aria-label="Instagram">📸</a>
-            <a class="social-link" href="https://youtube.com/@shivmarg" target="_blank" rel="noopener" aria-label="YouTube">▶</a>
-            <a class="social-link" href="https://t.me/shivmarg" target="_blank" rel="noopener" aria-label="Telegram">✈</a>
+            <a class="social-link" href="https://instagram.com/shivmarg.live" target="_blank" rel="noopener" aria-label="Instagram"><img src="/images/favicon/icons8-instagram-96.png" alt="Instagram"></a>
+            <a class="social-link" href="https://youtube.com/@shivmarg" target="_blank" rel="noopener" aria-label="YouTube"><img src="/images/favicon/icons8-youtube-48.png" alt="YouTube"></a>
+            <a class="social-link" href="https://t.me/shivmarg" target="_blank" rel="noopener" aria-label="Telegram"><img src="/images/favicon/icons8-telegram-logo-94.png" alt="Telegram"> </a>
           </div>
         </div>
 
