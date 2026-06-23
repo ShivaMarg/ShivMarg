@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ══════════════════════════════════════════
+       ✏️  EDIT ZONE 1 — PAGE META
+       Change title, description, og:image per article
+       ══════════════════════════════════════════ -->
+  <title>आपका लेख शीर्षक | शिव मार्ग</title>
+  <meta name="description" content="यहाँ लेख का संक्षिप्त विवरण लिखें — 150 अक्षर तक।">
+  <meta property="og:title" content="आपका लेख शीर्षक | शिव मार्ग">
+  <meta property="og:description" content="यहाँ लेख का संक्षिप्त विवरण लिखें।">
+  <meta property="og:image" content="/images/ShivMarg.png">
+  <meta property="og:url" content="">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="आपका लेख शीर्षक | शिव मार्ग">
+  <meta name="twitter:description" content="यहाँ लेख का संक्षिप्त विवरण लिखें।">
+  <meta name="twitter:image" content="/images/ShivMarg.png">
+  <link rel="canonical" href="">
+  <!-- ══════════════════════════════════════════ -->
+
+  <link rel="icon" href="/images/shivmarg_logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="/images/shivmarg_logo.png">
+  <link rel="manifest" href="/manifest.json">
+
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+  <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script>window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5809900825917201" crossorigin="anonymous"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── TOKENS ─────────────────────────────── */
+    :root {
+      --ink:       #1a1410;
+      --ink-soft:  #4a3f35;
+      --ink-muted: #8a7a6e;
+      --paper:     #faf8f5;
+      --paper-warm:#f5f0e8;
+      --accent:    #c5810c;
+      --accent-2:  #e8a87c;
+      --border:    #e2d9ce;
+      --sidebar-w: 320px;
+      --content-w: 720px;
+      --serif:     'Noto Serif Devanagari', 'Georgia', serif;
+      --display:   'Playfair Display', serif;
+      --mono:      'DM Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--serif);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .story-image {
+      width: 100%; max-width: 100%; height: auto;
+      border-radius: 12px; display: block;
+      margin: 20px auto; object-fit: cover;
+    }
+    .image-wrapper { width: 100%; overflow: hidden; border-radius: 12px; }
+
+    /* ── HEADER ─────────────────────────────── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--ink);
+      border-bottom: 3px solid var(--accent);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+      animation: slideDown .4s ease;
+    }
+    @keyframes slideDown { from{transform:translateY(-100%)} to{transform:translateY(0)} }
+
+    .logo {
+      font-family: var(--display);
+      font-size: 1.5rem; color: #fff;
+      text-decoration: none; letter-spacing: .04em;
+    }
+    .logo span { color: var(--accent); }
+
+    nav.hdr-nav { display: flex; gap: 1.5rem; }
+    nav.hdr-nav a {
+      color: rgba(255,255,255,.7); text-decoration: none;
+      font-size: .85rem; font-family: var(--mono);
+      letter-spacing: .05em; transition: color .2s; cursor: pointer;
+    }
+    nav.hdr-nav a:hover { color: var(--accent-2); }
+
+    .hdr-actions { display: flex; gap: .75rem; align-items: center; }
+
+    .btn-search {
+      background: none; border: none; color: rgba(255,255,255,.7);
+      font-size: 1.1rem; cursor: pointer; transition: color .2s; padding: .2rem .4rem;
+    }
+    .btn-search:hover { color: var(--accent-2); }
+
+    .hamburger {
+      display: none; flex-direction: column;
+      gap: 5px; background: none; border: none;
+      cursor: pointer; padding: .3rem;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: rgba(255,255,255,.7); transition: all .3s;
+    }
+
+    .btn-login {
+      background: var(--accent); color: #fff;
+      border: none; padding: .4rem 1rem;
+      font-size: .8rem; font-family: var(--mono);
+      cursor: pointer; letter-spacing: .05em;
+      transition: opacity .2s; text-decoration: none;
+    }
+    .btn-login:hover { opacity: .85; }
+
+    .user-bar { display: flex; align-items: center; gap: .5rem; }
+    .user-avatar {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem; font-weight: 700; color: #fff;
+      cursor: pointer; border: 1.5px solid var(--accent-2);
+      overflow: hidden;
+    }
+    .btn-logout {
+      font-size: .7rem; color: rgba(255,255,255,.7);
+      background: none; border: none; cursor: pointer;
+      font-family: var(--mono); text-decoration: underline; transition: color .2s;
+    }
+    .btn-logout:hover { color: #fff; }
+
+    /* ── MOBILE MENU ────────────────────────── */
+    .mobile-menu {
+      display: none; position: fixed; top: 60px; left: 0; right: 0;
+      background: var(--ink); z-index: 90; padding: 1.5rem 2rem;
+      border-bottom: 2px solid var(--accent);
+      animation: slideDown .3s ease;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 1.2rem;
+    }
+    .mobile-menu-close {
+      background: none; border: none; color: rgba(255,255,255,.7);
+      font-size: 1.2rem; cursor: pointer;
+    }
+    .mobile-menu nav { display: flex; flex-direction: column; gap: .85rem; }
+    .mobile-menu nav a {
+      color: rgba(255,255,255,.75); text-decoration: none;
+      font-family: var(--mono); font-size: .9rem;
+      padding: .4rem 0; border-bottom: 1px solid rgba(255,255,255,.08);
+      cursor: pointer; transition: color .2s;
+    }
+    .mobile-menu nav a:hover { color: var(--accent-2); }
+
+    /* ── SEARCH OVERLAY ─────────────────────── */
+    .search-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(26,20,16,.85); z-index: 200;
+      align-items: flex-start; justify-content: center; padding-top: 80px;
+    }
+    .search-overlay.open { display: flex; }
+    .search-box {
+      background: var(--paper); padding: 2rem;
+      width: min(600px, 90vw); position: relative;
+    }
+    .search-close {
+      position: absolute; top: .75rem; right: .75rem;
+      background: none; border: none; font-size: 1.2rem;
+      cursor: pointer; color: var(--ink-muted);
+    }
+    .search-box h3 { font-family: var(--display); font-size: 1.4rem; margin-bottom: 1rem; }
+    .search-input-wrap { display: flex; gap: .5rem; }
+    .search-input-wrap input {
+      flex: 1; padding: .65rem 1rem;
+      border: 1px solid var(--border); background: var(--paper-warm);
+      font-family: var(--serif); font-size: 1rem; color: var(--ink); outline: none;
+    }
+    .search-input-wrap input:focus { border-color: var(--accent); }
+    .search-input-wrap button {
+      background: var(--accent); color: #fff;
+      border: none; padding: .65rem 1.2rem;
+      font-family: var(--mono); cursor: pointer; transition: opacity .2s;
+    }
+    .search-input-wrap button:hover { opacity: .85; }
+    #searchResults { margin-top: 1rem; }
+    .search-result-item {
+      padding: .75rem 0; border-bottom: 1px solid var(--border);
+      text-decoration: none; color: inherit; display: block;
+    }
+    .search-result-item:hover .sri-title { color: var(--accent); }
+    .sri-title { font-weight: 600; margin-bottom: .2rem; }
+    .sri-meta { font-family: var(--mono); font-size: .72rem; color: var(--ink-muted); }
+
+    /* ── AUTH MODAL ─────────────────────────── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(26,20,16,.8); z-index: 300;
+      align-items: center; justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: var(--paper); padding: 2rem;
+      width: min(440px, 92vw); position: relative;
+      max-height: 90vh; overflow-y: auto;
+    }
+    .modal-close {
+      position: absolute; top: .75rem; right: .75rem;
+      background: none; border: none; font-size: 1.2rem;
+      cursor: pointer; color: var(--ink-muted);
+    }
+    .modal-title { font-family: var(--display); font-size: 1.5rem; margin-bottom: 1.25rem; }
+    .modal-tabs { display: flex; gap: 0; margin-bottom: 1.5rem; }
+    .modal-tab {
+      flex: 1; padding: .6rem; background: var(--paper-warm);
+      border: 1px solid var(--border); cursor: pointer;
+      font-family: var(--mono); font-size: .82rem;
+      color: var(--ink-muted); transition: all .2s;
+    }
+    .modal-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .form-field { margin-bottom: 1rem; }
+    .form-field label {
+      display: block; font-family: var(--mono);
+      font-size: .72rem; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--ink-muted); margin-bottom: .4rem;
+    }
+    .form-field input {
+      width: 100%; padding: .6rem 1rem;
+      border: 1px solid var(--border); background: var(--paper-warm);
+      font-family: var(--serif); font-size: .95rem;
+      color: var(--ink); outline: none; transition: border-color .2s;
+    }
+    .form-field input:focus { border-color: var(--accent); }
+    .btn-submit {
+      width: 100%; background: var(--accent); color: #fff;
+      border: none; padding: .7rem; font-family: var(--mono); font-size: .85rem;
+      letter-spacing: .05em; cursor: pointer; transition: opacity .2s; margin-top: .25rem;
+    }
+    .btn-submit:hover { opacity: .85; }
+    .form-msg { margin-top: .75rem; font-size: .85rem; font-family: var(--mono); text-align: center; min-height: 1.2em; }
+    .form-msg.error { color: #c0392b; }
+    .form-msg.success { color: #27ae60; }
+    .or-divider {
+      text-align: center; margin: 1rem 0;
+      font-family: var(--mono); font-size: .75rem; color: var(--ink-muted); position: relative;
+    }
+    .or-divider::before, .or-divider::after {
+      content: ''; position: absolute; top: 50%; width: 42%; height: 1px; background: var(--border);
+    }
+    .or-divider::before { left: 0; }
+    .or-divider::after { right: 0; }
+    .google-btn {
+      width: 100%; background: var(--paper-warm); color: var(--ink);
+      border: 1px solid var(--border); padding: .65rem; font-family: var(--mono); font-size: .82rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      gap: .6rem; transition: border-color .2s;
+    }
+    .google-btn:hover { border-color: var(--accent); }
+    .google-btn img { width: 18px; height: 18px; }
+
+    /* ── LAYOUT ─────────────────────────────── */
+    .page-wrap {
+      max-width: 1200px; margin: 0 auto;
+      padding: 3rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr var(--sidebar-w);
+      gap: 4rem; align-items: start;
+    }
+
+    /* ── ARTICLE MAIN ───────────────────────── */
+    .article-main { min-width: 0; }
+
+    .breadcrumb {
+      display: flex; gap: .5rem; align-items: center;
+      font-family: var(--mono); font-size: .75rem;
+      color: var(--ink-muted); margin-bottom: 2rem;
+      animation: fadeUp .5s .1s both;
+    }
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .breadcrumb-sep { opacity: .4; }
+
+    .tag-row { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.5rem; animation: fadeUp .5s .15s both; }
+    .tag {
+      display: inline-block; padding: .25rem .75rem;
+      font-size: .72rem; font-family: var(--mono);
+      letter-spacing: .08em; text-transform: uppercase;
+      border: 1px solid var(--border);
+      color: var(--ink-muted); text-decoration: none; transition: all .2s;
+    }
+    .tag:hover, .tag.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    h1.article-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 700; line-height: 1.25;
+      color: var(--ink); margin-bottom: 1.5rem;
+      animation: fadeUp .5s .2s both;
+    }
+
+    .author-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem; animation: fadeUp .5s .25s both;
+    }
+    .author-info { display: flex; align-items: center; gap: .85rem; }
+    .author-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      object-fit: cover; border: 2px solid var(--accent);
+    }
+    .author-name { font-weight: 600; font-size: .95rem; color: var(--ink); }
+    .author-name a { color: inherit; text-decoration: none; }
+    .author-name a:hover { color: var(--accent); }
+    .article-meta {
+      font-size: .78rem; color: var(--ink-muted);
+      font-family: var(--mono); display: flex; gap: 1rem; align-items: center;
+    }
+    .meta-dot { opacity: .3; }
+
+    .article-actions { display: flex; gap: .75rem; align-items: center; }
+    .btn-action {
+      display: flex; align-items: center; gap: .4rem;
+      padding: .45rem .9rem; border: 1px solid var(--border);
+      background: none; cursor: pointer;
+      font-family: var(--mono); font-size: .75rem;
+      color: var(--ink-muted); transition: all .2s;
+    }
+    .btn-action:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-action svg { width: 15px; height: 15px; fill: currentColor; }
+
+    .article-banner {
+      width: 100%; height: 420px; object-fit: cover;
+      display: block; margin-bottom: 2.5rem;
+      animation: fadeUp .6s .3s both;
+    }
+
+    /* ── ARTICLE BODY ───────────────────────── */
+    .article-body { animation: fadeUp .5s .35s both; }
+    .article-body p {
+      font-size: 1.5rem; line-height: 1.9;
+      color: var(--ink-soft); margin-bottom: 1.5rem;
+    }
+    .article-body p strong {
+      color: var(--ink); font-weight: 700;
+      font-size: 1.6rem; display: block; margin-bottom: .5rem;
+      border-left: 3px solid var(--accent); padding-left: .75rem;
+    }
+    .article-body h2 {
+      font-family: var(--serif); font-size: 1.8rem; font-weight: 700;
+      color: var(--ink); margin: 2.5rem 0 1rem;
+      border-left: 4px solid var(--accent); padding-left: .85rem;
+    }
+    .article-body h3 {
+      font-family: var(--serif); font-size: 1.4rem; font-weight: 600;
+      color: var(--ink); margin: 2rem 0 .75rem;
+    }
+    .article-body blockquote {
+      border-left: 4px solid var(--accent);
+      margin: 2rem 0; padding: 1.2rem 1.5rem;
+      background: var(--paper-warm); font-style: italic;
+      font-size: 1.5rem; color: var(--ink); line-height: 1.7;
+    }
+    .article-body em { font-style: italic; color: var(--ink); }
+    .article-body ul, .article-body ol {
+      margin: 1rem 0 1.5rem 2rem; color: var(--ink-soft); font-size: 1.1rem; line-height: 2;
+    }
+    .article-body img {
+      width: 100%; max-width: 100%; height: auto;
+      border-radius: 8px; display: block; margin: 2rem auto;
+    }
+    .article-body hr {
+      border: none; border-top: 2px solid var(--border);
+      margin: 2.5rem 0;
+    }
+
+    .bottom-tags { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+    .bottom-tags h4 {
+      font-family: var(--mono); font-size: .75rem;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--ink-muted); margin-bottom: 1rem;
+    }
+
+    .share-bar {
+      display: flex; gap: .6rem; align-items: center;
+      margin-top: 2rem; flex-wrap: wrap;
+    }
+    .share-label { font-family: var(--mono); font-size: .75rem; color: var(--ink-muted); margin-right: .4rem; }
+    .share-btn {
+      padding: .4rem .9rem; border: 1px solid var(--border);
+      background: none; cursor: pointer;
+      font-size: .78rem; font-family: var(--mono);
+      color: var(--ink-muted); text-decoration: none;
+      display: inline-flex; align-items: center; gap: .4rem; transition: all .2s;
+    }
+    .share-btn:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .share-btn.whatsapp:hover { background: #25d366; border-color: #25d366; }
+    .share-btn.twitter:hover { background: #1da1f2; border-color: #1da1f2; }
+
+    /* ── COMMENTS ───────────────────────────── */
+    .comments-section { margin-top: 4rem; }
+    .comments-section h2 { font-family: var(--display); font-size: 1.5rem; margin-bottom: .5rem; color: var(--ink); }
+    .comment-count {
+      font-family: var(--mono); font-size: .8rem;
+      color: var(--ink-muted); margin-bottom: 2rem;
+      padding-bottom: 1.5rem; border-bottom: 1px solid var(--border);
+    }
+    .comment-form { margin-bottom: 2.5rem; }
+    .comment-form textarea {
+      width: 100%; min-height: 100px;
+      border: 1px solid var(--border); background: var(--paper-warm);
+      padding: 1rem; resize: vertical;
+      font-family: var(--serif); font-size: 1rem;
+      color: var(--ink); outline: none; transition: border-color .2s;
+    }
+    .comment-form textarea:focus { border-color: var(--accent); }
+    .btn-comment {
+      background: var(--accent); color: #fff;
+      border: none; padding: .65rem 1.5rem;
+      font-family: var(--mono); font-size: .82rem;
+      letter-spacing: .05em; cursor: pointer;
+      transition: opacity .2s; white-space: nowrap;
+    }
+    .btn-comment:hover { opacity: .85; }
+    .comment-item {
+      display: flex; gap: 1rem;
+      padding: 1.25rem 0; border-bottom: 1px solid var(--border);
+      animation: fadeUp .4s ease;
+    }
+    .comment-avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: .82rem;
+      font-weight: 600; flex-shrink: 0; overflow: hidden;
+    }
+    .comment-author { font-weight: 600; font-size: .9rem; margin-bottom: .25rem; }
+    .comment-time { font-family: var(--mono); font-size: .72rem; color: var(--ink-muted); }
+    .comment-text { margin-top: .5rem; font-size: .95rem; color: var(--ink-soft); line-height: 1.7; }
+    .comment-like {
+      background: none; border: 1px solid var(--border);
+      padding: .25rem .6rem; font-family: var(--mono);
+      font-size: .72rem; cursor: pointer; color: var(--ink-muted);
+      margin-top: .75rem; transition: all .2s;
+      display: inline-flex; align-items: center; gap: .3rem;
+    }
+    .comment-like:hover { border-color: var(--accent); color: var(--accent); }
+
+    .skeleton {
+      background: linear-gradient(90deg, var(--border) 25%, var(--paper-warm) 50%, var(--border) 75%);
+      background-size: 200% 100%; animation: shimmer 1.2s infinite; border-radius: 2px;
+    }
+    @keyframes shimmer { to { background-position: -200% 0; } }
+
+    /* ── SIDEBAR ─────────────────────────────── */
+    .sidebar { position: sticky; top: 80px; animation: fadeUp .5s .4s both; }
+    .sidebar-block { margin-bottom: 3rem; }
+    .sidebar-title {
+      font-family: var(--mono); font-size: .72rem;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--ink-muted); margin-bottom: 1.25rem;
+      padding-bottom: .6rem; border-bottom: 2px solid var(--accent);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    .pop-card {
+      display: flex; gap: .85rem; padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none; color: inherit; transition: opacity .2s;
+    }
+    .pop-card:hover { opacity: .75; }
+    .pop-card:hover .pop-title { color: var(--accent); }
+    .pop-thumb { width: 72px; height: 72px; object-fit: cover; flex-shrink: 0; background: var(--border); }
+    .pop-title { font-weight: 600; font-size: .9rem; line-height: 1.4; transition: color .2s; margin-bottom: .3rem; }
+    .pop-meta { font-family: var(--mono); font-size: .7rem; color: var(--ink-muted); }
+
+    .lat-item {
+      display: flex; gap: .75rem; padding: .85rem 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none; color: inherit;
+    }
+    .lat-item:hover .lat-title { color: var(--accent); }
+    .lat-thumb { width: 52px; height: 52px; object-fit: cover; flex-shrink: 0; background: var(--border); }
+    .lat-title { font-weight: 600; font-size: .85rem; line-height: 1.35; transition: color .2s; }
+
+    .newsletter-block { background: var(--ink); padding: 1.5rem; margin-bottom: 2rem; }
+    .newsletter-block h3 { color: #fff; font-size: 1rem; margin-bottom: .4rem; font-family: var(--serif); }
+    .newsletter-block p { color: rgba(255,255,255,.6); font-size: .82rem; margin-bottom: 1rem; }
+    .nl-input {
+      width: 100%; padding: .6rem .85rem;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+      color: #fff; font-family: var(--serif); margin-bottom: .6rem; outline: none;
+    }
+    .nl-input::placeholder { color: rgba(255,255,255,.4); }
+    .nl-btn {
+      width: 100%; background: var(--accent); color: #fff;
+      border: none; padding: .65rem; font-family: var(--mono);
+      font-size: .8rem; cursor: pointer; transition: opacity .2s;
+    }
+    .nl-btn:hover { opacity: .85; }
+
+    /* ── PROGRESS BAR + BACK TO TOP ─────────── */
+    .read-progress {
+      position: fixed; top: 60px; left: 0;
+      height: 3px; background: var(--accent);
+      width: 0%; z-index: 200; transition: width .1s linear;
+    }
+    .back-top {
+      position: fixed; bottom: 2rem; right: 2rem;
+      width: 44px; height: 44px;
+      background: var(--accent); color: #fff;
+      border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; opacity: 0; pointer-events: none;
+      transition: opacity .3s, transform .3s; transform: translateY(10px);
+    }
+    .back-top.visible { opacity: 1; pointer-events: all; transform: translateY(0); }
+
+    /* ── TOAST ──────────────────────────────── */
+    .toast {
+      position: fixed; bottom: 2rem; left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--ink); color: #fff;
+      padding: .75rem 1.5rem; font-family: var(--mono);
+      font-size: .82rem; opacity: 0;
+      transition: all .3s; pointer-events: none; z-index: 999;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ── FOOTER ─────────────────────────────── */
+    footer {
+      background: var(--ink); color: rgba(255,255,255,.5);
+      text-align: center; padding: 2rem;
+      font-family: var(--mono); font-size: .78rem; margin-top: 4rem;
+    }
+    footer a { color: var(--accent-2); text-decoration: none; }
+
+    /* ── ANIMATIONS ─────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── PAGE LOADER ────────────────────────── */
+    #page-loader {
+      position: fixed; inset: 0; background: var(--paper);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999; transition: opacity .4s;
+    }
+    #page-loader.hidden { opacity: 0; pointer-events: none; }
+    .loader-content img { width: 80px; height: 80px; object-fit: contain; animation: pulse 1.2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.95)} }
+
+    /* ── RESPONSIVE ─────────────────────────── */
+    @media (max-width: 900px) {
+      .page-wrap { grid-template-columns: 1fr; gap: 2rem; }
+      .sidebar { position: static; }
+      nav.hdr-nav { display: none; }
+      .hamburger { display: flex; }
+      .article-banner { height: 260px; }
+    }
+    @media (max-width: 600px) {
+      .page-wrap { padding: 1.5rem 1rem; }
+      .author-bar { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .article-body p { font-size: 1rem; }
+      .article-body h2 { font-size: 1.4rem; }
+    }
+  </style>
+  <link rel="stylesheet" href="/loder/loder.css">
+</head>
+<body>
+
+<div class="read-progress" id="readProgress"></div>
+
+<!-- ── HEADER ─────────────────────────────────── -->
+<header>
+  <a href="/" class="logo">शिव मार्ग<span>.</span></a>
+  <nav class="hdr-nav">
+    <a href="#">कवि</a>
+    <a href="#">कविता</a>
+    <a href="#">गद्य</a>
+    <a href="#">ई-पुस्तक</a>
+    <a href="/article_editor/">नया लेख लिखें</a>
+  </nav>
+  <div class="hdr-actions">
+    <button class="btn-search" onclick="toggleSearch()" title="खोजें">&#128269;</button>
+    <div id="authArea"></div>
+    <button class="hamburger" onclick="toggleMobileMenu()" aria-label="menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ── MOBILE MENU ────────────────────────────── -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-header">
+    <span class="logo-hi" style="color:var(--accent);font-family:var(--display);">आलेख</span>
+    <button class="mobile-menu-close" onclick="toggleMobileMenu()">✕</button>
+  </div>
+  <nav>
+    <a onclick="filterCat(null,'');toggleMobileMenu()">सभी रचनाएँ</a>
+    <a onclick="filterCat(null,'kavita');toggleMobileMenu()">कविता</a>
+    <a onclick="filterCat(null,'kahani');toggleMobileMenu()">कहानी</a>
+    <a onclick="filterCat(null,'nibandh');toggleMobileMenu()">निबंध</a>
+    <a onclick="filterCat(null,'cinema');toggleMobileMenu()">सिनेमा</a>
+    <a onclick="filterCat(null,'science');toggleMobileMenu()">विज्ञान</a>
+    <a onclick="filterCat(null,'ai-it');toggleMobileMenu()">AI · IT</a>
+    <a onclick="filterCat(null,'vichar');toggleMobileMenu()">विचार</a>
+    <a href="/authors/">प्रसिद्ध लेखक</a>
+  </nav>
+</div>
+
+<!-- ── SEARCH OVERLAY ─────────────────────────── -->
+<div class="search-overlay" id="searchOverlay" onclick="closeSearch(event)">
+  <div class="search-box" onclick="event.stopPropagation()">
+    <button class="search-close" onclick="toggleSearch()">✕</button>
+    <h3>खोजिए</h3>
+    <div class="search-input-wrap">
+      <input type="text" id="searchInput" placeholder="कोई शीर्षक, लेखक, विषय..."
+             onkeydown="if(event.key==='Enter')doSearch()">
+      <button onclick="doSearch()">खोजें</button>
+    </div>
+    <div id="searchResults"></div>
+  </div>
+</div>
+
+<!-- ── AUTH MODAL ─────────────────────────────── -->
+<div class="modal-overlay" id="authModal" onclick="closeModal(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-title" id="modalTitle">स्वागत है</div>
+    <div class="modal-tabs">
+      <button class="modal-tab active" id="tabLogin" onclick="switchAuthTab('login')">लॉग-इन</button>
+      <button class="modal-tab" id="tabRegister" onclick="switchAuthTab('register')">नया खाता</button>
+    </div>
+    <div id="loginForm">
+      <button class="google-btn" id="gLoginBtn" onclick="doGoogleAuth('loginMsg')">
+        <img src="https://developers.google.com/identity/images/g-logo.png" alt="G">
+        Google से लॉग-इन करें
+      </button>
+      <div class="or-divider">या</div>
+      <div class="form-field">
+        <label>ई-मेल</label>
+        <input type="email" id="loginEmail" placeholder="आपका ई-मेल">
+      </div>
+      <div class="form-field">
+        <label>पासवर्ड</label>
+        <input type="password" id="loginPass" placeholder="पासवर्ड"
+               onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <button class="btn-submit" onclick="doLogin()">लॉग-इन करें</button>
+      <div class="form-msg" id="loginMsg"></div>
+    </div>
+    <div id="registerForm" style="display:none">
+      <button class="google-btn" id="gRegBtn" onclick="doGoogleAuth('registerMsg')">
+        <img src="https://developers.google.com/identity/images/g-logo.png" alt="G">
+        Google से खाता बनाएँ
+      </button>
+      <div class="or-divider">या</div>
+      <div class="form-field">
+        <label>उपयोगकर्ता नाम</label>
+        <input type="text" id="regUsername" placeholder="username (केवल अंग्रेज़ी)">
+      </div>
+      <div class="form-field">
+        <label>नाम</label>
+        <input type="text" id="regDisplay" placeholder="आपका नाम">
+      </div>
+      <div class="form-field">
+        <label>ई-मेल</label>
+        <input type="email" id="regEmail" placeholder="आपका ई-मेल">
+      </div>
+      <div class="form-field">
+        <label>पासवर्ड</label>
+        <input type="password" id="regPass" placeholder="कम से कम 6 अक्षर">
+      </div>
+      <button class="btn-submit" onclick="doRegister()">खाता बनाएँ</button>
+      <div class="form-msg" id="registerMsg"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     MAIN LAYOUT
+     ════════════════════════════════════════════ -->
+<div class="page-wrap">
+
+  <!-- LEFT: ARTICLE (STATIC) -->
+  <main class="article-main">
+
+    <!-- ══════════════════════════════════════════
+         ✏️  EDIT ZONE 2 — BREADCRUMB
+         ══════════════════════════════════════════ -->
+    <div class="breadcrumb">
+      <a href="/aalekh/">आलेख</a>
+      <span class="breadcrumb-sep">›</span>
+      <a href="/aalekh/?category=vichar">विचार</a><!-- ← change category -->
+      <span class="breadcrumb-sep">›</span>
+      <span>आपका लेख शीर्षक</span><!-- ← change article name -->
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         ✏️  EDIT ZONE 3 — TAGS
+         ══════════════════════════════════════════ -->
+    <div class="tag-row">
+      <a href="/aalekh/" class="tag">आलेख</a>
+      <a href="/aalekh/?category=vichar" class="tag active">विचार</a><!-- ← change category tag -->
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         ✏️  EDIT ZONE 4 — TITLE
+         ══════════════════════════════════════════ -->
+    <h1 class="article-title">यहाँ अपना लेख शीर्षक लिखें</h1>
+
+    <!-- ══════════════════════════════════════════
+         ✏️  EDIT ZONE 5 — AUTHOR BAR
+         Change: author name, profile link, date, views
+         ══════════════════════════════════════════ -->
+    <div class="author-bar">
+      <div class="author-info">
+        <!-- Option A: use an avatar image -->
+        <!-- <img src="/images/author.jpg" alt="लेखक नाम" class="author-avatar"> -->
+        <!-- Option B: initials avatar (default) -->
+        <div class="author-avatar" style="background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;">
+          ल<!-- ← first letter of author name -->
+        </div>
+        <div>
+          <div class="author-name">
+            <a href="/author/?slug=author-slug">लेखक नाम</a><!-- ← change -->
+          </div>
+          <div class="article-meta">
+            <span>१ जनवरी २०२६</span><!-- ← change date -->
+            <span class="meta-dot">•</span>
+            <span>१२३ बार देखा गया</span><!-- ← change views or remove -->
+          </div>
+        </div>
+      </div>
+      <div class="article-actions">
+        <button class="btn-action" onclick="shareArticle()">
+          <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>
+          शेयर
+        </button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         ✏️  EDIT ZONE 6 — BANNER IMAGE
+         Replace src with your image URL, or remove the
+         entire <img> tag if no banner is needed.
+         ══════════════════════════════════════════ -->
+    <img
+      src="/images/article-banner.jpg"
+      alt="लेख बैनर"
+      class="article-banner"
+      onerror="this.style.display='none'"
+    >
+
+    <!-- ══════════════════════════════════════════
+         ✏️  EDIT ZONE 7 — ARTICLE BODY
+         Write your full article content here.
+         Supported tags: <p>, <h2>, <h3>, <blockquote>,
+         <strong>, <em>, <ul>, <ol>, <li>, <img>, <hr>
+         ══════════════════════════════════════════ -->
+    <article class="article-body">
+
+      <p>यहाँ अपनी भूमिका लिखें। यह पहला पैराग्राफ पाठक का ध्यान खींचने के लिए होता है। इसे रोचक और संक्षिप्त रखें।</p>
+
+      <h2>पहला शीर्षक</h2>
+
+      <p>इस खंड में विषय की पहली बात विस्तार से लिखें। आप <strong>महत्वपूर्ण बात</strong> इस प्रकार उजागर कर सकते हैं।</p>
+
+      <blockquote>
+        यह एक उद्धरण है — किसी महान विचारक, कवि, या शास्त्र का वाक्य यहाँ लिखें।
+      </blockquote>
+
+      <p>उद्धरण के बाद अपना विश्लेषण या टिप्पणी जारी रखें। <em>तिरछे अक्षर</em> विशेष शब्दों के लिए प्रयोग करें।</p>
+
+      <h2>दूसरा शीर्षक</h2>
+
+      <p>दूसरे खंड की विषय-वस्तु यहाँ लिखें। आप चाहें तो सूची भी जोड़ सकते हैं:</p>
+
+      <ul>
+        <li>पहला बिंदु यहाँ लिखें</li>
+        <li>दूसरा बिंदु यहाँ लिखें</li>
+        <li>तीसरा बिंदु यहाँ लिखें</li>
+      </ul>
+
+      <h3>उपखंड शीर्षक</h3>
+
+      <p>उपखंड की विस्तृत चर्चा यहाँ करें। यह भाग किसी विशेष पहलू पर केंद्रित हो सकता है।</p>
+
+      <!-- इमेज जोड़ने के लिए यह uncomment करें:
+      <img src="/images/article-image.jpg" alt="इमेज विवरण">
+      -->
+
+      <hr>
+
+      <h2>निष्कर्ष</h2>
+
+      <p>लेख का समापन यहाँ करें। पाठक को एक स्पष्ट संदेश या निष्कर्ष दें जो उन्हें सोचने पर मजबूर करे।</p>
+
+    </article>
+    <!-- ══════════════════════════════════════════
+         END EDIT ZONE 7
+         ══════════════════════════════════════════ -->
+
+    <!-- ══════════════════════════════════════════
+         ✏️  EDIT ZONE 8 — BOTTOM TAGS (optional)
+         ══════════════════════════════════════════ -->
+    <div class="bottom-tags">
+      <h4>संबंधित विषय</h4>
+      <div class="tag-row">
+        <a href="/aalekh/?tag=शिव" class="tag">शिव</a>
+        <a href="/aalekh/?tag=दर्शन" class="tag">दर्शन</a>
+        <a href="/aalekh/?tag=आध्यात्म" class="tag">आध्यात्म</a>
+        <!-- ← add/remove tags as needed -->
+      </div>
+    </div>
+
+    <!-- Share bar — auto-uses current page URL, no edit needed -->
+    <div class="share-bar" id="shareBar"></div>
+
+    <!-- ── COMMENTS (fully dynamic — no edit needed) ── -->
+    <!-- ══════════════════════════════════════════
+         ✏️  EDIT ZONE 9 — COMMENTS PAGE ID
+         Set STATIC_PAGE_ID below to a unique identifier
+         for this page (used as comment thread key).
+         e.g. 'mahashivratri-mahatva', 'om-ka-arth' etc.
+         ══════════════════════════════════════════ -->
+    <section class="comments-section">
+      <h2>कमेंट</h2>
+      <div class="comment-count" id="commentCount">लोड हो रहा है...</div>
+      <div class="comment-form">
+        <textarea id="cmtText" placeholder="अपना कमेंट लिखिए..."></textarea>
+        <div style="display:flex;justify-content:flex-end;margin-top:.6rem;">
+          <button class="btn-comment" onclick="postComment()">कमेंट करें</button>
+        </div>
+      </div>
+      <div id="commentList">
+        <div class="skeleton" style="height:80px;margin-bottom:1rem;"></div>
+        <div class="skeleton" style="height:80px;opacity:.6;"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- RIGHT: SIDEBAR (fully dynamic — no edit needed) -->
+  <aside class="sidebar">
+
+    <div class="newsletter-block">
+      <h3>शिव मार्ग की नई पोस्ट्स पाने के लिए</h3>
+      <p>सब्सक्राइब कीजिए — स्पैम नहीं भेजेंगे।</p>
+      <input type="email" class="nl-input" id="nlEmail" placeholder="आपका ई-मेल">
+      <button class="nl-btn" onclick="handleNewsletter()">सब्सक्राइब</button>
+    </div>
+
+    <div class="sidebar-block">
+      <div class="sidebar-title">
+        <span>शिव मार्ग पॉपुलर</span>
+        <span style="font-size:.65rem;opacity:.5;">सबसे पढ़ी गई</span>
+      </div>
+      <div id="popularPosts">
+        <div class="skeleton" style="height:72px;margin-bottom:.75rem;"></div>
+        <div class="skeleton" style="height:72px;margin-bottom:.75rem;opacity:.7;"></div>
+        <div class="skeleton" style="height:72px;opacity:.5;"></div>
+      </div>
+    </div>
+
+    <div class="sidebar-block">
+      <div class="sidebar-title"><span>शिव मार्ग लेटेस्ट</span></div>
+      <div id="latestPosts">
+        <div class="skeleton" style="height:52px;margin-bottom:.75rem;"></div>
+        <div class="skeleton" style="height:52px;margin-bottom:.75rem;opacity:.7;"></div>
+        <div class="skeleton" style="height:52px;opacity:.5;"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         ✏️  EDIT ZONE 10 — SIDEBAR AUTHOR CARD
+         ══════════════════════════════════════════ -->
+    <div class="sidebar-block" id="authorCard">
+      <div class="sidebar-title"><span>लेखक के बारे में</span></div>
+      <div style="display:flex;gap:.85rem;align-items:center;margin-bottom:.85rem;">
+        <!-- Option A: image -->
+        <!-- <img src="/images/author.jpg" style="width:56px;height:56px;border-radius:50%;border:2px solid var(--accent);object-fit:cover;" alt="लेखक"> -->
+        <!-- Option B: initials (default) -->
+        <div style="width:56px;height:56px;border-radius:50%;border:2px solid var(--accent);background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1.2rem;">
+          ल<!-- ← first letter -->
+        </div>
+        <div>
+          <div style="font-weight:700;font-size:.95rem;">
+            <a href="/author/?slug=author-slug" style="color:inherit;text-decoration:none;">लेखक नाम</a><!-- ← change -->
+          </div>
+          <div style="font-family:var(--mono);font-size:.72rem;color:var(--ink-muted);">लेखक</div>
+        </div>
+      </div>
+      <!-- Optional author bio -->
+      <p style="font-size:.88rem;color:var(--ink-soft);line-height:1.65;">
+        लेखक का संक्षिप्त परिचय यहाँ लिखें।<!-- ← change or remove -->
+      </p>
+    </div>
+
+  </aside>
+</div>
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<div class="toast" id="toast"></div>
+
+<!-- PAGE LOADER -->
+<div id="page-loader">
+  <div class="loader-content">
+    <img src="/images/ShivMarg.png" alt="Logo">
+  </div>
+</div>
+
+<footer>
+  <p>॥ © ShivaMarg 2026 || shivmarg.live</p>
+  <a href="/">Home</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy-policy/">Privacy Policy</a>
+</footer>
+
+<!-- ════════════════════════════════════════════
+     JAVASCRIPT
+     ════════════════════════════════════════════ -->
+<script>
+  /* ══════════════════════════════════════════
+     ✏️  EDIT ZONE 11 — STATIC PAGE CONFIG
+     Set a unique page ID for the comment thread.
+     This is the only JS you need to touch per page.
+     ══════════════════════════════════════════ */
+  const STATIC_PAGE_ID = 'my-article-unique-slug'; // ← CHANGE THIS per page
+  /* ══════════════════════════════════════════ */
+
+  const API_BASE = 'https://www.api.shivmarg.live';
+
+  /* ── UTILITY ────────────────────────────── */
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  function setMsg(id, text, type = '') {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = text;
+    el.className = 'form-msg' + (type ? ' ' + type : '');
+  }
+
+  function copyLink() {
+    navigator.clipboard.writeText(window.location.href)
+      .then(() => showToast('लिंक कॉपी हो गया!'))
+      .catch(() => showToast('कॉपी नहीं हो सका'));
+  }
+
+  function shareArticle() {
+    if (navigator.share) {
+      navigator.share({ title: document.title, url: window.location.href });
+    } else {
+      copyLink();
+    }
+  }
+
+  /* ── SHARE BAR (auto-rendered) ──────────── */
+  function renderShareBar() {
+    const titleEnc = encodeURIComponent(document.title);
+    const urlEnc   = encodeURIComponent(window.location.href);
+    document.getElementById('shareBar').innerHTML = `
+      <span class="share-label">शेयर करें :</span>
+      <a href="https://wa.me/?text=${titleEnc}%20${urlEnc}" target="_blank" rel="noopener" class="share-btn whatsapp">📱 WhatsApp</a>
+      <a href="https://twitter.com/intent/tweet?text=${titleEnc}&url=${urlEnc}" target="_blank" rel="noopener" class="share-btn twitter">🐦 Twitter</a>
+      <button class="share-btn" onclick="copyLink()">🔗 लिंक कॉपी करें</button>
+    `;
+  }
+
+  /* ── PAGE LOADER ────────────────────────── */
+  function hideLoader() {
+    const loader = document.getElementById('page-loader');
+    if (loader) {
+      loader.classList.add('hidden');
+      setTimeout(() => loader.style.display = 'none', 450);
+    }
+  }
+
+  /* ── MOBILE MENU ────────────────────────── */
+  function toggleMobileMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  function filterCat(el, cat) {
+    window.location.href = '/aalekh/' + (cat ? '?category=' + cat : '');
+  }
+
+  /* ── SEARCH ─────────────────────────────── */
+  function toggleSearch() {
+    const overlay = document.getElementById('searchOverlay');
+    const isOpen = overlay.classList.toggle('open');
+    if (isOpen) setTimeout(() => document.getElementById('searchInput').focus(), 100);
+  }
+
+  function closeSearch(e) {
+    if (!e || e.target === document.getElementById('searchOverlay')) {
+      document.getElementById('searchOverlay').classList.remove('open');
+    }
+  }
+
+  async function doSearch() {
+    const q = document.getElementById('searchInput').value.trim();
+    const resultsEl = document.getElementById('searchResults');
+    if (!q) return;
+    resultsEl.innerHTML = '<div class="skeleton" style="height:60px;margin-top:1rem;"></div>';
+    try {
+      const res = await fetch(`${API_BASE}/api/articles/search?q=${encodeURIComponent(q)}&limit=8`);
+      const json = await res.json();
+      const articles = json.articles || json.results || [];
+      if (!articles.length) {
+        resultsEl.innerHTML = '<p style="color:var(--ink-muted);padding:1rem 0;font-size:.9rem;">कोई परिणाम नहीं मिला।</p>';
+        return;
+      }
+      resultsEl.innerHTML = articles.map(a => `
+        <a href="/articles/?slug=${a.slug}" class="search-result-item">
+          <div class="sri-title">${a.title}</div>
+          <div class="sri-meta">${a.category || ''} · ${a.author?.username || ''}</div>
+        </a>
+      `).join('');
+    } catch (e) {
+      resultsEl.innerHTML = '<p style="color:var(--ink-muted);padding:1rem 0;font-size:.9rem;">खोज नहीं हो सकी।</p>';
+    }
+  }
+
+  /* ── AUTH MODAL ─────────────────────────── */
+  function openModal() {
+    document.getElementById('authModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(e) {
+    if (!e || e.target === document.getElementById('authModal') || !e.target) {
+      document.getElementById('authModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+
+  function switchAuthTab(tab) {
+    const lf = document.getElementById('loginForm');
+    const rf = document.getElementById('registerForm');
+    const tl = document.getElementById('tabLogin');
+    const tr = document.getElementById('tabRegister');
+    if (tab === 'login') {
+      lf.style.display = 'block'; rf.style.display = 'none';
+      tl.classList.add('active'); tr.classList.remove('active');
+      document.getElementById('modalTitle').textContent = 'स्वागत है';
+    } else {
+      lf.style.display = 'none'; rf.style.display = 'block';
+      tr.classList.add('active'); tl.classList.remove('active');
+      document.getElementById('modalTitle').textContent = 'नया खाता बनाएँ';
+    }
+  }
+
+  async function doLogin() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const pass  = document.getElementById('loginPass').value;
+    if (!email || !pass) { setMsg('loginMsg', 'ई-मेल और पासवर्ड भरें।', 'error'); return; }
+    setMsg('loginMsg', 'लॉग-इन हो रहा है...');
+    try {
+      const res  = await fetch(`${API_BASE}/api/auth/login`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password: pass })
+      });
+      const json = await res.json();
+      if (!res.ok) { setMsg('loginMsg', json.message || json.error || 'गलत ई-मेल या पासवर्ड।', 'error'); return; }
+      localStorage.setItem('sm_token', json.token || json.access_token);
+      localStorage.setItem('sm_user', JSON.stringify(json.user));
+      closeModal(); renderAuthArea(); showToast('लॉग-इन हो गए! स्वागत है।');
+    } catch (e) { setMsg('loginMsg', 'सर्वर से जुड़ नहीं हो सका।', 'error'); }
+  }
+
+  async function doRegister() {
+    const username     = document.getElementById('regUsername').value.trim();
+    const display_name = document.getElementById('regDisplay').value.trim();
+    const email        = document.getElementById('regEmail').value.trim();
+    const password     = document.getElementById('regPass').value;
+    if (!username || !email || !password) { setMsg('registerMsg', 'सभी ज़रूरी फ़ील्ड भरें।', 'error'); return; }
+    if (password.length < 6) { setMsg('registerMsg', 'पासवर्ड कम से कम 6 अक्षर का होना चाहिए।', 'error'); return; }
+    setMsg('registerMsg', 'खाता बनाया जा रहा है...');
+    try {
+      const res  = await fetch(`${API_BASE}/api/auth/register`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, display_name, email, password })
+      });
+      const json = await res.json();
+      if (!res.ok) { setMsg('registerMsg', json.message || json.error || 'खाता नहीं बन सका।', 'error'); return; }
+      localStorage.setItem('sm_token', json.token || json.access_token);
+      localStorage.setItem('sm_user', JSON.stringify(json.user));
+      closeModal(); renderAuthArea(); showToast('खाता बन गया! स्वागत है।');
+    } catch (e) { setMsg('registerMsg', 'सर्वर से जुड़ नहीं हो सका।', 'error'); }
+  }
+
+  const GOOGLE_CLIENT_ID = '299436963033-5u4k118211j4jbeum45r67omn10d0g7g.apps.googleusercontent.com';
+
+  function _loadGsi() {
+    return new Promise(resolve => {
+      if (window.google) { resolve(); return; }
+      const s = document.createElement('script');
+      s.src = 'https://accounts.google.com/gsi/client';
+      s.onload = resolve;
+      document.head.appendChild(s);
+    });
+  }
+
+  async function doGoogleAuth(msgElId) {
+    if (!GOOGLE_CLIENT_ID || GOOGLE_CLIENT_ID === 'YOUR_CLIENT_ID_HERE') {
+      showToast('Google लॉगिन अभी उपलब्ध नहीं है'); return;
+    }
+    const msgEl = document.getElementById(msgElId);
+    ['gLoginBtn','gRegBtn'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) { el.disabled = true; el.textContent = '⏳ प्रतीक्षा करें…'; }
+    });
+    const resetBtns = () => {
+      const lb = document.getElementById('gLoginBtn');
+      const rb = document.getElementById('gRegBtn');
+      if (lb) { lb.disabled = false; lb.innerHTML = '<img src="https://developers.google.com/identity/images/g-logo.png" alt="G" style="width:16px;height:16px"> Google से लॉग-इन करें'; }
+      if (rb) { rb.disabled = false; rb.innerHTML = '<img src="https://developers.google.com/identity/images/g-logo.png" alt="G" style="width:16px;height:16px"> Google से खाता बनाएँ'; }
+    };
+    try {
+      await _loadGsi();
+      window.google.accounts.id.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: async (response) => {
+          try {
+            const res = await fetch(`${API_BASE}/api/auth/google`, {
+              method: 'POST', headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ id_token: response.credential })
+            });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.detail || 'Google लॉगिन विफल');
+            localStorage.setItem('sm_token', data.token);
+            localStorage.setItem('sm_user', JSON.stringify(data.user));
+            renderAuthArea(); closeModal();
+            showToast(data.is_new ? '🌸 खाता बन गया! स्वागत है, ' + data.user.display_name : '🙏 स्वागत है, ' + data.user.display_name + '!');
+          } catch(e) {
+            if (msgEl) { msgEl.textContent = e.message; msgEl.className = 'form-msg error'; }
+            resetBtns();
+          }
+        }
+      });
+      window.google.accounts.id.prompt();
+    } catch(e) { showToast('Google लॉगिन में समस्या हुई'); resetBtns(); }
+  }
+
+  function doLogout() {
+    localStorage.removeItem('sm_token');
+    localStorage.removeItem('sm_user');
+    renderAuthArea();
+    showToast('लॉग-आउट हो गए');
+  }
+
+  function renderAuthArea() {
+    const area  = document.getElementById('authArea');
+    const user  = JSON.parse(localStorage.getItem('sm_user') || 'null');
+    const token = localStorage.getItem('sm_token');
+    area.innerHTML = '';
+    if (user && token) {
+      const userBar  = document.createElement('div');
+      userBar.className = 'user-bar';
+      const avatar   = document.createElement('div');
+      avatar.className = 'user-avatar';
+      avatar.title = user.display_name || user.username;
+      avatar.onclick = () => window.location.href = `/profile/${user.username}`;
+      const initials = document.createElement('span');
+      initials.textContent = (user.username || 'U')[0].toUpperCase();
+      if (user.avatar && user.avatar.startsWith('http')) {
+        const img = document.createElement('img');
+        img.src = user.avatar; img.alt = user.display_name || user.username;
+        img.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:50%;';
+        img.onerror = () => { img.remove(); avatar.appendChild(initials); };
+        avatar.appendChild(img);
+      } else { avatar.appendChild(initials); }
+      const logoutBtn = document.createElement('button');
+      logoutBtn.className = 'btn-logout';
+      logoutBtn.textContent = 'लॉग-आउट';
+      logoutBtn.onclick = doLogout;
+      userBar.appendChild(avatar);
+      userBar.appendChild(logoutBtn);
+      area.appendChild(userBar);
+    } else {
+      const loginBtn = document.createElement('button');
+      loginBtn.className = 'btn-login';
+      loginBtn.textContent = 'लॉग-इन';
+      loginBtn.onclick = openModal;
+      area.appendChild(loginBtn);
+    }
+  }
+
+  /* ── POPULAR POSTS ──────────────────────── */
+  async function loadPopularPosts() {
+    try {
+      const res  = await fetch(`${API_BASE}/api/articles/popular?limit=6`);
+      const json = await res.json();
+      const el   = document.getElementById('popularPosts');
+      const articles = json.articles || json.data || [];
+      if (!articles.length) { el.innerHTML = '<p style="color:var(--ink-muted);font-size:.85rem;">कोई पोस्ट नहीं</p>'; return; }
+      el.innerHTML = articles.map(p => `
+        <a href="/articles/?slug=${p.slug}" class="pop-card">
+          ${p.thumbnail_url
+            ? `<img src="${p.thumbnail_url}" alt="${p.title}" class="pop-thumb" onerror="this.style.display='none'">`
+            : `<div class="pop-thumb"></div>`}
+          <div>
+            <div class="pop-title">${p.title}</div>
+            <div class="pop-meta">${new Date(p.published_at).toLocaleDateString('hi-IN')} · ${p.author?.username || ''}</div>
+          </div>
+        </a>
+      `).join('');
+    } catch (e) {
+      document.getElementById('popularPosts').innerHTML = '<p style="color:var(--ink-muted);font-size:.85rem;">लोड नहीं हो सका</p>';
+    }
+  }
+
+  /* ── LATEST POSTS ───────────────────────── */
+  async function loadLatestPosts() {
+    try {
+      const res  = await fetch(`${API_BASE}/api/articles/latest?limit=7`);
+      const json = await res.json();
+      const el   = document.getElementById('latestPosts');
+      const articles = json.articles || json.data || [];
+      if (!articles.length) { el.innerHTML = '<p style="color:var(--ink-muted);font-size:.85rem;">कोई पोस्ट नहीं</p>'; return; }
+      el.innerHTML = articles.map(p => `
+        <a href="/articles/?slug=${p.slug}" class="lat-item">
+          ${p.thumbnail_url
+            ? `<img src="${p.thumbnail_url}" alt="${p.title}" class="lat-thumb" onerror="this.style.display='none'">`
+            : `<div class="lat-thumb"></div>`}
+          <div><div class="lat-title">${p.title}</div></div>
+        </a>
+      `).join('');
+    } catch (e) { console.error('Latest posts error:', e); }
+  }
+
+  /* ── COMMENTS ───────────────────────────── */
+  async function loadComments() {
+    try {
+      const res  = await fetch(`${API_BASE}/api/comments/${STATIC_PAGE_ID}`);
+      const json = await res.json();
+      const list  = document.getElementById('commentList');
+      const count = document.getElementById('commentCount');
+      const comments = json.comments || json.data || [];
+      count.textContent = `${json.total ?? comments.length} कमेंट`;
+      if (!comments.length) {
+        list.innerHTML = '<p style="color:var(--ink-muted);font-size:.9rem;padding:1rem 0;">पहले कमेंट करने वाले बनें!</p>';
+        return;
+      }
+      list.innerHTML = comments.map(c => `
+        <div class="comment-item" id="cmt-${c.id}">
+          <div class="comment-avatar">
+            ${c.avatar ? `<img src="${c.avatar}" alt="${c.username}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.style.display='none'">` : ''}
+            <span>${(c.username || 'A')[0].toUpperCase()}</span>
+          </div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;">
+              <span class="comment-author">${c.username}</span>
+              <span class="comment-time">${new Date(c.created_at).toLocaleDateString('hi-IN')}</span>
+            </div>
+            <div class="comment-text">${c.text}</div>
+            <button class="comment-like" onclick="likeComment('${c.id}', this)">
+              ❤ <span>${c.likes || 0}</span>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    } catch (e) {
+      document.getElementById('commentList').innerHTML = '<p style="color:var(--ink-muted);font-size:.9rem;">लोड नहीं हो सका</p>';
+    }
+  }
+
+  async function postComment() {
+    const text = document.getElementById('cmtText').value.trim();
+    if (!text) { showToast('कमेंट खाली नहीं होना चाहिए'); return; }
+    const token = localStorage.getItem('sm_token');
+    if (!token) { showToast('कमेंट के लिए पहले लॉगिन करें'); openModal(); return; }
+    const btn = document.querySelector('.btn-comment');
+    btn.textContent = 'भेजा जा रहा है...'; btn.disabled = true;
+    try {
+      const res = await fetch(`${API_BASE}/api/comments`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body: JSON.stringify({ page_id: STATIC_PAGE_ID, text })
+      });
+      if (res.ok) {
+        document.getElementById('cmtText').value = '';
+        showToast('कमेंट हो गया! धन्यवाद।');
+        await loadComments();
+      } else { showToast('कमेंट नहीं हो सका'); }
+    } catch (e) { showToast('कुछ गड़बड़ हुई, फिर कोशिश करें'); }
+    finally { btn.textContent = 'कमेंट करें'; btn.disabled = false; }
+  }
+
+  async function likeComment(id, btn) {
+    const token = localStorage.getItem('sm_token');
+    if (!token) { showToast('लॉगिन करें'); openModal(); return; }
+    try {
+      await fetch(`${API_BASE}/api/comments/${id}/like`, {
+        method: 'POST', headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const countEl = btn.querySelector('span');
+      countEl.textContent = parseInt(countEl.textContent) + 1;
+      btn.style.borderColor = 'var(--accent)'; btn.style.color = 'var(--accent)'; btn.disabled = true;
+    } catch (e) { showToast('लॉगिन करें'); }
+  }
+
+  /* ── NEWSLETTER ─────────────────────────── */
+  function handleNewsletter() {
+    const email = document.getElementById('nlEmail').value.trim();
+    if (!email || !email.includes('@')) { showToast('सही ई-मेल डालें'); return; }
+    showToast('सब्सक्राइब के लिए धन्यवाद!');
+    document.getElementById('nlEmail').value = '';
+  }
+
+  /* ── SCROLL ─────────────────────────────── */
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const pct = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
+    document.getElementById('readProgress').style.width = pct + '%';
+    document.getElementById('backTop').classList.toggle('visible', doc.scrollTop > 400);
+  }, { passive: true });
+
+  /* ── KEYBOARD ───────────────────────────── */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.getElementById('searchOverlay').classList.remove('open');
+      document.getElementById('authModal').classList.remove('open');
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+
+  /* ── INIT ───────────────────────────────── */
+  (async () => {
+    renderAuthArea();
+    renderShareBar();
+    hideLoader();
+    await Promise.all([loadPopularPosts(), loadLatestPosts(), loadComments()]);
+  })();
+</script>
+
+<script src="/js/auth2.js" defer onerror="console.warn('auth2.js not found')"></script>
+</body>
+</html>
