@@ -123,6 +123,9 @@ mantra for wealth
 </script>
 <style>
     :root {
+      --temple-night:    #1A0C08;
+      --temple-night-2:  #2B1208;
+      --temple-night-3:  #3D1A0A;
       --saffron: #FF7A1A;
       --deep-saffron: #E85D04;
       --vermillion: #D64545;
@@ -145,9 +148,28 @@ mantra for wealth
       --bg-light: #FFFBF4;
       --border-color: #F0DDBC;
       --shadow: 0 10px 40px rgba(201, 150, 46, 0.15);
+      --saffron-light:   #FF8C2A;
+      --marigold:        #E8B84B;
+      --gold:            #C9921A;
+      --gold-muted:      #A07818;
+      --vermillion:      #C1432E;
+      --maroon-deep:     #4A1210;
+      --parchment:       #FBF3E2;
+      --parchment-2:     #F5E9D0;
+      --ink:             #3D1A0A;
+      --ink-mid:         #6B3A20;
+      --ink-light:       #8B5A2B;
+      --ivory-text:      #FFF0DC;
+      --ghost:           rgba(255,255,255,0.07);
+      --ghost-border:    rgba(255,220,150,0.18);
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    .container {
+      width: min(1160px, 92%);
+      margin-inline: auto;
+    }
 
     html { scroll-behavior: smooth; }
 
@@ -865,57 +887,189 @@ mantra for wealth
       padding: 0 10px;
     }
 
-    /* ── FOOTER ── */
-    footer {
+    /* ════════════════════════════════════════════
+       [14] FOOTER — temple night with diya glow
+    ════════════════════════════════════════════ */
+    .footer-section {
       position: relative;
       z-index: 10;
-      text-align: center;
-      padding: 50px 20px 40px;
-      border-top: 1px solid rgba(201,150,46,0.25);
+      width: 100%;
+      padding: 0;
+      background: var(--temple-night);
     }
-
-    .footer-om {
-      font-family: 'Tiro Devanagari Sanskrit', serif;
-      font-size: 3.5rem;
-      color: rgba(201,150,46,0.4);
-      display: block;
-      margin-bottom: 14px;
+    #footer {
+      background: var(--temple-night);
+      border-top: 10px solid var(--maroon-deep);
+      min-height: 535px;
+      padding: 120px 0 38px;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
     }
-
-    .footer-links {
+    #footer::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 180px;
+      background: radial-gradient(ellipse at bottom, rgba(200,100,10,0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    #footer .container {
+      position: relative;
+      z-index: 1;
+      width: min(1450px, calc(100% - 10vw));
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: minmax(300px, 1.45fr) repeat(3, minmax(170px, 1fr));
+      gap: clamp(36px, 4vw, 72px);
+      margin-bottom: 82px;
+      align-items: start;
+    }
+    .footer-brand-col {}
+    .footer-logo {
       display: flex;
+      align-items: center;
+      gap: var(--sp-sm);
+      margin-bottom: var(--sp-md);
+    }
+    .footer-logo-mark {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, var(--saffron-light), var(--maroon));
+      display: flex;
+      align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 0;
-      margin-bottom: 20px;
+      font-family: var(--font-deva);
+      font-size: 1.3rem;
+      color: var(--ivory-text);
+      flex-shrink: 0;
+    }
+    .footer-logo-name {
+      font-family: var(--font-display);
+      font-size: 1.22rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--marigold);
+    }
+    .footer-tagline {
+      font-family: var(--font-deva);
+      font-size: 1.02rem;
+      color: rgba(255,220,150,0.45);
+      line-height: 1.9;
+      max-width: 360px;
+      margin: 26px 0 30px;
+    }
+    .footer-social {
+      display: flex;
+      gap: var(--sp-sm);
+    }
+    .social-link {
+      width: 34px; height: 34px;
+      border: 1px solid rgba(200,140,50,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(200,140,50,0.5);
+      font-size: 0.85rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .social-link:hover {
+      border-color: var(--marigold);
+      color: var(--marigold);
+    }
+    .footer-col-title {
+      font-family: var(--font-label);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--marigold);
+      display: block;
+      margin-bottom: 28px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(200,140,50,0.15);
+    }
+    .footer-links {
+      position: static;
+      top: auto;
+      z-index: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: var(--sp-xs);
+      height: auto;
+      padding: 0;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      backdrop-filter: none;
     }
     .footer-links a {
-      font-family: 'Cinzel', serif;
-      font-size: 0.68rem;
-      letter-spacing: 3px;
-      color: var(--text-light);
-      text-decoration: none;
-      padding: 6px 16px;
+      font-family: var(--font-deva);
+      font-size: 1.03rem;
+      color: rgba(255,220,150,0.5);
+      transition: color 0.2s;
+      line-height: 1.9;
+    }
+    .footer-links a:hover { color: rgba(255,220,150,0.85); }
+    .footer-bottom {
+      border-top: 1px solid rgba(200,140,50,0.1);
+      padding-top: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--sp-sm);
+    }
+    .footer-bottom-left {
+      font-family: var(--font-deva);
+      font-size: 0.92rem;
+      color: rgba(255,220,150,0.3);
+    }
+    .footer-bottom-right {
+      display: flex;
+      gap: 34px;
+    }
+    .footer-bottom-right a {
+      font-family: var(--font-label);
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      transition: color 0.3s;
-      border-right: 1px solid rgba(201,150,46,0.25);
+      color: rgba(200,140,50,0.35);
+      transition: color 0.2s;
     }
-    .footer-links a:last-child { border-right: none; }
-    .footer-links a:hover { color: var(--deep-saffron); }
+    .footer-bottom-right a:hover { color: rgba(200,140,50,0.7); }
 
-    .footer-copy {
-      font-size: 0.8rem;
-      color: rgba(138,111,78,0.6);
-      font-style: italic;
-    }
-
-    /* ── REVEAL ── */
-    .reveal {
+    /* ════════════════════════════════════════════
+       BACK TO TOP BUTTON
+    ════════════════════════════════════════════ */
+    #back-to-top {
+      position: fixed;
+      bottom: var(--sp-lg);
+      right: var(--sp-lg);
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, var(--saffron), var(--gold));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--temple-night);
+      font-size: 1rem;
+      box-shadow: 0 4px 20px rgba(230,100,10,0.4);
       opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      transform: translateY(16px);
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 500;
+      border: none;
+      cursor: pointer;
     }
-    .reveal.on { opacity: 1; transform: none; }
+    #back-to-top.visible { opacity: 1; transform: translateY(0); }
+    
+
 
     /* ── AUTHORS SECTION (MAIN THEME) ── */
     .authors-section {
@@ -1039,10 +1193,27 @@ mantra for wealth
     }
 
     @media (max-width: 900px) {
+      #footer .container { width: min(1160px, 92%); }
+      .footer-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 28px;
+      }
+      .footer-tagline { max-width: 260px; }
       .authors-grid { grid-template-columns: repeat(3, 1fr); }
     }
 
     @media (max-width: 640px) {
+      .footer-section { padding: 0; }
+      #footer {
+        min-height: auto;
+        padding: 56px 0 32px;
+      }
+      #footer .container { width: min(100% - 32px, 560px); }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+      }
       .authors-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
     }
 
@@ -2144,6 +2315,8 @@ mantra for wealth
 <div class="bg-fixed"></div>
 <div class="mandala-tex"></div>
 <div id="diyas"></div>
+
+<main id="main-content">
 <div id="panchang-strip" role="complementary" aria-label="आज का पंचांग">
   <div class="panchang-strip-inner" id="panchang-content">
     <!-- Loading shimmer -->
@@ -2260,7 +2433,7 @@ mantra for wealth
 </div>  
 
 
-< class="cards-wrapper">
+<div class="cards-wrapper">
   <div class="featured-row" id="featured-row">
 
 
@@ -2500,70 +2673,70 @@ mantra for wealth
     <div class="divider-text">✦ मैथिली गीत ✦</div>
     <div class="divider-line"></div>
   </div>
-<!-- VIDYAPATI GEET — STOTRA-STYLE CARD -->
-<!-- VIDYAPATI GEET — STOTRA-STYLE STATIC SECTION -->
-<section id="vidyapati-geet" class="reveal" role="region" aria-label="विद्यापति गीत">
-  <div class="sotw-header">
-    <span class="sotw-label">✦ मैथिली काव्य ✦</span>
-    <div class="sotw-title">विद्यापति गीत संग्रह</div>
-  </div>
-  <div class="sotw-card">
-    <div class="sotw-image-side">
-      <img src="/images/Vidyapatee.jpg" alt="विद्यापति गीत">
-      <div class="sotw-image-overlay"></div>
-      <span class="sotw-badge">मैथिली</span>
-    </div>
-    <div class="sotw-content-side">
-      <div>
-        <div class="sotw-deity-tag">Vidyapati Geet</div>
-        <div class="sotw-name-deva">विद्यापति गीत</div>
-        <div class="sotw-name-eng">VIDYAPATI GEET</div>
+    <!-- VIDYAPATI GEET — STOTRA-STYLE CARD -->
+    <!-- VIDYAPATI GEET — STOTRA-STYLE STATIC SECTION -->
+    <section id="vidyapati-geet" class="reveal" role="region" aria-label="विद्यापति गीत">
+      <div class="sotw-header">
+        <span class="sotw-label">✦ मैथिली काव्य ✦</span>
+        <div class="sotw-title">विद्यापति गीत संग्रह</div>
       </div>
-      <div class="sotw-verse">तोहर मुख देखै सनु<br>भए प्रीति मोरा॥</div>
-      <div class="sotw-desc">महाकवि विद्यापति द्वारा रचित मैथिली के अमर गीतों का संग्रह, जिनमें भक्ति, श्रृंगार और लोक-संस्कृति की अद्भुत झलक मिलती है।</div>
-      <div>
-        <div class="sotw-meta" style="margin-bottom:16px;">
-          <span class="sotw-meta-tag">मैथिली</span>
-          <span class="sotw-meta-tag">12 गीत</span>
-          <span class="sotw-meta-tag">भक्ति काव्य</span>
+      <div class="sotw-card">
+        <div class="sotw-image-side">
+          <img src="/images/Vidyapatee.jpg" alt="विद्यापति गीत">
+          <div class="sotw-image-overlay"></div>
+          <span class="sotw-badge">मैथिली</span>
         </div>
-        <a class="sotw-read-btn" href="/Vidyapati-Geet-Sangrah/">सभी गीत पढ़ें</a>
+        <div class="sotw-content-side">
+          <div>
+            <div class="sotw-deity-tag">Vidyapati Geet</div>
+            <div class="sotw-name-deva">विद्यापति गीत</div>
+            <div class="sotw-name-eng">VIDYAPATI GEET</div>
+          </div>
+          <div class="sotw-verse">तोहर मुख देखै सनु<br>भए प्रीति मोरा॥</div>
+          <div class="sotw-desc">महाकवि विद्यापति द्वारा रचित मैथिली के अमर गीतों का संग्रह, जिनमें भक्ति, श्रृंगार और लोक-संस्कृति की अद्भुत झलक मिलती है।</div>
+          <div>
+            <div class="sotw-meta" style="margin-bottom:16px;">
+              <span class="sotw-meta-tag">मैथिली</span>
+              <span class="sotw-meta-tag">12 गीत</span>
+              <span class="sotw-meta-tag">भक्ति काव्य</span>
+            </div>
+            <a class="sotw-read-btn" href="/Vidyapati-Geet-Sangrah/">सभी गीत पढ़ें</a>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- SHIV BHAJAN MAITHILI — STOTRA-STYLE STATIC SECTION -->
-<section id="shiv-bhajan-maithili" class="reveal" role="region" aria-label="शिव भजन मैथिली गीत">
-  <div class="sotw-header">
-    <span class="sotw-label">✦ शिव भक्ति ✦</span>
-    <div class="sotw-title">शिव भजन मैथिली गीत</div>
-  </div>
-  <div class="sotw-card">
-    <div class="sotw-image-side">
-      <img src="/images/ShivParwatiMithilaPaiting.jpg" alt="शिव भजन मैथिली गीत">
-      <div class="sotw-image-overlay"></div>
-      <span class="sotw-badge">शिव भजन</span>
+  <!-- SHIV BHAJAN MAITHILI — STOTRA-STYLE STATIC SECTION -->
+  <section id="shiv-bhajan-maithili" class="reveal" role="region" aria-label="शिव भजन मैथिली गीत">
+    <div class="sotw-header">
+      <span class="sotw-label">✦ शिव भक्ति ✦</span>
+      <div class="sotw-title">शिव भजन मैथिली गीत</div>
     </div>
-    <div class="sotw-content-side">
-      <div>
-        <div class="sotw-deity-tag">Shiv Bhajan Maithili</div>
-        <div class="sotw-name-deva">शिव भजन मैथिली गीत</div>
-        <div class="sotw-name-eng">SHIV BHAJANS MAITHILI GEET</div>
+    <div class="sotw-card">
+      <div class="sotw-image-side">
+        <img src="/images/ShivParwatiMithilaPaiting.jpg" alt="शिव भजन मैथिली गीत">
+        <div class="sotw-image-overlay"></div>
+        <span class="sotw-badge">शिव भजन</span>
       </div>
-      <div class="sotw-verse">हर हर महादेव बम बम भोले<br>जय शम्भो नीलकंठ देव॥</div>
-      <div class="sotw-desc">भगवान शिव की महिमा में रचित मैथिली भजनों का संग्रह, जो भक्ति रस से परिपूर्ण होकर शिव भक्तों के हृदय को प्रसन्न करते हैं।</div>
-      <div>
-        <div class="sotw-meta" style="margin-bottom:16px;">
-          <span class="sotw-meta-tag">मैथिली</span>
-          <span class="sotw-meta-tag">20 भजन</span>
-          <span class="sotw-meta-tag">शिव भक्ति</span>
+      <div class="sotw-content-side">
+        <div>
+          <div class="sotw-deity-tag">Shiv Bhajan Maithili</div>
+          <div class="sotw-name-deva">शिव भजन मैथिली गीत</div>
+          <div class="sotw-name-eng">SHIV BHAJANS MAITHILI GEET</div>
         </div>
-        <a class="sotw-read-btn" href="/Maithili-bhajan-geet/">सभी भजन पढ़ें</a>
+        <div class="sotw-verse">हर हर महादेव बम बम भोले<br>जय शम्भो नीलकंठ देव॥</div>
+        <div class="sotw-desc">भगवान शिव की महिमा में रचित मैथिली भजनों का संग्रह, जो भक्ति रस से परिपूर्ण होकर शिव भक्तों के हृदय को प्रसन्न करते हैं।</div>
+        <div>
+          <div class="sotw-meta" style="margin-bottom:16px;">
+            <span class="sotw-meta-tag">मैथिली</span>
+            <span class="sotw-meta-tag">20 भजन</span>
+            <span class="sotw-meta-tag">शिव भक्ति</span>
+          </div>
+          <a class="sotw-read-btn" href="/Maithili-bhajan-geet/">सभी भजन पढ़ें</a>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <div class="divider reveal">
     <div class="divider-line"></div>
@@ -2769,19 +2942,16 @@ mantra for wealth
     <div class="feature-label">✦ दैनिक उपयोगकर्ता</div>
   </div>
 </div>
+<div id="sm-comments" data-page-id=""></div>
+</main>
+
 <div id="page-loader">
     <div class="loader-content">
         <img src="/images/ShivMarg.png" alt="Logo">
     </div>
 </div>
-<div id="sm-comments" data-page-id=""></div>
 
 <!-- Footer -->
-<div id="page-loader">
-    <div class="loader-content">
-        <img src="/images/ShivMarg.png" alt="Logo">
-    </div>
-</div>
 <div id="festival-popup-overlay" role="dialog" aria-modal="true" aria-label="आज का पर्व">
   <div class="fpc-card" id="festival-popup-card">
     <div class="fpc-topbar" id="fpc-topbar"></div>
@@ -2844,23 +3014,101 @@ mantra for wealth
 
 
 
-<footer>
-  <span class="footer-om">ॐ</span>
-  <div class="foot-links">
-    <a href="/">Home</a>
-    <a href="/about/">About</a>
-    <a href="/contact/">Contact</a>
-    <a href="/privacy-policy/">Privacy Policy</a>
-    <a href="/disclaimer/">Disclaimer</a>
-    <a href="/admin/">Admin</a>
-    <a href="/aalekh/">Aalekh</a>
-    <a href="/article_editor/">Write Article</a>
-    <a href="/become_author/">Become Author</a>
-    <a href="/dev-chat/">Dev Chat</a>
+  <!-- ════════════════════════════════════════════
+       [14] FOOTER
+  ════════════════════════════════════════════ -->
+<section class="footer-section" aria-label="Site footer">
+  <footer id="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
 
-  </div>
-  <div class="footer-copy">॥ हर हर महादेव ॥ जय श्री राम ॥ जय माता दी ॥ — © ShivaMarg 2026 — सर्वाधिकार सुरक्षित</div>
-</footer>
+        <!-- Brand column -->
+        <div class="footer-brand-col">
+          <div class="footer-logo">
+            <div class="footer-logo-mark" aria-hidden="true">ॐ</div>
+            <span class="footer-logo-name">ShivMarg</span>
+          </div>
+          <p class="footer-tagline deva">
+            भारत का प्रमुख हिंदी-मैथिली भक्ति पोर्टल। शिव की आराधना, मिथिला की परंपरा, और वैदिक ज्ञान — एक ही स्थान पर।
+          </p>
+          <div class="footer-social" aria-label="Social media links">
+            <a class="social-link" href="https://instagram.com/shivmarg.live" target="_blank" rel="noopener" aria-label="Instagram">📸</a>
+            <a class="social-link" href="https://youtube.com/@shivmarg" target="_blank" rel="noopener" aria-label="YouTube">▶</a>
+            <a class="social-link" href="https://t.me/shivmarg" target="_blank" rel="noopener" aria-label="Telegram">✈</a>
+          </div>
+        </div>
+
+        <!-- Mantra column -->
+        <div>
+          <span class="footer-col-title">मंत्र और स्तोत्र</span>
+          <nav class="footer-links" aria-label="Mantras and Stotras">
+            <a href="/mantras/shiv-mantras/" class="deva">शिव मंत्र</a>
+            <a href="/stotras/rudrashtakam/" class="deva">रुद्राष्टकम्</a>
+            <a href="/mantras/devi-mantras/" class="deva">देवी मंत्र</a>
+            <a href="/stotras/vishnu-sahasranaam/" class="deva">विष्णु सहस्रनाम</a>
+            <a href="/arati/" class="deva">आरती संग्रह</a>
+          </nav>
+        </div>
+
+        <!-- Maithili column -->
+        <div>
+          <span class="footer-col-title">मैथिली</span>
+          <nav class="footer-links" aria-label="Maithili section">
+            <a href="/bhajans/maithili-bhajans/" class="deva">मैथिली भजन</a>
+            <a href="/bhajans/vidyapati-geet/" class="deva">विदापति गीत</a>
+            <a href="/panchang/maithili-panchang/" class="deva">मैथिली पंचांग</a>
+            <a href="/articles/?tag=maithili" class="deva">मैथिली लेख</a>
+          </nav>
+        </div>
+
+        <!-- Other column -->
+        <div>
+          <span class="footer-col-title">अन्य</span>
+          <nav class="footer-links" aria-label="Other links">
+            <a href="/panchang/" class="deva">दैनिक पंचांग</a>
+            <a href="/articles/" class="deva">लेख</a>
+            <a href="/about/" class="deva">हमारे बारे में</a>
+            <a href="/contact/" class="deva">संपर्क</a>
+            <a href="/sitemap.xml" class="deva">साइटमैप</a>
+            
+          </nav>
+        </div>
+        <div>
+          <span class="footer-col-title">Important Links</span>
+          <nav class="footer-links" aria-label="Important links">
+            <a href="/about/">About</a>
+            <a href="/contact/">Contact</a>
+            <a href="/privacy-policy/">Privacy Policy</a>
+            <a href="/disclaimer/">Disclaimer</a>
+            <a href="/admin/">Admin</a>
+            <a href="/aalekh/">Aalekh</a>
+            <a href="/article_editor/">Write Article</a>
+            <a href="/become_author/">Become Author</a>
+            <a href="/dev-chat/">Dev Chat</a>
+          </nav>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-bottom-left deva">
+          © 2024–2025 ShivMarg · सर्वाधिकार सुरक्षित · <span style="color:rgba(200,100,10,0.4);">🕉</span>
+        </p>
+        <div class="footer-bottom-right">
+          <a href="/privacy/">Privacy</a>
+          <a href="/terms/">Terms</a>
+          <a href="/sitemap.xml">Sitemap</a>
+          
+        </div>
+      </div>
+    </div>
+  </footer>
+</section>
+
+  <!-- ════════════════════════════════════════════
+       BACK TO TOP
+  ════════════════════════════════════════════ -->
+  <button id="back-to-top" aria-label="ऊपर जाएं" title="Back to top">↑</button>
+
 
 
 <script>
@@ -2889,10 +3137,26 @@ mantra for wealth
   document.addEventListener('click', function(e) {
     if (!e.target.closest('.nav-dropdown')) {
       document.querySelectorAll('.dropdown-content').forEach(m => m.classList.remove('active'));
-      document.querySelectorAll('.nav-dropdown-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.nav-dropdown-btn').forEach(b =>
+       b.classList.remove('active'));
     }
   });
 
+  /* ────────────────────────────────────────────
+      BACK TO TOP
+  ──────────────────────────────────────────── */
+  (function() {
+    var btn = document.getElementById('back-to-top');
+    if (!btn) return;
+    window.addEventListener('scroll', function() {
+      btn.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+    btn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+
+  
   /* === DIYA PARTICLES === */
   const diyaC = document.getElementById('diyas');
   for (let i = 0; i < 50; i++) {
