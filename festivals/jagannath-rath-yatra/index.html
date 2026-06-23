@@ -86,6 +86,12 @@
       font-family: var(--display);
       font-size: 1.5rem; color: #fff;
       text-decoration: none; letter-spacing: .04em;
+      display: inline-flex; align-items: center; gap: .55rem;
+    }
+    .logo img {
+      width: 30px; height: 30px;
+      object-fit: contain; flex: 0 0 auto;
+      border-radius: 50%;
     }
     .logo span { color: var(--accent); }
 
@@ -586,7 +592,10 @@
 
 <!-- ── HEADER ─────────────────────────────────── -->
 <header>
-  <a href="/" class="logo">शिव मार्ग<span>.</span></a>
+  <a href="/" class="logo">
+    <img src="/images/shivmarg_logo.png" alt="ShivMarg">
+    शिव मार्ग<span>.</span>
+  </a>
   <nav class="hdr-nav">
     <a href="#">कवि</a>
     <a href="#">कविता</a>
