@@ -157,6 +157,7 @@
     }
     }
   }
+  
 
   async function init() {
     if (!("serviceWorker" in navigator)) return;
@@ -189,6 +190,31 @@
         button.remove();
       });
     });
+
+    window.registerNotificationTokenAfterLogin = async function () {
+      const token = localStorage.getItem("sm_fcm_token");
+      const authToken = localStorage.getItem("sm_token");
+
+      if (!token || !authToken) return;
+
+      try {
+          const response = await fetch(`${API_BASE}/api/notifications/token`, {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+                  "Authorization": `Bearer ${authToken}`
+              },
+              body: JSON.stringify({
+                  token,
+                  platform: navigator.userAgentData?.platform || navigator.platform || "web"
+              })
+          });
+
+          console.log("Notification token linked to user:", response.status);
+      } catch (e) {
+          console.error("Failed to link notification token", e);
+      }
+  };
 
     if ("Notification" in window && Notification.permission === "default" &&
         localStorage.getItem("sm_notifications_enabled") !== "1") {
