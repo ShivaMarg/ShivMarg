@@ -1,8 +1,18 @@
-
 /**
- * ShivMarg Navigation Module — v2.0
- * New theme: Deep Indigo + Terracotta + Brass Gold
+ * ShivMarg Navigation Module — v2.1
+ * Theme: Deep Indigo + Terracotta + Brass Gold
  * Include on all pages: <script src="/js/nav.js" defer></script>
+ *
+ * CHANGELOG (v2.1):
+ *  - Mobile drawer: categories now open a sliding sub-panel showing all
+ *    sub-mantras (mirrors desktop dropdown content) instead of redirecting.
+ *  - Mobile drawer: login/register buttons moved to the TOP user strip.
+ *  - Real profile photo support (avatar_url / photo / profile_photo from
+ *    backend) for both desktop chip and mobile drawer, with letter-avatar
+ *    fallback.
+ *  - Logged-in users now see quick-access chips (गतिविधि/प्रोफ़ाइल/पसंद/सेटिंग्स)
+ *    directly in the mobile drawer.
+ *  - Added: in-drawer search box, quick links footer (होम/संपर्क/गोपनीयता).
  */
 
 (function () {
@@ -147,20 +157,22 @@
   <div class="mobile-drawer" id="sm-mobile-drawer" role="dialog" aria-label="मोबाइल नेविगेशन" aria-hidden="true">
     <div class="drawer-inner">
 
-      <!-- User strip -->
+      <!-- User strip (login buttons live HERE for guests — top of drawer) -->
       <div class="drawer-user" id="sm-drawer-user">
         <!-- populated by JS -->
       </div>
 
-      <!-- Mandala strip -->
-      <div class="mandala-strip" aria-hidden="true"><span>✦ ॐ ✦</span></div>
-
-      <!-- Nav sections -->
-      <div class="drawer-sections" id="sm-drawer-sections">
+      <!-- Logged-in quick chips -->
+      <div class="du-chips" id="sm-drawer-chips">
         <!-- populated by JS -->
       </div>
 
-      <!-- Bottom actions -->
+      <!-- Sliding views: main category list <-> sub-menu -->
+      <div class="drawer-views" id="sm-drawer-views">
+        <!-- populated by JS -->
+      </div>
+
+      <!-- Bottom actions (logged-in: नया लेख / लॉगआउट) -->
       <div class="drawer-actions" id="sm-drawer-actions">
         <!-- populated by JS -->
       </div>
@@ -360,6 +372,10 @@
   background: linear-gradient(135deg, var(--terra), var(--brass));
   flex-shrink: 0;
 }
+#sm-navbar .avatar.avatar-photo,
+#sm-navbar .du-avatar.avatar-photo {
+  object-fit: cover; background: none; padding: 0;
+}
 #sm-navbar .user-name {
   font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.8px;
   color: var(--brass-l); max-width: 120px;
@@ -441,11 +457,12 @@
   box-shadow: 0 28px 60px rgba(28,15,46,0.28);
 }
 
-/* ── Drawer: user strip ── */
+/* ── Drawer: user strip (top) ── */
 #sm-navbar .drawer-user {
   background: var(--ink);
   padding: 18px 20px;
   display: flex; align-items: center; gap: 14px;
+  flex-wrap: wrap;
 }
 #sm-navbar .du-avatar {
   width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
@@ -463,19 +480,31 @@
   font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 0.7rem;
   color: rgba(237,227,212,0.4);
 }
-#sm-navbar .du-action {
-  margin-left: auto; padding: 7px 16px; border-radius: 20px;
-  background: rgba(192,75,10,0.18); border: 1px solid rgba(192,75,10,0.4);
-  font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 1px;
-  color: var(--terra-l); cursor: pointer; white-space: nowrap;
-  text-transform: uppercase; text-decoration: none;
-  transition: background 0.2s;
+
+/* Guest login/register — TOP of drawer */
+#sm-navbar .du-guest-btns { display: flex; gap: 8px; margin-left: auto; }
+#sm-navbar .du-guest-btns button {
+  padding: 9px 16px; border-radius: 18px; font-family: 'Cinzel', serif;
+  font-size: 0.6rem; letter-spacing: 1px; text-transform: uppercase;
+  cursor: pointer; border: 1px solid; white-space: nowrap;
 }
-#sm-navbar .du-action:hover { background: rgba(192,75,10,0.28); }
-#sm-navbar .du-action.secondary {
-  background: rgba(184,136,26,0.12); border-color: rgba(184,136,26,0.35);
-  color: var(--brass-l);
+#sm-navbar .gb-login { background: var(--terra); border-color: var(--terra); color: #fff; }
+#sm-navbar .gb-login:active { transform: translateY(1px); }
+#sm-navbar .gb-register { background: transparent; border-color: rgba(184,136,26,0.4); color: var(--brass-l); }
+
+/* Logged-in quick chips */
+#sm-navbar .du-chips {
+  display: flex; gap: 8px; padding: 0 20px 16px; flex-wrap: wrap;
+  background: var(--ink);
 }
+#sm-navbar .du-chip {
+  font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 0.74rem;
+  color: rgba(237,227,212,0.78); background: rgba(237,227,212,0.07);
+  border: 1px solid rgba(184,136,26,0.22); padding: 7px 13px; border-radius: 14px;
+  text-decoration: none; display: flex; align-items: center; gap: 5px;
+  transition: all 0.15s;
+}
+#sm-navbar .du-chip:hover { background: rgba(184,136,26,0.18); color: var(--brass-l); }
 
 /* ── Mandala strip ── */
 #sm-navbar .mandala-strip {
@@ -493,6 +522,41 @@
 #sm-navbar .mandala-strip span {
   font-family: 'Tiro Devanagari Sanskrit', serif;
   font-size: 0.65rem; color: var(--brass); padding: 0 14px; letter-spacing: 3px;
+}
+
+/* ── In-drawer search ── */
+#sm-navbar .drawer-search { padding: 16px 20px 4px; }
+#sm-navbar .drawer-search input {
+  width: 100%; padding: 11px 16px; border-radius: 20px;
+  border: 1px solid rgba(184,136,26,0.28); background: rgba(255,255,255,0.65);
+  font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 0.88rem;
+  color: var(--ink); outline: none;
+}
+#sm-navbar .drawer-search input:focus { border-color: var(--terra); background: #fff; }
+
+/* ── Sliding category <-> sub-menu views ── */
+#sm-navbar .drawer-views {
+  display: flex; width: 200%;
+  transition: transform 0.32s cubic-bezier(0.4,0,0.2,1);
+}
+#sm-navbar .drawer-views.show-sub { transform: translateX(-50%); }
+#sm-navbar .drawer-view { width: 50%; flex-shrink: 0; }
+
+#sm-navbar .sub-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 16px; background: var(--cream2);
+  border-bottom: 1px solid rgba(184,136,26,0.2);
+}
+#sm-navbar .sub-back {
+  background: none; border: none; cursor: pointer;
+  font-family: 'Cinzel', serif; font-size: 0.62rem; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--terra); padding: 7px 12px;
+  border-radius: 14px; display: flex; align-items: center; gap: 4px;
+}
+#sm-navbar .sub-back:hover { background: rgba(192,75,10,0.08); }
+#sm-navbar .sub-title {
+  font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 1rem;
+  color: var(--ink); font-weight: 600;
 }
 
 /* ── Drawer: section label ── */
@@ -552,8 +616,21 @@
 }
 #sm-navbar .drawer-item.accent .di-hi { color: var(--terra); }
 
-/* ── Drawer: bottom action strip ── */
-#sm-navbar .drawer-actions {
+/* ── Quick links footer (main view) ── */
+#sm-navbar .drawer-quicklinks {
+  display: flex; justify-content: space-around; flex-wrap: wrap;
+  padding: 14px 16px 26px; background: var(--cream2);
+  border-top: 1px solid rgba(184,136,26,0.15);
+}
+#sm-navbar .ql-link {
+  font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 1px;
+  color: var(--muted); text-decoration: none; text-transform: uppercase;
+  padding: 6px 8px;
+}
+#sm-navbar .ql-link:hover { color: var(--terra); }
+
+/* ── Drawer: bottom action strip (logged-in only) ── */
+#sm-navbar .drawer-actions:not(:empty) {
   display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
   padding: 16px 20px 28px;
   border-top: 1px solid rgba(184,136,26,0.15);
@@ -595,37 +672,86 @@
   #sm-navbar .mobile-drawer { top: 56px; }
   #sm-navbar .drawer-inner { max-height: calc(100dvh - 56px); }
   #sm-navbar .sm-logo { font-size: 1.05rem; }
+  #sm-navbar .drawer-user { flex-wrap: wrap; }
+  #sm-navbar .du-guest-btns { margin-left: 0; width: 100%; }
+  #sm-navbar .du-guest-btns button { flex: 1; }
 }
 `;
 
   /* ─────────────────────────────────────────────
-     MOBILE MENU DATA
+     MENU DATA — single source for desktop dropdowns'
+     content AND mobile sliding sub-menus.
   ───────────────────────────────────────────── */
-  const MOBILE_MENU = [
+  const MENU_DATA = [
     {
-      label: 'शिव-शक्ति',
-      items: [
-        { icon: '🕉',  hi: 'शिव मंत्र',            en: 'Shiva Mantras',   url: '/shiva-mantras' },
-        { icon: '🔱',  hi: 'महामृत्युंजय मंत्र',   en: 'Mahamrityunjaya', url: '/shiva-mantras/Shiva-mahamrityunjaya-mantra/' },
-        { icon: '🌺',  hi: 'माँ दुर्गा मंत्र',      en: 'Durga Mantras',   url: '/durga-mantras/' },
-        { icon: '⚡',  hi: 'माँ काली मंत्र',        en: 'Kali Mantras',    url: '/maha-kali-mantra/' },
+      id: 'shiv', icon: '🕉', label: 'शिव स्तोत्र',
+      groups: [
+        { label: 'मंत्र', items: [
+          { hi: 'शिव मंत्र', url: '/shiva-mantras' },
+          { hi: 'महामृत्युंजय मंत्र', url: '/shiva-mantras/Shiva-mahamrityunjaya-mantra/' },
+          { hi: 'निर्वाणपटकम्', url: '#' },
+        ]},
+        { label: 'आरती', items: [
+          { hi: 'शिव आरती', url: '#' },
+          { hi: 'महा आरती', url: '#' },
+        ]},
       ]
     },
     {
-      label: 'विष्णु परिवार',
-      items: [
-        { icon: '🪷',  hi: 'विष्णु मंत्र',          en: 'Vishnu Mantras',  url: '/bhagvan-vishnu-mantra/' },
-        { icon: '🦚',  hi: 'कृष्ण महामंत्र',        en: 'Krishna Mantra',  url: '/Krishna-Mahamantras/' },
-        { icon: '🏹',  hi: 'राम मंत्र',             en: 'Ram Mantras',     url: '/Shri-ram-mantra/' },
-        { icon: '🙏',  hi: 'हनुमान मंत्र',          en: 'Hanuman Mantras', url: '/hanumanji/' },
+      id: 'shakti', icon: '🌺', label: 'शक्ति',
+      groups: [
+        { label: 'माता दुर्गा', items: [
+          { hi: 'माँ दुर्गा मंत्र', url: '/durga-mantras/' },
+          { hi: 'अष्टोत्तर शतनाम', url: '#' },
+        ]},
+        { label: 'देवी काली', items: [
+          { hi: 'माँ काली मंत्र', url: '/maha-kali-mantra/' },
+          { hi: 'कालिका स्तोत्र', url: '#' },
+        ]},
       ]
     },
     {
-      label: 'मैथिली विशेष',
-      items: [
-        { icon: '📜',  hi: 'विद्यापति गीत संग्रह',  en: 'Vidyapati Geet',  url: '/Vidyapati-Geet-Sangrah/', accent: true },
-        { icon: '✍️', hi: 'आलेख',                   en: 'Articles',        url: '/aalekh' },
-        { icon: '📝',  hi: 'नया लेख लिखें',         en: 'Write Article',   url: '/article_editor' },
+      id: 'vishnu', icon: '🪷', label: 'विष्णु',
+      groups: [
+        { label: 'भगवान विष्णु', items: [
+          { hi: 'विष्णु मंत्र', url: '/bhagvan-vishnu-mantra/' },
+          { hi: 'विष्णु सहस्रनाम', url: '#' },
+        ]},
+      ]
+    },
+    {
+      id: 'ram', icon: '🏹', label: 'राम-हनुमान',
+      groups: [
+        { label: 'श्री राम', items: [
+          { hi: 'राम मंत्र', url: '/Shri-ram-mantra/' },
+          { hi: 'राम रक्षा स्तोत्र', url: '#' },
+        ]},
+        { label: 'हनुमान जी', items: [
+          { hi: 'हनुमान मंत्र', url: '/hanumanji/' },
+          { hi: 'हनुमान चालीसा', url: '#' },
+        ]},
+      ]
+    },
+    {
+      id: 'krishna', icon: '🦚', label: 'कृष्ण',
+      groups: [
+        { label: 'श्री कृष्ण', items: [
+          { hi: 'कृष्ण महामंत्र', url: '/Krishna-Mahamantras/' },
+          { hi: 'कृष्ण भजन', url: '#' },
+        ]},
+        { label: 'मैथिली गीत', items: [
+          { hi: 'विद्यापति गीत संग्रह', url: '/Vidyapati-Geet-Sangrah/' },
+        ]},
+      ]
+    },
+    {
+      id: 'articles', icon: '✍️', label: 'आलेख',
+      groups: [
+        { label: 'लेख', items: [
+          { hi: 'आलेख', url: '/aalekh' },
+          { hi: 'नया लेख लिखें', url: '/article_editor' },
+          { hi: 'लेख संपादित करें', url: '/become_author/' },
+        ]},
       ]
     },
   ];
@@ -705,6 +831,7 @@
       ham.setAttribute('aria-expanded', open ? 'true' : 'false');
       drawer.setAttribute('aria-hidden',  open ? 'false' : 'true');
       document.body.style.overflow = open ? 'hidden' : '';
+      if (!open) closeSubmenu();
     });
 
     document.addEventListener('click', e => {
@@ -724,35 +851,94 @@
     if (ham) ham.setAttribute('aria-expanded', 'false');
     drawer.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    closeSubmenu();
   }
 
+  /* Build the two sliding views: main category list + sub-menu */
   function buildDrawerContent() {
-    const sectionsEl = document.getElementById('sm-drawer-sections');
-    if (!sectionsEl) return;
+    const viewsEl = document.getElementById('sm-drawer-views');
+    if (!viewsEl) return;
 
+    let mainHtml = `
+      <div class="drawer-search">
+        <input type="search" placeholder="खोजें…" aria-label="खोजें" id="sm-drawer-search-input">
+      </div>
+      <div class="mandala-strip" aria-hidden="true"><span>✦ ॐ ✦</span></div>
+    `;
+
+    MENU_DATA.forEach(cat => {
+      mainHtml += `
+        <div class="drawer-item cat-item" data-cat="${cat.id}" role="button" tabindex="0">
+          <div class="di-icon" aria-hidden="true">${cat.icon}</div>
+          <div class="di-text">
+            <span class="di-hi">${cat.label}</span>
+          </div>
+          <span class="di-arrow" aria-hidden="true">›</span>
+        </div>`;
+    });
+
+    mainHtml += `
+      <div class="drawer-quicklinks">
+        <a href="/" class="ql-link">होम</a>
+        <a href="/contact" class="ql-link">संपर्क</a>
+        <a href="/privacy-policy" class="ql-link">गोपनीयता</a>
+      </div>`;
+
+    const subHtml = `
+      <div class="sub-header">
+        <button class="sub-back" id="sm-sub-back" type="button">‹ वापस</button>
+        <span class="sub-title" id="sm-sub-title"></span>
+      </div>
+      <div id="sm-sub-content"></div>
+    `;
+
+    viewsEl.innerHTML = `
+      <div class="drawer-view drawer-view-main">${mainHtml}</div>
+      <div class="drawer-view drawer-view-sub">${subHtml}</div>
+    `;
+
+    viewsEl.querySelectorAll('.cat-item').forEach(row => {
+      const open = () => openSubmenu(row.getAttribute('data-cat'));
+      row.addEventListener('click', open);
+      row.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+      });
+    });
+
+    const backBtn = document.getElementById('sm-sub-back');
+    if (backBtn) backBtn.addEventListener('click', closeSubmenu);
+  }
+
+  function openSubmenu(catId) {
+    const cat = MENU_DATA.find(c => c.id === catId);
+    const content = document.getElementById('sm-sub-content');
+    const title    = document.getElementById('sm-sub-title');
+    const viewsEl  = document.getElementById('sm-drawer-views');
+    if (!cat || !content || !title || !viewsEl) return;
+
+    title.textContent = cat.label;
     let html = '';
-    MOBILE_MENU.forEach((section, si) => {
-      if (si > 0) html += '<div class="mandala-strip" aria-hidden="true"><span>✦</span></div>';
-      html += `<div class="drawer-section-label">${section.label}</div>`;
-      section.items.forEach(item => {
-        const accent = item.accent ? ' accent' : '';
+    cat.groups.forEach(group => {
+      html += `<div class="drawer-section-label">${group.label}</div>`;
+      group.items.forEach(item => {
         html += `
-          <a href="${item.url}" class="drawer-item${accent}">
-            <div class="di-icon" aria-hidden="true">${item.icon}</div>
-            <div class="di-text">
-              <span class="di-hi">${item.hi}</span>
-              <span class="di-en">${item.en}</span>
-            </div>
+          <a href="${item.url}" class="drawer-item">
+            <div class="di-text"><span class="di-hi">${item.hi}</span></div>
             <span class="di-arrow" aria-hidden="true">›</span>
           </a>`;
       });
     });
+    content.innerHTML = html;
+    viewsEl.classList.add('show-sub');
+  }
 
-    sectionsEl.innerHTML = html;
+  function closeSubmenu() {
+    const viewsEl = document.getElementById('sm-drawer-views');
+    if (viewsEl) viewsEl.classList.remove('show-sub');
   }
 
   /* ─────────────────────────────────────────────
-     AUTH — wired to SmAuth (same as v1)
+     AUTH — wired to SmAuth
   ───────────────────────────────────────────── */
   function setupAuth() {
     function trySetupAuth() {
@@ -780,7 +966,6 @@
         });
 
         renderNavAuth();
-        // Re-render whenever auth state changes (login / logout in modal)
         document.addEventListener('sm-auth-changed', renderNavAuth);
 
       } else {
@@ -797,24 +982,33 @@
     renderDrawerAuth(user);
   }
 
+  /* Build an avatar — real photo if backend provides one, else letter avatar */
+  function getAvatarHTML(user, sizeClass) {
+    const photo =
+      user.avatar_url || user.photo || user.profile_photo || user.avatar_photo ||
+      (user.avatar && user.avatar.length > 2 ? user.avatar : null);
+
+    if (photo) {
+      return `<img src="${photo}" alt="${user.username}" class="${sizeClass} avatar-photo">`;
+    }
+
+    const avatarChar = (user.avatar && user.avatar.length === 1) ? user.avatar : (user.username || '?')[0];
+    const avatarBg = window.SmAuth?.getAvatarBg
+      ? window.SmAuth.getAvatarBg(avatarChar)
+      : 'linear-gradient(135deg,#C04B0A,#B8881A)';
+    return `<div class="${sizeClass}" style="background:${avatarBg}">${avatarChar.toUpperCase()}</div>`;
+  }
+
   /* ── Desktop auth ── */
   function renderDesktopAuth(user) {
     const widget = document.getElementById('nav-auth-widget');
     if (!widget) return;
 
     if (user) {
-      // Use SmAuth's avatar helpers if available, fall back gracefully
-      const avatarChar = (user.avatar && user.avatar.length === 1)
-        ? user.avatar
-        : (user.username || '?')[0];
-      const avatarBg = window.SmAuth.getAvatarBg
-        ? window.SmAuth.getAvatarBg(avatarChar)
-        : 'linear-gradient(135deg,#C04B0A,#B8881A)';
-
       widget.innerHTML = `
         <div class="user-chip" id="sm-user-chip" role="button" tabindex="0"
              aria-haspopup="true" aria-label="${user.username} - अकाउंट मेनू">
-          <div class="avatar" style="background:${avatarBg}">${avatarChar.toUpperCase()}</div>
+          ${getAvatarHTML(user, 'avatar')}
           <span class="user-name">${user.username}</span>
           <div class="user-menu" id="sm-user-menu" role="menu">
             <a href="/user/${user.username}/myactivity" role="menuitem">मेरी गतिविधि</a>
@@ -836,7 +1030,6 @@
       document.addEventListener('click', () => menu.classList.remove('open'));
 
     } else {
-      // Not logged in — open SmAuth modal (same as v1, no separate /login page needed)
       widget.innerHTML = `
         <button class="auth-btn" type="button"
                 onclick="window.SmAuth._switchTab('register');window.SmAuth._openModal()">
@@ -849,27 +1042,26 @@
     }
   }
 
-  /* ── Drawer auth ── */
+  /* ── Drawer auth (top of mobile menu) ── */
   function renderDrawerAuth(user) {
     const el        = document.getElementById('sm-drawer-user');
+    const chipsEl   = document.getElementById('sm-drawer-chips');
     const actionsEl = document.getElementById('sm-drawer-actions');
     if (!el) return;
 
     if (user) {
-      const avatarChar = (user.avatar && user.avatar.length === 1)
-        ? user.avatar
-        : (user.username || '?')[0];
-      const avatarBg = window.SmAuth?.getAvatarBg
-        ? window.SmAuth.getAvatarBg(avatarChar)
-        : 'linear-gradient(135deg,#C04B0A,#B8881A)';
-
       el.innerHTML = `
-        <div class="du-avatar" style="background:${avatarBg}">${avatarChar.toUpperCase()}</div>
+        ${getAvatarHTML(user, 'du-avatar')}
         <div class="du-info">
           <div class="du-name">${user.username}</div>
           <div class="du-sub">ShivMarg भक्त</div>
-        </div>
-        <a href="/user/${user.username}/myactivity" class="du-action secondary">गतिविधि</a>`;
+        </div>`;
+
+      if (chipsEl) chipsEl.innerHTML = `
+        <a href="/user/${user.username}/myactivity" class="du-chip">📊 गतिविधि</a>
+        <a href="/profile/${user.username}" class="du-chip">👤 प्रोफ़ाइल</a>
+        <a href="/favorites.html" class="du-chip">❤️ पसंद</a>
+        <a href="/settings.html" class="du-chip">⚙️ सेटिंग्स</a>`;
 
       if (actionsEl) actionsEl.innerHTML = `
         <a href="/article_editor" class="da-btn ghost">नया लेख</a>
@@ -877,22 +1069,26 @@
                 onclick="window.SmAuth.logout()">लॉगआउट</button>`;
 
     } else {
+      // Guest: login/register buttons sit right here, at the TOP of the drawer
       el.innerHTML = `
         <div class="du-avatar">ॐ</div>
         <div class="du-info">
           <div class="du-name">अतिथि देवो भव</div>
           <div class="du-sub">लॉगिन करें या खाता बनाएं</div>
+        </div>
+        <div class="du-guest-btns">
+          <button class="gb-register" type="button"
+                  onclick="window.SmAuth._switchTab('register');window.SmAuth._openModal()">
+            खाता बनाएँ
+          </button>
+          <button class="gb-login" type="button"
+                  onclick="window.SmAuth._switchTab('login');window.SmAuth._openModal()">
+            लॉगिन
+          </button>
         </div>`;
 
-      if (actionsEl) actionsEl.innerHTML = `
-        <button class="da-btn ghost" type="button"
-                onclick="window.SmAuth._switchTab('register');window.SmAuth._openModal()">
-          खाता बनाएँ
-        </button>
-        <button class="da-btn cta" type="button"
-                onclick="window.SmAuth._switchTab('login');window.SmAuth._openModal()">
-          लॉगिन
-        </button>`;
+      if (chipsEl) chipsEl.innerHTML = '';
+      if (actionsEl) actionsEl.innerHTML = '';
     }
   }
 
