@@ -859,7 +859,10 @@
 
   function getArticleSlug() {
     const parts = window.location.pathname.split('/').filter(Boolean);
-      return parts[parts.length - 1] || '';
+    if (parts[0] === 'article' && parts[1]) {
+      return parts[1];
+    }
+    return new URLSearchParams(window.location.search).get('slug') || '';
   }
 
   function copyLink() {

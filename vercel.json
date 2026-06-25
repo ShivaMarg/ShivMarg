@@ -22,7 +22,7 @@
   ],
   "rewrites": [
     { "source": "/profile/:username", "destination": "/profile/index.html" },
-    { "source": "/user/:username/myactivity", "destination": "/activity/index.html" }
-
+    { "source": "/user/:username/myactivity", "destination": "/activity/index.html" },
+    { "source": "/article/:slug", "destination": "/article.html" }
   ]
 }
