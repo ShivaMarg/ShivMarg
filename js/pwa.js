@@ -191,30 +191,33 @@
       });
     });
 
-    window.registerNotificationTokenAfterLogin = async function () {
-      const token = localStorage.getItem("sm_fcm_token");
-      const authToken = localStorage.getItem("sm_token");
+window.registerNotificationTokenAfterLogin = async function () {
+    const authToken = localStorage.getItem("sm_token");
+    const token = localStorage.getItem("sm_fcm_token");
 
-      if (!token || !authToken) return;
+    if (!authToken || !token) {
+        console.log("No auth token or FCM token available");
+        return;
+    }
 
-      try {
-          const response = await fetch(`${API_BASE}/api/notifications/token`, {
-              method: "POST",
-              headers: {
-                  "Content-Type": "application/json",
-                  "Authorization": `Bearer ${authToken}`
-              },
-              body: JSON.stringify({
-                  token,
-                  platform: navigator.userAgentData?.platform || navigator.platform || "web"
-              })
-          });
+    try {
+        const response = await fetch("https://www.api.shivmarg.live/api/notifications/token", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${authToken}`
+            },
+            body: JSON.stringify({
+                token,
+                platform: navigator.userAgentData?.platform || navigator.platform || "web"
+            })
+        });
 
-          console.log("Notification token linked to user:", response.status);
-      } catch (e) {
-          console.error("Failed to link notification token", e);
-      }
-  };
+        console.log("Notification token linked:", response.status);
+    } catch (e) {
+        console.error("Failed to register notification token", e);
+    }
+};
 
     if ("Notification" in window && Notification.permission === "default" &&
         localStorage.getItem("sm_notifications_enabled") !== "1") {

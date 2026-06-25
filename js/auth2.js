@@ -417,6 +417,9 @@
     try {
       const data = await apiPost('/api/auth/login', { email, password: pass });
       saveSession(data.token, data.user);
+          if (window.registerNotificationTokenAfterLogin) {
+        await window.registerNotificationTokenAfterLogin();
+    }
       _closeModal();
       renderWidget();
       toast('🙏 जय शिव! स्वागत है, ' + data.user.username);
@@ -491,6 +494,9 @@
               signup_page: window.location.pathname,
             });
             saveSession(data.token, data.user);
+            if (window.registerNotificationTokenAfterLogin) {
+                await window.registerNotificationTokenAfterLogin();
+            }
             _closeModal();
             renderWidget();
             toast(data.is_new
