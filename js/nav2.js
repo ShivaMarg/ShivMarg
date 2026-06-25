@@ -1,521 +1,889 @@
 /**
- * ShivaMarg Navigation Module
- * Include this single file on all pages: <script src="/js/nav.js"></script>
- * 
- * This module:
- * - Creates the navbar HTML on page load
- * - Handles all dropdowns and mobile menu logic
- * - Syncs with auth state automatically
- * - Works everywhere without conflicts
+ * ShivMarg Navigation Module — v2.0
+ * New theme: Deep Indigo + Terracotta + Brass Gold
+ * Include on all pages: <script src="/js/nav.js" defer></script>
  */
 
 (function () {
   'use strict';
 
+  /* ── PWA loader ── */
+  if (!document.querySelector('script[src="/js/pwa.js"]')) {
+    const s = document.createElement('script');
+    s.src = '/js/pwa.js'; s.defer = true;
+    document.head.appendChild(s);
+  }
+
+  /* ── Google Fonts (Yatra One for Hindi display, Tiro for body, Cinzel for labels) ── */
+  if (!document.querySelector('link[data-sm-fonts]')) {
+    const lnk = document.createElement('link');
+    lnk.rel = 'stylesheet';
+    lnk.setAttribute('data-sm-fonts', '1');
+    lnk.href = 'https://fonts.googleapis.com/css2?family=Yatra+One&family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Cinzel:wght@500;700&display=swap';
+    document.head.appendChild(lnk);
+  }
+
+  /* ─────────────────────────────────────────────
+     NAV HTML
+  ───────────────────────────────────────────── */
   const NAV_HTML = `
-<nav id="sm-navbar">
+<nav id="sm-navbar" role="navigation" aria-label="मुख्य नेविगेशन">
   <div class="nav-container">
+
     <!-- LOGO -->
-    <a href="/" class="logo">Shiva<em>Marg</em></a>
+    <a href="/" class="sm-logo" aria-label="ShivMarg होमपेज">
+      <span class="logo-dot" aria-hidden="true"></span>
+      Shiv<em>Marg</em>
+    </a>
 
-    <!-- HAMBURGER (Mobile) -->
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-
-    <!-- CENTER MENU (Desktop) -->
-    <div class="nav-center">
+    <!-- DESKTOP CENTER LINKS -->
+    <div class="nav-center" role="menubar">
       <div class="nav-links">
+
         <div class="nav-dropdown">
-          <button class="nav-dropdown-btn" data-menu="shiv-menu">शिव स्तोत्र</button>
-          <div class="dropdown-content" id="shiv-menu">
-            <div class="dropdown-label">✦ शिव पंचाक्षर स्तोत्र ✦</div>
-            <a href="/shiva-mantras">शिव मंत्र</a>
-            <a href="/shiva-mantras/Shiva-mahamrityunjaya-mantra/">महामृत्युंजय मंत्र</a>
-            <a href="#">निर्वाणपटकम्</a>
-            <div class="dropdown-divider"></div>
-            <div class="dropdown-label">✦ शिव आरती ✦</div>
-            <a href="#">शिव आरती</a>
-            <a href="#">महा आरती</a>
+          <button class="nav-btn" data-menu="d-shiv" aria-haspopup="true" aria-expanded="false" type="button">
+            <span class="btn-icon" aria-hidden="true">🕉</span> शिव स्तोत्र
+          </button>
+          <div class="dropdown-panel" id="d-shiv" role="menu">
+            <div class="dp-label">✦ मंत्र ✦</div>
+            <a href="/shiva-mantras" role="menuitem">शिव मंत्र</a>
+            <a href="/shiva-mantras/Shiva-mahamrityunjaya-mantra/" role="menuitem">महामृत्युंजय मंत्र</a>
+            <a href="#" role="menuitem">निर्वाणपटकम्</a>
+            <div class="dp-divider"></div>
+            <div class="dp-label">✦ आरती ✦</div>
+            <a href="#" role="menuitem">शिव आरती</a>
+            <a href="#" role="menuitem">महा आरती</a>
           </div>
         </div>
 
         <div class="nav-dropdown">
-          <button class="nav-dropdown-btn" data-menu="shakti-menu">शक्ति</button>
-          <div class="dropdown-content" id="shakti-menu">
-            <div class="dropdown-label">✦ माता दुर्गा ✦</div>
-            <a href="/durga-mantras/">माँ दुर्गा मंत्र</a>
-            <a href="#">अष्टोत्तर शतनाम</a>
-            <div class="dropdown-divider"></div>
-            <div class="dropdown-label">✦ देवी काली ✦</div>
-            <a href="/maha-kali-mantra/">माँ काली मंत्र</a>
-            <a href="#">कालिका स्तोत्र</a>
+          <button class="nav-btn" data-menu="d-shakti" type="button" aria-haspopup="true" aria-expanded="false">
+            <span class="btn-icon" aria-hidden="true">🌺</span> शक्ति
+          </button>
+          <div class="dropdown-panel" id="d-shakti" role="menu">
+            <div class="dp-label">✦ माता दुर्गा ✦</div>
+            <a href="/durga-mantras/" role="menuitem">माँ दुर्गा मंत्र</a>
+            <a href="#" role="menuitem">अष्टोत्तर शतनाम</a>
+            <div class="dp-divider"></div>
+            <div class="dp-label">✦ देवी काली ✦</div>
+            <a href="/maha-kali-mantra/" role="menuitem">माँ काली मंत्र</a>
+            <a href="#" role="menuitem">कालिका स्तोत्र</a>
           </div>
         </div>
 
         <div class="nav-dropdown">
-          <button class="nav-dropdown-btn" data-menu="vishnu-menu">विष्णु</button>
-          <div class="dropdown-content" id="vishnu-menu">
-            <div class="dropdown-label">✦ भगवान विष्णु ✦</div>
-            <a href="/bhagvan-vishnu-mantra/">विष्णु मंत्र</a>
-            <a href="#">विष्णु सहस्रनाम</a>
+          <button class="nav-btn" data-menu="d-vishnu" type="button" aria-haspopup="true" aria-expanded="false">
+            <span class="btn-icon" aria-hidden="true">🪷</span> विष्णु
+          </button>
+          <div class="dropdown-panel" id="d-vishnu" role="menu">
+            <div class="dp-label">✦ भगवान विष्णु ✦</div>
+            <a href="/bhagvan-vishnu-mantra/" role="menuitem">विष्णु मंत्र</a>
+            <a href="#" role="menuitem">विष्णु सहस्रनाम</a>
           </div>
         </div>
 
         <div class="nav-dropdown">
-          <button class="nav-dropdown-btn" data-menu="ram-menu">राम-हनुमान</button>
-          <div class="dropdown-content" id="ram-menu">
-            <div class="dropdown-label">✦ श्री राम ✦</div>
-            <a href="/Shri-ram-mantra/">राम मंत्र</a>
-            <a href="#">राम रक्षा स्तोत्र</a>
-            <div class="dropdown-divider"></div>
-            <div class="dropdown-label">✦ हनुमान जी ✦</div>
-            <a href="/hanumanji/">हनुमान मंत्र</a>
-            <a href="#">हनुमान चालीसा</a>
+          <button class="nav-btn" data-menu="d-ram" type="button" aria-haspopup="true" aria-expanded="false">
+            <span class="btn-icon" aria-hidden="true">🏹</span> राम-हनुमान
+          </button>
+          <div class="dropdown-panel" id="d-ram" role="menu">
+            <div class="dp-label">✦ श्री राम ✦</div>
+            <a href="/Shri-ram-mantra/" role="menuitem">राम मंत्र</a>
+            <a href="#" role="menuitem">राम रक्षा स्तोत्र</a>
+            <div class="dp-divider"></div>
+            <div class="dp-label">✦ हनुमान जी ✦</div>
+            <a href="/hanumanji/" role="menuitem">हनुमान मंत्र</a>
+            <a href="#" role="menuitem">हनुमान चालीसा</a>
           </div>
         </div>
 
         <div class="nav-dropdown">
-          <button class="nav-dropdown-btn" data-menu="krishna-menu">कृष्ण</button>
-          <div class="dropdown-content" id="krishna-menu">
-            <div class="dropdown-label">✦ श्री कृष्ण ✦</div>
-            <a href="/Krishna-Mahamantras/">कृष्ण महामंत्र</a>
-            <a href="#">कृष्ण भजन</a>
-            <div class="dropdown-divider"></div>
-            <div class="dropdown-label">✦ मैथिली गीत ✦</div>
-            <a href="/Vidyapati-Geet-Sangrah/">विद्यापति गीत संग्रह</a>
+          <button class="nav-btn" data-menu="d-krishna" type="button" aria-haspopup="true" aria-expanded="false">
+            <span class="btn-icon" aria-hidden="true">🦚</span> कृष्ण
+          </button>
+          <div class="dropdown-panel" id="d-krishna" role="menu">
+            <div class="dp-label">✦ श्री कृष्ण ✦</div>
+            <a href="/Krishna-Mahamantras/" role="menuitem">कृष्ण महामंत्र</a>
+            <a href="#" role="menuitem">कृष्ण भजन</a>
+            <div class="dp-divider"></div>
+            <div class="dp-label">✦ मैथिली गीत ✦</div>
+            <a href="/Vidyapati-Geet-Sangrah/" role="menuitem">विद्यापति गीत संग्रह</a>
           </div>
         </div>
 
         <div class="nav-dropdown">
-          <button class="nav-dropdown-btn" data-menu="other-menu">अन्य देव</button>
-          <div class="dropdown-content" id="other-menu">
-            <div class="dropdown-label">✦ गणेश जी ✦</div>
-            <a href="/ganesh-mantras/">गणेश मंत्र</a>
-            <div class="dropdown-divider"></div>
-            <div class="dropdown-label">✦ सूर्य देव ✦</div>
-            <a href="/surya-dev/">सूर्य मंत्र</a>
+          <button class="nav-btn" data-menu="d-articles" type="button" aria-haspopup="true" aria-expanded="false">
+            <span class="btn-icon" aria-hidden="true">✍️</span> आलेख
+          </button>
+          <div class="dropdown-panel" id="d-articles" role="menu">
+            <div class="dp-label">✦ लेख ✦</div>
+            <a href="/aalekh" role="menuitem">आलेख</a>
+            <a href="/article_editor" role="menuitem">नया लेख लिखें</a>
+            <a href="/become_author/" role="menuitem">लेख संपादित करें</a>
           </div>
         </div>
+
       </div>
     </div>
 
     <!-- RIGHT: Search + Auth -->
     <div class="nav-right">
-      <input class="nav-search" type="text" placeholder="🔍 खोजें...">
+      <div class="search-wrap">
+        <input class="nav-search" type="search" placeholder="खोजें…" aria-label="खोजें">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+      </div>
       <div id="nav-auth-widget"></div>
     </div>
+
+    <!-- HAMBURGER (Mobile) -->
+    <button class="hamburger" id="sm-hamburger" aria-label="मेनू खोलें" aria-expanded="false" aria-controls="sm-mobile-drawer" type="button">
+      <span></span><span></span><span></span>
+    </button>
+
   </div>
 
-  <!-- MOBILE MENU -->
-  <div class="mobile-menu" id="mobile-menu">
-    <div class="mobile-menu-content" id="mobile-menu-content"></div>
+  <!-- MOBILE DRAWER -->
+  <div class="mobile-drawer" id="sm-mobile-drawer" role="dialog" aria-label="मोबाइल नेविगेशन" aria-hidden="true">
+    <div class="drawer-inner">
+
+      <!-- User strip -->
+      <div class="drawer-user" id="sm-drawer-user">
+        <!-- populated by JS -->
+      </div>
+
+      <!-- Mandala strip -->
+      <div class="mandala-strip" aria-hidden="true"><span>✦ ॐ ✦</span></div>
+
+      <!-- Nav sections -->
+      <div class="drawer-sections" id="sm-drawer-sections">
+        <!-- populated by JS -->
+      </div>
+
+      <!-- Bottom actions -->
+      <div class="drawer-actions" id="sm-drawer-actions">
+        <!-- populated by JS -->
+      </div>
+
+    </div>
   </div>
 </nav>`;
 
+  /* ─────────────────────────────────────────────
+     STYLES
+  ───────────────────────────────────────────── */
   const NAV_STYLES = `
-    :root {
-      --saffron: #FF6B00;
-      --deep-saffron: #CC4400;
-      --gold: #D4A017;
-      --gold-light: #F2C94C;
-      --gold-pale: #FBE89A;
-      --crimson: #7B0000;
-      --maroon: #3D0000;
-      --cream: #FDF5E6;
-      --smoke: #F8EDD8;
-      --dark: #0D0500;
-      --dark2: #170800;
-      --dark3: #1F0A00;
-    }
+/* ── Design tokens ── */
+#sm-navbar {
+  --ink:        #1C0F2E;
+  --ink2:       #2B1A45;
+  --terra:      #C04B0A;
+  --terra-l:    #E06030;
+  --terra-d:    #8C2E00;
+  --brass:      #B8881A;
+  --brass-l:    #D4A830;
+  --brass-d:    #7A5A0A;
+  --cream:      #F7F0E6;
+  --cream2:     #EDE3D4;
+  --muted:      rgba(28,15,46,0.55);
+  --muted2:     rgba(28,15,46,0.30);
+  --border:     rgba(184,136,26,0.22);
+  --shadow:     rgba(28,15,46,0.18);
+}
 
-    #sm-navbar {
-      position: sticky; top: 0; z-index: 200;
-      background: rgba(13,5,0,0.92); backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(212,160,23,0.15);
-      display: flex; align-items: center; justify-content: space-between;
-      height: 64px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.35);
-    }
+/* ── Base ── */
+#sm-navbar * { box-sizing: border-box; }
 
-    #sm-navbar .nav-container {
-      display: flex; align-items: center; justify-content: space-between;
-      width: 100%; padding: 0 24px; gap: 20px;
-    }
+#sm-navbar {
+  position: sticky; top: 0; z-index: 200;
+  background: var(--ink);
+  height: 64px;
+  display: flex; align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+#sm-navbar::after {
+  content: '';
+  position: absolute; bottom: -3px; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, var(--terra), var(--brass), var(--terra), transparent);
+  pointer-events: none;
+}
 
-    #sm-navbar .logo {
-      font-family: 'Cinzel Decorative', serif; font-size: 1.35rem;
-      color: var(--gold); text-decoration: none; letter-spacing: 1.5px;
-      flex-shrink: 0; display: flex; align-items: center; gap: 8px;
-    }
-    #sm-navbar .logo::before { content: '🕉️'; font-size: 1.5rem; }
-    #sm-navbar .logo em { color: var(--saffron); font-style: normal; }
-    #sm-navbar .logo:hover { color: var(--gold-light); }
+/* ── Container ── */
+#sm-navbar .nav-container {
+  display: flex; align-items: center; width: 100%;
+  padding: 0 24px; gap: 16px;
+}
 
-    #sm-navbar .nav-center { display: flex; align-items: center; gap: 0; flex: 1; max-width: 800px; }
-    #sm-navbar .nav-links  { display: flex; gap: 0; }
+/* ── LOGO ── */
+#sm-navbar .sm-logo {
+  display: flex; align-items: center; gap: 9px;
+  text-decoration: none;
+  font-family: 'Cinzel', serif; font-size: 1.25rem; font-weight: 700;
+  color: var(--brass-l); letter-spacing: 1px;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+#sm-navbar .sm-logo em { color: var(--terra-l); font-style: normal; }
+#sm-navbar .sm-logo:hover { color: #EABF50; }
+#sm-navbar .logo-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--terra);
+  box-shadow: 0 0 0 2px rgba(192,75,10,0.25);
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+#sm-navbar .sm-logo:hover .logo-dot { background: var(--terra-l); }
 
-    #sm-navbar .nav-links a, #sm-navbar .nav-dropdown-btn {
-      color: rgba(253,245,230,0.65); text-decoration: none;
-      font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 2px;
-      text-transform: uppercase; padding: 0 14px; height: 64px;
-      display: flex; align-items: center;
-      border-bottom: 2px solid transparent;
-      transition: all 0.3s ease;
-      background: none; border: none; cursor: pointer; white-space: nowrap;
-    }
-    #sm-navbar .nav-links a:hover, #sm-navbar .nav-dropdown-btn:hover { color: var(--gold-light); border-bottom-color: var(--saffron); }
+/* ── NAV CENTER ── */
+#sm-navbar .nav-center { flex: 1; display: flex; align-items: center; overflow: hidden; }
+#sm-navbar .nav-links  { display: flex; align-items: center; }
 
-    #sm-navbar .nav-dropdown { position: relative; display: inline-block; }
-    #sm-navbar .nav-dropdown-btn { padding: 0 14px; gap: 6px; }
-    #sm-navbar .nav-dropdown-btn::after { content: '▼'; font-size: 0.45rem; transition: transform 0.3s ease; margin-left: 4px; }
-    #sm-navbar .nav-dropdown-btn.active::after { transform: rotate(180deg); }
+/* ── NAV BUTTONS ── */
+#sm-navbar .nav-btn {
+  display: flex; align-items: center; gap: 6px;
+  height: 64px; padding: 0 14px;
+  font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 1.5px;
+  text-transform: uppercase; white-space: nowrap;
+  color: rgba(212,168,48,0.7);
+  background: none; border: none; border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.2s, border-bottom-color 0.2s, background 0.2s;
+}
+#sm-navbar .nav-btn .btn-icon { font-size: 0.85rem; }
+#sm-navbar .nav-btn::after {
+  content: '▾'; font-size: 0.5rem; margin-left: 4px;
+  color: var(--brass); opacity: 0.6;
+  transition: transform 0.28s ease;
+}
+#sm-navbar .nav-btn:hover,
+#sm-navbar .nav-btn[aria-expanded="true"] {
+  color: var(--brass-l);
+  background: rgba(184,136,26,0.06);
+  border-bottom-color: var(--terra);
+}
+#sm-navbar .nav-btn[aria-expanded="true"]::after { transform: rotate(180deg); }
 
-    #sm-navbar .dropdown-content {
-      position: absolute; top: 64px; left: 0;
-      background: rgba(13,5,0,0.97); border: 1px solid rgba(212,160,23,0.2);
-      border-top: none; min-width: 320px;
-      max-height: 0; overflow: hidden;
-      transition: max-height 0.4s ease, opacity 0.4s ease;
-      opacity: 0; z-index: 1000;
-      backdrop-filter: blur(16px); box-shadow: 0 12px 48px rgba(0,0,0,0.5);
-    }
-    #sm-navbar .dropdown-content.active { max-height: 600px; opacity: 1; }
-    #sm-navbar .dropdown-content a {
-      display: block; padding: 12px 20px;
-      color: rgba(253,245,230,0.7); text-decoration: none;
-      font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 0.95rem;
-      transition: all 0.2s ease; border-bottom: 1px solid rgba(212,160,23,0.08);
-    }
-    #sm-navbar .dropdown-content a:last-child { border-bottom: none; }
-    #sm-navbar .dropdown-content a:hover { background: rgba(212,160,23,0.12); color: var(--gold-light); padding-left: 26px; }
-    #sm-navbar .dropdown-divider { height: 1px; background: linear-gradient(90deg,transparent,rgba(212,160,23,0.15),transparent); margin: 6px 0; }
-    #sm-navbar .dropdown-label { padding: 10px 20px; font-family: 'Cinzel',serif; font-size: 0.63rem; letter-spacing: 4px; color: var(--saffron); text-transform: uppercase; font-weight: 600; }
+/* ── DROPDOWN PANEL ── */
+#sm-navbar .nav-dropdown { position: relative; }
+#sm-navbar .dropdown-panel {
+  position: absolute; top: 64px; left: 0;
+  min-width: 240px;
+  background: var(--ink2);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--terra);
+  border-radius: 0 0 10px 10px;
+  max-height: 0; overflow: hidden; opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.3s ease;
+  z-index: 1000;
+  box-shadow: 0 20px 40px rgba(28,15,46,0.5);
+}
+#sm-navbar .dropdown-panel.open { max-height: 520px; opacity: 1; }
 
-    #sm-navbar .nav-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+#sm-navbar .dropdown-panel a {
+  display: block; padding: 11px 20px;
+  font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 0.92rem;
+  color: rgba(237,227,212,0.7); text-decoration: none;
+  border-bottom: 1px solid rgba(184,136,26,0.1);
+  transition: color 0.15s, padding-left 0.15s, background 0.15s;
+}
+#sm-navbar .dropdown-panel a:last-child { border-bottom: none; }
+#sm-navbar .dropdown-panel a:hover {
+  color: var(--brass-l);
+  padding-left: 28px;
+  background: rgba(184,136,26,0.06);
+}
+#sm-navbar .dp-label {
+  padding: 10px 20px 6px;
+  font-family: 'Cinzel', serif; font-size: 0.57rem; letter-spacing: 3px;
+  color: var(--terra-l); text-transform: uppercase; font-weight: 700;
+}
+#sm-navbar .dp-divider {
+  height: 1px; margin: 4px 0;
+  background: rgba(184,136,26,0.15);
+}
 
-    #sm-navbar .nav-right .auth-btn {
-      display: inline-block;
-    }
+/* ── NAV RIGHT ── */
+#sm-navbar .nav-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
 
-    #sm-navbar .nav-search {
-      background: rgba(255,255,255,0.06); border: 1px solid rgba(212,160,23,0.22);
-      color: var(--cream); padding: 8px 14px;
-      font-family: 'Cinzel',serif; font-size: 0.7rem; letter-spacing: 1px;
-      outline: none; border-radius: 3px; width: 160px; transition: all 0.3s ease;
-    }
-    #sm-navbar .nav-search::placeholder { color: rgba(253,245,230,0.3); }
-    #sm-navbar .nav-search:focus { border-color: var(--gold); background: rgba(255,255,255,0.1); box-shadow: 0 0 12px rgba(212,160,23,0.2); }
+/* ── SEARCH ── */
+#sm-navbar .search-wrap { position: relative; display: flex; align-items: center; }
+#sm-navbar .nav-search {
+  background: rgba(237,227,212,0.06);
+  border: 1px solid var(--border);
+  color: var(--cream);
+  padding: 7px 12px 7px 32px;
+  font-family: 'Cinzel', serif; font-size: 0.66rem; letter-spacing: 0.8px;
+  border-radius: 20px; width: 160px; outline: none;
+  transition: width 0.3s ease, border-color 0.2s, background 0.2s;
+}
+#sm-navbar .nav-search::placeholder { color: rgba(237,227,212,0.3); }
+#sm-navbar .nav-search:focus {
+  border-color: var(--brass);
+  background: rgba(237,227,212,0.1);
+  width: 200px;
+}
+#sm-navbar .search-icon {
+  position: absolute; left: 11px;
+  font-size: 1rem; color: rgba(184,136,26,0.5);
+  pointer-events: none; line-height: 1;
+}
 
-    #sm-navbar .auth-btn {
-      font-family: 'Cinzel',serif; font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
-      padding: 8px 16px; border: 1px solid rgba(212,160,23,0.35);
-      color: rgba(253,245,230,0.7); background: transparent;
-      cursor: pointer; transition: all 0.3s ease; border-radius: 3px; white-space: nowrap;
-    }
-    #sm-navbar .auth-btn:hover { border-color: var(--gold); color: var(--gold-light); background: rgba(212,160,23,0.08); }
-    #sm-navbar .auth-btn.primary {
-      background: linear-gradient(135deg,rgba(255,107,0,0.15),rgba(212,160,23,0.1));
-      border-color: var(--saffron); color: var(--gold-light);
-    }
-    #sm-navbar .auth-btn.primary:hover { background: linear-gradient(135deg,rgba(255,107,0,0.25),rgba(212,160,23,0.2)); box-shadow: 0 0 16px rgba(255,107,0,0.2); }
+/* ── AUTH BUTTONS (desktop) ── */
+#sm-navbar .auth-btn {
+  font-family: 'Cinzel', serif; font-size: 0.63rem; letter-spacing: 1.5px;
+  text-transform: uppercase; padding: 7px 16px; white-space: nowrap;
+  border-radius: 20px; border: 1px solid var(--border);
+  color: rgba(212,168,48,0.8); background: transparent; cursor: pointer;
+  transition: all 0.2s;
+}
+#sm-navbar .auth-btn:hover { border-color: var(--brass); color: var(--brass-l); background: rgba(184,136,26,0.08); }
+#sm-navbar .auth-btn.primary {
+  background: var(--terra); border-color: var(--terra); color: #fff;
+  box-shadow: 0 2px 0 var(--terra-d);
+}
+#sm-navbar .auth-btn.primary:hover { background: var(--terra-l); border-color: var(--terra-l); }
+#sm-navbar .auth-btn.primary:active { transform: translateY(2px); box-shadow: none; }
 
-    #sm-navbar .user-chip {
-      display: flex; align-items: center; gap: 10px;
-      background: rgba(212,160,23,0.08); border: 1px solid rgba(212,160,23,0.25);
-      padding: 6px 12px; border-radius: 20px;
-      cursor: pointer; transition: all 0.3s ease; position: relative;
-    }
-    #sm-navbar .user-chip:hover { background: rgba(212,160,23,0.15); border-color: var(--gold); }
+/* ── USER CHIP (desktop) ── */
+#sm-navbar .user-chip {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(237,227,212,0.06);
+  border: 1px solid var(--border);
+  padding: 5px 14px 5px 6px; border-radius: 24px; cursor: pointer;
+  position: relative; transition: all 0.2s;
+}
+#sm-navbar .user-chip:hover { background: rgba(237,227,212,0.1); border-color: var(--brass); }
+#sm-navbar .avatar {
+  width: 30px; height: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cinzel', serif; font-size: 0.72rem; font-weight: 700; color: #fff;
+  background: linear-gradient(135deg, var(--terra), var(--brass));
+  flex-shrink: 0;
+}
+#sm-navbar .user-name {
+  font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.8px;
+  color: var(--brass-l); max-width: 120px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
 
-    #sm-navbar .avatar {
-      width: 32px; height: 32px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Cinzel',serif; font-size: 0.8rem; color: #fff; font-weight: 700;
-    }
-    #sm-navbar .user-name {
-      font-family: 'Cinzel',serif; font-size: 0.68rem; letter-spacing: 1px;
-      color: var(--gold-light); max-width: 120px; overflow: hidden; text-overflow: ellipsis;
-    }
+/* ── USER DROPDOWN ── */
+#sm-navbar .user-menu {
+  position: absolute; top: calc(100% + 10px); right: 0;
+  background: var(--ink2);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--terra);
+  border-radius: 0 0 10px 10px; min-width: 180px;
+  max-height: 0; overflow: hidden; opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.28s ease;
+  box-shadow: 0 20px 40px rgba(28,15,46,0.5);
+  z-index: 1001;
+}
+#sm-navbar .user-menu.open { max-height: 260px; opacity: 1; }
+#sm-navbar .user-menu a,
+#sm-navbar .user-menu button {
+  display: block; width: 100%; padding: 11px 18px;
+  font-family: 'Cinzel', serif; font-size: 0.63rem; letter-spacing: 1px;
+  color: rgba(237,227,212,0.7); text-decoration: none;
+  border: none; background: none; text-align: left; cursor: pointer;
+  border-bottom: 1px solid rgba(184,136,26,0.1);
+  transition: all 0.15s;
+}
+#sm-navbar .user-menu a:last-child,
+#sm-navbar .user-menu button:last-child { border-bottom: none; }
+#sm-navbar .user-menu a:hover,
+#sm-navbar .user-menu button:hover { background: rgba(184,136,26,0.07); color: var(--brass-l); padding-left: 22px; }
+#sm-navbar .logout-btn { color: #E07070 !important; }
+#sm-navbar .logout-btn:hover { background: rgba(224,112,112,0.07) !important; color: #FF8A8A !important; }
 
-    #sm-navbar .user-menu {
-      position: absolute; top: calc(100% + 8px); right: 0;
-      background: rgba(13,5,0,0.97); border: 1px solid rgba(212,160,23,0.25);
-      border-radius: 4px; min-width: 180px;
-      max-height: 0; overflow: hidden;
-      transition: max-height 0.3s ease, opacity 0.3s ease;
-      opacity: 0; z-index: 1001;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5); backdrop-filter: blur(12px);
-    }
-    #sm-navbar .user-menu.active { max-height: 250px; opacity: 1; }
-    #sm-navbar .user-menu a, #sm-navbar .user-menu button {
-      display: block; width: 100%; padding: 12px 16px;
-      color: rgba(253,245,230,0.7); text-decoration: none;
-      font-family: 'Cinzel',serif; font-size: 0.68rem; letter-spacing: 1px;
-      border: none; background: none; text-align: left; cursor: pointer;
-      transition: all 0.2s ease; border-bottom: 1px solid rgba(212,160,23,0.08);
-    }
-    #sm-navbar .user-menu a:last-child, #sm-navbar .user-menu button:last-child { border-bottom: none; }
-    #sm-navbar .user-menu a:hover, #sm-navbar .user-menu button:hover { background: rgba(212,160,23,0.12); color: var(--gold-light); padding-left: 20px; }
-    #sm-navbar .logout-btn { color: #FF6B6B !important; }
-    #sm-navbar .logout-btn:hover { background: rgba(255,107,107,0.1) !important; }
+/* ── HAMBURGER ── */
+#sm-navbar .hamburger {
+  display: none; flex-direction: column; align-items: center; justify-content: center;
+  gap: 5.5px; width: 40px; height: 40px; border-radius: 10px;
+  background: rgba(184,136,26,0.1); border: 1px solid rgba(184,136,26,0.22);
+  cursor: pointer; margin-left: auto;
+  transition: background 0.2s, border-color 0.2s;
+}
+#sm-navbar .hamburger span {
+  width: 18px; height: 1.5px; background: var(--brass-l);
+  border-radius: 2px; transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  transform-origin: center;
+}
+#sm-navbar .hamburger[aria-expanded="true"] { background: rgba(192,75,10,0.12); border-color: rgba(192,75,10,0.35); }
+#sm-navbar .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+#sm-navbar .hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+#sm-navbar .hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    #sm-navbar .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; z-index: 201; }
-    #sm-navbar .hamburger span { width: 24px; height: 2px; background: var(--gold); border-radius: 2px; transition: all 0.3s ease; }
-    #sm-navbar .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px,8px); }
-    #sm-navbar .hamburger.active span:nth-child(2) { opacity: 0; }
-    #sm-navbar .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px,-7px); }
+/* ─────────────────────────────────────────────
+   MOBILE DRAWER — 3D perspective unfold
+───────────────────────────────────────────── */
+#sm-navbar .mobile-drawer {
+  position: fixed; top: 64px; left: 0; right: 0;
+  z-index: 198;
+  pointer-events: none;
+  /* 3D unfold: origin at top, rotates down */
+  transform-origin: top center;
+  transform: perspective(900px) rotateX(-10deg) scaleY(0.85);
+  opacity: 0;
+  transition:
+    transform 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity   0.3s ease;
+}
+#sm-navbar .mobile-drawer.open {
+  transform: perspective(900px) rotateX(0deg) scaleY(1);
+  opacity: 1;
+  pointer-events: auto;
+}
 
-    #sm-navbar .mobile-menu {
-      position: fixed; top: 64px; left: 0; right: 0;
-      background: rgba(13,5,0,0.98); border-bottom: 1px solid rgba(212,160,23,0.15);
-      max-height: 0; overflow-y: auto; overflow-x: hidden;
-      transition: max-height 0.4s ease; z-index: 199; backdrop-filter: blur(12px);
-    }
-    #sm-navbar .mobile-menu.active { max-height: 100vh; }
-    #sm-navbar .mobile-menu-content { padding: 20px 16px; display: flex; flex-direction: column; gap: 0; }
-    #sm-navbar .mobile-menu-item {
-      padding: 12px 0; border-bottom: 1px solid rgba(212,160,23,0.08);
-      color: rgba(253,245,230,0.65); font-family: 'Tiro Devanagari Sanskrit',serif;
-      font-size: 0.95rem; cursor: pointer; transition: color 0.2s ease; display: block; text-decoration: none;
-    }
-    #sm-navbar .mobile-menu-item:hover { color: var(--gold-light); padding-left: 8px; }
-    #sm-navbar .mobile-menu-item.label {
-      font-family: 'Cinzel',serif; font-size: 0.68rem; letter-spacing: 3px;
-      color: var(--saffron); text-transform: uppercase; margin-top: 12px; cursor: default;
-    }
-    #sm-navbar .mobile-menu-item.label:hover { color: var(--saffron); padding-left: 0; }
-    #sm-navbar .mobile-menu-divider { height: 1px; background: rgba(212,160,23,0.1); margin: 12px 0; }
-    #sm-navbar .mobile-auth-section { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(212,160,23,0.15); }
-    #sm-navbar .mobile-auth-section .auth-btn { width: 100%; text-align: center; }
+#sm-navbar .drawer-inner {
+  background: var(--cream);
+  max-height: calc(100dvh - 64px);
+  overflow-y: auto; overflow-x: hidden;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 28px 60px rgba(28,15,46,0.28);
+}
 
-    @media (max-width: 1000px) {
-      #sm-navbar .nav-search { width: 120px; font-size: 0.65rem; }
-      #sm-navbar .nav-links a, #sm-navbar .nav-dropdown-btn { padding: 0 10px; font-size: 0.65rem; }
-    }
-    @media (max-width: 800px) {
-      #sm-navbar .nav-center { display: none; }
-      #sm-navbar .hamburger  { display: flex; }
-      #sm-navbar .nav-search { display: none; }
-      #sm-navbar .logo { font-size: 1.15rem; }
-      
-      /* Hide BOTH auth buttons AND user chip on mobile */
-      #sm-navbar .nav-right .auth-btn { display: none; }
-      #sm-navbar .user-chip { display: none; }
-    }
-    @media (max-width: 480px) {
-      #sm-navbar { height: 56px; }
-      #sm-navbar .mobile-menu { top: 56px; }
-      #sm-navbar .logo { font-size: 1rem; gap: 4px; }
-      #sm-navbar .logo::before { font-size: 1.2rem; }
-      #sm-navbar .avatar { width: 28px; height: 28px; font-size: 0.7rem; }
-      #sm-navbar .user-name { max-width: 80px; font-size: 0.6rem; }
-      #sm-navbar .auth-btn { padding: 5px 10px; font-size: 0.58rem; }
-    }
-  `;
+/* ── Drawer: user strip ── */
+#sm-navbar .drawer-user {
+  background: var(--ink);
+  padding: 18px 20px;
+  display: flex; align-items: center; gap: 14px;
+}
+#sm-navbar .du-avatar {
+  width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--terra), var(--brass));
+  font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 1rem; color: #fff;
+  box-shadow: 0 3px 10px rgba(192,75,10,0.4);
+}
+#sm-navbar .du-info { display: flex; flex-direction: column; gap: 3px; }
+#sm-navbar .du-name {
+  font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.8px;
+  color: var(--brass-l);
+}
+#sm-navbar .du-sub {
+  font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 0.7rem;
+  color: rgba(237,227,212,0.4);
+}
+#sm-navbar .du-action {
+  margin-left: auto; padding: 7px 16px; border-radius: 20px;
+  background: rgba(192,75,10,0.18); border: 1px solid rgba(192,75,10,0.4);
+  font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 1px;
+  color: var(--terra-l); cursor: pointer; white-space: nowrap;
+  text-transform: uppercase; text-decoration: none;
+  transition: background 0.2s;
+}
+#sm-navbar .du-action:hover { background: rgba(192,75,10,0.28); }
+#sm-navbar .du-action.secondary {
+  background: rgba(184,136,26,0.12); border-color: rgba(184,136,26,0.35);
+  color: var(--brass-l);
+}
 
-  /* ─── INITIALIZE ─── */
+/* ── Mandala strip ── */
+#sm-navbar .mandala-strip {
+  display: flex; align-items: center; height: 28px;
+  background: var(--cream2);
+  border-top: 1px solid rgba(184,136,26,0.15);
+  border-bottom: 1px solid rgba(184,136,26,0.15);
+  padding: 0 20px;
+}
+#sm-navbar .mandala-strip::before,
+#sm-navbar .mandala-strip::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(184,136,26,0.45), transparent);
+}
+#sm-navbar .mandala-strip span {
+  font-family: 'Tiro Devanagari Sanskrit', serif;
+  font-size: 0.65rem; color: var(--brass); padding: 0 14px; letter-spacing: 3px;
+}
+
+/* ── Drawer: section label ── */
+#sm-navbar .drawer-section-label {
+  padding: 14px 20px 6px;
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 3px;
+  color: var(--terra); text-transform: uppercase; font-weight: 700;
+}
+#sm-navbar .drawer-section-label::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, rgba(192,75,10,0.3), transparent);
+}
+
+/* ── Drawer: menu item — 3D press card ── */
+#sm-navbar .drawer-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 11px 20px 11px 20px;
+  text-decoration: none; cursor: pointer;
+  border-bottom: 1px solid rgba(28,15,46,0.07);
+  transition: background 0.15s;
+  position: relative;
+}
+#sm-navbar .drawer-item:hover { background: rgba(192,75,10,0.04); }
+#sm-navbar .drawer-item:active { background: rgba(192,75,10,0.08); }
+
+#sm-navbar .di-icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: var(--cream2);
+  border: 1px solid rgba(184,136,26,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.05rem; flex-shrink: 0;
+  /* 3D pressed look */
+  box-shadow: 0 3px 0 rgba(184,136,26,0.18), 0 1px 4px rgba(28,15,46,0.1);
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+#sm-navbar .drawer-item:active .di-icon {
+  box-shadow: 0 0 0 rgba(184,136,26,0.18);
+  transform: translateY(2px);
+}
+#sm-navbar .di-text { display: flex; flex-direction: column; gap: 2px; }
+#sm-navbar .di-hi {
+  font-family: 'Tiro Devanagari Sanskrit', serif;
+  font-size: 0.93rem; color: var(--ink); font-weight: 600;
+}
+#sm-navbar .di-en {
+  font-family: 'Cinzel', serif; font-size: 0.54rem; letter-spacing: 1.5px;
+  color: var(--muted); text-transform: uppercase;
+}
+#sm-navbar .di-arrow {
+  margin-left: auto; font-size: 1rem; color: var(--muted2);
+  transition: transform 0.15s;
+}
+#sm-navbar .drawer-item:hover .di-arrow { transform: translateX(4px); }
+
+/* accent item (Maithili, featured) */
+#sm-navbar .drawer-item.accent .di-icon {
+  background: rgba(192,75,10,0.1); border-color: rgba(192,75,10,0.3);
+}
+#sm-navbar .drawer-item.accent .di-hi { color: var(--terra); }
+
+/* ── Drawer sub-divider ── */
+#sm-navbar .drawer-mini-divider {
+  height: 1px; margin: 4px 20px;
+  background: rgba(184,136,26,0.18);
+}
+
+/* ── Drawer: bottom action strip ── */
+#sm-navbar .drawer-actions {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  padding: 16px 20px 28px;
+  border-top: 1px solid rgba(184,136,26,0.15);
+  background: var(--cream2);
+}
+#sm-navbar .da-btn {
+  padding: 12px; border-radius: 10px; text-align: center;
+  font-family: 'Cinzel', serif; font-size: 0.63rem; letter-spacing: 1.5px;
+  text-transform: uppercase; cursor: pointer; border: 1px solid; text-decoration: none;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+#sm-navbar .da-btn.ghost {
+  background: transparent; border-color: rgba(28,15,46,0.18); color: var(--muted);
+}
+#sm-navbar .da-btn.ghost:hover { background: rgba(28,15,46,0.05); }
+#sm-navbar .da-btn.cta {
+  background: var(--terra); border-color: var(--terra); color: #fff;
+  /* 3D press effect */
+  box-shadow: 0 4px 0 var(--terra-d), 0 4px 10px rgba(192,75,10,0.3);
+}
+#sm-navbar .da-btn.cta:hover { background: var(--terra-l); }
+#sm-navbar .da-btn.cta:active { box-shadow: none; transform: translateY(3px); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 980px) {
+  #sm-navbar .nav-btn { padding: 0 10px; font-size: 0.63rem; letter-spacing: 1px; }
+  #sm-navbar .nav-search { width: 120px; }
+  #sm-navbar .nav-search:focus { width: 150px; }
+}
+@media (max-width: 800px) {
+  #sm-navbar .nav-center { display: none; }
+  #sm-navbar .nav-right .auth-btn { display: none; }
+  #sm-navbar .nav-right .user-chip { display: none; }
+  #sm-navbar .nav-right .search-wrap { display: none; }
+  #sm-navbar .hamburger { display: flex; }
+}
+@media (max-width: 480px) {
+  #sm-navbar { height: 56px; }
+  #sm-navbar .mobile-drawer { top: 56px; }
+  #sm-navbar .drawer-inner { max-height: calc(100dvh - 56px); }
+  #sm-navbar .sm-logo { font-size: 1.05rem; }
+}
+`;
+
+  /* ─────────────────────────────────────────────
+     MOBILE MENU DATA
+  ───────────────────────────────────────────── */
+  const MOBILE_MENU = [
+    {
+      label: 'शिव-शक्ति',
+      items: [
+        { icon: '🕉',  hi: 'शिव मंत्र',         en: 'Shiva Mantras',       url: '/shiva-mantras' },
+        { icon: '🔱',  hi: 'महामृत्युंजय मंत्र', en: 'Mahamrityunjaya',     url: '/shiva-mantras/Shiva-mahamrityunjaya-mantra/' },
+        { icon: '🌺',  hi: 'माँ दुर्गा मंत्र',   en: 'Durga Mantras',       url: '/durga-mantras/' },
+        { icon: '⚡',  hi: 'माँ काली मंत्र',     en: 'Kali Mantras',        url: '/maha-kali-mantra/' },
+      ]
+    },
+    {
+      label: 'विष्णु परिवार',
+      items: [
+        { icon: '🪷',  hi: 'विष्णु मंत्र',       en: 'Vishnu Mantras',      url: '/bhagvan-vishnu-mantra/' },
+        { icon: '🦚',  hi: 'कृष्ण महामंत्र',     en: 'Krishna Mantra',      url: '/Krishna-Mahamantras/' },
+        { icon: '🏹',  hi: 'राम मंत्र',          en: 'Ram Mantras',         url: '/Shri-ram-mantra/' },
+        { icon: '🙏',  hi: 'हनुमान मंत्र',       en: 'Hanuman Mantras',     url: '/hanumanji/' },
+      ]
+    },
+    {
+      label: 'मैथिली विशेष',
+      items: [
+        { icon: '📜',  hi: 'विद्यापति गीत संग्रह', en: 'Vidyapati Geet',   url: '/Vidyapati-Geet-Sangrah/', accent: true },
+        { icon: '✍️', hi: 'आलेख',                en: 'Articles',           url: '/aalekh' },
+        { icon: '📝',  hi: 'नया लेख लिखें',      en: 'Write Article',       url: '/article_editor' },
+      ]
+    },
+  ];
+
+  /* ─────────────────────────────────────────────
+     INIT
+  ───────────────────────────────────────────── */
   function init() {
-    // Inject styles
+    injectStyles();
+    injectNav();
+    setupDesktopDropdowns();
+    setupMobileDrawer();
+    setupAuth();
+  }
+
+  function injectStyles() {
     if (!document.getElementById('sm-nav-styles')) {
       const style = document.createElement('style');
       style.id = 'sm-nav-styles';
       style.textContent = NAV_STYLES;
       document.head.appendChild(style);
     }
+  }
 
-    // Inject navbar HTML at the very top of body
+  function injectNav() {
     if (!document.getElementById('sm-navbar')) {
-      const nav = document.createElement('div');
-      nav.innerHTML = NAV_HTML;
-      document.body.insertBefore(nav.firstElementChild, document.body.firstChild);
+      const wrap = document.createElement('div');
+      wrap.innerHTML = NAV_HTML;
+      document.body.insertBefore(wrap.firstElementChild, document.body.firstChild);
     }
-
-    // Setup event listeners
-    setupDropdowns();
-    setupMobileMenu();
-    setupAuth();
   }
 
-  /* ─── DROPDOWNS ─── */
-  function setupDropdowns() {
-    const buttons = document.querySelectorAll('#sm-navbar .nav-dropdown-btn');
+  /* ─────────────────────────────────────────────
+     DESKTOP DROPDOWNS
+  ───────────────────────────────────────────── */
+  function setupDesktopDropdowns() {
+    const buttons = document.querySelectorAll('#sm-navbar .nav-btn');
     buttons.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
         const menuId = btn.getAttribute('data-menu');
-        const menu = document.getElementById(menuId);
-        
-        // Close all other menus
-        document.querySelectorAll('#sm-navbar .dropdown-content').forEach(m => {
-          if (m !== menu) m.classList.remove('active');
-        });
-        document.querySelectorAll('#sm-navbar .nav-dropdown-btn').forEach(b => {
-          if (b !== btn) b.classList.remove('active');
-        });
+        const panel  = document.getElementById(menuId);
+        const isOpen = panel.classList.contains('open');
 
-        // Toggle current menu
-        menu.classList.toggle('active');
-        btn.classList.toggle('active');
-      });
-    });
-
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('#sm-navbar .nav-dropdown')) {
-        document.querySelectorAll('#sm-navbar .dropdown-content').forEach(m => m.classList.remove('active'));
-        document.querySelectorAll('#sm-navbar .nav-dropdown-btn').forEach(b => b.classList.remove('active'));
-      }
-    });
-  }
-
-  /* ─── MOBILE MENU ─── */
-  function setupMobileMenu() {
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileMenuContent = document.getElementById('mobile-menu-content');
-
-    // Build mobile menu - auth section will be added by renderNavAuth()
-    mobileMenuContent.innerHTML = 
-    `<div class="mobile-menu-divider"></div>
-      <div id="mobile-auth-section"></div>
-      <div class="mobile-menu-item label">✦ शिव स्तोत्र ✦</div>
-      <a href="/shiva-mantras" class="mobile-menu-item">शिव मंत्र</a>
-      <a href="/shiva-mantras/Shiva-mahamrityunjaya-mantra/" class="mobile-menu-item">महामृत्युंजय मंत्र</a>
-      <div class="mobile-menu-divider"></div>
-      <div class="mobile-menu-item label">✦ शक्ति ✦</div>
-      <a href="/durga-mantras/" class="mobile-menu-item">माँ दुर्गा मंत्र</a>
-      <a href="/maha-kali-mantra/" class="mobile-menu-item">माँ काली मंत्र</a>
-      <div class="mobile-menu-divider"></div>
-      <div class="mobile-menu-item label">✦ विष्णु ✦</div>
-      <a href="/bhagvan-vishnu-mantra/" class="mobile-menu-item">विष्णु मंत्र</a>
-      <a href="/Krishna-Mahamantras/" class="mobile-menu-item">कृष्ण महामंत्र</a>
-      <div class="mobile-menu-divider"></div>
-      <div class="mobile-menu-item label">✦ राम-हनुमान ✦</div>
-      <a href="/Shri-ram-mantra/" class="mobile-menu-item">राम मंत्र</a>
-      <a href="/hanumanji/" class="mobile-menu-item">हनुमान मंत्र</a>
-      <div class="mobile-menu-divider"></div>
-      <div class="mobile-menu-item label">✦ मैथिली ✦</div>
-      <a href="/Vidyapati-Geet-Sangrah/" class="mobile-menu-item">विद्यापति गीत संग्रह</a>
-      `;
-
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      mobileMenu.classList.toggle('active');
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('#sm-navbar')) {
-        hamburger.classList.remove('active');
-        mobileMenu.classList.remove('active');
-      }
-    });
-  }
-
-  /* ─── AUTH INTEGRATION ─── */
-function setupAuth() {
-  function trySetupAuth() {
-    if (window.SmAuth) {
-
-      window.SmAuth.init({
-        apiBase: 'https://www.api.shivmarg.live',
-        noWidget: true
-      });
-
-      // Track page view
-      const pageId =
-        new URLSearchParams(window.location.search).get('slug') ||
-        window.location.pathname ||
-        'home';
-
-      window.SmAuth.trackActivity({
-        page_id: pageId,
-        event_type: 'page_view',
-        meta: {
-          page_url: window.location.href,
-          page_title: document.title,
-          referrer: document.referrer
+        closeAllDesktop();
+        if (!isOpen) {
+          panel.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
         }
       });
+    });
 
-      renderNavAuth();
-      document.addEventListener('sm-auth-changed', renderNavAuth);
-
-    } else {
-      setTimeout(trySetupAuth, 100);
-    }
-  }
-
-  trySetupAuth();
-}
-
-  function renderNavAuth() {
-    const widget = document.getElementById('nav-auth-widget');
-    const mobileAuth = document.getElementById('mobile-auth-section');
-    const user = window.SmAuth?.getUser?.();
-
-    if (!widget) return;
-
-    if (user) {
-      const avatarChar = (user.avatar && user.avatar.length === 1) ? user.avatar : user.username[0];
-      const avatarBg = window.SmAuth.getAvatarBg(avatarChar);
-
-      // Desktop: Show user chip in top-right
-      widget.innerHTML = `
-        <div class="user-chip" id="user-chip" onclick="event.stopPropagation();document.getElementById('user-menu').classList.toggle('active')">
-          <div class="avatar" style="background:${avatarBg}">${avatarChar.toUpperCase()}</div>
-          <span class="user-name">${user.username}</span>
-          <div class="user-menu" id="user-menu">
-            <a href="/profile/${user.username}">👤 प्रोफाइल</a>
-            <a href="/settings.html">⚙️ सेटिंग्स</a>
-            <a href="/favorites.html">❤️ पसंद</a>
-            <button class="logout-btn" onclick="event.stopPropagation();window.SmAuth.logout()">🚪 लॉगआउट</button>
-          </div>
-        </div>`;
-
-      // Mobile: Show user options in hamburger menu
-      if (mobileAuth) {
-        mobileAuth.innerHTML = `
-          <div class="mobile-menu-divider"></div>
-          <div class="mobile-menu-item label">✦ खाता ✦</div>
-          <div class="mobile-menu-item" style="color: #F2C94C; font-weight: bold; padding: 8px 0;">👤 ${user.username}</div>
-          <a href="/profile/${user.username}" class="mobile-menu-item">👤 प्रोफाइल</a>
-          <a href="/settings.html" class="mobile-menu-item">⚙️ सेटिंग्स</a>
-          <a href="/favorites.html" class="mobile-menu-item">❤️ पसंद</a>
-          <button class="mobile-menu-item logout-btn" onclick="window.SmAuth.logout()" style="color: #FF6B6B; padding: 12px 0; border: none; background: none; text-align: left; cursor: pointer; font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 0.95rem; width: 100%;">🚪 लॉगआउट</button>`;
-      }
-    } else {
-      // Not logged in: Show login/register buttons
-      widget.innerHTML = `
-        <button class="auth-btn" onclick="window.SmAuth._switchTab('register');window.SmAuth._openModal()">खाता बनाएँ</button>
-        <button class="auth-btn primary" onclick="window.SmAuth._switchTab('login');window.SmAuth._openModal()">लॉगिन</button>`;
-
-      // Mobile: Show in hamburger menu instead
-      if (mobileAuth) {
-        mobileAuth.innerHTML = `
-          <div class="mobile-menu-divider"></div>
-          <div class="mobile-menu-item label">✦ खाता ✦</div>
-          <button class="mobile-menu-item" onclick="window.SmAuth._switchTab('register');window.SmAuth._openModal()" style="color: #FDF5E6; padding: 12px 0; border: none; background: none; text-align: left; cursor: pointer; font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 0.95rem; width: 100%;">👤 खाता बनाएँ</button>
-          <button class="mobile-menu-item" onclick="window.SmAuth._switchTab('login');window.SmAuth._openModal()" style="color: #F2C94C; padding: 12px 0; border: none; background: none; text-align: left; cursor: pointer; font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 0.95rem; width: 100%;">🔐 लॉगिन करें</button>`;
-      }
-    }
-
-    // Close user menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('#user-chip')) {
-        document.getElementById('user-menu')?.classList.remove('active');
-      }
+    document.addEventListener('click', e => {
+      if (!e.target.closest('#sm-navbar .nav-dropdown')) closeAllDesktop();
     });
   }
 
-  /* ─── START ─── */
+  function closeAllDesktop() {
+    document.querySelectorAll('#sm-navbar .dropdown-panel').forEach(p => p.classList.remove('open'));
+    document.querySelectorAll('#sm-navbar .nav-btn').forEach(b => b.setAttribute('aria-expanded', 'false'));
+    const um = document.querySelector('#sm-navbar .user-menu');
+    if (um) um.classList.remove('open');
+  }
+
+  /* ─────────────────────────────────────────────
+     MOBILE DRAWER
+  ───────────────────────────────────────────── */
+  function setupMobileDrawer() {
+    buildDrawerContent();
+
+    const ham    = document.getElementById('sm-hamburger');
+    const drawer = document.getElementById('sm-mobile-drawer');
+    if (!ham || !drawer) return;
+
+    ham.addEventListener('click', () => {
+      const open = drawer.classList.toggle('open');
+      ham.setAttribute('aria-expanded', open ? 'true' : 'false');
+      drawer.setAttribute('aria-hidden',  open ? 'false' : 'true');
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+
+    document.addEventListener('click', e => {
+      if (!e.target.closest('#sm-navbar')) closeDrawer();
+    });
+
+    // Close on ESC
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeDrawer();
+    });
+  }
+
+  function closeDrawer() {
+    const ham    = document.getElementById('sm-hamburger');
+    const drawer = document.getElementById('sm-mobile-drawer');
+    if (!drawer) return;
+    drawer.classList.remove('open');
+    if (ham) ham.setAttribute('aria-expanded', 'false');
+    drawer.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function buildDrawerContent() {
+    const sectionsEl = document.getElementById('sm-drawer-sections');
+    if (!sectionsEl) return;
+
+    let html = '';
+    MOBILE_MENU.forEach((section, si) => {
+      if (si > 0) html += '<div class="mandala-strip" aria-hidden="true"><span>✦</span></div>';
+      html += `<div class="drawer-section-label">${section.label}</div>`;
+      section.items.forEach(item => {
+        const accent = item.accent ? ' accent' : '';
+        html += `
+          <a href="${item.url}" class="drawer-item${accent}">
+            <div class="di-icon" aria-hidden="true">${item.icon}</div>
+            <div class="di-text">
+              <span class="di-hi">${item.hi}</span>
+              <span class="di-en">${item.en}</span>
+            </div>
+            <span class="di-arrow" aria-hidden="true">›</span>
+          </a>`;
+      });
+    });
+
+    sectionsEl.innerHTML = html;
+  }
+
+  /* ─────────────────────────────────────────────
+     AUTH
+  ───────────────────────────────────────────── */
+  function setupAuth() {
+    function getUser() {
+      try {
+        const raw = localStorage.getItem('sm_user') || localStorage.getItem('smUser');
+        return raw ? JSON.parse(raw) : null;
+      } catch { return null; }
+    }
+
+    function getInitials(name) {
+      if (!name) return 'ॐ';
+      return name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+    }
+
+    function getAvatarColor(name) {
+      const colors = [
+        'linear-gradient(135deg,#C04B0A,#B8881A)',
+        'linear-gradient(135deg,#7B2D8B,#C04B0A)',
+        'linear-gradient(135deg,#1A6B8A,#B8881A)',
+        'linear-gradient(135deg,#2B6A2B,#B8881A)',
+      ];
+      if (!name) return colors[0];
+      return colors[name.charCodeAt(0) % colors.length];
+    }
+
+    function renderDesktopAuth(user) {
+      const widget = document.getElementById('nav-auth-widget');
+      if (!widget) return;
+
+      if (user) {
+        const initials = getInitials(user.name || user.username);
+        const color    = getAvatarColor(user.name || user.username);
+        widget.innerHTML = `
+          <div class="user-chip" id="sm-user-chip" role="button" tabindex="0" aria-haspopup="true" aria-label="${user.name || user.username} - अकाउंट मेनू">
+            <div class="avatar" style="background:${color}">${initials}</div>
+            <span class="user-name">${user.name || user.username || 'भक्त'}</span>
+            <div class="user-menu" id="sm-user-menu" role="menu">
+              <a href="/user/${user.username || ''}/myactivity" role="menuitem">मेरी गतिविधि</a>
+              <a href="/profile" role="menuitem">प्रोफ़ाइल</a>
+              <a href="/article_editor" role="menuitem">नया लेख लिखें</a>
+              <button class="logout-btn" onclick="SmNav.logout()" type="button" role="menuitem">लॉगआउट</button>
+            </div>
+          </div>`;
+
+        const chip = document.getElementById('sm-user-chip');
+        const menu = document.getElementById('sm-user-menu');
+        chip.addEventListener('click', e => {
+          e.stopPropagation();
+          menu.classList.toggle('open');
+        });
+        document.addEventListener('click', () => menu.classList.remove('open'));
+      } else {
+        widget.innerHTML = `
+          <a href="/login" class="auth-btn">लॉगिन</a>
+          <a href="/signup" class="auth-btn primary">रजिस्टर</a>`;
+      }
+    }
+
+    function renderDrawerAuth(user) {
+      const el = document.getElementById('sm-drawer-user');
+      if (!el) return;
+      const actionsEl = document.getElementById('sm-drawer-actions');
+
+      if (user) {
+        const initials = getInitials(user.name || user.username);
+        const color    = getAvatarColor(user.name || user.username);
+        el.innerHTML = `
+          <div class="du-avatar" style="background:${color}">${initials}</div>
+          <div class="du-info">
+            <div class="du-name">${user.name || user.username || 'भक्त'}</div>
+            <div class="du-sub">ShivMarg भक्त</div>
+          </div>
+          <a href="/user/${user.username || ''}/myactivity" class="du-action secondary">गतिविधि</a>`;
+
+        if (actionsEl) actionsEl.innerHTML = `
+          <a href="/article_editor" class="da-btn ghost">नया लेख</a>
+          <button class="da-btn cta" onclick="SmNav.logout()" type="button">लॉगआउट</button>`;
+      } else {
+        el.innerHTML = `
+          <div class="du-avatar">ॐ</div>
+          <div class="du-info">
+            <div class="du-name">अतिथि देवो भव</div>
+            <div class="du-sub">लॉगिन करें या खाता बनाएं</div>
+          </div>`;
+        if (actionsEl) actionsEl.innerHTML = `
+          <a href="/login"  class="da-btn ghost">लॉगिन</a>
+          <a href="/signup" class="da-btn cta">रजिस्टर</a>`;
+      }
+    }
+
+    const user = getUser();
+    renderDesktopAuth(user);
+    renderDrawerAuth(user);
+  }
+
+  /* ─────────────────────────────────────────────
+     PUBLIC API
+  ───────────────────────────────────────────── */
+  window.SmNav = {
+    logout() {
+      ['sm_user', 'smUser', 'sm_token', 'smToken', 'authToken', 'sm_auth'].forEach(k => {
+        localStorage.removeItem(k); sessionStorage.removeItem(k);
+      });
+      window.location.href = '/';
+    },
+    refresh() {
+      const widget = document.getElementById('nav-auth-widget');
+      const drawerUser = document.getElementById('sm-drawer-user');
+      if (widget) widget.innerHTML = '';
+      if (drawerUser) drawerUser.innerHTML = '';
+      setupAuth();
+    }
+  };
+
+  /* ─────────────────────────────────────────────
+     BOOTSTRAP
+  ───────────────────────────────────────────── */
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
 
-  // Expose for manual use if needed
-  window.SmNav = { init };
 })();
