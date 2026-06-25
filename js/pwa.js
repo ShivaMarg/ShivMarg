@@ -35,6 +35,64 @@
     return config && !Object.values(config).some((value) => String(value).startsWith("YOUR_"));
   }
 
+  /* ── IN-APP NOTIFICATION TOAST ─────────────────── */
+  function showInAppNotification(title, body, url) {
+    const div = document.createElement("div");
+    div.style.cssText =
+      "position:fixed;bottom:1.5rem;left:1rem;right:1rem;max-width:360px;margin:auto;" +
+      "z-index:9999;background:#fff;border:1.5px solid #ff6f00;border-radius:14px;" +
+      "box-shadow:0 4px 20px rgba(0,0,0,.15);padding:.85rem 1rem;" +
+      "display:flex;align-items:flex-start;gap:.75rem;animation:smSlideIn .3s ease;cursor:pointer";
+    div.innerHTML = `
+      <div style="font-size:1.4rem">🔔</div>
+      <div style="flex:1">
+        <div style="font-weight:700;font-size:.9rem;margin-bottom:.2rem">${title || "शिव मार्ग"}</div>
+        <div style="font-size:.82rem;color:#666">${body || ""}</div>
+      </div>
+      <button onclick="this.parentElement.remove()" 
+        style="background:none;border:none;cursor:pointer;font-size:1rem;color:#999">✕</button>
+    `;
+    if (url) div.addEventListener("click", (e) => {
+      if (e.target.tagName === "BUTTON") return;
+      window.location.href = url;
+    });
+
+    // Add animation keyframe once
+    if (!document.getElementById("sm-notif-style")) {
+      const style = document.createElement("style");
+      style.id = "sm-notif-style";
+      style.textContent = `@keyframes smSlideIn{from{transform:translateY(120%);opacity:0}to{transform:translateY(0);opacity:1}}`;
+      document.head.appendChild(style);
+    }
+
+    document.body.appendChild(div);
+    setTimeout(() => div.remove(), 5000);
+  }
+
+  /* ── LOAD FIREBASE + LISTEN FOR FOREGROUND MESSAGES ── */
+  async function initFirebaseMessaging() {
+    try {
+      await loadScript("/firebase-config.js");
+      if (!configured()) return;
+
+      await loadScript("https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js");
+      await loadScript("https://www.gstatic.com/firebasejs/11.0.1/firebase-messaging-compat.js");
+
+      if (!firebase.apps.length) firebase.initializeApp(window.SHIVMARG_FIREBASE_CONFIG);
+
+      const messaging = firebase.messaging();
+
+      // Foreground: show in-app toast when tab is open
+      messaging.onMessage((payload) => {
+        const { title, body, url } = payload.data || {};
+        showInAppNotification(title, body, url);
+      });
+
+    } catch (e) {
+      console.warn("[ShivMarg PWA] Firebase messaging init failed", e);
+    }
+  }
+
   async function enableNotifications(button) {
     try {
       button.disabled = true;
@@ -57,17 +115,31 @@
       });
       if (!token) throw new Error("Firebase did not return a notification token");
 
+      // Save token with auth header if logged in
+      const authToken = localStorage.getItem("sm_token");
       const response = await fetch(`${API_BASE}/api/notifications/token`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...(authToken ? { "Authorization": `Bearer ${authToken}` } : {})
+        },
         body: JSON.stringify({
           token,
           platform: navigator.userAgentData?.platform || navigator.platform || "web"
         })
       });
       if (!response.ok) throw new Error("Could not save notification token");
+
       localStorage.setItem("sm_notifications_enabled", "1");
-      button.textContent = "Notifications enabled";
+      localStorage.setItem("sm_fcm_token", token);
+
+      // Start listening for foreground messages
+      firebase.messaging().onMessage((payload) => {
+        const { title, body, url } = payload.data || {};
+        showInAppNotification(title, body, url);
+      });
+
+      button.textContent = "✓ Notifications enabled";
       setTimeout(() => button.remove(), 1800);
     } catch (error) {
       console.warn("[ShivMarg PWA]", error);
@@ -83,6 +155,12 @@
     } catch (error) {
       console.warn("[ShivMarg PWA] Service worker registration failed", error);
       return;
+    }
+
+    // If notifications already enabled → init Firebase for foreground messages
+    if (localStorage.getItem("sm_notifications_enabled") === "1" &&
+        Notification.permission === "granted") {
+      initFirebaseMessaging();
     }
 
     window.addEventListener("beforeinstallprompt", (event) => {
