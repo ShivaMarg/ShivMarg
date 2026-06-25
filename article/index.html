@@ -858,8 +858,8 @@
   }
 
   function getArticleSlug() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('slug') || '';
+    const parts = window.location.pathname.split('/').filter(Boolean);
+      return parts[parts.length - 1] || '';
   }
 
   function copyLink() {
