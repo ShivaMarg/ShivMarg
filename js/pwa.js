@@ -158,10 +158,18 @@
     }
 
     // If notifications already enabled → init Firebase for foreground messages
-    if (localStorage.getItem("sm_notifications_enabled") === "1" &&
-        Notification.permission === "granted") {
+    if (Notification.permission === "granted") {
       initFirebaseMessaging();
-    }
+
+      if (!localStorage.getItem("sm_fcm_token")) {
+          console.log("Generating new FCM token...");
+          enableNotifications({
+              disabled: false,
+              textContent: "",
+              remove() {}
+          });
+      }
+  }
 
     window.addEventListener("beforeinstallprompt", (event) => {
       event.preventDefault();
