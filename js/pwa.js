@@ -3,6 +3,7 @@
 
   const API_BASE = "https://www.api.shivmarg.live";
   let installPrompt = null;
+  let firebaseInitialized = false;
 
   function addButton(id, label, bottom, onClick) {
     if (document.getElementById(id)) return;
@@ -71,12 +72,15 @@
 
   /* ── LOAD FIREBASE + LISTEN FOR FOREGROUND MESSAGES ── */
   async function initFirebaseMessaging() {
+    if (firebaseInitialized) return;
+    firebaseInitialized = true;
     try {
       await loadScript("/firebase-config.js");
       if (!configured()) return;
 
       await loadScript("https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js");
       await loadScript("https://www.gstatic.com/firebasejs/11.0.1/firebase-messaging-compat.js");
+
 
       if (!firebase.apps.length) firebase.initializeApp(window.SHIVMARG_FIREBASE_CONFIG);
 
@@ -93,10 +97,12 @@
     }
   }
 
-  async function enableNotifications(button) {
+  async function enableNotifications(button = null) {
     try {
-      button.disabled = true;
-      button.textContent = "Enabling...";
+      if (button) {
+        button.disabled = true;
+        button.textContent = "Enabling...";
+    }
       await loadScript("/firebase-config.js");
       if (!configured() || String(window.SHIVMARG_FIREBASE_VAPID_KEY).startsWith("YOUR_")) {
         throw new Error("Firebase web configuration is not set");
@@ -139,12 +145,16 @@
         showInAppNotification(title, body, url);
       });
 
-      button.textContent = "✓ Notifications enabled";
-      setTimeout(() => button.remove(), 1800);
+      if (button) {
+          button.textContent = "✓ Notifications enabled";
+          setTimeout(() => button.remove(), 1800);
+      }
     } catch (error) {
       console.warn("[ShivMarg PWA]", error);
+      if (button) {
       button.disabled = false;
       button.textContent = "Enable notifications";
+    }
     }
   }
 
@@ -163,11 +173,7 @@
 
       if (!localStorage.getItem("sm_fcm_token")) {
           console.log("Generating new FCM token...");
-          enableNotifications({
-              disabled: false,
-              textContent: "",
-              remove() {}
-          });
+          await enableNotifications();
       }
   }
 
