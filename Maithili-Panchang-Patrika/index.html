@@ -52,7 +52,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Serif+Devanagari:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+<link rel="preload" href="/images/shivmarg_logo.png" as="image">
+<link rel="preload" href="/loder/loder.css" as="style">
 <!-- Schema.org Structured Data -->
 <script type="application/ld+json">
 {
@@ -134,7 +135,10 @@
   gtag('js', new Date());
   gtag('config', 'AW-18008418302');
 </script>
-
+<!-- Event snippet for Page view conversion page -->
+<script>
+  gtag('event', 'conversion', {'send_to': 'AW-18008418302/MX4NCKKmmIkcEP7PiotD'});
+</script>
 <!-- Loader -->
 <link rel="stylesheet" href="/loder/loder.css">
 <script src="/loder/loder.js" defer></script>
@@ -338,6 +342,7 @@
     display:flex;
     width:100%;
     min-height:100vh;
+    flex-direction: row-reverse;
   }
 
   .main-content{
@@ -1146,7 +1151,7 @@
 
   @media (max-width: 900px) {
     .main-layout { flex-direction: column; }
-    .sidebar { width: 100%; min-width: unset; max-height: 400px; position: static; }
+    .sidebar { width: 100%; min-width: unset; max-height: 350px; position: static; order: -1}
     .panch-5-grid { grid-template-columns: repeat(3, 1fr); }
     .months-grid { grid-template-columns: repeat(2, 1fr); }
     .naks-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1227,7 +1232,9 @@
 
   <!-- MAIN CONTENT -->
   <main class="main-content">
-
+  <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">
+    मैथिली पञ्चाङ्ग 2083 — मिथिलाञ्चल आधारित तिथि, नक्षत्र, मुहूर्त आ राहुकाल | ShivMarg
+  </h1>
     <!-- TODAY'S PANCHANG PANEL -->
     <div class="section-panel active" id="panel-today">
 
