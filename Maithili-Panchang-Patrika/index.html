@@ -839,6 +839,14 @@
   .cal-date { font-size: 1rem; font-weight: 700; color: var(--text-dark); font-family: 'Noto Sans Devanagari', sans-serif; }
   .cal-cell.sunday .cal-date { color: var(--saffron); }
   .cal-tithi { font-size: 0.65rem; color: var(--text-light); font-family: 'Noto Sans Devanagari', sans-serif; margin-top: 2px; display: block; line-height: 1.2; }
+  .cal-naksh {
+  font-size: 0.58rem;
+  color: var(--peacock-blue);
+  font-family: 'Noto Sans Devanagari', sans-serif;
+  display: block;
+  margin-top: 1px;
+  line-height: 1.2;
+}
   .cal-event { font-size: 0.6rem; color: var(--green-auspicious); font-family: 'Noto Sans Devanagari', sans-serif; display: block; margin-top: 3px; font-weight: 600; line-height: 1.2; }
   .cal-event.bad { color: #C0392B; }
   .today-badge { position: absolute; top: 4px; right: 4px; background: var(--saffron); color: white; font-size: 0.55rem; border-radius: 3px; padding: 1px 4px; font-family: 'Noto Sans Devanagari', sans-serif; font-weight: 700; }
@@ -2107,7 +2115,9 @@
 
 
 </div>
-<div id="sm-comments" data-page-id="Maithili-panchang"></div>
+
+
+
 
 <!-- Footer -->
 <div id="page-loader">
@@ -2115,7 +2125,7 @@
         <img src="/images/ShivMarg.png" alt="Logo">
     </div>
 </div>
-
+<div id="sm-comments" data-page-id="Maithili-panchang"></div>
 <footer>
   <span class="footer-om">ॐ नमः शिवाय · ॐ जय माँ जानकी · जय मिथिला</span>
   मैथिली पञ्चाङ्ग २०८३ · मिथिलाञ्चल (दरभङ्गा/मधुबनी) आधारित · सभ तिथि एवं मुहूर्त पारम्परिक गणना अनुसार
@@ -2708,7 +2718,20 @@ const monthTitles   = [
 let currentMonth = 2;
  
 const weekDays = ['रवि','सोम','मङ्गल','बुध','बृहस्पति','शुक्र','शनि'];
- 
+
+// Add this ABOVE renderCalendar function
+const CALENDAR_FESTIVALS = {
+  // key: "gregorianMonth-gregorianDate" (0-indexed month)
+  "10-16": "छठ पूजा",     // Nov 16
+  "10-19": "कातिक पूर्णिमा",
+  "8-15":  "जितिया",      // Sep 15 approx
+  "7-2":   "हरतालिका",
+  "6-5":   "निर्जला एकादशी",
+  "5-4":   "वट सावित्री",
+  "4-13":  "अक्षय तृतीया",
+};
+
+
 function renderCalendar(monthIdx) {
   if (monthIdx === undefined) monthIdx = currentMonth;
   currentMonth = monthIdx;
@@ -2731,8 +2754,10 @@ function renderCalendar(monthIdx) {
   // Empty cells before start
   for (let i = 0; i < startWeekday; i++) html += '<div class="cal-cell empty"></div>';
  
-  for (let day = 0; day < 30; day++) {
-    const cellDate = new Date(yr, mo, startD + day);
+  const MASA_DAYS = [30,30,31,31,31,31,30,30,30,29,30,30]; // approx days per Maithili masa
+  const masaDays = MASA_DAYS[monthIdx] || 30;
+
+  for (let day = 0; day < masaDays; day++) {    const cellDate = new Date(yr, mo, startD + day);
     const dow = cellDate.getDay();
     const isSun = dow === 0;
     const isToday = cellDate.toDateString() === today.toDateString();
@@ -2761,9 +2786,17 @@ function renderCalendar(monthIdx) {
     if (isToday) html += '<span class="today-badge">आइ</span>';
     html += `<span class="cal-date">${toDev(startD + day)}</span>`;
     html += `<span class="cal-tithi">${pakshaShort} ${tithiName}</span>`;
+    html += `<span class="cal-naksh">${NAKSHATRA_NAMES[naksData.index]}</span>`;
     if (isPurnim)    html += `<span class="cal-event">पूर्णिमा</span>`;
     if (isAmavas)    html += `<span class="cal-event bad">अमावस्या</span>`;
-    if (isEkadashi)  html += `<span class="cal-event">एकादशी</span>`;
+    if (isEkadashi) html += `<span class="cal-event">एकादशी</span>`;
+// Festival lookup
+    const festKey = `${cellDate.getMonth()}-${cellDate.getDate()}`;
+    const festName = CALENDAR_FESTIVALS[festKey];
+    if (festName && !isPurnim && !isAmavas && !isEkadashi) {
+      html += `<span class="cal-event" style="color:var(--lotus-pink)">${festName}</span>`;
+    }
+
     html += '</div>';
   }
   html += '</div>';
@@ -2784,7 +2817,7 @@ function showCalDayDetail(yr, mo, d) {
   // Create popup
   const overlay = document.createElement("div");
   overlay.id = "panchang-popup-overlay";
-
+   
   overlay.innerHTML = `
 <div id="panchang-popup-box">
 
@@ -2797,6 +2830,7 @@ function showCalDayDetail(yr, mo, d) {
       <div>
         <h2>${day} ${monName}</h2>
         <p>${toDev(p.date.getFullYear())}</p>
+        <p>${p.masa} मास · ${p.paksha} पक्ष · वि.सं. ${toDev(p.samvat)}</p>
       </div>
     </div>
   </div>
@@ -2870,6 +2904,8 @@ function showCalDayDetail(yr, mo, d) {
   if(!document.getElementById("panchang-popup-style")){
   // CSS inside JS only
   const style = document.createElement("style");
+
+  style.id = "panchang-popup-style";
 
 style.innerHTML = `
 
@@ -3096,17 +3132,17 @@ style.innerHTML = `
   /* SUN SECTION */
   .sun-section{
     display:flex;
-    flex-direction:column;
+    flex-direction:row;   /* ← was column */
     gap:12px;
-
     margin-bottom:18px;
   }
+
 
   .sun-card{
     display:flex;
     align-items:center;
     gap:14px;
-
+    flex: 1;
     padding:16px 18px;
 
     border-radius:18px;
@@ -3276,6 +3312,7 @@ style.innerHTML = `
   .sun-section{
     gap:8px;
     margin-bottom:12px;
+    flex-direction: row;
   }
 
   .sun-card{
