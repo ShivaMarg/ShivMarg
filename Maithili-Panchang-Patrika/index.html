@@ -847,6 +847,14 @@
   margin-top: 1px;
   line-height: 1.2;
 }
+.cal-greg {
+  font-size: 0.6rem;
+  color: var(--text-light);
+  font-family: 'Noto Sans Devanagari', sans-serif;
+  display: block;
+  opacity: 0.55;
+  margin-top: 1px;
+}
   .cal-event { font-size: 0.6rem; color: var(--green-auspicious); font-family: 'Noto Sans Devanagari', sans-serif; display: block; margin-top: 3px; font-weight: 600; line-height: 1.2; }
   .cal-event.bad { color: #C0392B; }
   .today-badge { position: absolute; top: 4px; right: 4px; background: var(--saffron); color: white; font-size: 0.55rem; border-radius: 3px; padding: 1px 4px; font-family: 'Noto Sans Devanagari', sans-serif; font-weight: 700; }
@@ -1842,7 +1850,7 @@
 
   </main>
 
-    <aside class="sidebar">
+  <aside class="sidebar">
 
     <!-- MAITHILI PABNI (FESTIVALS) -->
     <div class="sidebar-section">
@@ -2758,6 +2766,7 @@ function renderCalendar(monthIdx) {
   const masaDays = MASA_DAYS[monthIdx] || 30;
 
   for (let day = 0; day < masaDays; day++) {    const cellDate = new Date(yr, mo, startD + day);
+   
     const dow = cellDate.getDay();
     const isSun = dow === 0;
     const isToday = cellDate.toDateString() === today.toDateString();
@@ -2782,9 +2791,13 @@ function renderCalendar(monthIdx) {
  
     const pakshaShort = paksha === 'शुक्ल' ? 'शु' : 'कृ';
  
-    html += `<div class="${cls}" onclick="showCalDayDetail(${yr},${mo},${startD+day})">`;
+    const gregDay = cellDate.getDate();   // actual Gregorian date (resets correctly)
+    const maiDay  = day + 1;              // Maithili day 1–30
+
+    html += `<div class="${cls}" onclick="showCalDayDetail(${yr},${mo},${gregDay})">`;
     if (isToday) html += '<span class="today-badge">आइ</span>';
-    html += `<span class="cal-date">${toDev(startD + day)}</span>`;
+    html += `<span class="cal-date">${toDev(maiDay)}</span>`;
+    html += `<span class="cal-greg" title="Gregorian">${gregDay}</span>`;
     html += `<span class="cal-tithi">${pakshaShort} ${tithiName}</span>`;
     html += `<span class="cal-naksh">${NAKSHATRA_NAMES[naksData.index]}</span>`;
     if (isPurnim)    html += `<span class="cal-event">पूर्णिमा</span>`;
