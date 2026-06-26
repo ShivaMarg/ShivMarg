@@ -1,0 +1,345 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);color:var(--text-primary)}
+.wrap{padding:1.5rem 0}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;gap:1rem;flex-wrap:wrap}
+.title-block h2{font-size:20px;font-weight:500;color:var(--text-primary)}
+.title-block p{font-size:13px;color:var(--text-muted);margin-top:2px}
+.stats{display:flex;gap:8px;flex-wrap:wrap}
+.stat{background:var(--surface-1);border:0.5px solid var(--border);border-radius:var(--radius);padding:6px 14px;text-align:center}
+.stat-val{font-size:18px;font-weight:500;color:var(--text-primary)}
+.stat-lab{font-size:11px;color:var(--text-muted);margin-top:1px}
+.search-bar{position:relative;margin-bottom:1rem}
+.search-bar input{width:100%;padding:9px 12px 9px 36px;font-size:14px;border:0.5px solid var(--border-strong);border-radius:var(--radius);background:var(--surface-2);color:var(--text-primary)}
+.search-bar input:focus{outline:none;border-color:var(--border-accent)}
+.search-bar i{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--text-muted)}
+.filter-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem}
+.chip{padding:5px 13px;border-radius:99px;font-size:12px;font-weight:500;cursor:pointer;border:0.5px solid var(--border-strong);background:var(--surface-1);color:var(--text-secondary);transition:all 0.15s}
+.chip:hover{border-color:var(--border-stronger);color:var(--text-primary)}
+.chip.active{background:var(--bg-accent);border-color:var(--border-accent);color:var(--text-accent)}
+.section{margin-bottom:0.75rem;border:0.5px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface-2)}
+.sec-header{display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;user-select:none;transition:background 0.1s}
+.sec-header:hover{background:var(--surface-1)}
+.sec-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.sec-meta{flex:1;min-width:0}
+.sec-name{font-size:14px;font-weight:500;color:var(--text-primary)}
+.sec-path{font-size:11px;color:var(--text-muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sec-badges{display:flex;gap:6px;align-items:center;flex-shrink:0}
+.badge{font-size:11px;padding:3px 8px;border-radius:99px;font-weight:500}
+.badge-count{background:var(--surface-1);color:var(--text-secondary);border:0.5px solid var(--border)}
+.badge-freq{background:var(--bg-success);color:var(--text-success)}
+.badge-pri{background:var(--bg-accent);color:var(--text-accent)}
+.chevron{font-size:14px;color:var(--text-muted);transition:transform 0.2s;flex-shrink:0}
+.chevron.open{transform:rotate(180deg)}
+.url-list{display:none;border-top:0.5px solid var(--border)}
+.url-list.open{display:block}
+.url-row{display:flex;align-items:center;gap:10px;padding:8px 16px 8px 60px;border-bottom:0.5px solid var(--border);transition:background 0.1s}
+.url-row:last-child{border-bottom:none}
+.url-row:hover{background:var(--surface-1)}
+.url-slug{flex:1;font-size:13px;color:var(--text-secondary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.url-slug span{color:var(--text-muted)}
+.url-link{font-size:11px;color:var(--text-accent);text-decoration:none;display:flex;align-items:center;gap:3px;flex-shrink:0;opacity:0;transition:opacity 0.15s}
+.url-row:hover .url-link{opacity:1}
+.pri-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.no-results{text-align:center;padding:3rem 1rem;color:var(--text-muted);font-size:14px}
+</style>
+
+<div class="wrap">
+  <div class="header">
+    <div class="title-block">
+      <h2>ShivMarg — Sitemap explorer</h2>
+      <p>shivmarg.live · last updated June 2026</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-val" id="s-total">0</div><div class="stat-lab">Total URLs</div></div>
+      <div class="stat"><div class="stat-val" id="s-sections">0</div><div class="stat-lab">Sections</div></div>
+      <div class="stat"><div class="stat-val" id="s-daily">0</div><div class="stat-lab">Updated daily</div></div>
+    </div>
+  </div>
+
+  <div class="search-bar">
+    <i class="ti ti-search" aria-hidden="true"></i>
+    <input type="text" id="search" placeholder="Search URLs or sections…" oninput="render()">
+  </div>
+
+  <div class="filter-bar" id="filter-bar"></div>
+
+  <div id="list"></div>
+</div>
+
+<script>
+const data = [
+  {id:'home', label:'Home & Core Pages', icon:'🏠', color:'#e8f4f8', accent:'#0C447C',
+   freq:'daily/monthly', pri:'1.00',
+   urls:[
+    {slug:'/', label:'Home', priority:'1.00', freq:'daily'},
+    {slug:'/about/', label:'About', priority:'0.85', freq:'monthly'},
+    {slug:'/contact/', label:'Contact', priority:'0.85', freq:'monthly'},
+    {slug:'/privacy-policy/', label:'Privacy Policy', priority:'0.70', freq:'monthly'},
+    {slug:'/disclaimer/', label:'Disclaimer', priority:'0.70', freq:'monthly'},
+  ]},
+  {id:'shiva', label:'Shiva Mantras', icon:'🔱', color:'#f5eeff', accent:'#534AB7',
+   freq:'daily', pri:'0.90',
+   urls:[
+    {slug:'/shiva-mantras/', label:'Shiva Mantras (index)', priority:'0.90', freq:'daily'},
+    {slug:'/shiva-mantras/har-har-mahadev', label:'Har Har Mahadev'},
+    {slug:'/shiva-mantras/Namami-samisam-nirvanrupam', label:'Namami Samisam Nirvanrupam'},
+    {slug:'/shiva-mantras/Shiv-aarti', label:'Shiv Aarti'},
+    {slug:'/shiva-mantras/Shiv-chalisa', label:'Shiv Chalisa'},
+    {slug:'/shiva-mantras/Shiv-kavacham', label:'Shiv Kavacham'},
+    {slug:'/shiva-mantras/Shiva-beej-mantra', label:'Shiva Beej Mantra'},
+    {slug:'/shiva-mantras/Shiva-gayatri-mantra', label:'Shiva Gayatri Mantra'},
+    {slug:'/shiva-mantras/Shiva-jyotirlinga-stotram', label:'Jyotirlinga Stotram'},
+    {slug:'/shiva-mantras/Shiva-lingashtakam', label:'Lingashtakam'},
+    {slug:'/shiva-mantras/Shiva-mahamrityunjaya-mantra', label:'Mahamrityunjaya Mantra'},
+    {slug:'/shiva-mantras/Shiva-mahimna-stotra', label:'Mahimna Stotra'},
+    {slug:'/shiva-mantras/shiva-manasa-puja', label:'Manasa Puja'},
+    {slug:'/shiva-mantras/Shiva-panchakshara-stotram', label:'Panchakshara Stotram'},
+    {slug:'/shiva-mantras/Shiva-sahasranama', label:'Sahasranama'},
+    {slug:'/shiva-mantras/shiva-tandav-stotram', label:'Tandav Stotram'},
+    {slug:'/shiva-mantras/Shivashtakam', label:'Shivashtakam'},
+    {slug:'/shiva-mantras/bilvashtakam', label:'Bilvashtakam'},
+  ]},
+  {id:'chandra', label:'Chandra Mantras', icon:'🌙', color:'#eaf8ff', accent:'#0f6e56',
+   freq:'daily', pri:'0.80',
+   urls:[
+    {slug:'/Chandra-mantras/', label:'Chandra Mantras (index)', priority:'0.80'},
+    {slug:'/Chandra-mantras/chandra-aarti/', label:'Chandra Aarti'},
+    {slug:'/Chandra-mantras/chandra-ashtakam/', label:'Chandra Ashtakam'},
+    {slug:'/Chandra-mantras/chandra-beej-mantra/', label:'Beej Mantra'},
+    {slug:'/Chandra-mantras/chandra-chalisa/', label:'Chandra Chalisa'},
+    {slug:'/Chandra-mantras/chandra-gayatri-mantra/', label:'Gayatri Mantra'},
+    {slug:'/Chandra-mantras/chandra-kavach/', label:'Chandra Kavach'},
+    {slug:'/Chandra-mantras/som-stotra/', label:'Som Stotra'},
+    {slug:'/Chandra-mantras/chandra-namaskar-mantra/', label:'Namaskar Mantra'},
+    {slug:'/Chandra-mantras/vedic-som-mantra/', label:'Vedic Som Mantra'},
+    {slug:'/Chandra-mantras/chandra-108-names/', label:'108 Names'},
+    {slug:'/Chandra-mantras/chandra-stotram/', label:'Chandra Stotram'},
+    {slug:'/Chandra-mantras/chandra-sahasranama/', label:'Sahasranama'},
+    {slug:'/Chandra-mantras/karwa-chauth-mantra/', label:'Karwa Chauth Mantra'},
+    {slug:'/Chandra-mantras/chandra-graha-shanti/', label:'Graha Shanti'},
+    {slug:'/Chandra-mantras/som-panchakshara/', label:'Som Panchakshara'},
+    {slug:'/Chandra-mantras/chandra-vandana/', label:'Chandra Vandana'},
+    {slug:'/Chandra-mantras/chandra-puja-vidhi-mantra/', label:'Puja Vidhi Mantra'},
+    {slug:'/Chandra-mantras/chandra-mangalacharan/', label:'Mangalacharan'},
+    {slug:'/Chandra-mantras/chandra-namaskara-stotram/', label:'Namaskara Stotram'},
+    {slug:'/Chandra-mantras/sharad-purnima-mantra/', label:'Sharad Purnima Mantra'},
+    {slug:'/Chandra-mantras/chandra-dwadasha-nama/', label:'Dwadasha Nama'},
+    {slug:'/Chandra-mantras/chandra-vrat-katha/', label:'Vrat Katha'},
+    {slug:'/Chandra-mantras/chandra-pratah-smarana/', label:'Pratah Smarana'},
+    {slug:'/Chandra-mantras/chandra-tantra-mantra/', label:'Tantra Mantra'},
+    {slug:'/Chandra-mantras/chandra-upanishad-shloka/', label:'Upanishad Shloka'},
+    {slug:'/Chandra-mantras/chandra-jyoti-mantra/', label:'Jyoti Mantra'},
+    {slug:'/Chandra-mantras/karwa-chauth-vrat-katha/', label:'Karwa Chauth Vrat Katha'},
+  ]},
+  {id:'durga', label:'Durga Mantras', icon:'🪔', color:'#fff3e8', accent:'#993C1D',
+   freq:'daily', pri:'0.90',
+   urls:[
+    {slug:'/durga-mantras/', label:'Durga Mantras (index)', priority:'0.90'},
+    {slug:'/durga-mantras/Argala-stotram/', label:'Argala Stotram'},
+    {slug:'/durga-mantras/Devi-kavacham/', label:'Devi Kavacham'},
+    {slug:'/durga-mantras/Durga-aarti/', label:'Durga Aarti'},
+    {slug:'/durga-mantras/Durga-Chalisha/', label:'Durga Chalisha'},
+    {slug:'/durga-mantras/kilaka-stotram/', label:'Kilaka Stotram'},
+    {slug:'/durga-mantras/Nav-durga-mantra/', label:'Nav Durga Mantra'},
+    {slug:'/durga-mantras/santoshi-mata-aarti/', label:'Santoshi Mata Aarti'},
+  ]},
+  {id:'ganesh', label:'Ganesh Mantras', icon:'🐘', color:'#ffeef5', accent:'#993556',
+   freq:'daily', pri:'0.90',
+   urls:[
+    {slug:'/ganesh-mantras/', label:'Ganesh Mantras (index)', priority:'0.90'},
+    {slug:'/ganesh-mantras/ganesh-aarti/', label:'Ganesh Aarti'},
+    {slug:'/ganesh-mantras/ganesh-chalisha/', label:'Ganesh Chalisha'},
+    {slug:'/ganesh-mantras/gajanana-shree-gajanana/', label:'Gajanana Shree Gajanana'},
+    {slug:'/ganesh-mantras/ganesh-pancharatnam/', label:'Pancharatnam'},
+    {slug:'/ganesh-mantras/ganpati-bappa-morya/', label:'Ganpati Bappa Morya'},
+    {slug:'/ganesh-mantras/ganesh-kavach/', label:'Ganesh Kavach'},
+    {slug:'/ganesh-mantras/ekadanta-stotra/', label:'Ekadanta Stotra'},
+    {slug:'/ganesh-mantras/siddhi-vinayak-mantra/', label:'Siddhi Vinayak Mantra'},
+    {slug:'/ganesh-mantras/ganesh-ashtanama-stotra/', label:'Ashtanama Stotra'},
+    {slug:'/ganesh-mantras/ganesh-sahasranama/', label:'Sahasranama'},
+    {slug:'/ganesh-mantras/modakahasta-stotra/', label:'Modakahasta Stotra'},
+    {slug:'/ganesh-mantras/ganesh-dwadasha-nama/', label:'Dwadasha Nama'},
+    {slug:'/ganesh-mantras/ganesh-mangalacharana/', label:'Mangalacharana'},
+    {slug:'/ganesh-mantras/mudakarata-modakam/', label:'Mudakarata Modakam'},
+    {slug:'/ganesh-mantras/heramba-stotra/', label:'Heramba Stotra'},
+    {slug:'/ganesh-mantras/vighnaraja-stotra/', label:'Vighnaraja Stotra'},
+    {slug:'/ganesh-mantras/ganesh-namaskara-mantra/', label:'Namaskara Mantra'},
+  ]},
+  {id:'gayatri', label:'Gayatri Mantra', icon:'☀️', color:'#fffbe6', accent:'#854F0B',
+   freq:'daily', pri:'0.90',
+   urls:[
+    {slug:'/Gayatri-mantra/', label:'Gayatri Mantra', priority:'0.90'},
+  ]},
+  {id:'hanuman', label:'Hanuman Ji', icon:'🙏', color:'#fff0e6', accent:'#712B13',
+   freq:'daily', pri:'0.90',
+   urls:[
+    {slug:'/hanumanji/', label:'Hanuman Ji (index)', priority:'0.90'},
+    {slug:'/hanumanji/bajrang-baan/', label:'Bajrang Baan'},
+    {slug:'/hanumanji/hanuman-bahuk/', label:'Hanuman Bahuk'},
+    {slug:'/hanumanji/Hanuman-Chalisa/', label:'Hanuman Chalisa'},
+    {slug:'/hanumanji/Hanuman-ji-aarti/', label:'Hanuman Ji Aarti'},
+  ]},
+  {id:'krishna', label:'Krishna Mahamantras', icon:'🪈', color:'#eef5ff', accent:'#185FA5',
+   freq:'daily', pri:'0.90',
+   urls:[
+    {slug:'/Krishna-Mahamantras/', label:'Krishna Mahamantras (index)', priority:'0.90'},
+    {slug:'/Krishna-Mahamantras/Achyutam-keshavam/', label:'Achyutam Keshavam'},
+    {slug:'/Krishna-Mahamantras/Damodarashtakam/', label:'Damodarashtakam'},
+    {slug:'/Krishna-Mahamantras/Gita-chapter-2-nishkam-karma/', label:'Gita Chapter 2 — Nishkam Karma'},
+    {slug:'/Krishna-Mahamantras/Govindam-adi-purusham/', label:'Govindam Adi Purusham'},
+    {slug:'/Krishna-Mahamantras/Hare-Krishna-mahamantras/', label:'Hare Krishna Maha Mantra'},
+    {slug:'/Krishna-Mahamantras/Krishna-108-names/', label:'108 Names'},
+    {slug:'/Krishna-Mahamantras/Krishna-gayatri/', label:'Krishna Gayatri'},
+    {slug:'/Krishna-Mahamantras/Krishnashtakam/', label:'Krishnashtakam'},
+    {slug:'/Krishna-Mahamantras/Madhurasthakam/', label:'Madhurasthakam'},
+    {slug:'/Krishna-Mahamantras/Om-Namo-Bhagavate-Vasudevaya/', label:'Om Namo Bhagavate Vasudevaya'},
+    {slug:'/Krishna-Mahamantras/Radhe-radhe-bhajan/', label:'Radhe Radhe Bhajan'},
+    {slug:'/Krishna-Mahamantras/Shreemad-Bhagavad-gita/', label:'Shreemad Bhagavad Gita'},
+    {slug:'/Krishna-Mahamantras/Shri-Krishna-Aarti/', label:'Shri Krishna Aarti'},
+    {slug:'/Krishna-Mahamantras/Shri-Krishna-Chalisha/', label:'Shri Krishna Chalisha'},
+  ]},
+  {id:'lakshmi', label:'Lakshmi Mantras', icon:'🌸', color:'#ffeef8', accent:'#72243E',
+   freq:'daily', pri:'0.90',
+   urls:[
+    {slug:'/Lakshmi-mantras/', label:'Lakshmi Mantras (index)', priority:'0.90'},
+    {slug:'/Lakshmi-mantras/lakshmi-aarti/', label:'Lakshmi Aarti'},
+    {slug:'/Lakshmi-mantras/lakshmi-ashtakam/', label:'Lakshmi Ashtakam'},
+    {slug:'/Lakshmi-mantras/lakshmi-chalisha/', label:'Lakshmi Chalisha'},
+    {slug:'/Lakshmi-mantras/mahalakshmi-ashtakam/', label:'Mahalakshmi Ashtakam'},
+    {slug:'/Lakshmi-mantras/shri-suktam/', label:'Shri Suktam'},
+  ]},
+  {id:'kali', label:'Kali Mantras', icon:'⚡', color:'#f5eeff', accent:'#3C3489',
+   freq:'daily', pri:'0.90',
+   urls:[
+    {slug:'/maha-kali-mantra/', label:'Maha Kali Mantra (index)', priority:'0.90'},
+    {slug:'/maha-kali-mantra/kali-stotram/', label:'Kali Stotram'},
+    {slug:'/maha-kali-mantra/Kalikastakam/', label:'Kalikastakam'},
+    {slug:'/maha-kali-mantra/maa-kali-aarti/', label:'Maa Kali Aarti'},
+    {slug:'/maha-kali-mantra/maa-kali-chalisha/', label:'Maa Kali Chalisha'},
+    {slug:'/kali-mantras/', label:'Kali Mantras Collection (index)', priority:'0.90'},
+    {slug:'/kali-mantras/dakshina-kali-mantra/', label:'Dakshina Kali Mantra'},
+    {slug:'/kali-mantras/kali-chalisa/', label:'Kali Chalisa'},
+    {slug:'/kali-mantras/kali-kavacham/', label:'Kali Kavacham'},
+    {slug:'/kali-mantras/chamunda-stuti/', label:'Chamunda Stuti'},
+    {slug:'/kali-mantras/kali-gayatri/', label:'Kali Gayatri'},
+    {slug:'/kali-mantras/kali-108-names/', label:'108 Names'},
+    {slug:'/kali-mantras/kali-sahasranama/', label:'Kali Sahasranama'},
+    {slug:'/kali-mantras/adya-stotram/', label:'Adya Stotram'},
+    {slug:'/kali-mantras/kali-pratahsmarana/', label:'Pratahsmarana'},
+    {slug:'/kali-mantras/dakshina-kali-kavach/', label:'Dakshina Kali Kavach'},
+    {slug:'/kali-mantras/kali-khadgamala/', label:'Kali Khadgamala'},
+    {slug:'/kali-mantras/navarna-mantra/', label:'Navarna Mantra'},
+    {slug:'/kali-mantras/parashurama-kali-stotram/', label:'Parashurama Kali Stotram'},
+    {slug:'/kali-mantras/kali-puja-vidhi/', label:'Kali Puja Vidhi'},
+    {slug:'/kali-mantras/brahma-krita-kali-stuti/', label:'Brahma Krita Kali Stuti'},
+    {slug:'/kali-mantras/guhya-kali-mantra/', label:'Guhya Kali Mantra'},
+    {slug:'/kali-mantras/smashanakali-stotra/', label:'Smashanakali Stotra'},
+    {slug:'/kali-mantras/kali-mahastuti-ramakrishna/', label:'Kali Mahastuti — Ramakrishna'},
+    {slug:'/kali-mantras/jaganmangala-kali-kavach/', label:'Jaganmangala Kali Kavach'},
+    {slug:'/kali-mantras/kali-ekakshari-mantra/', label:'Ekakshari Mantra'},
+    {slug:'/kali-mantras/kali-mangal-aarti/', label:'Mangal Aarti'},
+    {slug:'/kali-mantras/kamakala-kali-stotram/', label:'Kamakala Kali Stotram'},
+    {slug:'/kali-mantras/kali-namavali/', label:'Kali Namavali'},
+  ]},
+  {id:'maithili', label:'Maithili & Vidyapati', icon:'📜', color:'#efffea', accent:'#27500A',
+   freq:'daily', pri:'0.90',
+   urls:[
+    {slug:'/Maithili-bhajan-geet/', label:'Maithili Bhajan Geet', priority:'0.90'},
+    {slug:'/Vidyapati-Geet-Sangrah/', label:'Vidyapati Geet Sangrah (index)', priority:'0.90'},
+    {slug:'/Vidyapati-Geet-Sangrah/ugna-re-mor-katai-gela/', label:'Ugna Re Mor Katai Gela'},
+    {slug:'/Vidyapati-Geet-Sangrah/gauri-dauri-dauri-kahthin-he/', label:'Gauri Dauri Dauri Kahthin He'},
+    {slug:'/Vidyapati-Geet-Sangrah/jogiya-ek-hum-dekhlaun-ge-mai/', label:'Jogiya Ek Hum Dekhlaun Ge Mai'},
+    {slug:'/Vidyapati-Geet-Sangrah/bar-ajgut-dekhal-tor-angana/', label:'Bar Ajgut Dekhal Tor Angana'},
+  ]},
+  {id:'other', label:'Other Deities & Sections', icon:'✨', color:'#f8f8f2', accent:'#5F5E5A',
+   freq:'daily', pri:'0.80',
+   urls:[
+    {slug:'/aigiri-nandini/', label:'Aigiri Nandini'},
+    {slug:'/bhagvan-vishnu-mantra/', label:'Bhagvan Vishnu Mantra'},
+    {slug:'/kumar-kartikey-mantras/', label:'Kumar Kartikey Mantras'},
+    {slug:'/Sharaswati-mantra/', label:'Saraswati Mantra'},
+    {slug:'/Shri-ram-mantra/', label:'Shri Ram Mantra'},
+    {slug:'/surya-dev/', label:'Surya Dev'},
+  ]},
+];
+
+const BASE = 'https://www.shivmarg.live';
+let openSections = new Set(['shiva']);
+let activeFilter = 'all';
+
+function priColor(p){
+  const v=parseFloat(p||'0.80');
+  if(v>=0.90) return '#639922';
+  if(v>=0.80) return '#378ADD';
+  return '#888780';
+}
+
+function renderFilters(){
+  const bar=document.getElementById('filter-bar');
+  const filters=[{id:'all',label:'All sections'},...data.map(d=>({id:d.id,label:d.label.split(' ')[0]}))];
+  bar.innerHTML=filters.map(f=>`<div class="chip ${activeFilter===f.id?'active':''}" onclick="setFilter('${f.id}')">${f.label}</div>`).join('');
+}
+
+function setFilter(id){activeFilter=id;if(id!=='all')openSections.add(id);render();}
+
+function render(){
+  const q=(document.getElementById('search').value||'').toLowerCase().trim();
+  const list=document.getElementById('list');
+  let totalShow=0,html='';
+
+  const filtered=data.filter(s=>activeFilter==='all'||s.id===activeFilter);
+
+  filtered.forEach(sec=>{
+    const matchSection=sec.label.toLowerCase().includes(q);
+    const urlsFiltered=sec.urls.filter(u=>
+      !q||u.label.toLowerCase().includes(q)||u.slug.toLowerCase().includes(q)||matchSection
+    );
+    if(!urlsFiltered.length) return;
+    totalShow+=urlsFiltered.length;
+    const isOpen=openSections.has(sec.id)||q.length>0;
+
+    html+=`<div class="section">
+      <div class="sec-header" onclick="toggle('${sec.id}')">
+        <div class="sec-icon" style="background:${sec.color}">${sec.icon}</div>
+        <div class="sec-meta">
+          <div class="sec-name">${sec.label}</div>
+          <div class="sec-path">${sec.urls[0]?BASE+sec.urls[0].slug:''}</div>
+        </div>
+        <div class="sec-badges">
+          <span class="badge badge-count">${urlsFiltered.length} URLs</span>
+          <span class="badge badge-freq">daily</span>
+          <span class="badge badge-pri" style="background:${priColor(sec.pri)}1a;color:${priColor(sec.pri)}">p${sec.pri}</span>
+        </div>
+        <i class="ti ti-chevron-down chevron ${isOpen?'open':''}" aria-hidden="true"></i>
+      </div>
+      <div class="url-list ${isOpen?'open':''}">
+        ${urlsFiltered.map(u=>`
+        <div class="url-row">
+          <div class="pri-dot" style="background:${priColor(u.priority||'0.80')}"></div>
+          <div class="url-slug"><span>shivmarg.live</span>${u.slug} — ${u.label}</div>
+          <a class="url-link" href="${BASE+u.slug}" target="_blank">visit <i class="ti ti-external-link" style="font-size:11px"></i></a>
+        </div>`).join('')}
+      </div>
+    </div>`;
+  });
+
+  if(!html) html=`<div class="no-results"><i class="ti ti-search-off" style="font-size:32px;display:block;margin-bottom:8px"></i>No URLs match "<strong>${q}</strong>"</div>`;
+  list.innerHTML=html;
+
+  document.getElementById('s-total').textContent=totalShow||data.reduce((a,s)=>a+s.urls.length,0);
+  document.getElementById('s-sections').textContent=filtered.length;
+  document.getElementById('s-daily').textContent=Math.round(totalShow*0.85)||Math.round(data.reduce((a,s)=>a+s.urls.length,0)*0.85);
+
+  renderFilters();
+}
+
+function toggle(id){
+  if(openSections.has(id)) openSections.delete(id);
+  else openSections.add(id);
+  render();
+}
+
+render();
+</script>
