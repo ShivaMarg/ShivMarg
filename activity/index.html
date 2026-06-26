@@ -402,7 +402,7 @@
         <div class="card-title">सबसे ज्यादा देखे गए पृष्ठ</div>
         <div class="chip-list">
           ${pagesVisitedEntries.map(([page,count])=>`
-            <a class="chip" href="/${getPageUrl(page)}">🔱 ${escHtml(pageTitle(page))} <span class="ct">${count}</span></a>
+            <a class="chip" href="https://www.shivmarg.live${getPageUrl(page)}">🔱 ${escHtml(pageTitle(page))} <span class="ct">${count}</span></a>
           `).join('')}
         </div>
       </div>` : ''}
