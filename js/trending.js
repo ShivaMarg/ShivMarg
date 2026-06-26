@@ -52,9 +52,9 @@
       container.innerHTML = "";
       return;
     }
-
+    
     const cards = items.map((item, i) => `
-      <a class="trending-card" href="${item.url}" aria-label="${item.title}">
+      <a class="trending-card" href="https://www.shivmarg.live${item.url}" aria-label="${item.title}">
         <div class="trending-rank">${i + 1}</div>
         <div class="trending-card-icon">${item.icon}</div>
         <div class="trending-card-body">
