@@ -1,0 +1,827 @@
+<!-- ============================================================
+     ShivMarg — मंत्र जाप ट्रैकर (Mantra Jaap Tracker)
+     Mobile-first. Talks to mantra_routes.py endpoints.
+     EDIT ZONE: CONFIG block near top of <script> — set API_BASE / token key.
+============================================================ -->
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>मंत्र जाप ट्रैकर — ShivMarg</title>
+<meta name="description" content="अपने दैनिक मंत्र जाप, माला गिनती और गुरु मंत्र को सुरक्षित रूप से ट्रैक करें।">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Hind:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* PATCH_CSS START — mantra tracker design tokens */
+:root{
+  --ink:#2B160A;
+  --ink-soft:#5C3D24;
+  --bg:#FFF8EC;
+  --bg-soft:#FBEFD9;
+  --card:#FFFFFF;
+  --gold:#C8860D;
+  --gold-deep:#9C6A09;
+  --saffron:#E8A33D;
+  --maroon:#7A1F1F;
+  --sandal:#EFD9B4;
+  --bead-off:#E3D2B0;
+  --bead-lit:#C8860D;
+  --line:#EADFC6;
+  --shadow:0 10px 28px rgba(43,22,10,.10);
+  --shadow-soft:0 4px 14px rgba(43,22,10,.07);
+  --radius-lg:22px;
+  --radius-md:16px;
+  --radius-sm:10px;
+  --font-display:'Yatra One', serif;
+  --font-body:'Hind', sans-serif;
+  --font-data:'Rajdhani', sans-serif;
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);
+  -webkit-tap-highlight-color:transparent;}
+body{padding-bottom:96px;}
+img,svg{display:block;}
+button{font-family:inherit;border:none;background:none;cursor:pointer;}
+
+/* ── Temple arch header ───────────────────────── */
+.tk-header{
+  position:relative;
+  background:linear-gradient(180deg,var(--maroon) 0%, #5E1717 100%);
+  color:#FBEFD9;
+  padding:22px 18px 38px;
+  border-radius:0 0 50% 50% / 0 0 28px 28px;
+  text-align:center;
+  overflow:hidden;
+}
+.tk-header::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 50% -20%, rgba(232,163,61,.35), transparent 60%);
+}
+.tk-header h1{
+  font-family:var(--font-display);
+  font-size:1.5rem;font-weight:400;margin:6px 0 2px;letter-spacing:.5px;position:relative;
+}
+.tk-header p{margin:0;font-size:.85rem;opacity:.85;position:relative;}
+.tk-streak-row{
+  display:flex;justify-content:center;gap:22px;margin-top:14px;position:relative;
+}
+.tk-streak-pill{
+  display:flex;flex-direction:column;align-items:center;
+}
+.tk-streak-pill .num{font-family:var(--font-data);font-size:1.4rem;font-weight:700;color:var(--saffron);line-height:1;}
+.tk-streak-pill .lbl{font-size:.68rem;opacity:.8;margin-top:2px;}
+
+.tk-demo-banner{
+  margin:-18px 14px 14px;position:relative;z-index:2;
+  background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:10px 14px;font-size:.82rem;color:var(--ink-soft);
+  display:flex;align-items:center;gap:8px;
+}
+.tk-demo-banner button{color:var(--maroon);font-weight:600;text-decoration:underline;font-size:.82rem;white-space:nowrap;}
+
+/* ── Mantra carousel (switch active mantra) ───── */
+.tk-carousel{
+  display:flex;gap:10px;overflow-x:auto;padding:14px 14px 6px;
+  scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;
+}
+.tk-carousel::-webkit-scrollbar{display:none;}
+.tk-mcard{
+  scroll-snap-align:start;flex:0 0 auto;min-width:96px;
+  background:var(--card);border:2px solid var(--line);border-radius:var(--radius-md);
+  padding:10px 12px;text-align:center;box-shadow:var(--shadow-soft);
+  transition:border-color .2s, transform .15s;
+}
+.tk-mcard.active{border-color:var(--gold);transform:translateY(-2px);}
+.tk-mcard .icon{font-size:1.5rem;}
+.tk-mcard .name{font-size:.74rem;margin-top:4px;max-width:90px;line-height:1.2;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.tk-mcard .prog{font-family:var(--font-data);font-size:.7rem;color:var(--gold-deep);margin-top:3px;font-weight:600;}
+.tk-mcard.add-card{border-style:dashed;color:var(--ink-soft);display:flex;align-items:center;justify-content:center;
+  min-height:64px;font-size:1.6rem;}
+
+/* ── The Mala (signature element) ─────────────── */
+.tk-mala-wrap{
+  display:flex;flex-direction:column;align-items:center;padding:8px 16px 4px;
+}
+.tk-mala-name{font-family:var(--font-display);font-size:1.05rem;margin:0 0 14px;color:var(--maroon);text-align:center;}
+.tk-mala-ring{
+  position:relative;width:280px;height:280px;max-width:90vw;max-height:90vw;
+  touch-action:manipulation;
+}
+.tk-mala-ring svg{width:100%;height:100%;overflow:visible;}
+.bead{transition:fill .25s, r .25s;}
+.bead.lit{filter:drop-shadow(0 0 3px rgba(200,134,13,.6));}
+.tk-mala-center{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.tk-tap-btn{
+  width:172px;height:172px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #FFFCF4, var(--bg-soft) 60%, var(--sandal) 100%);
+  box-shadow:inset 0 2px 10px rgba(43,22,10,.08), var(--shadow);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:transform .08s;
+}
+.tk-tap-btn:active{transform:scale(.96);}
+.tk-tap-count{font-family:var(--font-data);font-size:2.6rem;font-weight:700;color:var(--ink);line-height:1;}
+.tk-tap-sub{font-size:.72rem;color:var(--ink-soft);margin-top:2px;}
+.tk-tap-hint{font-size:.66rem;color:var(--gold-deep);margin-top:4px;letter-spacing:.5px;}
+.tk-mala-flash{
+  position:absolute;inset:0;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle, rgba(232,163,61,.55), transparent 70%);
+  opacity:0;
+}
+.tk-mala-flash.show{animation:malaFlash .9s ease-out;}
+@keyframes malaFlash{0%{opacity:0;transform:scale(.7);}30%{opacity:1;}100%{opacity:0;transform:scale(1.25);}}
+
+.tk-target-line{font-size:.8rem;color:var(--ink-soft);margin-top:14px;text-align:center;}
+.tk-target-line b{color:var(--gold-deep);}
+
+/* ── Section shells ────────────────────────────── */
+.tk-section{margin:22px 14px 0;}
+.tk-section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.tk-section-head h2{font-family:var(--font-display);font-size:1.05rem;margin:0;color:var(--ink);}
+.tk-section-head .tk-link{font-size:.78rem;color:var(--gold-deep);font-weight:600;}
+.tk-card{background:var(--card);border-radius:var(--radius-md);box-shadow:var(--shadow-soft);padding:14px;}
+
+/* ── Weekly strip ──────────────────────────────── */
+.tk-week-bars{display:flex;justify-content:space-between;align-items:flex-end;height:110px;padding:0 4px;}
+.tk-week-bar{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;}
+.tk-week-bar .bar{width:18px;border-radius:6px 6px 3px 3px;background:var(--bead-off);min-height:6px;
+  transition:height .4s ease;}
+.tk-week-bar .bar.has-jaap{background:linear-gradient(180deg,var(--saffron),var(--gold));}
+.tk-week-bar .bar.today{outline:2px solid var(--maroon);outline-offset:2px;}
+.tk-week-bar .day-lbl{font-size:.68rem;color:var(--ink-soft);}
+
+/* ── Monthly calendar ──────────────────────────── */
+.tk-month-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.tk-month-head button{font-size:1.1rem;color:var(--maroon);padding:4px 8px;}
+.tk-month-head .lbl{font-family:var(--font-data);font-weight:700;font-size:.9rem;}
+.tk-month-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;}
+.tk-day-cell{
+  aspect-ratio:1;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-data);font-size:.7rem;color:var(--ink-soft);background:var(--bg-soft);position:relative;
+}
+.tk-day-cell.l1{background:#F4DFA8;color:var(--ink);}
+.tk-day-cell.l2{background:#E8B95C;color:#fff;}
+.tk-day-cell.l3{background:var(--gold);color:#fff;font-weight:700;}
+.tk-day-cell.empty{background:transparent;}
+.tk-day-cell.today{outline:2px solid var(--maroon);outline-offset:1px;}
+
+/* ── Stats ─────────────────────────────────────── */
+.tk-stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.tk-stat{background:var(--card);border-radius:var(--radius-sm);box-shadow:var(--shadow-soft);
+  padding:12px 6px;text-align:center;}
+.tk-stat .num{font-family:var(--font-data);font-size:1.25rem;font-weight:700;color:var(--gold-deep);}
+.tk-stat .lbl{font-size:.66rem;color:var(--ink-soft);margin-top:2px;}
+
+/* ── Guru mantra (sealed cards) ────────────────── */
+.tk-guru-card{
+  background:linear-gradient(135deg,#3A1010,var(--maroon));color:#FBEFD9;
+  border-radius:var(--radius-md);padding:16px;margin-bottom:10px;position:relative;overflow:hidden;
+}
+.tk-guru-card::after{
+  content:"🔒";position:absolute;right:14px;top:14px;font-size:1.1rem;opacity:.85;
+}
+.tk-guru-card .title{font-family:var(--font-display);font-size:1rem;margin:0 0 4px;}
+.tk-guru-card .guru-name{font-size:.74rem;opacity:.8;}
+.tk-guru-card .seal-text{
+  margin-top:10px;font-size:.78rem;letter-spacing:.5px;color:var(--saffron);
+}
+.tk-guru-card.unsealed .mantra-text{
+  margin-top:8px;font-size:.95rem;background:rgba(0,0,0,.18);padding:10px;border-radius:8px;
+  font-family:var(--font-display);
+}
+.tk-guru-card .guru-foot{display:flex;justify-content:space-between;align-items:center;margin-top:10px;}
+.tk-guru-card .guru-today{font-family:var(--font-data);font-size:.78rem;}
+.tk-guru-add{
+  border:2px dashed rgba(122,31,31,.4);border-radius:var(--radius-md);padding:16px;text-align:center;
+  color:var(--ink-soft);font-size:.85rem;
+}
+.tk-guru-add b{color:var(--maroon);}
+
+/* ── Bottom sheet (add mantra / guru) ──────────── */
+.tk-sheet-backdrop{
+  position:fixed;inset:0;background:rgba(43,22,10,.45);opacity:0;visibility:hidden;
+  transition:opacity .2s;z-index:50;
+}
+.tk-sheet-backdrop.open{opacity:1;visibility:visible;}
+.tk-sheet{
+  position:fixed;left:0;right:0;bottom:0;background:var(--bg);
+  border-radius:20px 20px 0 0;box-shadow:0 -10px 30px rgba(0,0,0,.2);
+  max-height:85vh;overflow-y:auto;transform:translateY(100%);transition:transform .25s ease;z-index:51;
+  padding:18px 18px max(18px, env(safe-area-inset-bottom));
+}
+.tk-sheet.open{transform:translateY(0);}
+.tk-sheet-handle{width:40px;height:4px;background:var(--line);border-radius:4px;margin:0 auto 14px;}
+.tk-sheet h3{font-family:var(--font-display);margin:0 0 12px;font-size:1.1rem;}
+.tk-field{margin-bottom:12px;}
+.tk-field label{display:block;font-size:.78rem;color:var(--ink-soft);margin-bottom:4px;}
+.tk-field input,.tk-field textarea,.tk-field select{
+  width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:var(--radius-sm);
+  font-family:var(--font-body);font-size:.95rem;background:#fff;
+}
+.tk-catalog-list{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px;}
+.tk-catalog-chip{
+  padding:8px 12px;border-radius:20px;border:1px solid var(--line);font-size:.8rem;background:#fff;
+}
+.tk-catalog-chip.sel{background:var(--gold);color:#fff;border-color:var(--gold);}
+.tk-btn-primary{
+  width:100%;padding:13px;border-radius:var(--radius-sm);background:var(--maroon);color:#fff;
+  font-weight:600;font-size:.95rem;margin-top:6px;
+}
+.tk-btn-secondary{
+  width:100%;padding:11px;border-radius:var(--radius-sm);background:transparent;color:var(--ink-soft);
+  font-size:.85rem;margin-top:6px;
+}
+
+/* ── Toast ─────────────────────────────────────── */
+.tk-toast{
+  position:fixed;bottom:18px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--ink);color:#FBEFD9;padding:10px 18px;border-radius:30px;font-size:.82rem;
+  opacity:0;transition:opacity .25s, transform .25s;z-index:60;white-space:nowrap;
+}
+.tk-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+@media (prefers-reduced-motion: reduce){
+  .tk-mala-flash.show{animation:none;opacity:.4;}
+  *{transition-duration:.01ms !important;}
+}
+/* PATCH_CSS END */
+</style>
+</head>
+<body>
+
+<!-- EDIT ZONE: header text -->
+<header class="tk-header">
+  <h1>मंत्र जाप ट्रैकर</h1>
+  <p>आज की माला, अपनी भक्ति के साथ</p>
+  <div class="tk-streak-row">
+    <div class="tk-streak-pill"><span class="num" id="tkStreakNum">0</span><span class="lbl">दिन की लड़ी 🔥</span></div>
+    <div class="tk-streak-pill"><span class="num" id="tkTodayMalas">0</span><span class="lbl">आज माला</span></div>
+    <div class="tk-streak-pill"><span class="num" id="tkLifeMalas">0</span><span class="lbl">कुल माला</span></div>
+  </div>
+</header>
+
+<div id="tkDemoBanner" class="tk-demo-banner" style="display:none;">
+  <span>🙏 यह डेमो डेटा है — अपना जाप सेव करने के लिए</span>
+  <button id="tkLoginCta">लॉगिन करें</button>
+</div>
+
+<!-- Mantra carousel -->
+<div class="tk-carousel" id="tkCarousel"></div>
+
+<!-- The Mala -->
+<div class="tk-mala-wrap">
+  <h2 class="tk-mala-name" id="tkActiveName">—</h2>
+  <div class="tk-mala-ring" id="tkRing">
+    <svg id="tkRingSvg" viewBox="0 0 280 280"></svg>
+    <div class="tk-mala-center">
+      <div class="tk-mala-flash" id="tkFlash"></div>
+      <button class="tk-tap-btn" id="tkTapBtn">
+        <span class="tk-tap-count" id="tkCount">0</span>
+        <span class="tk-tap-sub" id="tkMalaProgress">0 / 108</span>
+        <span class="tk-tap-hint">जाप के लिए टैप करें</span>
+      </button>
+    </div>
+  </div>
+  <p class="tk-target-line">आज का लक्ष्य: <b id="tkTargetLine">—</b></p>
+</div>
+
+<!-- Calendar: weekly / monthly -->
+<section class="tk-section">
+  <div class="tk-section-head">
+    <h2>कैलेंडर</h2>
+    <div>
+      <button class="tk-link" id="tkViewWeekly" style="margin-right:10px;">साप्ताहिक</button>
+      <button class="tk-link" id="tkViewMonthly">मासिक</button>
+    </div>
+  </div>
+  <div class="tk-card">
+    <div id="tkWeeklyView" class="tk-week-bars"></div>
+    <div id="tkMonthlyView" style="display:none;">
+      <div class="tk-month-head">
+        <button id="tkMonthPrev">‹</button>
+        <span class="lbl" id="tkMonthLabel">—</span>
+        <button id="tkMonthNext">›</button>
+      </div>
+      <div class="tk-month-grid" id="tkMonthGrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="tk-section">
+  <div class="tk-section-head"><h2>आपकी साधना</h2></div>
+  <div class="tk-stats-grid">
+    <div class="tk-stat"><div class="num" id="statBestDay">0</div><div class="lbl">सर्वश्रेष्ठ दिन</div></div>
+    <div class="tk-stat"><div class="num" id="statLongest">0</div><div class="lbl">सबसे लंबी लड़ी</div></div>
+    <div class="tk-stat"><div class="num" id="statLifetime">0</div><div class="lbl">कुल जाप</div></div>
+  </div>
+</section>
+
+<!-- Guru Mantra (encrypted) -->
+<section class="tk-section">
+  <div class="tk-section-head">
+    <h2>गुरु मंत्र 🔒</h2>
+    <button class="tk-link" id="tkAddGuru">+ जोड़ें</button>
+  </div>
+  <div id="tkGuruList"></div>
+</section>
+
+<!-- ── Bottom sheet: Add mantra ───────────────── -->
+<div class="tk-sheet-backdrop" id="tkAddBackdrop"></div>
+<div class="tk-sheet" id="tkAddSheet">
+  <div class="tk-sheet-handle"></div>
+  <h3>नया मंत्र जोड़ें</h3>
+  <div class="tk-field">
+    <label>सूची से चुनें</label>
+    <div class="tk-catalog-list" id="tkCatalogList"></div>
+  </div>
+  <div class="tk-field">
+    <label>या अपना मंत्र लिखें</label>
+    <input type="text" id="tkCustomName" placeholder="जैसे: कृष्ण कृष्ण कृष्ण…">
+  </div>
+  <div class="tk-field">
+    <label>माला का आकार</label>
+    <select id="tkMalaSizeSel">
+      <option value="27">27</option>
+      <option value="54">54</option>
+      <option value="108" selected>108</option>
+      <option value="1008">1008</option>
+    </select>
+  </div>
+  <div class="tk-field">
+    <label>दैनिक लक्ष्य (माला में)</label>
+    <input type="number" id="tkDailyTarget" value="1" min="0" step="0.5">
+  </div>
+  <button class="tk-btn-primary" id="tkSaveMantra">मंत्र जोड़ें</button>
+  <button class="tk-btn-secondary" id="tkCancelMantra">रद्द करें</button>
+</div>
+
+<!-- ── Bottom sheet: Add guru mantra ──────────── -->
+<div class="tk-sheet-backdrop" id="tkGuruBackdrop"></div>
+<div class="tk-sheet" id="tkGuruSheet">
+  <div class="tk-sheet-handle"></div>
+  <h3>गुरु मंत्र जोड़ें — पूर्णतः सुरक्षित 🔒</h3>
+  <div class="tk-field">
+    <label>शीर्षक (जैसे: मेरा गुरु मंत्र)</label>
+    <input type="text" id="tkGuruTitle">
+  </div>
+  <div class="tk-field">
+    <label>मंत्र (केवल आप देख सकेंगे)</label>
+    <textarea id="tkGuruText" rows="3"></textarea>
+  </div>
+  <div class="tk-field">
+    <label>गुरु का नाम (वैकल्पिक)</label>
+    <input type="text" id="tkGuruName">
+  </div>
+  <div class="tk-field">
+    <label>माला का आकार</label>
+    <select id="tkGuruMalaSize">
+      <option value="27">27</option>
+      <option value="108" selected>108</option>
+    </select>
+  </div>
+  <button class="tk-btn-primary" id="tkSaveGuru">सुरक्षित रूप से सहेजें</button>
+  <button class="tk-btn-secondary" id="tkCancelGuru">रद्द करें</button>
+</div>
+
+<div class="tk-toast" id="tkToast"></div>
+
+<script>
+/* PATCH_JS START — Mantra Jaap Tracker */
+(function(){
+
+// ── EDIT ZONE: CONFIG — align with your nav.js ──────────────
+const API_BASE = "https://www.api.shivmarg.live"; // <-- set your backend base URL
+function getToken(){
+  // adjust the key to whatever nav.js uses, e.g. localStorage.getItem('shivmarg_token')
+  return localStorage.getItem('sm_token');
+}
+// ─────────────────────────────────────────────────────────────
+
+const $ = (id) => document.getElementById(id);
+let state = {
+  isGuest: true,
+  mantras: [],       // regular, normalized: {id,mantra_type,name,icon,mala_size,daily_target_count,today_count}
+  guruMantras: [],
+  activeId: null,
+  pendingDelta: 0,
+  flushTimer: null,
+  catalog: [],
+  monthCursor: new Date(),
+};
+
+function authHeaders(){
+  const t = getToken();
+  return t ? { "Authorization": "Bearer " + t, "Content-Type": "application/json" } : { "Content-Type": "application/json" };
+}
+
+async function api(path, opts={}){
+  const res = await fetch(API_BASE + path, { ...opts, headers: { ...authHeaders(), ...(opts.headers||{}) } });
+  if(!res.ok){
+    if(res.status === 401){ /* token expired */ }
+    throw new Error("API error " + res.status);
+  }
+  return res.json();
+}
+
+function toast(msg){
+  const t = $('tkToast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2200);
+}
+
+// ── INIT ───────────────────────────────────────────────────
+async function init(){
+  state.isGuest = !getToken();
+  $('tkDemoBanner').style.display = state.isGuest ? 'flex' : 'none';
+
+  try{
+    if(state.isGuest){
+      const demo = await api('/api/mantras/demo');
+      state.mantras = demo.mantras.map(m => ({...m}));
+      state.guruMantras = []; // demo guru shown as static locked card, see renderGuru()
+      applySummary({
+        current_streak: demo.current_streak,
+        today_malas: demo.today_total_malas,
+        lifetime_malas: demo.lifetime_malas,
+        longest_streak: demo.longest_streak,
+        lifetime_count: demo.lifetime_count,
+      });
+      renderWeeklyFromDays(demo.last_30_days.slice(-7));
+    } else {
+      const [mine, guru, stats] = await Promise.all([
+        api('/api/mantras/my'),
+        api('/api/mantras/guru'),
+        api('/api/mantras/stats'),
+      ]);
+      state.mantras = mine.mantras;
+      state.guruMantras = guru.guru_mantras;
+      applySummary(stats);
+      loadWeekly();
+    }
+  } catch(e){
+    console.error(e);
+    toast('डेटा लोड करने में समस्या हुई');
+  }
+
+  if(state.mantras.length){
+    state.activeId = state.mantras[0].id;
+  }
+  renderCarousel();
+  renderActiveMala();
+  renderGuru();
+  loadCatalog();
+}
+
+function applySummary(s){
+  $('tkStreakNum').textContent = s.current_streak ?? 0;
+  $('tkTodayMalas').textContent = s.today_malas ?? 0;
+  $('tkLifeMalas').textContent = s.lifetime_malas ?? 0;
+  $('statBestDay').textContent = (s.best_day && s.best_day.count) ? s.best_day.count : 0;
+  $('statLongest').textContent = s.longest_streak ?? 0;
+  $('statLifetime').textContent = s.lifetime_count ?? 0;
+}
+
+// ── Carousel ──────────────────────────────────────────────
+function renderCarousel(){
+  const el = $('tkCarousel');
+  el.innerHTML = '';
+  state.mantras.forEach(m => {
+    const malas = m.daily_target_count ? Math.round((m.today_count/m.daily_target_count)*100) : 0;
+    const card = document.createElement('div');
+    card.className = 'tk-mcard' + (m.id === state.activeId ? ' active' : '');
+    card.innerHTML = `<div class="icon">${m.icon||'🕉️'}</div>
+      <div class="name">${m.name}</div>
+      <div class="prog">${malas}%</div>`;
+    card.onclick = () => { state.activeId = m.id; renderCarousel(); renderActiveMala(); };
+    el.appendChild(card);
+  });
+  const addCard = document.createElement('div');
+  addCard.className = 'tk-mcard add-card';
+  addCard.textContent = '+';
+  addCard.onclick = () => openSheet('tkAddSheet','tkAddBackdrop');
+  el.appendChild(addCard);
+}
+
+function activeMantra(){
+  return state.mantras.find(m => m.id === state.activeId);
+}
+
+// ── The Mala ring ─────────────────────────────────────────
+function buildRingSVG(malaSize){
+  const visualBeads = Math.min(malaSize, 108);
+  const svg = $('tkRingSvg');
+  svg.innerHTML = '';
+  const cx=140, cy=140, r=128, beadR=7;
+  for(let i=0;i<visualBeads;i++){
+    const angle = (i/visualBeads) * 2*Math.PI - Math.PI/2;
+    const x = cx + r*Math.cos(angle);
+    const y = cy + r*Math.sin(angle);
+    const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', beadR);
+    c.setAttribute('class','bead'); c.setAttribute('fill', 'var(--bead-off)');
+    c.dataset.index = i;
+    svg.appendChild(c);
+  }
+}
+
+function paintRing(count, malaSize){
+  const visualBeads = Math.min(malaSize, 108);
+  const perBead = malaSize / visualBeads;
+  const inThisMala = count % malaSize;
+  const litCount = Math.floor(inThisMala / perBead);
+  document.querySelectorAll('#tkRingSvg .bead').forEach(b => {
+    const i = +b.dataset.index;
+    if(i < litCount){ b.setAttribute('fill','var(--bead-lit)'); b.classList.add('lit'); }
+    else { b.setAttribute('fill','var(--bead-off)'); b.classList.remove('lit'); }
+  });
+}
+
+function renderActiveMala(){
+  const m = activeMantra();
+  if(!m){
+    $('tkActiveName').textContent = 'अपना पहला मंत्र जोड़ें';
+    $('tkCount').textContent = '0';
+    $('tkMalaProgress').textContent = '';
+    $('tkTargetLine').textContent = '—';
+    buildRingSVG(108);
+    return;
+  }
+  $('tkActiveName').textContent = m.name;
+  $('tkCount').textContent = m.today_count;
+  $('tkMalaProgress').textContent = `${m.today_count % m.mala_size} / ${m.mala_size}`;
+  $('tkTargetLine').innerHTML = `<b>${m.daily_target_malas}</b> माला (${m.daily_target_count} जाप)`;
+  buildRingSVG(m.mala_size);
+  paintRing(m.today_count, m.mala_size);
+}
+
+// ── Tap counting (debounced sync) ────────────────────────
+$('tkTapBtn').addEventListener('click', onTap);
+
+function onTap(){
+  const m = activeMantra();
+  if(!m){ openSheet('tkAddSheet','tkAddBackdrop'); return; }
+
+  const before = m.today_count;
+  m.today_count += 1;
+  state.pendingDelta += 1;
+
+  $('tkCount').textContent = m.today_count;
+  $('tkMalaProgress').textContent = `${m.today_count % m.mala_size} / ${m.mala_size}`;
+  paintRing(m.today_count, m.mala_size);
+
+  if(navigator.vibrate) navigator.vibrate(8);
+
+  // mala completed?
+  if(Math.floor(before / m.mala_size) !== Math.floor(m.today_count / m.mala_size)){
+    flashMala();
+    if(navigator.vibrate) navigator.vibrate([20,40,20]);
+  }
+
+  renderCarousel(); // keep % progress live
+
+  if(state.isGuest){
+    scheduleFlush(true); // never actually sends, just nudges toast
+    return;
+  }
+  scheduleFlush(false);
+}
+
+function flashMala(){
+  const f = $('tkFlash');
+  f.classList.remove('show');
+  requestAnimationFrame(()=> f.classList.add('show'));
+}
+
+function scheduleFlush(guestOnly){
+  clearTimeout(state.flushTimer);
+  state.flushTimer = setTimeout(()=> flushPending(guestOnly), 1200);
+}
+
+async function flushPending(guestOnly){
+  if(state.pendingDelta === 0) return;
+  const delta = state.pendingDelta;
+  state.pendingDelta = 0;
+
+  if(guestOnly){
+    toast('लॉगिन करें — अपना जाप स्थायी रूप से सहेजने के लिए 🙏');
+    return;
+  }
+  const m = activeMantra();
+  if(!m) return;
+  try{
+    await api('/api/mantras/log', {
+      method: 'POST',
+      body: JSON.stringify({ mantra_id: m.id, mantra_type: m.mantra_type, count: delta }),
+    });
+  }catch(e){
+    console.error('jaap sync failed', e);
+    toast('जाप सेव करने में समस्या — दोबारा कोशिश हो रही है');
+    state.pendingDelta += delta; // retry on next tap/flush
+  }
+}
+window.addEventListener('visibilitychange', () => {
+  if(document.visibilityState === 'hidden') flushPending(state.isGuest);
+});
+
+// ── Weekly / monthly calendar ─────────────────────────────
+$('tkViewWeekly').onclick = () => { $('tkWeeklyView').style.display='flex'; $('tkMonthlyView').style.display='none'; };
+$('tkViewMonthly').onclick = () => { $('tkWeeklyView').style.display='none'; $('tkMonthlyView').style.display='block'; loadMonthly(); };
+
+async function loadWeekly(){
+  try{
+    const data = await api('/api/mantras/calendar?view=weekly');
+    renderWeeklyFromDays(data.days);
+  }catch(e){ console.error(e); }
+}
+
+function renderWeeklyFromDays(days){
+  const el = $('tkWeeklyView');
+  el.innerHTML = '';
+  const todayStr = new Date().toISOString().slice(0,10);
+  const maxCount = Math.max(...days.map(d=>d.count), 1);
+  days.forEach(d => {
+    const dayLbl = new Date(d.date).toLocaleDateString('hi-IN', { weekday:'short' });
+    const heightPx = Math.max(6, Math.round((d.count / maxCount) * 84));
+    const wrap = document.createElement('div');
+    wrap.className = 'tk-week-bar';
+    wrap.innerHTML = `<div class="bar ${d.count>0?'has-jaap':''} ${d.date===todayStr?'today':''}" style="height:${heightPx}px"></div>
+      <span class="day-lbl">${dayLbl}</span>`;
+    el.appendChild(wrap);
+  });
+}
+
+$('tkMonthPrev').onclick = () => { state.monthCursor.setMonth(state.monthCursor.getMonth()-1); loadMonthly(); };
+$('tkMonthNext').onclick = () => { state.monthCursor.setMonth(state.monthCursor.getMonth()+1); loadMonthly(); };
+
+async function loadMonthly(){
+  const m = state.monthCursor.getMonth()+1, y = state.monthCursor.getFullYear();
+  $('tkMonthLabel').textContent = state.monthCursor.toLocaleDateString('hi-IN',{month:'long',year:'numeric'});
+  if(state.isGuest){ renderMonthGrid([], m, y); return; }
+  try{
+    const data = await api(`/api/mantras/calendar?view=monthly&month=${m}&year=${y}`);
+    renderMonthGrid(data.days, m, y);
+  }catch(e){ console.error(e); }
+}
+
+function renderMonthGrid(days, month, year){
+  const grid = $('tkMonthGrid');
+  grid.innerHTML = '';
+  const firstDow = new Date(year, month-1, 1).getDay();
+  for(let i=0;i<firstDow;i++){
+    const c = document.createElement('div'); c.className='tk-day-cell empty'; grid.appendChild(c);
+  }
+  const todayStr = new Date().toISOString().slice(0,10);
+  days.forEach(d => {
+    const c = document.createElement('div');
+    let lvl = '';
+    if(d.count > 0 && d.count < 108) lvl='l1';
+    else if(d.count >= 108 && d.count < 324) lvl='l2';
+    else if(d.count >= 324) lvl='l3';
+    c.className = `tk-day-cell ${lvl} ${d.date===todayStr?'today':''}`;
+    c.textContent = new Date(d.date).getDate();
+    grid.appendChild(c);
+  });
+}
+
+// ── Add mantra sheet ──────────────────────────────────────
+async function loadCatalog(){
+  try{
+    const data = await api('/api/mantras/catalog');
+    state.catalog = data.mantras;
+    const list = $('tkCatalogList');
+    list.innerHTML = '';
+    state.catalog.forEach(c => {
+      const chip = document.createElement('div');
+      chip.className = 'tk-catalog-chip';
+      chip.textContent = `${c.icon} ${c.name}`;
+      chip.dataset.key = c.key;
+      chip.onclick = () => {
+        document.querySelectorAll('.tk-catalog-chip').forEach(x=>x.classList.remove('sel'));
+        chip.classList.add('sel');
+        $('tkCustomName').value = '';
+        chip.dataset.selected = 'true';
+      };
+      list.appendChild(chip);
+    });
+  }catch(e){ console.error(e); }
+}
+
+function openSheet(sheetId, backdropId){
+  if(state.isGuest){ toast('लॉगिन करें — मंत्र जोड़ने के लिए 🙏'); return; }
+  $(backdropId).classList.add('open');
+  $(sheetId).classList.add('open');
+}
+function closeSheet(sheetId, backdropId){
+  $(backdropId).classList.remove('open');
+  $(sheetId).classList.remove('open');
+}
+$('tkAddBackdrop').onclick = () => closeSheet('tkAddSheet','tkAddBackdrop');
+$('tkCancelMantra').onclick = () => closeSheet('tkAddSheet','tkAddBackdrop');
+$('tkGuruBackdrop').onclick = () => closeSheet('tkGuruSheet','tkGuruBackdrop');
+$('tkCancelGuru').onclick = () => closeSheet('tkGuruSheet','tkGuruBackdrop');
+
+$('tkSaveMantra').onclick = async () => {
+  const selChip = document.querySelector('.tk-catalog-chip.sel');
+  const body = {
+    catalog_key: selChip ? selChip.dataset.key : null,
+    custom_name: selChip ? null : ($('tkCustomName').value.trim() || null),
+    mala_size: parseInt($('tkMalaSizeSel').value, 10),
+    daily_target_malas: parseFloat($('tkDailyTarget').value || '1'),
+  };
+  if(!body.catalog_key && !body.custom_name){ toast('मंत्र चुनें या नाम लिखें'); return; }
+  try{
+    const created = await api('/api/mantras/my', { method:'POST', body: JSON.stringify(body) });
+    state.mantras.push(created);
+    state.activeId = created.id;
+    closeSheet('tkAddSheet','tkAddBackdrop');
+    renderCarousel(); renderActiveMala();
+    toast('मंत्र जुड़ गया 🙏');
+  }catch(e){
+    toast('यह मंत्र पहले से जुड़ा हो सकता है');
+  }
+};
+
+// ── Guru mantra ───────────────────────────────────────────
+$('tkAddGuru').onclick = () => openSheet('tkGuruSheet','tkGuruBackdrop');
+
+function renderGuru(){
+  const el = $('tkGuruList');
+  el.innerHTML = '';
+
+  if(state.isGuest){
+    el.innerHTML = `<div class="tk-guru-card">
+        <p class="title">सुरक्षित गुरु मंत्र</p>
+        <p class="guru-name">लॉगिन के बाद ही दिखेगा</p>
+        <p class="seal-text">🔒 एन्क्रिप्टेड — केवल आप देख सकते हैं</p>
+      </div>`;
+    return;
+  }
+  if(!state.guruMantras.length){
+    el.innerHTML = `<div class="tk-guru-add">अभी कोई गुरु मंत्र नहीं जोड़ा गया।<br><b>+ जोड़ें</b> पर टैप करें — यह पूर्ण रूप से एन्क्रिप्ट होकर सहेजा जाएगा।</div>`;
+    return;
+  }
+  state.guruMantras.forEach(g => {
+    const card = document.createElement('div');
+    card.className = 'tk-guru-card';
+    card.innerHTML = `
+      <p class="title">${g.title}</p>
+      ${g.guru_name ? `<p class="guru-name">— ${g.guru_name}</p>` : ''}
+      <p class="seal-text">🔒 टैप करके खोलें</p>
+      <div class="mantra-text" style="display:none;">${g.mantra_text}</div>
+      <div class="guru-foot">
+        <span class="guru-today">आज: ${g.today_count} जाप</span>
+        <button class="tk-link" style="color:#FBEFD9;" data-id="${g.id}" data-type="guru">+१०८</button>
+      </div>`;
+    card.querySelector('.seal-text').onclick = () => {
+      card.classList.toggle('unsealed');
+      const t = card.querySelector('.mantra-text');
+      t.style.display = card.classList.contains('unsealed') ? 'block' : 'none';
+    };
+    card.querySelector('button[data-id]').onclick = async (ev) => {
+      ev.stopPropagation();
+      try{
+        await api('/api/mantras/log', { method:'POST', body: JSON.stringify({
+          mantra_id: g.id, mantra_type:'guru', count: g.mala_size || 108 }) });
+        g.today_count += (g.mala_size || 108);
+        card.querySelector('.guru-today').textContent = `आज: ${g.today_count} जाप`;
+        toast('माला दर्ज हुई 🙏');
+      }catch(e){ toast('सेव नहीं हो पाया, फिर कोशिश करें'); }
+    };
+    el.appendChild(card);
+  });
+}
+
+$('tkSaveGuru').onclick = async () => {
+  const body = {
+    title: $('tkGuruTitle').value.trim(),
+    mantra_text: $('tkGuruText').value.trim(),
+    guru_name: $('tkGuruName').value.trim() || null,
+    mala_size: parseInt($('tkGuruMalaSize').value, 10),
+    daily_target_malas: 1,
+  };
+  if(!body.title || !body.mantra_text){ toast('शीर्षक और मंत्र दोनों आवश्यक हैं'); return; }
+  try{
+    const created = await api('/api/mantras/guru', { method:'POST', body: JSON.stringify(body) });
+    state.guruMantras.push(created);
+    closeSheet('tkGuruSheet','tkGuruBackdrop');
+    renderGuru();
+    toast('गुरु मंत्र सुरक्षित रूप से सहेजा गया 🔒');
+  }catch(e){ toast('सहेजने में समस्या हुई'); }
+};
+
+// ── Login CTA ─────────────────────────────────────────────
+$('tkLoginCta').onclick = () => { window.location.href = '/login/'; }; // EDIT ZONE: your login page path
+
+init();
+})();
+/* PATCH_JS END */
+</script>
+</body>
+</html>
