@@ -1131,7 +1131,6 @@ async function renderCalendar() {
       data = buildDemoCalData(view);
     }
     state.calData = data;
-    console.log(data);
     if (view === 'weekly') renderWeekly(data);
     else if (view === 'monthly') renderMonthly(data);
     else renderDaily(data);
@@ -1211,6 +1210,7 @@ function renderDaily(data) {
     document.getElementById('cal-content').innerHTML = `<div class="empty-state"><div class="es-icon">📿</div><div class="es-text">आज कोई जाप दर्ज नहीं</div></div>`;
     return;
   }
+  console.log('daily sessions', sessions);
   const items = sessions.map(s => `
     <div class="log-item">
       <div class="log-icon">🕉️</div>
