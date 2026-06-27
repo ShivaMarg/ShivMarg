@@ -341,11 +341,12 @@
 }
 
 #sm-navbar .dropdown-panel a {
-  display: block; padding: 11px 20px;
-  font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 0.92rem;
+  display: block; padding: 7px 20px;
+  font-family: 'Tiro Devanagari Sanskrit', serif; font-size: 0.82rem;
   color: rgba(237,227,212,0.7); text-decoration: none;
   border-bottom: 1px solid rgba(184,136,26,0.1);
   transition: color 0.15s, padding-left 0.15s, background 0.15s;
+  line-height: 1.3;
 }
 #sm-navbar .dropdown-panel a:last-child { border-bottom: none; }
 #sm-navbar .dropdown-panel a:hover {
@@ -353,8 +354,15 @@
   padding-left: 28px;
   background: rgba(184,136,26,0.06);
 }
+#sm-navbar .dropdown-panel a:last-child { border-bottom: none; }
+#sm-navbar .dropdown-panel a:hover {
+  color: var(--brass-l);
+  padding-left: 28px;
+  background: rgba(184,136,26,0.06);
+}
+/* REPLACE */
 #sm-navbar .dp-label {
-  padding: 10px 20px 6px;
+  padding: 6px 20px 3px;
   font-family: 'Cinzel', serif; font-size: 0.57rem; letter-spacing: 3px;
   color: var(--terra-l); text-transform: uppercase; font-weight: 700;
 }
