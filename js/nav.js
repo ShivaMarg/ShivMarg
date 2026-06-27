@@ -747,79 +747,132 @@
      MENU DATA — single source for desktop dropdowns'
      content AND mobile sliding sub-menus.
   ───────────────────────────────────────────── */
-  const MENU_DATA = [
-    {
-      id: 'shiv', icon: '🕉', label: 'शिव स्तोत्र',
-      groups: [
-        { label: 'मंत्र', items: [
-          { hi: 'शिव मंत्र', url: '/shiva-mantras' },
-          { hi: 'महामृत्युंजय मंत्र', url: '/shiva-mantras/Shiva-mahamrityunjaya-mantra/' },
-          { hi: 'निर्वाणपटकम्', url: '#' },
-        ]},
-        { label: 'आरती', items: [
-          { hi: 'शिव आरती', url: '#' },
-          { hi: 'महा आरती', url: '#' },
-        ]},
-      ]
-    },
-    {
-      id: 'shakti', icon: '🌺', label: 'शक्ति',
-      groups: [
-        { label: 'माता दुर्गा', items: [
-          { hi: 'माँ दुर्गा मंत्र', url: '/durga-mantras/' },
-          { hi: 'अष्टोत्तर शतनाम', url: '#' },
-        ]},
-        { label: 'देवी काली', items: [
-          { hi: 'माँ काली मंत्र', url: '/maha-kali-mantra/' },
-          { hi: 'कालिका स्तोत्र', url: '#' },
-        ]},
-      ]
-    },
-    {
-      id: 'vishnu', icon: '🪷', label: 'विष्णु',
-      groups: [
-        { label: 'भगवान विष्णु', items: [
-          { hi: 'विष्णु मंत्र', url: '/bhagvan-vishnu-mantra/' },
-          { hi: 'विष्णु सहस्रनाम', url: '#' },
-        ]},
-      ]
-    },
-    {
-      id: 'ram', icon: '🏹', label: 'राम-हनुमान',
-      groups: [
-        { label: 'श्री राम', items: [
-          { hi: 'राम मंत्र', url: '/Shri-ram-mantra/' },
-          { hi: 'राम रक्षा स्तोत्र', url: '#' },
-        ]},
-        { label: 'हनुमान जी', items: [
-          { hi: 'हनुमान मंत्र', url: '/hanumanji/' },
-          { hi: 'हनुमान चालीसा', url: '#' },
-        ]},
-      ]
-    },
-    {
-      id: 'krishna', icon: '🦚', label: 'कृष्ण',
-      groups: [
-        { label: 'श्री कृष्ण', items: [
-          { hi: 'कृष्ण महामंत्र', url: '/Krishna-Mahamantras/' },
-          { hi: 'कृष्ण भजन', url: '#' },
-        ]},
-        { label: 'मैथिली गीत', items: [
-          { hi: 'विद्यापति गीत संग्रह', url: '/Vidyapati-Geet-Sangrah/' },
-        ]},
-      ]
-    },
-    {
-      id: 'articles', icon: '✍️', label: 'आलेख',
-      groups: [
-        { label: 'लेख', items: [
-          { hi: 'आलेख', url: '/aalekh' },
-          { hi: 'नया लेख लिखें', url: '/article_editor' },
-          { hi: 'लेख संपादित करें', url: '/become_author/' },
-        ]},
-      ]
-    },
-  ];
+const MENU_DATA = [
+  {
+    id: 'shiv', icon: '🕉', label: 'शिव स्तोत्र',
+    groups: [
+      { label: 'मंत्र', items: [
+        { hi: 'शिव मंत्र', url: '/shiva-mantras/' },
+        { hi: 'महामृत्युंजय मंत्र', url: '/shiva-mantras/Shiva-mahamrityunjaya-mantra/' },
+        { hi: 'शिव पंचाक्षर स्तोत्रम्', url: '/shiva-mantras/Shiva-panchakshara-stotram/' },
+        { hi: 'शिव महिम्न स्तोत्र', url: '/shiva-mantras/Shiva-mahimna-stotra/' },
+        { hi: 'शिव ताण्डव स्तोत्रम्', url: '/shiva-mantras/shiva-tandav-stotram/' },
+      ]},
+      { label: 'आरती-चालीसा', items: [
+        { hi: 'शिव आरती', url: '/shiva-mantras/Shiv-aarti/' },
+        { hi: 'शिव चालीसा', url: '/shiva-mantras/Shiv-chalisa/' },
+        { hi: 'शिव कवचम्', url: '/shiva-mantras/Shiv-kavacham/' },
+      ]},
+    ]
+  },
+  {
+    id: 'shakti', icon: '🌺', label: 'शक्ति',
+    groups: [
+      { label: 'माता दुर्गा', items: [
+        { hi: 'माँ दुर्गा मंत्र', url: '/durga-mantras/' },
+        { hi: 'दुर्गा आरती', url: '/durga-mantras/Durga-aarti/' },
+        { hi: 'दुर्गा चालीसा', url: '/durga-mantras/Durga-Chalisha/' },
+        { hi: 'देवी कवचम्', url: '/durga-mantras/Devi-kavacham/' },
+      ]},
+      { label: 'देवी काली', items: [
+        { hi: 'माँ काली मंत्र', url: '/maha-kali-mantra/' },
+        { hi: 'काली चालीसा', url: '/maha-kali-mantra/maa-kali-chalisha/' },
+        { hi: 'काली आरती', url: '/maha-kali-mantra/maa-kali-aarti/' },
+        { hi: 'काली सहस्रनाम', url: '/kali-mantras/kali-sahasranama/' },
+      ]},
+      { label: 'माँ लक्ष्मी', items: [
+        { hi: 'लक्ष्मी मंत्र', url: '/Lakshmi-mantras/' },
+        { hi: 'लक्ष्मी आरती', url: '/Lakshmi-mantras/lakshmi-aarti/' },
+        { hi: 'लक्ष्मी चालीसा', url: '/Lakshmi-mantras/lakshmi-chalisha/' },
+      ]},
+      { label: 'गायत्री माता', items: [
+        { hi: 'गायत्री मंत्र', url: '/gayatri-mantras/' },
+        { hi: 'गायत्री चालीसा', url: '/gayatri-mantras/gayatri-chalisa/' },
+      ]},
+    ]
+  },
+  {
+    id: 'vishnu', icon: '🪷', label: 'विष्णु',
+    groups: [
+      { label: 'भगवान विष्णु', items: [
+        { hi: 'विष्णु मंत्र', url: '/bhagvan-vishnu-mantra/' },
+      ]},
+    ]
+  },
+  {
+    id: 'ram', icon: '🏹', label: 'राम-हनुमान',
+    groups: [
+      { label: 'श्री राम', items: [
+        { hi: 'राम मंत्र', url: '/Shri-ram-mantra/' },
+        { hi: 'राम रक्षा स्तोत्रम्', url: '/Shri-ram-mantra/ram-raksha-stotram/' },
+        { hi: 'श्री राम आरती', url: '/Shri-ram-mantra/Shree-ram-aarti/' },
+        { hi: 'श्री राम चालीसा', url: '/Shri-ram-mantra/shree-ram-chalisha/' },
+        { hi: 'सुन्दरकाण्ड', url: '/ram-mantras/sundarkand/' },
+      ]},
+      { label: 'हनुमान जी', items: [
+        { hi: 'हनुमान मंत्र', url: '/hanumanji/' },
+        { hi: 'हनुमान चालीसा', url: '/hanumanji/Hanuman-Chalisa/' },
+        { hi: 'बजरंग बाण', url: '/hanumanji/bajrang-baan/' },
+        { hi: 'हनुमान जी आरती', url: '/hanumanji/Hanuman-ji-aarti/' },
+      ]},
+    ]
+  },
+  {
+    id: 'krishna', icon: '🦚', label: 'कृष्ण',
+    groups: [
+      { label: 'श्री कृष्ण', items: [
+        { hi: 'कृष्ण महामंत्र', url: '/Krishna-Mahamantras/' },
+        { hi: 'श्री कृष्ण आरती', url: '/Krishna-Mahamantras/Shri-Krishna-Aarti/' },
+        { hi: 'श्री कृष्ण चालीसा', url: '/Krishna-Mahamantras/Shri-Krishna-Chalisha/' },
+        { hi: 'श्रीमद् भगवद्गीता', url: '/Krishna-Mahamantras/Shreemad-Bhagavad-gita/' },
+      ]},
+      { label: 'मैथिली गीत', items: [
+        { hi: 'विद्यापति गीत संग्रह', url: '/Vidyapati-Geet-Sangrah/' },
+        { hi: 'मैथिली भजन गीत', url: '/Maithili-bhajan-geet/' },
+      ]},
+    ]
+  },
+  {
+    id: 'ganesh', icon: '🐘', label: 'गणेश',
+    groups: [
+      { label: 'श्री गणेश', items: [
+        { hi: 'गणेश मंत्र', url: '/ganesh-mantras/' },
+        { hi: 'गणेश आरती', url: '/ganesh-mantras/ganesh-aarti/' },
+        { hi: 'गणेश चालीसा', url: '/ganesh-mantras/ganesh-chalisha/' },
+      ]},
+    ]
+  },
+  {
+    id: 'surya', icon: '☀️', label: 'सूर्य देव',
+    groups: [
+      { label: 'सूर्य देव', items: [
+        { hi: 'सूर्य मंत्र', url: '/surya-mantras/' },
+        { hi: 'सूर्य आरती', url: '/surya-mantras/surya-aarti/' },
+        { hi: 'आदित्य हृदयम्', url: '/surya-mantras/aditya-hridayam/' },
+        { hi: 'छठ पूजा मंत्र', url: '/surya-mantras/chhath-puja-mantra/' },
+      ]},
+    ]
+  },
+  {
+    id: 'panchang', icon: '📅', label: 'पंचांग',
+    groups: [
+      { label: 'पंचांग पत्रिका', items: [
+        { hi: 'हिंदी पंचांग पत्रा', url: '/Hindi-Panchang-Patara/' },
+        { hi: 'मैथिली पंचांग पत्रिका', url: '/Maithili-Panchang-Patrika/' },
+      ]},
+    ]
+  },
+  {
+    id: 'articles', icon: '✍️', label: 'आलेख',
+    groups: [
+      { label: 'लेख', items: [
+        { hi: 'आलेख', url: '/aalekh/' },
+        { hi: 'नया लेख लिखें', url: '/article_editor' },
+        { hi: 'लेखक बनें', url: '/become_author/' },
+      ]},
+    ]
+  },
+];
 
   /* ─────────────────────────────────────────────
      INIT
