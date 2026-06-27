@@ -872,6 +872,15 @@ const MENU_DATA = [
       ]},
     ]
   },
+  {
+    id: 'Daily-Tracker', icon: '📖', label: 'दैनिक जाप ट्रैकर',
+    groups: [
+      { label: 'दैनिक जाप ट्रैकर', items: [
+        { hi: 'दैनिक जाप ट्रैकर', url: '/daily-mantra-jaap-tracker/' },
+        { hi: 'दैनिक ट्रैकर (पुराना)', url: '/daily-mantra-jaap-tracker/index2.html' },
+      ]},
+    ]
+  },
 ];
 
   /* ─────────────────────────────────────────────
