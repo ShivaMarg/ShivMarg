@@ -573,8 +573,8 @@
           <div class="login-om">🔱</div>
           <div class="login-title">ShivaMarg में लॉगिन करें</div>
           <div class="login-sub">अपने मंत्र जाप को सुरक्षित रखें और किसी भी डिवाइस पर देखें।</div>
-          <button class="btn-primary" onclick="window.location.href='/login'">लॉगिन करें</button>
-          <button class="btn-secondary" onclick="window.location.href='/register'">नया खाता बनाएं</button>
+          <button class="btn-primary" onclick="window.SmAuth._switchTab('login');window.SmAuth._openModal()">लॉगिन करें</button>
+          <button class="btn-secondary" onclick="window.SmAuth._switchTab('register');window.SmAuth._openModal()">नया खाता बनाएं</button>
         </div>
         <div style="text-align:center;padding:10px 20px 20px;font-size:0.75rem;color:var(--text-dim)">
           गुरु मंत्र पूर्ण एन्क्रिप्शन के साथ सुरक्षित संग्रहीत किए जाते हैं। 🔒
@@ -1411,5 +1411,6 @@ window.addEventListener('DOMContentLoaded', () => {
   setTimeout(init, 600);
 });
 </script>
+<script src="/js/auth2.js"></script>
 </body>
 </html>
