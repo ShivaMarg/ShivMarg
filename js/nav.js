@@ -223,7 +223,7 @@
 /* ── Container ── */
 #sm-navbar .nav-container {
   display: flex; align-items: center; width: 100%;
-  padding: 0 24px; gap: 16px;
+  padding: 0 16px; gap: 8px;
 }
 
 /* ── LOGO ── */
@@ -249,13 +249,14 @@
 /* ── NAV CENTER ── */
 /* AFTER */
 #sm-navbar .nav-center { flex: 1; min-width: 0; display: flex; align-items: center; overflow: hidden; }
-#sm-navbar .nav-links  { display: flex; align-items: center; flex-wrap: nowrap; min-width: 0; }
+#sm-navbar .nav-links { display: flex; align-items: center; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; }
+#sm-navbar .nav-links::-webkit-scrollbar { display: none; }
 
 /* ── NAV BUTTONS ── */
 #sm-navbar .nav-btn {
-  display: flex; align-items: center; gap: 6px;
-  height: 64px; padding: 0 14px;
-  font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 1.5px;
+  display: flex; align-items: center; gap: 4px;
+  height: 64px; padding: 0 10px;
+  font-family: 'Cinzel', serif; font-size: 0.63rem; letter-spacing: 0.8px;
   text-transform: uppercase; white-space: nowrap;
   color: rgba(212,168,48,0.7);
   background: none; border: none; border-bottom: 2px solid transparent;
@@ -326,7 +327,7 @@
   color: var(--cream);
   padding: 7px 12px 7px 32px;
   font-family: 'Cinzel', serif; font-size: 0.66rem; letter-spacing: 0.8px;
-  border-radius: 20px; width: 160px; outline: none;
+  border-radius: 20px; width: 120px; outline: none;
   transition: width 0.3s ease, border-color 0.2s, background 0.2s;
 }
 #sm-navbar .nav-search::placeholder { color: rgba(237,227,212,0.3); }
