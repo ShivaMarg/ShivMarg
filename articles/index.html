@@ -934,7 +934,7 @@
       }
 
       resultsEl.innerHTML = articles.map(a => `
-        <a href="/articles/?slug=${a.slug}" class="search-result-item">
+        <a href="/article/${a.slug}" class="search-result-item">
           <div class="sri-title">${a.title}</div>
           <div class="sri-meta">${a.category || ''} · ${a.author?.username || ''}</div>
         </a>
@@ -1378,7 +1378,7 @@
         return;
       }
       el.innerHTML = articles.map(p => `
-        <a href="/articles/?slug=${p.slug}" class="pop-card">
+        <a href="/article/${p.slug}" class="pop-card">
           ${p.thumbnail_url
             ? `<img src="${p.thumbnail_url}" alt="${p.title}" class="pop-thumb" onerror="this.style.display='none'">`
             : `<div class="pop-thumb" style="background:var(--border);"></div>`
@@ -1410,7 +1410,7 @@
         return;
       }
       el.innerHTML = articles.map(p => `
-        <a href="/articles/?slug=${p.slug}" class="lat-item">
+        <a href="/article/${p.slug}" class="lat-item">
           ${p.thumbnail_url
             ? `<img src="${p.thumbnail_url}" alt="${p.title}" class="lat-thumb" onerror="this.style.display='none'">`
             : `<div class="lat-thumb" style="background:var(--border);"></div>`

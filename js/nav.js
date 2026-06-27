@@ -247,8 +247,9 @@
 #sm-navbar .sm-logo:hover .logo-dot { background: var(--terra-l); }
 
 /* ── NAV CENTER ── */
-#sm-navbar .nav-center { flex: 1; display: flex; align-items: center; overflow: hidden; }
-#sm-navbar .nav-links  { display: flex; align-items: center; }
+/* AFTER */
+#sm-navbar .nav-center { flex: 1; min-width: 0; display: flex; align-items: center; overflow: hidden; }
+#sm-navbar .nav-links  { display: flex; align-items: center; flex-wrap: nowrap; min-width: 0; }
 
 /* ── NAV BUTTONS ── */
 #sm-navbar .nav-btn {
@@ -675,6 +676,9 @@
   #sm-navbar .drawer-user { flex-wrap: wrap; }
   #sm-navbar .du-guest-btns { margin-left: 0; width: 100%; }
   #sm-navbar .du-guest-btns button { flex: 1; }
+  /* ADD inside @media (max-width: 480px) */
+  #sm-navbar .nav-btn { height: 56px; }
+  #sm-navbar .dropdown-panel { top: 56px; }
 }
 `;
 
