@@ -903,13 +903,69 @@ const MENU_DATA = [
     }
   }
 
-  function injectNav() {
-    if (!document.getElementById('sm-navbar')) {
-      const wrap = document.createElement('div');
-      wrap.innerHTML = NAV_HTML;
-      document.body.insertBefore(wrap.firstElementChild, document.body.firstChild);
-    }
-  }
+/* ── Replace injectNav() ── */
+function injectNav() {
+  if (document.getElementById('sm-navbar')) return;
+
+  // Build desktop dropdown HTML dynamically from MENU_DATA
+  const desktopLinks = MENU_DATA.map(cat => {
+    const panelRows = cat.groups.map(group => `
+      <div class="dp-label">✦ ${group.label} ✦</div>
+      ${group.items.map(item =>
+        `<a href="${item.url}" role="menuitem">${item.hi}</a>`
+      ).join('')}
+      <div class="dp-divider"></div>
+    `).join('');
+
+    return `
+      <div class="nav-dropdown">
+        <button class="nav-btn" data-menu="d-${cat.id}"
+                aria-haspopup="true" aria-expanded="false" type="button">
+          <span class="btn-icon" aria-hidden="true">${cat.icon}</span> ${cat.label}
+        </button>
+        <div class="dropdown-panel" id="d-${cat.id}" role="menu">
+          ${panelRows}
+        </div>
+      </div>`;
+  }).join('');
+
+  const NAV_HTML_DYNAMIC = `
+<nav id="sm-navbar" role="navigation" aria-label="मुख्य नेविगेशन">
+  <div class="nav-container">
+    <a href="/" class="sm-logo" aria-label="ShivMarg होमपेज">
+      <span class="logo-dot" aria-hidden="true"></span>
+      Shiv<em>Marg</em>
+    </a>
+    <div class="nav-center" role="menubar">
+      <div class="nav-links">${desktopLinks}</div>
+    </div>
+    <div class="nav-right">
+      <div class="search-wrap">
+        <input class="nav-search" type="search" placeholder="खोजें…" aria-label="खोजें">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+      </div>
+      <div id="nav-auth-widget"></div>
+    </div>
+    <button class="hamburger" id="sm-hamburger" aria-label="मेनू खोलें"
+            aria-expanded="false" aria-controls="sm-mobile-drawer" type="button">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-drawer" id="sm-mobile-drawer" role="dialog"
+       aria-label="मोबाइल नेविगेशन" aria-hidden="true">
+    <div class="drawer-inner">
+      <div class="drawer-user" id="sm-drawer-user"></div>
+      <div class="du-chips" id="sm-drawer-chips"></div>
+      <div class="drawer-views" id="sm-drawer-views"></div>
+      <div class="drawer-actions" id="sm-drawer-actions"></div>
+    </div>
+  </div>
+</nav>`;
+
+  const wrap = document.createElement('div');
+  wrap.innerHTML = NAV_HTML_DYNAMIC;
+  document.body.insertBefore(wrap.firstElementChild, document.body.firstChild);
+}
 
   /* ─────────────────────────────────────────────
      DESKTOP DROPDOWNS
