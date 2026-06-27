@@ -464,7 +464,58 @@
   }
   .empty-state .es-icon { font-size: 3rem; margin-bottom: 12px; opacity: 0.5; }
   .empty-state .es-text { color: var(--text-muted); margin-bottom: 14px; }
+  /* ─── PROFILE PAGE (logged-in view) ───────────────── */
+.profile-hero {
+  margin: 16px 16px 0;
+  background: linear-gradient(135deg, var(--surface2) 0%, var(--surface3) 100%);
+  border: 1px solid var(--rim);
+  border-radius: var(--r-lg);
+  padding: 22px 18px;
+  display: flex; align-items: center; gap: 16px;
+}
+.profile-avatar {
+  width: 60px; height: 60px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; font-weight: 700; color: #fff;
+  border: 2px solid var(--rim2); overflow: hidden;
+}
+.profile-name { font-size: 1.05rem; font-weight: 700; color: var(--text); }
+.profile-username { font-size: 0.78rem; color: var(--saffron); margin-top: 2px; }
+.profile-joined { font-size: 0.7rem; color: var(--text-dim); margin-top: 4px; }
 
+.profile-info-card {
+  margin: 14px 16px 0;
+  background: var(--surface); border: 1px solid var(--rim);
+  border-radius: var(--r-md); padding: 14px 16px;
+}
+.profile-info-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 9px 0; border-bottom: 1px solid var(--rim);
+  font-size: 0.85rem;
+}
+.profile-info-row:last-child { border-bottom: none; }
+.profile-info-row .pi-label { color: var(--text-dim); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.profile-info-row .pi-val { color: var(--text); text-align: right; max-width: 60%; }
+
+.profile-stats-row { display: flex; gap: 10px; margin: 14px 16px 0; }
+.profile-stat-box {
+  flex: 1; background: var(--surface); border: 1px solid var(--rim);
+  border-radius: var(--r-sm); padding: 12px 8px; text-align: center;
+}
+.profile-stat-box .val { font-size: 1.2rem; font-weight: 800; color: var(--saffron); }
+.profile-stat-box .lbl { font-size: 0.62rem; color: var(--text-dim); margin-top: 2px; }
+
+.profile-edit-link {
+  display: block; text-align: center; margin: 14px 16px 0;
+  font-size: 0.82rem; color: var(--saffron); text-decoration: none;
+  padding: 10px; border: 1px solid var(--rim); border-radius: var(--r-sm);
+}
+.profile-logout-link {
+  display: block; text-align: center; margin: 10px 16px 0;
+  font-size: 0.82rem; color: #e74c3c; background: none;
+  border: 1px solid rgba(231,76,60,0.3); border-radius: var(--r-sm);
+  padding: 10px; cursor: pointer; font-family: var(--font-dev); width: calc(100% - 32px);
+}
   /* ─── RESPONSIVE TWEAKS ───────────────────────────── */
   @media (min-width: 440px) {
     body { background: #080306; }
@@ -567,19 +618,20 @@
     </div>
 
     <!-- ══ PROFILE/LOGIN PAGE ═════════════════════════ -->
+    <!-- ══ PROFILE/LOGIN PAGE ═════════════════════════ -->
     <div id="page-profile" class="page">
-      <div id="profile-content">
+    <div id="profile-content">
         <div class="login-card">
-          <div class="login-om">🔱</div>
-          <div class="login-title">ShivaMarg में लॉगिन करें</div>
-          <div class="login-sub">अपने मंत्र जाप को सुरक्षित रखें और किसी भी डिवाइस पर देखें।</div>
-          <button class="btn-primary" onclick="window.SmAuth._switchTab('login');window.SmAuth._openModal()">लॉगिन करें</button>
-          <button class="btn-secondary" onclick="window.SmAuth._switchTab('register');window.SmAuth._openModal()">नया खाता बनाएं</button>
+        <div class="login-om">🔱</div>
+        <div class="login-title">ShivaMarg में लॉगिन करें</div>
+        <div class="login-sub">अपने मंत्र जाप को सुरक्षित रखें और किसी भी डिवाइस पर देखें।</div>
+        <button class="btn-primary" onclick="window.SmAuth._switchTab('login');window.SmAuth._openModal()">लॉगिन करें</button>
+        <button class="btn-secondary" onclick="window.SmAuth._switchTab('register');window.SmAuth._openModal()">नया खाता बनाएं</button>
         </div>
         <div style="text-align:center;padding:10px 20px 20px;font-size:0.75rem;color:var(--text-dim)">
-          गुरु मंत्र पूर्ण एन्क्रिप्शन के साथ सुरक्षित संग्रहीत किए जाते हैं। 🔒
+        गुरु मंत्र पूर्ण एन्क्रिप्शन के साथ सुरक्षित संग्रहीत किए जाते हैं। 🔒
         </div>
-      </div>
+    </div>
     </div>
 
   </div><!-- /page-body -->
@@ -1144,6 +1196,94 @@ function updateLogCountDisplay() {
   document.getElementById('log-count-display').textContent = logCount;
   document.getElementById('log-mala-display').textContent = `= ${(logCount / mala).toFixed(2)} माला`;
 }
+// ─── PROFILE PAGE (logged-in details) ────────────────
+const COLORS_PT = {A:'#E53935',B:'#D81B60',C:'#8E24AA',D:'#5E35B1',E:'#3949AB',F:'#1E88E5',G:'#039BE5',H:'#00ACC1',I:'#00897B',J:'#43A047',K:'#7CB342',L:'#C0CA33',M:'#F9A825',N:'#FB8C00',O:'#F4511E',P:'#8D6E63',Q:'#546E7A',R:'#EC407A',S:'#7C4DFF',T:'#00BCD4',U:'#FF7043',V:'#26A69A',W:'#AB47BC',X:'#EF5350',Y:'#FDD835',Z:'#29B6F6'};
+function avatarColorPT(letter) {
+  const c = COLORS_PT[(letter||'S').toUpperCase()] || '#7C4DFF';
+  return `linear-gradient(135deg, ${c}, #1a0d12)`;
+}
+
+async function renderProfilePage() {
+  const content = document.getElementById('profile-content');
+  if (!isLoggedIn()) {
+    // restore the default login card (in case user logged out)
+    content.innerHTML = `
+      <div class="login-card">
+        <div class="login-om">🔱</div>
+        <div class="login-title">ShivaMarg में लॉगिन करें</div>
+        <div class="login-sub">अपने मंत्र जाप को सुरक्षित रखें और किसी भी डिवाइस पर देखें।</div>
+        <button class="btn-primary" onclick="window.SmAuth._switchTab('login');window.SmAuth._openModal()">लॉगिन करें</button>
+        <button class="btn-secondary" onclick="window.SmAuth._switchTab('register');window.SmAuth._openModal()">नया खाता बनाएं</button>
+      </div>
+      <div style="text-align:center;padding:10px 20px 20px;font-size:0.75rem;color:var(--text-dim)">
+        गुरु मंत्र पूर्ण एन्क्रिप्शन के साथ सुरक्षित संग्रहीत किए जाते हैं। 🔒
+      </div>`;
+    return;
+  }
+
+  content.innerHTML = `<div style="text-align:center;padding:30px;color:var(--text-dim);font-size:0.85rem">लोड हो रहा है...</div>`;
+
+  try {
+    // SmAuth caches the logged-in user (set on login + on profile edits)
+    let user = window.SmAuth.getUser();
+
+    // Refresh from backend so address/mobile/dob etc. are current
+    try {
+      const fresh = await api(`/api/users/by-username/${user.username}`);
+      user = { ...user, ...fresh };
+    } catch (_) { /* fall back to cached user if endpoint not reachable */ }
+
+    const av = (user.avatar && user.avatar.length === 1) ? user.avatar : (user.username || '?')[0];
+    const isImageUrl = user.avatar && user.avatar.startsWith('http');
+    const avatarHtml = isImageUrl
+      ? `<img src="${user.avatar}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div style="width:100%;height:100%;display:none;align-items:center;justify-content:center">${av.toUpperCase()}</div>`
+      : av.toUpperCase();
+
+    const joined = user.created_at
+      ? new Date(user.created_at).toLocaleDateString('hi-IN', { year: 'numeric', month: 'long' })
+      : '—';
+
+    const addr = user.address || {};
+    const addrStr = [addr.city, addr.state, addr.country].filter(Boolean).join(', ');
+
+    const s = state.stats;
+
+    content.innerHTML = `
+      <div class="profile-hero">
+        <div class="profile-avatar" style="background:${isImageUrl ? 'transparent' : avatarColorPT(av)}">${avatarHtml}</div>
+        <div>
+          <div class="profile-name">${user.display_name || user.username}</div>
+          <div class="profile-username">@${user.username}</div>
+          <div class="profile-joined">🕉️ सदस्य बने: ${joined}</div>
+        </div>
+      </div>
+
+      <div class="profile-stats-row">
+        <div class="profile-stat-box"><div class="val">${formatNumber(s.lifetime_count || 0)}</div><div class="lbl">कुल जाप</div></div>
+        <div class="profile-stat-box"><div class="val">${(s.current_streak || 0)} 🔥</div><div class="lbl">streak</div></div>
+        <div class="profile-stat-box"><div class="val">${(s.longest_streak || 0)} 🏆</div><div class="lbl">सर्वश्रेष्ठ</div></div>
+      </div>
+
+      <div class="profile-info-card">
+        <div class="profile-info-row"><span class="pi-label">ईमेल</span><span class="pi-val">${user.email || '—'}</span></div>
+        <div class="profile-info-row"><span class="pi-label">मोबाइल</span><span class="pi-val">${user.mobile || '—'}</span></div>
+        <div class="profile-info-row"><span class="pi-label">जन्म तिथि</span><span class="pi-val">${user.dob || '—'}</span></div>
+        <div class="profile-info-row"><span class="pi-label">स्थान</span><span class="pi-val">${addrStr || '—'}</span></div>
+      </div>
+
+      <a class="profile-edit-link" href="/profile/${user.username}">✏️ प्रोफ़ाइल / टिप्पणियाँ संपादित करें</a>
+      <button class="profile-logout-link" onclick="doProfileLogout()">लॉगआउट करें</button>
+    `;
+  } catch (e) {
+    content.innerHTML = `<div style="text-align:center;padding:30px;color:var(--text-dim);font-size:0.85rem">प्रोफ़ाइल लोड नहीं हो सकी</div>`;
+  }
+}
+
+function doProfileLogout() {
+  window.SmAuth.logout();
+  showToast('👋 लॉगआउट हो गए। जय शिव!', '');
+  setTimeout(() => window.location.reload(), 1000);
+}
 
 async function submitLog() {
   if (!state.logTarget) return;
@@ -1268,6 +1408,7 @@ function switchPage(name, tabEl) {
 
   if (name === 'calendar') renderCalendar();
   if (name === 'stats') renderStats();
+    if (name === 'profile') renderProfilePage();
 
   // hide fab on non-home
   document.getElementById('fab-btn').style.display = name === 'home' ? 'flex' : 'none';
