@@ -221,11 +221,10 @@
 }
 
 /* ── Container ── */
-/* REPLACE WITH */
+/* REPLACE nav-container */
 #sm-navbar .nav-container {
   display: flex; align-items: center; width: 100%;
   padding: 0 12px; gap: 6px;
-  overflow: hidden;          /* ← clips the whole bar, not just center */
 }
 
 /* ── LOGO ── */
@@ -249,26 +248,44 @@
 #sm-navbar .sm-logo:hover .logo-dot { background: var(--terra-l); }
 
 /* ── NAV CENTER ── */
-/* REPLACE with */
-/* REPLACE WITH */
+/* REPLACE nav-center */
 #sm-navbar .nav-center {
   flex: 1;
   min-width: 0;
-  height: 64px;              /* ← explicit height is CRITICAL */
   display: flex;
-  align-items: center;
-  overflow: hidden;
+  align-items: stretch;    /* stretch so children fill full 64px height */
 }
+
+/* REPLACE nav-links */
 #sm-navbar .nav-links {
   display: flex;
-  align-items: center;
-  height: 64px;              /* ← must match parent */
-  overflow-x: auto;
-  overflow-y: visible;       /* ← allow dropdowns to escape downward */
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  align-items: stretch;    /* same — children fill height for hover zone */
+  gap: 0;
 }
-#sm-navbar .nav-links::-webkit-scrollbar { display: none; }
+
+/* REPLACE nav-btn */
+#sm-navbar .nav-btn {
+  display: flex; align-items: center; gap: 4px;
+  height: 64px; padding: 0 11px;
+  font-family: 'Tiro Devanagari Sanskrit', serif;
+  font-size: 0.82rem; letter-spacing: 0;
+  white-space: nowrap; flex-shrink: 0;
+  color: rgba(212,168,48,0.7);
+  background: none; border: none; border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.2s, border-bottom-color 0.2s, background 0.2s;
+}
+#sm-navbar .nav-dropdown:hover .nav-btn {
+  color: var(--brass-l);
+  background: rgba(184,136,26,0.06);
+  border-bottom-color: var(--terra);
+}
+#sm-navbar .nav-btn::after {
+  content: '▾'; font-size: 0.5rem; margin-left: 4px;
+  color: var(--brass); opacity: 0.6;
+  transition: transform 0.22s ease;
+}
+#sm-navbar .nav-dropdown:hover .nav-btn::after { transform: rotate(180deg); }
 
 /* ── NAV BUTTONS ── */
 /* REPLACE WITH */
@@ -297,21 +314,31 @@
 }
 #sm-navbar .nav-btn[aria-expanded="true"]::after { transform: rotate(180deg); }
 
-/* ── DROPDOWN PANEL ── */
+/* ── DROPDOWN PANEL ── *//* REPLACE WITH */
 #sm-navbar .nav-dropdown { position: relative; }
 #sm-navbar .dropdown-panel {
-  position: absolute; top: 64px; left: 0;
-  min-width: 240px;
+  position: absolute; top: 100%; left: 0;
+  min-width: 220px;
   background: var(--ink2);
   border: 1px solid var(--border);
   border-top: 2px solid var(--terra);
   border-radius: 0 0 10px 10px;
-  max-height: 0; overflow: hidden; opacity: 0;
-  transition: max-height 0.35s ease, opacity 0.3s ease;
-  z-index: 1000;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0s linear 0.22s;
+  z-index: 9999;
   box-shadow: 0 20px 40px rgba(28,15,46,0.5);
+  pointer-events: none;
 }
-#sm-navbar .dropdown-panel.open { max-height: 520px; opacity: 1; }
+#sm-navbar .nav-dropdown:hover .dropdown-panel,
+#sm-navbar .dropdown-panel.open {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0s linear 0s;
+  pointer-events: auto;
+}
 
 #sm-navbar .dropdown-panel a {
   display: block; padding: 11px 20px;
@@ -817,25 +844,25 @@
   /* ─────────────────────────────────────────────
      DESKTOP DROPDOWNS
   ───────────────────────────────────────────── */
+/* REPLACE setupDesktopDropdowns() */
   function setupDesktopDropdowns() {
-    const buttons = document.querySelectorAll('#sm-navbar .nav-btn');
-    buttons.forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.stopPropagation();
-        const menuId = btn.getAttribute('data-menu');
-        const panel  = document.getElementById(menuId);
-        const isOpen = panel.classList.contains('open');
-
-        closeAllDesktop();
-        if (!isOpen) {
-          panel.classList.add('open');
-          btn.setAttribute('aria-expanded', 'true');
+    /* Dropdowns are now pure CSS :hover — JS only handles keyboard a11y */
+    document.querySelectorAll('#sm-navbar .nav-btn').forEach(btn => {
+      btn.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const panel = document.getElementById(btn.getAttribute('data-menu'));
+          const isOpen = panel.classList.contains('open');
+          closeAllDesktop();
+          if (!isOpen) {
+            panel.classList.add('open');
+            btn.setAttribute('aria-expanded', 'true');
+          }
         }
       });
     });
-
-    document.addEventListener('click', e => {
-      if (!e.target.closest('#sm-navbar .nav-dropdown')) closeAllDesktop();
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeAllDesktop();
     });
   }
 
