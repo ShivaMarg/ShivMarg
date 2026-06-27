@@ -1549,6 +1549,9 @@ const CATALOG_FALLBACK = [
 
 // ─── BOOT ─────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
+    if (window.SmAuth) {
+    window.SmAuth.init({ apiBase: API_BASE, noWidget: true }); // noWidget: nav.js/profile UI already handles the chip
+  }
   setTimeout(init, 600);
 });
 </script>
