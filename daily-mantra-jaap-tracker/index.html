@@ -437,6 +437,16 @@
     font-family: var(--font-dev); font-size: 0.8rem; color: var(--text-muted);
     transition: all 0.2s;
   }
+  .topbar-avatar-img {
+  width: 24px; height: 24px; border-radius: 50%;
+  object-fit: cover; display: block;
+}
+.topbar-avatar-letter {
+  width: 24px; height: 24px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.72rem; font-weight: 700; color: #fff;
+  line-height: 1;
+}
   .count-chip:hover, .count-chip.selected { background: rgba(232,114,28,0.15); border-color: var(--saffron); color: var(--saffron); }
   .count-chip.big { font-size: 0.88rem; }
   .count-custom-row { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
@@ -631,7 +641,9 @@
     <div class="topbar-brand">🔱 <span>Shiva</span>Marg</div>
     <div class="topbar-right">
       <button class="btn-icon ghost" id="btn-notify" title="अनुस्मारक">🔔</button>
-      <button class="btn-icon ghost" id="btn-profile" onclick="goProfile()">👤</button>
+      <button class="btn-icon ghost" id="btn-profile" onclick="goProfile()">
+        <span id="topbar-profile-icon">👤</span>
+        </button>
     </div>
   </div>
 
@@ -1442,23 +1454,31 @@ async function submitLog() {
 }
 
 function updateNavProfileIcon() {
-  const iconEl = document.getElementById('nav-profile-icon');
-  if (!iconEl) return;
+  const navIcon = document.getElementById('nav-profile-icon');
+  const topbarIcon = document.getElementById('topbar-profile-icon');
+  if (!navIcon && !topbarIcon) return;
 
   const user = window.SmAuth && window.SmAuth.getUser ? window.SmAuth.getUser() : null;
 
   if (!user) {
-    iconEl.innerHTML = '👤';
+    if (navIcon) navIcon.innerHTML = '👤';
+    if (topbarIcon) topbarIcon.innerHTML = '👤';
     return;
   }
 
   const letter = (user.avatar && user.avatar.length === 1) ? user.avatar : (user.username || '?')[0];
   const isImageUrl = user.avatar && user.avatar.startsWith('http');
 
-  if (isImageUrl) {
-    iconEl.innerHTML = `<img class="nav-avatar-img" src="${user.avatar}" alt="" onerror="this.outerHTML='<span class=\\'nav-avatar-letter\\' style=\\'background:${avatarColorPT(letter)}\\'>${letter.toUpperCase()}</span>'">`;
-  } else {
-    iconEl.innerHTML = `<span class="nav-avatar-letter" style="background:${avatarColorPT(letter)}">${letter.toUpperCase()}</span>`;
+  if (navIcon) {
+    navIcon.innerHTML = isImageUrl
+      ? `<img class="nav-avatar-img" src="${user.avatar}" alt="" onerror="this.outerHTML='<span class=\\'nav-avatar-letter\\' style=\\'background:${avatarColorPT(letter)}\\'>${letter.toUpperCase()}</span>'">`
+      : `<span class="nav-avatar-letter" style="background:${avatarColorPT(letter)}">${letter.toUpperCase()}</span>`;
+  }
+
+  if (topbarIcon) {
+    topbarIcon.innerHTML = isImageUrl
+      ? `<img class="topbar-avatar-img" src="${user.avatar}" alt="" onerror="this.outerHTML='<span class=\\'topbar-avatar-letter\\' style=\\'background:${avatarColorPT(letter)}\\'>${letter.toUpperCase()}</span>'">`
+      : `<span class="topbar-avatar-letter" style="background:${avatarColorPT(letter)}">${letter.toUpperCase()}</span>`;
   }
 }
 
