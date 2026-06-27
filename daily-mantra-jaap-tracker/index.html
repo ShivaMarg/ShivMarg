@@ -873,6 +873,33 @@ async function loadDemoData() {
   }
 }
 
+// ─── REACT TO LOGIN/LOGOUT WITHOUT REFRESH ───────────
+document.addEventListener('sm-auth-changed', async (e) => {
+  if (e.detail && e.detail.user) {
+    // Just logged in / registered
+    state.isDemo = false;
+    try {
+      await Promise.all([loadMantras(), loadStats()]);
+    } catch (err) {
+      showToast('डेटा लोड नहीं हो सका', 'error');
+      await loadDemoData();
+    }
+  } else {
+    // Logged out
+    await loadDemoData();
+  }
+
+  renderHome();
+  renderCalendar();
+  renderStats();
+
+  // If they're currently sitting on the profile tab, refresh it too
+  const profilePage = document.getElementById('page-profile');
+  if (profilePage && profilePage.classList.contains('active')) {
+    renderProfilePage();
+  }
+});
+
 async function loadMantras() {
   const [r, g] = await Promise.all([
     api('/api/mantras/my'),
