@@ -1046,7 +1046,7 @@ function renderHome() {
       <div class="demo-banner">
         <span>📢</span>
         <div>यह <strong>डेमो डेटा</strong> है। लॉगिन करने पर आपका वास्तविक जाप ट्रैकर दिखाई देगा।</div>
-        <button class="btn-login" onclick="window.location.href='/login'">लॉगिन</button>
+        <button class="btn-login" onclick="window.SmAuth._switchTab('login');window.SmAuth._openModal()">लॉगिन</button>
       </div>`;
   } else {
     bannerWrap.innerHTML = '';
@@ -1210,7 +1210,7 @@ function renderDaily(data) {
     document.getElementById('cal-content').innerHTML = `<div class="empty-state"><div class="es-icon">📿</div><div class="es-text">आज कोई जाप दर्ज नहीं</div></div>`;
     return;
   }
-  console.log('daily sessions', sessions);
+  console.log(sessions);
   const items = sessions.map(s => `
     <div class="log-item">
       <div class="log-icon">🕉️</div>
