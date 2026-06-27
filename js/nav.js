@@ -43,7 +43,7 @@
 
     <!-- LOGO -->
     <a href="/" class="sm-logo" aria-label="ShivMarg होमपेज">
-      <span class="logo-dot" aria-hidden="true"></span>
+      <img src="/images/shivmarg_logo.png" alt="" class="logo-dot" aria-hidden="true">
       Shiv<em>Marg</em>
     </a>
 
@@ -239,11 +239,21 @@
 #sm-navbar .sm-logo em { color: var(--terra-l); font-style: normal; }
 #sm-navbar .sm-logo:hover { color: #EABF50; }
 #sm-navbar .logo-dot {
-  width: 9px; height: 9px; border-radius: 50%;
-  background: var(--terra);
-  box-shadow: 0 0 0 2px rgba(192,75,10,0.25);
-  flex-shrink: 0;
-  transition: background 0.2s;
+  width: 1.25em;
+  height: 1.25em;
+  object-fit: contain;
+  vertical-align: middle;
+  margin-right: 4px;
+  border-radius: 0; /* remove if .logo-dot currently has border-radius:50% for the old dot shape */
+}
+
+.logo-dot {
+  width: 1.25em;
+  height: 1.25em;
+  object-fit: contain;
+  vertical-align: middle;
+  margin-right: 4px;
+  border-radius: 0; /* remove if .logo-dot currently has border-radius:50% for the old dot shape */
 }
 #sm-navbar .sm-logo:hover .logo-dot { background: var(--terra-l); }
 
@@ -932,10 +942,10 @@ function injectNav() {
   const NAV_HTML_DYNAMIC = `
 <nav id="sm-navbar" role="navigation" aria-label="मुख्य नेविगेशन">
   <div class="nav-container">
-    <a href="/" class="sm-logo" aria-label="ShivMarg होमपेज">
-      <span class="logo-dot" aria-hidden="true"></span>
-      Shiv<em>Marg</em>
-    </a>
+      <a href="/" class="sm-logo" aria-label="ShivMarg होमपेज">
+    <img src="/images/shivmarg_logo.png" alt="" class="logo-dot" aria-hidden="true">
+    Shiv<em>Marg</em>
+  </a>
     <div class="nav-center" role="menubar">
       <div class="nav-links">${desktopLinks}</div>
     </div>
