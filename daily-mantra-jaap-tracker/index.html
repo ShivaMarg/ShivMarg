@@ -270,7 +270,16 @@
   .heatmap-cell.level-2 { background: rgba(232,114,28,0.45); color: var(--text); }
   .heatmap-cell.level-3 { background: var(--saffron); color: white; }
   .heatmap-cell.level-4 { background: var(--gold-lt); color: var(--deep); }
-
+  .nav-avatar-img {
+  width: 22px; height: 22px; border-radius: 50%;
+  object-fit: cover; display: block;
+}
+.nav-avatar-letter {
+  width: 22px; height: 22px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.68rem; font-weight: 700; color: #fff;
+  line-height: 1;
+}
   /* Log list */
   .log-list { padding: 0 16px; display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
   .log-item {
@@ -656,10 +665,10 @@
       <span>आँकड़े</span>
       <div class="nav-dot"></div>
     </button>
-    <button class="nav-tab" onclick="switchPage('profile',this)">
-      <span class="nav-icon">👤</span>
-      <span>प्रोफाइल</span>
-      <div class="nav-dot"></div>
+    <button class="nav-tab" onclick="switchPage('profile',this)" id="nav-tab-profile">
+        <span class="nav-icon" id="nav-profile-icon">👤</span>
+        <span>प्रोफाइल</span>
+        <div class="nav-dot"></div>
     </button>
   </nav>
 
@@ -849,6 +858,7 @@ async function init() {
   renderCalendar();
   renderStats();
   loadCatalog();
+  updateNavProfileIcon();
 }
 
 async function loadDemoData() {
@@ -892,6 +902,7 @@ document.addEventListener('sm-auth-changed', async (e) => {
   renderHome();
   renderCalendar();
   renderStats();
+  updateNavProfileIcon();
 
   // If they're currently sitting on the profile tab, refresh it too
   const profilePage = document.getElementById('page-profile');
@@ -1249,7 +1260,7 @@ async function renderProfilePage() {
   }
 
   content.innerHTML = `<div style="text-align:center;padding:30px;color:var(--text-dim);font-size:0.85rem">लोड हो रहा है...</div>`;
-
+  updateNavProfileIcon();
   try {
     // SmAuth caches the logged-in user (set on login + on profile edits)
     let user = window.SmAuth.getUser();
@@ -1345,6 +1356,27 @@ async function submitLog() {
     renderHome();
   } catch(e) {
     showToast('त्रुटि: ' + e.message, 'error');
+  }
+}
+
+function updateNavProfileIcon() {
+  const iconEl = document.getElementById('nav-profile-icon');
+  if (!iconEl) return;
+
+  const user = window.SmAuth && window.SmAuth.getUser ? window.SmAuth.getUser() : null;
+
+  if (!user) {
+    iconEl.innerHTML = '👤';
+    return;
+  }
+
+  const letter = (user.avatar && user.avatar.length === 1) ? user.avatar : (user.username || '?')[0];
+  const isImageUrl = user.avatar && user.avatar.startsWith('http');
+
+  if (isImageUrl) {
+    iconEl.innerHTML = `<img class="nav-avatar-img" src="${user.avatar}" alt="" onerror="this.outerHTML='<span class=\\'nav-avatar-letter\\' style=\\'background:${avatarColorPT(letter)}\\'>${letter.toUpperCase()}</span>'">`;
+  } else {
+    iconEl.innerHTML = `<span class="nav-avatar-letter" style="background:${avatarColorPT(letter)}">${letter.toUpperCase()}</span>`;
   }
 }
 
