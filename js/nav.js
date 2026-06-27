@@ -221,9 +221,11 @@
 }
 
 /* ── Container ── */
+/* REPLACE WITH */
 #sm-navbar .nav-container {
   display: flex; align-items: center; width: 100%;
-  padding: 0 16px; gap: 8px;
+  padding: 0 12px; gap: 6px;
+  overflow: hidden;          /* ← clips the whole bar, not just center */
 }
 
 /* ── LOGO ── */
@@ -247,17 +249,35 @@
 #sm-navbar .sm-logo:hover .logo-dot { background: var(--terra-l); }
 
 /* ── NAV CENTER ── */
-/* AFTER */
-#sm-navbar .nav-center { flex: 1; min-width: 0; display: flex; align-items: center; overflow: hidden; }
-#sm-navbar .nav-links { display: flex; align-items: center; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; }
+/* REPLACE with */
+/* REPLACE WITH */
+#sm-navbar .nav-center {
+  flex: 1;
+  min-width: 0;
+  height: 64px;              /* ← explicit height is CRITICAL */
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+#sm-navbar .nav-links {
+  display: flex;
+  align-items: center;
+  height: 64px;              /* ← must match parent */
+  overflow-x: auto;
+  overflow-y: visible;       /* ← allow dropdowns to escape downward */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
 #sm-navbar .nav-links::-webkit-scrollbar { display: none; }
 
 /* ── NAV BUTTONS ── */
+/* REPLACE WITH */
 #sm-navbar .nav-btn {
-  display: flex; align-items: center; gap: 4px;
-  height: 64px; padding: 0 10px;
-  font-family: 'Cinzel', serif; font-size: 0.63rem; letter-spacing: 0.8px;
-  text-transform: uppercase; white-space: nowrap;
+  display: flex; align-items: center; gap: 3px;
+  height: 64px; padding: 0 7px;
+  font-family: 'Tiro Devanagari Sanskrit', serif;
+  font-size: 0.78rem; letter-spacing: 0;
+  white-space: nowrap; flex-shrink: 0;     /* ← CRITICAL: never shrink */
   color: rgba(212,168,48,0.7);
   background: none; border: none; border-bottom: 2px solid transparent;
   cursor: pointer;
@@ -317,7 +337,12 @@
 }
 
 /* ── NAV RIGHT ── */
-#sm-navbar .nav-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+/* REPLACE WITH */
+#sm-navbar .nav-right {
+  display: flex; align-items: center; gap: 8px;
+  flex-shrink: 0;
+  max-width: 280px;          /* ← caps how much space auth+search can steal */
+}
 
 /* ── SEARCH ── */
 #sm-navbar .search-wrap { position: relative; display: flex; align-items: center; }
@@ -345,7 +370,7 @@
 /* ── AUTH BUTTONS (desktop) ── */
 #sm-navbar .auth-btn {
   font-family: 'Cinzel', serif; font-size: 0.63rem; letter-spacing: 1.5px;
-  text-transform: uppercase; padding: 7px 16px; white-space: nowrap;
+  text-transform: uppercase; padding: 7px 10px; white-space: nowrap;
   border-radius: 20px; border: 1px solid var(--border);
   color: rgba(212,168,48,0.8); background: transparent; cursor: pointer;
   transition: all 0.2s; text-decoration: none; display: inline-flex; align-items: center;
