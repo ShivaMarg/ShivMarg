@@ -151,7 +151,11 @@
     background: linear-gradient(180deg, rgba(20,8,13,0.98) 0%, transparent 100%);
     position: sticky; top: 0; z-index: 100;
   }
-  .topbar-brand { font-size: 1.25rem; font-weight: 700; color: var(--saffron); letter-spacing: 0.04em; }
+  .topbar-brand {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
   .topbar-brand span { color: var(--gold-lt); }
   .topbar-right { display: flex; align-items: center; gap: 10px; }
   .btn-icon {
@@ -646,10 +650,10 @@
 
   <!-- TOP BAR -->
   <div class="topbar">
-    <div class="topbar-brand">
+    <a href="/" class="topbar-brand" aria-label="ShivaMarg होमपेज">
     <img src="/images/shivmarg_logo.png" alt="ShivaMarg" class="topbar-logo">
     <span>Shiv</span>Marg
-    </div>
+    </a>
     <div class="topbar-right">
       <button class="btn-icon ghost" id="btn-notify" title="अनुस्मारक">🔔</button>
       <button class="btn-icon ghost" id="btn-profile" onclick="goProfile()">
