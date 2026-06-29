@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - ShivaMarg</title>
+  <!-- Favicon -->
+<link rel="icon" href="/images/shivmarg_logo.png" type="image/png">
+
+<!-- Apple -->
+<link rel="apple-touch-icon" href="/images/shivmarg_logo.png">
+
+<!-- Android -->
+<link rel="manifest" href="/manifest.json">
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+  <script>
+	window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+	</script>
+	<script defer src="/_vercel/insights/script.js"></script>
+	<script>
+	  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+	</script>
+	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5809900825917201"
+	crossorigin="anonymous">
+  </script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #3730A3;
+      --primary-dark: #1E1B4B;
+      --secondary: #67E8F9;
+      --gold: #C9A84C;
+      --dark: #05040F;
+      --light: #F0F0FF;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--dark) 0%, #0D0A22 50%, var(--dark) 100%);
+      color: var(--light);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .login-container {
+      background: linear-gradient(135deg, rgba(15, 12, 40, 0.8), rgba(5, 4, 15, 0.95));
+      border: 1px solid rgba(184, 192, 255, 0.2);
+      border-radius: 12px;
+      padding: 50px 40px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 20px 60px rgba(55, 48, 163, 0.3);
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      color: var(--gold);
+      letter-spacing: 2px;
+      margin-bottom: 5px;
+    }
+
+    .logo p {
+      color: var(--secondary);
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 10px;
+      color: rgba(232, 232, 255, 0.8);
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 15px;
+      background: rgba(55, 48, 163, 0.15);
+      border: 1px solid rgba(184, 192, 255, 0.3);
+      color: var(--light);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+    }
+
+    .form-group input::placeholder {
+      color: rgba(232, 232, 255, 0.4);
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--secondary);
+      background: rgba(55, 48, 163, 0.25);
+      box-shadow: 0 0 15px rgba(103, 232, 249, 0.15);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 14px 20px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: 1px solid rgba(184, 192, 255, 0.3);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+
+    .login-btn:hover {
+      box-shadow: 0 10px 30px rgba(55, 48, 163, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .login-btn:active {
+      transform: translateY(0);
+    }
+
+    .login-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .error {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #FCA5A5;
+      padding: 12px 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .error.show {
+      display: block;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(184, 192, 255, 0.1);
+      font-size: 0.8rem;
+      color: rgba(232, 232, 255, 0.4);
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .info {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #A7F3D0;
+      padding: 12px 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 40px 25px;
+      }
+
+      .logo h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+<link rel="stylesheet" href="/loder/loder.css">
+<script src="/loder/loder.js" defer></script>
+</head>
+<body>
+<div class="login-container">
+  <div class="logo">
+    <h1>Shiva<span style="color: var(--secondary);">Marg</span></h1>
+    <p>🔐 Admin Access</p>
+  </div>
+
+  <div id="errorMsg" class="error"></div>
+
+  <div class="info">
+    💡 This is admin-only area. Contact system administrator for login credentials.
+  </div>
+
+  <form id="loginForm" onsubmit="handleLogin(event)">
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="admin@example.com" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="••••••••" required>
+    </div>
+
+    <button type="submit" class="login-btn" id="loginBtn">Login</button>
+  </form>
+
+  <div class="footer">
+    <p>© 2026 ShivaMarg. All rights reserved.</p>
+  </div>
+</div>
+
+<script>
+  const API_BASE = 'https://www.api.shivmarg.live'; // Update to your backend
+
+  // Check if already logged in
+  if (localStorage.getItem('admin_token')) {
+    window.location.href = '/admin/';
+  }
+
+  async function handleLogin(event) {
+    event.preventDefault();
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const loginBtn = document.getElementById('loginBtn');
+    const errorMsg = document.getElementById('errorMsg');
+
+    // Clear previous error
+    errorMsg.classList.remove('show');
+    errorMsg.textContent = '';
+
+    // Show loading
+    const originalText = loginBtn.textContent;
+    loginBtn.disabled = true;
+    loginBtn.innerHTML = '<span class="spinner"></span> Logging in...';
+
+    try {
+      const response = await fetch(`${API_BASE}/api/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.detail || 'Login failed');
+      }
+
+      // Check if user is admin or editor
+      if (!['admin'].includes(data.user.role)) {
+        throw new Error('Admin access required');
+      }
+
+      // Store token
+      localStorage.setItem('admin_token', data.token);
+
+      // Redirect to dashboard
+      window.location.href = '/events/admin/';
+    } catch (error) {
+      console.error('Login error:', error);
+      errorMsg.textContent = error.message || 'Login failed. Please try again.';
+      errorMsg.classList.add('show');
+
+      // Restore button
+      loginBtn.disabled = false;
+      loginBtn.textContent = originalText;
+    }
+  }
+</script>
+<script src="/js/chatbot.js"></script>
+<script src="/js/last-visited.js"></script>
+</body>
+</html>
