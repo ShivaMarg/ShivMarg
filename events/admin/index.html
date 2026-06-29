@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Admin | ShivMarg</title>
+  <!-- No index — admin pages should never appear in Google -->
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --saffron:   #E8620A;
+      --saffron-l: #FFF3E8;
+      --gold:      #B8841E;
+      --gold-l:    #FFF8EC;
+      --maroon:    #6E1A28;
+      --maroon-dk: #3D0D16;
+      --cream:     #FEFAF3;
+      --cream-dk:  #F4EDD8;
+      --text-dk:   #2A1508;
+      --text-md:   #5A3318;
+      --text-lt:   #8B5E3C;
+      --border:    rgba(184,132,30,0.25);
+      --line:      #E2C070;
+      --radius:    10px;
+      --green:     #15803D;
+      --green-l:   #DCFCE7;
+      --red:       #991B1B;
+      --red-l:     #FEE2E2;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--cream);
+      color: var(--text-dk);
+      min-height: 100vh;
+    }
+
+    /* ── AUTH GATE (shown until admin confirmed) ──────────── */
+    #auth-gate {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh;
+      background: var(--cream-dk);
+    }
+    .auth-box {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 14px; padding: 36px 32px;
+      text-align: center; max-width: 340px; width: 90%;
+    }
+    .auth-icon { font-size: 36px; margin-bottom: 10px; }
+    .auth-title { font-family:'Cinzel',serif; font-size:18px; color:var(--maroon); margin-bottom:6px; }
+    .auth-sub { font-size:12px; color:var(--text-lt); margin-bottom:20px; }
+    .auth-err { font-size:12px; color:var(--red); margin-top:10px; display:none; }
+
+    /* ── TOPBAR ───────────────────────────────────────────── */
+    #admin-root { display: none; }
+    .topbar {
+      background: linear-gradient(135deg, var(--maroon-dk), var(--maroon));
+      padding: 12px 20px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    }
+    .topbar-title { font-family:'Cinzel',serif; font-size:16px; color:#FFF5E0; }
+    .topbar-right { display:flex; align-items:center; gap:10px; }
+    .topbar-user { font-size:12px; color:rgba(255,240,200,.8); }
+    .btn-logout {
+      background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25);
+      color:#FFE0B2; font-size:11px; padding:4px 12px; border-radius:6px; cursor:pointer;
+    }
+    .btn-logout:hover { background:rgba(255,255,255,.2); }
+
+    /* ── TABS ─────────────────────────────────────────────── */
+    .tabs-bar {
+      background: var(--cream-dk);
+      border-bottom: 2px solid var(--line);
+      display: flex; gap: 0; padding: 0 18px; overflow-x: auto;
+    }
+    .tab-btn {
+      background: none; border: none; cursor: pointer;
+      padding: 11px 18px; font-size: 13px; font-weight: 500;
+      color: var(--text-lt);
+      border-bottom: 2px solid transparent; margin-bottom: -2px;
+      white-space: nowrap; transition: all .18s;
+    }
+    .tab-btn.active { color: var(--saffron); border-bottom-color: var(--saffron); }
+    .tab-btn:hover:not(.active) { color: var(--text-md); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── SHARED LAYOUT ────────────────────────────────────── */
+    .page-wrap { max-width: 860px; margin: 0 auto; padding: 22px 18px 60px; }
+
+    /* ── CARDS ────────────────────────────────────────────── */
+    .card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px 20px;
+      margin-bottom: 16px;
+    }
+    .card-title {
+      font-size: 14px; font-weight: 600; color: var(--maroon);
+      margin-bottom: 16px; display: flex; align-items: center; gap: 7px;
+    }
+
+    /* ── FORM ─────────────────────────────────────────────── */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-full  { grid-column: 1 / -1; }
+    .fgrp { display: flex; flex-direction: column; gap: 5px; }
+    .flabel { font-size: 10px; font-weight: 700; color: var(--text-lt); text-transform: uppercase; letter-spacing: .6px; }
+    .finput, .fselect, .ftextarea {
+      border: 1px solid rgba(184,132,30,.35);
+      border-radius: 7px; padding: 8px 11px;
+      font-size: 13px; color: var(--text-dk);
+      background: var(--cream); outline: none; font-family: inherit;
+      transition: border-color .18s;
+    }
+    .finput:focus, .fselect:focus, .ftextarea:focus { border-color: var(--saffron); }
+    .ftextarea { resize: vertical; min-height: 88px; }
+    .form-row { display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px; }
+
+    /* ── BUTTONS ──────────────────────────────────────────── */
+    .btn-primary {
+      background: var(--saffron); color: #fff;
+      border: none; border-radius: 7px; padding: 9px 22px;
+      font-size: 13px; font-weight: 600; cursor: pointer; transition: background .18s;
+    }
+    .btn-primary:hover { background: #C0520A; }
+    .btn-primary:disabled { background: #ccc; cursor: not-allowed; }
+    .btn-sec {
+      background: none; border: 1px solid var(--line);
+      border-radius: 7px; padding: 9px 16px;
+      font-size: 13px; color: var(--text-md); cursor: pointer;
+    }
+    .btn-sm {
+      font-size: 11px; padding: 4px 11px; border-radius: 6px;
+      border: 1px solid var(--border); background: none; cursor: pointer; color: var(--text-md);
+    }
+    .btn-sm.danger { border-color: var(--red); color: var(--red); }
+    .btn-sm.success { border-color: var(--green); color: var(--green); }
+
+    /* ── TOAST ────────────────────────────────────────────── */
+    .toast {
+      position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+      padding: 11px 20px; border-radius: 9px; font-size: 13px; font-weight: 500;
+      display: none; max-width: 320px;
+    }
+    .toast.ok  { background: var(--green-l); color: var(--green); border: 1px solid #86EFAC; }
+    .toast.err { background: var(--red-l);   color: var(--red);   border: 1px solid #FCA5A5; }
+
+    /* ── EVENT LIST TABLE ─────────────────────────────────── */
+    .ev-list { display: flex; flex-direction: column; gap: 10px; }
+    .ev-item {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 12px 14px;
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;
+    }
+    .ev-item-left { flex: 1; min-width: 0; }
+    .ev-item-title { font-size: 13px; font-weight: 600; color: var(--text-dk); margin-bottom: 4px; }
+    .ev-item-meta { font-size: 11px; color: var(--text-lt); display: flex; gap: 10px; flex-wrap: wrap; }
+    .ev-item-actions { display: flex; gap: 6px; flex-shrink: 0; flex-wrap: wrap; }
+
+    .status-badge {
+      display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .5px;
+      padding: 2px 8px; border-radius: 10px; text-transform: uppercase;
+    }
+    .sb-live     { background:#DCFCE7; color:#15803D; }
+    .sb-alert    { background:#FEE2E2; color:#991B1B; }
+    .sb-update   { background:var(--saffron-l); color:var(--saffron); }
+    .sb-upcoming { background:var(--gold-l); color:var(--gold); }
+    .sb-done     { background:#F3F4F6; color:#6B7280; }
+
+    /* festival selector pill */
+    .fest-sel-wrap { margin-bottom: 18px; }
+    .fest-label { font-size: 11px; font-weight: 700; color: var(--text-lt); text-transform: uppercase; letter-spacing: .6px; margin-bottom: 6px; }
+
+    .spinner-sm {
+      display: inline-block; width: 16px; height: 16px; border-radius: 50%;
+      border: 2px solid #eee; border-top-color: var(--saffron);
+      animation: spin .7s linear infinite; vertical-align: middle; margin-right: 6px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .empty-msg { text-align: center; padding: 30px; color: var(--text-lt); font-size: 13px; }
+
+    @media (max-width:520px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .ev-item { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── AUTH GATE ─────────────────────────────────────────────────── -->
+<div id="auth-gate">
+  <div class="auth-box">
+    <div class="auth-icon">🔐</div>
+    <div class="auth-title">Admin Login</div>
+    <div class="auth-sub">ShivMarg admin access required</div>
+    <div id="auth-loading" style="font-size:13px;color:var(--text-lt);">
+      <span class="spinner-sm"></span> Verifying session...
+    </div>
+    <div class="auth-err" id="auth-err">Admin access denied. Home pe redirect ho raha hai...</div>
+  </div>
+</div>
+
+<!-- ── ADMIN PANEL (hidden until auth passes) ─────────────────────── -->
+<div id="admin-root">
+
+  <div class="topbar">
+    <div class="topbar-title">⚙️ ShivMarg · Event Admin</div>
+    <div class="topbar-right">
+      <div class="topbar-user" id="topbar-user"></div>
+      <button class="btn-logout" onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="tabs-bar">
+    <button class="tab-btn active" onclick="switchTab('add')">➕ Update Add Karo</button>
+    <button class="tab-btn" onclick="switchTab('manage')">📋 Manage Events</button>
+    <button class="tab-btn" onclick="switchTab('festival')">🎪 Festival Banao</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TAB 1 — ADD EVENT UPDATE
+  ════════════════════════════════════════════════════════ -->
+  <div id="tab-add" class="tab-panel active">
+    <div class="page-wrap">
+      <div class="card">
+        <div class="card-title">➕ Naya Timeline Update Add Karo</div>
+
+        <div class="fest-sel-wrap">
+          <div class="fest-label">Festival chuno</div>
+          <select class="fselect" id="ev-festival" style="width:100%;max-width:320px;" onchange="onFestivalChange()">
+            <option value="">-- Festival select karo --</option>
+          </select>
+        </div>
+
+        <div class="form-grid">
+          <div class="fgrp">
+            <div class="flabel">Date</div>
+            <input type="date" class="finput" id="ev-date" />
+          </div>
+          <div class="fgrp">
+            <div class="flabel">Time (optional)</div>
+            <input type="time" class="finput" id="ev-time" />
+          </div>
+          <div class="fgrp form-full">
+            <div class="flabel">Headline / Title *</div>
+            <input type="text" class="finput" id="ev-title" placeholder="e.g. Snana Purnima Snan Ritual Shuru Hua" />
+          </div>
+          <div class="fgrp form-full">
+            <div class="flabel">Description / Body *</div>
+            <textarea class="ftextarea" id="ev-body" style="min-height:120px;" placeholder="Kya ho raha hai, kahan, kaise — detail mein likho. Yahi Google index karega."></textarea>
+          </div>
+          <div class="fgrp">
+            <div class="flabel">Status</div>
+            <select class="fselect" id="ev-status">
+              <option value="live">🟢 Live — Abhi chal raha hai</option>
+              <option value="alert">🔴 Alert — Warning / Advisory</option>
+              <option value="update" selected>🟠 Update — Samachar</option>
+              <option value="upcoming">🟡 Upcoming — Aane wala hai</option>
+              <option value="done">⚫ Done — Ho gaya</option>
+            </select>
+          </div>
+          <div class="fgrp">
+            <div class="flabel">Day Label (optional)</div>
+            <input type="text" class="finput" id="ev-daylabel" placeholder="e.g. Snana Purnima, Rath Yatra Day 1" />
+          </div>
+          <div class="fgrp form-full">
+            <div class="flabel">Image URLs (Cloudinary · comma separated)</div>
+            <input type="text" class="finput" id="ev-images" placeholder="https://res.cloudinary.com/shivmarg/image/upload/..." />
+          </div>
+          <div class="fgrp form-full">
+            <div class="flabel">YouTube / Video Embed URL (optional)</div>
+            <input type="text" class="finput" id="ev-video" placeholder="https://www.youtube.com/embed/VIDEO_ID" />
+          </div>
+          <div class="fgrp">
+            <div class="flabel">Media Tags</div>
+            <select class="fselect" id="ev-mediatags">
+              <option value="">Koi media nahi</option>
+              <option value="photo">📷 Photo</option>
+              <option value="video">🎥 Video</option>
+              <option value="both">📷 + 🎥 Dono</option>
+            </select>
+          </div>
+          <div class="fgrp">
+            <div class="flabel">Source / Reporter</div>
+            <input type="text" class="finput" id="ev-source" placeholder="ShivMarg Live · Puri Correspondent" />
+          </div>
+          <div class="fgrp" style="align-self:center; padding-top:8px;">
+            <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;">
+              <input type="checkbox" id="ev-pinned" style="width:16px;height:16px;accent-color:var(--saffron);" />
+              📌 Is update ko pin karo (sabse upar dikhega)
+            </label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <button class="btn-sec" onclick="clearEventForm()">Clear</button>
+          <button class="btn-primary" id="btn-add-ev" onclick="submitEvent()">+ Timeline mein add karo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TAB 2 — MANAGE EVENTS
+  ════════════════════════════════════════════════════════ -->
+  <div id="tab-manage" class="tab-panel">
+    <div class="page-wrap">
+      <div class="card">
+        <div class="card-title">📋 Events Manage Karo</div>
+        <div class="fest-sel-wrap">
+          <div class="fest-label">Festival chuno</div>
+          <select class="fselect" id="mg-festival" style="width:100%;max-width:320px;" onchange="loadEventsList()">
+            <option value="">-- Festival select karo --</option>
+          </select>
+        </div>
+        <div id="ev-list-root">
+          <div class="empty-msg">Pehle festival select karo.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TAB 3 — CREATE FESTIVAL
+  ════════════════════════════════════════════════════════ -->
+  <div id="tab-festival" class="tab-panel">
+    <div class="page-wrap">
+      <div class="card">
+        <div class="card-title">🎪 Naya Festival Banao</div>
+        <div class="form-grid">
+          <div class="fgrp form-full">
+            <div class="flabel">Festival Name *</div>
+            <input type="text" class="finput" id="ff-name" placeholder="e.g. Jagannath Rath Yatra 2026" />
+          </div>
+          <div class="fgrp">
+            <div class="flabel">Slug (auto-generate hoga)</div>
+            <input type="text" class="finput" id="ff-slug" placeholder="rath-yatra-2026" />
+          </div>
+          <div class="fgrp">
+            <div class="flabel">Subtitle</div>
+            <input type="text" class="finput" id="ff-subtitle" placeholder="Puri, Odisha · June 27 – July 6" />
+          </div>
+          <div class="fgrp">
+            <div class="flabel">Start Date *</div>
+            <input type="date" class="finput" id="ff-start" />
+          </div>
+          <div class="fgrp">
+            <div class="flabel">End Date *</div>
+            <input type="date" class="finput" id="ff-end" />
+          </div>
+          <div class="fgrp">
+            <div class="flabel">Location</div>
+            <input type="text" class="finput" id="ff-location" placeholder="Puri, Odisha" />
+          </div>
+          <div class="fgrp form-full">
+            <div class="flabel">SEO Title</div>
+            <input type="text" class="finput" id="ff-seo-title" placeholder="Jagannath Rath Yatra 2026 Live | ShivMarg" />
+          </div>
+          <div class="fgrp form-full">
+            <div class="flabel">SEO Description (160 chars max)</div>
+            <input type="text" class="finput" id="ff-seo-desc" placeholder="Live coverage of Rath Yatra 2026 Puri..." />
+          </div>
+          <div class="fgrp form-full">
+            <div class="flabel">OG Image URL (Cloudinary)</div>
+            <input type="text" class="finput" id="ff-og" placeholder="https://res.cloudinary.com/shivmarg/..." />
+          </div>
+          <div class="fgrp form-full">
+            <div class="flabel">Tags (comma separated)</div>
+            <input type="text" class="finput" id="ff-tags" placeholder="jagannath, rath yatra, puri, odisha" />
+          </div>
+        </div>
+        <div class="form-row">
+          <button class="btn-sec" onclick="clearFestForm()">Clear</button>
+          <button class="btn-primary" id="btn-add-fest" onclick="submitFestival()">🎪 Festival Create Karo</button>
+        </div>
+      </div>
+
+      <!-- existing festivals list -->
+      <div class="card">
+        <div class="card-title">📅 Existing Festivals</div>
+        <div id="fest-list-root"><div class="empty-msg"><span class="spinner-sm"></span> Load ho raha hai...</div></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /admin-root -->
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ─────────────────────────────────────────────────────────────────
+// CONFIG
+// ─────────────────────────────────────────────────────────────────
+const API_BASE = 'https://api.shivmarg.live';
+
+// ─────────────────────────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────────────────────────
+let authToken   = null;
+let currentUser = null;
+let festivals   = [];
+
+// ─────────────────────────────────────────────────────────────────
+// BOOT — check SmAuth, verify admin role
+// ─────────────────────────────────────────────────────────────────
+async function boot() {
+  // Uses your existing SmAuth global (same pattern as rest of ShivMarg)
+  const user = window.SmAuth ? window.SmAuth.getUser() : null;
+
+  if (!user) {
+    showAuthErr('Login nahi kiya hai. Redirect ho raha hai...');
+    setTimeout(() => window.location.href = '/', 1800);
+    return;
+  }
+
+  if (user.role !== 'admin') {
+    showAuthErr('Admin access nahi hai. Home pe redirect ho raha hai...');
+    setTimeout(() => window.location.href = '/', 1800);
+    return;
+  }
+
+  // Store token for API calls (SmAuth should expose this)
+  authToken = user.token || window.SmAuth.getToken?.() || localStorage.getItem('sm_token');
+  currentUser = user;
+
+  // Show admin panel
+  document.getElementById('auth-gate').style.display = 'none';
+  document.getElementById('admin-root').style.display = 'block';
+  document.getElementById('topbar-user').textContent = '👤 ' + (user.name || user.email || 'Admin');
+
+  await loadFestivals();
+}
+
+function showAuthErr(msg) {
+  document.getElementById('auth-loading').style.display = 'none';
+  const el = document.getElementById('auth-err');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+function logout() {
+  if (window.SmAuth) window.SmAuth.logout?.();
+  window.location.href = '/';
+}
+
+// ─────────────────────────────────────────────────────────────────
+// API HELPER
+// ─────────────────────────────────────────────────────────────────
+async function api(method, path, body) {
+  const opts = {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + authToken,
+    },
+  };
+  if (body) opts.body = JSON.stringify(body);
+  const r = await fetch(API_BASE + path, opts);
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(data.detail || `HTTP ${r.status}`);
+  return data;
+}
+
+// ─────────────────────────────────────────────────────────────────
+// FESTIVALS
+// ─────────────────────────────────────────────────────────────────
+async function loadFestivals() {
+  try {
+    const data = await api('GET', '/events/festivals?active_only=false');
+    festivals = data.festivals || [];
+    populateFestivalSelects();
+    renderFestivalList();
+  } catch(e) { showToast('Festivals load nahi hue: ' + e.message, 'err'); }
+}
+
+function populateFestivalSelects() {
+  ['ev-festival', 'mg-festival'].forEach(id => {
+    const sel = document.getElementById(id);
+    const cur = sel.value;
+    sel.innerHTML = '<option value="">-- Festival select karo --</option>';
+    festivals.forEach(f => {
+      const opt = document.createElement('option');
+      opt.value   = f.slug;
+      opt.textContent = f.name + (f.is_active ? '' : ' (inactive)');
+      sel.appendChild(opt);
+    });
+    if (cur) sel.value = cur;
+  });
+}
+
+function renderFestivalList() {
+  const root = document.getElementById('fest-list-root');
+  if (!festivals.length) {
+    root.innerHTML = '<div class="empty-msg">Koi festival nahi. Upar se banao.</div>';
+    return;
+  }
+  root.innerHTML = festivals.map(f => `
+    <div class="ev-item">
+      <div class="ev-item-left">
+        <div class="ev-item-title">${esc(f.name)}</div>
+        <div class="ev-item-meta">
+          <span>🔗 ${esc(f.slug)}</span>
+          <span>📅 ${esc(f.start_date)} – ${esc(f.end_date)}</span>
+          <span>${f.is_active ? '✅ Active' : '🔴 Inactive'}</span>
+        </div>
+      </div>
+      <div class="ev-item-actions">
+        <button class="btn-sm" onclick="viewPublic('${esc(f.slug)}')">🌐 View</button>
+        <button class="btn-sm danger" onclick="deactivateFestival('${esc(f.slug)}')">Deactivate</button>
+      </div>
+    </div>`).join('');
+}
+
+async function submitFestival() {
+  const name = document.getElementById('ff-name').value.trim();
+  const start = document.getElementById('ff-start').value;
+  const end   = document.getElementById('ff-end').value;
+  if (!name || !start || !end) { showToast('Name, start date aur end date required hai', 'err'); return; }
+
+  const rawTags = document.getElementById('ff-tags').value;
+  const tags = rawTags ? rawTags.split(',').map(t => t.trim()).filter(Boolean) : [];
+
+  const btn = document.getElementById('btn-add-fest');
+  btn.disabled = true; btn.textContent = 'Creating...';
+
+  try {
+    await api('POST', '/events/festivals', {
+      name,
+      slug:            document.getElementById('ff-slug').value.trim() || undefined,
+      subtitle:        document.getElementById('ff-subtitle').value.trim() || undefined,
+      start_date:      start,
+      end_date:        end,
+      location:        document.getElementById('ff-location').value.trim() || undefined,
+      seo_title:       document.getElementById('ff-seo-title').value.trim() || undefined,
+      seo_description: document.getElementById('ff-seo-desc').value.trim() || undefined,
+      og_image:        document.getElementById('ff-og').value.trim() || undefined,
+      tags,
+    });
+    showToast('✅ Festival create ho gaya!', 'ok');
+    clearFestForm();
+    await loadFestivals();
+  } catch(e) { showToast('Error: ' + e.message, 'err'); }
+  finally { btn.disabled = false; btn.textContent = '🎪 Festival Create Karo'; }
+}
+
+async function deactivateFestival(slug) {
+  if (!confirm(`"${slug}" ko deactivate karna chahte ho?`)) return;
+  try {
+    await api('DELETE', `/events/festivals/${slug}`);
+    showToast('Festival deactivated', 'ok');
+    await loadFestivals();
+  } catch(e) { showToast('Error: ' + e.message, 'err'); }
+}
+
+function viewPublic(slug) {
+  window.open(`/events/${slug}`, '_blank');
+}
+
+// ─────────────────────────────────────────────────────────────────
+// ADD EVENT
+// ─────────────────────────────────────────────────────────────────
+function onFestivalChange() {
+  // nothing extra needed — slug is read on submit
+}
+
+async function submitEvent() {
+  const slug = document.getElementById('ev-festival').value;
+  if (!slug) { showToast('Pehle festival select karo', 'err'); return; }
+
+  const title = document.getElementById('ev-title').value.trim();
+  const body  = document.getElementById('ev-body').value.trim();
+  if (!title) { showToast('Title required hai', 'err'); return; }
+  if (!body)  { showToast('Description required hai', 'err'); return; }
+  if (!document.getElementById('ev-date').value) {
+    showToast('Date required hai', 'err'); return;
+  }
+
+  const rawMt   = document.getElementById('ev-mediatags').value;
+  const mediaTags = rawMt === 'both' ? ['photo','video'] : rawMt ? [rawMt] : [];
+
+  const rawImgs = document.getElementById('ev-images').value.trim();
+  const images  = rawImgs ? rawImgs.split(',').map(s => s.trim()).filter(Boolean) : [];
+
+  const btn = document.getElementById('btn-add-ev');
+  btn.disabled = true; btn.textContent = 'Adding...';
+
+  try {
+    await api('POST', `/events/${slug}`, {
+      festival_slug: slug,
+      title,
+      body,
+      event_date:    document.getElementById('ev-date').value,
+      event_time:    document.getElementById('ev-time').value || undefined,
+      status:        document.getElementById('ev-status').value,
+      day_label:     document.getElementById('ev-daylabel').value.trim() || undefined,
+      images,
+      video_url:     document.getElementById('ev-video').value.trim() || undefined,
+      media_tags:    mediaTags,
+      source:        document.getElementById('ev-source').value.trim() || undefined,
+      pinned:        document.getElementById('ev-pinned').checked,
+    });
+    showToast('✅ Update timeline mein add ho gaya!', 'ok');
+    clearEventForm();
+  } catch(e) { showToast('Error: ' + e.message, 'err'); }
+  finally { btn.disabled = false; btn.textContent = '+ Timeline mein add karo'; }
+}
+
+// ─────────────────────────────────────────────────────────────────
+// MANAGE EVENTS LIST
+// ─────────────────────────────────────────────────────────────────
+async function loadEventsList() {
+  const slug = document.getElementById('mg-festival').value;
+  if (!slug) {
+    document.getElementById('ev-list-root').innerHTML = '<div class="empty-msg">Festival select karo.</div>';
+    return;
+  }
+  document.getElementById('ev-list-root').innerHTML = '<div class="empty-msg"><span class="spinner-sm"></span> Load ho raha hai...</div>';
+  try {
+    const data = await api('GET', `/events/${slug}?limit=80`);
+    renderEventsList(data.events, slug);
+  } catch(e) { showToast('Error: ' + e.message, 'err'); }
+}
+
+function renderEventsList(events, festSlug) {
+  const root = document.getElementById('ev-list-root');
+  if (!events.length) {
+    root.innerHTML = '<div class="empty-msg">Is festival mein koi event nahi abhi.</div>';
+    return;
+  }
+  root.innerHTML = `<div class="ev-list">${events.map(ev => `
+    <div class="ev-item" id="ei-${esc(ev._id)}">
+      <div class="ev-item-left">
+        <div class="ev-item-title">
+          <span class="status-badge sb-${esc(ev.status)}">${esc(ev.status)}</span>
+          ${ev.pinned ? '📌 ' : ''}${esc(ev.title)}
+        </div>
+        <div class="ev-item-meta">
+          <span>📅 ${esc(ev.event_date)}${ev.event_time ? ' ' + esc(ev.event_time) : ''}</span>
+          ${ev.source ? '<span>🗞️ ' + esc(ev.source) + '</span>' : ''}
+        </div>
+      </div>
+      <div class="ev-item-actions">
+        <select class="fselect" style="font-size:11px;padding:3px 7px;"
+          onchange="quickStatus('${esc(festSlug)}','${esc(ev._id)}',this.value)">
+          ${['live','alert','update','upcoming','done'].map(s =>
+            `<option value="${s}" ${ev.status===s?'selected':''}>${s}</option>`).join('')}
+        </select>
+        <button class="btn-sm ${ev.pinned?'success':''}"
+          onclick="togglePin('${esc(festSlug)}','${esc(ev._id)}',${!ev.pinned})">
+          ${ev.pinned ? 'Unpin' : '📌 Pin'}
+        </button>
+        <button class="btn-sm danger"
+          onclick="deleteEvent('${esc(festSlug)}','${esc(ev._id)}')">Delete</button>
+      </div>
+    </div>`).join('')}</div>`;
+}
+
+async function quickStatus(festSlug, eventId, status) {
+  try {
+    await api('PATCH', `/events/${festSlug}/${eventId}/status?status=${status}`);
+    showToast(`Status → ${status}`, 'ok');
+  } catch(e) { showToast('Error: ' + e.message, 'err'); }
+}
+
+async function togglePin(festSlug, eventId, pinned) {
+  try {
+    await api('PATCH', `/events/${festSlug}/${eventId}/pin?pinned=${pinned}`);
+    showToast(pinned ? '📌 Pinned' : 'Unpinned', 'ok');
+    loadEventsList();
+  } catch(e) { showToast('Error: ' + e.message, 'err'); }
+}
+
+async function deleteEvent(festSlug, eventId) {
+  if (!confirm('Yeh update delete karna chahte ho? Wapas nahi aayega.')) return;
+  try {
+    await api('DELETE', `/events/${festSlug}/${eventId}`);
+    showToast('Event delete ho gaya', 'ok');
+    document.getElementById('ei-' + eventId)?.remove();
+  } catch(e) { showToast('Error: ' + e.message, 'err'); }
+}
+
+// ─────────────────────────────────────────────────────────────────
+// TAB SWITCH
+// ─────────────────────────────────────────────────────────────────
+function switchTab(name) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ─────────────────────────────────────────────────────────────────
+// CLEAR FORMS
+// ─────────────────────────────────────────────────────────────────
+function clearEventForm() {
+  ['ev-title','ev-body','ev-images','ev-video','ev-source','ev-daylabel','ev-time'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('ev-date').valueAsDate = new Date();
+  document.getElementById('ev-status').value = 'update';
+  document.getElementById('ev-mediatags').value = '';
+  document.getElementById('ev-pinned').checked = false;
+}
+
+function clearFestForm() {
+  ['ff-name','ff-slug','ff-subtitle','ff-start','ff-end','ff-location',
+   'ff-seo-title','ff-seo-desc','ff-og','ff-tags'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+}
+
+// ─────────────────────────────────────────────────────────────────
+// TOAST
+// ─────────────────────────────────────────────────────────────────
+let toastTimer = null;
+function showToast(msg, type='ok') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast ' + type;
+  t.style.display = 'block';
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.style.display = 'none', 3200);
+}
+
+// ─────────────────────────────────────────────────────────────────
+// UTILS
+// ─────────────────────────────────────────────────────────────────
+function esc(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// ─────────────────────────────────────────────────────────────────
+// START
+// ─────────────────────────────────────────────────────────────────
+document.getElementById('ev-date').valueAsDate = new Date();
+boot();
+</script>
+<script src="/js/auth2.js"></script>
+<script src="/js/s-comments.js"></script>
+<script src="/js/streak-widget.js"></script>
+<script src="/js/nav.js?v=2.1" defer></script>
+<script src="/js/search.js"></script>
+<script src="/js/suggested-posts.js"></script>
+<script>
+  // const SM_API = 'https://www.api.shivmarg.live';
+  SmComments.init({ apiBase: SM_API });
+</script>
+<script src="/js/chatbot.js"></script>
+
+<script src="/js/pwa.js"></script>
+<script src="/js/trending.js"></script>
+<script>window.SM_PAGE_ID = "/events/jagannath-rath-yatra-2026";</script>
+<script src="/js/last-visited.js"></script>
+<script src="/js/recent-visits.js"></script>
+</body>
+</html>
