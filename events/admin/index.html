@@ -409,12 +409,31 @@ let festivals   = [];
 // BOOT — check SmAuth, verify admin role
 // ─────────────────────────────────────────────────────────────────
 async function boot() {
-  // Uses your existing SmAuth global (same pattern as rest of ShivMarg)
-  const user = window.SmAuth ? window.SmAuth.getUser() : null;
+  const token = localStorage.getItem('admin_token');
 
-  if (!user) {
+  if (!token) {
     showAuthErr('Login nahi kiya hai. Redirect ho raha hai...');
     setTimeout(() => window.location.href = '/admin-login/event-login.html', 1800);
+    return;
+  }
+
+  // Verify token and get user from backend
+  let user;
+  try {
+    const res = await fetch('https://www.api.shivmarg.live/api/auth/me', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+
+    if (!res.ok) {
+      localStorage.removeItem('admin_token');
+      showAuthErr('Session expire ho gaya. Dobara login karein...');
+      setTimeout(() => window.location.href = '/admin-login/event-login.html', 1800);
+      return;
+    }
+
+    user = await res.json();
+  } catch (err) {
+    showAuthErr('Server se connect nahi ho paya. Dobara try karein.');
     return;
   }
 
@@ -424,17 +443,17 @@ async function boot() {
     return;
   }
 
-  // Store token for API calls (SmAuth should expose this)
-  authToken = user.token || window.SmAuth.getToken?.() || localStorage.getItem('admin_token');
+  authToken = token;
   currentUser = user;
 
   // Show admin panel
   document.getElementById('auth-gate').style.display = 'none';
   document.getElementById('admin-root').style.display = 'block';
-  document.getElementById('topbar-user').textContent = '👤 ' + (user.name || user.email || 'Admin');
+  document.getElementById('topbar-user').textContent = '👤 ' + (user.display_name || user.username || 'Admin');
 
   await loadFestivals();
 }
+
 
 function showAuthErr(msg) {
   document.getElementById('auth-loading').style.display = 'none';
