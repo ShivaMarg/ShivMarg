@@ -4,41 +4,63 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- SEO meta filled dynamically by JS from /events/{slug}/seo API -->
-  <title id="page-title">Loading... | ShivMarg</title>
-  <meta name="description" id="meta-desc" content="" />
-  <meta property="og:title" id="og-title" content="" />
-  <meta property="og:description" id="og-desc" content="" />
-  <meta property="og:image" id="og-image" content="" />
-  <meta property="og:type" content="article" />
-  <link rel="canonical" id="canonical" href="" />
+  <!-- ═══════════════════════════════════════════════════════
+       SEO META — filled by JS from /events/{slug}/seo API
+       Fallback values below kick in if API returns nothing
+  ════════════════════════════════════════════════════════ -->
+  <title id="page-title">Live Festival Updates | ShivMarg</title>
+  <meta name="description"   id="meta-desc"    content="ShivMarg par live festival coverage padhein — mantras, rituals, aur latest updates." />
+  <meta name="keywords"      id="meta-keywords" content="festival live updates, hindu festival, mantra, puja, shivmarg" />
+  <meta name="robots"        content="index, follow" />
+  <meta name="author"        content="ShivMarg" />
 
-  <!-- JSON-LD injected by JS -->
-  <script id="jsonld-event" type="application/ld+json"></script>
+  <!-- Open Graph -->
+  <meta property="og:title"       id="og-title" content="Live Festival Updates | ShivMarg" />
+  <meta property="og:description" id="og-desc"  content="ShivMarg par live festival coverage padhein." />
+  <meta property="og:image"       id="og-image" content="https://shivmarg.live/assets/og-default.jpg" />
+  <meta property="og:type"        content="article" />
+  <meta property="og:site_name"   content="ShivMarg" />
+  <meta property="og:url"         id="og-url"   content="" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:site"        content="@shivmarg" />
+  <meta name="twitter:title"       id="tw-title" content="Live Festival Updates | ShivMarg" />
+  <meta name="twitter:description" id="tw-desc"  content="ShivMarg par live festival coverage padhein." />
+  <meta name="twitter:image"       id="tw-image" content="https://shivmarg.live/assets/og-default.jpg" />
+
+  <link rel="canonical" id="canonical" href="https://shivmarg.live/events" />
+
+  <!-- JSON-LD — injected by JS -->
+  <script id="jsonld-event"    type="application/ld+json"></script>
   <script id="jsonld-liveblog" type="application/ld+json"></script>
 
-  <!-- ShivMarg fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Tiro+Devanagari+Sanskrit&display=swap" rel="stylesheet" />
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Tiro+Devanagari+Sanskrit&family=Noto+Sans+Devanagari:wght@400;600&display=swap" rel="stylesheet" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --saffron:      #E8620A;
-      --saffron-l:    #FFF3E8;
-      --gold:         #B8841E;
-      --gold-l:       #FFF8EC;
-      --maroon:       #6E1A28;
-      --maroon-dk:    #3D0D16;
-      --cream:        #FEFAF3;
-      --cream-dk:     #F4EDD8;
-      --text-dk:      #2A1508;
-      --text-md:      #5A3318;
-      --text-lt:      #8B5E3C;
-      --border:       rgba(184,132,30,0.22);
-      --line:         #E2C070;
-      --radius:       12px;
-      --dot:          13px;
+      --saffron:    #E8620A;
+      --saffron-l:  #FFF3E8;
+      --gold:       #B8841E;
+      --gold-l:     #FFF8EC;
+      --maroon:     #6E1A28;
+      --maroon-dk:  #3D0D16;
+      --cream:      #FEFAF3;
+      --cream-dk:   #F4EDD8;
+      --text-dk:    #2A1508;
+      --text-md:    #5A3318;
+      --text-lt:    #8B5E3C;
+      --border:     rgba(184,132,30,0.22);
+      --line:       #E2C070;
+      --radius:     10px;
+      --dot:        13px;
+      --green:      #15803D;
+      --green-l:    #DCFCE7;
+      --red:        #991B1B;
+      --red-l:      #FEE2E2;
     }
 
     body {
@@ -48,87 +70,89 @@
       min-height: 100vh;
     }
 
-    /* ── HEADER ─────────────────────────────────────────── */
+    /* ════════════════════════════════════════════════════════
+       HEADER
+    ═══════════════════════════════════════════════════════ */
     .f-header {
       background: linear-gradient(160deg, var(--maroon-dk) 0%, var(--maroon) 55%, #8B2235 100%);
       padding: 28px 20px 22px;
       text-align: center;
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
     }
     .f-header::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: repeating-linear-gradient(45deg, transparent, transparent 24px, rgba(184,132,30,.06) 24px, rgba(184,132,30,.06) 25px);
+      content: ''; position: absolute; inset: 0;
+      background: repeating-linear-gradient(45deg,transparent,transparent 24px,rgba(184,132,30,.06) 24px,rgba(184,132,30,.06) 25px);
       pointer-events: none;
     }
     .f-badge {
       display: inline-flex; align-items: center; gap: 7px;
-      background: rgba(232,98,10,.22);
-      border: 1px solid rgba(232,98,10,.5);
-      color: #FFB870;
-      font-size: 10px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase;
+      background: rgba(232,98,10,.22); border: 1px solid rgba(232,98,10,.5);
+      color: #FFB870; font-size: 10px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase;
       padding: 4px 14px; border-radius: 20px; margin-bottom: 12px;
     }
     .blink-dot {
       width: 7px; height: 7px; border-radius: 50%; background: #FF4444;
-      display: inline-block;
-      animation: bdot 1.2s ease-in-out infinite;
+      display: inline-block; animation: bdot 1.2s ease-in-out infinite;
     }
     @keyframes bdot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(.7)} }
-
     .f-title {
       font-family: 'Cinzel', serif;
       font-size: clamp(20px, 5vw, 28px); font-weight: 700;
-      color: #FFF5E0; letter-spacing: .5px; margin-bottom: 5px;
-      position: relative;
+      color: #FFF5E0; letter-spacing: .5px; margin-bottom: 5px; position: relative;
     }
-    .f-subtitle {
-      font-size: 13px; color: rgba(255,240,200,.72);
-      margin-bottom: 16px; position: relative;
-    }
-    .f-meta {
-      display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
-      position: relative;
-    }
+    .f-subtitle { font-size: 13px; color: rgba(255,240,200,.72); margin-bottom: 16px; position: relative; }
+    .f-meta { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; position: relative; }
     .f-pill {
-      background: rgba(255,255,255,.1);
-      border: 1px solid rgba(255,255,255,.2);
-      color: #FFE0B2; font-size: 12px;
-      padding: 4px 13px; border-radius: 20px;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+      color: #FFE0B2; font-size: 12px; padding: 4px 13px; border-radius: 20px;
     }
 
-    /* ── STATUSBAR ────────────────────────────────────────── */
+    /* ════════════════════════════════════════════════════════
+       STATUSBAR
+    ═══════════════════════════════════════════════════════ */
     .statusbar {
       display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;
-      background: var(--cream-dk);
-      border-bottom: 1px solid var(--line);
+      background: var(--cream-dk); border-bottom: 1px solid var(--line);
       padding: 9px 18px; font-size: 12px;
     }
     .live-pill {
       display: flex; align-items: center; gap: 7px;
-      background: #DCFCE7; color: #15803D;
+      background: var(--green-l); color: var(--green);
       padding: 4px 12px; border-radius: 20px;
       font-weight: 700; font-size: 11px; letter-spacing: .3px;
     }
     .status-right { color: var(--text-lt); }
 
-    /* ── LOADING / ERROR ──────────────────────────────────── */
+    /* ════════════════════════════════════════════════════════
+       TWO-COLUMN LAYOUT
+    ═══════════════════════════════════════════════════════ */
+    .page-layout {
+      max-width: 1200px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 24px;
+      padding: 24px 18px 60px;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .page-layout { grid-template-columns: 1fr; }
+      .sidebar { order: 2; }
+      .main-col { order: 1; }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       TIMELINE (left col)
+    ═══════════════════════════════════════════════════════ */
     .state-box {
       text-align: center; padding: 60px 20px;
       color: var(--text-lt); font-size: 14px;
     }
     .state-box .spinner {
       width: 36px; height: 36px; border-radius: 50%;
-      border: 3px solid var(--cream-dk);
-      border-top-color: var(--saffron);
-      animation: spin .8s linear infinite;
-      margin: 0 auto 14px;
+      border: 3px solid var(--cream-dk); border-top-color: var(--saffron);
+      animation: spin .8s linear infinite; margin: 0 auto 14px;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ── TIMELINE WRAP ────────────────────────────────────── */
-    .tl-wrap { max-width: 820px; margin: 0 auto; padding: 28px 18px 60px; }
 
     .day-group { margin-bottom: 36px; }
     .day-label {
@@ -146,39 +170,28 @@
       background: linear-gradient(to bottom, var(--saffron), var(--gold) 50%, var(--line));
       border-radius: 2px;
     }
-
-    .ev-row {
-      display: flex; gap: 16px; align-items: flex-start;
-      position: relative;
-    }
-
-    /* dot column */
+    .ev-row { display: flex; gap: 16px; align-items: flex-start; position: relative; }
     .dot-col {
       flex-shrink: 0; width: 12px;
       display: flex; flex-direction: column; align-items: center;
       padding-top: 3px; z-index: 1;
     }
     .dot {
-      width: var(--dot); height: var(--dot);
-      border-radius: 50%;
-      border: 2px solid var(--cream);
-      flex-shrink: 0;
+      width: var(--dot); height: var(--dot); border-radius: 50%;
+      border: 2px solid var(--cream); flex-shrink: 0;
     }
-    .dot.live    { background: #22C55E; animation: pg 1.8s ease-in-out infinite; }
-    .dot.alert   { background: #EF4444; animation: pr 1.2s ease-in-out infinite; }
-    .dot.update  { background: var(--saffron); }
-    .dot.upcoming{ background: var(--gold); }
-    .dot.done    { background: #9CA3AF; }
-    @keyframes pg  { 0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.6)} 50%{box-shadow:0 0 0 6px rgba(34,197,94,0)} }
-    @keyframes pr  { 0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.7)} 50%{box-shadow:0 0 0 7px rgba(239,68,68,0)} }
-
+    .dot.live     { background: #22C55E; animation: pg 1.8s ease-in-out infinite; }
+    .dot.alert    { background: #EF4444; animation: pr 1.2s ease-in-out infinite; }
+    .dot.update   { background: var(--saffron); }
+    .dot.upcoming { background: var(--gold); }
+    .dot.done     { background: #9CA3AF; }
+    @keyframes pg { 0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.6)} 50%{box-shadow:0 0 0 6px rgba(34,197,94,0)} }
+    @keyframes pr { 0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.7)} 50%{box-shadow:0 0 0 7px rgba(239,68,68,0)} }
     .conn { width: 2px; background: var(--line); flex: 1; min-height: 20px; opacity: .5; }
 
-    /* card */
     .ev-card {
       flex: 1; min-width: 0;
-      background: #fff;
-      border: 1px solid var(--border);
+      background: #fff; border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 13px 15px 11px;
       margin-bottom: 16px;
@@ -191,21 +204,19 @@
       left: 0; top: 0; bottom: 0; width: 3px;
       border-radius: 3px 0 0 3px;
     }
-    .ev-card.live::before    { background: linear-gradient(to bottom,#22C55E,#16A34A); }
-    .ev-card.alert::before   { background: linear-gradient(to bottom,#EF4444,#DC2626); }
-    .ev-card.update::before  { background: linear-gradient(to bottom,var(--saffron),#C0520A); }
-    .ev-card.upcoming::before{ background: linear-gradient(to bottom,var(--gold),var(--saffron)); }
-    .ev-card.done::before    { background: #D1D5DB; }
+    .ev-card.live::before     { background: linear-gradient(to bottom,#22C55E,#16A34A); }
+    .ev-card.alert::before    { background: linear-gradient(to bottom,#EF4444,#DC2626); }
+    .ev-card.update::before   { background: linear-gradient(to bottom,var(--saffron),#C0520A); }
+    .ev-card.upcoming::before { background: linear-gradient(to bottom,var(--gold),var(--saffron)); }
+    .ev-card.done::before     { background: #D1D5DB; }
 
     .card-top {
       display: flex; align-items: flex-start;
-      justify-content: space-between; gap: 8px;
-      margin-bottom: 7px;
+      justify-content: space-between; gap: 8px; margin-bottom: 7px;
     }
     .card-time {
-      font-size: 11px; font-weight: 700;
-      color: var(--gold); letter-spacing: .3px;
-      white-space: nowrap; margin-top: 2px; flex-shrink: 0;
+      font-size: 11px; font-weight: 700; color: var(--gold);
+      letter-spacing: .3px; white-space: nowrap; margin-top: 2px; flex-shrink: 0;
     }
     .badges { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
     .badge {
@@ -221,79 +232,209 @@
     .b-video    { background:#FDF4FF; color:#7E22CE; }
     .b-pin      { background:#FEF3C7; color:#92400E; }
 
-    .card-title {
-      font-size: 14px; font-weight: 600;
-      color: var(--text-dk); margin-bottom: 6px; line-height: 1.4;
-    }
-    .card-body {
-      font-size: 13px; line-height: 1.7;
-      color: var(--text-md);
-    }
+    .card-title { font-size: 14px; font-weight: 600; color: var(--text-dk); margin-bottom: 6px; line-height: 1.4; }
+    .card-body  { font-size: 13px; line-height: 1.7; color: var(--text-md); }
 
-    /* media */
     .media-row { display: flex; gap: 7px; margin-top: 10px; flex-wrap: wrap; }
     .img-thumb {
-      width: 72px; height: 56px; border-radius: 8px;
+      width: 80px; height: 62px; border-radius: 8px;
       object-fit: cover; border: 1px solid var(--border); cursor: pointer;
+      transition: transform .15s;
     }
+    .img-thumb:hover { transform: scale(1.04); }
     .vid-thumb {
-      width: 72px; height: 56px; border-radius: 8px;
+      width: 80px; height: 62px; border-radius: 8px;
       background: #0f0a0a; border: 1px solid var(--border);
       display: flex; align-items: center; justify-content: center; cursor: pointer;
     }
     .play-btn {
-      width: 26px; height: 26px; border-radius: 50%;
+      width: 28px; height: 28px; border-radius: 50%;
       background: rgba(232,98,10,.9);
       display: flex; align-items: center; justify-content: center;
-      color: #fff; font-size: 10px; padding-left: 2px;
+      color: #fff; font-size: 11px; padding-left: 2px;
     }
 
-    /* video lightbox */
-    .lightbox {
-      display: none; position: fixed; inset: 0; z-index: 999;
-      background: rgba(0,0,0,.88);
-      align-items: center; justify-content: center;
-    }
-    .lightbox.open { display: flex; }
-    .lightbox-inner { position: relative; width: min(640px, 94vw); }
-    .lightbox-inner iframe { width: 100%; aspect-ratio: 16/9; border: none; border-radius: 8px; }
-    .lb-close {
-      position: absolute; top: -36px; right: 0;
-      background: none; border: none; color: #fff; font-size: 26px; cursor: pointer;
-    }
-
-    /* source */
     .source-row { display: flex; align-items: center; gap: 5px; margin-top: 9px; }
     .src-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--text-lt); flex-shrink: 0; }
     .src-txt { font-size: 11px; color: var(--text-lt); }
 
+    /* share row */
+    .share-row {
+      display: flex; align-items: center; gap: 8px;
+      margin-top: 10px; padding-top: 9px;
+      border-top: 1px solid var(--cream-dk);
+    }
+    .share-lbl { font-size: 10px; color: var(--text-lt); letter-spacing: .5px; text-transform: uppercase; }
+    .share-btn {
+      font-size: 11px; padding: 3px 10px; border-radius: 6px;
+      border: 1px solid var(--border); background: none; cursor: pointer;
+      color: var(--text-md); text-decoration: none;
+      display: inline-flex; align-items: center; gap: 4px;
+      transition: background .15s;
+    }
+    .share-btn:hover { background: var(--cream-dk); }
+
     /* load more */
-    .load-more-wrap { text-align: center; margin-top: 20px; }
+    .load-more-wrap { text-align: center; margin-top: 8px; }
     .btn-load {
-      background: none; border: 1px solid var(--line);
-      border-radius: 8px; padding: 9px 28px;
-      font-size: 13px; color: var(--text-md); cursor: pointer;
+      background: none; border: 1px solid var(--line); border-radius: 8px;
+      padding: 9px 28px; font-size: 13px; color: var(--text-md); cursor: pointer;
       transition: background .18s;
     }
     .btn-load:hover { background: var(--cream-dk); }
 
-    /* empty */
-    .empty { text-align: center; padding: 40px 20px; color: var(--text-lt); font-size: 14px; }
-
-    @media (max-width: 500px) {
-      .f-title { font-size: 18px; }
-      .card-title { font-size: 13px; }
+    /* ════════════════════════════════════════════════════════
+       SIDEBAR (right col)
+    ═══════════════════════════════════════════════════════ */
+    .sidebar {
+      display: flex; flex-direction: column; gap: 18px;
+      position: sticky; top: 16px;
     }
+
+    .sb-widget {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .sb-head {
+      display: flex; align-items: center; gap: 8px;
+      padding: 11px 14px;
+      background: linear-gradient(to right, var(--cream-dk), #fff);
+      border-bottom: 1px solid var(--cream-dk);
+      font-size: 12px; font-weight: 700;
+      color: var(--maroon); letter-spacing: .3px;
+    }
+    .sb-head-icon { font-size: 15px; }
+
+    /* skeleton shimmer */
+    .sk-line {
+      height: 10px; border-radius: 5px; margin-bottom: 6px;
+      background: linear-gradient(90deg, var(--cream-dk) 25%, var(--cream) 50%, var(--cream-dk) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+    }
+    .sk-w80 { width: 80%; }
+    .sk-w55 { width: 55%; }
+    @keyframes shimmer { 0%{ background-position:200% 0 } 100%{ background-position:-200% 0 } }
+    .sk-block { padding: 12px 14px; border-bottom: 1px solid var(--cream-dk); }
+
+    /* ── Trending (most viewed pages) ── */
+    .trend-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px; text-decoration: none;
+      border-bottom: 1px solid var(--cream-dk);
+      transition: background .15s;
+    }
+    .trend-item:last-child { border-bottom: none; }
+    .trend-item:hover { background: var(--saffron-l); }
+    .trend-rank {
+      font-size: 10px; font-weight: 800; color: var(--gold);
+      width: 16px; flex-shrink: 0; text-align: center;
+    }
+    .trend-icon { font-size: 18px; flex-shrink: 0; }
+    .trend-body { flex: 1; min-width: 0; }
+    .trend-title {
+      font-size: 12px; font-weight: 600; color: var(--text-dk);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      line-height: 1.3;
+    }
+    .trend-views {
+      font-size: 10px; color: var(--text-lt); margin-top: 2px;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .views-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
+    .trend-arrow { font-size: 14px; color: var(--line); flex-shrink: 0; }
+
+    /* ── Article/Post list items ── */
+    .art-item {
+      display: flex; gap: 10px; padding: 10px 14px;
+      text-decoration: none; color: inherit;
+      border-bottom: 1px solid var(--cream-dk);
+      transition: background .15s;
+    }
+    .art-item:last-child { border-bottom: none; }
+    .art-item:hover { background: var(--saffron-l); }
+    .art-thumb {
+      width: 58px; height: 46px; border-radius: 7px;
+      object-fit: cover; flex-shrink: 0; border: 1px solid var(--border);
+      background: var(--cream-dk);
+    }
+    .art-thumb-placeholder {
+      width: 58px; height: 46px; border-radius: 7px;
+      background: var(--cream-dk); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 20px;
+      border: 1px solid var(--border);
+    }
+    .art-body { flex: 1; min-width: 0; }
+    .art-title {
+      font-size: 12px; font-weight: 600; color: var(--text-dk);
+      line-height: 1.4;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+      font-family: 'Noto Sans Devanagari', sans-serif;
+    }
+    .art-meta { font-size: 10px; color: var(--text-lt); margin-top: 3px; }
+
+    /* ── Comments widget wrapper ── */
+    #sm-comments {
+      /* styles injected by s-comments.js — just set wrapper padding */
+      padding: 0;
+    }
+    .comments-wrap { padding: 0; }
+
+    /* ── Live dot on trending header ── */
+    .live-dot-sm {
+      width: 7px; height: 7px; border-radius: 50%; background: #22C55E;
+      animation: pg 1.8s ease-in-out infinite; flex-shrink: 0; margin-left: auto;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       VIDEO LIGHTBOX
+    ═══════════════════════════════════════════════════════ */
+    .lightbox {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: rgba(0,0,0,.88); align-items: center; justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-inner { position: relative; width: min(680px, 94vw); }
+    .lightbox-inner iframe { width: 100%; aspect-ratio: 16/9; border: none; border-radius: 8px; }
+    .lb-close {
+      position: absolute; top: -38px; right: 0;
+      background: none; border: none; color: #fff; font-size: 26px; cursor: pointer;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       MOBILE SIDEBAR TOGGLE
+    ═══════════════════════════════════════════════════════ */
+    .mob-toggle {
+      display: none; width: 100%; padding: 10px 18px;
+      background: var(--cream-dk); border: none; border-top: 1px solid var(--line);
+      font-size: 13px; font-weight: 600; color: var(--maroon);
+      cursor: pointer; text-align: left; gap: 8px; align-items: center;
+    }
+    @media (max-width: 900px) {
+      .mob-toggle { display: flex; }
+      .sidebar-inner { display: none; flex-direction: column; gap: 18px; padding: 16px 0; }
+      .sidebar-inner.open { display: flex; }
+    }
+    @media (min-width: 901px) {
+      .sidebar-inner { display: flex; flex-direction: column; gap: 18px; }
+    }
+
+    .empty-sb { padding: 16px 14px; font-size: 12px; color: var(--text-lt); text-align: center; }
   </style>
 </head>
 <body>
 
-<!-- HEADER — filled by JS from festival API -->
+<!-- ════════════════════════════════════════════════════════
+     HEADER
+═══════════════════════════════════════════════════════ -->
 <div class="f-header" id="fheader">
   <div class="f-badge"><span class="blink-dot"></span> Live Coverage</div>
-  <div class="f-title" id="ftitle">Loading...</div>
+  <div class="f-title"  id="ftitle">Loading...</div>
   <div class="f-subtitle" id="fsubtitle"></div>
-  <div class="f-meta" id="fmeta"></div>
+  <div class="f-meta"   id="fmeta"></div>
 </div>
 
 <!-- STATUSBAR -->
@@ -305,15 +446,85 @@
   <div class="status-right" id="status-right">Loading...</div>
 </div>
 
-<!-- TIMELINE -->
-<div class="tl-wrap">
-  <div id="tl-root">
-    <div class="state-box"><div class="spinner"></div>Timeline load ho rahi hai...</div>
+<!-- MOBILE SIDEBAR TOGGLE -->
+<button class="mob-toggle" onclick="toggleSidebar()">
+  📌 More — Articles, Trending &amp; Comments
+  <span id="mob-arrow" style="margin-left:auto;">▼</span>
+</button>
+
+<!-- ════════════════════════════════════════════════════════
+     TWO-COLUMN LAYOUT
+═══════════════════════════════════════════════════════ -->
+<div class="page-layout">
+
+  <!-- ── LEFT: TIMELINE ─────────────────────────────────── -->
+  <div class="main-col">
+    <div id="tl-root">
+      <div class="state-box"><div class="spinner"></div>Timeline load ho rahi hai...</div>
+    </div>
+    <div class="load-more-wrap" id="load-more-wrap" style="display:none;">
+      <button class="btn-load" id="load-more-btn" onclick="loadMore()">Aur updates dekho</button>
+    </div>
   </div>
-  <div class="load-more-wrap" id="load-more-wrap" style="display:none;">
-    <button class="btn-load" id="load-more-btn" onclick="loadMore()">Aur updates dekho</button>
-  </div>
-</div>
+
+  <!-- ── RIGHT: SIDEBAR ─────────────────────────────────── -->
+  <aside class="sidebar">
+    <div class="sidebar-inner" id="sidebar-inner">
+
+      <!-- 1. TRENDING / MOST VIEWED PAGES -->
+      <div class="sb-widget" id="widget-trending">
+        <div class="sb-head">
+          <span class="sb-head-icon">🔥</span>
+          अभी सबसे अधिक पढ़ा जा रहा
+          <span class="live-dot-sm"></span>
+        </div>
+        <div id="trending-body">
+          <!-- skeleton -->
+          ${[1,2,3,4].map(() => `
+          <div class="sk-block">
+            <div class="sk-line sk-w80"></div>
+            <div class="sk-line sk-w55"></div>
+          </div>`).join('')}
+        </div>
+      </div>
+
+      <!-- 2. LATEST ARTICLES -->
+      <div class="sb-widget" id="widget-latest-articles">
+        <div class="sb-head"><span class="sb-head-icon">📖</span> नवीनतम लेख</div>
+        <div id="latest-articles-body">
+          ${[1,2,3].map(() => `<div class="sk-block"><div class="sk-line sk-w80"></div><div class="sk-line sk-w55"></div></div>`).join('')}
+        </div>
+      </div>
+
+      <!-- 3. MOST VIEWED ARTICLES -->
+      <div class="sb-widget" id="widget-popular-articles">
+        <div class="sb-head"><span class="sb-head-icon">👁️</span> सर्वाधिक देखे गए लेख</div>
+        <div id="popular-articles-body">
+          ${[1,2,3].map(() => `<div class="sk-block"><div class="sk-line sk-w80"></div><div class="sk-line sk-w55"></div></div>`).join('')}
+        </div>
+      </div>
+
+      <!-- 4. LATEST POSTS -->
+      <div class="sb-widget" id="widget-latest-posts">
+        <div class="sb-head"><span class="sb-head-icon">🪷</span> नवीनतम पोस्ट</div>
+        <div id="latest-posts-body">
+          ${[1,2,3].map(() => `<div class="sk-block"><div class="sk-line sk-w80"></div><div class="sk-line sk-w55"></div></div>`).join('')}
+        </div>
+      </div>
+
+      <!-- 5. COMMENTS -->
+      <div class="sb-widget" id="widget-comments">
+        <div class="sb-head"><span class="sb-head-icon">💬</span> टिप्पणियाँ</div>
+        <div class="comments-wrap">
+          <!-- page-id set dynamically by JS once festival slug is known -->
+          <div id="sm-comments" data-page-id=""></div>
+        </div>
+      </div>
+
+    </div><!-- /sidebar-inner -->
+  </aside>
+
+</div><!-- /page-layout -->
 
 <!-- VIDEO LIGHTBOX -->
 <div class="lightbox" id="lb" onclick="closeLb(event)">
@@ -323,352 +534,6 @@
   </div>
 </div>
 
-<script>
-// ─────────────────────────────────────────────────────────────────
-// CONFIG — change these two lines only
-// ─────────────────────────────────────────────────────────────────
-const API_BASE     = 'https://www.api.shivmarg.live';
-const FESTIVAL_SLUG = (() => {
-  // reads slug from URL path: /events/rath-yatra-2026  →  "rath-yatra-2026"
-  const parts = window.location.pathname.split('/').filter(Boolean);
-  const idx = parts.indexOf('events');
-  return idx !== -1 && parts[idx + 1] ? parts[idx + 1] : 'rath-yatra-2026';
-})();
-
-// ─────────────────────────────────────────────────────────────────
-// STATE
-// ─────────────────────────────────────────────────────────────────
-let totalEvents   = 0;
-let loadedEvents  = 0;
-const PAGE_SIZE   = 30;
-let pollTimer     = null;
-let lastLiveCount = 0;
-
-// ─────────────────────────────────────────────────────────────────
-// BOOT
-// ─────────────────────────────────────────────────────────────────
-async function boot() {
-  await Promise.all([
-    loadSEO(),
-    loadTimeline(0),
-  ]);
-  startLivePolling();
-}
-
-// ─────────────────────────────────────────────────────────────────
-// SEO — inject meta + JSON-LD
-// ─────────────────────────────────────────────────────────────────
-async function loadSEO() {
-  try {
-    const r = await fetch(`${API_BASE}/events/${FESTIVAL_SLUG}/seo`);
-    if (!r.ok) return;
-    const data = await r.json();
-    const m = data.meta;
-
-    document.getElementById('page-title').textContent   = m.title + ' | ShivMarg';
-    document.title                                      = m.title + ' | ShivMarg';
-    document.getElementById('meta-desc').content        = m.description;
-    document.getElementById('og-title').content         = m.title;
-    document.getElementById('og-desc').content          = m.description;
-    document.getElementById('og-image').content         = m.og_image;
-    document.getElementById('canonical').href           = m.canonical;
-
-    if (data.json_ld && data.json_ld[0])
-      document.getElementById('jsonld-event').textContent    = JSON.stringify(data.json_ld[0]);
-    if (data.json_ld && data.json_ld[1])
-      document.getElementById('jsonld-liveblog').textContent = JSON.stringify(data.json_ld[1]);
-  } catch(e) { console.warn('SEO load failed', e); }
-}
-
-// ─────────────────────────────────────────────────────────────────
-// TIMELINE LOAD
-// ─────────────────────────────────────────────────────────────────
-async function loadTimeline(skip) {
-  try {
-    const r = await fetch(`${API_BASE}/events/${FESTIVAL_SLUG}?limit=${PAGE_SIZE}&skip=${skip}`);
-    if (!r.ok) throw new Error(r.status);
-    const data = await r.json();
-
-    // Fill festival header once
-    if (skip === 0) fillHeader(data.festival);
-
-    totalEvents  = data.total;
-    loadedEvents += data.events.length;
-
-    if (skip === 0) {
-      document.getElementById('tl-root').innerHTML = '';
-    }
-
-    if (data.events.length === 0 && skip === 0) {
-      document.getElementById('tl-root').innerHTML =
-        '<div class="empty">Koi event abhi tak add nahi kiya gaya.</div>';
-      return;
-    }
-
-    renderEvents(data.events);
-    updateStatusBar(data);
-    toggleLoadMore();
-
-  } catch(e) {
-    document.getElementById('tl-root').innerHTML =
-      `<div class="state-box">⚠️ Timeline load nahi hui. API check karo.<br><small>${e}</small></div>`;
-  }
-}
-
-function loadMore() {
-  loadTimeline(loadedEvents);
-}
-
-// ─────────────────────────────────────────────────────────────────
-// LIVE POLLING — every 60s fetch /live endpoint
-// ─────────────────────────────────────────────────────────────────
-function startLivePolling() {
-  updateLivePill();
-  pollTimer = setInterval(updateLivePill, 60000);
-}
-
-async function updateLivePill() {
-  try {
-    const r = await fetch(`${API_BASE}/events/${FESTIVAL_SLUG}/live`);
-    if (!r.ok) return;
-    const data = await r.json();
-    const count = data.count || 0;
-
-    const pill = document.getElementById('live-pill');
-    const cnt  = document.getElementById('live-count');
-
-    if (count > 0) {
-      pill.style.display = 'flex';
-      cnt.textContent = `${count} live update${count > 1 ? 's' : ''} abhi chal rahi hai`;
-
-      // If new live events appeared since last poll — refresh timeline silently
-      if (count !== lastLiveCount) {
-        loadedEvents = 0;
-        await loadTimeline(0);
-      }
-    } else {
-      cnt.textContent = 'Koi live update nahi abhi';
-    }
-    lastLiveCount = count;
-  } catch(e) { /* silent */ }
-}
-
-// ─────────────────────────────────────────────────────────────────
-// RENDER HELPERS
-// ─────────────────────────────────────────────────────────────────
-function fillHeader(festival) {
-  if (!festival) return;
-  document.getElementById('ftitle').textContent    = festival.name || '';
-  document.getElementById('fsubtitle').textContent = festival.subtitle || festival.location || '';
-
-  const meta = document.getElementById('fmeta');
-  const pills = [];
-  if (festival.start_date && festival.end_date) {
-    pills.push(formatDateRange(festival.start_date, festival.end_date));
-  }
-  if (festival.location) pills.push('📍 ' + festival.location);
-  if (festival.tags && festival.tags.length)
-    pills.push('🏷️ ' + festival.tags.slice(0, 2).join(', '));
-
-  meta.innerHTML = pills.map(p => `<div class="f-pill">${p}</div>`).join('');
-}
-
-function updateStatusBar(data) {
-  const sr = document.getElementById('status-right');
-  const lastEv = data.events[0];
-  let lastStr = '';
-  if (lastEv) {
-    const dt = new Date(lastEv.created_at || lastEv.event_date);
-    lastStr = ' · Last: ' + timeAgo(dt);
-  }
-  sr.textContent = `${data.total} kul updates${lastStr}`;
-}
-
-function toggleLoadMore() {
-  const wrap = document.getElementById('load-more-wrap');
-  wrap.style.display = loadedEvents < totalEvents ? 'block' : 'none';
-}
-
-// Group events by date and render day sections
-function renderEvents(events) {
-  const root = document.getElementById('tl-root');
-  const groups = groupByDate(events);
-
-  groups.forEach(({ label, events: evs }) => {
-    const grpDiv = document.createElement('div');
-    grpDiv.className = 'day-group';
-    grpDiv.innerHTML = `<div class="day-label">${label}</div>`;
-    const listDiv = document.createElement('div');
-    listDiv.className = 'tl-list';
-
-    evs.forEach((ev, i) => {
-      listDiv.innerHTML += buildEventCard(ev, i === evs.length - 1);
-    });
-
-    grpDiv.appendChild(listDiv);
-    root.appendChild(grpDiv);
-  });
-}
-
-function buildEventCard(ev, isLast) {
-  const status = ev.status || 'update';
-  const dotCls = status;
-
-  // time string
-  const timeStr = ev.event_time
-    ? formatTime(ev.event_time)
-    : (ev.event_date ? formatDate(ev.event_date) : 'Abhi');
-
-  // badges
-  const badges = [];
-  const badgeMap = {
-    live: '<span class="badge b-live">🟢 Live</span>',
-    alert: '<span class="badge b-alert">🔴 Alert</span>',
-    update: '<span class="badge b-update">Update</span>',
-    upcoming: '<span class="badge b-upcoming">Upcoming</span>',
-    done: '<span class="badge b-done">Completed</span>',
-  };
-  if (badgeMap[status]) badges.push(badgeMap[status]);
-  if (ev.pinned) badges.push('<span class="badge b-pin">📌 Pinned</span>');
-  if (ev.media_tags && ev.media_tags.includes('photo'))
-    badges.push('<span class="badge b-photo">Photo</span>');
-  if (ev.media_tags && ev.media_tags.includes('video'))
-    badges.push('<span class="badge b-video">Video</span>');
-
-  // images
-  let mediaHtml = '';
-  const imgs = (ev.images || []).filter(Boolean);
-  const hasVideo = !!ev.video_url;
-  if (imgs.length || hasVideo) {
-    const thumbs = imgs.slice(0, 3).map(url =>
-      `<img class="img-thumb" src="${esc(url)}" alt="Event image" loading="lazy" onclick="openImg('${esc(url)}')">`
-    ).join('');
-    const vidThumb = hasVideo
-      ? `<div class="vid-thumb" onclick="openVideo('${esc(ev.video_url)}')"><div class="play-btn">▶</div></div>`
-      : '';
-    mediaHtml = `<div class="media-row">${thumbs}${vidThumb}</div>`;
-  }
-
-  // source
-  const srcHtml = ev.source
-    ? `<div class="source-row"><div class="src-dot"></div><div class="src-txt">${esc(ev.source)}</div></div>`
-    : '';
-
-  const connCls = isLast ? 'style="min-height:0;height:0;"' : '';
-
-  return `
-  <div class="ev-row">
-    <div class="dot-col">
-      <div class="dot ${dotCls}"></div>
-      <div class="conn" ${connCls}></div>
-    </div>
-    <div class="ev-card ${status}">
-      <div class="card-top">
-        <div class="card-time">${esc(timeStr)}</div>
-        <div class="badges">${badges.join('')}</div>
-      </div>
-      <div class="card-title">${esc(ev.title || '')}</div>
-      <div class="card-body">${ev.body || ''}</div>
-      ${mediaHtml}
-      ${srcHtml}
-    </div>
-  </div>`;
-}
-
-// ─────────────────────────────────────────────────────────────────
-// LIGHTBOX
-// ─────────────────────────────────────────────────────────────────
-function openVideo(url) {
-  document.getElementById('lb-frame').src = url;
-  document.getElementById('lb').classList.add('open');
-}
-function openImg(url) {
-  window.open(url, '_blank');
-}
-function closeLb(e) {
-  if (!e || e.target === document.getElementById('lb') || e.currentTarget.tagName === 'BUTTON') {
-    document.getElementById('lb').classList.remove('open');
-    document.getElementById('lb-frame').src = '';
-  }
-}
-
-// ─────────────────────────────────────────────────────────────────
-// UTILS
-// ─────────────────────────────────────────────────────────────────
-function groupByDate(events) {
-  const map = new Map();
-  events.forEach(ev => {
-    const key = ev.event_date || 'unknown';
-    if (!map.has(key)) map.set(key, []);
-    map.get(key).push(ev);
-  });
-  return Array.from(map.entries()).map(([date, evs]) => ({
-    label: buildDayLabel(date, evs),
-    events: evs,
-  }));
-}
-
-function buildDayLabel(dateStr, evs) {
-  const today    = new Date().toISOString().slice(0, 10);
-  const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
-
-  let prefix = '';
-  if (dateStr === today)     prefix = 'Aaj · ';
-  else if (dateStr === yesterday) prefix = 'Kal · ';
-
-  const customLabel = evs.find(e => e.day_label)?.day_label;
-  const formatted   = dateStr !== 'unknown' ? formatDate(dateStr) : '';
-
-  return customLabel
-    ? `${prefix}${formatted} · ${customLabel}`
-    : `${prefix}${formatted}`;
-}
-
-function formatDate(iso) {
-  if (!iso) return '';
-  const d = new Date(iso + 'T00:00:00');
-  return d.toLocaleDateString('hi-IN', { day: 'numeric', month: 'long', year: 'numeric' });
-}
-
-function formatDateRange(start, end) {
-  const s = new Date(start + 'T00:00:00');
-  const e = new Date(end + 'T00:00:00');
-  const sm = s.toLocaleDateString('en-IN', { month: 'short', day: 'numeric' });
-  const em = e.toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' });
-  return `📅 ${sm} – ${em}`;
-}
-
-function formatTime(t) {
-  if (!t) return '';
-  const [h, m] = t.split(':').map(Number);
-  const ampm = h >= 12 ? 'PM' : 'AM';
-  const hh   = h % 12 || 12;
-  return `${hh}:${String(m).padStart(2,'0')} ${ampm}`;
-}
-
-function timeAgo(date) {
-  const sec = Math.floor((Date.now() - new Date(date)) / 1000);
-  if (sec < 60)  return 'abhi abhi';
-  if (sec < 3600) return Math.floor(sec/60) + ' min pehle';
-  if (sec < 86400) return Math.floor(sec/3600) + ' ghante pehle';
-  return Math.floor(sec/86400) + ' din pehle';
-}
-
-function esc(str) {
-  if (!str) return '';
-  return String(str)
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;')
-    .replace(/'/g,'&#39;');
-}
-
-// ─────────────────────────────────────────────────────────────────
-// START
-// ─────────────────────────────────────────────────────────────────
-boot();
-</script>
 <script src="/js/auth2.js"></script>
 <script src="/js/s-comments.js"></script>
 <script src="/js/streak-widget.js"></script>
@@ -686,5 +551,529 @@ boot();
 <script>window.SM_PAGE_ID = "/events/jagannath-rath-yatra-2026";</script>
 <script src="/js/last-visited.js"></script>
 <script src="/js/recent-visits.js"></script>
+<script src="/js/s-comments.js"></script>
+
+<script>
+'use strict';
+
+// ─────────────────────────────────────────────────────────────────
+// CONFIG — change only these
+// ─────────────────────────────────────────────────────────────────
+const API_BASE      = 'https://www.api.shivmarg.live';
+const FESTIVAL_SLUG = (() => {
+  const parts = window.location.pathname.split('/').filter(Boolean);
+  const idx   = parts.indexOf('events');
+  return (idx !== -1 && parts[idx + 1]) ? parts[idx + 1] : 'rath-yatra-2026';
+})();
+
+// SEO fallback values — used if API returns empty/null
+const SEO_FALLBACKS = {
+  title:       'Live Festival Updates | ShivMarg',
+  description: 'ShivMarg par live festival coverage padhein — mantras, rituals, aur latest updates.',
+  og_image:    'https://shivmarg.live/assets/og-default.jpg',
+  canonical:   `https://shivmarg.live/events/${FESTIVAL_SLUG}`,
+  keywords:    'festival live updates, hindu festival, mantra, puja, shivmarg',
+};
+
+// ─────────────────────────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────────────────────────
+let totalEvents   = 0;
+let loadedEvents  = 0;
+const PAGE_SIZE   = 30;
+let lastLiveCount = 0;
+
+// ─────────────────────────────────────────────────────────────────
+// BOOT
+// ─────────────────────────────────────────────────────────────────
+async function boot() {
+  // Run all loads in parallel — timeline + sidebar, don't block each other
+  await Promise.all([
+    loadSEO(),
+    loadTimeline(0),
+  ]);
+
+  // Sidebar loads independently (non-blocking)
+  loadTrending();
+  loadLatestArticles();
+  loadPopularArticles();
+  loadLatestPosts();
+
+  // Comments — set page-id then let s-comments.js do its thing
+  initComments();
+
+  // Live polling starts after first timeline load
+  startLivePolling();
+}
+
+// ─────────────────────────────────────────────────────────────────
+// SEO — inject meta + JSON-LD with fallbacks
+// ─────────────────────────────────────────────────────────────────
+function setMeta(id, attr, val, fallback) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const v = val || fallback || '';
+  el[attr] = v;
+  // also set document.title directly
+  if (id === 'page-title') document.title = v;
+}
+
+async function loadSEO() {
+  try {
+    const r = await fetch(`${API_BASE}/events/${FESTIVAL_SLUG}/seo`);
+    if (!r.ok) throw new Error('SEO API ' + r.status);
+    const data = await r.json();
+    const m    = data.meta || {};
+
+    const title = m.title       || SEO_FALLBACKS.title;
+    const desc  = m.description || SEO_FALLBACKS.description;
+    const img   = m.og_image    || SEO_FALLBACKS.og_image;
+    const canon = m.canonical   || SEO_FALLBACKS.canonical;
+
+    // Title
+    document.title = title;
+    document.getElementById('page-title').textContent = title;
+
+    // Standard meta
+    document.getElementById('meta-desc').content    = desc;
+    document.getElementById('meta-keywords').content = SEO_FALLBACKS.keywords;
+
+    // OG
+    document.getElementById('og-title').content = title;
+    document.getElementById('og-desc').content  = desc;
+    document.getElementById('og-image').content = img;
+    document.getElementById('og-url').content   = canon;
+
+    // Twitter
+    document.getElementById('tw-title').content = title;
+    document.getElementById('tw-desc').content  = desc;
+    document.getElementById('tw-image').content = img;
+
+    // Canonical
+    document.getElementById('canonical').href = canon;
+
+    // JSON-LD
+    if (data.json_ld && data.json_ld[0])
+      document.getElementById('jsonld-event').textContent    = JSON.stringify(data.json_ld[0]);
+    if (data.json_ld && data.json_ld[1])
+      document.getElementById('jsonld-liveblog').textContent = JSON.stringify(data.json_ld[1]);
+
+  } catch(e) {
+    // Fallback — API failed, use frontend defaults
+    console.warn('SEO API failed, using fallbacks:', e.message);
+    document.title = SEO_FALLBACKS.title;
+    document.getElementById('page-title').textContent = SEO_FALLBACKS.title;
+    document.getElementById('meta-desc').content      = SEO_FALLBACKS.description;
+    document.getElementById('og-title').content       = SEO_FALLBACKS.title;
+    document.getElementById('og-desc').content        = SEO_FALLBACKS.description;
+    document.getElementById('og-image').content       = SEO_FALLBACKS.og_image;
+    document.getElementById('tw-title').content       = SEO_FALLBACKS.title;
+    document.getElementById('tw-desc').content        = SEO_FALLBACKS.description;
+    document.getElementById('tw-image').content       = SEO_FALLBACKS.og_image;
+    document.getElementById('canonical').href         = SEO_FALLBACKS.canonical;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────
+// TIMELINE
+// ─────────────────────────────────────────────────────────────────
+async function loadTimeline(skip) {
+  try {
+    const r = await fetch(`${API_BASE}/events/${FESTIVAL_SLUG}?limit=${PAGE_SIZE}&skip=${skip}`);
+    if (!r.ok) throw new Error(r.status);
+    const data = await r.json();
+
+    if (skip === 0) {
+      fillHeader(data.festival);
+      document.getElementById('tl-root').innerHTML = '';
+    }
+
+    totalEvents   = data.total;
+    loadedEvents += data.events.length;
+
+    if (data.events.length === 0 && skip === 0) {
+      document.getElementById('tl-root').innerHTML =
+        '<div class="state-box">Koi event abhi tak add nahi kiya gaya.</div>';
+      return;
+    }
+
+    renderEvents(data.events);
+    updateStatusBar(data);
+    toggleLoadMore();
+
+  } catch(e) {
+    document.getElementById('tl-root').innerHTML =
+      `<div class="state-box">⚠️ Timeline load nahi hui.<br><small style="opacity:.6">${e}</small></div>`;
+  }
+}
+
+function loadMore() { loadTimeline(loadedEvents); }
+
+// ─────────────────────────────────────────────────────────────────
+// LIVE POLLING — every 60s, only /live endpoint
+// ─────────────────────────────────────────────────────────────────
+function startLivePolling() {
+  updateLivePill();
+  setInterval(updateLivePill, 60000);
+}
+
+async function updateLivePill() {
+  try {
+    const r    = await fetch(`${API_BASE}/events/${FESTIVAL_SLUG}/live`);
+    if (!r.ok) return;
+    const data = await r.json();
+    const count = data.count || 0;
+    const cnt   = document.getElementById('live-count');
+
+    if (count > 0) {
+      cnt.textContent = `${count} live update${count > 1 ? 's' : ''} abhi chal rahi hai`;
+      if (count !== lastLiveCount) {
+        // New live event appeared — silently refresh timeline
+        loadedEvents = 0;
+        await loadTimeline(0);
+      }
+    } else {
+      cnt.textContent = 'Koi live update nahi abhi';
+    }
+    lastLiveCount = count;
+  } catch(e) { /* silent */ }
+}
+
+// ─────────────────────────────────────────────────────────────────
+// SIDEBAR: TRENDING (most viewed pages)
+// Uses the same API as trending.js: /api/public/trending-pages
+// ─────────────────────────────────────────────────────────────────
+async function loadTrending() {
+  const body = document.getElementById('trending-body');
+  try {
+    const r    = await fetch(`${API_BASE}/api/public/trending-pages?limit=6`);
+    if (!r.ok) throw new Error(r.status);
+    const data = await r.json();
+    const items = data.trending || [];
+
+    if (!items.length) { body.innerHTML = '<div class="empty-sb">Koi data nahi.</div>'; return; }
+
+    body.innerHTML = items.map((item, i) => `
+      <a class="trend-item" href="https://www.shivmarg.live${esc(item.url)}" target="_blank" rel="noopener">
+        <div class="trend-rank">${i + 1}</div>
+        <div class="trend-icon">${item.icon || '🪷'}</div>
+        <div class="trend-body">
+          <div class="trend-title">${esc(item.title)}</div>
+          <div class="trend-views"><div class="views-dot"></div>${fmtViews(item.views)} पाठक</div>
+        </div>
+        <div class="trend-arrow">›</div>
+      </a>`).join('');
+  } catch(e) {
+    body.innerHTML = '<div class="empty-sb">Trending load nahi hua.</div>';
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────
+// SIDEBAR: LATEST ARTICLES
+// Uses same endpoint as suggested-posts.js: /api/articles/latest
+// ─────────────────────────────────────────────────────────────────
+async function loadLatestArticles() {
+  const body = document.getElementById('latest-articles-body');
+  try {
+    const r    = await fetch(`${API_BASE}/api/articles/latest?limit=4`);
+    if (!r.ok) throw new Error(r.status);
+    const data = await r.json();
+    const arts  = data.articles || data || [];
+    if (!arts.length) { body.innerHTML = '<div class="empty-sb">Koi article nahi.</div>'; return; }
+    body.innerHTML = arts.map(a => buildArticleItem(a, false)).join('');
+  } catch(e) {
+    body.innerHTML = '<div class="empty-sb">Articles load nahi hue.</div>';
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────
+// SIDEBAR: POPULAR / MOST VIEWED ARTICLES
+// Uses same endpoint as suggested-posts.js: /api/articles/popular
+// ─────────────────────────────────────────────────────────────────
+async function loadPopularArticles() {
+  const body = document.getElementById('popular-articles-body');
+  try {
+    const r    = await fetch(`${API_BASE}/api/articles/popular?limit=4`);
+    if (!r.ok) throw new Error(r.status);
+    const data = await r.json();
+    const arts  = data.articles || data || [];
+    if (!arts.length) { body.innerHTML = '<div class="empty-sb">Koi article nahi.</div>'; return; }
+    body.innerHTML = arts.map(a => buildArticleItem(a, false)).join('');
+  } catch(e) {
+    body.innerHTML = '<div class="empty-sb">Popular articles load nahi hue.</div>';
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────
+// SIDEBAR: LATEST POSTS
+// Uses same endpoint as suggested-posts.js: /api/posts/latest
+// ─────────────────────────────────────────────────────────────────
+async function loadLatestPosts() {
+  const body = document.getElementById('latest-posts-body');
+  try {
+    const r    = await fetch(`${API_BASE}/api/posts/latest?limit=4`);
+    if (!r.ok) throw new Error(r.status);
+    const data = await r.json();
+    const posts = data.posts || data || [];
+    if (!posts.length) { body.innerHTML = '<div class="empty-sb">Koi post nahi.</div>'; return; }
+    body.innerHTML = posts.map(p => buildArticleItem(p, true)).join('');
+  } catch(e) {
+    body.innerHTML = '<div class="empty-sb">Posts load nahi hue.</div>';
+  }
+}
+
+// Shared article/post card for sidebar
+function buildArticleItem(item, isPost) {
+  const href  = isPost
+    ? (item.url || item.link || '#')
+    : `/article/${item.slug || ''}`;
+  const title = esc(isPost ? (item.name || item.title) : item.title);
+  const img   = isPost ? item.image : (item.thumbnail_url || item.banner_url);
+  const views = item.view_count || 0;
+  const date  = isPost ? (item.createdAt || item.date) : (item.created_at || item.published_at || item.date);
+  const dateStr = date ? new Date(date).toLocaleDateString('hi-IN', { day: 'numeric', month: 'short' }) : '';
+
+  const imgHtml = img
+    ? `<img class="art-thumb" src="${esc(img)}" alt="${title}" loading="lazy" onerror="this.style.display='none'">`
+    : `<div class="art-thumb-placeholder">🪷</div>`;
+
+  return `
+    <a class="art-item" href="${esc(href)}" target="${isPost?'_blank':'_self'}" rel="noopener">
+      ${imgHtml}
+      <div class="art-body">
+        <div class="art-title">${title}</div>
+        <div class="art-meta">${dateStr}${views ? ' · ' + fmtViews(views) + ' views' : ''}</div>
+      </div>
+    </a>`;
+}
+
+// ─────────────────────────────────────────────────────────────────
+// COMMENTS — set data-page-id then fire event for s-comments.js
+// ─────────────────────────────────────────────────────────────────
+function initComments() {
+  const el = document.getElementById('sm-comments');
+  if (!el) return;
+  // page-id = "event-{slug}" — same pattern your other pages use
+  const pageId = `event-${FESTIVAL_SLUG}`;
+  el.setAttribute('data-page-id', pageId);
+  // If s-comments.js exposes an init function, call it; otherwise it
+  // auto-discovers [data-page-id] on DOMContentLoaded — already done.
+  if (window.SmComments && typeof window.SmComments.init === 'function') {
+    window.SmComments.init();
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────
+// MOBILE SIDEBAR TOGGLE
+// ─────────────────────────────────────────────────────────────────
+function toggleSidebar() {
+  const inner = document.getElementById('sidebar-inner');
+  const arrow = document.getElementById('mob-arrow');
+  const open  = inner.classList.toggle('open');
+  arrow.textContent = open ? '▲' : '▼';
+}
+
+// ─────────────────────────────────────────────────────────────────
+// RENDER HELPERS
+// ─────────────────────────────────────────────────────────────────
+function fillHeader(festival) {
+  if (!festival) return;
+  document.getElementById('ftitle').textContent    = festival.name || '';
+  document.getElementById('fsubtitle').textContent = festival.subtitle || festival.location || '';
+
+  const meta  = document.getElementById('fmeta');
+  const pills = [];
+  if (festival.start_date && festival.end_date)
+    pills.push(formatDateRange(festival.start_date, festival.end_date));
+  if (festival.location)
+    pills.push('📍 ' + festival.location);
+  if (festival.tags && festival.tags.length)
+    pills.push('🏷️ ' + festival.tags.slice(0, 2).join(', '));
+  meta.innerHTML = pills.map(p => `<div class="f-pill">${p}</div>`).join('');
+}
+
+function updateStatusBar(data) {
+  const sr    = document.getElementById('status-right');
+  const lastEv = data.events[0];
+  let lastStr  = '';
+  if (lastEv) {
+    const dt = new Date(lastEv.created_at || lastEv.event_date);
+    lastStr  = ' · Last: ' + timeAgo(dt);
+  }
+  sr.textContent = `${data.total} kul updates${lastStr}`;
+}
+
+function toggleLoadMore() {
+  document.getElementById('load-more-wrap').style.display =
+    loadedEvents < totalEvents ? 'block' : 'none';
+}
+
+function renderEvents(events) {
+  const root   = document.getElementById('tl-root');
+  const groups = groupByDate(events);
+  groups.forEach(({ label, events: evs }) => {
+    const grp  = document.createElement('div');
+    grp.className = 'day-group';
+    grp.innerHTML = `<div class="day-label">${label}</div>`;
+    const list = document.createElement('div');
+    list.className = 'tl-list';
+    evs.forEach((ev, i) => { list.innerHTML += buildEventCard(ev, i === evs.length - 1); });
+    grp.appendChild(list);
+    root.appendChild(grp);
+  });
+}
+
+function buildEventCard(ev, isLast) {
+  const status   = ev.status || 'update';
+  const timeStr  = ev.event_time ? formatTime(ev.event_time) : (ev.event_date ? formatDate(ev.event_date) : 'Abhi');
+
+  const badgeMap = {
+    live:     '<span class="badge b-live">🟢 Live</span>',
+    alert:    '<span class="badge b-alert">🔴 Alert</span>',
+    update:   '<span class="badge b-update">Update</span>',
+    upcoming: '<span class="badge b-upcoming">Upcoming</span>',
+    done:     '<span class="badge b-done">Completed</span>',
+  };
+  const badges = [];
+  if (badgeMap[status]) badges.push(badgeMap[status]);
+  if (ev.pinned) badges.push('<span class="badge b-pin">📌 Pinned</span>');
+  if (ev.media_tags?.includes('photo')) badges.push('<span class="badge b-photo">Photo</span>');
+  if (ev.media_tags?.includes('video')) badges.push('<span class="badge b-video">Video</span>');
+
+  // media
+  const imgs = (ev.images || []).filter(Boolean);
+  const hasVideo = !!ev.video_url;
+  let mediaHtml = '';
+  if (imgs.length || hasVideo) {
+    const thumbs = imgs.slice(0, 3).map(url =>
+      `<img class="img-thumb" src="${esc(url)}" alt="Event image" loading="lazy" onclick="openImg('${esc(url)}')">`
+    ).join('');
+    const vidThumb = hasVideo
+      ? `<div class="vid-thumb" onclick="openVideo('${esc(ev.video_url)}')"><div class="play-btn">▶</div></div>`
+      : '';
+    mediaHtml = `<div class="media-row">${thumbs}${vidThumb}</div>`;
+  }
+
+  // source
+  const srcHtml = ev.source
+    ? `<div class="source-row"><div class="src-dot"></div><div class="src-txt">${esc(ev.source)}</div></div>`
+    : '';
+
+  // share
+  const pageUrl  = encodeURIComponent(window.location.href);
+  const shareTitle = encodeURIComponent(ev.title || '');
+  const shareHtml = `
+    <div class="share-row">
+      <span class="share-lbl">Share:</span>
+      <a class="share-btn" href="https://wa.me/?text=${shareTitle}%20${pageUrl}" target="_blank" rel="noopener">📲 WhatsApp</a>
+      <a class="share-btn" href="https://twitter.com/intent/tweet?text=${shareTitle}&url=${pageUrl}" target="_blank" rel="noopener">𝕏 Twitter</a>
+      <button class="share-btn" onclick="copyLink()">🔗 Copy</button>
+    </div>`;
+
+  const connAttr = isLast ? 'style="min-height:0;height:0;"' : '';
+
+  return `
+  <div class="ev-row">
+    <div class="dot-col">
+      <div class="dot ${status}"></div>
+      <div class="conn" ${connAttr}></div>
+    </div>
+    <div class="ev-card ${status}">
+      <div class="card-top">
+        <div class="card-time">${esc(timeStr)}</div>
+        <div class="badges">${badges.join('')}</div>
+      </div>
+      <div class="card-title">${esc(ev.title || '')}</div>
+      <div class="card-body">${ev.body || ''}</div>
+      ${mediaHtml}
+      ${srcHtml}
+      ${shareHtml}
+    </div>
+  </div>`;
+}
+
+// ─────────────────────────────────────────────────────────────────
+// LIGHTBOX & SHARE
+// ─────────────────────────────────────────────────────────────────
+function openVideo(url) {
+  document.getElementById('lb-frame').src = url;
+  document.getElementById('lb').classList.add('open');
+}
+function openImg(url) { window.open(url, '_blank'); }
+function closeLb(e) {
+  if (!e || e.target === document.getElementById('lb') || e.currentTarget.tagName === 'BUTTON') {
+    document.getElementById('lb').classList.remove('open');
+    document.getElementById('lb-frame').src = '';
+  }
+}
+function copyLink() {
+  navigator.clipboard?.writeText(window.location.href)
+    .then(() => alert('Link copy ho gaya!'))
+    .catch(() => alert(window.location.href));
+}
+
+// ─────────────────────────────────────────────────────────────────
+// UTILS
+// ─────────────────────────────────────────────────────────────────
+function groupByDate(events) {
+  const map = new Map();
+  events.forEach(ev => {
+    const key = ev.event_date || 'unknown';
+    if (!map.has(key)) map.set(key, []);
+    map.get(key).push(ev);
+  });
+  return Array.from(map.entries()).map(([date, evs]) => ({
+    label: buildDayLabel(date, evs), events: evs,
+  }));
+}
+
+function buildDayLabel(dateStr, evs) {
+  const today     = new Date().toISOString().slice(0, 10);
+  const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+  let prefix = '';
+  if (dateStr === today)      prefix = 'Aaj · ';
+  else if (dateStr === yesterday) prefix = 'Kal · ';
+  const customLabel = evs.find(e => e.day_label)?.day_label;
+  const formatted   = dateStr !== 'unknown' ? formatDate(dateStr) : '';
+  return customLabel ? `${prefix}${formatted} · ${customLabel}` : `${prefix}${formatted}`;
+}
+
+function formatDate(iso) {
+  if (!iso) return '';
+  return new Date(iso + 'T00:00:00').toLocaleDateString('hi-IN', { day:'numeric', month:'long', year:'numeric' });
+}
+function formatDateRange(start, end) {
+  const sm = new Date(start + 'T00:00:00').toLocaleDateString('en-IN', { month:'short', day:'numeric' });
+  const em = new Date(end   + 'T00:00:00').toLocaleDateString('en-IN', { month:'short', day:'numeric', year:'numeric' });
+  return `📅 ${sm} – ${em}`;
+}
+function formatTime(t) {
+  if (!t) return '';
+  const [h, m] = t.split(':').map(Number);
+  return `${h % 12 || 12}:${String(m).padStart(2,'0')} ${h >= 12 ? 'PM' : 'AM'}`;
+}
+function timeAgo(date) {
+  const sec = Math.floor((Date.now() - new Date(date)) / 1000);
+  if (sec < 60)    return 'abhi abhi';
+  if (sec < 3600)  return Math.floor(sec / 60)   + ' min pehle';
+  if (sec < 86400) return Math.floor(sec / 3600)  + ' ghante pehle';
+  return Math.floor(sec / 86400) + ' din pehle';
+}
+function fmtViews(n) {
+  if (!n) return '0';
+  return n >= 1000 ? (n / 1000).toFixed(1) + 'k' : String(n);
+}
+function esc(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// ─────────────────────────────────────────────────────────────────
+// START
+// ─────────────────────────────────────────────────────────────────
+boot();
+</script>
 </body>
 </html>
