@@ -410,11 +410,11 @@ let festivals   = [];
 // ─────────────────────────────────────────────────────────────────
 async function boot() {
   // Uses your existing SmAuth global (same pattern as rest of ShivMarg)
-  const user = window.SmAuth?.getUser?.() || null;
+  const user = window.SmAuth ? window.SmAuth.getUser() : null;
 
   if (!user) {
     showAuthErr('Login nahi kiya hai. Redirect ho raha hai...');
-    setTimeout(() => window.SmAuth._switchTab('login'), 1800);
+    setTimeout(() => window.location.href = '/admin-login', 1800);
     return;
   }
 
