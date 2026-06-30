@@ -891,6 +891,17 @@ const MENU_DATA = [
       ]},
     ]
   },
+  {
+    id: 'Shop', icon: '🛍️', label: 'शिवमार्ग शॉप',
+    groups: [
+      { label: 'शिवमार्ग शॉप', items: [
+        { hi: 'शिवमार्ग शॉप', url: 'https://crafts.shivmarg.com' },
+        { hi: 'rudraksha', url: 'https://crafts.shivmarg.live/products.html?cat=rudraksha' },
+        { hi: 'टेक्सटाइल्स', url: 'https://crafts.shivmarg.live/products.html?cat=textiles' },
+        { hi: 'चित्र', url: 'https://crafts.shivmarg.live/products.html?cat=paintings' },
+      ]},
+    ]
+  },
 ];
 
   /* ─────────────────────────────────────────────
