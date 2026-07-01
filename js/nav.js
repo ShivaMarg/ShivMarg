@@ -802,14 +802,6 @@ const MENU_DATA = [
     ]
   },
   {
-    id: 'vishnu', icon: '🪷', label: 'विष्णु',
-    groups: [
-      { label: 'भगवान विष्णु', items: [
-        { hi: 'विष्णु मंत्र', url: '/bhagvan-vishnu-mantra/' },
-      ]},
-    ]
-  },
-  {
     id: 'ram', icon: '🏹', label: 'राम-हनुमान',
     groups: [
       { label: 'श्री राम', items: [
@@ -835,20 +827,11 @@ const MENU_DATA = [
         { hi: 'श्री कृष्ण आरती', url: '/Krishna-Mahamantras/Shri-Krishna-Aarti/' },
         { hi: 'श्री कृष्ण चालीसा', url: '/Krishna-Mahamantras/Shri-Krishna-Chalisha/' },
         { hi: 'श्रीमद् भगवद्गीता', url: '/Krishna-Mahamantras/Shreemad-Bhagavad-gita/' },
+        { hi: 'विष्णु मंत्र', url: '/bhagvan-vishnu-mantra/' },
       ]},
       { label: 'मैथिली गीत', items: [
         { hi: 'विद्यापति गीत संग्रह', url: '/Vidyapati-Geet-Sangrah/' },
         { hi: 'मैथिली भजन गीत', url: '/Maithili-bhajan-geet/' },
-      ]},
-    ]
-  },
-  {
-    id: 'ganesh', icon: '🐘', label: 'गणेश',
-    groups: [
-      { label: 'श्री गणेश', items: [
-        { hi: 'गणेश मंत्र', url: '/ganesh-mantras/' },
-        { hi: 'गणेश आरती', url: '/ganesh-mantras/ganesh-aarti/' },
-        { hi: 'गणेश चालीसा', url: '/ganesh-mantras/ganesh-chalisha/' },
       ]},
     ]
   },
@@ -860,6 +843,11 @@ const MENU_DATA = [
         { hi: 'सूर्य आरती', url: '/surya-mantras/surya-aarti/' },
         { hi: 'आदित्य हृदयम्', url: '/surya-mantras/aditya-hridayam/' },
         { hi: 'छठ पूजा मंत्र', url: '/surya-mantras/chhath-puja-mantra/' },
+      ]},
+      { label: 'श्री गणेश', items: [
+        { hi: 'गणेश मंत्र', url: '/ganesh-mantras/' },
+        { hi: 'गणेश आरती', url: '/ganesh-mantras/ganesh-aarti/' },
+        { hi: 'गणेश चालीसा', url: '/ganesh-mantras/ganesh-chalisha/' },
       ]},
     ]
   },
@@ -895,7 +883,7 @@ const MENU_DATA = [
     id: 'Shop', icon: '🛍️', label: 'शिवमार्ग शॉप',
     groups: [
       { label: 'शिवमार्ग शॉप', items: [
-        { hi: 'शिवमार्ग शॉप', url: 'https://crafts.shivmarg.com' },
+        { hi: 'शिवमार्ग शॉप', url: 'https://crafts.shivmarg.live' },
         { hi: 'rudraksha', url: 'https://crafts.shivmarg.live/products.html?cat=rudraksha' },
         { hi: 'टेक्सटाइल्स', url: 'https://crafts.shivmarg.live/products.html?cat=textiles' },
         { hi: 'चित्र', url: 'https://crafts.shivmarg.live/products.html?cat=paintings' },
