@@ -24,6 +24,7 @@
     { "source": "/profile/:username", "destination": "/profile/index.html" },
     { "source": "/user/:username/myactivity", "destination": "/activity/index.html" },
     { "source": "/article/:slug", "destination": "/article/index.html" },
-    { "source": "/events/:slug", "destination": "/events/jagannath-rath-yatra-2026/index.html" }
+    { "source": "/events/:slug", "destination": "/events/jagannath-rath-yatra-2026/index.html" },
+    { "source": "/author/:slug", "destination": "/author/index.html" }
   ]
 }
