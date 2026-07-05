@@ -219,8 +219,8 @@
     <label for="keyInput">RapidAPI Key</label>
     <input id="keyInput" type="text" placeholder="Paste your RapidAPI key here">
     <div class="hint">
-      This page uses the free <b>IRCTC</b> API on RapidAPI. Get a free key in under a minute:
-      <br>1. Go to <a href="https://rapidapi.com/IRCTCAPI/api/irctc1" target="_blank">rapidapi.com/IRCTCAPI/api/irctc1</a>
+      This page uses the <b>Real-Time PNR Status API for Indian Railways</b> on RapidAPI. Get a free key in under a minute:
+      <br>1. Go to <a href="https://rapidapi.com/shivesh96/api/real-time-pnr-status-api-for-indian-railways" target="_blank">this API's RapidAPI page</a>
       <br>2. Sign up / log in (free)
       <br>3. Click <b>Subscribe</b> → choose the <b>Free</b> plan
       <br>4. Copy your key from the "X-RapidAPI-Key" field and paste it above
@@ -247,8 +247,8 @@
 </div>
 
 <script>
-const API_HOST = "irctc1.p.rapidapi.com";
-const API_URL_BASE = "https://irctc1.p.rapidapi.com/api/v3/getPNRStatus";
+const API_HOST = "real-time-pnr-status-api-for-indian-railways.p.rapidapi.com";
+const API_URL_BASE = "https://real-time-pnr-status-api-for-indian-railways.p.rapidapi.com/disha";
 
 const setupCard = document.getElementById('setupCard');
 const statusCard = document.getElementById('statusCard');
@@ -295,12 +295,13 @@ async function fetchPNR(pnr, key, isManualRefresh){
   }
 
   try{
-    const url = `${API_URL_BASE}?pnrNumber=${encodeURIComponent(pnr)}`;
+    const url = `${API_URL_BASE}/${encodeURIComponent(pnr)}`;
     const resp = await fetch(url, {
       method: 'GET',
       headers: {
         'x-rapidapi-key': key,
-        'x-rapidapi-host': API_HOST
+        'x-rapidapi-host': API_HOST,
+        'Content-Type': 'application/json'
       }
     });
 
@@ -337,10 +338,10 @@ function renderResult(json, pnr){
 
   const trainName = data.trainName || data.train_name || '—';
   const trainNumber = data.trainNumber || data.train_number || '—';
-  const fromCode = (data.sourceStation || data.boardingPoint || (data.from && data.from.code)) || '—';
-  const toCode = (data.destinationStation || (data.to && data.to.code)) || '—';
+  const fromCode = (data.sourceStation || data.boardingPoint || data.boarding_point || data.from_station || (data.from && data.from.code)) || '—';
+  const toCode = (data.destinationStation || data.reservation_upto || data.to_station || (data.to && data.to.code)) || '—';
   const journeyDate = data.dateOfJourney || data.journey_date || data.doj || '—';
-  const chartStatus = data.chartStatus || data.chart_prepared || '—';
+  const chartStatus = data.chartStatus || data.chart_prepared || data.status || '—';
   const cls = data.journeyClass || data.class || '—';
   const boardingDate = data.boardingDate || journeyDate;
 
@@ -349,8 +350,8 @@ function renderResult(json, pnr){
 
   let rowsHtml = '';
   passengers.forEach((p, idx) => {
-    const current = p.currentStatus || p.status || p.currentStatusDetails || '—';
-    const booking = p.bookingStatus || p.status_booking || '';
+    const current = p.currentStatus || p.current_status || p.status || p.currentStatusDetails || p.seat_number || '—';
+    const booking = p.bookingStatus || p.booking_status || p.status_booking || '';
     const cls2 = statusBadgeClass(current);
     rowsHtml += `<tr>
         <td>${idx+1}</td>
