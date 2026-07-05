@@ -195,6 +195,15 @@ HTML_PAGE_TEMPLATE = """<!DOCTYPE html>
   <meta name="twitter:description" content="{meta_description}">
   <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
   <style>{css}</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9N0GE0NNGD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9N0GE0NNGD');
+</script>
 </head>
 <body>
 <header>
@@ -324,6 +333,15 @@ CATEGORY_INDEX_TEMPLATE = """<!DOCTYPE html>
     .link-title{{display:block;font-size:1.05rem;color:#fff;}}
     .link-desc{{color:#d1c6ab;font-size:0.94rem;}}
   </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9N0GE0NNGD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9N0GE0NNGD');
+</script>
 </head>
 <body>
 <main>

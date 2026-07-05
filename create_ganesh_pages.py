@@ -233,6 +233,15 @@ html_template = """<!DOCTYPE html>
       .mantra-text {{ font-size:1.4rem; padding:20px; }}
     }}
   </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9N0GE0NNGD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9N0GE0NNGD');
+</script>
 </head>
 <body>
   <!-- BG -->
@@ -329,6 +338,15 @@ root_index = """<!DOCTYPE html>
   <meta name="description" content="गणेश मंत्र और स्तोत्रों का संग्रह।">
   <meta name="robots" content="index, follow">
   <style>body{margin:0;font-family:Segoe UI,system-ui,sans-serif;background:#05060f;color:#f8f4e8}h1{margin:.4em 0;font-size:2.4rem}p{line-height:1.8}ul{margin:1.2em 0 0 1.2em}li{margin:.55em 0}a{color:#ffd86b;text-decoration:none}</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9N0GE0NNGD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9N0GE0NNGD');
+</script>
 </head>
 <body>
 <main style="max-width:780px;margin:0 auto;padding:28px">

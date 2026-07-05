@@ -121,6 +121,15 @@ def make_content(slug, title, eng, desc, audio_title, preview):
     .play-btn{{width:38px;height:38px;border-radius:50%;background:#ffb347;border:none;color:#05060f;font-size:1rem;cursor:pointer}}
     #player{{width:0;height:0;overflow:hidden}}
   </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9N0GE0NNGD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9N0GE0NNGD');
+</script>
 </head>
 <body>
 <main>
@@ -154,6 +163,15 @@ with open(root_index, 'w', encoding='utf-8') as f:
   <meta name="description" content="सूर्य मंत्रों और स्तोत्रों का संग्रह।">
   <meta name="robots" content="index, follow">
   <style>body{margin:0;font-family:Segoe UI,system-ui,sans-serif;background:#05060f;color:#f8f4e8}main{max-width:780px;margin:0 auto;padding:28px}h1{margin:.4em 0;font-size:2.4rem}p{line-height:1.8}ul{margin:1.2em 0 0 1.2em}li{margin:.55em 0}a{color:#ffd86b;text-decoration:none}</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9N0GE0NNGD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9N0GE0NNGD');
+</script>
 </head>
 <body>
 <main>

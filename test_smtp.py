@@ -74,6 +74,15 @@ def _build_custom_email_html(display_name: str, custom_message: str) -> str:
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ShivaMarg संदेश</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9N0GE0NNGD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9N0GE0NNGD');
+</script>
 </head>
 <body style="margin:0;padding:0;background-color:#fdf6ec;font-family:'Segoe UI',Arial,sans-serif;">
 

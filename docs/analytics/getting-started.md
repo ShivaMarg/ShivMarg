@@ -150,6 +150,15 @@ export default function RootLayout({
         <title>Next.js</title>
       <link rel="stylesheet" href="/loder/loder.css">
 <script src="/loder/loder.js" defer></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9N0GE0NNGD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9N0GE0NNGD');
+</script>
 </head>
       <body>
         {children}
@@ -171,6 +180,15 @@ export default function RootLayout({ children }) {
         <title>Next.js</title>
       <link rel="stylesheet" href="/loder/loder.css">
 <script src="/loder/loder.js" defer></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9N0GE0NNGD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9N0GE0NNGD');
+</script>
 </head>
       <body>
         {children}
@@ -235,6 +253,15 @@ export default function App() {
         <Links />
       <link rel="stylesheet" href="/loder/loder.css">
 <script src="/loder/loder.js" defer></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9N0GE0NNGD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9N0GE0NNGD');
+</script>
 </head>
       <body>
         <Analytics />
@@ -270,6 +297,15 @@ export default function App() {
         <Links />
       <link rel="stylesheet" href="/loder/loder.css">
 <script src="/loder/loder.js" defer></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9N0GE0NNGD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9N0GE0NNGD');
+</script>
 </head>
       <body>
         <Analytics />
@@ -433,6 +469,15 @@ import Analytics from '@vercel/analytics/astro';
     <Analytics />
 	<link rel="stylesheet" href="/loder/loder.css">
 <script src="/loder/loder.js" defer></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9N0GE0NNGD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9N0GE0NNGD');
+</script>
 </head>
 	<body>
 		<slot />
@@ -454,6 +499,15 @@ import Analytics from '@vercel/analytics/astro';
     <Analytics />
 	<link rel="stylesheet" href="/loder/loder.css">
 <script src="/loder/loder.js" defer></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9N0GE0NNGD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9N0GE0NNGD');
+</script>
 </head>
 	<body>
 		<slot />
