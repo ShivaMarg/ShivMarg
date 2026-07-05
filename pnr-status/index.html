@@ -219,8 +219,8 @@
     <label for="keyInput">RapidAPI Key</label>
     <input id="keyInput" type="text" placeholder="Paste your RapidAPI key here">
     <div class="hint">
-      This page uses the <b>Real-Time PNR Status API for Indian Railways</b> on RapidAPI. Get a free key in under a minute:
-      <br>1. Go to <a href="https://rapidapi.com/shivesh96/api/real-time-pnr-status-api-for-indian-railways" target="_blank">this API's RapidAPI page</a>
+      This page uses the <b>IRCTC1</b> API on RapidAPI. Get a free key in under a minute:
+      <br>1. Go to <a href="https://rapidapi.com/IRCTCAPI/api/irctc1" target="_blank">rapidapi.com/IRCTCAPI/api/irctc1</a>
       <br>2. Sign up / log in (free)
       <br>3. Click <b>Subscribe</b> → choose the <b>Free</b> plan
       <br>4. Copy your key from the "X-RapidAPI-Key" field and paste it above
@@ -247,8 +247,8 @@
 </div>
 
 <script>
-const API_HOST = "real-time-pnr-status-api-for-indian-railways.p.rapidapi.com";
-const API_URL_BASE = "https://real-time-pnr-status-api-for-indian-railways.p.rapidapi.com/disha";
+const API_HOST = "irctc1.p.rapidapi.com";
+const API_URL_BASE = "https://irctc1.p.rapidapi.com/api/v3/getPNRStatus";
 
 const setupCard = document.getElementById('setupCard');
 const statusCard = document.getElementById('statusCard');
@@ -295,13 +295,12 @@ async function fetchPNR(pnr, key, isManualRefresh){
   }
 
   try{
-    const url = `${API_URL_BASE}/${encodeURIComponent(pnr)}`;
+    const url = `${API_URL_BASE}?pnrNumber=${encodeURIComponent(pnr)}`;
     const resp = await fetch(url, {
       method: 'GET',
       headers: {
         'x-rapidapi-key': key,
-        'x-rapidapi-host': API_HOST,
-        'Content-Type': 'application/json'
+        'x-rapidapi-host': API_HOST
       }
     });
 
@@ -331,27 +330,35 @@ function renderResult(json, pnr){
 
   const data = json && json.data ? json.data : json;
 
-  if(!data || (json.success === false)){
+  if(!data || (json.success === false) || (json.status === false)){
     resultArea.innerHTML = `<div class="error-box">⚠️ ${json && json.message ? json.message : 'No data found for this PNR. It may be invalid or too old.'}</div>`;
     return;
   }
 
-  const trainName = data.trainName || data.train_name || '—';
-  const trainNumber = data.trainNumber || data.train_number || '—';
-  const fromCode = (data.sourceStation || data.boardingPoint || data.boarding_point || data.from_station || (data.from && data.from.code)) || '—';
-  const toCode = (data.destinationStation || data.reservation_upto || data.to_station || (data.to && data.to.code)) || '—';
-  const journeyDate = data.dateOfJourney || data.journey_date || data.doj || '—';
-  const chartStatus = data.chartStatus || data.chart_prepared || data.status || '—';
-  const cls = data.journeyClass || data.class || '—';
-  const boardingDate = data.boardingDate || journeyDate;
+  const trainName = data.TrainName || '—';
+  const trainNumber = data.TrainNo || '—';
+  const fromCode = data.From || data.BoardingPoint || '—';
+  const toCode = data.ReservationUpto || '—';
+  const journeyDate = data.Doj || '—';
+  const chartStatus = (typeof data.ChartPrepared === 'boolean')
+    ? (data.ChartPrepared ? 'Chart Prepared' : 'Chart Not Prepared')
+    : (data.ChartPrepared || '—');
+  const cls = data.Class || '—';
 
-  let passengers = data.passengerList || data.passenger || data.passengers || [];
+  // Safety check: make sure the API actually returned data for the PNR we asked for.
+  const returnedPnr = String(data.Pnr || data.pnrNumber || data.pnrNo || data.pnr || '').trim();
+  if(returnedPnr && returnedPnr !== String(pnr).trim()){
+    resultArea.innerHTML = `<div class="error-box">⚠️ This API returned data for PNR <b>${returnedPnr}</b> instead of the PNR you entered (<b>${pnr}</b>). This provider appears to be returning static/demo data rather than your real ticket. Please try a different API key/provider.</div>`;
+    return;
+  }
+
+  let passengers = data.PassengerStatus || data.passengerList || data.passengerDetailsDTO || data.passenger || data.passengers || [];
   if(!Array.isArray(passengers)) passengers = [];
 
   let rowsHtml = '';
   passengers.forEach((p, idx) => {
-    const current = p.currentStatus || p.current_status || p.status || p.currentStatusDetails || p.seat_number || '—';
-    const booking = p.bookingStatus || p.booking_status || p.status_booking || '';
+    const current = p.CurrentStatus || p.currentStatusDetails || p.currentStatus || p.current_status || p.status || '—';
+    const booking = p.BookingStatus || p.bookingStatusDetails || p.bookingStatus || p.booking_status || '';
     const cls2 = statusBadgeClass(current);
     rowsHtml += `<tr>
         <td>${idx+1}</td>
