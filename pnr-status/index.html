@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PNR Status Checker</title>
+<style>
+  :root{
+    --bg:#0f172a;
+    --card:#ffffff;
+    --accent:#2563eb;
+    --accent-dark:#1d4ed8;
+    --text:#1e293b;
+    --muted:#64748b;
+    --green:#16a34a;
+    --amber:#d97706;
+    --red:#dc2626;
+    --border:#e2e8f0;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 100%);
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:32px 16px;
+  }
+  .wrap{width:100%;max-width:480px;}
+  .header{
+    text-align:center;
+    color:#fff;
+    margin-bottom:20px;
+  }
+  .header h1{font-size:24px;margin:0 0 4px;font-weight:700;}
+  .header p{margin:0;color:#cbd5e1;font-size:13px;}
+
+  .card{
+    background:var(--card);
+    border-radius:16px;
+    padding:24px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.25);
+    margin-bottom:16px;
+  }
+  label{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    color:var(--text);
+    margin-bottom:6px;
+    margin-top:14px;
+  }
+  label:first-of-type{margin-top:0;}
+  input{
+    width:100%;
+    padding:11px 12px;
+    border:1.5px solid var(--border);
+    border-radius:10px;
+    font-size:15px;
+    outline:none;
+    transition:border-color .15s;
+  }
+  input:focus{border-color:var(--accent);}
+  .hint{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.4;}
+  .hint a{color:var(--accent);text-decoration:none;}
+
+  button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:var(--accent);
+    color:#fff;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    margin-top:18px;
+    transition:background .15s;
+  }
+  button:hover{background:var(--accent-dark);}
+  button:disabled{background:#94a3b8;cursor:not-allowed;}
+  .btn-secondary{
+    background:transparent;
+    color:var(--accent);
+    border:1.5px solid var(--accent);
+    margin-top:10px;
+  }
+  .btn-secondary:hover{background:#eff6ff;}
+
+  .status-line{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:14px;
+  }
+  .pnr-tag{
+    font-family:monospace;
+    font-size:13px;
+    background:#f1f5f9;
+    padding:4px 10px;
+    border-radius:6px;
+    color:var(--text);
+    font-weight:600;
+    letter-spacing:0.5px;
+  }
+  .refresh-icon{
+    cursor:pointer;
+    font-size:18px;
+    color:var(--accent);
+    user-select:none;
+  }
+  .refresh-icon.spinning{
+    display:inline-block;
+    animation:spin 0.8s linear infinite;
+  }
+  @keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+
+  .train-name{font-size:18px;font-weight:700;color:var(--text);margin:0 0 2px;}
+  .train-sub{font-size:13px;color:var(--muted);margin:0 0 16px;}
+
+  .route{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#f8fafc;
+    border-radius:10px;
+    padding:12px 14px;
+    margin-bottom:14px;
+  }
+  .route .station{text-align:center;flex:1;}
+  .route .station .code{font-size:16px;font-weight:700;color:var(--text);}
+  .route .station .label{font-size:11px;color:var(--muted);margin-top:2px;}
+  .route .arrow{color:var(--muted);font-size:16px;padding:0 8px;}
+
+  .meta-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:16px;
+  }
+  .meta-item{
+    background:#f8fafc;
+    border-radius:8px;
+    padding:8px 10px;
+  }
+  .meta-item .k{font-size:11px;color:var(--muted);}
+  .meta-item .v{font-size:13px;font-weight:600;color:var(--text);margin-top:2px;}
+
+  table{width:100%;border-collapse:collapse;margin-top:4px;}
+  th{
+    text-align:left;
+    font-size:11px;
+    color:var(--muted);
+    padding:6px 8px;
+    border-bottom:1.5px solid var(--border);
+    text-transform:uppercase;
+    letter-spacing:0.3px;
+  }
+  td{
+    padding:9px 8px;
+    font-size:13.5px;
+    border-bottom:1px solid var(--border);
+    color:var(--text);
+  }
+  .badge{
+    display:inline-block;
+    padding:3px 8px;
+    border-radius:6px;
+    font-size:12px;
+    font-weight:700;
+  }
+  .badge.cnf{background:#dcfce7;color:var(--green);}
+  .badge.wl{background:#fef3c7;color:var(--amber);}
+  .badge.rac{background:#dbeafe;color:var(--accent);}
+  .badge.can{background:#fee2e2;color:var(--red);}
+
+  .last-updated{
+    text-align:center;
+    font-size:12px;
+    color:#cbd5e1;
+    margin-top:4px;
+  }
+  .error-box{
+    background:#fee2e2;
+    color:var(--red);
+    border-radius:10px;
+    padding:12px 14px;
+    font-size:13.5px;
+    margin-bottom:14px;
+    line-height:1.4;
+  }
+  .loading-box{
+    text-align:center;
+    padding:30px 0;
+    color:var(--muted);
+    font-size:14px;
+  }
+  .footer-links{
+    text-align:center;
+    margin-top:6px;
+  }
+  .footer-links button{width:auto;padding:8px 16px;font-size:12.5px;margin:4px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <h1>🚆 PNR Status</h1>
+    <p>Saved once, refreshed every time you open this page</p>
+  </div>
+
+  <!-- SETUP FORM -->
+  <div class="card" id="setupCard" style="display:none;">
+    <label for="pnrInput">PNR Number</label>
+    <input id="pnrInput" type="text" inputmode="numeric" maxlength="10" placeholder="e.g. 2451234567">
+
+    <label for="keyInput">RapidAPI Key</label>
+    <input id="keyInput" type="text" placeholder="Paste your RapidAPI key here">
+    <div class="hint">
+      This page uses the free <b>IRCTC</b> API on RapidAPI. Get a free key in under a minute:
+      <br>1. Go to <a href="https://rapidapi.com/IRCTCAPI/api/irctc1" target="_blank">rapidapi.com/IRCTCAPI/api/irctc1</a>
+      <br>2. Sign up / log in (free)
+      <br>3. Click <b>Subscribe</b> → choose the <b>Free</b> plan
+      <br>4. Copy your key from the "X-RapidAPI-Key" field and paste it above
+      <br><br>Your PNR and key are stored only in your browser (localStorage) — nothing is sent anywhere except directly to the API.
+    </div>
+
+    <button id="saveBtn">Save & Check Status</button>
+  </div>
+
+  <!-- STATUS CARD -->
+  <div class="card" id="statusCard" style="display:none;">
+    <div class="status-line">
+      <span class="pnr-tag" id="pnrTag"></span>
+      <span class="refresh-icon" id="refreshBtn" title="Refresh">⟳</span>
+    </div>
+    <div id="resultArea"></div>
+  </div>
+
+  <div class="last-updated" id="lastUpdated"></div>
+
+  <div class="footer-links">
+    <button class="btn-secondary" id="changeBtn" style="display:none;">Change PNR / API Key</button>
+  </div>
+</div>
+
+<script>
+const API_HOST = "irctc1.p.rapidapi.com";
+const API_URL_BASE = "https://irctc1.p.rapidapi.com/api/v3/getPNRStatus";
+
+const setupCard = document.getElementById('setupCard');
+const statusCard = document.getElementById('statusCard');
+const resultArea = document.getElementById('resultArea');
+const pnrTag = document.getElementById('pnrTag');
+const lastUpdatedEl = document.getElementById('lastUpdated');
+const changeBtn = document.getElementById('changeBtn');
+const refreshBtn = document.getElementById('refreshBtn');
+
+function getSaved(){
+  return {
+    pnr: localStorage.getItem('pnr_number'),
+    key: localStorage.getItem('rapidapi_key')
+  };
+}
+
+function saveDetails(pnr, key){
+  localStorage.setItem('pnr_number', pnr);
+  localStorage.setItem('rapidapi_key', key);
+}
+
+function clearDetails(){
+  localStorage.removeItem('pnr_number');
+  localStorage.removeItem('rapidapi_key');
+}
+
+function statusBadgeClass(statusText){
+  if(!statusText) return '';
+  const s = statusText.toUpperCase();
+  if(s.includes('CNF') || s.includes('CONFIRM')) return 'cnf';
+  if(s.includes('WL')) return 'wl';
+  if(s.includes('RAC')) return 'rac';
+  if(s.includes('CAN')) return 'can';
+  return '';
+}
+
+async function fetchPNR(pnr, key, isManualRefresh){
+  resultArea.innerHTML = '';
+  if(isManualRefresh){
+    refreshBtn.classList.add('spinning');
+  } else {
+    statusCard.style.display = 'block';
+    resultArea.innerHTML = '<div class="loading-box">Fetching latest status…</div>';
+  }
+
+  try{
+    const url = `${API_URL_BASE}?pnrNumber=${encodeURIComponent(pnr)}`;
+    const resp = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'x-rapidapi-key': key,
+        'x-rapidapi-host': API_HOST
+      }
+    });
+
+    if(!resp.ok){
+      if(resp.status === 401 || resp.status === 403){
+        throw new Error('Invalid or unauthorized RapidAPI key. Please check your key and subscription.');
+      }
+      if(resp.status === 429){
+        throw new Error('Free quota exceeded for this month. Try again later or upgrade your RapidAPI plan.');
+      }
+      throw new Error(`API request failed (HTTP ${resp.status}).`);
+    }
+
+    const json = await resp.json();
+    renderResult(json, pnr);
+    lastUpdatedEl.textContent = 'Last updated: ' + new Date().toLocaleString();
+  } catch(err){
+    statusCard.style.display = 'block';
+    resultArea.innerHTML = `<div class="error-box">⚠️ ${err.message || 'Something went wrong while fetching PNR status.'}</div>`;
+  } finally {
+    refreshBtn.classList.remove('spinning');
+  }
+}
+
+function renderResult(json, pnr){
+  pnrTag.textContent = 'PNR ' + pnr;
+
+  const data = json && json.data ? json.data : json;
+
+  if(!data || (json.success === false)){
+    resultArea.innerHTML = `<div class="error-box">⚠️ ${json && json.message ? json.message : 'No data found for this PNR. It may be invalid or too old.'}</div>`;
+    return;
+  }
+
+  const trainName = data.trainName || data.train_name || '—';
+  const trainNumber = data.trainNumber || data.train_number || '—';
+  const fromCode = (data.sourceStation || data.boardingPoint || (data.from && data.from.code)) || '—';
+  const toCode = (data.destinationStation || (data.to && data.to.code)) || '—';
+  const journeyDate = data.dateOfJourney || data.journey_date || data.doj || '—';
+  const chartStatus = data.chartStatus || data.chart_prepared || '—';
+  const cls = data.journeyClass || data.class || '—';
+  const boardingDate = data.boardingDate || journeyDate;
+
+  let passengers = data.passengerList || data.passenger || data.passengers || [];
+  if(!Array.isArray(passengers)) passengers = [];
+
+  let rowsHtml = '';
+  passengers.forEach((p, idx) => {
+    const current = p.currentStatus || p.status || p.currentStatusDetails || '—';
+    const booking = p.bookingStatus || p.status_booking || '';
+    const cls2 = statusBadgeClass(current);
+    rowsHtml += `<tr>
+        <td>${idx+1}</td>
+        <td><span class="badge ${cls2}">${current}</span></td>
+        <td>${booking || '—'}</td>
+      </tr>`;
+  });
+
+  resultArea.innerHTML = `
+    <p class="train-name">${trainName}</p>
+    <p class="train-sub">Train No. ${trainNumber} &middot; ${cls}</p>
+
+    <div class="route">
+      <div class="station">
+        <div class="code">${fromCode}</div>
+        <div class="label">From</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="station">
+        <div class="code">${toCode}</div>
+        <div class="label">To</div>
+      </div>
+    </div>
+
+    <div class="meta-grid">
+      <div class="meta-item">
+        <div class="k">Journey Date</div>
+        <div class="v">${journeyDate}</div>
+      </div>
+      <div class="meta-item">
+        <div class="k">Chart Status</div>
+        <div class="v">${chartStatus}</div>
+      </div>
+    </div>
+
+    ${passengers.length ? `
+    <table>
+      <thead>
+        <tr><th>#</th><th>Current Status</th><th>Booking Status</th></tr>
+      </thead>
+      <tbody>
+        ${rowsHtml}
+      </tbody>
+    </table>` : '<div class="hint">No passenger-level details returned by the API for this PNR.</div>'}
+  `;
+}
+
+function showSetup(){
+  setupCard.style.display = 'block';
+  statusCard.style.display = 'none';
+  changeBtn.style.display = 'none';
+  lastUpdatedEl.textContent = '';
+  const saved = getSaved();
+  if(saved.pnr) document.getElementById('pnrInput').value = saved.pnr;
+  if(saved.key) document.getElementById('keyInput').value = saved.key;
+}
+
+function showStatus(){
+  setupCard.style.display = 'none';
+  changeBtn.style.display = 'inline-block';
+}
+
+document.getElementById('saveBtn').addEventListener('click', () => {
+  const pnr = document.getElementById('pnrInput').value.trim();
+  const key = document.getElementById('keyInput').value.trim();
+  if(!/^\d{9,10}$/.test(pnr)){
+    alert('Please enter a valid 9 or 10 digit PNR number.');
+    return;
+  }
+  if(!key){
+    alert('Please paste your RapidAPI key.');
+    return;
+  }
+  saveDetails(pnr, key);
+  showStatus();
+  fetchPNR(pnr, key, false);
+});
+
+changeBtn.addEventListener('click', () => {
+  clearDetails();
+  showSetup();
+});
+
+refreshBtn.addEventListener('click', () => {
+  const saved = getSaved();
+  if(saved.pnr && saved.key){
+    fetchPNR(saved.pnr, saved.key, true);
+  }
+});
+
+// On page load / refresh: auto-fetch if details already saved
+(function init(){
+  const saved = getSaved();
+  if(saved.pnr && saved.key){
+    showStatus();
+    fetchPNR(saved.pnr, saved.key, false);
+  } else {
+    showSetup();
+  }
+})();
+</script>
+</body>
+</html>
