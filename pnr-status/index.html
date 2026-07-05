@@ -359,11 +359,15 @@ function renderResult(json, pnr){
   passengers.forEach((p, idx) => {
     const current = p.CurrentStatus || p.currentStatusDetails || p.currentStatus || p.current_status || p.status || '—';
     const booking = p.BookingStatus || p.bookingStatusDetails || p.bookingStatus || p.booking_status || '';
+    const coach = p.Coach || p.CurrentCoachId || p.BookingCoachId || p.coach || '—';
+    const berth = p.Berth || p.CurrentBerthNo || p.BookingBerthNo || p.berth || '—';
     const cls2 = statusBadgeClass(current);
     rowsHtml += `<tr>
         <td>${idx+1}</td>
         <td><span class="badge ${cls2}">${current}</span></td>
         <td>${booking || '—'}</td>
+        <td>${coach}</td>
+        <td>${berth}</td>
       </tr>`;
   });
 
@@ -395,14 +399,16 @@ function renderResult(json, pnr){
     </div>
 
     ${passengers.length ? `
+    <div style="overflow-x:auto;">
     <table>
       <thead>
-        <tr><th>#</th><th>Current Status</th><th>Booking Status</th></tr>
+        <tr><th>#</th><th>Current Status</th><th>Booking Status</th><th>Coach</th><th>Berth</th></tr>
       </thead>
       <tbody>
         ${rowsHtml}
       </tbody>
-    </table>` : '<div class="hint">No passenger-level details returned by the API for this PNR.</div>'}
+    </table>
+    </div>` : '<div class="hint">No passenger-level details returned by the API for this PNR.</div>'}
   `;
 }
 
