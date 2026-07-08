@@ -3417,12 +3417,60 @@ body {
   <div class="akm-card">
     <div class="akm-eyebrow">✦ जुड़े रहें ✦</div>
     <div class="akm-shloka" style="font-size:1.15rem;">दैनिक मंत्र, पर्व अपडेट और पंचांग सीधे अपने ईमेल पर पाएं</div>
-    <form id="sm-newsletter-form" style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;justify-content:center;" onsubmit="return false;">
-      <input type="email" required placeholder="आपका ईमेल" style="flex:1;min-width:220px;padding:10px 14px;border:1px solid var(--border-color);border-radius:6px;font-family:'Crimson Pro',serif;">
-      <button type="submit" class="akm-share-btn">सब्सक्राइब करें</button>
+    <form id="sm-newsletter-form" style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;justify-content:center;">
+     <input type="email" id="sm-newsletter-email" required placeholder="आपका ईमेल" style="flex:1;min-width:220px;padding:10px 14px;border:1px solid var(--border-color);border-radius:6px;font-family:'Crimson Pro',serif;">
+     <button type="submit" id="sm-newsletter-btn" class="akm-share-btn">सब्सक्राइब करें</button>
     </form>
-  </div>
-</section>
+    <p id="sm-newsletter-msg" style="margin-top:10px;font-size:0.85rem;min-height:1.2em;"></p>
+   </div>
+ </section>
+<script>
+(function() {
+  var form = document.getElementById('sm-newsletter-form');
+  if (!form) return;
+  var btn = document.getElementById('sm-newsletter-btn');
+  var msg = document.getElementById('sm-newsletter-msg');
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var email = document.getElementById('sm-newsletter-email').value.trim();
+    if (!email) return;
+
+    btn.disabled = true;
+    var originalText = btn.textContent;
+    btn.textContent = 'भेज रहे हैं...';
+    msg.textContent = '';
+    msg.style.color = '';
+    try {
+      var res = await fetch(SM_API + '/api/newsletter/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email })
+      });
+
+      if (res.status === 201) {
+        msg.textContent = '✓ सब्सक्राइब हो गया! धन्यवाद।';
+        msg.style.color = 'var(--deep-saffron)';
+        form.reset();
+      } else if (res.status === 422) {
+       var data = await res.json();
+       var detail = (data.detail && data.detail[0] && data.detail[0].msg) || 'कृपया मान्य ईमेल दर्ज करें।';
+        msg.textContent = detail;
+        msg.style.color = 'var(--crimson)';
+      } else {
+        msg.textContent = 'कुछ गड़बड़ हुई, कृपया बाद में पुनः प्रयास करें।';
+        msg.style.color = 'var(--crimson)';
+      }    } catch (err) {
+      msg.textContent = 'नेटवर्क त्रुटि — कृपया पुनः प्रयास करें।';
+      msg.style.color = 'var(--crimson)';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = originalText;
+    }
+  });
+})();
+</script>
+
+
 <!-- Stats strip -->
 <div class="feature-strip">
   <div class="feature-item">
