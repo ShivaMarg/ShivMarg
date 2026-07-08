@@ -60,20 +60,20 @@
 </script>
 <style>
   :root{
-    --indigo:#1b2340;
-    --indigo-deep:#10142b;
-    --terracotta:#c1502e;
-    --brass:#c9a24b;
-    --brass-soft:#e6d3a3;
-    --cream:#f7f1e3;
-    --ash:#8b95b3;
+    --indigo:#0f0a1a;
+    --indigo-deep:#0a0515;
+    --terracotta:#c75b7a;
+    --brass:#d4af37;
+    --brass-soft:#e8c768;
+    --cream:#e8dff5;
+    --ash:#c9b3d4;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
     background:
-      radial-gradient(ellipse at 50% -10%, rgba(201,162,75,0.18), transparent 60%),
-      linear-gradient(180deg, var(--indigo-deep) 0%, var(--indigo) 55%, #161c38 100%);
+      radial-gradient(ellipse at 50% -10%, rgba(212, 175, 55, 0.15), transparent 60%),
+      linear-gradient(180deg, var(--indigo-deep) 0%, var(--indigo) 55%, #1a1230 100%);
     color:var(--cream);
     font-family:'Tiro Devanagari Hindi', serif;
     min-height:100vh;
@@ -91,7 +91,7 @@
     top:-40px; right:-60px;
     font-family:'Yatra One', cursive;
     font-size:280px;
-    color:rgba(201,162,75,0.04);
+    color:rgba(212, 175, 55, 0.04);
     transform:rotate(8deg);
     pointer-events:none;
     user-select:none;
@@ -144,9 +144,9 @@
     text-align:center;
     font-size:clamp(17px, 3vw, 20px);
     color:var(--terracotta);
-    background:linear-gradient(180deg, rgba(193,80,46,0.14), rgba(193,80,46,0.03));
-    border-top:1px solid rgba(201,162,75,0.35);
-    border-bottom:1px solid rgba(201,162,75,0.35);
+    background:linear-gradient(180deg, rgba(199, 91, 122, 0.12), rgba(199, 91, 122, 0.02));
+    border-top:1px solid rgba(212, 175, 55, 0.35);
+    border-bottom:1px solid rgba(212, 175, 55, 0.35);
     padding:16px 18px;
     margin:0 0 40px;
     line-height:1.9;
@@ -166,7 +166,7 @@
     position:absolute;
     left:0; top:6px; bottom:6px;
     width:2px;
-    background:linear-gradient(180deg, var(--brass), transparent);
+    background:linear-gradient(180deg, #d4af37, transparent);
   }
   .stanza .refrain-echo{
     display:block;
@@ -183,13 +183,13 @@
     justify-content:center;
     gap:14px;
     margin:0 0 40px;
-    color:var(--brass);
+    color:#d4af37;
   }
   .divider::before, .divider::after{
     content:"";
     height:1px;
     flex:1;
-    background:linear-gradient(90deg, transparent, rgba(201,162,75,0.4), transparent);
+    background:linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
   }
   .divider span{ font-size:13px; letter-spacing:0.3em; }
 
@@ -206,8 +206,8 @@
     letter-spacing:0.06em;
     text-transform:uppercase;
     color:var(--brass-soft);
-    background:rgba(201,162,75,0.1);
-    border:1px solid rgba(201,162,75,0.3);
+    background:rgba(212, 175, 55, 0.1);
+    border:1px solid rgba(212, 175, 55, 0.3);
     border-radius:20px;
     padding:6px 14px;
     text-decoration:none;
@@ -238,16 +238,16 @@
   .suggested-card{
     display:block;
     padding:16px 16px 14px;
-    border:1px solid rgba(201,162,75,0.22);
+    border:1px solid rgba(212, 175, 55, 0.22);
     border-radius:10px;
-    background:linear-gradient(180deg, rgba(201,162,75,0.06), transparent);
+    background:linear-gradient(180deg, rgba(212, 175, 55, 0.06), transparent);
     text-decoration:none;
     color:var(--cream);
     transition:transform 0.2s, border-color 0.2s;
   }
   .suggested-card:hover, .suggested-card:focus-visible{
     transform:translateY(-2px);
-    border-color:rgba(201,162,75,0.55);
+    border-color:rgba(212, 175, 55, 0.55);
   }
   .suggested-card .eyebrow-sm{
     display:block;
@@ -268,7 +268,7 @@
     text-align:center;
     margin-top:50px;
     padding-top:28px;
-    border-top:1px solid rgba(201,162,75,0.2);
+    border-top:1px solid rgba(212, 175, 55, 0.2);
   }
   .credit{
     font-family:'Cinzel', serif;
@@ -315,7 +315,7 @@
 </head>
 <body>
 
-  
+
   <div class="page">
 
     <div class="crest">

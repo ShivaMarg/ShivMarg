@@ -247,6 +247,82 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;}
 }
 .tk-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
+/* ── Profile card ──────────────────────────────── */
+.tk-profile-card{
+  background:linear-gradient(135deg,var(--card) 0%, var(--bg-soft) 100%);
+  border:1px solid var(--line);border-radius:var(--radius-md);
+  padding:16px;box-shadow:var(--shadow-soft);
+  display:flex;align-items:center;gap:14px;
+}
+.tk-profile-avatar{
+  width:58px;height:58px;border-radius:50%;flex:0 0 auto;
+  background:linear-gradient(135deg,var(--saffron),var(--gold-deep));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:1.5rem;color:#fff;
+  box-shadow:0 3px 10px rgba(156,106,9,.3);object-fit:cover;
+  border:2px solid #fff;
+}
+.tk-profile-info{flex:1;min-width:0;}
+.tk-profile-name{font-weight:700;font-size:1rem;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tk-profile-sub{font-size:.76rem;color:var(--ink-soft);margin-top:2px;}
+.tk-profile-edit{
+  width:36px;height:36px;border-radius:50%;background:var(--bg-soft);
+  display:flex;align-items:center;justify-content:center;font-size:.85rem;flex:0 0 auto;
+  border:1px solid var(--line);color:var(--gold-deep);
+}
+.tk-profile-badges{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
+.tk-badge{
+  font-size:.66rem;font-weight:600;padding:3px 9px;border-radius:12px;
+  background:var(--bg-soft);color:var(--gold-deep);border:1px solid var(--line);
+  display:flex;align-items:center;gap:3px;
+}
+.tk-badge.locked{opacity:.4;filter:grayscale(1);}
+.tk-badge-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px;}
+.tk-badge-tile{
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  padding:10px 4px;border-radius:var(--radius-sm);background:var(--bg-soft);
+  border:1px solid var(--line);text-align:center;
+}
+.tk-badge-tile.locked{opacity:.35;filter:grayscale(1);}
+.tk-badge-tile .emoji{font-size:1.3rem;}
+.tk-badge-tile .lbl{font-size:.6rem;color:var(--ink-soft);line-height:1.2;}
+
+/* ── Profile edit sheet ────────────────────────── */
+.tk-avatar-picker{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+.tk-avatar-picker .preview{
+  width:64px;height:64px;border-radius:50%;object-fit:cover;
+  background:linear-gradient(135deg,var(--saffron),var(--gold-deep));
+  display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.6rem;font-family:var(--font-display);
+  border:2px solid var(--line);
+}
+.tk-avatar-picker input[type=file]{font-size:.78rem;}
+
+/* ── Editable Profile Stat Row ─────────────────── */
+.tk-profile-stats-row{display:flex;justify-content:space-between;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);}
+.tk-profile-stats-row .pstat{text-align:center;flex:1;}
+.tk-profile-stats-row .pstat .num{font-family:var(--font-data);font-weight:700;font-size:1.1rem;color:var(--gold-deep);}
+.tk-profile-stats-row .pstat .lbl{font-size:.62rem;color:var(--ink-soft);margin-top:1px;}
+
+/* ── SEO / informational blocks ────────────────── */
+.tk-info-card{line-height:1.75;}
+.tk-info-card h3{font-family:var(--font-display);font-size:1rem;color:var(--maroon);margin:0 0 6px;}
+.tk-info-card h3:not(:first-child){margin-top:16px;}
+.tk-info-card p{margin:0 0 4px;font-size:.86rem;color:var(--ink-soft);}
+.tk-faq-item{background:var(--card);border-radius:var(--radius-md);box-shadow:var(--shadow-soft);
+  padding:14px 16px;margin-bottom:8px;}
+.tk-faq-item summary{cursor:pointer;font-weight:600;font-size:.9rem;color:var(--ink);list-style:none;
+  display:flex;justify-content:space-between;align-items:center;}
+.tk-faq-item summary::-webkit-details-marker{display:none;}
+.tk-faq-item summary::after{content:'+';font-size:1.1rem;color:var(--gold-deep);margin-left:10px;}
+.tk-faq-item[open] summary::after{content:'−';}
+.tk-faq-item p{margin:10px 0 0;font-size:.83rem;color:var(--ink-soft);line-height:1.6;}
+.tk-guide-item{background:var(--card);border-radius:var(--radius-md);box-shadow:var(--shadow-soft);
+  padding:14px 16px;margin-bottom:8px;}
+.tk-guide-item summary{cursor:pointer;font-weight:600;font-size:.88rem;color:var(--ink);list-style:none;}
+.tk-guide-item summary::-webkit-details-marker{display:none;}
+.tk-guide-item .body{margin-top:8px;font-size:.83rem;color:var(--ink-soft);line-height:1.65;}
+.tk-guide-item .body p{margin:0 0 6px;}
+
 @media (prefers-reduced-motion: reduce){
   .tk-mala-flash.show{animation:none;opacity:.4;}
   *{transition-duration:.01ms !important;}
@@ -261,6 +337,39 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;}
   gtag('js', new Date());
 
   gtag('config', 'G-9N0GE0NNGD');
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "क्या ShivMarg मंत्र जाप ट्रैकर मुफ़्त है?",
+      "acceptedAnswer": { "@type": "Answer", "text": "हाँ, ShivMarg पर मंत्र जाप ट्रैक करना पूरी तरह निःशुल्क है — कोई सदस्यता या छुपा शुल्क नहीं।" }
+    },
+    {
+      "@type": "Question",
+      "name": "क्या मेरा गुरु मंत्र सुरक्षित रहता है?",
+      "acceptedAnswer": { "@type": "Answer", "text": "जी हाँ, गुरु मंत्र एन्क्रिप्टेड रूप में सहेजा जाता है और केवल लॉगिन किए गए खाते से ही देखा जा सकता है।" }
+    },
+    {
+      "@type": "Question",
+      "name": "क्या मैं एक साथ कई मंत्रों की गिनती रख सकता हूँ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "हाँ, आप अपनी पसंद के कई मंत्र जोड़ सकते हैं और प्रत्येक का अलग-अलग दैनिक लक्ष्य व माला आकार सेट कर सकते हैं।" }
+    },
+    {
+      "@type": "Question",
+      "name": "क्या बिना लॉगिन किए ट्रैकर इस्तेमाल किया जा सकता है?",
+      "acceptedAnswer": { "@type": "Answer", "text": "हाँ, डेमो मोड में आप ट्रैकर आज़मा सकते हैं, लेकिन डेटा स्थायी रूप से सहेजने और लड़ी ट्रैक करने के लिए लॉगिन आवश्यक है।" }
+    },
+    {
+      "@type": "Question",
+      "name": "प्रोफ़ाइल की उपलब्धि (badge) कैसे अनलॉक होती हैं?",
+      "acceptedAnswer": { "@type": "Answer", "text": "निरंतर जाप, माला पूर्ण करने और लंबी लड़ी बनाए रखने से बैज अपने-आप अनलॉक होते हैं।" }
+    }
+  ]
+}
 </script>
 </head>
 <body>
@@ -281,8 +390,10 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;}
   <button id="tkLoginCta">लॉगिन करें</button>
 </div>
 
+
 <!-- Mantra carousel -->
 <div class="tk-carousel" id="tkCarousel"></div>
+
 
 <!-- The Mala -->
 <div class="tk-mala-wrap">
@@ -300,6 +411,29 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;}
   </div>
   <p class="tk-target-line">आज का लक्ष्य: <b id="tkTargetLine">—</b></p>
 </div>
+
+<!-- ── Profile card ─────────────────────────────── -->
+<section class="tk-section" style="margin-top:14px;">
+  <div class="tk-profile-card" id="tkProfileCard">
+    <div class="tk-profile-avatar" id="tkProfileAvatar">?</div>
+    <div class="tk-profile-info">
+      <div class="tk-profile-name" id="tkProfileName">अतिथि साधक</div>
+      <div class="tk-profile-sub" id="tkProfileSub">डेमो मोड — प्रगति सहेजने के लिए लॉगिन करें</div>
+      <div class="tk-profile-badges" id="tkProfileBadgesRow"></div>
+    </div>
+    <button class="tk-profile-edit" id="tkProfileEditBtn" title="प्रोफ़ाइल संपादित करें">✎</button>
+  </div>
+  <div class="tk-card" style="margin-top:10px;">
+    <div class="tk-profile-stats-row">
+      <div class="pstat"><div class="num" id="pStatMalas">0</div><div class="lbl">कुल माला</div></div>
+      <div class="pstat"><div class="num" id="pStatStreak">0</div><div class="lbl">दिन की लड़ी</div></div>
+      <div class="pstat"><div class="num" id="pStatMantras">0</div><div class="lbl">सक्रिय मंत्र</div></div>
+      <div class="pstat"><div class="num" id="pStatSince">—</div><div class="lbl">साधना आरंभ</div></div>
+    </div>
+    <div class="tk-badge-grid" id="tkBadgeGrid"></div>
+  </div>
+</section>
+
 
 <!-- Calendar: weekly / monthly -->
 <section class="tk-section">
@@ -340,6 +474,89 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;}
     <button class="tk-link" id="tkAddGuru">+ जोड़ें</button>
   </div>
   <div id="tkGuruList"></div>
+</section>
+
+<!-- ── SEO: विषय-प्राधिकरण अनुभाग ──────────────── -->
+<section class="tk-section">
+  <div class="tk-section-head"><h2>मंत्र जाप और माला ट्रैकर के बारे में</h2></div>
+  <div class="tk-card tk-info-card">
+    <h3>जाप क्या है और इसे गिनना क्यों ज़रूरी है?</h3>
+    <p>जाप यानी किसी मंत्र या ईश्वर के नाम की निरंतर आवृत्ति। शास्त्रों में जाप की एक निश्चित संख्या — जैसे एक माला (108 जाप), 11 माला या 21 माला — तय करने की परंपरा है, जिसे नियम कहा जाता है। संख्या तय होने से मन एकाग्र रहता है और साधना में निरंतरता बनी रहती है। ShivMarg का यह मंत्र जाप ट्रैकर आपको बिना गिनती भूले, पूरी तरह मंत्र पर ध्यान केंद्रित करने में मदद करता है।</p>
+
+    <h3>108 की संख्या का महत्व</h3>
+    <p>एक पारंपरिक माला में 108 मनके होते हैं। यह संख्या उपनिषदों की गिनती, ज्योतिषीय गणनाओं और वैदिक परंपरा में पूर्णता के प्रतीक के रूप में मानी जाती है। इसी कारण ShivMarg की डिजिटल माला भी डिफ़ॉल्ट रूप से 108 पर आधारित है, साथ ही 27, 54 और 1008 के विकल्प भी दिए गए हैं।</p>
+
+    <h3>डिजिटल जाप ट्रैकर बनाम भौतिक माला/काउंटर</h3>
+    <p>भौतिक जाप काउंटर मशीन में इतिहास सुरक्षित नहीं रहता, न ही लक्ष्य या लड़ी (streak) ट्रैक होती है। ShivMarg का ऑनलाइन ट्रैकर हर दिन की गिनती, माला-वार प्रगति, कैलेंडर व्यू और सबसे लंबी साधना-लड़ी — सब कुछ अपने-आप सुरक्षित रखता है, और यह पूरी तरह निःशुल्क है।</p>
+
+    <h3>गुरु मंत्र की गोपनीयता</h3>
+    <p>जिन साधकों को गुरु से दीक्षा में मंत्र प्राप्त हुआ है, वे उसे ShivMarg पर पूर्णतः एन्क्रिप्टेड रूप में सहेज सकते हैं — केवल आप ही इसे देख सकते हैं। यह ट्रैकर आपकी व्यक्तिगत साधना को गोपनीय रखते हुए भी उसकी नियमितता ट्रैक करता है।</p>
+  </div>
+</section>
+
+<!-- ── SEO: प्रमुख मंत्र गाइड ───────────────────── -->
+<section class="tk-section">
+  <div class="tk-section-head"><h2>लोकप्रिय मंत्र — जाप विधि और नियम</h2></div>
+
+  <details class="tk-guide-item">
+    <summary>🕉️ ॐ नमः शिवाय — पंचाक्षर मंत्र</summary>
+    <div class="body">
+      <p>यह भगवान शिव का पंचाक्षर मंत्र है। परंपरागत रूप से सोमवार, प्रदोष और महाशिवरात्रि पर इसका जाप विशेष फलदायी माना जाता है। न्यूनतम एक माला (108 जाप) प्रतिदिन, और साधक चाहें तो 11 या 21 माला तक बढ़ा सकते हैं।</p>
+      <p>ट्रैकर में इसे जोड़ने के लिए "+" पर टैप करें और सूची से चुनें, फिर दैनिक लक्ष्य सेट करें।</p>
+    </div>
+  </details>
+
+  <details class="tk-guide-item">
+    <summary>🙏 महामृत्युंजय मंत्र</summary>
+    <div class="body">
+      <p>आरोग्य और दीर्घायु के लिए किया जाने वाला यह मंत्र विशेष रूप से संकट-निवारण हेतु जपा जाता है। साधक इसे 108, 1008 या संकल्प अनुसार अधिक बार जपते हैं।</p>
+      <p>दैनिक लक्ष्य सेट करके ट्रैकर में इसकी प्रगति देखी जा सकती है।</p>
+    </div>
+  </details>
+
+  <details class="tk-guide-item">
+    <summary>📿 गायत्री मंत्र</summary>
+    <div class="body">
+      <p>वेदों का सबसे पूजनीय मंत्र, बुद्धि और तेज की प्रार्थना के रूप में जपा जाता है। प्रातःकाल ब्रह्म मुहूर्त में जाप को सर्वाधिक शुभ माना गया है। न्यूनतम एक माला प्रतिदिन का नियम सामान्य है।</p>
+    </div>
+  </details>
+
+  <details class="tk-guide-item">
+    <summary>🪔 गुरु मंत्र — व्यक्तिगत साधना</summary>
+    <div class="body">
+      <p>जिन साधकों को गुरु से दीक्षा में मंत्र प्राप्त हुआ है, वे उसे "गुरु मंत्र" सेक्शन में जोड़ सकते हैं। यह पूर्णतः एन्क्रिप्टेड रहता है और केवल आपके खाते से ही दिखाई देता है।</p>
+    </div>
+  </details>
+</section>
+
+<!-- ── SEO: FAQ (schema-friendly) ───────────────── -->
+<section class="tk-section" id="tk-faq">
+  <div class="tk-section-head"><h2>अक्सर पूछे जाने वाले प्रश्न</h2></div>
+
+  <details class="tk-faq-item">
+    <summary>क्या ShivMarg मंत्र जाप ट्रैकर मुफ़्त है?</summary>
+    <p>हाँ, ShivMarg पर मंत्र जाप ट्रैक करना पूरी तरह निःशुल्क है — कोई सदस्यता या छुपा शुल्क नहीं।</p>
+  </details>
+
+  <details class="tk-faq-item">
+    <summary>क्या मेरा गुरु मंत्र सुरक्षित रहता है?</summary>
+    <p>जी हाँ, गुरु मंत्र एन्क्रिप्टेड रूप में सहेजा जाता है और केवल लॉगिन किए गए खाते से ही देखा जा सकता है।</p>
+  </details>
+
+  <details class="tk-faq-item">
+    <summary>क्या मैं एक साथ कई मंत्रों की गिनती रख सकता हूँ?</summary>
+    <p>हाँ, आप अपनी पसंद के कई मंत्र जोड़ सकते हैं और प्रत्येक का अलग-अलग दैनिक लक्ष्य व माला आकार सेट कर सकते हैं।</p>
+  </details>
+
+  <details class="tk-faq-item">
+    <summary>क्या बिना लॉगिन किए ट्रैकर इस्तेमाल किया जा सकता है?</summary>
+    <p>हाँ, डेमो मोड में आप ट्रैकर आज़मा सकते हैं, लेकिन डेटा स्थायी रूप से सहेजने और लड़ी (streak) ट्रैक करने के लिए लॉगिन आवश्यक है।</p>
+  </details>
+
+  <details class="tk-faq-item">
+    <summary>प्रोफ़ाइल की उपलब्धि (badge) कैसे अनलॉक होती हैं?</summary>
+    <p>निरंतर जाप, माला पूर्ण करने और लंबी लड़ी बनाए रखने से बैज अपने-आप अनलॉक होते हैं — जैसे "7 दिन की लड़ी" या "पहली माला पूर्ण"।</p>
+  </details>
 </section>
 
 <!-- ── Bottom sheet: Add mantra ───────────────── -->
@@ -400,6 +617,30 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;}
   <button class="tk-btn-secondary" id="tkCancelGuru">रद्द करें</button>
 </div>
 
+<!-- ── Bottom sheet: Edit profile ──────────────── -->
+<div class="tk-sheet-backdrop" id="tkProfileBackdrop"></div>
+<div class="tk-sheet" id="tkProfileSheet">
+  <div class="tk-sheet-handle"></div>
+  <h3>प्रोफ़ाइल संपादित करें</h3>
+  <div class="tk-avatar-picker">
+    <div class="preview" id="tkAvatarPreview">?</div>
+    <div>
+      <input type="file" id="tkAvatarFile" accept="image/*">
+      <div style="font-size:.72rem;color:var(--ink-soft);margin-top:4px;">JPG/PNG, अधिकतम 2MB</div>
+    </div>
+  </div>
+  <div class="tk-field">
+    <label>नाम</label>
+    <input type="text" id="tkProfileNameInput" placeholder="अपना नाम लिखें">
+  </div>
+  <div class="tk-field">
+    <label>दैनिक कुल लक्ष्य (सभी मंत्र मिलाकर, माला में)</label>
+    <input type="number" id="tkProfileGoalInput" min="0" step="0.5" value="1">
+  </div>
+  <button class="tk-btn-primary" id="tkSaveProfile">सहेजें</button>
+  <button class="tk-btn-secondary" id="tkCancelProfile">रद्द करें</button>
+</div>
+
 <div class="tk-toast" id="tkToast"></div>
 
 <script>
@@ -424,7 +665,26 @@ let state = {
   flushTimer: null,
   catalog: [],
   monthCursor: new Date(),
+  profile: {                 // EDIT ZONE: shape should match your /api/user/profile response
+    name: 'अतिथि साधक',
+    avatar_url: null,
+    joined_at: null,
+    daily_goal_malas: 1,
+  },
+  pendingAvatarFile: null,
 };
+
+// ── Badge definitions (unlocked by streak / lifetime malas) ────
+const BADGE_DEFS = [
+  { key:'first_mala',  emoji:'🌱', label:'पहली माला',      test:(s)=> s.lifetime_malas >= 1 },
+  { key:'streak3',     emoji:'🔥', label:'3 दिन लड़ी',      test:(s)=> s.current_streak >= 3 },
+  { key:'streak7',     emoji:'🌟', label:'7 दिन लड़ी',      test:(s)=> s.current_streak >= 7 },
+  { key:'streak21',    emoji:'🏵️', label:'21 दिन लड़ी',     test:(s)=> s.current_streak >= 21 },
+  { key:'malas50',     emoji:'📿', label:'50 माला',        test:(s)=> s.lifetime_malas >= 50 },
+  { key:'malas108',    emoji:'🕉️', label:'108 माला',       test:(s)=> s.lifetime_malas >= 108 },
+  { key:'streak108',   emoji:'👑', label:'108 दिन लड़ी',    test:(s)=> s.current_streak >= 108 },
+  { key:'multi_mantra',emoji:'🪷', label:'बहु-मंत्र साधक',  test:(s)=> (s._mantraCount||0) >= 3 },
+];
 
 function authHeaders(){
   const t = getToken();
@@ -457,6 +717,7 @@ async function init(){
       const demo = await api('/api/mantras/demo');
       state.mantras = demo.mantras.map(m => ({...m}));
       state.guruMantras = []; // demo guru shown as static locked card, see renderGuru()
+      state.profile = { name:'अतिथि साधक', avatar_url:null, joined_at:null, daily_goal_malas:1 };
       applySummary({
         current_streak: demo.current_streak,
         today_malas: demo.today_total_malas,
@@ -466,13 +727,23 @@ async function init(){
       });
       renderWeeklyFromDays(demo.last_30_days.slice(-7));
     } else {
-      const [mine, guru, stats] = await Promise.all([
+      // EDIT ZONE: adjust '/api/user/profile' to your actual profile endpoint
+      const [mine, guru, stats, profile] = await Promise.all([
         api('/api/mantras/my'),
         api('/api/mantras/guru'),
         api('/api/mantras/stats'),
+        api('/api/user/profile').catch(()=>null),
       ]);
       state.mantras = mine.mantras;
       state.guruMantras = guru.guru_mantras;
+      if(profile){
+        state.profile = {
+          name: profile.name || profile.display_name || 'साधक',
+          avatar_url: profile.avatar_url || null,
+          joined_at: profile.joined_at || profile.created_at || null,
+          daily_goal_malas: profile.daily_goal_malas ?? 1,
+        };
+      }
       applySummary(stats);
       loadWeekly();
     }
@@ -487,6 +758,7 @@ async function init(){
   renderCarousel();
   renderActiveMala();
   renderGuru();
+  renderProfile();
   loadCatalog();
 }
 
@@ -497,6 +769,66 @@ function applySummary(s){
   $('statBestDay').textContent = (s.best_day && s.best_day.count) ? s.best_day.count : 0;
   $('statLongest').textContent = s.longest_streak ?? 0;
   $('statLifetime').textContent = s.lifetime_count ?? 0;
+  state.summary = s; // kept for badge/profile rendering
+}
+
+// ── Profile card ────────────────────────────────────────────
+function initials(name){
+  if(!name) return '?';
+  const parts = name.trim().split(/\s+/);
+  return (parts[0]?.[0]||'') + (parts[1]?.[0]||'');
+}
+
+function renderAvatarInto(el, url, name){
+  if(url){
+    el.innerHTML = '';
+    el.style.background = 'none';
+    const img = document.createElement('img');
+    img.src = url;
+    img.alt = name || 'avatar';
+    img.style.cssText = 'width:100%;height:100%;border-radius:50%;object-fit:cover;';
+    el.appendChild(img);
+  } else {
+    el.style.background = 'linear-gradient(135deg,var(--saffron),var(--gold-deep))';
+    el.textContent = initials(name).toUpperCase() || '🕉️';
+  }
+}
+
+function renderProfile(){
+  const p = state.profile;
+  renderAvatarInto($('tkProfileAvatar'), p.avatar_url, p.name);
+  $('tkProfileName').textContent = p.name;
+
+  if(state.isGuest){
+    $('tkProfileSub').textContent = 'डेमो मोड — प्रगति सहेजने के लिए लॉगिन करें';
+  } else {
+    const since = p.joined_at ? new Date(p.joined_at).toLocaleDateString('hi-IN', { month:'short', year:'numeric' }) : '—';
+    $('tkProfileSub').textContent = `साधक — ${since} से जुड़े`;
+    $('pStatSince').textContent = since;
+  }
+
+  const s = state.summary || {};
+  $('pStatMalas').textContent = s.lifetime_malas ?? 0;
+  $('pStatStreak').textContent = s.current_streak ?? 0;
+  $('pStatMantras').textContent = state.mantras.length;
+
+  renderBadges(s);
+}
+
+function renderBadges(summary){
+  const ctx = { ...summary, _mantraCount: state.mantras.length };
+  const unlocked = BADGE_DEFS.filter(b => b.test(ctx));
+  const row = $('tkProfileBadgesRow');
+  row.innerHTML = unlocked.slice(0,3).map(b => `<span class="tk-badge">${b.emoji} ${b.label}</span>`).join('');
+
+  const grid = $('tkBadgeGrid');
+  grid.innerHTML = BADGE_DEFS.map(b => {
+    const isUnlocked = b.test(ctx);
+    return `<div class="tk-badge-tile${isUnlocked?'':' locked'}" title="${b.label}">
+      <div class="emoji">${b.emoji}</div>
+      <div class="lbl">${b.label}</div>
+    </div>`;
+  }).join('');
 }
 
 // ── Carousel ──────────────────────────────────────────────
@@ -825,6 +1157,69 @@ $('tkSaveGuru').onclick = async () => {
     renderGuru();
     toast('गुरु मंत्र सुरक्षित रूप से सहेजा गया 🔒');
   }catch(e){ toast('सहेजने में समस्या हुई'); }
+};
+
+// ── Profile edit ──────────────────────────────────────────
+$('tkProfileEditBtn').onclick = () => {
+  if(state.isGuest){ toast('लॉगिन करें — प्रोफ़ाइल संपादित करने के लिए 🙏'); return; }
+  $('tkProfileNameInput').value = state.profile.name || '';
+  $('tkProfileGoalInput').value = state.profile.daily_goal_malas ?? 1;
+  renderAvatarInto($('tkAvatarPreview'), state.profile.avatar_url, state.profile.name);
+  state.pendingAvatarFile = null;
+  openSheet('tkProfileSheet','tkProfileBackdrop');
+};
+$('tkProfileBackdrop').onclick = () => closeSheet('tkProfileSheet','tkProfileBackdrop');
+$('tkCancelProfile').onclick = () => closeSheet('tkProfileSheet','tkProfileBackdrop');
+
+$('tkAvatarFile').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if(!file) return;
+  if(file.size > 2 * 1024 * 1024){ toast('फ़ाइल 2MB से बड़ी न हो'); e.target.value=''; return; }
+  state.pendingAvatarFile = file;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    const el = $('tkAvatarPreview');
+    el.innerHTML = `<img src="${ev.target.result}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
+  };
+  reader.readAsDataURL(file);
+});
+
+async function uploadAvatar(file){
+  // EDIT ZONE: adjust endpoint/field name to match your backend's upload route
+  const fd = new FormData();
+  fd.append('avatar', file);
+  const t = getToken();
+  const res = await fetch(API_BASE + '/api/user/avatar', {
+    method: 'POST',
+    headers: t ? { 'Authorization': 'Bearer ' + t } : {},
+    body: fd,
+  });
+  if(!res.ok) throw new Error('avatar upload failed ' + res.status);
+  return res.json(); // expect { avatar_url }
+}
+
+$('tkSaveProfile').onclick = async () => {
+  const name = $('tkProfileNameInput').value.trim();
+  const goal = parseFloat($('tkProfileGoalInput').value || '1');
+  if(!name){ toast('नाम आवश्यक है'); return; }
+  try{
+    if(state.pendingAvatarFile){
+      const up = await uploadAvatar(state.pendingAvatarFile);
+      state.profile.avatar_url = up.avatar_url;
+    }
+    const updated = await api('/api/user/profile', {
+      method: 'PATCH',
+      body: JSON.stringify({ name, daily_goal_malas: goal }),
+    });
+    state.profile.name = updated.name || name;
+    state.profile.daily_goal_malas = updated.daily_goal_malas ?? goal;
+    closeSheet('tkProfileSheet','tkProfileBackdrop');
+    renderProfile();
+    toast('प्रोफ़ाइल सहेजी गई 🙏');
+  }catch(e){
+    console.error(e);
+    toast('प्रोफ़ाइल सहेजने में समस्या हुई');
+  }
 };
 
 // ── Login CTA ─────────────────────────────────────────────
