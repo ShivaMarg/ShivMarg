@@ -1363,7 +1363,7 @@ function filterCards(cat, btn){
   statsObs.observe(document.querySelector('.feature-strip'));
 
   /* === AUTHORS SECTION === */
-  const SM_API = 'https://www.api.shivmarg.live';
+  window.SM_API = window.SM_API || 'https://www.api.shivmarg.live';
   const CAT_COLORS = {
     kavita:'#F39C12',
     kahani:'#E74C3C',
