@@ -41,6 +41,44 @@
   --font-data:'Rajdhani', sans-serif;
 }
 
+/* ── Dark theme override ───────────────────────── */
+html.dark{
+  --ink:#F5E6C8;
+  --ink-soft:#C9AE84;
+  --bg:#1B1108;
+  --bg-soft:#241708;
+  --card:#2A1B0D;
+  --gold:#E0A63A;
+  --gold-deep:#F0BC5E;
+  --saffron:#F0A94E;
+  --maroon:#C0433E;
+  --sandal:#3A2712;
+  --bead-off:#3D2A15;
+  --bead-lit:#E0A63A;
+  --line:#3D2A15;
+  --shadow:0 10px 28px rgba(0,0,0,.35);
+  --shadow-soft:0 4px 14px rgba(0,0,0,.25);
+}
+html.dark body{background:var(--bg);}
+html.dark .tk-tap-btn{
+  background:radial-gradient(circle at 35% 30%, #2E1E10, var(--bg-soft) 60%, var(--sandal) 100%);
+}
+html.dark .tk-header{background:linear-gradient(180deg,#3A1010 0%, #260909 100%);}
+html.dark .tk-avatar-picker .preview,
+html.dark .tk-profile-avatar{border-color:var(--line);}
+
+/* ── Top control bar (sound / theme) ───────────── */
+.tk-topbar{
+  position:absolute;top:14px;right:14px;display:flex;gap:8px;z-index:3;
+}
+.tk-ctrl-btn{
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(255,255,255,.14);color:#FBEFD9;
+  display:flex;align-items:center;justify-content:center;font-size:.95rem;
+  border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(2px);
+}
+.tk-ctrl-btn:active{transform:scale(.92);}
+
 *{box-sizing:border-box;}
 html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);
   -webkit-tap-highlight-color:transparent;}
@@ -376,6 +414,10 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;}
 
 <!-- EDIT ZONE: header text -->
 <header class="tk-header">
+  <div class="tk-topbar">
+    <button class="tk-ctrl-btn" id="tkSoundBtn" title="ध्वनि चालू/बंद">🔊</button>
+    <button class="tk-ctrl-btn" id="tkThemeBtn" title="डार्क/लाइट मोड">🌙</button>
+  </div>
   <h1>मंत्र जाप ट्रैकर</h1>
   <p>आज की माला, अपनी भक्ति के साथ</p>
   <div class="tk-streak-row">
@@ -388,28 +430,6 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;}
 <div id="tkDemoBanner" class="tk-demo-banner" style="display:none;">
   <span>🙏 यह डेमो डेटा है — अपना जाप सेव करने के लिए</span>
   <button id="tkLoginCta">लॉगिन करें</button>
-</div>
-
-
-<!-- Mantra carousel -->
-<div class="tk-carousel" id="tkCarousel"></div>
-
-
-<!-- The Mala -->
-<div class="tk-mala-wrap">
-  <h2 class="tk-mala-name" id="tkActiveName">—</h2>
-  <div class="tk-mala-ring" id="tkRing">
-    <svg id="tkRingSvg" viewBox="0 0 280 280"></svg>
-    <div class="tk-mala-center">
-      <div class="tk-mala-flash" id="tkFlash"></div>
-      <button class="tk-tap-btn" id="tkTapBtn">
-        <span class="tk-tap-count" id="tkCount">0</span>
-        <span class="tk-tap-sub" id="tkMalaProgress">0 / 108</span>
-        <span class="tk-tap-hint">जाप के लिए टैप करें</span>
-      </button>
-    </div>
-  </div>
-  <p class="tk-target-line">आज का लक्ष्य: <b id="tkTargetLine">—</b></p>
 </div>
 
 <!-- ── Profile card ─────────────────────────────── -->
@@ -434,6 +454,25 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;}
   </div>
 </section>
 
+<!-- Mantra carousel -->
+<div class="tk-carousel" id="tkCarousel"></div>
+
+<!-- The Mala -->
+<div class="tk-mala-wrap">
+  <h2 class="tk-mala-name" id="tkActiveName">—</h2>
+  <div class="tk-mala-ring" id="tkRing">
+    <svg id="tkRingSvg" viewBox="0 0 280 280"></svg>
+    <div class="tk-mala-center">
+      <div class="tk-mala-flash" id="tkFlash"></div>
+      <button class="tk-tap-btn" id="tkTapBtn">
+        <span class="tk-tap-count" id="tkCount">0</span>
+        <span class="tk-tap-sub" id="tkMalaProgress">0 / 108</span>
+        <span class="tk-tap-hint">जाप के लिए टैप करें</span>
+      </button>
+    </div>
+  </div>
+  <p class="tk-target-line">आज का लक्ष्य: <b id="tkTargetLine">—</b></p>
+</div>
 
 <!-- Calendar: weekly / monthly -->
 <section class="tk-section">
@@ -654,6 +693,66 @@ function getToken(){
   return localStorage.getItem('sm_token');
 }
 // ─────────────────────────────────────────────────────────────
+
+// ── Theme (dark/light) ──────────────────────────────────────
+function loadTheme(){
+  const saved = localStorage.getItem('tk_theme');
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  applyTheme(saved ? saved === 'dark' : prefersDark);
+}
+function applyTheme(dark){
+  document.documentElement.classList.toggle('dark', dark);
+  const btn = document.getElementById('tkThemeBtn');
+  if(btn) btn.textContent = dark ? '☀️' : '🌙';
+  localStorage.setItem('tk_theme', dark ? 'dark' : 'light');
+}
+function toggleTheme(){
+  applyTheme(!document.documentElement.classList.contains('dark'));
+}
+
+// ── Sound effects (Web Audio, no external files needed) ─────
+let audioCtx = null;
+function getAudioCtx(){
+  if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return audioCtx;
+}
+function soundEnabled(){
+  return localStorage.getItem('tk_sound') !== 'off';
+}
+function playTapSound(){
+  if(!soundEnabled()) return;
+  try{
+    const ctx = getAudioCtx();
+    const osc = ctx.createOscillator(), gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(560, ctx.currentTime);
+    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+    osc.start(); osc.stop(ctx.currentTime + 0.08);
+  }catch(e){}
+}
+function playMalaCompleteSound(){
+  if(!soundEnabled()) return;
+  try{
+    const ctx = getAudioCtx();
+    const osc = ctx.createOscillator(), gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(880, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(440, ctx.currentTime + 0.45);
+    gain.gain.setValueAtTime(0.16, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.65);
+    osc.start(); osc.stop(ctx.currentTime + 0.65);
+  }catch(e){}
+}
+function toggleSound(){
+  const next = soundEnabled() ? 'off' : 'on';
+  localStorage.setItem('tk_sound', next);
+  const btn = document.getElementById('tkSoundBtn');
+  if(btn) btn.textContent = next === 'off' ? '🔇' : '🔊';
+  if(next !== 'off') playTapSound(); // little confirmation blip
+}
 
 const $ = (id) => document.getElementById(id);
 let state = {
@@ -924,7 +1023,10 @@ function onTap(){
   // mala completed?
   if(Math.floor(before / m.mala_size) !== Math.floor(m.today_count / m.mala_size)){
     flashMala();
+    playMalaCompleteSound();
     if(navigator.vibrate) navigator.vibrate([20,40,20]);
+  } else {
+    playTapSound();
   }
 
   renderCarousel(); // keep % progress live
@@ -1224,6 +1326,12 @@ $('tkSaveProfile').onclick = async () => {
 
 // ── Login CTA ─────────────────────────────────────────────
 $('tkLoginCta').onclick = () => { window.location.href = '/login/'; }; // EDIT ZONE: your login page path
+
+// ── Theme / Sound button wiring ──────────────────────────
+$('tkThemeBtn').onclick = toggleTheme;
+$('tkSoundBtn').onclick = toggleSound;
+loadTheme();
+$('tkSoundBtn').textContent = soundEnabled() ? '🔊' : '🔇';
 
 init();
 })();
