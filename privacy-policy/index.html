@@ -121,6 +121,49 @@
     .reveal.on{opacity:1;transform:none}
     @media(max-width:700px){nav{display:none}.section-card{padding:26px 18px}}
   </style>
+  <style id="COOKIE_CONSENT_CSS">
+#sm-cookie-banner{
+  position:fixed;left:0;right:0;bottom:0;z-index:9998;
+  display:none;padding:18px 20px;
+  background:linear-gradient(180deg,rgba(6,3,0,.6),rgba(6,3,0,.97) 40%);
+  border-top:1px solid rgba(230,81,0,.3);
+  backdrop-filter:blur(6px);
+}
+#sm-cookie-banner.active{display:flex}
+.sm-cb-inner{
+  max-width:1000px;margin:0 auto;display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+}
+.sm-cb-text{flex:1;min-width:240px;font-size:.88rem;color:var(--soft);line-height:1.6}
+.sm-cb-text a{color:var(--teal-s);border-bottom:1px solid rgba(77,208,225,.25);text-decoration:none}
+.sm-cb-actions{display:flex;gap:10px;flex-wrap:wrap}
+.sm-cb-btn{
+  font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;
+  padding:10px 18px;border-radius:3px;cursor:pointer;border:1px solid rgba(230,81,0,.35);
+  background:transparent;color:var(--soft);transition:all .25s;white-space:nowrap;
+}
+.sm-cb-btn.primary{background:linear-gradient(135deg,var(--saffron),var(--saff-s));color:#fff;border-color:transparent}
+.sm-cb-btn:hover{opacity:.85}
+
+#sm-cookie-modal{
+  position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.6);padding:16px;
+}
+#sm-cookie-modal.active{display:flex}
+.sm-cm-card{
+  max-width:480px;width:100%;background:#0c0500;border:1px solid rgba(230,81,0,.3);
+  border-radius:4px;padding:28px;
+}
+.sm-cm-title{font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-lt);margin-bottom:16px;letter-spacing:1px}
+.sm-cm-row{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px solid rgba(230,81,0,.1)}
+.sm-cm-row-label{font-family:'Cinzel',serif;font-size:.75rem;color:var(--saff-p);letter-spacing:1px;margin-bottom:4px}
+.sm-cm-row-desc{font-size:.82rem;color:rgba(255,251,242,.55);line-height:1.5}
+.sm-cm-toggle{flex-shrink:0;width:42px;height:24px;border-radius:12px;background:rgba(255,251,242,.15);position:relative;cursor:pointer;transition:background .2s}
+.sm-cm-toggle.on{background:var(--saffron)}
+.sm-cm-toggle::after{content:'';position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .2s}
+.sm-cm-toggle.on::after{transform:translateX(18px)}
+.sm-cm-toggle.disabled{opacity:.5;cursor:not-allowed}
+.sm-cm-footer{display:flex;gap:10px;margin-top:20px;justify-content:flex-end;flex-wrap:wrap}
+</style>
 <link rel="stylesheet" href="/loder/loder.css">
 <script src="/loder/loder.js" defer></script>
 <!-- Google tag (gtag.js) -->
@@ -159,12 +202,14 @@
 
 <div class="page-body">
 
-  <div class="section-card reveal">
+  <div class="section-card reveal" id="cookie-policy">
+     <span class="corner tl">✦</span><span class="corner tr">✦</span>
+     <div class="sec-label">✦ Cookie Policy ✦</div>
     <span class="corner tl">✦</span><span class="corner tr">✦</span>
     <span class="corner bl">✦</span><span class="corner br">✦</span>
     <div class="sec-label">✦ Privacy Policy ✦</div>
     <div class="sec-title">Your Privacy Matters</div>
-    <p class="sec-body"><em>Last Updated: January 2026</em></p>
+    <p class="sec-body"><em>Last Updated: July 9, 2026</em></p>
     <p class="sec-body">Welcome to ShivaMarg (<strong>shivmarg.live</strong>). We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you visit our website. Please read this policy carefully. By using ShivaMarg, you agree to the practices described here.</p>
   </div>
 
@@ -174,10 +219,28 @@
     <div class="sec-title">What Data We Gather</div>
     <p class="sec-body"><strong>1. Information You Provide Voluntarily</strong><br>When you use our contact form or comment system, you may provide: your name, email address, and the content of your message. We use this solely to respond to your enquiry.</p>
     <p class="sec-body"><strong>2. Automatically Collected Information</strong><br>When you visit our site, certain technical information is automatically collected: your IP address, browser type and version, pages visited, time and date of visit, and referring URL. This is collected via standard server logs and analytics tools.</p>
-    <p class="sec-body"><strong>3. Cookies</strong><br>ShivaMarg uses cookies for analytics and to remember your preferences. These include:<br>
-    • <strong>Analytics cookies</strong> (Vercel Analytics) — to understand which content is most useful<br>
-    • <strong>Advertising cookies</strong> (Google AdSense) — to serve relevant advertisements<br>
-    You may disable cookies in your browser settings, though some features may be affected.</p>
+    <p class="sec-body"><strong>3. Cookies</strong><br>ShivaMarg uses cookies to run the site, understand usage, and serve ads. See the dedicated <em>Cookie Policy</em> section below for full details and to manage your preferences.</p>
+   </div>
+
+   <div class="section-card reveal">
+    <span class="corner tl">✦</span><span class="corner tr">✦</span>
+    <div class="sec-label">✦ Cookie Policy ✦</div>
+    <div class="sec-title">How We Use Cookies</div>
+    <p class="sec-body">A cookie is a small text file stored on your device that helps a website remember information about your visit. ShivaMarg uses the following categories of cookies:</p>
+
+    <p class="sec-body"><strong>Essential Cookies</strong> — always active, cannot be disabled.<br>
+    Used for core site functionality: keeping you logged in via <em>SmAuth</em>, remembering your festival-popup dismissal for the session, and basic security. Without these, parts of the site (login, comments) won't work.</p>
+
+    <p class="sec-body"><strong>Analytics Cookies</strong> — used to understand how visitors use ShivaMarg, so we know which mantras and pages are most helpful.<br>
+    • <strong>Vercel Analytics / Speed Insights</strong> — privacy-friendly, does not use cookies to track you across sites<br>
+    • <strong>Google Analytics (gtag.js)</strong> — sets cookies to measure page views and traffic sources</p>
+
+    <p class="sec-body"><strong>Advertising Cookies</strong> — used by Google AdSense to show ads and measure their performance.<br>
+    • Google may use the <strong>DoubleClick/DART cookie</strong> and similar identifiers to serve ads based on your visits to ShivaMarg and other sites<br>
+    • These cookies do not collect your name or contact details directly, but may build an advertising profile linked to your browser</p>
+
+    <p class="sec-body"><strong>Managing Your Preference</strong><br>
+    When you first visit ShivaMarg, a cookie banner lets you <strong>Accept All</strong>, <strong>Reject Non-Essential</strong>, or <strong>Manage Preferences</strong>. You can change your choice anytime using the <strong>"Cookie Settings"</strong> link in the footer, or by clearing cookies in your browser. Rejecting non-essential cookies will disable Google Analytics and personalised AdSense ads, though you may still see non-personalised ads as required to keep ShivaMarg free.</p>
   </div>
 
   <div class="section-card reveal">
@@ -229,6 +292,54 @@
 
 <div id="sm-comments" data-page-id="privacy-policy"></div>
 
+<div id="sm-cookie-banner" role="dialog" aria-label="Cookie consent">
+  <div class="sm-cb-inner">
+    <p class="sm-cb-text">
+      We use cookies to run ShivaMarg, understand how it's used, and show ads via Google AdSense.
+      See our <a href="/privacy-policy/#cookie-policy">Cookie Policy</a> for details.
+    </p>
+    <div class="sm-cb-actions">
+      <button class="sm-cb-btn" onclick="SMCookieConsent.openManage()">Manage</button>
+      <button class="sm-cb-btn" onclick="SMCookieConsent.rejectAll()">Reject Non-Essential</button>
+      <button class="sm-cb-btn primary" onclick="SMCookieConsent.acceptAll()">Accept All</button>
+    </div>
+  </div>
+</div>
+
+<div id="sm-cookie-modal" role="dialog" aria-modal="true" aria-label="Cookie preferences">
+  <div class="sm-cm-card">
+    <div class="sm-cm-title">Cookie Preferences</div>
+
+    <div class="sm-cm-row">
+      <div>
+        <div class="sm-cm-row-label">Essential</div>
+        <div class="sm-cm-row-desc">Required for login, comments, and basic security. Always on.</div>
+      </div>
+      <div class="sm-cm-toggle on disabled" aria-label="Essential cookies always on"></div>
+    </div>
+
+    <div class="sm-cm-row">
+      <div>
+        <div class="sm-cm-row-label">Analytics</div>
+        <div class="sm-cm-row-desc">Google Analytics — helps us see which pages are most useful.</div>
+      </div>
+      <div class="sm-cm-toggle" id="sm-cm-analytics" onclick="SMCookieConsent.toggle(this)"></div>
+    </div>
+
+    <div class="sm-cm-row">
+      <div>
+        <div class="sm-cm-row-label">Advertising</div>
+        <div class="sm-cm-row-desc">Google AdSense — personalised ads based on your browsing.</div>
+      </div>
+      <div class="sm-cm-toggle" id="sm-cm-ads" onclick="SMCookieConsent.toggle(this)"></div>
+    </div>
+
+    <div class="sm-cm-footer">
+      <button class="sm-cb-btn" onclick="SMCookieConsent.closeManage()">Cancel</button>
+      <button class="sm-cb-btn primary" onclick="SMCookieConsent.saveManage()">Save Preferences</button>
+    </div>
+  </div>
+</div>
 
 <div id="page-loader">
     <div class="loader-content">
@@ -245,6 +356,7 @@
     <a href="/contact/">Contact</a>
     <a href="/privacy-policy/">Privacy Policy</a>
     <a href="/disclaimer/">Disclaimer</a>
+    <a href="javascript:void(0)" onclick="SMCookieConsent.openManage()">Cookie Settings</a>
   </div>
 </footer>
 
@@ -256,6 +368,76 @@
   const rv=document.querySelectorAll('.reveal');
   const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*40);obs.unobserve(e.target)}})},{threshold:.06});
   rv.forEach(el=>obs.observe(el));
+</script>
+<script id="SM_COOKIE_CONSENT_JS">
+window.SMCookieConsent = (function() {
+  var STORAGE_KEY = 'sm_cookie_consent';
+
+  function getConsent() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch(e) { return null; }
+  }
+
+  function setConsent(consent) {
+    consent.timestamp = Date.now();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(consent));
+    applyConsent(consent);
+    hideBanner();
+    closeManage();
+  }
+
+  function applyConsent(consent) {
+    // Gate Google Analytics
+    window['ga-disable-G-9N0GE0NNGD'] = !consent.analytics;
+    // Gate AdSense personalisation (non-essential reject => non-personalised ads only)
+    window.SM_ADS_PERSONALIZED = !!consent.ads;
+  }
+
+  function showBanner() {
+    var b = document.getElementById('sm-cookie-banner');
+    if (b) b.classList.add('active');
+  }
+  function hideBanner() {
+    var b = document.getElementById('sm-cookie-banner');
+    if (b) b.classList.remove('active');
+  }
+
+  function acceptAll() {
+    setConsent({ analytics: true, ads: true });
+  }
+  function rejectAll() {
+    setConsent({ analytics: false, ads: false });
+  }
+
+  function openManage() {
+    var existing = getConsent() || { analytics: true, ads: true };
+    document.getElementById('sm-cm-analytics').classList.toggle('on', existing.analytics);
+    document.getElementById('sm-cm-ads').classList.toggle('on', existing.ads);
+    document.getElementById('sm-cookie-modal').classList.add('active');
+  }
+  function closeManage() {
+    var m = document.getElementById('sm-cookie-modal');
+    if (m) m.classList.remove('active');
+  }
+  function toggle(el) {
+    el.classList.toggle('on');
+  }
+  function saveManage() {
+    setConsent({
+      analytics: document.getElementById('sm-cm-analytics').classList.contains('on'),
+      ads: document.getElementById('sm-cm-ads').classList.contains('on')
+    });
+  }
+
+  // Init on load
+  var existing = getConsent();
+  if (existing) {
+    applyConsent(existing);
+  } else {
+    showBanner();
+  }
+
+  return { acceptAll: acceptAll, rejectAll: rejectAll, openManage: openManage, closeManage: closeManage, toggle: toggle, saveManage: saveManage, getConsent: getConsent };
+})();
 </script>
 <script src="/js/search.js"></script>\n<script src="/js/chatbot.js"></script>
 <script src="/js/last-visited.js"></script>

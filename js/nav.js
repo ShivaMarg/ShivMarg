@@ -25,6 +25,14 @@
     document.head.appendChild(s);
   }
 
+  if (!document.getElementById('sm-cookie-consent-script')) {
+    const cc = document.createElement('script');
+    cc.id = 'sm-cookie-consent-script';
+    cc.src = '/js/cookie-consent.js';
+    cc.defer = true;
+    document.head.appendChild(cc);
+  }
+  
   /* ── Google Fonts ── */
   if (!document.querySelector('link[data-sm-fonts]')) {
     const lnk = document.createElement('link');
