@@ -42,7 +42,7 @@ style.textContent = `
 
       #sm-auth-modal{
         background:#FFFFFF;
-        border:1px solid #E5E9F0;
+        border:1px solid #bac3d2;
         border-radius:16px;
         width:min(440px,94vw);padding:36px 32px;
         position:relative;animation:sm-slide-up .3s ease;
