@@ -960,6 +960,28 @@ width:100%;
       padding: 0 10px;
     }
 
+
+    .cards-scroll-row{
+  display:flex;
+  flex-wrap:nowrap;
+  overflow-x:auto;
+  gap:18px;
+  max-width:1280px;
+  margin:0 auto 60px;
+  padding:8px 24px 20px;
+  scroll-snap-type:x proximity;
+  -webkit-overflow-scrolling:touch;
+}
+.cards-scroll-row .card{
+  flex:0 0 auto;
+  width:230px;
+  scroll-snap-align:start;
+}
+/* optional: thin styled scrollbar instead of default */
+.cards-scroll-row::-webkit-scrollbar{ height:6px; }
+.cards-scroll-row::-webkit-scrollbar-thumb{ background:var(--gold, #B8862E); border-radius:3px; }
+.cards-scroll-row::-webkit-scrollbar-track{ background:transparent; }
+
     /* ════════════════════════════════════════════
        [14] FOOTER — temple night with diya glow
     ════════════════════════════════════════════ */
@@ -2702,14 +2724,7 @@ body {
   </div>
 </div>
 
-<div id="recent-visits-section" aria-label="हाल ही में देखे गए पृष्ठ">
-  <div class="rv-header">
-    <span class="rv-label">✦ हाल ही में देखा गया ✦</span>
-    <div class="rv-header-line"></div>
-    <button class="rv-clear-btn" onclick="window.SMRecentVisits && SMRecentVisits.clear()">साफ़ करें</button>
-  </div>
-  <div class="rv-track" id="rv-track"></div>
-</div>
+
 <!-- Hero -->
 <section class="hero">
   <span class="hero-om"><img src="images/ShivMarg.png" alt="logo" class="orb-logo"></span>
@@ -2761,12 +2776,72 @@ body {
 <div class="divider reveal">
   <div class="divider-line"></div><div class="divider-text">✦ आध्यात्मिक उपकरण ✦</div><div class="divider-line"></div>
 </div>
-<div class="cards-grid" style="max-width:1280px;margin:0 auto 60px;padding:0 24px;">
-  <a href="/jaap-mala-tracker/" class="card card-ganesh reveal" style="text-decoration:none;color:inherit;"><div class="card-inner"><div class="card-tag">🧮</div><div class="card-name-deva">दैनिक जप ट्रैकर</div></div></a>
-  <a href="/Hindi-Panchang-Patara/" class="card card-surya reveal" style="text-decoration:none;color:inherit;"><div class="card-inner"><div class="card-tag">📅</div><div class="card-name-deva">पंचांग</div></div></a>
-  <a href="/events/jagannath-rath-yatra-2026/" class="card card-lakshmi reveal" style="text-decoration:none;color:inherit;"><div class="card-inner"><div class="card-tag">🪔</div><div class="card-name-deva">पर्व कैलेंडर</div></div></a>
-  <a href="/arati/" class="card card-krishna reveal" style="text-decoration:none;color:inherit;"><div class="card-inner"><div class="card-tag">🕯️</div><div class="card-name-deva">आरती संग्रह</div></div></a>
-  <a href="/mantras/" class="card card-shiv reveal" style="text-decoration:none;color:inherit;"><div class="card-inner"><div class="card-tag">📿</div><div class="card-name-deva">मंत्र संग्रह</div></div></a>
+<div class="cards-scroll-row">
+  <a href="/jaap-mala-tracker" class="card card-ganesh reveal" style="text-decoration:none;color:inherit;">
+    <div class="card-image"><img src="/images/jaap-tracker.png" alt="दैनिक जप ट्रैकर"></div>
+    <div class="card-inner">
+      <div class="card-tag">🧮 Tool</div>
+      <div class="card-name-deva">दैनिक जप ट्रैकर</div>
+      <div class="card-name-eng">JAAP TRACKER</div>
+      <div class="card-count"><span class="card-count-dot"></span> रोज़ ट्रैक करें</div>
+    </div>
+    <div class="card-arrow">→</div>
+  </a>
+
+  <a href="/Hindi-Panchang-Patara" class="card card-surya reveal" style="text-decoration:none;color:inherit;">
+    <div class="card-image"><img src="/images/home/Hindi_Panchang.png" alt="पंचांग"></div>
+    <div class="card-inner">
+      <div class="card-tag">📅 Panchang</div>
+      <div class="card-name-deva">पंचांग</div>
+      <div class="card-name-eng">HINDI PANCHANG</div>
+      <div class="card-count"><span class="card-count-dot"></span> दैनिक अपडेट</div>
+    </div>
+    <div class="card-arrow">→</div>
+  </a>
+
+  <a href="/ekadashi" class="card card-surya reveal" style="text-decoration:none;color:inherit;">
+    <div class="card-image"><img src="https://res.cloudinary.com/drzt5llbh/image/upload/v1783662979/shivmarg/ekadashi_g7sylr.png" alt="एकादशी"></div>
+    <div class="card-inner">
+      <div class="card-tag">💧 Vrat</div>
+      <div class="card-name-deva">एकादशी</div>
+      <div class="card-name-eng">EKADASHI</div>
+      <div class="card-count"><span class="card-count-dot"></span> 24+ एकादशी</div>
+    </div>
+    <div class="card-arrow">→</div>
+  </a>
+
+  <a href="/events/jagannath-rath-yatra-2026/" class="card card-lakshmi reveal" style="text-decoration:none;color:inherit;">
+    <div class="card-image"><img src="https://res.cloudinary.com/drzt5llbh/image/upload/v1782230694/shivmarg/Gemini_Generated_Image_me7haume7haume7h_1_hr5lgt.png" alt="पर्व कैलेंडर"></div>
+    <div class="card-inner">
+      <div class="card-tag">🪔 Festival</div>
+      <div class="card-name-deva">पर्व कैलेंडर</div>
+      <div class="card-name-eng">FESTIVAL CALENDAR</div>
+      <div class="card-count"><span class="card-count-dot"></span> लाइव अपडेट</div>
+    </div>
+    <div class="card-arrow">→</div>
+  </a>
+
+  <a href="/durga-mantras" class="card card-krishna reveal" style="text-decoration:none;color:inherit;">
+    <div class="card-image"><img src="https://res.cloudinary.com/drzt5llbh/image/upload/v1782211396/Gemini_Generated_Image_r6q2gmr6q2gmr6q2_od8emu.png" alt="आरती संग्रह"></div>
+    <div class="card-inner">
+      <div class="card-tag">🕯️ Aarti</div>
+      <div class="card-name-deva">आरती संग्रह</div>
+      <div class="card-name-eng">AARTI COLLECTION</div>
+      <div class="card-count"><span class="card-count-dot"></span> पूरा संग्रह</div>
+    </div>
+    <div class="card-arrow">→</div>
+  </a>
+
+  <a href="/shiva-mantras/" class="card card-shiv reveal" style="text-decoration:none;color:inherit;">
+    <div class="card-image"><img src="https://res.cloudinary.com/drzt5llbh/image/upload/v1782211439/Gemini_Generated_Image_2iwlw32iwlw32iwl_vp2ynb.png" alt="मंत्र संग्रह"></div>
+    <div class="card-inner">
+      <div class="card-tag">📿 Mantra</div>
+      <div class="card-name-deva">मंत्र संग्रह</div>
+      <div class="card-name-eng">MANTRA COLLECTION</div>
+      <div class="card-count"><span class="card-count-dot"></span> सभी देवी-देवता</div>
+    </div>
+    <div class="card-arrow">→</div>
+  </a>
 </div>
 
 <!-- Filter Tabs -->
@@ -2826,6 +2901,7 @@ body {
       </div>
       <div class="card-arrow">→</div>
     </a>
+    
   </div>
 </div>
 
@@ -3739,7 +3815,14 @@ body {
     <div class="fpc-bottombar" id="fpc-bottombar"></div>
   </div>
 </div>
-
+<div id="recent-visits-section" aria-label="हाल ही में देखे गए पृष्ठ">
+  <div class="rv-header">
+    <span class="rv-label">✦ हाल ही में देखा गया ✦</span>
+    <div class="rv-header-line"></div>
+    <button class="rv-clear-btn" onclick="window.SMRecentVisits && SMRecentVisits.clear()">साफ़ करें</button>
+  </div>
+  <div class="rv-track" id="rv-track"></div>
+</div>
 </main>
 
   <!-- ════════════════════════════════════════════
