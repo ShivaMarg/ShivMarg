@@ -734,6 +734,12 @@
       try { await api('/api/family/relation', { method: 'PATCH', body: { relation } }); toast('अपडेट हो गया 🙏', 'ok'); renderFamily(); }
       catch (e) { toast(e.message, 'err'); }
     });
+
+    $viewsRoot.querySelectorAll('.smd-member-row[data-member-id], .smd-member-row').forEach(row => {
+      row.addEventListener('click', () => {
+        openFamilyMemberModal(row.dataset.memberId, row.dataset.memberName);
+      });
+    });
   }
 
   // ===========================================================
