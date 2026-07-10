@@ -23,7 +23,7 @@
 (() => {
   'use strict';
 
-  const API_BASE = window.SHIVAMARG_API_BASE || 'https://api.shivmarg.live';
+  const API_BASE =  'https://www.api.shivmarg.live';
 
   const root = document.getElementById('smSadhna');
   if (!root) return; // section not present on this page
