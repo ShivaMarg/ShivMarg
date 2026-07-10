@@ -5,8 +5,8 @@
    auth module (nav.js / SM_API) if the names differ.
    ============================================================ */
 
-const API_BASE  = window.SM_API_BASE || 'https://www.api.shivmarg.live';
-const TOKEN_KEY = 'shivmarg_token';
+const API_BASE  = window.SM_API_BASE || 'http://www.api.shivmarg.live';
+const TOKEN_KEY = 'sm_token';
 
 function getToken(){ return localStorage.getItem(TOKEN_KEY); }
 function isLoggedIn(){ return !!getToken(); }
