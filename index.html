@@ -28,6 +28,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@0;1&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
   <meta name="google-adsense-account" content="ca-pub-5809900825917201">
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18008418302"></script>
+  <link rel="stylesheet" href="/sadhnadashboard.css">
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -2724,6 +2725,53 @@ body {
   </div>
 </div>
 
+<section class="sm-sadhna" id="smSadhna" data-view="overview">
+
+  <!-- Guest banner — shown only when NOT logged in -->
+  <div class="smd-guestbar" id="smdGuestbar" hidden>
+    <span class="smd-guestbar-text">🕉️ आप डेमो मोड में देख रहे हैं — असली प्रगति देखने व सहेजने के लिए लॉगिन करें।</span>
+    <a class="smd-btn smd-btn-primary smd-btn-sm" href="javascript:void(0);" id="smdGuestLoginBtn">लॉगिन करें</a>
+  </div>
+
+  <div class="smd-shell">
+
+    <!-- Sidebar (desktop) -->
+    <nav class="smd-sidebar" id="smdSidebar" aria-label="साधना डैशबोर्ड नेविगेशन">
+      <div class="smd-side-head">
+        <div class="smd-brand-mark">ॐ</div>
+        <div class="smd-brand-text">
+          <b>मेरी साधना</b>
+          <span id="smdStreakLabel" class="smd-data">🔥 — दिन</span>
+        </div>
+      </div>
+
+      <button class="smd-tab-btn active" data-view="overview" type="button"><span class="smd-ic">🏠</span>अवलोकन</button>
+      <button class="smd-tab-btn" data-view="puja" type="button"><span class="smd-ic">🪔</span>आज की पूजा</button>
+      <button class="smd-tab-btn" data-view="diary" type="button"><span class="smd-ic">📿</span>जप डायरी</button>
+      <button class="smd-tab-btn" data-view="challenges" type="button"><span class="smd-ic">🚩</span>संकल्प चैलेंज</button>
+      <button class="smd-tab-btn" data-view="family" type="button"><span class="smd-ic">👨‍👩‍👧‍👦</span>परिवार</button>
+      <button class="smd-tab-btn" data-view="settings" type="button"><span class="smd-ic">⚙️</span>सेटिंग्स</button>
+
+      <div class="smd-side-foot" id="smdSideFoot">
+        <!-- filled by JS: avatar + name (logged in) OR login button (guest) -->
+      </div>
+    </nav>
+
+    <!-- Main column -->
+    <div class="smd-main">
+      <!-- Horizontal tab strip (mobile only — mirrors sidebar) -->
+      <div class="smd-mobile-tabs" id="smdMobileTabs"></div>
+
+      <div id="smdViewsRoot"><!-- views injected by JS --></div>
+    </div>
+  </div>
+
+  <div class="smd-toast-stack" id="smdToastStack"></div>
+
+  <div class="smd-modal-backdrop" id="smdModalBackdrop">
+    <div class="smd-modal" id="smdModalBody"></div>
+  </div>
+</section>
 
 <!-- Hero -->
 <section class="hero">
@@ -4048,7 +4096,8 @@ body {
   statsObs.observe(document.querySelector('.feature-strip'));
 
   /* === AUTHORS SECTION === */
-  const SM_API = 'https://www.api.shivmarg.live';
+  // const SM_API = 'https://www.api.shivmarg.live';
+  const SM_API = 'http://127.0.0.1:8000';
   const CAT_COLORS = {
     kavita:'#F39C12',
     kahani:'#E74C3C',
@@ -4170,6 +4219,7 @@ body {
   // Load authors on page load
   window.addEventListener('load', loadAuthors);
 </script>
+<script src="/sadhnadashboard.js" defer></script>
 <script src="/js/auth2.js"></script>
 <script src="/js/s-comments.js"></script>
 <script src="/js/streak-widget.js"></script>

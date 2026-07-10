@@ -19,6 +19,7 @@
   const TOKEN_KEY = 'sm_token';
   const USER_KEY  = 'sm_user';
   let   API_BASE  = 'https://www.api.shivmarg.live';
+  // let API_BASE = 'http://127.0.0.1:8000';
   let   NO_WIDGET = false; // set true when the page navbar manages its own auth UI
 
   /* ─── STATE ─── */
@@ -201,6 +202,9 @@ style.textContent = `
     _token = token; _user = user;
     localStorage.setItem(TOKEN_KEY, token);
     localStorage.setItem(USER_KEY, JSON.stringify(user));
+    document.dispatchEvent(
+      new CustomEvent("sm-auth-changed")
+    );
   }
 
   function loadSession() {

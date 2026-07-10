@@ -15,7 +15,7 @@
   /* ─── CONFIG ─── */
   const TOKEN_KEY   = 'sm_token';
   const USER_KEY    = 'sm_user';
-  let   API_BASE    = 'https://www.api.shivmarg.live'; // ← change to your server URL in prod
+  let   API_BASE    = 'https://www.api.shivamarg.live'; // ← change to your server URL in prod
 
   /* ─── STATE ─── */
   let _user  = null;
