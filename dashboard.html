@@ -245,6 +245,52 @@ a{ color: inherit; }
 .modal-actions{ display:flex; gap:10px; margin-top:18px; }
 .modal-close{ position:absolute; top:14px; right:16px; background:none; border:none; font-size:20px; color:var(--ink-soft); }
 
+/* ---------- Family member grid + card ---------- */
+.member-grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(140px,1fr)); gap:12px; }
+.member-card{
+  background: var(--cream); border:1.5px solid var(--line); border-radius:16px;
+  padding:16px 12px; text-align:center; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.member-card:hover{ transform: translateY(-3px); box-shadow: var(--shadow-sm); border-color: var(--gold-soft); cursor:pointer; }
+.member-card .m-avatar{
+  width:52px; height:52px; border-radius:50%; margin:0 auto 10px;
+  background: linear-gradient(135deg, var(--maroon), var(--saffron-deep));
+  color:#fff; font-family: var(--font-data); font-weight:700; font-size:19px;
+  display:flex; align-items:center; justify-content:center; border:2px solid var(--gold-soft);
+}
+.member-card .m-name{ font-weight:700; font-size:14px; color:var(--maroon-deep); }
+.member-card .m-relation{ font-size:11px; color:var(--ink-soft); font-family:var(--font-data); text-transform:capitalize; margin-bottom:8px;}
+.member-card .m-today{ font-size:12px; font-family:var(--font-data); font-weight:600; color:var(--tulsi); background:var(--tulsi-soft); border-radius:999px; padding:3px 10px; display:inline-block; }
+.member-card .m-you-tag{ font-size:9.5px; background:var(--gold-soft); color:var(--maroon-deep); padding:2px 7px; border-radius:999px; font-family:var(--font-data); font-weight:700; margin-left:5px;}
+
+/* ---------- Member profile popup ---------- */
+.mp-head{ display:flex; align-items:center; gap:14px; margin-bottom:18px; }
+.mp-avatar{
+  width:58px; height:58px; border-radius:50%; flex:0 0 auto;
+  background: linear-gradient(135deg, var(--maroon), var(--saffron-deep)); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-family:var(--font-data); font-weight:700; font-size:20px;
+  border:3px solid var(--gold-soft);
+}
+.mp-head h3{ font-size:18px; color:var(--maroon-deep); }
+.mp-head .mp-relation{ font-size:12px; color:var(--ink-soft); font-family:var(--font-data); text-transform:capitalize; }
+.mp-stats-row{ display:flex; gap:10px; margin-bottom:18px; }
+.mp-stat{ flex:1; background:var(--cream); border-radius:12px; padding:10px 8px; text-align:center; }
+.mp-stat .n{ font-family:var(--font-data); font-weight:800; font-size:19px; color:var(--saffron-deep); }
+.mp-stat .l{ font-size:10.5px; color:var(--ink-soft); font-family:var(--font-data); margin-top:2px; }
+.mp-section-title{ font-size:12.5px; font-weight:700; color:var(--maroon-deep); text-transform:uppercase; letter-spacing:0.04em; font-family:var(--font-data); margin: 16px 0 10px; display:flex; align-items:center; gap:6px;}
+.mp-mantra-row{ display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid var(--line); }
+.mp-mantra-row:last-child{ border-bottom:none; }
+.mp-mantra-icon{ font-size:18px; width:30px; text-align:center; }
+.mp-mantra-name{ flex:1; font-size:13.5px; font-weight:600; }
+.mp-mantra-count{ font-family:var(--font-data); font-size:12.5px; font-weight:700; color:var(--tulsi); }
+.mp-bead-ring{ flex:0 0 auto; }
+.mp-empty{ font-size:12.5px; color:var(--ink-soft); text-align:center; padding:14px 0; }
+.mp-trend{ display:flex; align-items:flex-end; gap:3px; height:44px; margin-top:6px; }
+.mp-trend .bar{ flex:1; background: var(--gold-soft); border-radius:3px 3px 0 0; min-height:2px; }
+.mp-trend .bar.hot{ background: linear-gradient(180deg, var(--saffron), var(--saffron-deep)); }
+.mp-challenge-pill{ display:flex; align-items:center; justify-content:space-between; background:var(--cream); border-radius:10px; padding:8px 12px; margin-bottom:8px; font-size:12.5px; }
+.mp-note{ font-size:11.5px; color:var(--ink-soft); text-align:center; margin-top:14px; padding-top:12px; border-top:1px dashed var(--line); font-family:var(--font-data); }
+
 /* ---------- Bottom tab bar (mobile) ---------- */
 .mobile-tabbar{
   position:fixed; bottom:0; left:0; right:0; z-index:50;
@@ -276,7 +322,7 @@ a{ color: inherit; }
     <div class="om">🕉️</div>
     <h2>साधना डैशबोर्ड देखने हेतु लॉगिन करें</h2>
     <p>अपनी दैनिक पूजा, जप डायरी, संकल्प चैलेंज और परिवार डैशबोर्ड देखने के लिए कृपया अपने ShivMarg खाते से लॉगिन करें।</p>
-    <a class="btn btn-primary btn-block" href="/admin-login">लॉगिन करें</a>
+    <a class="btn btn-primary btn-block" href="/login.html">लॉगिन करें</a>
   </div>
 </div>
 
