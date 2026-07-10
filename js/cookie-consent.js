@@ -4,10 +4,11 @@
   var STORAGE_KEY = 'sm_cookie_consent';
 
   if (localStorage.getItem(STORAGE_KEY) === 'accepted') return;
+  if (document.getElementById('sm-cookie-bar')) return; // prevent duplicate injection
 
   var css = `
     #sm-cookie-bar {
-      position: fixed; left: 0; right: 0; bottom: 0; z-index: 9998;
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 999999;
       display: flex; align-items: center; justify-content: space-between;
       gap: 20px; flex-wrap: wrap;
       padding: 14px 24px;
@@ -15,6 +16,7 @@
       border-top: 1px solid rgba(232,184,75,0.25);
       font-family: 'Crimson Pro', 'EB Garamond', serif;
       animation: sm-cb-in 0.4s ease both;
+      pointer-events: auto;
     }
     @keyframes sm-cb-in { from { transform: translateY(100%); } to { transform: translateY(0); } }
     #sm-cookie-bar p {
@@ -30,6 +32,9 @@
       padding: 10px 22px; border: none; border-radius: 4px; cursor: pointer;
       background: linear-gradient(135deg, #FF7A1A, #C9962E);
       color: #fff; transition: opacity 0.2s;
+      pointer-events: auto;
+      position: relative;
+      z-index: 1;
     }
     #sm-cookie-bar button:hover { opacity: 0.88; }
     @media (max-width: 600px) {
@@ -53,7 +58,9 @@
 
   document.body.appendChild(bar);
 
-  document.getElementById('sm-cookie-accept').addEventListener('click', function () {
+  document.getElementById('sm-cookie-accept').addEventListener('click', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
     localStorage.setItem(STORAGE_KEY, 'accepted');
     bar.remove();
   });
