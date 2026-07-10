@@ -702,7 +702,7 @@
         ${family.members.map(m => `
           <div class="smd-member-row" data-member-id="${escapeHTML(m.user_id || '')}" data-member-name="${escapeHTML(m.username)}">
             <div style="display:flex;align-items:center;gap:10px;">
-              <div class="smd-avatar" style="width:30px;height:30px;font-size:11px;">${escapeHTML((m.username || 'U')[0].toUpperCase())}</div>
+              ${avatarHTML(m.avatar_url, m.username, 'width:30px;height:30px;font-size:11px;')}
               <div><b>${escapeHTML(m.username)}${m.is_you ? ' (आप)' : ''}</b><br><span class="smd-data" style="font-size:11px;color:var(--smd-ink-soft);">${relationLabel(m.relation)}</span></div>
             </div>
             <span class="smd-data" style="font-size:12px;color:var(--smd-saffron-deep);font-weight:700;">${m.today_completed_count} आज पूर्ण</span>
@@ -741,6 +741,14 @@
       });
     });
   }
+
+  function avatarHTML(avatarUrl, name, sizeStyle = '') {
+  const initial = escapeHTML((name || 'U')[0].toUpperCase());
+  const img = avatarUrl
+    ? `<img class="smd-avatar-img" src="${escapeHTML(avatarUrl)}" alt="" onerror="this.remove()">`
+    : '';
+  return `<div class="smd-avatar" style="${sizeStyle}">${initial}${img}</div>`;
+}
 
   // ===========================================================
   // FAMILY MEMBER PROFILE POPUP
@@ -835,7 +843,7 @@
 
     openModal(`
       <div class="smd-mp-head">
-        <div class="smd-mp-avatar">${escapeHTML((p.avatar || p.username || '?')[0].toUpperCase())}</div>
+        ${avatarHTML(p.avatar_url, p.username, '')}
         <div>
           <h3>${escapeHTML(p.username)}${p.is_you ? ' (आप)' : ''}</h3>
           <div class="smd-mp-relation">${relationLabel(p.relation)}</div>

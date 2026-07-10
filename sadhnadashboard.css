@@ -191,13 +191,14 @@
 .smd-hero-stat .smd-lbl{ font-size:11.5px; opacity:0.8; margin-top:4px; }
 
 /* ---------- Bento grid ---------- */
-.smd-grid{ display:grid; grid-template-columns: repeat(12,1fr); gap:12px; }
+.smd-grid{ display:grid; grid-template-columns: repeat(12,1fr); gap:18px; }
 .smd-card{
   grid-column: span 12;
   background: var(--smd-surface);
   border:1px solid var(--smd-line);
   border-radius: var(--smd-radius-card);
-  padding: 14px 14px 16px;
+  padding: 22px 22px 24px;
+  min-height: 150px;
   box-shadow: var(--smd-shadow-sm);
   position:relative;
 }
@@ -215,10 +216,15 @@
 }
 .smd-card-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px; }
 .smd-card-title{ display:flex; align-items:center; gap:9px; }
-.smd-card-title .smd-ic{ font-size:18px; }
-.smd-card-title h3{ font-size:15.5px; color: var(--smd-maroon-deep); font-family: var(--smd-font-hindi); font-weight:700; }
+.smd-card-title .smd-ic{ font-size:21px; }
+.smd-card-title h3{ font-size:17.5px; color: var(--smd-maroon-deep); font-family: var(--smd-font-hindi); font-weight:700; }
 .smd-card-link{ font-size:12px; font-weight:600; color: var(--smd-saffron-deep); font-family: var(--smd-font-data); background:none; border:none; }
 .smd-card-link:hover{ text-decoration:underline; }
+.smd-avatar{ position:relative; overflow:hidden; }
+.smd-avatar-img{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; border-radius:50%;
+}
 
 /* ---------- Buttons ---------- */
 .smd-btn{
@@ -275,6 +281,7 @@
   width:100%; padding:11px 13px; border-radius:10px; border:1.5px solid var(--smd-line);
   font-size:14px; background: var(--smd-cream); color: var(--smd-ink);
 }
+.smd-guestbar[hidden]{ display:none !important; }
 .smd-field input:focus, .smd-field select:focus{ outline:2px solid var(--smd-saffron); outline-offset:1px; border-color: var(--smd-saffron); }
 .smd-modal-actions{ display:flex; gap:10px; margin-top:16px; }
 /* ---------- Family member row (clickable) ---------- */
