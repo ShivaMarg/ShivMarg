@@ -21,7 +21,7 @@
   // ---------------------------------------------------------
   // CONFIG — adjust these two to match the rest of your site
   // ---------------------------------------------------------
-  const API_BASE  = window.SHIVAMARG_API_BASE || 'https://www.api.shivmarg.live'; // must match the base your FastAPI backend is running on
+  const API_BASE  =  'https://www.api.shivmarg.live'; // must match the base your FastAPI backend is running on
   const TOKEN_KEY = 'admin_token'; // must match the key your login flow writes to localStorage
 
   // ---------------------------------------------------------
