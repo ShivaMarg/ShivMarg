@@ -700,7 +700,7 @@
           <span class="smd-data" style="font-size:12px;color:var(--smd-ink-soft);">कोड: ${escapeHTML(family.invite_code)}</span>
         </div>
         ${family.members.map(m => `
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 4px;border-bottom:1px solid var(--smd-line);">
+          <div class="smd-member-row" data-member-id="${escapeHTML(m.user_id || '')}" data-member-name="${escapeHTML(m.username)}">
             <div style="display:flex;align-items:center;gap:10px;">
               <div class="smd-avatar" style="width:30px;height:30px;font-size:11px;">${escapeHTML((m.username || 'U')[0].toUpperCase())}</div>
               <div><b>${escapeHTML(m.username)}${m.is_you ? ' (आप)' : ''}</b><br><span class="smd-data" style="font-size:11px;color:var(--smd-ink-soft);">${relationLabel(m.relation)}</span></div>
@@ -735,6 +735,121 @@
       catch (e) { toast(e.message, 'err'); }
     });
   }
+
+  // ===========================================================
+  // FAMILY MEMBER PROFILE POPUP
+  // Shows a member's jaap mala + puja + challenge activity.
+  // Guru mantras are never requested or shown here — the
+  // /api/family/member/{id} endpoint doesn't expose them.
+  // ===========================================================
+  function beadRing({ filled = 0, total = 12, size = 36 }) {
+    const r = size / 2 - 5, cx = size / 2, cy = size / 2;
+    let beads = '';
+    for (let i = 0; i < total; i++) {
+      const angle = (i / total) * 2 * Math.PI - Math.PI / 2;
+      const bx = (cx + r * Math.cos(angle)).toFixed(1);
+      const by = (cy + r * Math.sin(angle)).toFixed(1);
+      const on = i < filled;
+      beads += `<circle cx="${bx}" cy="${by}" r="3" style="fill:${on ? 'var(--smd-saffron)' : 'none'};stroke:${on ? 'var(--smd-saffron-deep)' : 'var(--smd-line)'};stroke-width:1.1"/>`;
+    }
+    const pct = total ? Math.round((filled / total) * 100) : 0;
+    return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" style="flex:0 0 auto;">
+      ${beads}
+      <text x="${cx}" y="${cy + 3.5}" text-anchor="middle" style="font-family:Inter,sans-serif;font-size:10px;font-weight:700;fill:var(--smd-maroon-deep);">${pct}%</text>
+    </svg>`;
+  }
+
+  function DEMO_MEMBER_PROFILE(name) {
+    return {
+      username: name || 'सदस्य', avatar: (name || 'S')[0], relation: 'other', is_you: false,
+      jaap: {
+        mantras: [
+          { icon: '🕉️', name: 'ॐ नमः शिवाय', today_count: 54, daily_target_count: 108 },
+          { icon: '☀️', name: 'गायत्री मंत्र', today_count: 108, daily_target_count: 108 },
+        ],
+        today_total_count: 162, current_streak: 5, longest_streak: 21, lifetime_count: 5400,
+        last_14_days: Array.from({ length: 14 }, (_, i) => ({ date: '', count: [0, 54, 108, 162][i % 4] })),
+      },
+      puja_today: { completed_count: 2 },
+      challenges: [{ challenge_slug: 'shravan-som-jaap', current_streak: 4, total_days_completed: 12, target_days: 30, completed: false }],
+    };
+  }
+
+  async function openFamilyMemberModal(memberId, memberName) {
+    openModal(`
+      <div class="smd-mp-head">
+        <div class="smd-mp-avatar">${escapeHTML((memberName || '?')[0].toUpperCase())}</div>
+        <div><h3>${escapeHTML(memberName || '')}</h3><div class="smd-mp-relation">लोड हो रहा है…</div></div>
+      </div>
+      <div class="smd-skeleton smd-skel-row"></div>
+      <div class="smd-skeleton smd-skel-row"></div>`);
+
+    if (guest || !memberId) {
+      renderMemberModal(DEMO_MEMBER_PROFILE(memberName));
+      return;
+    }
+    try {
+      const p = await api(`/api/family/member/${memberId}`);
+      renderMemberModal(p);
+    } catch (e) {
+      openModal(`<div class="smd-empty"><span class="smd-ic">🔒</span><p>${escapeHTML(e.message || 'विवरण लोड नहीं हो सका।')}</p></div>`);
+    }
+  }
+
+  function renderMemberModal(p) {
+    const mantraRows = (p.jaap.mantras || []).length
+      ? p.jaap.mantras.map(m => {
+          const target = m.daily_target_count || 108;
+          const filled = Math.min(12, Math.round((m.today_count / target) * 12));
+          return `
+            <div class="smd-mp-mantra-row">
+              <div class="smd-mp-mantra-icon">${escapeHTML(m.icon || '🕉️')}</div>
+              <div class="smd-mp-mantra-name">${escapeHTML(m.name)}</div>
+              ${beadRing({ filled, total: 12, size: 36 })}
+              <div class="smd-mp-mantra-count">${m.today_count}/${target}</div>
+            </div>`;
+        }).join('')
+      : `<div class="smd-mp-empty">आज तक कोई जप मंत्र सेट नहीं किया गया</div>`;
+
+    const maxCount = Math.max(1, ...(p.jaap.last_14_days || []).map(d => d.count));
+    const trendBars = (p.jaap.last_14_days || []).map(d => {
+      const h = Math.max(2, Math.round((d.count / maxCount) * 40));
+      return `<div class="smd-bar ${d.count > 0 ? 'smd-hot' : ''}" style="height:${h}px" title="${escapeHTML(d.date)}: ${d.count}"></div>`;
+    }).join('');
+
+    const challengeRows = (p.challenges || []).length
+      ? p.challenges.map(c => `
+          <div class="smd-mp-challenge-pill">
+            <span>${escapeHTML(c.challenge_slug.replace(/-/g, ' '))}</span>
+            <span class="smd-data" style="font-weight:700;color:${c.completed ? 'var(--smd-tulsi)' : 'var(--smd-saffron-deep)'}">
+              ${c.completed ? '✅ पूर्ण' : `${c.total_days_completed}/${c.target_days} दिन · 🔥${c.current_streak}`}
+            </span>
+          </div>`).join('')
+      : `<div class="smd-mp-empty">कोई सक्रिय चैलेंज नहीं</div>`;
+
+    openModal(`
+      <div class="smd-mp-head">
+        <div class="smd-mp-avatar">${escapeHTML((p.avatar || p.username || '?')[0].toUpperCase())}</div>
+        <div>
+          <h3>${escapeHTML(p.username)}${p.is_you ? ' (आप)' : ''}</h3>
+          <div class="smd-mp-relation">${relationLabel(p.relation)}</div>
+        </div>
+      </div>
+      <div class="smd-mp-stats-row">
+        <div class="smd-mp-stat"><div class="smd-n">${p.jaap.current_streak}🔥</div><div class="smd-l">जप लगन</div></div>
+        <div class="smd-mp-stat"><div class="smd-n">${p.jaap.today_total_count}</div><div class="smd-l">आज का जप</div></div>
+        <div class="smd-mp-stat"><div class="smd-n">${p.puja_today.completed_count}</div><div class="smd-l">आज पूजा</div></div>
+      </div>
+      <div class="smd-mp-section-title">📿 जप माला — आज की स्थिति</div>
+      ${mantraRows}
+      <div class="smd-mp-section-title">📈 पिछले 14 दिन</div>
+      <div class="smd-mp-trend">${trendBars}</div>
+      <div class="smd-mp-section-title">🚩 संकल्प चैलेंज</div>
+      ${challengeRows}
+      <div class="smd-mp-note">🔒 गुरु मंत्र सदैव गोपनीय रहते हैं — परिवार में कभी साझा नहीं होते</div>
+    `);
+  }
+
 
   // ===========================================================
   // SETTINGS

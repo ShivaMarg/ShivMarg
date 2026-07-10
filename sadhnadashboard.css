@@ -277,4 +277,38 @@
 }
 .smd-field input:focus, .smd-field select:focus{ outline:2px solid var(--smd-saffron); outline-offset:1px; border-color: var(--smd-saffron); }
 .smd-modal-actions{ display:flex; gap:10px; margin-top:16px; }
-.smd-modal-close{ position:absolute; top:12px; right:14px; background:none; border:none; font-size:19px; color: var(--smd-ink-soft); }
+/* ---------- Family member row (clickable) ---------- */
+.smd-member-row{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 4px; border-bottom:1px solid var(--smd-line);
+  cursor:pointer; border-radius:8px; transition: background .15s ease, padding-left .15s ease;
+}
+.smd-member-row:hover{ background: var(--smd-cream-deep); padding-left:8px; }
+.smd-member-row:last-child{ border-bottom:none; }
+
+/* ---------- Family member profile popup ---------- */
+.smd-mp-head{ display:flex; align-items:center; gap:14px; margin-bottom:16px; }
+.smd-mp-avatar{
+  width:54px; height:54px; border-radius:50%; flex:0 0 auto;
+  background: linear-gradient(135deg, var(--smd-maroon), var(--smd-saffron-deep)); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-family:var(--smd-font-data); font-weight:700; font-size:19px;
+  border:3px solid var(--smd-gold-soft);
+}
+.smd-mp-head h3{ font-size:17px; color:var(--smd-maroon-deep); }
+.smd-mp-relation{ font-size:11.5px; color:var(--smd-ink-soft); font-family:var(--smd-font-data); text-transform:capitalize; }
+.smd-mp-stats-row{ display:flex; gap:10px; margin-bottom:16px; }
+.smd-mp-stat{ flex:1; background:var(--smd-cream); border-radius:12px; padding:10px 8px; text-align:center; }
+.smd-mp-stat .smd-n{ font-family:var(--smd-font-data); font-weight:800; font-size:18px; color:var(--smd-saffron-deep); }
+.smd-mp-stat .smd-l{ font-size:10px; color:var(--smd-ink-soft); font-family:var(--smd-font-data); margin-top:2px; }
+.smd-mp-section-title{ font-size:12px; font-weight:700; color:var(--smd-maroon-deep); text-transform:uppercase; letter-spacing:0.04em; font-family:var(--smd-font-data); margin:16px 0 8px; }
+.smd-mp-mantra-row{ display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid var(--smd-line); }
+.smd-mp-mantra-row:last-child{ border-bottom:none; }
+.smd-mp-mantra-icon{ font-size:17px; width:26px; text-align:center; }
+.smd-mp-mantra-name{ flex:1; font-size:13px; font-weight:600; }
+.smd-mp-mantra-count{ font-family:var(--smd-font-data); font-size:12px; font-weight:700; color:var(--smd-tulsi); }
+.smd-mp-empty{ font-size:12px; color:var(--smd-ink-soft); text-align:center; padding:12px 0; }
+.smd-mp-trend{ display:flex; align-items:flex-end; gap:3px; height:40px; margin-top:4px; }
+.smd-mp-trend .smd-bar{ flex:1; background:var(--smd-gold-soft); border-radius:3px 3px 0 0; min-height:2px; }
+.smd-mp-trend .smd-bar.smd-hot{ background: linear-gradient(180deg, var(--smd-saffron), var(--smd-saffron-deep)); }
+.smd-mp-challenge-pill{ display:flex; align-items:center; justify-content:space-between; background:var(--smd-cream); border-radius:10px; padding:7px 11px; margin-bottom:7px; font-size:12px; }
+.smd-mp-note{ font-size:11px; color:var(--smd-ink-soft); text-align:center; margin-top:14px; padding-top:10px; border-top:1px dashed var(--smd-line); font-family:var(--smd-font-data); }
