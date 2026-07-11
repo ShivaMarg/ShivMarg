@@ -259,6 +259,7 @@
       <div class="nav-item" onclick="showTab('activity',this)"><i class="ti ti-activity"></i> Activity</div>
       <div class="nav-item" onclick="SmCloudinary.open()"><i class="ti ti-photo"></i> Browse Images</div>
       <div class="nav-item" onclick="window.open('/events/admin', '_blank')"><i class="ti ti-photo"></i> Events</div>
+      <div class="nav-item" onclick="showTab('affiliate',this)"><i class="ti ti-shopping-cart"></i> Affiliate</div>
     </nav>
     <div class="nav-divider"></div>
     <div class="logout-wrap">
@@ -554,6 +555,44 @@
           <button class="pag-btn" id="activityNext" onclick="changePage('activity',1)">Next →</button>
         </div>
       </div>
+      <!-- AFFILIATE TAB -->
+      <div id="tab-affiliate" class="tab-pane">
+        <div class="section-head">
+          <div class="section-title">Affiliate products</div>
+          <button class="act-btn act-edit" style="padding:6px 14px" onclick="openProductModal()">+ Add product</button>
+        </div>
+        <div class="filters">
+          <span class="filter-label">Category:</span>
+          <select class="filter-select" id="affCatFilter" onchange="renderAffProducts()">
+            <option value="">All categories</option>
+          </select>
+          <input type="text" class="search-input" id="affSearch" placeholder="Search name…" oninput="renderAffProducts()">
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr>
+              <th>Image</th><th>Name</th><th>Category</th><th>Price</th><th style="text-align:right">Clicks</th><th style="text-align:right">Actions</th>
+            </tr></thead>
+            <tbody id="affProductsTbody">
+              <tr class="spinner-cell"><td colspan="6"><span class="dot-spin"></span><span class="dot-spin"></span><span class="dot-spin"></span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="section-head" style="margin-top:24px">
+          <div class="section-title">Recent clicks</div>
+          <div class="section-count" id="affClickCount">— total</div>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Product</th><th>User</th><th>Page</th><th>Device/IP</th><th>When</th></tr></thead>
+            <tbody id="affClicksTbody">
+              <tr class="spinner-cell"><td colspan="5"><span class="dot-spin"></span><span class="dot-spin"></span><span class="dot-spin"></span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
     </div><!-- /content -->
   </div><!-- /main -->
 </div><!-- /shell -->
@@ -603,6 +642,37 @@
     <div class="modal-footer">
       <button class="btn-cancel" onclick="closeModal('articleModal')">Cancel</button>
       <button class="btn-save" id="artSaveBtn" onclick="saveArticleStatus()">Save changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="modal-overlay" id="productModal">
+  <div class="modal-box">
+    <div class="modal-title"><i class="ti ti-shopping-bag"></i> <span id="prodModalTitle">Add product</span></div>
+    <div class="form-row"><label>Name</label><input type="text" id="prodName"></div>
+    <div class="form-row"><label>Image URL</label><input type="text" id="prodImage"></div>
+    <div class="form-row"><label>Amazon link</label><input type="text" id="prodLink"></div>
+    <div class="form-row">
+      <label>Category</label>
+      <select id="prodCategory">
+        <option value="puja_samagri">Puja Samagri</option>
+        <option value="idols_murti">Idols / Murti</option>
+        <option value="books">Books</option>
+        <option value="jewelry">Jewelry</option>
+        <option value="home_decor">Home Decor</option>
+        <option value="clothing">Clothing</option>
+        <option value="kitchen">Kitchen</option>
+        <option value="electronics">Electronics</option>
+        <option value="kids">Kids</option>
+        <option value="misc">Misc</option>
+      </select>
+    </div>
+    <div class="form-row"><label>Price (optional)</label><input type="text" id="prodPrice" placeholder="₹499"></div>
+    <div class="form-row"><label>Description (optional)</label><textarea id="prodDesc"></textarea></div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal('productModal')">Cancel</button>
+      <button class="btn-save" id="prodSaveBtn" onclick="saveProduct()">Save product</button>
     </div>
   </div>
 </div>
@@ -1098,6 +1168,108 @@ function renderActivityTable(){
   }).join('');
 }
 
+state.affProducts = []; state.affClicks = []; state.editingProductId = null;
+
+function loadAffiliateTab(){ loadAffProducts(); loadAffClicks(); }
+
+async function loadAffProducts(){
+  const data = await apiFetch('/affiliate/admin/products');
+  state.affProducts = data || [];
+  const cats = [...new Set(state.affProducts.map(p=>p.category))];
+  const sel = document.getElementById('affCatFilter');
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">All categories</option>'+cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
+  sel.value = cur;
+  renderAffProducts();
+}
+
+function renderAffProducts(){
+  const cat = document.getElementById('affCatFilter').value;
+  const q = (document.getElementById('affSearch').value||'').toLowerCase();
+  const filtered = state.affProducts.filter(p=>(!cat||p.category===cat)&&(!q||p.name.toLowerCase().includes(q)));
+  const tbody = document.getElementById('affProductsTbody');
+  if(!filtered.length){ tbody.innerHTML = `<tr class="empty-row"><td colspan="6">No products found</td></tr>`; return; }
+  tbody.innerHTML = filtered.map(p=>`
+    <tr>
+      <td><img src="${esc(p.image)}" style="width:40px;height:40px;object-fit:cover;border-radius:6px" onerror="this.style.display='none'"></td>
+      <td><strong>${esc(p.name)}</strong></td>
+      <td style="color:var(--muted)">${esc(p.category)}</td>
+      <td style="color:var(--muted)">${esc(p.price||'—')}</td>
+      <td style="text-align:right;color:var(--gold);font-weight:600">${p.click_count ?? 0}</td>
+      <td><div class="act-row">
+        <button class="act-btn act-edit" onclick="openProductModal('${p.id}')">Edit</button>
+        <button class="act-btn act-del" onclick="deleteProduct('${p.id}','${esc(p.name)}')">Delete</button>
+      </div></td>
+    </tr>`).join('');
+}
+
+function openProductModal(id){
+  state.editingProductId = id || null;
+  const p = id ? state.affProducts.find(x=>x.id===id) : null;
+  document.getElementById('prodModalTitle').textContent = id ? 'Edit product' : 'Add product';
+  document.getElementById('prodName').value = p?.name || '';
+  document.getElementById('prodImage').value = p?.image || '';
+  document.getElementById('prodLink').value = p?.link || '';
+  document.getElementById('prodCategory').value = p?.category || 'puja_samagri';
+  document.getElementById('prodPrice').value = p?.price || '';
+  document.getElementById('prodDesc').value = p?.description || '';
+  document.getElementById('productModal').classList.add('open');
+}
+
+async function saveProduct(){
+  const body = {
+    name: document.getElementById('prodName').value.trim(),
+    image: document.getElementById('prodImage').value.trim(),
+    link: document.getElementById('prodLink').value.trim(),
+    category: document.getElementById('prodCategory').value,
+    price: document.getElementById('prodPrice').value.trim() || null,
+    description: document.getElementById('prodDesc').value.trim() || null
+  };
+  if(!body.name || !body.link){ showToast('Name and link required','error'); return; }
+  const btn = document.getElementById('prodSaveBtn'); btn.disabled = true; btn.textContent = 'Saving…';
+  const id = state.editingProductId;
+  const data = id
+    ? await apiFetch(`/affiliate/admin/products/${id}`, {method:'PUT', body: JSON.stringify(body)})
+    : await apiFetch('/affiliate/admin/products', {method:'POST', body: JSON.stringify(body)});
+  btn.disabled = false; btn.textContent = 'Save product';
+  if(data){
+    closeModal('productModal');
+    showToast(id ? 'Product updated' : 'Product added', 'success');
+    loadAffProducts();
+  } else {
+    showToast('Save failed', 'error');
+  }
+}
+
+async function deleteProduct(id, name){
+  if(!confirm(`Delete "${name}"?`)) return;
+  const data = await apiFetch(`/affiliate/admin/products/${id}`, {method:'DELETE'});
+  if(data !== null){
+    state.affProducts = state.affProducts.filter(p=>p.id!==id);
+    renderAffProducts();
+    showToast('Product deleted','success');
+  } else {
+    showToast('Delete failed','error');
+  }
+}
+
+async function loadAffClicks(){
+  const data = await apiFetch('/affiliate/admin/clicks');
+  state.affClicks = data || [];
+  document.getElementById('affClickCount').textContent = state.affClicks.length + ' total';
+  const tbody = document.getElementById('affClicksTbody');
+  if(!state.affClicks.length){ tbody.innerHTML = `<tr class="empty-row"><td colspan="5">No clicks yet</td></tr>`; return; }
+  tbody.innerHTML = state.affClicks.map(c=>{
+    const prod = state.affProducts.find(p=>p.id===c.product_id);
+    return `<tr>
+      <td><strong>${esc(prod?.name || c.product_id)}</strong></td>
+      <td style="color:var(--muted)">${esc(c.user||'Anon')}</td>
+      <td style="color:var(--muted)" class="trunc" title="${esc(c.page||'')}">${esc(c.page||'—')}</td>
+      <td style="color:var(--muted)">${esc(c.ip||'—')}</td>
+      <td style="color:var(--muted)">${fmtDateTime(c.ts)}</td>
+    </tr>`;
+  }).join('');
+}
 /* ───────────────────────────── NAV ───────────────────────────── */
 function showTab(tab,el){
   currentTab=tab;
@@ -1105,13 +1277,15 @@ function showTab(tab,el){
   document.getElementById('tab-'+tab).classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   if(el)el.classList.add('active');
-  const titles={dashboard:'Dashboard',users:'Manage users',comments:'Manage comments',posts:'Manage posts',articles:'Manage articles',newsletter:'Newsletter',notifications:'Push notifications',activity:'User activity'};
+  const titles={dashboard:'Dashboard',users:'Manage users',comments:'Manage comments',posts:'Manage posts',articles:'Manage articles',newsletter:'Newsletter',notifications:'Push notifications',activity:'User activity',affiliate:'Affiliate products'};
   document.getElementById('pageTitle').textContent=titles[tab]||tab;
   closeSidebar();
   // Lazy-load articles
   if(tab==='articles'&&!state.articles.length)loadArticles();
   if(tab==='newsletter' && !state.newsletter.length) loadNewsletter();
   if(tab==='activity' && !state.activityLog.length) loadActivityTab();
+  if(tab==='affiliate' && !state.affProducts.length) loadAffiliateTab();
+
 }
 
 function refreshCurrent(){
@@ -1122,6 +1296,7 @@ function refreshCurrent(){
   else if(currentTab==='articles')loadArticles();
   else if(currentTab==='newsletter')loadNewsletter();
   else if(currentTab==='activity')loadActivityTab();
+  else if(currentTab==='affiliate') loadAffiliateTab();
 }
 
 async function sendPushNotification(){
