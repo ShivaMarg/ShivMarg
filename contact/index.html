@@ -341,12 +341,12 @@
         btn.style.color = '#fff'; btn.style.opacity = '1';
       } else {
         var d = await res.json();
-        msg.textContent = 'Error: '+(d.errors?d.errors.map(function(x){return x.message}).join(', '):'Unknown')+'. Email saurav.jha@zohomail.in';
+        msg.textContent = 'Error: '+(d.errors?d.errors.map(function(x){return x.message}).join(', '):'Unknown')+'. Email admin@shivmarg.live';
         msg.style.color = 'rgba(255,100,80,.9)'; msg.style.display = 'block';
         btn.textContent = '🙏 Send Message'; btn.disabled = false; btn.style.opacity = '1';
       }
     } catch(err){
-      msg.textContent = 'Network error. Please email saurav.jha@zohomail.in directly.';
+      msg.textContent = 'Network error. Please email admin@shivmarg.live directly.';
       msg.style.color = 'rgba(255,100,80,.9)'; msg.style.display = 'block';
       btn.textContent = '🙏 Send Message'; btn.disabled = false; btn.style.opacity = '1';
     }

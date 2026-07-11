@@ -42,7 +42,7 @@
   const $modalBackdrop          = document.getElementById('smdModalBackdrop');
   const $modalBody                = document.getElementById('smdModalBody');
 
-  const VIEWS = ['overview', 'puja', 'diary', 'challenges', 'family', 'settings'];
+  const VIEWS = ['overview', 'puja', 'diary', 'challenges', 'family', 'settings', 'about'];
   let currentUser = null;
   let guest = true;
   let lastAuthToken = null;
@@ -141,6 +141,13 @@
       history: Array.from({ length: 12 }, (_, i) => ({
         date: new Date(Date.now() - i * 86400000).toISOString().slice(0, 10),
         count: [0, 1, 2, 3][i % 4],
+      })),
+    },
+    mantraStats: {
+      today_count: 216, current_streak: 7, longest_streak: 21,
+      last_30_days: Array.from({ length: 30 }, (_, i) => ({
+        date: new Date(Date.now() - (29 - i) * 86400000).toISOString().slice(0, 10),
+        count: [0, 54, 108, 162, 216][i % 5],
       })),
     },
   };
@@ -338,6 +345,7 @@
   const RENDERERS = {
     overview: renderOverview, puja: renderPuja, diary: renderDiary,
     challenges: renderChallenges, family: renderFamily, settings: renderSettings,
+    about: renderAboutPolicy,
   };
 
   async function switchView(view) {
@@ -357,22 +365,78 @@
   // ===========================================================
   // OVERVIEW
   // ===========================================================
-  async function renderOverview() {
-    let streak, puja, chall, family;
+async function renderOverview() {
+    let streak, puja, chall, family, mantraStats;
     if (guest) {
-      streak = DEMO.streak; puja = DEMO.puja; chall = DEMO.challengesMy.challenges; family = DEMO.family;
+      streak = DEMO.streak; puja = DEMO.puja; chall = DEMO.challengesMy.challenges;
+      family = DEMO.family; mantraStats = DEMO.mantraStats;
     } else {
-      const [sR, pR, cR, fR] = await Promise.allSettled([
-        api('/api/streak/me'), api('/api/puja/today'), api('/api/challenges/my'), api('/api/family/dashboard'),
+      const [sR, pR, cR, fR, mR] = await Promise.allSettled([
+        api('/api/streak/me'), api('/api/puja/today'), api('/api/challenges/my'),
+        api('/api/family/dashboard'), api('/api/mantras/stats'),
       ]);
       streak = sR.status === 'fulfilled' ? sR.value : { streak: 0 };
       puja   = pR.status === 'fulfilled' ? pR.value : null;
       chall  = (cR.status === 'fulfilled' ? cR.value.challenges : []) || [];
       family = fR.status === 'fulfilled' ? fR.value : null;
+      mantraStats = mR.status === 'fulfilled' ? mR.value : null;
     }
 
     const activeCount = chall.filter(c => !c.completed).length;
     const today = new Date().toLocaleDateString('hi-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+    // ---- Puja: segmented bar, one segment per today's item ----
+    const pujaBarHTML = (puja && puja.items && puja.items.length)
+      ? `<div class="smd-seg-bar">
+          ${puja.items.map(it => `<div class="smd-seg ${it.completed ? 'smd-seg-on' : ''}" title="${escapeHTML(it.mantra_name)}${it.completed ? ' — पूर्ण' : ' — शेष'}"></div>`).join('')}
+        </div>
+        <div class="smd-seg-list">
+          ${puja.items.map(it => `
+            <div class="smd-seg-item">
+              <span class="smd-seg-dot ${it.completed ? 'smd-seg-dot-on' : ''}"></span>
+              <span>${escapeHTML(it.mantra_name)}</span>
+              <span class="smd-seg-hint smd-data">${escapeHTML(it.time_hint || '')}</span>
+            </div>`).join('')}
+        </div>`
+      : `<div class="smd-empty"><span class="smd-ic">🪔</span><p>अपनी दैनिक साधना प्रोफ़ाइल अभी सेट करें।</p>
+         <button class="smd-btn smd-btn-primary smd-btn-sm" data-view="puja">शुरू करें</button></div>`;
+
+    // ---- Jaap diary: today's total + weekly bars (last 7 days) ----
+    let jaapCardHTML;
+    if (mantraStats && mantraStats.last_30_days) {
+      const last7 = mantraStats.last_30_days.slice(-7);
+      const maxC = Math.max(1, ...last7.map(d => d.count));
+      const dayLabel = (dateStr) => new Date(dateStr).toLocaleDateString('hi-IN', { weekday: 'short' });
+      jaapCardHTML = `
+        <div class="smd-jaap-today"><span class="smd-num smd-data">${mantraStats.today_count ?? 0}</span><span style="font-size:12.5px;color:var(--smd-ink-soft);">आज का जप · 🔥 ${mantraStats.current_streak ?? 0} दिन</span></div>
+        <div class="smd-week-bars">
+          ${last7.map(d => {
+            const h = Math.max(3, Math.round((d.count / maxC) * 54));
+            return `<div class="smd-week-col">
+              <div class="smd-week-bar ${d.count > 0 ? 'smd-week-bar-on' : ''}" style="height:${h}px" title="${d.date}: ${d.count} जप"></div>
+              <span class="smd-week-day smd-data">${dayLabel(d.date)}</span>
+            </div>`;
+          }).join('')}
+        </div>`;
+    } else {
+      jaapCardHTML = `<div class="smd-empty"><span class="smd-ic">📿</span><p>पिछले दिनों की अपनी साधना देखें और प्रगति ट्रैक करें।</p>
+        <button class="smd-btn smd-btn-primary smd-btn-sm" data-view="diary">डायरी खोलें</button></div>`;
+    }
+
+    // ---- Family: member preview chips with today's count ----
+    const familyCardHTML = family
+      ? `<p style="font-size:13px;margin-bottom:10px;">${escapeHTML(family.family_name)} — ${family.members.length} सदस्य</p>
+         <div class="smd-fam-preview">
+           ${family.members.slice(0, 5).map(m => `
+             <div class="smd-fam-chip" title="${escapeHTML(m.username)} — आज ${m.today_completed_count} पूर्ण">
+               ${avatarHTML(m.avatar_url, m.username, 'width:30px;height:30px;font-size:11px;')}
+               <span class="smd-fam-chip-name">${escapeHTML(m.username)}</span>
+               <span class="smd-fam-chip-count smd-data">${m.today_completed_count}</span>
+             </div>`).join('')}
+           ${family.members.length > 5 ? `<div class="smd-fam-more">+${family.members.length - 5}</div>` : ''}
+         </div>`
+      : `<div class="smd-empty"><span class="smd-ic">👨‍👩‍👧‍👦</span><p>अभी तक किसी परिवार से नहीं जुड़े।</p>
+         <button class="smd-btn smd-btn-primary smd-btn-sm" data-view="family">जोड़ें / बनाएं</button></div>`;
 
     $viewsRoot.innerHTML = `
       <section class="smd-hero">
@@ -393,11 +457,7 @@
             <div class="smd-card-title"><span class="smd-ic">🪔</span><h3>आज की पूजा</h3></div>
             <button class="smd-card-link" data-view="puja">विस्तार से देखें →</button>
           </div>
-          ${puja
-            ? `<p class="smd-data" style="font-size:13px;color:var(--smd-ink-soft);">${escapeHTML(puja.title)}</p>
-               <p style="margin-top:8px;font-size:13px;">${puja.completed_count} / ${puja.total} पूर्ण</p>`
-            : `<div class="smd-empty"><span class="smd-ic">🪔</span><p>अपनी दैनिक साधना प्रोफ़ाइल अभी सेट करें।</p>
-               <button class="smd-btn smd-btn-primary smd-btn-sm" data-view="puja">शुरू करें</button></div>`}
+          ${pujaBarHTML}
         </div>
 
         <div class="smd-card smd-col-6">
@@ -420,7 +480,7 @@
             <div class="smd-card-title"><span class="smd-ic">📿</span><h3>जप डायरी</h3></div>
             <button class="smd-card-link" data-view="diary">विस्तार से देखें →</button>
           </div>
-          <p style="font-size:13px;color:var(--smd-ink-soft);">पिछले दिनों की अपनी साधना देखें और प्रगति ट्रैक करें।</p>
+          ${jaapCardHTML}
         </div>
 
         <div class="smd-card smd-col-6">
@@ -428,16 +488,12 @@
             <div class="smd-card-title"><span class="smd-ic">👨‍👩‍👧‍👦</span><h3>परिवार</h3></div>
             <button class="smd-card-link" data-view="family">विस्तार से देखें →</button>
           </div>
-          ${family
-            ? `<p style="font-size:13px;">${escapeHTML(family.family_name)} — ${family.members.length} सदस्य</p>`
-            : `<div class="smd-empty"><span class="smd-ic">👨‍👩‍👧‍👦</span><p>अभी तक किसी परिवार से नहीं जुड़े।</p>
-               <button class="smd-btn smd-btn-primary smd-btn-sm" data-view="family">जोड़ें / बनाएं</button></div>`}
+          ${familyCardHTML}
         </div>
       </div>`;
 
     bindNavButtons($viewsRoot);
   }
-
   // ===========================================================
   // PUJA
   // ===========================================================
@@ -934,6 +990,63 @@
       if (window.SmAuth && typeof window.SmAuth.logout === 'function') window.SmAuth.logout();
       document.dispatchEvent(new CustomEvent('sm-auth-changed'));
     });
+  }
+
+  // ===========================================================
+  // ABOUT & POLICY — static info tab
+  // ===========================================================
+  function renderAboutPolicy() {
+    $viewsRoot.innerHTML = `
+      <div class="smd-grid">
+        <div class="smd-card smd-col-12">
+          <div class="smd-card-head"><div class="smd-card-title"><span class="smd-ic">ℹ️</span><h3>यह फीचर क्या है?</h3></div></div>
+          <p style="font-size:13.5px;line-height:1.8;color:var(--smd-ink);">
+            <b>मेरी साधना डैशबोर्ड</b> आपकी दैनिक पूजा दिनचर्या, जप माला (मंत्र जाप), संकल्प चैलेंज और
+            परिवार की साधना — सबको एक ही स्थान पर दिखाता है। लक्ष्य है आपकी आध्यात्मिक यात्रा को
+            नियमित, मापने योग्य और परिवार के साथ जोड़े रखना — बिना किसी अतिरिक्त ऐप के।
+          </p>
+        </div>
+
+        <div class="smd-card smd-col-12">
+          <div class="smd-card-head"><div class="smd-card-title"><span class="smd-ic">👨‍👩‍👧‍👦</span><h3>परिवार से जुड़ाव कैसे काम करता है?</h3></div></div>
+          <ul class="smd-policy-list">
+            <li>कोई भी सदस्य एक परिवार <b>बना</b> सकता है — इससे एक 6-अंकों का <b>आमंत्रण कोड</b> मिलता है।</li>
+            <li>परिवार के अन्य सदस्य उसी कोड से <b>जुड़ सकते हैं</b> (अधिकतम 8 सदस्य प्रति परिवार)।</li>
+            <li>कोई भी सदस्य किसी दूसरे सदस्य की साधना तभी देख सकता है जब दोनों <b>एक ही परिवार</b> में हों — यह हर बार सर्वर पर जाँचा जाता है।</li>
+            <li>कोई भी सदस्य कभी भी <b>परिवार छोड़</b> सकता है — छोड़ने के बाद उसकी साधना किसी को दिखनी बंद हो जाती है।</li>
+          </ul>
+        </div>
+
+        <div class="smd-card smd-col-6">
+          <div class="smd-card-head"><div class="smd-card-title"><span class="smd-ic">🗄️</span><h3>हम आपका डेटा कैसे संग्रहित करते हैं?</h3></div></div>
+          <ul class="smd-policy-list">
+            <li>आपकी पूजा दिनचर्या, जप संख्या और चैलेंज प्रगति MongoDB में सुरक्षित रूप से संग्रहित होती है।</li>
+            <li>सभी समय-मुद्राएँ भारतीय मानक समय (IST) में रखी जाती हैं।</li>
+            <li><b>गुरु मंत्र सदैव एन्क्रिप्ट होकर संग्रहित होते हैं</b> — केवल आप ही इन्हें डिक्रिप्ट कर देख सकते हैं।</li>
+            <li>परिवार डैशबोर्ड का कोड गुरु मंत्र वाले डेटा को कभी छूता तक नहीं — यह तकनीकी रूप से असंभव बनाया गया है, केवल नीति द्वारा नहीं।</li>
+          </ul>
+        </div>
+
+        <div class="smd-card smd-col-6">
+          <div class="smd-card-head"><div class="smd-card-title"><span class="smd-ic">🔒</span><h3>गोपनीयता नीति</h3></div></div>
+          <ul class="smd-policy-list">
+            <li>परिवार में केवल <b>नियमित जप मंत्र</b>, आज की पूजा-स्थिति और <b>सक्रिय चैलेंज</b> दिखते हैं।</li>
+            <li><b>गुरु मंत्र कभी भी</b> — किसी भी परिस्थिति में — परिवार या किसी अन्य सदस्य को नहीं दिखाए जाते।</li>
+            <li>हम आपका डेटा किसी तीसरे पक्ष को नहीं बेचते या साझा नहीं करते।</li>
+            <li>आपका डेटा केवल आपकी साधना को व्यक्तिगत बनाने हेतु उपयोग होता है — विज्ञापन हेतु नहीं।</li>
+            <li>आप कभी भी अपना खाता व सभी डेटा हटाने का अनुरोध कर सकते हैं।</li>
+          </ul>
+        </div>
+
+        <div class="smd-card smd-col-12">
+          <div class="smd-card-head"><div class="smd-card-title"><span class="smd-ic">🙏</span><h3>प्रश्न या सहायता चाहिए?</h3></div></div>
+          <p style="font-size:13px;color:var(--smd-ink-soft);line-height:1.7;">
+            डेटा हटाने, गोपनीयता संबंधी प्रश्न, या किसी भी सुझाव हेतु हमें
+            <a href="mailto:admin@shivmarg.live" style="color:var(--smd-saffron-deep);font-weight:700;">admin@shivmarg.live</a>
+            पर लिखें।
+          </p>
+        </div>
+      </div>`;
   }
 
   // ---------------------------------------------------------

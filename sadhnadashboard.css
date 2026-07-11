@@ -319,3 +319,35 @@
 .smd-mp-trend .smd-bar.smd-hot{ background: linear-gradient(180deg, var(--smd-saffron), var(--smd-saffron-deep)); }
 .smd-mp-challenge-pill{ display:flex; align-items:center; justify-content:space-between; background:var(--smd-cream); border-radius:10px; padding:7px 11px; margin-bottom:7px; font-size:12px; }
 .smd-mp-note{ font-size:11px; color:var(--smd-ink-soft); text-align:center; margin-top:14px; padding-top:10px; border-top:1px dashed var(--smd-line); font-family:var(--smd-font-data); }
+/* ---------- Overview: Puja segmented bar ---------- */
+.smd-seg-bar{ display:flex; gap:5px; margin-bottom:14px; }
+.smd-seg{ flex:1; height:10px; border-radius:6px; background: var(--smd-cream-deep); border:1px solid var(--smd-line); transition: background .2s ease; }
+.smd-seg.smd-seg-on{ background: linear-gradient(90deg, var(--smd-saffron), var(--smd-gold)); border-color: var(--smd-saffron-deep); }
+.smd-seg-list{ display:flex; flex-direction:column; gap:2px; }
+.smd-seg-item{ display:flex; align-items:center; gap:8px; padding:6px 0; font-size:12.5px; border-bottom:1px solid var(--smd-line); }
+.smd-seg-item:last-child{ border-bottom:none; }
+.smd-seg-dot{ width:9px; height:9px; border-radius:50%; background:var(--smd-cream-deep); border:1.5px solid var(--smd-line); flex:0 0 auto; }
+.smd-seg-dot.smd-seg-dot-on{ background:var(--smd-tulsi); border-color:var(--smd-tulsi); }
+.smd-seg-hint{ margin-left:auto; font-size:11px; color:var(--smd-ink-soft); }
+
+/* ---------- Overview: Jaap diary weekly bars ---------- */
+.smd-jaap-today{ margin-bottom:12px; }
+.smd-jaap-today .smd-num{ font-size:22px; font-weight:800; color:var(--smd-saffron-deep); margin-right:6px; }
+.smd-week-bars{ display:flex; align-items:flex-end; gap:8px; height:70px; padding-top:10px; }
+.smd-week-col{ flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; }
+.smd-week-bar{ width:100%; max-width:22px; border-radius:5px 5px 2px 2px; background: var(--smd-cream-deep); border:1px solid var(--smd-line); }
+.smd-week-bar.smd-week-bar-on{ background: linear-gradient(180deg, var(--smd-saffron), var(--smd-saffron-deep)); border-color:var(--smd-saffron-deep); }
+.smd-week-day{ font-size:10px; color:var(--smd-ink-soft); }
+
+/* ---------- Overview: Family preview chips ---------- */
+.smd-fam-preview{ display:flex; flex-wrap:wrap; gap:10px; }
+.smd-fam-chip{ display:flex; flex-direction:column; align-items:center; gap:4px; width:58px; }
+.smd-fam-chip-name{ font-size:10.5px; font-weight:600; color:var(--smd-maroon-deep); text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:58px; }
+.smd-fam-chip-count{ font-size:10px; color:var(--smd-tulsi); font-weight:700; }
+.smd-fam-more{ width:58px; height:58px; display:flex; align-items:center; justify-content:center; background:var(--smd-cream-deep); border-radius:50%; font-size:12px; font-weight:700; color:var(--smd-maroon-deep); }
+
+/* ---------- About & Policy tab ---------- */
+.smd-policy-list{ list-style:none; padding:0; margin:0; }
+.smd-policy-list li{ font-size:13px; line-height:1.7; padding:8px 0 8px 22px; border-bottom:1px solid var(--smd-line); position:relative; color:var(--smd-ink); }
+.smd-policy-list li:last-child{ border-bottom:none; }
+.smd-policy-list li::before{ content:"🕉️"; position:absolute; left:0; top:8px; font-size:11px; opacity:0.7; }
