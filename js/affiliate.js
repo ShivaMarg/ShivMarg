@@ -1,5 +1,5 @@
 (function(){
-const API = "https://api.shivmarg.live/affiliate";
+const API = "https://www.api.shivmarg.live/affiliate";
 async function track(pid){
   const u = localStorage.getItem("sm_user")||"";
   const r = await fetch(`${API}/click/${pid}`, {method:"POST", headers:{"x-sm-user":u}});
