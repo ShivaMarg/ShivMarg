@@ -439,17 +439,22 @@ window.SMCookieConsent = (function() {
   return { acceptAll: acceptAll, rejectAll: rejectAll, openManage: openManage, closeManage: closeManage, toggle: toggle, saveManage: saveManage, getConsent: getConsent };
 })();
 </script>
-<script src="/js/search.js"></script>\n<script src="/js/chatbot.js"></script>
-<script src="/js/last-visited.js"></script>
-</body>
+<div id="sm-comments" data-page-id="privacy-policy"></div>
 <script src="/js/auth2.js"></script>
 <script src="/js/s-comments.js"></script>
 <script src="/js/streak-widget.js"></script>
-<script src="/js/nav.js?v=2" defer></script>
+<script src="/js/nav.js?v=2.1" defer></script>
 <script src="/js/search.js"></script>
-  <script>
-    const SM_API = 'https://www.api.shivmarg.live';
-    
-    SmComments.init({ apiBase: SM_API });
-  </script>
+<script src="/js/suggested-posts.js"></script>
+<script src="/js/last-visited.js"></script>
+<script src="/js/recent-visits.js"></script>
+<script src="/js/chatbot.js"></script>
+<script src="/js/affiliate.js"></script>
+<script src="/js/pwa.js"></script>
+<script src="/js/trending.js"></script>
+<script src="/js/cookie-consent.js" defer></script>
+<script>
+  const SM_API = 'https://www.api.shivmarg.live';
+  SmComments.init({ apiBase: SM_API });
+</script>
 </html>

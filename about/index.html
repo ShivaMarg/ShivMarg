@@ -317,8 +317,23 @@
   const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*40);obs.unobserve(e.target)}})},{threshold:.06});
   rv.forEach(el=>obs.observe(el));
 </script>
-<script src="/js/search.js"></script>\n<script src="/js/chatbot.js"></script>
-<script src="/js/last-visited.js"></script>
-</body>
+<div id="sm-comments" data-page-id="about"></div>
+
+<script src="/js/auth2.js"></script>
+<script src="/js/s-comments.js"></script>
 <script src="/js/streak-widget.js"></script>
+<script src="/js/nav.js?v=2.1" defer></script>
+<script src="/js/search.js"></script>
+<script src="/js/suggested-posts.js"></script>
+<script src="/js/last-visited.js"></script>
+<script src="/js/recent-visits.js"></script>
+<script src="/js/chatbot.js"></script>
+<script src="/js/affiliate.js"></script>
+<script src="/js/pwa.js"></script>
+<script src="/js/trending.js"></script>
+<script src="/js/cookie-consent.js" defer></script>
+<script>
+  const SM_API = 'https://www.api.shivmarg.live';
+  SmComments.init({ apiBase: SM_API });
+</script>
 </html>
