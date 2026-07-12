@@ -898,6 +898,20 @@ const MENU_DATA = [
       ]},
     ]
   },
+  {
+    id: 'LEGAL', icon: '⚖️', label: 'LEGAL',
+    groups: [
+      { label: 'LEGAL', items: [
+        { hi: 'About Us', url: '/about' },
+        { hi: 'Contact Us', url: '/contact' },
+        { hi: 'Privacy Policy', url: '/privacy-policy' },
+        { hi: 'Disclaimer', url: '/disclaimer' },
+        { hi: 'Affiliate Disclosure', url: '/affiliate-disclosure' },
+        { hi: 'Sitemap', url: '/sitemap' },
+
+      ]},
+    ]
+  },
 ];
 
   /* ─────────────────────────────────────────────
