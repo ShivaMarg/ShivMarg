@@ -391,7 +391,7 @@
     border-right: 3px solid var(--gold);
     position: relative;
     overflow-y: auto;
-    max-height: calc(100vh - 160px);
+    max-height: calc(200vh - 260px);
     position: sticky;
     top: 0;
     align-self: flex-start;
@@ -1306,6 +1306,7 @@
 <div class="main-layout">
 
  <!-- SIDEBAR -->
+<div class="sm-affiliate" data-category="puja_samagri" data-title="Puja Essentials"></div>
 
   <aside class="sidebar">
 
@@ -1577,7 +1578,6 @@
     </div>
 
   </aside>
-  <div class="sm-affiliate" data-category="puja_samagri" data-title="Puja Essentials"></div>
   <!-- MAIN CONTENT -->
   <main class="main-content">
   <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">
@@ -2179,7 +2179,9 @@
         </div>
       </div>
     </div>
-
+    <div class="muhurat-widget" data-type="vivah"></div>
+    <div class="muhurat-widget" data-type="mundan"></div>
+    <div class="muhurat-widget" data-type="upanayan"></div>
   </main>
 
 
@@ -2451,11 +2453,8 @@ function calcKarana(jd) {
 /* ── 13. MAITHILI MASA (Purnimanta) ────────────────── */
 function calcMasa(jd) {
   const sunL = siderealSun(jd);
-  const sunRashi = Math.floor(sunL / 30);  // 0-11 (Mesa=0 ... Meena=11)
-  // Purnimanta: month name shifts by 1 rashi from amanta
-  // Chaitra starts when sun is in Pisces/Aries transition
-  // Approximate: masa index = sunRashi (0=Chaitra when sun in Mesha)
-  const masaIdx = sunRashi;
+  const sunRashi = Math.floor(sunL / 30);
+  const masaIdx = (sunRashi + 1) % 12;   // ✅ shift by one rashi
   return MASA_NAMES[masaIdx];
 }
  
@@ -2687,7 +2686,7 @@ function updateTodayPanel(p) {
   _setText('.sun-time[data-key="sunset"]',  fmtTime(p.sunset)  + ' सायं');
   _setText('.sun-time[data-key="moonrise"]',fmtTime(p.moonrise));
   // ─── Panch cards ───
-  _setText('.panch-card[data-key="masa"] .p-value',   p.masa + ' (ज्येष्ठ)');
+  _setText('.panch-card[data-key="masa"] .p-value', p.masa);
   _setText('.panch-card[data-key="masa"] .p-sub',     p.paksha + ' पक्ष');
   _setText('.panch-card[data-key="samvat"] .p-value', 'विक्रम ' + toDev(p.samvat));
   _setText('.panch-card[data-key="moon-rashi"] .p-value', p.moonRashi);
@@ -2718,7 +2717,7 @@ function updateTodayPanel(p) {
   // ─── Detail table ───
   _setText('#dt-samvat',   toDev(p.samvat) + ' (परिधावी)');
   _setText('#dt-shaka',    toDev(p.shaka));
-  _setText('#dt-masa',     p.masa + ' (ज्येष्ठ)');
+  _setText('#dt-masa',     p.masa);
   _setText('#dt-paksha',   p.paksha + ' पक्ष');
   _setText('#dt-tithi',    p.paksha + ' ' + p.tithi + ' (रातिक ' + fmtTime(p.tithiEnd) + ' धरि)');
   _setText('#dt-vaar',     p.vaar + ' (आइत)');
@@ -3654,6 +3653,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
  
 </script>
+<script src="/js/muhurat-widget.js"></script>
 <script src="/js/auth2.js"></script>
 <script src="/js/s-comments.js"></script>
 <script src="/js/streak-widget.js"></script>
