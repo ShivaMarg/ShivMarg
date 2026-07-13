@@ -1,0 +1,127 @@
+# ShivMarg (शिवमार्ग)
+
+> ShivMarg is India's Hindi-Maithili Hindu devotional portal — a single destination for mantras, chalisa, aarti, bhajans, and stotras of major Hindu deities, alongside Mithila's literary and cultural heritage (Vidyapati geet, Maithili Panchang). The platform is built for Hindi-speaking mobile users who read and share devotional content via WhatsApp.
+
+Base URL: https://www.shivmarg.live
+Language: Hindi (hi), with Maithili-language content sections
+Contact: https://www.shivmarg.live/contact
+AdSense: ca-pub-5809900825917201
+
+---
+
+## Deity Mantra Collections
+
+### Shiv Mantra — https://www.shivmarg.live/shiva-mantras
+24 mantras available. Includes Shiv Stotram ("नमामि शमीशान निर्वाण रूपं..."), Rudrashtakam (https://www.shivmarg.live/shiva-mantras/Namami-samisam-nirvanrupam), Shiv Gayatri Mantra (https://www.shivmarg.live/shiva-mantras/shiva-gayatri-mantra), Shiv Beej Mantra (https://www.shivmarg.live/shiva-mantras/Shiva-beej-mantra), and Mahamrityunjaya Mantra (https://www.shivmarg.live/shiva-mantras/Shiva-mahamrityunjaya-mantra) — "ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्॥"
+
+### Hanuman Ji — https://www.shivmarg.live/hanumanji
+20+ mantras, stotras, chalisa and katha. Core sub-pages:
+- Hanuman Chalisa: https://www.shivmarg.live/hanumanji/Hanuman-Chalisa — 40 chaupai by Goswami Tulsidas
+- Bajrang Baan: https://www.shivmarg.live/hanumanji/bajrang-baan — protective stotra
+- Sundarkand: https://www.shivmarg.live/hanuman-mantras/sundarkand — 60 doha, Ramcharitmanas, 5th kaand
+- Hanuman Aarti: https://www.shivmarg.live/hanumanji/Hanuman-ji-aarti
+- Hanumashtakam: https://www.shivmarg.live/hanumanji/sankat-mochan-ashtakam — 8 shlokas by Tulsidas
+- Panchamukhi Hanuman Mantra: https://www.shivmarg.live/hanuman-mantras/panchamukhi-hanuman-mantra
+- Hanuman Kavacham: https://www.shivmarg.live/hanuman-mantras/hanuman-kavacham — full-body protection kavach
+- Hanuman Beej Mantra: https://www.shivmarg.live/hanuman-mantras/hanuman-beej-mantra — Tuesday recitation
+- Hanuman Gayatri Mantra: https://www.shivmarg.live/hanuman-mantras/hanuman-gayatri-mantra
+- 108 Names of Hanuman: https://www.shivmarg.live/hanumanji/hey-dukh-bhanjan-maruti-nandan-sun-lo-meri-pukar
+- Hanuman Sahasranama (1000+ names): https://www.shivmarg.live/hanuman-mantras/hanuman-sahasranama
+- Sankat Mochan Mantra: https://www.shivmarg.live/hanuman-mantras/sankat-mochan-mantra
+- Lanka Dahan Katha: https://www.shivmarg.live/hanuman-mantras/lanka-dahan-katha
+- Maruti Stotra: https://www.shivmarg.live/hanuman-mantras/maruti-stotra
+- Vayuputra Stotram: https://www.shivmarg.live/hanuman-mantras/vayuputra-stotram
+- Mangalvar Vrat Katha: https://www.shivmarg.live/hanuman-mantras/mangalvar-vrat-katha
+- Hanuman Jayanti Mantra: https://www.shivmarg.live/hanuman-mantras/hanuman-jayanti-mantra
+- Anjaneya Stotram (South Indian tradition): https://www.shivmarg.live/hanuman-mantras/anjaneya-stotram
+- Hanuman Puja Vidhi: https://www.shivmarg.live/hanuman-mantras/hanuman-puja-vidhi
+- Bala Hanuman Mantra: https://www.shivmarg.live/hanuman-mantras/bala-hanuman-mantra
+- Hanuman Dwadash Naam: https://www.shivmarg.live/hanuman-mantras/hanuman-dwadash-naam
+- Atulita Bala Stotram: https://www.shivmarg.live/hanumanji/hanuman-bahuk — from Valmiki Ramayana, Sundarkand
+
+### Shri Krishna — https://www.shivmarg.live/Krishna-Mahamantras
+28 mantras, including Hare Krishna Mahamantra, Krishna 108 names / Vishnu Sahasranama (https://www.shivmarg.live/Krishna-Mahamantras/Krishna-108-names), bhajans, aarti, and Gita shlokas.
+
+### Maa Durga — https://www.shivmarg.live/durga-mantras
+31 mantras. Durga Stuti ("या देवी सर्वभूतेषु शक्तिरूपेण संस्थिता..."), chalisa, aarti, Saptashati mantras.
+
+### Shri Ganesh — https://www.shivmarg.live/ganesh-mantras
+18 mantras and stotras ("ॐ गं गणपतये नमः").
+
+### Maa Lakshmi — https://www.shivmarg.live/Lakshmi-mantras
+22 mantras. Lakshmi Stotram ("ॐ श्रीं ह्रीं श्रीं महालक्ष्म्यै नमः").
+
+### Shri Ram — https://www.shivmarg.live/Shri-ram-mantra
+26 mantras and stotras ("श्री राम जय राम जय जय राम").
+
+### Maa Saraswati — https://www.shivmarg.live/Sharaswati-mantra
+15 mantras. Saraswati Vandana ("या कुन्देन्दु तुषार हार धवला या शुभ्र वस्त्रावृता").
+
+### Bhagwan Vishnu — https://www.shivmarg.live/bhagvan-vishnu-mantra
+19 mantras. Vishnu Stotram ("ॐ नमो भगवते वासुदेवाय").
+
+### Maa Kali — https://www.shivmarg.live/maha-kali-mantra
+17 mantras ("क्रीं काली क्रीं महाकाल्यै नमः").
+
+### Bhagwan Surya — https://www.shivmarg.live/surya-dev
+14 mantras ("ॐ ह्रां ह्रीं ह्रौं सः सूर्याय नमः").
+
+### Chandra Mantra — https://www.shivmarg.live/Chandra-mantras
+27 mantras for Chandra Dev — cooling, peace, and kavach mantras.
+
+### Gayatri Mata — https://www.shivmarg.live/Gayatri-mantra
+12 mantras. Gayatri Mantra ("ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यम् भर्गो देवस्य धीमहि").
+
+### Shri Kartikeya — https://www.shivmarg.live/kumar-kartikey-mantras
+11 mantras and stotras ("ॐ सरवण भव षण्मुखाय नमः").
+
+### Aarti Sangrah — https://www.shivmarg.live/arati
+Cross-deity aarti collection.
+
+---
+
+## Maithili Cultural Content
+
+### Vidyapati Geet Sangrah — https://www.shivmarg.live/Vidyapati-Geet-Sangrah
+Collection of Maithili poet Mahakavi Vidyapati's devotional and shringar geet, including a Vidyapati biography section. 12 geet across bhakti kavya themes. Sample line: "तोहर मुख देखै सनु भए प्रीति मोरा॥"
+
+### Maithili Bhajan Geet — https://www.shivmarg.live/Maithili-bhajan-geet
+20 Shiv bhajans composed in Maithili. Sample line: "हर हर महादेव बम बम भोले जय शम्भो नीलकंठ देव॥"
+
+### Maithili Panchang Patrika — https://www.shivmarg.live/Maithili-Panchang-Patrika
+Daily-updated Panchang for the Mithila region (Darbhanga/Madhubani coordinates), calculated via Jean Meeus algorithms with Lahiri Ayanamsa. Provides tithi, vaar, nakshatra, yoga, karan, sunrise/sunset, rahukaal, shubh muhurat, and chandra rashi.
+
+## Panchang & Calendar Tools
+
+### Hindi Panchang Patrika — https://www.shivmarg.live/Hindi-Panchang-Patara
+Daily Hindi-language Panchang with the same core data points (tithi, nakshatra, muhurat, etc.), updated daily.
+
+## Articles & Community
+
+### Aalekh (Articles) — https://www.shivmarg.live/aalekh
+Hub for Hindi devotional, cultural, and literary articles contributed by registered authors.
+
+### Write Article — https://www.shivmarg.live/article_editor
+Article submission editor for approved authors (lekhak role).
+
+### Become an Author — https://www.shivmarg.live/become_author
+Registration flow for community members to become published authors (lekhak) on ShivMarg.
+
+### Author Directory — https://www.shivmarg.live/author
+Public list of published authors, categorized by content type (poetry / kavita, story / kahani, essay / nibandh, drama / natak, philosophy / darshan).
+
+---
+
+## Site Info
+
+- About: https://www.shivmarg.live/about
+- Contact: https://www.shivmarg.live/contact
+- Privacy Policy: https://www.shivmarg.live/privacy-policy
+- Disclaimer: https://www.shivmarg.live/disclaimer
+- XML Sitemap: https://www.shivmarg.live/sitemap.xml
+- HTML Sitemap: https://www.shivmarg.live/sitemap
+
+## Social
+
+- Instagram: https://instagram.com/shivmarg.live
+- mail: maito:shivmarg@shivmarg.live

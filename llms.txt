@@ -1,0 +1,41 @@
+# ShivMarg
+
+> ShivMarg (शिवमार्ग) is a Hindi/Maithili Hindu devotional platform offering mantras, chalisa, aarti, bhajans, stotras, and Vidyapati's Maithili poetry for deities including Shiva, Hanuman, Krishna, Durga, Ganesh, Lakshmi, Saraswati, Vishnu, Ram, Kali, Surya, Chandra, Kartikeya, and Gayatri Mata. It also provides daily Hindi and Maithili Panchang (Vedic calendar) calculations for the Mithila region.
+
+## Deity Mantra Collections
+- [Shiv Mantra](https://www.shivmarg.live/shiva-mantras): Complete Shiva mantras, stotras, Rudrashtakam, Mahamrityunjaya, Shiv Gayatri, and beej mantras
+- [Hanuman Ji](https://www.shivmarg.live/hanumanji): Hanuman Chalisa, Bajrang Baan, Sundarkand, Hanumashtakam, Panchamukhi mantra, Hanuman Kavacham, 108 names, and related katha/bhajans
+- [Shri Krishna](https://www.shivmarg.live/Krishna-Mahamantras): Krishna mantras, Hare Krishna mahamantra, Vishnu Sahasranama (1000 names), bhajans
+- [Maa Durga](https://www.shivmarg.live/durga-mantras): Durga stuti, chalisa, aarti, Saptashati mantras
+- [Shri Ganesh](https://www.shivmarg.live/ganesh-mantras): Ganesh mantras and stotras
+- [Maa Lakshmi](https://www.shivmarg.live/Lakshmi-mantras): Lakshmi stotram and mantras for wealth/prosperity
+- [Shri Ram](https://www.shivmarg.live/Shri-ram-mantra): Ram mantras and stotras
+- [Maa Saraswati](https://www.shivmarg.live/Sharaswati-mantra): Saraswati vandana and mantras
+- [Bhagwan Vishnu](https://www.shivmarg.live/bhagvan-vishnu-mantra): Vishnu stotram and mantras
+- [Maa Kali](https://www.shivmarg.live/maha-kali-mantra): Kali mantras
+- [Bhagwan Surya](https://www.shivmarg.live/surya-dev): Surya dev mantras
+- [Chandra Mantra](https://www.shivmarg.live/Chandra-mantras): Chandra dev mantras and kavach
+- [Gayatri Mata](https://www.shivmarg.live/Gayatri-mantra): Gayatri mantra collection
+- [Shri Kartikeya](https://www.shivmarg.live/kumar-kartikey-mantras): Kartikeya stotram and mantras
+- [Aarti Sangrah](https://www.shivmarg.live/arati): Aarti collection across deities
+
+## Maithili Content
+- [Vidyapati Geet Sangrah](https://www.shivmarg.live/Vidyapati-Geet-Sangrah): Collection of Maithili poet Vidyapati's devotional and bhakti geet, with meanings
+- [Maithili Bhajan Geet](https://www.shivmarg.live/Maithili-bhajan-geet): Shiv bhajans in Maithili language
+- [Maithili Panchang Patrika](https://www.shivmarg.live/Maithili-Panchang-Patrika): Daily Maithili Panchang (tithi, vaar, nakshatra, yoga, karan, sunrise/sunset, rahukaal, shubh muhurat) calculated for Mithila region
+
+## Tools & Calendar
+- [Hindi Panchang Patrika](https://www.shivmarg.live/Hindi-Panchang-Patara): Daily Hindi Panchang with tithi, nakshatra, muhurat details
+
+## Articles & Community
+- [Aalekh (Articles)](https://www.shivmarg.live/aalekh): Hindi devotional and cultural articles
+- [Write Article](https://www.shivmarg.live/article_editor): Article submission portal for registered authors
+- [Become an Author](https://www.shivmarg.live/become_author): Author registration
+- [All Authors](https://www.shivmarg.live/author): Directory of published authors
+
+## About
+- [About ShivMarg](https://www.shivmarg.live/about)
+- [Contact](https://www.shivmarg.live/contact)
+- [Privacy Policy](https://www.shivmarg.live/privacy-policy)
+- [Disclaimer](https://www.shivmarg.live/disclaimer)
+- [Sitemap](https://www.shivmarg.live/sitemap.xml)
