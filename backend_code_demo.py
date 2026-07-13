@@ -1439,7 +1439,7 @@ def send_push_notification(
     if not tokens:
         return {"success": 0, "failed": 0, "removed": 0, "total": 0}
 
-    click_url = body.url if body.url.startswith("https://") else f"https://shivmarg.live{body.url}"
+    click_url = body.url if body.url.startswith("https://") else f"https://www.shivmarg.live{body.url}"
     success = failed = 0
     invalid_tokens = []
 

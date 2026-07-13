@@ -411,7 +411,7 @@ async function submitJoinFamily(){
 }
 
 function openInviteCodeModal(code, familyName){
-  const shareText = `शिवमार्ग पर हमारे परिवार "${familyName}" में जुड़ें! कोड डालें: ${code} — https://shivmarg.live/family/join?code=${code}`;
+  const shareText = `शिवमार्ग पर हमारे परिवार "${familyName}" में जुड़ें! कोड डालें: ${code} — https://www.shivmarg.live/family/join?code=${code}`;
   openModal(`
     <h3>आमंत्रण कोड</h3>
     <p class="sub">यह कोड परिवार के सदस्यों के साथ साझा करें (अधिकतम 8 सदस्य)</p>

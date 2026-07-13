@@ -770,9 +770,9 @@ const DEMO_COMMENTS=[
   {id:'c3',username:'ram_prasad',page_id:'rudrashtakam',text:'Namami Shamishan Nirvaan Roopam. Lovely.',created_at:'2025-05-15T07:00:00',likes:15},
 ];
 const DEMO_POSTS=[
-  {id:'p1',name:'शिव आरती',title:'Shiv Aarti',category:'aarti',featured:true,createdAt:'2025-04-10T00:00:00',url:'https://shivmarg.live/shiv-aarti'},
-  {id:'p2',name:'महामृत्युंजय मंत्र',title:'Maha Mrityunjaya Mantra',category:'mantra',featured:true,createdAt:'2025-04-08T00:00:00',url:'https://shivmarg.live/maha-mrityunjaya'},
-  {id:'p3',name:'शिव चालीसा',title:'Shiv Chalisa',category:'chalisa',featured:false,createdAt:'2025-03-25T00:00:00',url:'https://shivmarg.live/shiv-chalisa'},
+  {id:'p1',name:'शिव आरती',title:'Shiv Aarti',category:'aarti',featured:true,createdAt:'2025-04-10T00:00:00',url:'https://www.shivmarg.live/shiv-aarti'},
+  {id:'p2',name:'महामृत्युंजय मंत्र',title:'Maha Mrityunjaya Mantra',category:'mantra',featured:true,createdAt:'2025-04-08T00:00:00',url:'https://www.shivmarg.live/maha-mrityunjaya'},
+  {id:'p3',name:'शिव चालीसा',title:'Shiv Chalisa',category:'chalisa',featured:false,createdAt:'2025-03-25T00:00:00',url:'https://www.shivmarg.live/shiv-chalisa'},
 ];
 const DEMO_ARTICLES=[
   {_id:'a1',title:'शिव आरती की महत्ता और लाभ',author:{username:'shiva_admin',display_name:'Shiva Admin'},category:'आरती',status:'published',created_at:'2025-05-20T10:00:00',view_count:1250,like_count:34,slug:'shiv-aarti-importance'},
@@ -949,7 +949,7 @@ function _renderArticles(){
       <td style="color:var(--muted);text-align:right">${a.view_count||0}</td>
       <td style="color:var(--muted);text-align:right">${a.like_count||0}</td>
       <td><div class="act-row">
-        ${a.status==='published'?`<a class="act-btn act-view" href="https://shivmarg.live/articles?slug=${esc(slug)}" target="_blank"><i class="ti ti-external-link" style="font-size:11px"></i></a>`:''}
+        ${a.status==='published'?`<a class="act-btn act-view" href="https://www.shivmarg.live/articles?slug=${esc(slug)}" target="_blank"><i class="ti ti-external-link" style="font-size:11px"></i></a>`:''}
         <button class="act-btn act-edit" onclick="openArticleModal('${esc(slug)}')">Edit</button>
         <button class="act-btn act-del" onclick="deleteArticle('${esc(slug)}','${esc(a.title)}')">Del</button>
       </div></td>
