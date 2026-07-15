@@ -272,7 +272,7 @@ const children = [];
 // ── Cover ───────────────────────────────────────────────────────────────────
 children.push(
   spacer(2400),
-  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 200 }, children: [new TextRun({ text: "ShivaMarg", font: "Segoe UI Light", size: 72, color: C.blue })] }),
+  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 200 }, children: [new TextRun({ text: "ShivMarg", font: "Segoe UI Light", size: 72, color: C.blue })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 200 }, children: [new TextRun({ text: "REST API Reference — Part 2", font: "Segoe UI", size: 40, color: C.darkGray })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 600 }, children: [new TextRun({ text: "Version 3.1.0  •  Users · Posts · Articles · Lekhak · Admin · Health", font: "Segoe UI", size: 22, color: C.gray })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0 }, border: { bottom: { style: BorderStyle.SINGLE, size: 8, color: C.blue, space: 1 } }, children: [] }),
@@ -1428,7 +1428,7 @@ children.push(...buildEndpoint({
   exRes: [
     "{",
     '  "status": "ok",',
-    '  "db": "ShivaMarg",',
+    '  "db": "ShivMarg",',
     '  "version": "3.1.0",',
     '  "collections": {',
     '    "users": 1240,',
@@ -1510,7 +1510,7 @@ children.push(
 children.push(
   para("", { pageBreak: true }),
   spacer(2400),
-  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 200 }, children: [new TextRun({ text: "ShivaMarg API Reference — Part 2", font: "Segoe UI", size: 28, bold: true, color: C.blue })] }),
+  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 200 }, children: [new TextRun({ text: "ShivMarg API Reference — Part 2", font: "Segoe UI", size: 28, bold: true, color: C.blue })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 120 }, children: [new TextRun({ text: "Version 3.1.0  •  35 Endpoints Documented", font: "Segoe UI", size: 18, color: C.gray })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 120 }, children: [new TextRun({ text: "Combined with Part 1: 63 total endpoints covered", font: "Segoe UI", size: 18, color: C.gray })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0 }, children: [new TextRun({ text: "Confidential — For Authorized Developers Only", font: "Segoe UI", size: 16, color: C.gray, italics: true })] }),
@@ -1549,7 +1549,7 @@ const doc = new Document({
           alignment: AlignmentType.RIGHT,
           spacing: { before: 0, after: 0 },
           border: { bottom: { style: BorderStyle.SINGLE, size: 4, color: C.blue, space: 6 } },
-          children: [new TextRun({ text: "ShivaMarg API Reference  v3.1.0  |  Part 2", font: "Segoe UI", size: 16, color: C.gray })],
+          children: [new TextRun({ text: "ShivMarg API Reference  v3.1.0  |  Part 2", font: "Segoe UI", size: 16, color: C.gray })],
         })],
       }),
     },
@@ -1574,6 +1574,6 @@ const doc = new Document({
 });
 
 Packer.toBuffer(doc).then(buf => {
-  fs.writeFileSync('/mnt/user-data/outputs/ShivaMarg_API_Reference_Part2_v3.1.0.docx', buf);
+  fs.writeFileSync('/mnt/user-data/outputs/ShivMarg_API_Reference_Part2_v3.1.0.docx', buf);
   console.log('Done!');
 }).catch(console.error);

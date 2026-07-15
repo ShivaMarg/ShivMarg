@@ -1,5 +1,5 @@
 /**
- * ShivaMarg Auth — auth.js
+ * ShivMarg Auth — auth.js
  * Drop-in login / register modal for any page.
  * Reads/writes JWT to localStorage key "sm_token".
  *
@@ -311,7 +311,7 @@ style.textContent = `
     overlay.innerHTML = `
       <div id="sm-auth-modal" role="dialog" aria-modal="true" aria-label="Login or Register">
         <button class="sm-close" id="sm-close-btn" aria-label="Close">×</button>
-        <div class="sm-modal-title">🕉️ ShivaMarg</div>
+        <div class="sm-modal-title">🕉️ ShivMarg</div>
         <div class="sm-modal-sub" id="sm-modal-sub">भक्त-पोर्टल में प्रवेश करें</div>
         <div class="sm-tabs">
           <button class="sm-tab active" id="sm-tab-login"    onclick="SmAuth._switchTab('login')">लॉगिन</button>
@@ -430,7 +430,7 @@ style.textContent = `
       _closeModal();
       renderWidget();
       toast('🙏 जय शिव! स्वागत है, ' + data.user.username);
-      if (window.ShivaMargStreak) ShivaMargStreak.onLogin(); 
+      if (window.ShivMargStreak) ShivMargStreak.onLogin(); 
     } catch (e) {
       errEl.textContent = e.message;
     } finally {
@@ -458,7 +458,7 @@ style.textContent = `
       _closeModal();
       renderWidget();
       toast('🌸 खाता बन गया! जय महादेव, ' + data.user.username);
-      if (window.ShivaMargStreak) ShivaMargStreak.onLogin(); 
+      if (window.ShivMargStreak) ShivMargStreak.onLogin(); 
     } catch (e) {
       errEl.textContent = e.message;
     } finally {
@@ -510,7 +510,7 @@ style.textContent = `
               ? '🌸 खाता बन गया! जय महादेव, ' + data.user.username
               : '🙏 जय शिव! स्वागत है, ' + data.user.username
             );
-            if (window.ShivaMargStreak) ShivaMargStreak.onLogin();
+            if (window.ShivMargStreak) ShivMargStreak.onLogin();
           } catch (e) {
             // Show error in whichever tab is active
             const isLogin = document.getElementById('sm-login-form').style.display !== 'none';

@@ -1,4 +1,4 @@
-# ShivaMarg Backend — Complete Software Documentation
+# ShivMarg Backend — Complete Software Documentation
 
 > **Version:** 3.0.0  
 > **Framework:** FastAPI (Python)  
@@ -35,7 +35,7 @@
 
 ## 1. Project Overview
 
-**ShivaMarg** is a Hindi/Sanskrit content platform. This backend is a single-file FastAPI server that powers:
+**ShivMarg** is a Hindi/Sanskrit content platform. This backend is a single-file FastAPI server that powers:
 
 - **User authentication** — register, login, JWT tokens
 - **Comments system** — post, edit, delete, like comments on any page
@@ -74,7 +74,7 @@ All config values are read from environment variables, with safe defaults for lo
 | Variable | Default | Description |
 |---|---|---|
 | `MONGO_URI` | `mongodb://localhost:27017` | MongoDB connection string |
-| `DB_NAME` | `ShivaMarg` | MongoDB database name |
+| `DB_NAME` | `ShivMarg` | MongoDB database name |
 | `SECRET_KEY` | `shiva-om-namah-supersecret-...` | JWT signing secret — **must be changed in production** |
 | `ALLOWED_ORIGINS` | `*` | CORS allowed origins (comma-separated list) |
 | `PORT` | `8000` | Port the server listens on |
@@ -86,7 +86,7 @@ All config values are read from environment variables, with safe defaults for lo
 
 ## 4. Database Collections & Indexes
 
-The server uses **5 MongoDB collections** inside the `ShivaMarg` database.
+The server uses **5 MongoDB collections** inside the `ShivMarg` database.
 
 ### Collections
 
@@ -946,7 +946,7 @@ Server and database health check.
 ```json
 {
   "status": "ok",
-  "db": "ShivaMarg",
+  "db": "ShivMarg",
   "collections": {
     "users": 150,
     "comments": 800,
@@ -1153,7 +1153,7 @@ uvicorn shivamarg_backend:app --host 0.0.0.0 --port 8000 --reload
 ```bash
 PORT=8000 \
 MONGO_URI="mongodb+srv://user:pass@cluster.mongodb.net" \
-DB_NAME="ShivaMarg" \
+DB_NAME="ShivMarg" \
 SECRET_KEY="your-strong-secret-key-here" \
 ALLOWED_ORIGINS="https://shivamarg.com,https://www.shivamarg.com" \
 uvicorn shivamarg_backend:app --host 0.0.0.0 --port 8000 --workers 4
@@ -1227,4 +1227,4 @@ FastAPI auto-generates docs at:
 
 ---
 
-*Documentation generated for ShivaMarg Backend v3.0.0*
+*Documentation generated for ShivMarg Backend v3.0.0*

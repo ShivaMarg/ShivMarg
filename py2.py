@@ -1,5 +1,5 @@
 """
-email_utils.py — ShivaMarg Email Utility
+email_utils.py — ShivMarg Email Utility
 Supports two providers:
   - Resend API  (recommended, set EMAIL_PROVIDER=resend)
   - Gmail SMTP  (fallback,    set EMAIL_PROVIDER=gmail)
@@ -8,11 +8,11 @@ Add to .env:
   EMAIL_PROVIDER=resend         # or 'gmail'
   # --- For Resend ---
   RESEND_API_KEY=re_xxxxxxxxxxxx
-  EMAIL_FROM=ShivaMarg <noreply@yourdomain.com>
+  EMAIL_FROM=ShivMarg <noreply@yourdomain.com>
   # --- For Gmail SMTP ---
   ZOHO_EMAIL=your@gmail.com
   ZOHO_PASSWORD=xxxx xxxx xxxx xxxx
-  EMAIL_FROM_NAME=ShivaMarg
+  EMAIL_FROM_NAME=ShivMarg
 """
 
 import os
@@ -28,8 +28,8 @@ logger = logging.getLogger("shivamarg.email")
 #  CONFIG  (read from environment)
 # ─────────────────────────────────────────────
 EMAIL_PROVIDER     = os.getenv("EMAIL_PROVIDER",     "zoho").lower()  # 'resend' | 'zoho'
-EMAIL_FROM         = os.getenv("EMAIL_FROM",         "ShivaMarg <noreply@shivamarg.com>")
-EMAIL_FROM_NAME    = os.getenv("EMAIL_FROM_NAME",    "ShivaMarg")
+EMAIL_FROM         = os.getenv("EMAIL_FROM",         "ShivMarg <noreply@shivamarg.com>")
+EMAIL_FROM_NAME    = os.getenv("EMAIL_FROM_NAME",    "ShivMarg")
 
 # Resend
 RESEND_API_KEY     = os.getenv("RESEND_API_KEY",     "")
@@ -52,7 +52,7 @@ def _build_welcome_html(display_name: str, username: str) -> str:
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShivaMarg में आपका स्वागत है</title>
+  <title>ShivMarg में आपका स्वागत है</title>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9N0GE0NNGD"></script>
 <script>
@@ -81,7 +81,7 @@ def _build_welcome_html(display_name: str, username: str) -> str:
             <td style="background:linear-gradient(135deg,#b5451b 0%,#e07b39 100%);
                         padding:40px 40px 32px;text-align:center;">
               <h1 style="margin:0;color:#ffffff;font-size:32px;font-weight:700;
-                          letter-spacing:1px;">🕉 ShivaMarg</h1>
+                          letter-spacing:1px;">🕉 ShivMarg</h1>
               <p style="margin:8px 0 0;color:rgba(255,255,255,0.85);font-size:14px;
                          letter-spacing:2px;text-transform:uppercase;">
                 आध्यात्मिक ज्ञान का मार्ग
@@ -103,12 +103,12 @@ def _build_welcome_html(display_name: str, username: str) -> str:
               </p>
 
               <p style="margin:0 0 20px;color:#4a3728;font-size:16px;line-height:1.7;">
-                ShivaMarg परिवार में आपका हार्दिक स्वागत है।
+                ShivMarg परिवार में आपका हार्दिक स्वागत है।
                 हमें प्रसन्नता है कि आप इस आध्यात्मिक यात्रा का हिस्सा बने।
               </p>
 
               <p style="margin:0 0 28px;color:#4a3728;font-size:15px;line-height:1.7;">
-                ShivaMarg पर आप पाएंगे —
+                ShivMarg पर आप पाएंगे —
               </p>
 
               <!-- Feature list -->
@@ -169,7 +169,7 @@ def _build_welcome_html(display_name: str, username: str) -> str:
                     </p>
                     <p style="margin:0;color:#5c3d2e;font-size:14px;line-height:1.6;">
                       अपना ज्ञान और विचार हजारों पाठकों तक पहुँचाएं।
-                      ShivaMarg पर लेखक (Lekhak) के रूप में अपनी आध्यात्मिक यात्रा
+                      ShivMarg पर लेखक (Lekhak) के रूप में अपनी आध्यात्मिक यात्रा
                       शुरू करें।
                     </p>
                   </td>
@@ -187,10 +187,10 @@ def _build_welcome_html(display_name: str, username: str) -> str:
           <tr>
             <td style="background:#2d1a0e;padding:24px 40px;text-align:center;">
               <p style="margin:0 0 4px;color:#e07b39;font-size:16px;font-weight:700;">
-                🕉 ShivaMarg
+                🕉 ShivMarg
               </p>
               <p style="margin:0;color:rgba(255,255,255,0.5);font-size:12px;">
-                © {year} ShivaMarg. सर्वाधिकार सुरक्षित।
+                © {year} ShivMarg. सर्वाधिकार सुरक्षित।
               </p>
             </td>
           </tr>
@@ -210,9 +210,9 @@ def _build_welcome_text(display_name: str, username: str) -> str:
     """Plain-text fallback for email clients that don't render HTML."""
     return f"""नमस्ते {display_name} (@{username}),
 
-ShivaMarg परिवार में आपका हार्दिक स्वागत है! 🙏
+ShivMarg परिवार में आपका हार्दिक स्वागत है! 🙏
 
-ShivaMarg पर आप पाएंगे:
+ShivMarg पर आप पाएंगे:
   - वैदिक मंत्र एवं स्तोत्र
   - विद्यापति गीत संग्रह
   - लेख एवं आध्यात्मिक ज्ञान
@@ -220,7 +220,7 @@ ShivaMarg पर आप पाएंगे:
 
 आध्यात्मिक यात्रा में आपका स्वागत है।
 
-— ShivaMarg Team
+— ShivMarg Team
 """
 
 
@@ -241,7 +241,7 @@ def _send_via_resend(to_email: str, display_name: str, username: str) -> bool:
         params = {
             "from":    EMAIL_FROM,
             "to":      [to_email],
-            "subject": f"🕉 ShivaMarg में आपका स्वागत है, {display_name}!",
+            "subject": f"🕉 ShivMarg में आपका स्वागत है, {display_name}!",
             "html":    _build_welcome_html(display_name, username),
             "text":    _build_welcome_text(display_name, username),
         }
@@ -262,7 +262,7 @@ def _send_via_zoho(to_email: str, display_name: str, username: str) -> bool:
     try:
         msg = MIMEMultipart("alternative")
 
-        msg["Subject"] = f"🕉 ShivaMarg में आपका स्वागत है, {display_name}!"
+        msg["Subject"] = f"🕉 ShivMarg में आपका स्वागत है, {display_name}!"
         msg["From"] = f"{EMAIL_FROM_NAME} <{ZOHO_EMAIL}>"
         msg["To"] = to_email
 

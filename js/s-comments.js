@@ -1,5 +1,5 @@
 /**
- * ShivaMarg Comments — comments.js
+ * ShivMarg Comments — comments.js
  * Drop-in comments section for any page.
  * Requires auth.js to be loaded first.
  *

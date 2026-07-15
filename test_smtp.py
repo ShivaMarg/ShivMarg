@@ -6,7 +6,7 @@ Usage:
     python send_bulk_emails.py "Your custom message here"
 
 Example:
-    python send_bulk_emails.py "🕉 नमस्ते! आपके ShivaMarg पर नए लेख प्रकाशित हुए हैं।"
+    python send_bulk_emails.py "🕉 नमस्ते! आपके ShivMarg पर नए लेख प्रकाशित हुए हैं।"
 
 Requires:
     - pip install python-dotenv resend pymongo
@@ -20,7 +20,7 @@ Usage:
     python send_bulk_emails_zoho.py "Your custom message here"
 
 Example:
-    python send_bulk_emails_zoho.py "🕉 नमस्ते! आपके ShivaMarg पर नए लेख प्रकाशित हुए हैं।"
+    python send_bulk_emails_zoho.py "🕉 नमस्ते! आपके ShivMarg पर नए लेख प्रकाशित हुए हैं।"
 
 Requires:
     - pip install python-dotenv pymongo
@@ -54,7 +54,7 @@ logger = logging.getLogger("bulk_emails_zoho")
 # Zoho SMTP
 ZOHO_EMAIL = "shivmarg@shivmarg.live"
 ZOHO_PASSWORD = ""
-EMAIL_FROM_NAME = os.getenv("EMAIL_FROM_NAME", "ShivaMarg")
+EMAIL_FROM_NAME = os.getenv("EMAIL_FROM_NAME", "ShivMarg")
 
 # MongoDB
 MONGO_URI = ""
@@ -73,7 +73,7 @@ def _build_custom_email_html(display_name: str, custom_message: str) -> str:
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShivaMarg संदेश</title>
+  <title>ShivMarg संदेश</title>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9N0GE0NNGD"></script>
 <script>
@@ -102,7 +102,7 @@ def _build_custom_email_html(display_name: str, custom_message: str) -> str:
             <td style="background:linear-gradient(135deg,#b5451b 0%,#e07b39 100%);
                         padding:40px 40px 32px;text-align:center;">
               <h1 style="margin:0;color:#ffffff;font-size:32px;font-weight:700;
-                          letter-spacing:1px;">🕉 ShivaMarg</h1>
+                          letter-spacing:1px;">🕉 ShivMarg</h1>
               <p style="margin:8px 0 0;color:rgba(255,255,255,0.85);font-size:14px;
                          letter-spacing:2px;text-transform:uppercase;">
                 आध्यात्मिक ज्ञान का मार्ग
@@ -138,10 +138,10 @@ def _build_custom_email_html(display_name: str, custom_message: str) -> str:
           <tr>
             <td style="background:#2d1a0e;padding:24px 40px;text-align:center;">
               <p style="margin:0 0 4px;color:#e07b39;font-size:16px;font-weight:700;">
-                🕉 ShivaMarg
+                🕉 ShivMarg
               </p>
               <p style="margin:0;color:rgba(255,255,255,0.5);font-size:12px;">
-                © {year} ShivaMarg. सर्वाधिकार सुरक्षित।
+                © {year} ShivMarg. सर्वाधिकार सुरक्षित।
               </p>
             </td>
           </tr>
@@ -163,7 +163,7 @@ def _build_custom_email_text(display_name: str, custom_message: str) -> str:
 
 {custom_message}
 
-— ShivaMarg Team
+— ShivMarg Team
 """
 
 
@@ -223,7 +223,7 @@ def send_email_via_zoho(to_email: str, display_name: str, custom_message: str) -
     try:
         # Build email message
         msg = MIMEMultipart("alternative")
-        msg["Subject"] = "🕉 ShivaMarg से आपके लिए संदेश"
+        msg["Subject"] = "🕉 ShivMarg से आपके लिए संदेश"
         msg["From"] = f"{EMAIL_FROM_NAME} <{ZOHO_EMAIL}>"
         msg["To"] = to_email
 
@@ -362,7 +362,7 @@ if __name__ == "__main__":
         print("❌ Usage: python send_bulk_emails_zoho.py \"Your message here\"")
         print("\nExamples:")
         print('  python send_bulk_emails_zoho.py "🕉 नमस्ते! नए लेख प्रकाशित हुए हैं।"')
-        print('  python send_bulk_emails_zoho.py "Welcome to ShivaMarg!"')
+        print('  python send_bulk_emails_zoho.py "Welcome to ShivMarg!"')
         print('\n  python send_bulk_emails_zoho.py "Test message" --dry-run')
         sys.exit(1)
     

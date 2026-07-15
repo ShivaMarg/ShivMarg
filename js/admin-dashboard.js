@@ -1,5 +1,5 @@
 /**
- * ShivaMarg Admin Dashboard
+ * ShivMarg Admin Dashboard
  * Handles all admin functionality and API interactions
  */
 

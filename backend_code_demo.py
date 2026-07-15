@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ShivaMarg Backend — Single-file FastAPI server
+ShivMarg Backend — Single-file FastAPI server
 Auth + Comments + Articles + Authors (MongoDB)
 
 Install: pip install fastapi uvicorn pymongo python-jose[cryptography] passlib[bcrypt] python-multipart python-slugify resend
@@ -34,7 +34,7 @@ except ImportError:
 #  CONFIG
 # ─────────────────────────────────────────────
 MONGO_URI                   = os.getenv("MONGO_URI",  "mongodb://localhost:27017")
-DB_NAME                     = os.getenv("DB_NAME",    "ShivaMarg")
+DB_NAME                     = os.getenv("DB_NAME",    "ShivMarg")
 SECRET_KEY                  = os.getenv("SECRET_KEY", "shiva-om-namah-supersecret-change-in-prod-2024")
 ALGORITHM                   = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7   # 7 days
@@ -43,7 +43,7 @@ ALLOWED_ORIGINS             = os.getenv("ALLOWED_ORIGINS", "*").split(",")
 # ─────────────────────────────────────────────
 #  APP + CORS
 # ─────────────────────────────────────────────
-app = FastAPI(title="ShivaMarg API", version="3.1.0")
+app = FastAPI(title="ShivMarg API", version="3.1.0")
 
 app.add_middleware(
     CORSMiddleware,

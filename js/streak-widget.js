@@ -1,6 +1,6 @@
 /**
  * ═══════════════════════════════════════════════════════════
- *  ShivaMarg Streak Widget  — streak-widget.js
+ *  ShivMarg Streak Widget  — streak-widget.js
  *  Include this on EVERY page:
  *    <script src="/js/streak-widget.js"></script>
  *
@@ -29,9 +29,9 @@
     { min: 15,  max: 20,  msg: "🙏 {n} दिन — ज्ञान की यात्रा जारी है!",       sub: "ॐ नमः शिवाय 🕉" },
     { min: 21,  max: 21,  msg: "🏆 21 दिन — आदत बन गई!",                      sub: "विज्ञान कहता है — 21 दिन में संस्कार!" },
     { min: 22,  max: 29,  msg: "🔱 {n} दिनों की अखंड साधना!",                 sub: "त्रिशूल की तरह दृढ़ हैं आप!" },
-    { min: 30,  max: 30,  msg: "🌙 एक पूरा महीना!",                            sub: "30 दिन — आप ShivaMarg के सच्चे अनुयायी हैं!" },
+    { min: 30,  max: 30,  msg: "🌙 एक पूरा महीना!",                            sub: "30 दिन — आप ShivMarg के सच्चे अनुयायी हैं!" },
     { min: 31,  max: 99,  msg: "⚡ {n} दिन — अद्भुत!",                        sub: "आपकी भक्ति प्रेरणा है।" },
-    { min: 100, max: 999, msg: "🌺 {n} दिन — किंवदंती!",                       sub: "शत दिवस — आप ShivaMarg के स्तंभ हैं!" },
+    { min: 100, max: 999, msg: "🌺 {n} दिन — किंवदंती!",                       sub: "शत दिवस — आप ShivMarg के स्तंभ हैं!" },
   ];
 
   function getMessage(streak) {
@@ -390,7 +390,7 @@
       if (!res.ok) return null;
       return await res.json();
     } catch (e) {
-      console.warn("[ShivaMarg Streak] ping failed:", e);
+      console.warn("[ShivMarg Streak] ping failed:", e);
       return null;
     }
   }
@@ -409,7 +409,7 @@
         body: JSON.stringify({ token: anonToken }),
       });
     } catch (e) {
-      console.warn("[ShivaMarg Streak] claim failed:", e);
+      console.warn("[ShivMarg Streak] claim failed:", e);
     }
   }
 
@@ -472,10 +472,10 @@
   }
 
   // ── Public API (optional — call from your auth code after login) ──────────
-  window.ShivaMargStreak = {
+  window.ShivMargStreak = {
     /**
      * Call this right after a successful login/signup:
-     *   ShivaMargStreak.onLogin();
+     *   ShivMargStreak.onLogin();
      * It will claim the anonymous streak and refresh.
      */
     onLogin: async function () {

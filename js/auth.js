@@ -1,5 +1,5 @@
 /**
- * ShivaMarg Auth — auth.js
+ * ShivMarg Auth — auth.js
  * Drop-in login / register modal for any page.
  * Reads/writes JWT to localStorage key "sm_token".
  * Exposes: window.SmAuth.{init, getUser, getToken, logout, requireLogin}
@@ -228,7 +228,7 @@
     P: 'linear-gradient(135deg,#8D6E63,#4E342E)',   // Brown
     Q: 'linear-gradient(135deg,#546E7A,#263238)',   // Blue Grey
     R: 'linear-gradient(135deg,#EC407A,#AD1457)',   // Hot Pink
-    S: 'linear-gradient(135deg,#7C4DFF,#4527A0)',   // Violet (ShivaMarg brand)
+    S: 'linear-gradient(135deg,#7C4DFF,#4527A0)',   // Violet (ShivMarg brand)
     T: 'linear-gradient(135deg,#00BCD4,#00838F)',   // Aqua
     U: 'linear-gradient(135deg,#FF7043,#BF360C)',   // Burnt Orange
     V: 'linear-gradient(135deg,#26A69A,#00695C)',   // Sea Green
@@ -240,7 +240,7 @@
 
   /**
    * Returns a CSS `background` value for a given avatar letter.
-   * Falls back to the ShivaMarg brand violet for non-alpha characters.
+   * Falls back to the ShivMarg brand violet for non-alpha characters.
    */
   function getAvatarBg(letter) {
     const key = (letter || '?').toUpperCase();
@@ -318,7 +318,7 @@
     overlay.innerHTML = `
       <div id="sm-auth-modal" role="dialog" aria-modal="true" aria-label="Login or Register">
         <button class="sm-close" id="sm-close-btn" aria-label="Close">×</button>
-        <div class="sm-modal-title">🕉️ ShivaMarg</div>
+        <div class="sm-modal-title">🕉️ ShivMarg</div>
         <div class="sm-modal-sub" id="sm-modal-sub">भक्त-पोर्टल में प्रवेश करें</div>
 
         <div class="sm-tabs">
