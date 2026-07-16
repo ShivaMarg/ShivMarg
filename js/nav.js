@@ -906,6 +906,7 @@ const MENU_DATA = [
         { hi: 'Contact Us', url: '/contact' },
         { hi: 'Privacy Policy', url: '/privacy-policy' },
         { hi: 'Disclaimer', url: '/disclaimer' },
+        { hi: 'Terms of Service', url: '/terms-conditions' },
         { hi: 'Affiliate Disclosure', url: '/affiliate-disclosure' },
         { hi: 'Sitemap', url: '/sitemap' },
 

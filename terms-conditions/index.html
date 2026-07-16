@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms & Conditions — ShivMarg.live</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #eae7df;
+    --bg-sidebar: #fec23526;
+    --paper: #FEFAF0;
+    --rule: #E1CFA4;
+    --rule-soft: #EADFC2;
+    --text: #000000;
+    --text-soft: #3b2302;
+    --text-faint: #4e221a;
+    --accent: #A6431F;
+    --accent-deep: #7A2E15;
+    --accent-soft: #E8C9A0;
+    --sidebar-w: 300px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Crimson Pro', serif;
+    font-size:18px;
+    line-height:1.68;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3,.brand-mark,.eyebrow{
+    font-family:'Fraunces', serif;
+  }
+
+  a{color:var(--accent-deep);}
+
+  /* ---------- Layout shell ---------- */
+  .shell{
+    display:flex;
+    align-items:flex-start;
+    max-width:1180px;
+    margin:0 auto;
+  }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar{
+    width:var(--sidebar-w);
+    flex-shrink:0;
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow-y:auto;
+    background:var(--bg-sidebar);
+    border-right:1px solid var(--rule);
+    padding:34px 26px 40px;
+  }
+
+  .sidebar::-webkit-scrollbar{width:8px;}
+  .sidebar::-webkit-scrollbar-thumb{background:var(--rule);border-radius:4px;}
+
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:6px;
+  }
+
+  .om{
+    width:36px;height:36px;
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid var(--accent);
+    border-radius:50%;
+    color:var(--accent-deep);
+    font-size:19px;
+    flex-shrink:0;
+  }
+
+  .brand-mark{
+    font-size:20px;
+    font-weight:600;
+    color:var(--accent-deep);
+    letter-spacing:0.01em;
+  }
+
+  .doc-label{
+    margin:14px 0 2px;
+    font-family:'Cinzel', serif;
+    font-size:16px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--text-soft);
+  }
+
+  .doc-title{
+    margin:0 0 4px;
+    font-size:15px;
+    color:var(--text);
+  }
+
+  .doc-updated{
+    font-size:16px;
+    color:var(--text-faint);
+    margin-bottom:26px;
+    font-style:italic;
+  }
+
+  .toc-group-label{
+    font-family:'Cinzel', serif;
+    font-size:16px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+    margin:22px 0 10px;
+    padding-top:14px;
+    border-top:1px solid var(--rule-soft);
+  }
+  .toc-group-label:first-of-type{border-top:none;margin-top:0;padding-top:0;}
+
+  .toc{
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+
+  .toc li{margin:0;}
+
+  .toc a{
+    display:flex;
+    gap:10px;
+    align-items:baseline;
+    text-decoration:none;
+    color:var(--text-soft);
+    font-size:14.5px;
+    padding:6px 8px;
+    border-radius:5px;
+    line-height:1.35;
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+
+  .toc a .num{
+    font-family:'Fraunces', serif;
+    font-variant-numeric:oldstyle-nums;
+    font-size:16px;
+    color:var(--text-faint);
+    min-width:18px;
+  }
+
+  .toc a:hover{
+    background:rgba(166,67,31,0.08);
+    color:var(--accent-deep);
+  }
+
+  .toc a.active{
+    background:var(--paper);
+    color:var(--accent-deep);
+    font-weight:600;
+    box-shadow: inset 3px 0 0 var(--accent);
+  }
+  .toc a.active .num{color:var(--accent);}
+
+  /* ---------- Main content ---------- */
+  main{
+    flex:1;
+    min-width:0;
+    padding:56px 64px 120px;
+  }
+
+  .page-header{
+    max-width:700px;
+    margin-bottom:48px;
+    border-bottom:1px solid var(--rule);
+    padding-bottom:32px;
+  }
+
+  .page-header .eyebrow{
+    font-family:'Cinzel', serif;
+    font-size:16px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:14px;
+  }
+
+  .page-header h1{
+    font-size:42px;
+    font-weight:500;
+    margin:0 0 16px;
+    color:var(--text);
+    line-height:1.15;
+  }
+
+  .page-header .sub{
+    color:var(--text-soft);
+    font-size:18px;
+    max-width:560px;
+  }
+
+  .updated-badge{
+    display:inline-block;
+    margin-top:18px;
+    font-size:16.5px;
+    font-style:italic;
+    color:var(--text-faint);
+  }
+
+  article{
+    max-width:700px;
+  }
+
+  section.clause{
+    margin-bottom:46px;
+    scroll-margin-top:28px;
+  }
+
+  section.clause .clause-head{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:14px;
+  }
+
+  section.clause .clause-num{
+    font-family:'Fraunces', serif;
+    font-variant-numeric:oldstyle-nums;
+    font-size:16px;
+    color:var(--accent);
+    border:1px solid var(--accent-soft);
+    background:var(--paper);
+    border-radius:50%;
+    width:34px;height:34px;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+
+  section.clause h2{
+    font-size:24px;
+    font-weight:500;
+    margin:0;
+    color:var(--text);
+  }
+
+  section.clause p{
+    margin:0 0 14px;
+    color:var(--text);
+  }
+
+  section.clause p.lead{
+    color:var(--text-soft);
+    font-style:italic;
+  }
+
+  section.clause ul{
+    margin:0 0 14px;
+    padding-left:0;
+    list-style:none;
+  }
+
+  section.clause ul li{
+    position:relative;
+    padding-left:22px;
+    margin-bottom:9px;
+    color:var(--text);
+  }
+
+  section.clause ul li::before{
+    content:"—";
+    position:absolute;
+    left:0;
+    color:var(--accent);
+  }
+
+  .divider-mala{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    margin:52px 0;
+  }
+  .divider-mala span{
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--accent-soft);
+  }
+  .divider-mala span:nth-child(4n){background:var(--accent);width:8px;height:8px;}
+
+  .group-heading{
+    font-family:'Cinzel', serif;
+    font-size:16px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--accent-deep);
+    margin:8px 0 30px;
+    padding-bottom:14px;
+    border-bottom:1px solid var(--rule);
+  }
+
+  .note-box{
+    background:var(--paper);
+    border:1px solid var(--rule);
+    border-left:3px solid var(--accent);
+    border-radius:6px;
+    padding:16px 20px;
+    margin:14px 0;
+    font-size:16.5px;
+    color:var(--text-soft);
+  }
+
+  .contact-card{
+    background:var(--paper);
+    border:1px solid var(--rule);
+    border-radius:10px;
+    padding:26px 28px;
+    margin-top:10px;
+  }
+  .contact-card div{margin-bottom:8px;font-size:16.5px;}
+  .contact-card div:last-child{margin-bottom:0;}
+  .contact-card .label{
+    font-family:'Cinzel', serif;
+    font-size:16px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+    display:block;
+    margin-bottom:2px;
+  }
+
+  .btn-learn-more{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:6px;
+    padding:10px 18px;
+    background:var(--paper);
+    border:1px solid var(--accent-soft);
+    border-radius:8px;
+    color:var(--accent-deep);
+    font-family:'Crimson Pro', serif;
+    font-size:15.5px;
+    font-weight:600;
+    text-decoration:none;
+    transition:background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  }
+  .btn-learn-more .arrow{
+    font-size:14px;
+    transition:transform 0.15s ease;
+  }
+  .btn-learn-more:hover{
+    background:var(--accent);
+    border-color:var(--accent);
+    color:#fff;
+  }
+  .btn-learn-more:hover .arrow{transform:translate(2px,-2px);}
+  .btn-learn-more:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+
+  footer.doc-footer{
+    max-width:700px;
+    margin-top:60px;
+    padding-top:26px;
+    border-top:1px solid var(--rule);
+    color:var(--text-faint);
+    font-size:14px;
+    font-style:italic;
+  }
+
+  /* ---------- Mobile ---------- */
+  .mobile-bar{
+    display:none;
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:var(--bg-sidebar);
+    border-bottom:1px solid var(--rule);
+    padding:14px 20px;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mobile-bar .brand{margin:0;}
+  .mobile-bar .brand-mark{font-size:16px;}
+  .mobile-bar .om{width:28px;height:28px;font-size:15px;}
+
+  #toc-toggle{
+    background:var(--paper);
+    border:1px solid var(--rule);
+    border-radius:7px;
+    padding:8px 12px;
+    font-family:'Crimson Pro', serif;
+    font-size:14px;
+    color:var(--accent-deep);
+    cursor:pointer;
+  }
+
+  @media (max-width: 940px){
+    .shell{display:block;}
+    .sidebar{
+      position:fixed;
+      top:0; left:0;
+      height:100vh;
+      z-index:30;
+      transform:translateX(-100%);
+      transition:transform 0.25s ease;
+      box-shadow:6px 0 24px rgba(0,0,0,0.15);
+    }
+    .sidebar.open{transform:translateX(0);}
+    .mobile-bar{display:flex;}
+    main{padding:36px 24px 100px;}
+    .page-header h1{font-size:32px;}
+    .overlay{
+      display:none;
+      position:fixed;inset:0;
+      background:rgba(59,42,30,0.35);
+      z-index:25;
+    }
+    .overlay.show{display:block;}
+  }
+
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+
+  @media print{
+    .sidebar,.mobile-bar,.overlay{display:none !important;}
+    main{padding:0;}
+  }
+</style>
+</head>
+<body>
+
+<div class="mobile-bar">
+  <div class="brand">
+    <div class="om">ॐ</div>
+    <span class="brand-mark">ShivMarg</span>
+  </div>
+  <button id="toc-toggle" aria-label="Open table of contents">Contents ☰</button>
+</div>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="shell">
+
+  <nav class="sidebar" id="sidebar" aria-label="Table of contents">
+    <div class="brand">
+      <div class="om">ॐ</div>
+      <span class="brand-mark">ShivMarg.live</span>
+    </div>
+    <div class="doc-label">Legal Document</div>
+    <div class="doc-title">Terms & Conditions</div>
+    <div class="doc-updated">Last updated: July 16, 2026</div>
+
+    <div class="toc-group-label">General Terms</div>
+    <ul class="toc">
+      <li><a href="#s1"><span class="num">1</span> Acceptance of Terms</a></li>
+      <li><a href="#s2"><span class="num">2</span> About ShivMarg.live</a></li>
+      <li><a href="#s3"><span class="num">3</span> User Accounts</a></li>
+      <li><a href="#s4"><span class="num">4</span> Acceptable Use</a></li>
+      <li><a href="#s5"><span class="num">5</span> User Generated Content</a></li>
+      <li><a href="#s6"><span class="num">6</span> Spiritual Disclaimer</a></li>
+      <li><a href="#s7"><span class="num">7</span> Accuracy of Information</a></li>
+      <li><a href="#s8"><span class="num">8</span> Health & Medical Disclaimer</a></li>
+      <li><a href="#s9"><span class="num">9</span> Affiliate Disclosure</a></li>
+      <li><a href="#s10"><span class="num">10</span> Advertisements</a></li>
+      <li><a href="#s11"><span class="num">11</span> Intellectual Property</a></li>
+      <li><a href="#s12"><span class="num">12</span> Limited License</a></li>
+      <li><a href="#s13"><span class="num">13</span> Copyright Complaints</a></li>
+      <li><a href="#s14"><span class="num">14</span> Third-Party Services</a></li>
+      <li><a href="#s15"><span class="num">15</span> Availability</a></li>
+      <li><a href="#s16"><span class="num">16</span> Limitation of Liability</a></li>
+      <li><a href="#s17"><span class="num">17</span> Indemnification</a></li>
+      <li><a href="#s18"><span class="num">18</span> Privacy</a></li>
+      <li><a href="#s19"><span class="num">19</span> Account Termination</a></li>
+      <li><a href="#s20"><span class="num">20</span> Changes to These Terms</a></li>
+      <li><a href="#s21"><span class="num">21</span> Governing Law</a></li>
+      <li><a href="#s22"><span class="num">22</span> Contact Us</a></li>
+    </ul>
+
+    <div class="toc-group-label">Platform Features & Community</div>
+    <ul class="toc">
+      <li><a href="#s23"><span class="num">23</span> Jaap Tracker & Progress Data</a></li>
+      <li><a href="#s24"><span class="num">24</span> Family Accounts</a></li>
+      <li><a href="#s25"><span class="num">25</span> Daily Puja Recommendations</a></li>
+      <li><a href="#s26"><span class="num">26</span> Streaks, Badges & Achievements</a></li>
+      <li><a href="#s27"><span class="num">27</span> Community Guidelines</a></li>
+      <li><a href="#s28"><span class="num">28</span> User-Submitted Articles</a></li>
+      <li><a href="#s29"><span class="num">29</span> AI Assistant</a></li>
+      <li><a href="#s30"><span class="num">30</span> AI Article Writing Tools</a></li>
+      <li><a href="#s31"><span class="num">31</span> Push Notifications</a></li>
+      <li><a href="#s32"><span class="num">32</span> Religious Diversity</a></li>
+      <li><a href="#s33"><span class="num">33</span> Future Features</a></li>
+      <li><a href="#s34"><span class="num">34</span> Right to Moderate Content</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-header">
+      <div class="eyebrow">श्री शिवमार्ग · shivmarg.live</div>
+      <h1>Terms & Conditions</h1>
+      <p class="sub">This document explains the rules that govern your use of ShivMarg.live — a devotional platform for mantras, chalisas, aartis, stotras, panchang, and personal spiritual tracking tools. Please read it in full before using the website.</p>
+      <span class="updated-badge">Last Updated: July 16, 2026</span>
+    </div>
+
+    <article>
+
+      <section class="clause" id="s1">
+        <div class="clause-head"><div class="clause-num">1</div><h2>Acceptance of Terms</h2></div>
+        <p>By accessing or using ShivMarg.live in any way — browsing articles, creating an account, or using any devotional tool — you are entering into an agreement with us. This agreement takes effect the moment you use the site, whether or not you have created an account. If you do not agree with any part of these Terms, you should stop using the website immediately.</p>
+        <p>By using ShivMarg.live, you confirm that:</p>
+        <ul>
+          <li>You are at least 13 years old, or the minimum legal age required to use online services in your country of residence.</li>
+          <li>You agree to comply fully with these Terms and any policies referenced within them.</li>
+          <li>You will use the website only for lawful, personal, and devotional purposes, and not for any purpose that could harm the platform, other users, or third parties.</li>
+        </ul>
+      </section>
+
+      <section class="clause" id="s2">
+        <div class="clause-head"><div class="clause-num">2</div><h2>About ShivMarg.live</h2></div>
+        <p>ShivMarg.live is an online spiritual platform built to make daily devotional practice more accessible, organized, and personal. It brings together traditional religious texts with modern tools for tracking and reminders. The platform currently provides, or intends to provide:</p>
+        <ul>
+          <li>Hindu mantras, chalisas, aartis, and stotras, presented for reading and recitation.</li>
+          <li>Spiritual articles covering festivals, practices, philosophy, and devotional guidance.</li>
+          <li>A Panchang (Hindu calendar) with astronomical and muhurat information.</li>
+          <li>A Jaap Tracker and Family Jaap Tracker for logging personal recitation practice.</li>
+          <li>A Daily Puja Planner to help organize devotional routines.</li>
+          <li>Other devotional tools and religious festival information as the platform grows.</li>
+        </ul>
+        <p>The website is intended for educational and devotional purposes. It is a companion to personal spiritual practice, not a replacement for the guidance of a qualified guru, priest, or religious institution.</p>
+        <a href="https://www.shivmarg.live/about" target="_blank" rel="noopener noreferrer" class="btn-learn-more">
+            Learn more about ShivMarg.live <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </section>
+
+      <section class="clause" id="s3">
+        <div class="clause-head"><div class="clause-num">3</div><h2>User Accounts</h2></div>
+        <p>Some features of ShivMarg.live, such as tracking tools and family sharing, require you to create a personal account. Creating an account is a commitment to keep that account secure and to use it honestly. If you create an account, you agree to:</p>
+        <ul>
+          <li>Keep your password secure and confidential, and not share it with anyone else.</li>
+          <li>Take responsibility for all activity that occurs under your account, whether or not you personally performed it.</li>
+          <li>Provide accurate and truthful information when registering or updating your profile.</li>
+          <li>Not impersonate another person or misrepresent your affiliation with any individual or organization.</li>
+        </ul>
+        <p>We reserve the right to suspend or terminate accounts that violate these Terms, including accounts used to deceive other users or to compromise the safety of the platform.</p>
+      </section>
+
+      <section class="clause" id="s4">
+        <div class="clause-head"><div class="clause-num">4</div><h2>Acceptable Use</h2></div>
+        <p>ShivMarg.live is meant to be a peaceful, respectful space for devotional practice. To keep it that way for everyone, you agree that you will not:</p>
+        <ul>
+          <li>Upload illegal content of any kind.</li>
+          <li>Post offensive, abusive, or discriminatory comments.</li>
+          <li>Harass, threaten, or intimidate other users.</li>
+          <li>Attempt to hack, disrupt, or otherwise damage the website or its infrastructure.</li>
+          <li>Use bots, crawlers, or automated tools to scrape content from the platform.</li>
+          <li>Upload malware, viruses, or any other harmful code.</li>
+          <li>Copy large portions of our content without written permission.</li>
+          <li>Attempt to circumvent security measures, rate limits, or access controls.</li>
+        </ul>
+        <p>Violations of this section may result in immediate suspension of your account, in addition to any other remedies available to us under law.</p>
+      </section>
+
+      <section class="clause" id="s5">
+        <div class="clause-head"><div class="clause-num">5</div><h2>User Generated Content</h2></div>
+        <p>ShivMarg.live may allow you to contribute your own content in various forms, including:</p>
+        <ul>
+          <li>Comments on articles and devotional content.</li>
+          <li>Reviews of features or content.</li>
+          <li>Personal notes attached to your own tracking data.</li>
+          <li>Prayer requests shared with the community.</li>
+          <li>Tracker entries, where you choose to make them visible to others (such as within a family group).</li>
+        </ul>
+        <p>When you post such content, you grant ShivMarg.live a non-exclusive license to display and store it as part of operating the platform. This license allows us to show your content to other users where relevant, and to keep it stored securely on our systems. You remain the owner of anything you create and share.</p>
+        <p>We may remove content at our discretion if it:</p>
+        <ul>
+          <li>Is abusive or hateful in nature.</li>
+          <li>Contains spam or unsolicited promotional material.</li>
+          <li>Promotes hate speech or discrimination.</li>
+          <li>Violates applicable laws.</li>
+          <li>Infringes on copyrights or other intellectual property rights.</li>
+        </ul>
+      </section>
+
+      <section class="clause" id="s6">
+        <div class="clause-head"><div class="clause-num">6</div><h2>Spiritual Disclaimer</h2></div>
+        <p>The devotional content on ShivMarg.live — including mantras, chalisas, aartis, stotras, articles, and tracking tools — is provided for devotional, educational, and informational purposes. It reflects traditional practices as they are commonly understood and shared, but spiritual experience is deeply personal.</p>
+        <p class="lead">We do not, and cannot, guarantee any of the following:</p>
+        <ul>
+          <li>Specific spiritual outcomes from any practice described on the platform.</li>
+          <li>Religious results of any kind.</li>
+          <li>Miracles or supernatural occurrences.</li>
+          <li>Healing of any physical, emotional, or spiritual condition.</li>
+          <li>Fulfillment of wishes or personal intentions.</li>
+        </ul>
+        <p>Spiritual practices are personal experiences and may vary significantly from person to person, tradition to tradition, and moment to moment. ShivMarg.live is a tool to support your practice, not a promise of any particular result.</p>
+        <a href="https://www.shivmarg.live/disclaimer" target="_blank" rel="noopener noreferrer" class="btn-learn-more">
+            Learn more about our disclaimer <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </section>
+
+      <section class="clause" id="s7">
+        <div class="clause-head"><div class="clause-num">7</div><h2>Accuracy of Information</h2></div>
+        <p>Our team works to ensure that content on ShivMarg.live is accurate, well-researched, and respectful of tradition. However, religious and astronomical information carries inherent complexity, and we cannot guarantee that:</p>
+        <ul>
+          <li>Panchang calculations are always free of error, given the complexity of astronomical and regional calendar systems.</li>
+          <li>Festival dates never change, since some dates are determined locally or may shift due to regional or institutional decisions.</li>
+          <li>Religious interpretations presented on the platform are universally accepted across all schools of thought.</li>
+        </ul>
+        <p>Different traditions, regions, and lineages may follow different practices and calculations, and ShivMarg.live cannot represent every variation with equal authority. Where precision is critical — for example, timing a specific ritual — we encourage you to confirm details with a local priest, temple, or trusted community source.</p>
+      </section>
+
+      <section class="clause" id="s8">
+        <div class="clause-head"><div class="clause-num">8</div><h2>Health and Medical Disclaimer</h2></div>
+        <p>Meditation, chanting, fasting, yoga, and other spiritual or physical practices shared or referenced on this website are presented from a devotional and cultural perspective. They are not medical advice, and they are not intended to diagnose, treat, cure, or prevent any illness or condition.</p>
+        <p>Always consult qualified medical professionals before beginning any practice that could affect your physical or mental health, particularly practices involving fasting, extended breathing exercises, or physical exertion. If you have an existing health condition, discuss any planned practice with your doctor first.</p>
+      </section>
+
+      <section class="clause" id="s9">
+        <div class="clause-head"><div class="clause-num">9</div><h2>Affiliate Disclosure</h2></div>
+        <p>Some pages on ShivMarg.live may contain affiliate links to third-party products or services. If you make a purchase through one of these links, ShivMarg.live may earn a commission — at no additional cost to you. This is one way we sustain the platform and continue building free devotional resources.</p>
+        <p>Affiliate relationships do not influence our editorial integrity. We do not alter religious or devotional content to favor any affiliate partner, and our recommendations reflect what we genuinely believe may be useful to our readers.</p>
+        <a href="https://www.shivmarg.live/affiliate-disclosure" target="_blank" rel="noopener noreferrer" class="btn-learn-more">
+            Learn more about our affiliate disclosure <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </section>
+
+      <section class="clause" id="s10">
+        <div class="clause-head"><div class="clause-num">10</div><h2>Advertisements</h2></div>
+        <p>The website may display advertisements delivered through third-party advertising partners, such as Google AdSense. These advertisements are selected and served by the advertising partner's own systems, not directly by ShivMarg.live.</p>
+        <p>We are not responsible for the products, claims, or offers made by advertisers, or for the content of any third-party website you may visit through an advertisement. Users interact with advertisers entirely at their own discretion and should exercise their own judgment before engaging with any advertised offer.</p>
+      </section>
+
+      <section class="clause" id="s11">
+        <div class="clause-head"><div class="clause-num">11</div><h2>Intellectual Property</h2></div>
+        <p>Unless otherwise stated, all content on ShivMarg.live belongs to ShivMarg.live or its licensors. This includes, but is not limited to:</p>
+        <ul>
+          <li>Articles and written devotional content.</li>
+          <li>Visual designs and layouts.</li>
+          <li>Tracking tools and related features.</li>
+          <li>Logos and brand marks.</li>
+          <li>Graphics and illustrations.</li>
+          <li>Source code powering the platform.</li>
+          <li>Icons used throughout the interface.</li>
+          <li>Images used across the site.</li>
+          <li>All other original text on the platform.</li>
+        </ul>
+        <p>Unauthorized copying, redistribution, or commercial use of this material is prohibited without our prior written consent.</p>
+      </section>
+
+      <section class="clause" id="s12">
+        <div class="clause-head"><div class="clause-num">12</div><h2>Limited License</h2></div>
+        <p>We want ShivMarg.live's content to reach and support as many devotees as possible, within reasonable limits. You are permitted to:</p>
+        <ul>
+          <li>Read articles and devotional content for personal use.</li>
+          <li>Print pages for your own personal, non-commercial use.</li>
+          <li>Share links to our pages with others.</li>
+        </ul>
+        <p class="lead">However, you may not:</p>
+        <ul>
+          <li>Republish our content elsewhere, in whole or in part, without permission.</li>
+          <li>Sell our content or repackage it as your own.</li>
+          <li>Scrape the website using automated tools.</li>
+          <li>Create mirror websites that reproduce our content or structure.</li>
+          <li>Use automated extraction methods to harvest data from the platform without our authorization.</li>
+        </ul>
+      </section>
+
+      <section class="clause" id="s13">
+        <div class="clause-head"><div class="clause-num">13</div><h2>Copyright Complaints</h2></div>
+        <p>We take intellectual property seriously — both our own and that of others. If you believe your copyrighted work appears on ShivMarg.live without proper authorization, please contact us with the following information so we can investigate:</p>
+        <ul>
+          <li>Your full name.</li>
+          <li>Proof of ownership of the copyrighted work in question.</li>
+          <li>The exact URL where the content appears on our site.</li>
+          <li>Your contact information, so we can follow up with you.</li>
+        </ul>
+        <p>We will investigate every valid complaint promptly and take appropriate action, which may include removing or modifying the content in question.</p>
+      </section>
+
+      <section class="clause" id="s14">
+        <div class="clause-head"><div class="clause-num">14</div><h2>Third-Party Services</h2></div>
+        <p>To operate ShivMarg.live reliably and securely, we rely on a number of third-party service providers. These currently include, or may in the future include:</p>
+        <ul>
+          <li>Google Analytics, for understanding how the site is used.</li>
+          <li>Google AdSense, for serving advertisements.</li>
+          <li>Firebase, for infrastructure such as push notifications.</li>
+          <li>Authentication providers, for secure account sign-in.</li>
+          <li>Affiliate networks, for the affiliate links described above.</li>
+          <li>Payment providers, should paid features be introduced in the future.</li>
+        </ul>
+        <p>Each of these services is governed by its own separate terms and privacy policies, which we encourage you to review if you have concerns about how a specific provider handles your data.</p>
+      </section>
+
+      <section class="clause" id="s15">
+        <div class="clause-head"><div class="clause-num">15</div><h2>Availability</h2></div>
+        <p>We strive to keep ShivMarg.live available to you at all times, so that your devotional practice is never interrupted. That said, we cannot guarantee uninterrupted access. Maintenance, upgrades, unexpected technical issues, or events outside our control may temporarily interrupt the service. We will work to resolve any such interruptions as quickly as possible.</p>
+      </section>
+
+      <section class="clause" id="s16">
+        <div class="clause-head"><div class="clause-num">16</div><h2>Limitation of Liability</h2></div>
+        <p>To the maximum extent permitted by applicable law, ShivMarg.live shall not be liable for any of the following:</p>
+        <ul>
+          <li>Indirect, incidental, or consequential damages arising from your use of the platform.</li>
+          <li>Loss of data, including tracker entries or account information.</li>
+          <li>Loss of profits or business opportunities.</li>
+          <li>Interruption of service, however caused.</li>
+          <li>Reliance on devotional, astrological, or informational content provided on the site.</li>
+        </ul>
+        <p>This limitation applies regardless of the legal theory under which liability is asserted, to the fullest extent the law allows.</p>
+      </section>
+
+      <section class="clause" id="s17">
+        <div class="clause-head"><div class="clause-num">17</div><h2>Indemnification</h2></div>
+        <p>You agree to indemnify and hold ShivMarg.live harmless from any claims, damages, or expenses — including reasonable legal fees — arising from:</p>
+        <ul>
+          <li>Your misuse of the website.</li>
+          <li>Your violation of these Terms.</li>
+          <li>Your infringement of the rights of any third party, including intellectual property or privacy rights.</li>
+        </ul>
+      </section>
+
+      <section class="clause" id="s18">
+        <div class="clause-head"><div class="clause-num">18</div><h2>Privacy</h2></div>
+        <p>Your use of ShivMarg.live is also governed by our Privacy Policy, which explains in detail how we collect, use, store, and protect your personal information. We encourage you to review that policy carefully so you fully understand your rights and our responsibilities regarding your data.</p>
+        <a href="https://www.shivmarg.live/privacy-policy" target="_blank" rel="noopener noreferrer" class="btn-learn-more">
+          Learn more about our Privacy Policy <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </section>
+
+      <section class="clause" id="s19">
+        <div class="clause-head"><div class="clause-num">19</div><h2>Account Termination</h2></div>
+        <p>We may suspend or terminate accounts, at our discretion, when we determine that an account:</p>
+        <ul>
+          <li>Violates these Terms in any material way.</li>
+          <li>Engages in fraudulent activity of any kind.</li>
+          <li>Abuses the platform, its features, or its community.</li>
+          <li>Threatens the security or integrity of the website.</li>
+        </ul>
+        <p>Where possible, we will attempt to notify affected users before or immediately after taking such action, except where doing so would compromise the security of the platform.</p>
+      </section>
+
+      <section class="clause" id="s20">
+        <div class="clause-head"><div class="clause-num">20</div><h2>Changes to These Terms</h2></div>
+        <p>ShivMarg.live is a growing platform, and these Terms may need to evolve alongside it. We may modify these Terms at any time. Whenever we do, the updated version will be posted on this page with a revised "Last Updated" date at the top of the document.</p>
+        <p>Your continued use of the website after changes are posted constitutes your acceptance of the revised Terms. We recommend checking this page periodically if you want to stay informed of any changes.</p>
+      </section>
+
+      <section class="clause" id="s21">
+        <div class="clause-head"><div class="clause-num">21</div><h2>Governing Law</h2></div>
+        <p>These Terms shall be governed by and interpreted in accordance with the laws of India. Any disputes arising from or relating to these Terms, or your use of ShivMarg.live, shall be subject to the exclusive jurisdiction of the competent courts in India.</p>
+      </section>
+
+      <section class="clause" id="s22">
+        <div class="clause-head"><div class="clause-num">22</div><h2>Contact Us</h2></div>
+        <p>If you have questions about these Terms, or need to reach us for any reason described above, you can contact us using the details below.</p>
+        <div class="contact-card">
+          <div><span class="label">Website</span> https://www.shivmarg.live</div>
+          <div><span class="label">Support Email</span> admin@shivmarg.live</div>
+        </div>
+        <a href="https://www.shivmarg.live/contact" target="_blank" rel="noopener noreferrer" class="btn-learn-more">
+            Learn more ways to contact us <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </section>
+
+      <div class="divider-mala">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+
+      <div class="group-heading">Platform Features & Community</div>
+
+      <section class="clause" id="s23">
+        <div class="clause-head"><div class="clause-num">23</div><h2>Jaap Tracker and Spiritual Progress Data</h2></div>
+        <p>ShivMarg.live provides digital spiritual tracking tools, including but not limited to the Jaap Tracker, Family Jaap Tracker, Daily Puja Tracker, and related progress features. These tools exist to make your personal devotional practice easier to organize and reflect on over time.</p>
+        <p>These tools are provided solely for your personal convenience and devotional record-keeping. By using them, you acknowledge that:</p>
+        <ul>
+          <li>You are responsible for the accuracy of all entries you create.</li>
+          <li>Your spiritual records are personal in nature and should not be considered official religious documentation of any kind.</li>
+          <li>ShivMarg.live is not responsible for accidental deletion, loss, or corruption of your tracking data, though we take reasonable measures to protect it.</li>
+          <li>We may improve, adjust, or modify tracker features from time to time as the platform evolves.</li>
+        </ul>
+      </section>
+
+      <section class="clause" id="s24">
+        <div class="clause-head"><div class="clause-num">24</div><h2>Family Accounts and Shared Features</h2></div>
+        <p>Certain features on ShivMarg.live allow users to create or join family groups, so that devotional practice can be shared and tracked together with loved ones. Because this involves other people's data and participation, additional responsibilities apply.</p>
+        <p>By using these features, you agree that:</p>
+        <ul>
+          <li>You are responsible for inviting family members to your group.</li>
+          <li>You will not add individuals without their knowledge or permission.</li>
+          <li>Family members are individually responsible for their own accounts and activities within the group.</li>
+          <li>ShivMarg.live is not responsible for disputes between family members regarding shared devotional data or participation.</li>
+        </ul>
+      </section>
+
+      <section class="clause" id="s25">
+        <div class="clause-head"><div class="clause-num">25</div><h2>Daily Puja Recommendations</h2></div>
+        <p>Daily Puja recommendations, mantra suggestions, reminders, fasting guidance, and similar devotional recommendations are generated to help you organize and structure your spiritual practice more consistently.</p>
+        <p>These recommendations:</p>
+        <ul>
+          <li>Are informational only, and intended purely as a helpful starting point.</li>
+          <li>Do not constitute religious authority or an official ruling on correct practice.</li>
+          <li>May vary depending on regional traditions and personal or family customs.</li>
+          <li>Should not replace the personal guidance of a qualified guru, priest, or spiritual teacher.</li>
+        </ul>
+      </section>
+
+      <section class="clause" id="s26">
+        <div class="clause-head"><div class="clause-num">26</div><h2>Streaks, Badges, and Achievements</h2></div>
+        <p>To encourage consistency in devotional practice, ShivMarg.live may award digital streaks, badges, achievements, rankings, milestones, or similar recognition based on your activity on the platform.</p>
+        <p>These features are designed solely for motivation and community engagement. By using them, you acknowledge that:</p>
+        <ul>
+          <li>Badges have no monetary value of any kind.</li>
+          <li>Streaks may reset if activity requirements are not met on a given day or period.</li>
+          <li>ShivMarg.live reserves the right to modify achievement criteria at any time as the platform develops.</li>
+          <li>Abuse or manipulation of streak systems may result in badge removal or account restrictions.</li>
+        </ul>
+      </section>
+
+      <section class="clause" id="s27">
+        <div class="clause-head"><div class="clause-num">27</div><h2>Community Guidelines</h2></div>
+        <p>As ShivMarg.live grows to include comments, discussions, article publishing, and future community features, we ask every participant to help maintain a respectful devotional atmosphere. Users participating in these areas agree to:</p>
+        <ul>
+          <li>Treat all users respectfully, regardless of background or belief.</li>
+          <li>Avoid abusive, hateful, defamatory, or discriminatory language.</li>
+          <li>Avoid posting misleading spiritual information intended to deceive others.</li>
+          <li>Avoid spam, advertisements, phishing links, or malicious content of any kind.</li>
+          <li>Respect the diversity of Hindu traditions, philosophies, and religious beliefs represented within the community.</li>
+        </ul>
+        <p>ShivMarg.live reserves the right to remove any content or suspend accounts that violate these community guidelines, in order to protect the experience of the wider community.</p>
+      </section>
+
+      <section class="clause" id="s28">
+        <div class="clause-head"><div class="clause-num">28</div><h2>User-Submitted Articles</h2></div>
+        <p>ShivMarg.live may allow registered users to write and publish devotional articles, educational content, or personal spiritual experiences directly on the platform. This is an opportunity to contribute to the wider devotional community, but it comes with responsibilities.</p>
+        <p>By submitting content, you confirm that:</p>
+        <ul>
+          <li>You own the rights to the content you publish, or you have obtained permission to publish it.</li>
+          <li>Your content does not infringe copyrights, trademarks, or other intellectual property rights of any third party.</li>
+          <li>Your content does not contain unlawful, offensive, misleading, or defamatory material.</li>
+        </ul>
+        <p>By publishing content, you grant ShivMarg.live a worldwide, non-exclusive, royalty-free license to host, display, reproduce, distribute, and promote your content within the platform. We reserve the right to edit, moderate, reject, or remove submitted content without prior notice if it violates these Terms.</p>
+        <a href="https://www.shivmarg.live/aalekh" target="_blank" rel="noopener noreferrer" class="btn-learn-more">
+            Checkout user submitted Articles <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </section>
+
+      <section class="clause" id="s29">
+        <div class="clause-head"><div class="clause-num">29</div><h2>AI Assistant</h2></div>
+        <p>ShivMarg.live may include AI-powered features designed to assist users with devotional guidance, article writing, content suggestions, translations, explanations, question answering, and other spiritual or educational purposes. These features are meant to make devotional exploration more accessible, not to replace human religious authority.</p>
+        <p>By using these AI features, you acknowledge that:</p>
+        <ul>
+          <li>AI-generated responses are informational only.</li>
+          <li>AI responses may occasionally contain inaccuracies or incomplete information.</li>
+          <li>AI-generated content should not be treated as authoritative religious advice.</li>
+          <li>You are responsible for reviewing AI-generated content before relying upon or publishing it.</li>
+          <li>ShivMarg.live is not responsible for decisions made based on AI-generated responses.</li>
+        </ul>
+      </section>
+
+      <section class="clause" id="s30">
+        <div class="clause-head"><div class="clause-num">30</div><h2>AI Article Writing Tools</h2></div>
+        <p>ShivMarg.live may provide AI-assisted writing tools to help users draft devotional articles, blog posts, prayers, or other content more efficiently. These tools are meant to support your writing process, not to substitute for your own judgment and diligence.</p>
+        <p>Users remain solely responsible for:</p>
+        <ul>
+          <li>Reviewing AI-generated text before publishing or sharing it.</li>
+          <li>Ensuring the factual and religious accuracy of the content.</li>
+          <li>Ensuring the originality of what they publish.</li>
+          <li>Complying with all applicable copyright laws.</li>
+        </ul>
+        <p>Publishing AI-generated content does not transfer responsibility for that content to ShivMarg.live — responsibility remains with the user who publishes it.</p>
+        <a href="https://www.shivmarg.live/article-editor" target="_blank" rel="noopener noreferrer" class="btn-learn-more">
+            check out the article editor <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </section>
+
+      <section class="clause" id="s31">
+        <div class="clause-head"><div class="clause-num">31</div><h2>Push Notifications</h2></div>
+        <p>Users may choose to enable browser or mobile push notifications to stay connected with their devotional practice and the wider ShivMarg.live community. These notifications may include:</p>
+        <ul>
+          <li>Daily mantras.</li>
+          <li>Festival reminders.</li>
+          <li>Panchang updates.</li>
+          <li>Challenge reminders.</li>
+          <li>New articles.</li>
+          <li>Feature announcements.</li>
+          <li>Community updates.</li>
+        </ul>
+        <p>Users may disable notifications at any time through their browser, device settings, or application settings — participation is always optional and fully within your control.</p>
+      </section>
+
+      <section class="clause" id="s32">
+        <div class="clause-head"><div class="clause-num">32</div><h2>Religious Diversity and Interpretations</h2></div>
+        <p>Hinduism is a vast and living tradition, encompassing numerous schools of thought, philosophies, sampradayas, and regional practices that have developed over thousands of years. ShivMarg.live respects this diversity, rather than presenting any single tradition as the sole authority.</p>
+        <p>Content published on ShivMarg.live may reflect one or more traditions, including but not limited to:</p>
+        <ul>
+          <li>Shaiva.</li>
+          <li>Vaishnava.</li>
+          <li>Shakta.</li>
+          <li>Smarta.</li>
+          <li>Regional customs.</li>
+          <li>Local temple traditions.</li>
+        </ul>
+        <p>Practices, interpretations, festival timings, rituals, and recommendations may vary across these traditions. We encourage users to follow the guidance of their own family traditions, spiritual teachers, or religious authorities where appropriate, and to treat content on this platform as a general reference rather than a single definitive source.</p>
+      </section>
+
+      <section class="clause" id="s33">
+        <div class="clause-head"><div class="clause-num">33</div><h2>Future Features</h2></div>
+        <p>ShivMarg.live is continuously evolving, and we intend to keep building tools that serve the devotional community more fully. Future additions may include, but are not limited to:</p>
+        <ul>
+          <li>Community forums.</li>
+          <li>Live devotional events.</li>
+          <li>Spiritual challenges.</li>
+          <li>Donations.</li>
+          <li>Premium memberships.</li>
+          <li>Temple directories.</li>
+          <li>Online courses.</li>
+          <li>Marketplace integrations.</li>
+          <li>AI-powered devotional services.</li>
+        </ul>
+        <p>These Terms shall apply to future services as they are introduced, unless we provide separate terms specific to a new feature.</p>
+      </section>
+
+      <section class="clause" id="s34">
+        <div class="clause-head"><div class="clause-num">34</div><h2>Right to Moderate Content</h2></div>
+        <p>To maintain a respectful devotional environment for every user, ShivMarg.live reserves the right to:</p>
+        <ul>
+          <li>Review user-generated content across the platform.</li>
+          <li>Remove spam or harmful content.</li>
+          <li>Edit formatting where appropriate, without altering the substance of your contribution.</li>
+          <li>Suspend or terminate accounts violating these Terms.</li>
+          <li>Restrict access to specific features when necessary.</li>
+          <li>Remove content without prior notice when necessary to protect the platform or its users.</li>
+        </ul>
+        <div class="note-box">This moderation authority exists to protect the integrity of ShivMarg.live as a shared devotional space — it is exercised with care, and primarily in response to violations of the guidelines set out above.</div>
+      </section>
+
+      <footer class="doc-footer">
+        ShivMarg.live — a devotional companion for daily practice. This document may be updated periodically; the version above reflects the most current Terms & Conditions as of the date noted at the top of this page.
+      </footer>
+
+    </article>
+  </main>
+</div>
+
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const toggle = document.getElementById('toc-toggle');
+  const overlay = document.getElementById('overlay');
+
+  function closeSidebar(){
+    sidebar.classList.remove('open');
+    overlay.classList.remove('show');
+  }
+
+  toggle?.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('show');
+  });
+  overlay?.addEventListener('click', closeSidebar);
+
+  document.querySelectorAll('.toc a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (window.innerWidth <= 940) closeSidebar();
+    });
+  });
+
+  // Active section highlighting
+  const links = Array.from(document.querySelectorAll('.toc a'));
+  const sections = links.map(a => document.querySelector(a.getAttribute('href')));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const idx = sections.indexOf(entry.target);
+      if (idx === -1) return;
+      if (entry.isIntersecting){
+        links.forEach(l => l.classList.remove('active'));
+        links[idx].classList.add('active');
+      }
+    });
+  }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+
+  sections.forEach(s => { if (s) observer.observe(s); });
+</script>
+
+</body>
+</html>
