@@ -5,7 +5,7 @@
 
 (function () {
     const API = "https://www.api.shivmarg.live/api/public/trending-pages?limit=6";
-  const TRACK_API = "https://www.api.shivmarg.live/api/public/track";
+    const TRACK_API = "https://www.api.shivmarg.live/api/public/track";
   const CONTAINER_ID = "sm-trending";
 
   /* ── Track current page view ─────────────────────────── */
