@@ -9,14 +9,28 @@
 <link rel="icon" type="image/png" href="/images/logo.png">
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=Tiro+Devanagari+Sanskrit&family=Mukta:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9N0GE0NNGD"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18008418302"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18008418302');
+</script>
+<!-- Event snippet for Page view conversion page -->
+<script>
+  gtag('event', 'conversion', {'send_to': 'AW-18008418302/MX4NCKKmmIkcEP7PiotD'});
+</script>
+<meta name="google-adsense-account" content="ca-pub-5809900825917201">
 
 <style>
   /* ============================================================
      DESIGN TOKENS — Praveshdwar theme
      ============================================================ */
   :root{
-    --maroon-deep:   #2B0A0A;
-    --maroon:        #5C1A1A;
+    --maroon-deep:   #e0d9b3;
+    --maroon:        #e5ddb0;
     --saffron:       #F4A11A;
     --gold:          #D4A017;
     --cream:         #FBF3E3;
@@ -269,16 +283,11 @@
 
   <div id="pageContent">
 
-  <div class="topbar">
-    <a class="brand" href="/">🕉️ ShivMarg</a>
-    <!-- SmAuth floating widget renders itself here (noWidget:false) -->
-  </div>
-
   <div class="dwar-divider"></div>
 
   <section class="hero">
     <div class="eyebrow">पवित्र सामग्री भंडार</div>
-    <h1>प्रवेशद्वार से होकर <span>डाउनलोड</span> तक</h1>
+    <h1>मंत्र, पूजा विधि और व्रत सामग्री <span>डाउनलोड</span></h1>
     <p class="sub">मंत्र, पूजा विधि और व्रत सामग्री केवल भक्त-पोर्टल में प्रवेश करने के बाद ही उपलब्ध हैं। कृपया पहले लॉगिन करें।</p>
 
 
@@ -300,7 +309,7 @@
 
     <p class="toast-note">डाउनलोड पूर्णतः निःशुल्क है — बस एक बार भक्त-पोर्टल में प्रवेश करें 🙏</p>
   </section>
-
+   <div id="sm-comments" data-page-id="study-material"></div>
   <footer>
     © 2026 <strong>ShivMarg.live</strong> · जय शिव जय शंकर
   </footer>
@@ -343,5 +352,21 @@
   });
 </script>
 <script src="/assets/materials/documents/study-material/studymaterial.js"></script>
+<script src="/js/s-comments.js"></script>
+<script src="/js/streak-widget.js"></script>
+<script src="/js/nav.js?v=2.1" defer></script>
+<script src="/js/search.js"></script>
+<script src="/js/suggested-posts.js"></script>
+<script>
+  // const SM_API = 'https://www.api.shivmarg.live';
+  SmComments.init({ apiBase: SM_API });
+</script>
+<script src="/js/last-visited.js"></script>
+<script src="/js/recent-visits.js"></script>
+<script src="/js/chatbot.js"></script>
+<script src="/js/affiliate.js"></script>
+<script src="/js/pwa.js"></script>
+<script src="/js/trending.js"></script>
+<script src="/js/cookie-consent.js" defer></script>
 </body>
 </html>
