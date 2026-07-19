@@ -1,0 +1,135 @@
+/* ============================================================
+   Study Material Grid — Praveshdwar theme
+   Container: #studyMaterialContainer
+   ============================================================ */
+
+#studyMaterialContainer{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:24px;
+  padding:20px 0;
+}
+
+/* Bootstrap leftover — neutralize col-md-4 so grid controls layout */
+#studyMaterialContainer .col-md-4{
+  width:100%;
+  padding:0;
+  margin:0;
+}
+
+.blog-entry{
+  background:linear-gradient(160deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  border:1px solid rgba(212,160,23,0.28);
+  border-radius:14px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  height:100%;
+  transition:border-color .25s, transform .25s, box-shadow .25s;
+}
+.blog-entry:hover{
+  border-color:#F4A11A;
+  transform:translateY(-4px);
+  box-shadow:0 14px 34px rgba(0,0,0,0.35);
+}
+
+/* Thumbnail (was .block-20.zoom-effect) */
+.blog-entry .block-20{
+  display:block;
+  width:100%;
+  aspect-ratio:4/3;
+  background-size:cover;
+  background-position:center;
+  background-color:#5C1A1A;
+  position:relative;
+  overflow:hidden;
+}
+.blog-entry .block-20::after{
+  content:"PDF";
+  position:absolute;
+  top:10px;left:10px;
+  background:#D4A017;
+  color:#2B0A0A;
+  font-family:'Mukta',sans-serif;
+  font-weight:700;
+  font-size:0.65rem;
+  letter-spacing:1px;
+  padding:4px 9px;
+  border-radius:5px;
+}
+.blog-entry .zoom-effect{
+  transition:transform .5s ease;
+}
+.blog-entry:hover .zoom-effect{
+  transform:scale(1.08);
+}
+
+/* Text block */
+.blog-entry .text{
+  padding:18px 20px 20px;
+  float:none !important;   /* undo old .float-right */
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  flex:1;
+}
+
+.blog-entry .heading{
+  font-family:'Tiro Devanagari Sanskrit',serif;
+  font-size:1.1rem;
+  color:#FBF3E3;
+  margin:0 0 4px;
+}
+.blog-entry .heading a{
+  color:inherit;
+  text-decoration:none;
+}
+.blog-entry .heading a:hover{
+  color:#F4A11A;
+}
+
+.blog-entry .category,
+.blog-entry .type,
+.blog-entry .date{
+  display:inline-block;
+  font-family:'Mukta',sans-serif;
+  font-weight:500;
+  font-size:0.72rem;
+  color:#EFE2C6;
+  opacity:0.75;
+  margin:0 8px 0 0;
+}
+
+.blog-entry p{
+  font-family:'Mukta',sans-serif;
+  font-size:0.88rem;
+  color:#EFE2C6;
+  line-height:1.6;
+  margin:8px 0 4px;
+}
+
+.blog-entry .btn.btn-primary{
+  margin-top:auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  padding:11px 16px;
+  border-radius:8px;
+  border:none;
+  font-family:'Mukta',sans-serif;
+  font-weight:600;
+  font-size:0.85rem;
+  letter-spacing:0.3px;
+  background:linear-gradient(135deg,#F4A11A,#C8770B);
+  color:#2B0A0A;
+  text-decoration:none;
+  transition:filter .2s;
+}
+.blog-entry .btn.btn-primary:hover{
+  filter:brightness(1.08);
+}
+
+@media (prefers-reduced-motion: reduce){
+  .blog-entry, .blog-entry .zoom-effect{ transition:none !important; }
+}
