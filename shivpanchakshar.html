@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shiv Panchakshar Stotram — Read &amp; Listen | ShivMarg</title>
+<meta name="description" content="Read, listen and chant the Shiv Panchakshar Stotram with synced audio, Sanskrit text, English meaning and verse-by-verse highlighting.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Tiro+Devanagari+Sanskrit&family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --indigo:#1B1B3A;
+    --indigo-deep:#100F26;
+    --terracotta:#C1502E;
+    --gold:#C9A227;
+    --gold-soft:#E4C766;
+    --cream:#F7F3E8;
+    --cream-dim:#EDE6D3;
+    --ink:#241F1A;
+
+    --bg:var(--cream);
+    --bg-panel:#FFFFFF;
+    --bg-elevated:#FFFDF8;
+    --text:var(--ink);
+    --text-soft:#5C5445;
+    --line:#E1D6BC;
+    --accent:var(--terracotta);
+    --accent-2:var(--gold);
+    --shadow:0 10px 30px rgba(27,27,58,0.10);
+    --highlight-bg:rgba(201,162,39,0.18);
+    --highlight-text:var(--indigo);
+    --radius:14px;
+    --font-display:'Yatra One', cursive;
+    --font-sanskrit:'Tiro Devanagari Sanskrit', serif;
+    --font-label:'Cinzel', serif;
+  }
+
+  [data-theme="dark"]{
+    --bg:var(--indigo-deep);
+    --bg-panel:#191840;
+    --bg-elevated:#20204B;
+    --text:#F1ECDD;
+    --text-soft:#B9B2D6;
+    --line:#33325E;
+    --accent:#E28A63;
+    --accent-2:var(--gold-soft);
+    --shadow:0 10px 30px rgba(0,0,0,0.45);
+    --highlight-bg:rgba(228,199,102,0.16);
+    --highlight-text:#FCEFC7;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-sanskrit);
+    transition:background .35s ease,color .35s ease;
+    --font-scale:1;
+  }
+  a{color:inherit;}
+  .wrap{
+    display:grid;
+    grid-template-columns:240px minmax(0,760px) 1fr;
+    gap:32px;
+    max-width:1280px;
+    margin:0 auto;
+    padding:24px 24px 140px;
+  }
+  .col-main{grid-column:2; min-width:0;}
+  .col-side{grid-column:1;}
+  @media (max-width:1080px){
+    .wrap{grid-template-columns:1fr; padding:16px 16px 140px;}
+    .col-side{display:none;}
+    .col-main{grid-column:1;}
+  }
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    display:flex; align-items:center; gap:10px;
+    font-family:var(--font-label);
+    font-size:0.85rem;
+    letter-spacing:.04em;
+    color:var(--text-soft);
+    padding:18px 4px 6px;
+  }
+  .topbar .back{
+    display:flex;align-items:center;gap:6px;
+    text-decoration:none;color:var(--accent);
+    font-weight:600;
+  }
+  .topbar .back:hover{color:var(--accent-2);}
+  .settings-btn{
+    margin-left:auto;
+    background:none;border:1px solid var(--line);
+    color:var(--text-soft);
+    border-radius:999px;
+    padding:8px 14px;
+    font-family:var(--font-label);
+    font-size:.78rem;
+    letter-spacing:.06em;
+    cursor:pointer;
+    display:flex;align-items:center;gap:6px;
+  }
+  .settings-btn:hover{border-color:var(--accent-2); color:var(--accent-2);}
+
+  /* ---------- Header ---------- */
+  .stotram-header{padding:8px 4px 20px;}
+  .om{
+    font-family:var(--font-display);
+    font-size:2.6rem;
+    color:var(--accent);
+    line-height:1;
+  }
+  h1.title{
+    font-family:var(--font-display);
+    font-size:2.5rem;
+    margin:6px 0 10px;
+    color:var(--text);
+    font-weight:400;
+  }
+  .meta-row{
+    display:flex; flex-wrap:wrap; align-items:center; gap:18px;
+    font-family:var(--font-label);
+    font-size:.82rem;
+    color:var(--text-soft);
+  }
+  .stars{color:var(--gold);}
+  .meta-row .dot{width:4px;height:4px;border-radius:50%;background:var(--text-soft);opacity:.6;}
+
+  hr.rule{
+    border:none;border-top:1px solid var(--line);
+    margin:22px 0;
+  }
+
+  /* ---------- Player bar ---------- */
+  .player-bar{
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:18px 20px;
+    box-shadow:var(--shadow);
+  }
+  .transport{
+    display:flex; align-items:center; justify-content:center; gap:18px;
+    margin-bottom:16px;
+  }
+  .transport button{
+    background:none;border:none;cursor:pointer;
+    color:var(--text);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .transport .play-pause{
+    width:56px;height:56px;border-radius:50%;
+    background:var(--accent);color:#fff;
+    font-size:1.3rem;
+    box-shadow:0 6px 16px rgba(193,80,46,.35);
+  }
+  .transport .play-pause:hover{background:var(--accent-2); box-shadow:0 6px 16px rgba(201,162,39,.4);}
+  .transport .skip{font-size:1.3rem; color:var(--text-soft);}
+  .transport .skip:hover{color:var(--accent);}
+
+  .player-controls-row{
+    display:flex; flex-wrap:wrap; gap:10px 22px; justify-content:center;
+    font-family:var(--font-label);
+    font-size:.78rem;
+    letter-spacing:.04em;
+    color:var(--text-soft);
+  }
+  .player-controls-row .ctl{
+    display:flex; align-items:center; gap:6px;
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    padding:6px 12px;
+    border-radius:999px;
+    cursor:pointer;
+  }
+  .player-controls-row select{
+    background:none;border:none;color:inherit;font:inherit;cursor:pointer;
+  }
+  .player-controls-row .ctl.active{border-color:var(--accent); color:var(--accent);}
+
+  .progress-wrap{margin-top:18px;}
+  .progress-label{
+    display:flex; justify-content:space-between;
+    font-family:var(--font-label);
+    font-size:.75rem;
+    color:var(--text-soft);
+    margin-bottom:6px;
+  }
+  .progress-track{
+    height:8px; background:var(--line); border-radius:99px; overflow:hidden;
+  }
+  .progress-fill{
+    height:100%; width:0%;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    border-radius:99px;
+    transition:width .4s ease;
+  }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar{
+    position:sticky; top:24px;
+    font-family:var(--font-label);
+    font-size:.82rem;
+  }
+  .sidebar h4{
+    text-transform:uppercase; letter-spacing:.08em;
+    font-size:.72rem; color:var(--text-soft);
+    margin:0 0 10px;
+  }
+  .sidebar ul{list-style:none;margin:0 0 22px;padding:0;}
+  .sidebar li{margin-bottom:2px;}
+  .sidebar a{
+    display:flex; align-items:center; gap:8px;
+    text-decoration:none; color:var(--text-soft);
+    padding:6px 8px; border-radius:8px;
+  }
+  .sidebar a:hover{background:var(--bg-elevated); color:var(--text);}
+  .sidebar a.active{color:var(--accent); background:var(--bg-elevated); font-weight:600;}
+  .sidebar a .tick{color:var(--gold);}
+
+  /* ---------- Verse cards ---------- */
+  .verses{margin-top:28px;}
+  .verse-card{
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:26px 26px 20px;
+    margin-bottom:22px;
+    scroll-margin-top:24px;
+    transition:box-shadow .3s ease, border-color .3s ease;
+  }
+  .verse-card.is-active{
+    border-color:var(--accent-2);
+    box-shadow:0 0 0 3px rgba(201,162,39,0.18), var(--shadow);
+  }
+  .verse-top{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:14px;
+  }
+  .verse-num{
+    font-family:var(--font-label);
+    font-weight:600; letter-spacing:.05em;
+    color:var(--text-soft);
+    font-size:.85rem;
+  }
+  .verse-status{
+    font-family:var(--font-label);
+    font-size:.72rem;
+    color:var(--text-soft);
+    display:none;
+    align-items:center;gap:6px;
+  }
+  .verse-card.is-active .verse-status{display:flex;}
+  .verse-status .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);animation:pulse 1.4s infinite;}
+  @keyframes pulse{0%,100%{opacity:.4;}50%{opacity:1;}}
+
+  .sanskrit{
+    font-family:var(--font-sanskrit);
+    font-size:calc(1.35rem * var(--font-scale));
+    line-height:2.15;
+    color:var(--text);
+  }
+  .sanskrit .line{
+    display:block;
+    border-radius:6px;
+    padding:2px 6px;
+    margin:0 -6px;
+    transition:background .25s ease, color .25s ease;
+  }
+  .sanskrit .line.speaking{
+    background:var(--highlight-bg);
+    color:var(--highlight-text);
+  }
+
+  .divider-fancy{
+    display:flex; align-items:center; gap:10px;
+    margin:18px 0;
+    color:var(--accent-2);
+    font-size:.75rem;
+  }
+  .divider-fancy::before,.divider-fancy::after{
+    content:""; flex:1; height:1px; background:var(--line);
+  }
+
+  .meaning-toggle{
+    font-family:var(--font-label);
+    font-size:.78rem; letter-spacing:.05em;
+    color:var(--text-soft);
+    background:none;border:none;cursor:pointer;
+    display:flex;align-items:center;gap:6px;
+    padding:0 0 8px;
+  }
+  .meaning-toggle .chev{transition:transform .25s ease;}
+  .meaning-toggle[aria-expanded="true"] .chev{transform:rotate(90deg);}
+  .meaning-body{
+    font-family:'Cinzel', serif;
+    font-size:calc(.92rem * var(--font-scale));
+    line-height:1.75;
+    color:var(--text-soft);
+    max-height:0; overflow:hidden;
+    transition:max-height .35s ease;
+  }
+  .meaning-body p{margin:0 0 8px;}
+
+  .verse-actions{
+    display:flex; flex-wrap:wrap; gap:10px;
+    margin-top:16px;
+    font-family:var(--font-label);
+    font-size:.75rem;
+  }
+  .verse-actions button{
+    display:flex;align-items:center;gap:6px;
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    color:var(--text-soft);
+    padding:7px 12px;
+    border-radius:999px;
+    cursor:pointer;
+  }
+  .verse-actions button:hover{border-color:var(--accent); color:var(--accent);}
+  .verse-actions button.on{border-color:var(--accent-2); color:var(--accent-2);}
+
+  /* ---------- Floating mini player ---------- */
+  .mini-player{
+    position:fixed; left:50%; bottom:18px;
+    transform:translateX(-50%) translateY(120%);
+    width:min(92%,520px);
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    box-shadow:var(--shadow);
+    border-radius:16px;
+    padding:12px 16px;
+    display:flex; align-items:center; gap:14px;
+    z-index:60;
+    transition:transform .35s ease;
+  }
+  .mini-player.show{transform:translateX(-50%) translateY(0);}
+  .mini-player .mp-play{
+    width:38px;height:38px;border-radius:50%;
+    background:var(--accent); color:#fff; border:none; cursor:pointer;
+    display:flex;align-items:center;justify-content:center;flex:none;
+  }
+  .mini-player .mp-info{flex:1; min-width:0;}
+  .mini-player .mp-title{
+    font-family:var(--font-label); font-size:.78rem; font-weight:600;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .mini-player .mp-sub{font-size:.72rem; color:var(--text-soft);}
+  .mini-player .mp-progress{height:4px; background:var(--line); border-radius:99px; margin-top:6px; overflow:hidden;}
+  .mini-player .mp-progress-fill{height:100%; width:0%; background:var(--accent-2);}
+  .mini-player .mp-next{background:none;border:none;color:var(--text-soft);cursor:pointer;font-size:1.1rem;flex:none;}
+
+  /* ---------- Selection popup ---------- */
+  .sel-popup{
+    position:absolute; display:none;
+    background:var(--indigo); color:#fff;
+    border-radius:10px; box-shadow:var(--shadow);
+    padding:6px; gap:2px; z-index:80;
+    font-family:var(--font-label); font-size:.72rem;
+  }
+  .sel-popup.show{display:flex;}
+  .sel-popup button{
+    background:none;border:none;color:#fff;cursor:pointer;
+    padding:8px 10px; border-radius:6px; display:flex;flex-direction:column;align-items:center;gap:3px;
+  }
+  .sel-popup button:hover{background:rgba(255,255,255,.12);}
+
+  /* ---------- Settings drawer ---------- */
+  .drawer-overlay{
+    position:fixed; inset:0; background:rgba(16,15,38,.45);
+    opacity:0; pointer-events:none; transition:opacity .3s ease; z-index:90;
+  }
+  .drawer-overlay.show{opacity:1; pointer-events:auto;}
+  .drawer{
+    position:fixed; top:0; right:0; height:100%;
+    width:min(360px,88vw);
+    background:var(--bg-panel);
+    box-shadow:-10px 0 30px rgba(0,0,0,.2);
+    transform:translateX(100%);
+    transition:transform .35s ease;
+    z-index:95;
+    padding:26px 22px;
+    overflow-y:auto;
+    font-family:var(--font-label);
+  }
+  .drawer.show{transform:translateX(0);}
+  .drawer h3{font-family:var(--font-display); font-size:1.4rem; margin:0 0 20px; font-weight:400;}
+  .drawer .close-drawer{position:absolute; top:20px; right:20px; background:none;border:none;font-size:1.2rem;color:var(--text-soft);cursor:pointer;}
+  .setting-block{margin-bottom:24px;}
+  .setting-block > label.block-label{
+    display:block; font-size:.72rem; text-transform:uppercase; letter-spacing:.08em;
+    color:var(--text-soft); margin-bottom:10px;
+  }
+  .seg{display:flex; gap:8px; flex-wrap:wrap;}
+  .seg button{
+    flex:1; min-width:70px;
+    background:var(--bg-elevated); border:1px solid var(--line);
+    color:var(--text-soft); padding:8px 10px; border-radius:9px;
+    font-family:inherit; font-size:.78rem; cursor:pointer;
+  }
+  .seg button.active{border-color:var(--accent); color:var(--accent); background:rgba(193,80,46,.08);}
+  .font-seg button{flex:none; width:44px;}
+  .toggle-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:10px 0; border-top:1px solid var(--line);
+    font-size:.85rem;
+  }
+  .toggle-row:first-of-type{border-top:none;}
+  .switch{
+    width:40px; height:22px; border-radius:99px; background:var(--line);
+    position:relative; cursor:pointer; flex:none;
+  }
+  .switch::after{
+    content:""; position:absolute; top:2px; left:2px; width:18px;height:18px;
+    background:#fff; border-radius:50%; transition:transform .2s ease;
+    box-shadow:0 1px 3px rgba(0,0,0,.3);
+  }
+  .switch.on{background:var(--accent);}
+  .switch.on::after{transform:translateX(18px);}
+
+  /* ---------- Benefits ---------- */
+  .benefits-card{
+    background:linear-gradient(135deg, var(--indigo) 0%, #2A2A5C 100%);
+    color:#F3EFE0;
+    border-radius:var(--radius);
+    padding:30px 28px;
+    margin:36px 0;
+    box-shadow:var(--shadow);
+  }
+  [data-theme="dark"] .benefits-card{background:linear-gradient(135deg,#22214C 0%,#33325E 100%);}
+  .benefits-card h3{
+    font-family:var(--font-display); font-weight:400; font-size:1.5rem;
+    margin:0 0 16px; color:var(--gold-soft);
+  }
+  .benefits-card ul{list-style:none; margin:0; padding:0; display:grid; gap:10px;}
+  .benefits-card li{display:flex; gap:10px; font-family:'Cinzel',serif; font-size:.92rem;}
+  .benefits-card li .chk{color:var(--gold-soft); flex:none;}
+
+  /* ---------- FAQ ---------- */
+  .faq-section h2, .seo-section h2{
+    font-family:var(--font-display); font-weight:400; font-size:1.7rem; margin:0 0 18px;
+  }
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%; text-align:left; background:none; border:none; cursor:pointer;
+    padding:16px 4px; display:flex; justify-content:space-between; align-items:center;
+    font-family:'Cinzel',serif; font-weight:600; font-size:.95rem; color:var(--text);
+  }
+  .faq-q .chev{transition:transform .25s ease; color:var(--accent);}
+  .faq-q[aria-expanded="true"] .chev{transform:rotate(45deg);}
+  .faq-a{
+    max-height:0; overflow:hidden; transition:max-height .35s ease;
+    font-family:'Cinzel',serif; color:var(--text-soft); font-size:.88rem; line-height:1.7;
+  }
+  .faq-a p{margin:0 0 16px; padding:0 4px;}
+
+  /* ---------- SEO content ---------- */
+  .seo-section{margin-top:44px;}
+  .seo-section article{
+    font-family:'Cinzel',serif; color:var(--text-soft); font-size:.92rem; line-height:1.85;
+    margin-bottom:26px;
+  }
+  .seo-section article h3{
+    font-family:var(--font-label); color:var(--text); font-size:1.05rem; margin-bottom:8px;
+  }
+
+  /* transliteration lines toggle */
+  .translit{
+    font-family:'Cinzel',serif; font-size:calc(.85rem * var(--font-scale));
+    color:var(--text-soft); margin-top:8px; display:none; font-style:italic;
+  }
+  .translit.show{display:block;}
+
+  .skip-link{position:absolute; left:-999px;}
+  .skip-link:focus{left:8px; top:8px; background:var(--accent); color:#fff; padding:8px 12px; border-radius:8px; z-index:200;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
+  }
+</style>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9N0GE0NNGD"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18008418302"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18008418302');
+</script>
+<!-- Event snippet for Page view conversion page -->
+<script>
+  gtag('event', 'conversion', {'send_to': 'AW-18008418302/MX4NCKKmmIkcEP7PiotD'});
+</script>
+<meta name="google-adsense-account" content="ca-pub-5809900825917201">
+
+
+</head>
+<body data-theme="light">
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="wrap">
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="col-side">
+    <nav class="sidebar" aria-label="Verse contents">
+      <h4>Contents</h4>
+      <ul id="toc-list">
+        <!-- injected by JS -->
+      </ul>
+      <h4>On this page</h4>
+      <ul>
+        <li><a href="#benefits">Benefits</a></li>
+        <li><a href="#lyrics">Full Lyrics</a></li>
+        <li><a href="#faqs">FAQs</a></li>
+        <li><a href="#about">About the Stotram</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- ================= MAIN ================= -->
+  <main class="col-main" id="main">
+
+    <div class="topbar">
+      <a href="/" class="back">&larr; Back</a>
+      <button class="settings-btn" id="openSettings">&#9881; Settings</button>
+    </div>
+
+    <header class="stotram-header">
+      <div class="om">&#2384;</div>
+      <h1 class="title">Shiv Panchakshar Stotram</h1>
+      <div class="meta-row">
+        <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span style="color:var(--text-soft)">4.9</span></span>
+        <span class="dot"></span>
+        <span>Reading time &bull; 2 min</span>
+        <span class="dot"></span>
+        <span>5 Verses &bull; Panchakshara Mantra</span>
+      </div>
+    </header>
+
+    <hr class="rule">
+
+    <!-- ================= PLAYER BAR ================= -->
+    <section class="player-bar" aria-label="Audio player">
+      <div class="transport">
+        <button class="skip" id="btnPrev" title="Previous verse" aria-label="Previous verse">&#9198;</button>
+        <button class="play-pause" id="btnPlay" title="Play" aria-label="Play">&#9658;</button>
+        <button class="skip" id="btnNext" title="Next verse" aria-label="Next verse">&#9197;</button>
+      </div>
+      <div class="player-controls-row">
+        <div class="ctl" id="speedCtl">Speed <select id="speedSelect">
+          <option value="0.75">0.75x</option>
+          <option value="1" selected>1x</option>
+          <option value="1.25">1.25x</option>
+          <option value="1.5">1.5x</option>
+        </select></div>
+        <div class="ctl">Voice <select id="voiceSelect"></select></div>
+        <div class="ctl" id="repeatCtl">&#8635; Repeat</div>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span>Progress</span>
+          <span id="progressText">Verse 1 of 5</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
+      <div id="statusMsg" style="display:none; margin-top:12px; font-family:var(--font-label); font-size:.75rem; color:var(--accent); background:var(--bg-elevated); border:1px solid var(--line); border-radius:8px; padding:8px 12px;"></div>
+    </section>
+
+    <!-- ================= VERSES ================= -->
+    <section class="verses" id="verses" aria-label="Stotram verses">
+      <!-- verse cards injected by JS -->
+    </section>
+
+    <!-- ================= BENEFITS ================= -->
+    <section class="benefits-card" id="benefits">
+      <h3>Benefits of Chanting</h3>
+      <ul>
+        <li><span class="chk">&#10003;</span> Removes negativity and inner restlessness</li>
+        <li><span class="chk">&#10003;</span> Improves concentration during meditation and japa</li>
+        <li><span class="chk">&#10003;</span> Brings inner peace and emotional steadiness</li>
+        <li><span class="chk">&#10003;</span> Deepens devotion (bhakti) towards Lord Shiva</li>
+        <li><span class="chk">&#10003;</span> Traditionally believed to please Lord Shiva and invite his grace</li>
+      </ul>
+    </section>
+
+    <!-- ================= FULL LYRICS (collapsible per-verse meanings already inline; this is a plain lyrics block) ================= -->
+    <section id="lyrics">
+      <h2 style="font-family:var(--font-display);font-weight:400;font-size:1.7rem;">Full Lyrics</h2>
+      <div class="sanskrit" id="fullLyrics" style="line-height:2.4;"></div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section class="faq-section" id="faqs">
+      <h2>Frequently Asked Questions</h2>
+      <div id="faqList"></div>
+    </section>
+
+    <!-- ================= SEO CONTENT ================= -->
+    <section class="seo-section" id="about">
+      <h2>About the Stotram</h2>
+      <article>
+        <h3>Introduction</h3>
+        <p>The Shiv Panchakshar Stotram is a five-verse Sanskrit hymn composed by Adi Shankaracharya in praise of Lord Shiva. Each of the five verses is built around one syllable of the sacred Panchakshara mantra, "Na-Ma-Shi-Va-Ya," making the stotram both a hymn of praise and a meditation on the mantra itself.</p>
+      </article>
+      <article>
+        <h3>History</h3>
+        <p>Tradition attributes this stotram to Adi Shankaracharya, the eighth-century philosopher and reformer credited with reviving Shaiva and Advaita devotional literature across India. Like his other short stotrams, it was composed to make deep philosophical reverence for Shiva accessible through simple, rhythmic verse suited for daily recitation.</p>
+      </article>
+      <article>
+        <h3>Importance</h3>
+        <p>The Panchakshara mantra, "Namah Shivaya," is considered one of the most fundamental mantras in Shaivism. This stotram unpacks the mantra syllable by syllable, so each verse becomes a standalone meditation on one letter, one attribute of Shiva, and one facet of surrender.</p>
+      </article>
+      <article>
+        <h3>Spiritual Significance</h3>
+        <p>Chanting the stotram is traditionally seen as a way to internalize the qualities of Shiva described in each verse — his simplicity, his fearlessness, his detachment, and his compassion — rather than only reciting words. Many practitioners pair it with japa of the Panchakshara mantra itself.</p>
+      </article>
+      <article>
+        <h3>Benefits</h3>
+        <p>Regular recitation is associated with steadier concentration, a calmer mind before meditation, and a felt sense of closeness to Shiva. Its short length makes it approachable for daily practice, including for those new to Sanskrit chanting.</p>
+      </article>
+      <article>
+        <h3>Pronunciation Guide</h3>
+        <p>Each verse ends with a name built on one syllable — Nakaraya, Makaraya, Shikaraya, Vakaraya, Yakaraya — said slowly to let the syllable land clearly. Use the Play button above to hear each line paced correctly, and toggle Auto Scroll and Highlight in Settings to follow along visually.</p>
+      </article>
+    </section>
+
+  </main>
+</div>
+
+<!-- ================= FLOATING MINI PLAYER ================= -->
+<div class="mini-player" id="miniPlayer">
+  <button class="mp-play" id="mpPlay">&#9658;</button>
+  <div class="mp-info">
+    <div class="mp-title">Shiv Panchakshar &bull; <span id="mpVerse">Verse 1</span></div>
+    <div class="mp-progress"><div class="mp-progress-fill" id="mpProgressFill"></div></div>
+  </div>
+  <button class="mp-next" id="mpNext" aria-label="Next verse">&#9197;</button>
+</div>
+
+<!-- ================= SELECTION POPUP ================= -->
+<div class="sel-popup" id="selPopup">
+  <button data-act="read"><span>&#9658;</span>Read</button>
+  <button data-act="copy"><span>&#128203;</span>Copy</button>
+  <button data-act="search"><span>&#128269;</span>Meaning</button>
+  <button data-act="save"><span>&#128278;</span>Save</button>
+</div>
+
+<!-- ================= SETTINGS DRAWER ================= -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<div class="drawer" id="drawer" role="dialog" aria-label="Reading settings">
+  <button class="close-drawer" id="closeDrawer" aria-label="Close settings">&times;</button>
+  <h3>Reading Settings</h3>
+
+  <div class="setting-block">
+    <button id="testVoiceBtn" style="width:100%; background:var(--bg-elevated); border:1px solid var(--line); color:var(--accent); padding:10px; border-radius:9px; font-family:inherit; font-size:.82rem; cursor:pointer;">&#128264; Test Sound</button>
+    <div id="testVoiceResult" style="font-size:.72rem; color:var(--text-soft); margin-top:6px;"></div>
+  </div>
+
+  <div class="setting-block">
+    <label class="block-label">Voice</label>
+    <div class="seg" id="voiceGenderSeg">
+      <button data-val="male" class="active">Male</button>
+      <button data-val="female">Female</button>
+    </div>
+  </div>
+
+  <div class="setting-block">
+    <label class="block-label">Language</label>
+    <div class="seg" id="langSeg">
+      <button data-val="sa" class="active">Sanskrit</button>
+      <button data-val="hi">Hindi</button>
+      <button data-val="en">English</button>
+    </div>
+  </div>
+
+  <div class="setting-block">
+    <label class="block-label">Speed</label>
+    <div class="seg" id="speedSeg">
+      <button data-val="0.75">0.75x</button>
+      <button data-val="1" class="active">1x</button>
+      <button data-val="1.25">1.25x</button>
+      <button data-val="1.5">1.5x</button>
+    </div>
+  </div>
+
+  <div class="setting-block">
+    <label class="block-label">Theme</label>
+    <div class="seg" id="themeSeg">
+      <button data-val="light" class="active">Light</button>
+      <button data-val="dark">Dark</button>
+    </div>
+  </div>
+
+  <div class="setting-block">
+    <label class="block-label">Font Size</label>
+    <div class="seg font-seg" id="fontSeg">
+      <button data-val="dec">A&minus;</button>
+      <button data-val="reset" class="active">A</button>
+      <button data-val="inc">A+</button>
+    </div>
+  </div>
+
+  <div class="setting-block">
+    <div class="toggle-row"><span>Auto Scroll</span><div class="switch on" id="toggleAutoScroll"></div></div>
+    <div class="toggle-row"><span>Highlight</span><div class="switch on" id="toggleHighlight"></div></div>
+    <div class="toggle-row"><span>Repeat</span><div class="switch" id="toggleRepeat"></div></div>
+    <div class="toggle-row"><span>Show Transliteration</span><div class="switch" id="toggleTranslit"></div></div>
+  </div>
+</div>
+
+<div id="sm-comments" data-page-id="shiv-panchakshar-stotram"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ============================================================
+     DATA — Shiv Panchakshar Stotram (Adi Shankaracharya), 5 verses
+     ============================================================ */
+  const VERSES = [
+    {
+      syllable: "Na",
+      lines: [
+        "नागेन्द्रहाराय त्रिलोचनाय",
+        "भस्माङ्गरागाय महेश्वराय।",
+        "नित्याय शुद्धाय दिगम्बराय",
+        "तस्मै \u201cन\u201dकाराय नमः शिवाय॥"
+      ],
+      translit: "nāgendra-hārāya trilocanāya, bhasmāṅga-rāgāya maheśvarāya, nityāya śuddhāya digambarāya, tasmai nakārāya namaḥ śivāya.",
+      meaning: "Salutations to Shiva, represented by the syllable “Na” — who wears the king of serpents as a garland, has three eyes, smears his body with sacred ash, and is the great Lord: eternal, pure, and clad in the sky itself."
+    },
+    {
+      syllable: "Ma",
+      lines: [
+        "मन्दाकिनीसलिलचन्दनचर्चिताय",
+        "नन्दीश्वरप्रमथनाथमहेश्वराय।",
+        "मन्दारपुष्पबहुपुष्पसुपूजिताय",
+        "तस्मै \u201cम\u201dकाराय नमः शिवाय॥"
+      ],
+      translit: "mandākinī-salila-candana-carcitāya, nandīśvara-pramatha-nātha-maheśvarāya, mandāra-puṣpa-bahu-puṣpa-supūjitāya, tasmai makārāya namaḥ śivāya.",
+      meaning: "Salutations to Shiva, represented by the syllable “Ma” — anointed with sandal paste mixed with the waters of the Mandakini (Ganga), lord of Nandi and the Pramatha attendants, worshipped with mandara and countless other flowers."
+    },
+    {
+      syllable: "Shi",
+      lines: [
+        "शिवाय गौरीवदनाब्जवृन्द",
+        "सूर्याय दक्षाध्वरनाशकाय।",
+        "श्रीनीलकण्ठाय वृषध्वजाय",
+        "तस्मै \u201cशि\u201dकाराय नमः शिवाय॥"
+      ],
+      translit: "śivāya gaurī-vadanābja-vṛnda- sūryāya dakṣādhvara-nāśakāya, śrī-nīlakaṇṭhāya vṛṣadhvajāya, tasmai śikārāya namaḥ śivāya.",
+      meaning: "Salutations to Shiva, represented by the syllable “Shi” — the auspicious one, who is like the sun to the lotus face of Gauri, who put an end to Daksha's sacrifice, the blue-throated one, whose banner bears the bull."
+    },
+    {
+      syllable: "Va",
+      lines: [
+        "वसिष्ठकुम्भोद्भवगौतमार्य",
+        "मुनीन्द्रदेवार्चितशेखराय।",
+        "चन्द्रार्कवैश्वानरलोचनाय",
+        "तस्मै \u201cव\u201dकाराय नमः शिवाय॥"
+      ],
+      translit: "vasiṣṭha-kumbhodbhava-gautamārya- munīndra-devārcita-śekharāya, candrārka-vaiśvānara-locanāya, tasmai vakārāya namaḥ śivāya.",
+      meaning: "Salutations to Shiva, represented by the syllable “Va” — whose crown is worshipped by the noble sages Vasishtha, Agastya (Kumbhodbhava), Gautama and the lords of sages and devas, whose eyes are the moon, the sun, and fire."
+    },
+    {
+      syllable: "Ya",
+      lines: [
+        "यज्ञस्वरूपाय जटाधराय",
+        "पिनाकहस्ताय सनातनाय।",
+        "दिव्याय देवाय दिगम्बराय",
+        "तस्मै \u201cय\u201dकाराय नमः शिवाय॥"
+      ],
+      translit: "yajña-svarūpāya jaṭādharāya, pināka-hastāya sanātanāya, divyāya devāya digambarāya, tasmai yakārāya namaḥ śivāya.",
+      meaning: "Salutations to Shiva, represented by the syllable “Ya” — the embodiment of sacrifice, bearer of matted locks, holding the Pinaka bow, the eternal one, the divine god who is clad in the sky."
+    }
+  ];
+
+  const FAQS = [
+    {q:"What is Shiv Panchakshar Stotram?", a:"It is a five-verse Sanskrit hymn to Lord Shiva composed by Adi Shankaracharya, with each verse built around one syllable of the Panchakshara mantra \u201cNamah Shivaya.\u201d"},
+    {q:"Who wrote it?", a:"It is traditionally attributed to Adi Shankaracharya, the eighth-century Advaita philosopher known for many short devotional stotrams."},
+    {q:"When should it be chanted?", a:"It can be chanted any time, though early morning after bathing, during Pradosh, Shivratri, or on Mondays is considered especially auspicious."},
+    {q:"How many times should it be recited?", a:"There is no fixed rule — once with full attention is meaningful. Some devotees recite it daily, or repeat all five verses three or nine times during focused practice."},
+    {q:"Can beginners chant it?", a:"Yes. Its five short verses make it one of the more approachable Shiva stotrams for those just starting Sanskrit chanting. Use the audio playback and highlighting on this page to follow along."},
+    {q:"What are its benefits?", a:"Regular recitation is associated with reduced mental restlessness, better focus for meditation, and a felt sense of devotion and closeness to Shiva."}
+  ];
+
+  /* ============================================================
+     STATE
+     ============================================================ */
+  const state = {
+    currentVerse: 0,
+    isPlaying: false,
+    isPaused: false,
+    speed: 1,
+    langMode: 'sa',
+    voiceGender: 'male',
+    theme: 'light',
+    fontStep: 0,
+    autoScroll: true,
+    highlight: true,
+    repeat: false,
+    bookmarks: {},
+    favorites: {}
+  };
+
+  const STORE_KEY = 'shivPanchaksharSettings_v1';
+
+  function loadState(){
+    try{
+      const raw = localStorage.getItem(STORE_KEY);
+      if(raw){
+        const saved = JSON.parse(raw);
+        Object.assign(state, saved);
+      }
+    }catch(e){ /* ignore corrupted storage */ }
+  }
+  function saveState(){
+    try{
+      localStorage.setItem(STORE_KEY, JSON.stringify(state));
+    }catch(e){ /* storage may be full or blocked */ }
+  }
+
+  /* ============================================================
+     BUILD DOM — verse cards, sidebar, lyrics block, faqs
+     ============================================================ */
+
+  const fullLyricsEl = document.getElementById('fullLyrics');
+  const versesEl = document.getElementById('verses');
+  const tocList = document.getElementById('toc-list');
+//   const fullLyricsEl = document.getElementById('fullLyrics');
+  const faqListEl = document.getElementById('faqList');
+
+  VERSES.forEach((v, i) => {
+    // verse card
+    const card = document.createElement('article');
+    card.className = 'verse-card';
+    card.id = 'verse-' + (i+1);
+    card.setAttribute('data-index', i);
+
+    const linesHtml = v.lines.map((l, li) => `<span class="line" data-line="${li}">${l}</span>`).join('');
+
+    
+    card.innerHTML = `
+      <div class="verse-top">
+        <span class="verse-num">Verse ${i+1} &middot; “${v.syllable}”</span>
+        <span class="verse-status"><span class="dot"></span> Reading...</span>
+      </div>
+      <div class="sanskrit">${linesHtml}</div>
+      <div class="translit" data-translit>${v.translit}</div>
+      <div class="divider-fancy">॥</div>
+      <button class="meaning-toggle" aria-expanded="true">
+        <span class="chev">&#9656;</span> English Meaning
+      </button>
+      <div class="meaning-body" style="max-height:400px;"><p>${v.meaning}</p></div>
+      <div class="verse-actions">
+        <button data-act="read"><span>&#9658;</span> Read Verse</button>
+        <button data-act="bookmark"><span>&#128278;</span> Bookmark</button>
+        <button data-act="copy"><span>&#128203;</span> Copy</button>
+        <button data-act="share"><span>&#128228;</span> Share</button>
+        <button data-act="favorite"><span>&#10084;</span> Favorite</button>
+      </div>
+    `;
+    versesEl.appendChild(card);
+
+    // sidebar toc entry
+    const li = document.createElement('li');
+    li.innerHTML = `<a href="#verse-${i+1}" data-index="${i}"><span class="tick">&nbsp;</span> Verse ${i+1}</a>`;
+    tocList.appendChild(li);
+
+    // full lyrics block
+    const lyricsBlock = document.createElement('div');
+    lyricsBlock.style.marginBottom = '18px';
+    lyricsBlock.innerHTML = `<div style="font-family:var(--font-label);font-size:.75rem;color:var(--text-soft);margin-bottom:4px;">Verse ${i+1}</div>${v.lines.join('<br>')}`;
+    fullLyricsEl.appendChild(lyricsBlock);
+  });
+
+  FAQS.forEach((f, i) => {
+    const item = document.createElement('div');
+    item.className = 'faq-item';
+    item.innerHTML = `
+      <button class="faq-q" aria-expanded="false">
+        <span>${f.q}</span><span class="chev">+</span>
+      </button>
+      <div class="faq-a"><p>${f.a}</p></div>
+    `;
+    faqListEl.appendChild(item);
+  });
+
+  const verseCards = Array.from(document.querySelectorAll('.verse-card'));
+  const tocLinks = Array.from(document.querySelectorAll('#toc-list a'));
+
+  /* ============================================================
+     MEANING TOGGLES (per verse)
+     ============================================================ */
+  document.querySelectorAll('.meaning-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const body = btn.nextElementSibling;
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      body.style.maxHeight = expanded ? '0px' : '400px';
+    });
+  });
+
+  /* ============================================================
+     FAQ TOGGLES
+     ============================================================ */
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const body = btn.nextElementSibling;
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      // close all
+      document.querySelectorAll('.faq-q').forEach(b => {
+        b.setAttribute('aria-expanded','false');
+        b.nextElementSibling.style.maxHeight = '0px';
+      });
+      if(!expanded){
+        btn.setAttribute('aria-expanded','true');
+        body.style.maxHeight = body.scrollHeight + 'px';
+      }
+    });
+  });
+
+  /* ============================================================
+     TEXT-TO-SPEECH ENGINE (Web Speech API)
+     ============================================================ */
+  const synth = window.speechSynthesis;
+  let availableVoices = [];
+  let currentUtterance = null;
+  let currentLineIndex = 0;
+  let keepAliveTimer = null;
+
+  function setStatusMsg(msg){
+    const el = document.getElementById('statusMsg');
+    if(!msg){ el.style.display = 'none'; el.textContent=''; return; }
+    el.style.display = 'block';
+    el.textContent = msg;
+  }
+
+  // Chrome (desktop) has a long-standing bug where speechSynthesis silently
+  // stops emitting audio on long-running pages / after ~15s of a paused
+  // engine state. Nudging pause/resume periodically works around it.
+  function keepAlive(){
+    if(keepAliveTimer) clearInterval(keepAliveTimer);
+    keepAliveTimer = setInterval(() => {
+      if(synth.speaking && !synth.paused){
+        synth.pause();
+        synth.resume();
+      } else {
+        clearInterval(keepAliveTimer);
+      }
+    }, 9000);
+  }
+
+  if(!synth){
+    setStatusMsg('This browser does not support speech playback (window.speechSynthesis is unavailable). Try Chrome or Edge on desktop.');
+  }
+
+  function populateVoices(){
+    availableVoices = synth.getVoices();
+    const select = document.getElementById('voiceSelect');
+    select.innerHTML = '';
+    if(availableVoices.length === 0){
+      const opt = document.createElement('option');
+      opt.textContent = 'Default';
+      select.appendChild(opt);
+      return;
+    }
+    // prefer hindi/indian voices first
+    const sorted = [...availableVoices].sort((a,b) => {
+      const aScore = /hi|IN/i.test(a.lang) ? 0 : 1;
+      const bScore = /hi|IN/i.test(b.lang) ? 0 : 1;
+      return aScore - bScore;
+    });
+    sorted.forEach((v, idx) => {
+      const opt = document.createElement('option');
+      opt.value = v.name;
+      opt.textContent = `${v.name} (${v.lang})`;
+      select.appendChild(opt);
+    });
+  }
+  if(synth){
+    populateVoices();
+    synth.onvoiceschanged = populateVoices;
+  }
+
+  function pickVoice(){
+    const select = document.getElementById('voiceSelect');
+    const chosenName = select.value;
+    let voice = availableVoices.find(v => v.name === chosenName);
+    if(!voice){
+      // fallback by gender heuristic + language preference
+      const langPref = state.langMode === 'en' ? /en/i : /hi|IN|en/i;
+      voice = availableVoices.find(v => langPref.test(v.lang));
+    }
+    return voice;
+  }
+
+  function speakLine(verseIdx, lineIdx){
+    if(!synth) return;
+    const verse = VERSES[verseIdx];
+    if(!verse){ stopAll(); return; }
+    if(lineIdx >= verse.lines.length){
+      // move to next verse
+      if(verseIdx + 1 < VERSES.length){
+        goToVerse(verseIdx + 1);
+        speakLine(verseIdx + 1, 0);
+      } else if(state.repeat){
+        goToVerse(0);
+        speakLine(0,0);
+      } else {
+        stopAll();
+      }
+      return;
+    }
+    const spoken = state.langMode === 'en' ? verse.meaning : verse.lines[lineIdx].replace(/[॥।]/g,'');
+    const utter = new SpeechSynthesisUtterance(spoken);
+    utter.rate = state.speed;
+    utter.volume = 1;
+    utter.pitch = 1;
+    const v = pickVoice();
+    if(v){
+      // only set voice+lang together when we actually found a matching voice;
+      // forcing lang:'hi-IN' with no matching voice installed makes some
+      // browsers fail to produce any audio at all
+      utter.voice = v;
+      utter.lang = v.lang;
+    } else {
+      utter.lang = state.langMode === 'en' ? 'en-US' : 'hi-IN';
+    }
+
+    highlightLine(verseIdx, lineIdx);
+
+    utter.onend = () => {
+      currentLineIndex = lineIdx + 1;
+      if(state.isPlaying){
+        speakLine(verseIdx, currentLineIndex);
+      }
+    };
+    utter.onerror = (ev) => {
+      console.error('Speech synthesis error:', ev.error);
+      setStatusMsg('Audio error: ' + ev.error + '. Try a different Voice in the player bar, or use Chrome desktop.');
+      state.isPlaying = false;
+      setPlayButtonsState(false);
+    };
+    currentUtterance = utter;
+    // cancel any stuck/queued utterance before speaking a new one — Chrome
+    // in particular can silently stop producing audio without this
+    synth.cancel();
+    synth.speak(utter);
+    // Chrome bug workaround: speechSynthesis can go silent on long-lived
+    // pages unless nudged periodically while actively speaking
+    keepAlive();
+  }
+
+  function highlightLine(verseIdx, lineIdx){
+    verseCards.forEach((card, i) => {
+      card.classList.toggle('is-active', i === verseIdx);
+      card.querySelectorAll('.line').forEach(l => l.classList.remove('speaking'));
+    });
+    if(state.highlight){
+      const card = verseCards[verseIdx];
+      const lineEl = card && card.querySelector(`.line[data-line="${lineIdx}"]`);
+      if(lineEl) lineEl.classList.add('speaking');
+      if(state.autoScroll && lineEl){
+        lineEl.scrollIntoView({behavior:'smooth', block:'center'});
+      } else if(state.autoScroll && card){
+        card.scrollIntoView({behavior:'smooth', block:'center'});
+      }
+    }
+    updateProgress(verseIdx);
+    updateTocActive(verseIdx);
+    updateMiniPlayer(verseIdx);
+  }
+
+  function updateProgress(verseIdx){
+    const pct = ((verseIdx) / (VERSES.length - 1)) * 100;
+    document.getElementById('progressFill').style.width = Math.min(100, Math.max(0, pct)) + '%';
+    document.getElementById('progressText').textContent = `Verse ${verseIdx+1} of ${VERSES.length}`;
+  }
+
+  function updateTocActive(verseIdx){
+    tocLinks.forEach((a,i) => a.classList.toggle('active', i === verseIdx));
+  }
+
+  function updateMiniPlayer(verseIdx){
+    document.getElementById('mpVerse').textContent = `Verse ${verseIdx+1}`;
+    const pct = ((verseIdx) / (VERSES.length - 1)) * 100;
+    document.getElementById('mpProgressFill').style.width = Math.min(100,Math.max(0,pct)) + '%';
+  }
+
+  function goToVerse(idx){
+    state.currentVerse = idx;
+    const card = verseCards[idx];
+    if(card) card.scrollIntoView({behavior:'smooth', block:'center'});
+    updateProgress(idx);
+    updateTocActive(idx);
+    updateMiniPlayer(idx);
+  }
+
+  function playFromCurrent(){
+    if(!synth){
+      alert('Speech playback is not supported in this browser.');
+      return;
+    }
+    state.isPlaying = true;
+    state.isPaused = false;
+    setPlayButtonsState(true);
+    currentLineIndex = 0;
+    speakLine(state.currentVerse, currentLineIndex);
+  }
+
+  function pausePlayback(){
+    if(synth && synth.speaking){
+      synth.pause();
+      state.isPaused = true;
+    }
+    state.isPlaying = false;
+    setPlayButtonsState(false);
+  }
+
+  function resumePlayback(){
+    if(synth && state.isPaused){
+      synth.resume();
+      state.isPaused = false;
+      state.isPlaying = true;
+      setPlayButtonsState(true);
+    } else {
+      playFromCurrent();
+    }
+  }
+
+  function stopAll(){
+    if(synth) synth.cancel();
+    if(keepAliveTimer) clearInterval(keepAliveTimer);
+    state.isPlaying = false;
+    state.isPaused = false;
+    setStatusMsg('');
+    setPlayButtonsState(false);
+    verseCards.forEach(c => {
+      c.classList.remove('is-active');
+      c.querySelectorAll('.line').forEach(l => l.classList.remove('speaking'));
+    });
+  }
+
+  function setPlayButtonsState(playing){
+    const icon = playing ? '&#10074;&#10074;' : '&#9658;';
+    document.getElementById('btnPlay').innerHTML = icon;
+    document.getElementById('mpPlay').innerHTML = icon;
+    document.getElementById('btnPlay').setAttribute('aria-label', playing ? 'Pause' : 'Play');
+    document.getElementById('miniPlayer').classList.toggle('show', true);
+  }
+
+  /* ============================================================
+     TRANSPORT CONTROLS
+     ============================================================ */
+  document.getElementById('btnPlay').addEventListener('click', () => {
+    if(state.isPlaying){ pausePlayback(); }
+    else { resumePlayback(); }
+  });
+  document.getElementById('mpPlay').addEventListener('click', () => {
+    if(state.isPlaying){ pausePlayback(); }
+    else { resumePlayback(); }
+  });
+  document.getElementById('btnNext').addEventListener('click', nextVerse);
+  document.getElementById('mpNext').addEventListener('click', nextVerse);
+  document.getElementById('btnPrev').addEventListener('click', prevVerse);
+
+  function nextVerse(){
+    if(state.currentVerse + 1 < VERSES.length){
+      stopAll();
+      goToVerse(state.currentVerse + 1);
+      if(state.isPlaying) playFromCurrent();
+    }
+  }
+  function prevVerse(){
+    if(state.currentVerse > 0){
+      stopAll();
+      goToVerse(state.currentVerse - 1);
+      if(state.isPlaying) playFromCurrent();
+    }
+  }
+
+  document.getElementById('speedSelect').addEventListener('change', (e) => {
+    state.speed = parseFloat(e.target.value);
+    saveState();
+  });
+
+  const repeatCtl = document.getElementById('repeatCtl');
+  repeatCtl.addEventListener('click', () => {
+    state.repeat = !state.repeat;
+    repeatCtl.classList.toggle('active', state.repeat);
+    document.getElementById('toggleRepeat').classList.toggle('on', state.repeat);
+    saveState();
+  });
+
+  /* ============================================================
+     PER-VERSE ACTION BUTTONS (read / bookmark / copy / share / favorite)
+     ============================================================ */
+  versesEl.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-act]');
+    if(!btn) return;
+    const card = btn.closest('.verse-card');
+    const idx = parseInt(card.getAttribute('data-index'), 10);
+    const act = btn.getAttribute('data-act');
+    const verse = VERSES[idx];
+
+    if(act === 'read'){
+      stopAll();
+      goToVerse(idx);
+      state.isPlaying = true;
+      setPlayButtonsState(true);
+      currentLineIndex = 0;
+      speakLine(idx, 0);
+    }
+    if(act === 'copy'){
+      const text = verse.lines.join('\n');
+      navigator.clipboard && navigator.clipboard.writeText(text).catch(()=>{});
+      flashButton(btn, 'Copied!');
+    }
+    if(act === 'bookmark'){
+      state.bookmarks[idx] = !state.bookmarks[idx];
+      btn.classList.toggle('on', state.bookmarks[idx]);
+      saveState();
+      flashButton(btn, state.bookmarks[idx] ? 'Saved' : 'Bookmark');
+    }
+    if(act === 'favorite'){
+      state.favorites[idx] = !state.favorites[idx];
+      btn.classList.toggle('on', state.favorites[idx]);
+      saveState();
+    }
+    if(act === 'share'){
+      const shareText = `${verse.lines.join(' ')} — Shiv Panchakshar Stotram, Verse ${idx+1}`;
+      if(navigator.share){
+        navigator.share({title:'Shiv Panchakshar Stotram', text: shareText}).catch(()=>{});
+      } else {
+        navigator.clipboard && navigator.clipboard.writeText(shareText).catch(()=>{});
+        flashButton(btn, 'Link copied');
+      }
+    }
+  });
+
+  function flashButton(btn, label){
+    const original = btn.innerHTML;
+    btn.innerHTML = `<span></span> ${label}`;
+    setTimeout(() => { btn.innerHTML = original; }, 1200);
+  }
+
+  /* ============================================================
+     TOC CLICK — jump to verse
+     ============================================================ */
+  tocLinks.forEach(a => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const idx = parseInt(a.getAttribute('data-index'), 10);
+      stopAll();
+      goToVerse(idx);
+    });
+  });
+
+  /* ============================================================
+     SETTINGS DRAWER
+     ============================================================ */
+  const drawer = document.getElementById('drawer');
+  const overlay = document.getElementById('drawerOverlay');
+  document.getElementById('openSettings').addEventListener('click', () => {
+    drawer.classList.add('show'); overlay.classList.add('show');
+  });
+  document.getElementById('closeDrawer').addEventListener('click', closeDrawer);
+  overlay.addEventListener('click', closeDrawer);
+  function closeDrawer(){ drawer.classList.remove('show'); overlay.classList.remove('show'); }
+
+  function setSeg(container, value){
+    container.querySelectorAll('button').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-val') === value);
+    });
+  }
+
+  document.getElementById('testVoiceBtn').addEventListener('click', () => {
+    const resultEl = document.getElementById('testVoiceResult');
+    if(!synth){
+      resultEl.textContent = 'speechSynthesis not supported in this browser.';
+      return;
+    }
+    synth.cancel();
+    const test = new SpeechSynthesisUtterance('Om Namah Shivaya');
+    test.rate = state.speed;
+    test.volume = 1;
+    test.onstart = () => { resultEl.textContent = 'Playing... if you hear nothing, check system/browser volume and try a different Voice below.'; };
+    test.onend = () => { resultEl.textContent += ' Done.'; };
+    test.onerror = (ev) => { resultEl.textContent = 'Error: ' + ev.error + '. Try a different voice from the list, or open this file directly in Chrome desktop.'; };
+    resultEl.textContent = 'Requesting audio...';
+    synth.speak(test);
+  });
+
+  document.getElementById('voiceGenderSeg').addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if(!b) return;
+    state.voiceGender = b.getAttribute('data-val');
+    setSeg(document.getElementById('voiceGenderSeg'), state.voiceGender);
+    saveState();
+  });
+
+  document.getElementById('langSeg').addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if(!b) return;
+    state.langMode = b.getAttribute('data-val');
+    setSeg(document.getElementById('langSeg'), state.langMode);
+    saveState();
+  });
+
+  document.getElementById('speedSeg').addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if(!b) return;
+    state.speed = parseFloat(b.getAttribute('data-val'));
+    setSeg(document.getElementById('speedSeg'), b.getAttribute('data-val'));
+    document.getElementById('speedSelect').value = String(state.speed);
+    saveState();
+  });
+
+  document.getElementById('themeSeg').addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if(!b) return;
+    state.theme = b.getAttribute('data-val');
+    setSeg(document.getElementById('themeSeg'), state.theme);
+    document.body.setAttribute('data-theme', state.theme);
+    saveState();
+  });
+
+  document.getElementById('fontSeg').addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if(!b) return;
+    const val = b.getAttribute('data-val');
+    if(val === 'inc') state.fontStep = Math.min(3, state.fontStep + 1);
+    if(val === 'dec') state.fontStep = Math.max(-2, state.fontStep - 1);
+    if(val === 'reset') state.fontStep = 0;
+    applyFontScale();
+    saveState();
+  });
+  function applyFontScale(){
+    const scale = 1 + state.fontStep * 0.1;
+    document.body.style.setProperty('--font-scale', scale);
+  }
+
+  function bindSwitch(id, key, onChange){
+    const el = document.getElementById(id);
+    el.classList.toggle('on', state[key]);
+    el.addEventListener('click', () => {
+      state[key] = !state[key];
+      el.classList.toggle('on', state[key]);
+      if(onChange) onChange(state[key]);
+      saveState();
+    });
+  }
+  bindSwitch('toggleAutoScroll', 'autoScroll');
+  bindSwitch('toggleHighlight', 'highlight');
+  bindSwitch('toggleRepeat', 'repeat', (v) => {
+    repeatCtl.classList.toggle('active', v);
+  });
+  bindSwitch('toggleTranslit', 'showTranslit', (v) => {
+    document.querySelectorAll('[data-translit]').forEach(el => el.classList.toggle('show', v));
+  });
+
+  /* ============================================================
+     TEXT SELECTION POPUP
+     ============================================================ */
+  const selPopup = document.getElementById('selPopup');
+  let lastSelectedText = '';
+
+  document.addEventListener('mouseup', (e) => {
+    if(e.target.closest('.sel-popup')) return;
+    const selection = window.getSelection();
+    const text = selection ? selection.toString().trim() : '';
+    if(text && text.length > 1){
+      lastSelectedText = text;
+      const range = selection.getRangeAt(0);
+      const rect = range.getBoundingClientRect();
+      selPopup.style.top = (window.scrollY + rect.top - 52) + 'px';
+      selPopup.style.left = (window.scrollX + rect.left) + 'px';
+      selPopup.classList.add('show');
+    } else {
+      selPopup.classList.remove('show');
+    }
+  });
+  document.addEventListener('scroll', () => selPopup.classList.remove('show'));
+
+  selPopup.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-act]');
+    if(!btn) return;
+    const act = btn.getAttribute('data-act');
+    if(act === 'read' && synth){
+      const utter = new SpeechSynthesisUtterance(lastSelectedText);
+      utter.lang = 'hi-IN';
+      utter.rate = state.speed;
+      synth.speak(utter);
+    }
+    if(act === 'copy'){
+      navigator.clipboard && navigator.clipboard.writeText(lastSelectedText).catch(()=>{});
+    }
+    if(act === 'search'){
+      window.open('https://www.google.com/search?q=' + encodeURIComponent(lastSelectedText + ' meaning shiv stotram'), '_blank');
+    }
+    if(act === 'save'){
+      try{
+        const saved = JSON.parse(localStorage.getItem('shivSavedLines') || '[]');
+        saved.push(lastSelectedText);
+        localStorage.setItem('shivSavedLines', JSON.stringify(saved));
+      }catch(err){ /* ignore */ }
+    }
+    selPopup.classList.remove('show');
+  });
+
+  /* ============================================================
+     FLOATING MINI PLAYER — show while scrolling past main player
+     ============================================================ */
+  const miniPlayer = document.getElementById('miniPlayer');
+  const mainPlayerBar = document.querySelector('.player-bar');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(!entry.isIntersecting && (state.isPlaying || state.isPaused)){
+        miniPlayer.classList.add('show');
+      } else if(entry.isIntersecting){
+        miniPlayer.classList.remove('show');
+      }
+    });
+  }, {threshold:0});
+  io.observe(mainPlayerBar);
+
+  /* ============================================================
+     SCROLLSPY — highlight active TOC entry while scrolling manually
+     ============================================================ */
+  const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const idx = parseInt(entry.target.getAttribute('data-index'), 10);
+        if(!state.isPlaying){
+          updateTocActive(idx);
+        }
+      }
+    });
+  }, {threshold:0.5});
+  verseCards.forEach(c => cardObserver.observe(c));
+
+  /* ============================================================
+     INIT
+     ============================================================ */
+  loadState();
+  document.body.setAttribute('data-theme', state.theme || 'light');
+  setSeg(document.getElementById('themeSeg'), state.theme || 'light');
+  setSeg(document.getElementById('langSeg'), state.langMode || 'sa');
+  setSeg(document.getElementById('voiceGenderSeg'), state.voiceGender || 'male');
+  setSeg(document.getElementById('speedSeg'), String(state.speed || 1));
+  document.getElementById('speedSelect').value = String(state.speed || 1);
+  applyFontScale();
+  Object.keys(state.bookmarks || {}).forEach(idx => {
+    const card = verseCards[idx];
+    if(card && state.bookmarks[idx]){
+      const b = card.querySelector('button[data-act="bookmark"]');
+      if(b) b.classList.add('on');
+    }
+  });
+  Object.keys(state.favorites || {}).forEach(idx => {
+    const card = verseCards[idx];
+    if(card && state.favorites[idx]){
+      const b = card.querySelector('button[data-act="favorite"]');
+      if(b) b.classList.add('on');
+    }
+  });
+  updateProgress(0);
+  updateTocActive(0);
+  updateMiniPlayer(0);
+
+})();
+</script>
+<script src="/sadhnadashboard.js" defer></script>
+<script src="/js/auth2.js"></script>
+<script src="/js/s-comments.js"></script>
+<script src="/js/streak-widget.js"></script>
+<script src="/js/nav.js?v=2.1" defer></script>
+<script src="/js/search.js"></script>
+<script src="/js/suggested-posts.js"></script>
+<script>
+  // const SM_API = 'https://www.api.shivmarg.live';
+  SmComments.init({ apiBase: SM_API });
+</script>
+<script src="/js/last-visited.js"></script>
+<script src="/js/recent-visits.js"></script>
+<script src="/js/chatbot.js"></script>
+<script src="/js/affiliate.js"></script>
+<script src="/js/pwa.js"></script>
+<script src="/js/trending.js"></script>
+<script src="/js/cookie-consent.js" defer></script>
+</body>
+</html>
