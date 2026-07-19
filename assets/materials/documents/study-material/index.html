@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>पवित्र सामग्री डाउनलोड | ShivMarg</title>
+<meta name="description" content="ShivMarg से पवित्र मंत्र, पूजा विधि और व्रत सामग्री डाउनलोड करें। डाउनलोड के लिए लॉगिन आवश्यक है।">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/png" href="/images/logo.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=Tiro+Devanagari+Sanskrit&family=Mukta:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ============================================================
+     DESIGN TOKENS — Praveshdwar theme
+     ============================================================ */
+  :root{
+    --maroon-deep:   #2B0A0A;
+    --maroon:        #5C1A1A;
+    --saffron:       #F4A11A;
+    --gold:          #D4A017;
+    --cream:         #FBF3E3;
+    --cream-dim:     #EFE2C6;
+    --ink:           #241109;
+
+    --font-display:  'Cinzel Decorative', serif;
+    --font-hindi:    'Tiro Devanagari Sanskrit', serif;
+    --font-body:     'Mukta', sans-serif;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(ellipse at top, rgba(244,161,26,0.10), transparent 55%),
+      var(--maroon-deep);
+    color:var(--cream);
+    font-family:var(--font-body);
+    min-height:100vh;
+    overflow-x:hidden;
+  }
+
+  a{color:inherit;}
+  .material-card a{text-decoration:none;}
+
+  /* ---------- Gate divider motif (signature element) ---------- */
+  .dwar-divider{
+    width:100%;height:34px;
+    background-repeat:repeat-x;background-position:center;
+    background-size:64px 34px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='34' viewBox='0 0 64 34'%3E%3Cpath d='M0 34 L12 6 L32 0 L52 6 L64 34' fill='none' stroke='%23D4A017' stroke-width='1.5' opacity='0.55'/%3E%3C/svg%3E");
+    opacity:0.8;
+  }
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 6vw;
+    border-bottom:1px solid rgba(212,160,23,0.25);
+  }
+  .brand{
+    font-family:var(--font-display);
+    font-size:1.05rem;letter-spacing:1px;color:var(--saffron);
+    text-decoration:none;
+  }
+
+  /* ---------- Hero / Gate ---------- */
+  .hero{
+    text-align:center;
+    padding:64px 6vw 40px;
+    position:relative;
+  }
+  .hero .eyebrow{
+    font-family:var(--font-body);font-weight:600;font-size:0.72rem;
+    letter-spacing:4px;text-transform:uppercase;color:var(--gold);
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-family:var(--font-display);
+    font-size:clamp(1.8rem,5vw,3.1rem);
+    color:var(--cream);
+    line-height:1.25;
+    text-shadow:0 0 30px rgba(244,161,26,0.25);
+  }
+  .hero h1 span{color:var(--saffron);}
+  .hero p.sub{
+    font-family:var(--font-hindi);
+    font-size:1.15rem;color:var(--cream-dim);
+    max-width:620px;margin:18px auto 0;line-height:1.9;
+  }
+
+  /* Gate SVG — locked / unlocked states */
+  .gate-wrap{
+    display:flex;justify-content:center;margin:38px 0 8px;
+  }
+  .gate-wrap svg{ width:min(260px,70vw); height:auto; }
+  .gate-wrap .status-pill{
+    display:inline-flex;align-items:center;gap:8px;
+    margin-top:18px;padding:8px 20px;border-radius:30px;
+    font-family:var(--font-body);font-weight:600;font-size:0.8rem;
+    letter-spacing:0.5px;
+    border:1px solid rgba(212,160,23,0.4);
+    background:rgba(0,0,0,0.2);
+  }
+  .status-pill.locked{color:#F0B4B4;}
+  .status-pill.unlocked{color:#B8E0B0;}
+
+  /* ---------- Downloads section ---------- */
+  .downloads-section{
+    max-width:900px;margin:0 auto;padding:20px 6vw 100px;
+  }
+  .section-title{
+    font-family:var(--font-display);
+    font-size:1.3rem;color:var(--saffron);
+    text-align:center;margin-bottom:6px;
+  }
+  .section-title-sub{
+    font-family:var(--font-hindi);
+    text-align:center;color:var(--cream-dim);
+    margin-bottom:34px;font-size:1rem;
+  }
+
+  .material-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:24px;
+  }
+  .material-card{
+    background:linear-gradient(160deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+    border:1px solid rgba(212,160,23,0.28);
+    border-radius:14px;
+    overflow:hidden;
+    position:relative;
+    transition:border-color .25s, transform .25s, box-shadow .25s;
+  }
+  .material-card:hover{
+    border-color:var(--saffron);
+    transform:translateY(-4px);
+    box-shadow:0 14px 34px rgba(0,0,0,0.35);
+  }
+
+  /* ---- cover thumbnail ---- */
+  .card-thumb{
+    display:block;
+    position:relative;
+    width:100%;aspect-ratio:4/3;
+    background:linear-gradient(150deg, var(--maroon), var(--maroon-deep));
+    background-size:cover;background-position:center;
+    overflow:hidden;
+    cursor:pointer;
+  }
+  .card-thumb img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform .5s ease, filter .35s ease;
+  }
+  .material-card:hover .card-thumb img{transform:scale(1.08);}
+
+  .card-thumb .lock-overlay{
+    position:absolute;inset:0;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(43,10,10,0.55);
+    backdrop-filter:blur(1.5px);
+    font-size:2rem;
+    transition:opacity .4s ease;
+  }
+  .material-card.is-unlocked .card-thumb img{filter:none;}
+  .material-card.is-unlocked .card-thumb .lock-overlay{opacity:0;pointer-events:none;}
+
+  .card-thumb .pdf-badge{
+    position:absolute;top:10px;left:10px;
+    background:var(--gold);color:var(--maroon-deep);
+    font-family:var(--font-body);font-weight:700;font-size:0.65rem;
+    letter-spacing:1px;padding:4px 9px;border-radius:5px;
+  }
+
+  /* ---- body ---- */
+  .card-body{padding:20px 20px 22px;}
+  .material-card h3{
+    font-family:var(--font-hindi);font-size:1.15rem;color:var(--cream);
+    margin-bottom:6px;
+  }
+  .material-card p{
+    font-size:0.88rem;color:var(--cream-dim);line-height:1.6;margin-bottom:16px;
+  }
+  .dl-btn{
+    display:inline-flex;align-items:center;gap:8px;
+    width:100%;justify-content:center;
+    padding:11px 16px;border-radius:8px;border:none;cursor:pointer;
+    font-family:var(--font-body);font-weight:600;font-size:0.85rem;letter-spacing:0.3px;
+    background:linear-gradient(135deg,var(--saffron),#C8770B);
+    color:#2B0A0A;
+    transition:filter .2s, opacity .2s;
+  }
+  .dl-btn:hover{filter:brightness(1.08);}
+  .dl-btn.locked-btn{
+    background:rgba(255,255,255,0.06);color:var(--cream-dim);
+    border:1px solid rgba(212,160,23,0.3);
+  }
+  .dl-btn .lock-icon{font-size:0.9rem;}
+
+  .toast-note{
+    text-align:center;margin-top:40px;font-size:0.82rem;color:var(--cream-dim);
+    font-family:var(--font-body);
+  }
+
+  .loading-note{
+    grid-column:1/-1;text-align:center;color:var(--cream-dim);
+    font-family:var(--font-hindi);font-size:1rem;padding:30px 0;
+  }
+  .error-note{
+    grid-column:1/-1;text-align:center;color:#F0B4B4;
+    font-family:var(--font-body);font-size:0.9rem;padding:24px 0;
+  }
+  .error-note .retry-btn{
+    display:inline-block;margin-top:12px;padding:9px 20px;border-radius:8px;
+    border:1px solid var(--gold);background:transparent;color:var(--gold);
+    font-family:var(--font-body);font-weight:600;font-size:0.82rem;cursor:pointer;
+  }
+  .error-note .retry-btn:hover{background:var(--gold);color:var(--maroon-deep);}
+
+  .dl-count{
+    color:var(--gold);font-weight:600;font-size:0.78rem;margin-bottom:10px;
+  }
+  .material-card .meta-row{
+    display:flex;flex-wrap:wrap;gap:6px 12px;margin-bottom:8px;
+    font-size:0.75rem;color:var(--cream-dim);
+  }
+
+  footer{
+    text-align:center;padding:26px 6vw;font-size:0.8rem;color:var(--cream-dim);
+    border-top:1px solid rgba(212,160,23,0.2);
+  }
+
+  /* ---------- Pre-gate loader — blocks content until auth state is known ---------- */
+  #preGate{
+    position:fixed;inset:0;z-index:8700;
+    background:var(--maroon-deep);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+    transition:opacity .35s ease;
+  }
+  #preGate.fade-out{opacity:0;pointer-events:none;}
+  #preGate .om{
+    font-size:2.4rem;color:var(--saffron);
+    animation:preGatePulse 1.4s ease-in-out infinite;
+  }
+  #preGate p{
+    font-family:var(--font-hindi);color:var(--cream-dim);font-size:0.95rem;letter-spacing:0.5px;
+  }
+  @keyframes preGatePulse{
+    0%,100%{opacity:0.5;transform:scale(0.96);}
+    50%{opacity:1;transform:scale(1.06);}
+  }
+  /* Page content stays invisible behind the loader — avoids any flash before the gate resolves */
+  #pageContent{visibility:hidden;}
+  #pageContent.ready{visibility:visible;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;animation:none !important;}
+  }
+</style>
+</head>
+<body>
+
+  <div id="preGate">
+    <div class="om">🕉️</div>
+    <p>प्रवेशद्वार खुल रहा है…</p>
+  </div>
+
+  <div id="pageContent">
+
+  <div class="topbar">
+    <a class="brand" href="/">🕉️ ShivMarg</a>
+    <!-- SmAuth floating widget renders itself here (noWidget:false) -->
+  </div>
+
+  <div class="dwar-divider"></div>
+
+  <section class="hero">
+    <div class="eyebrow">पवित्र सामग्री भंडार</div>
+    <h1>प्रवेशद्वार से होकर <span>डाउनलोड</span> तक</h1>
+    <p class="sub">मंत्र, पूजा विधि और व्रत सामग्री केवल भक्त-पोर्टल में प्रवेश करने के बाद ही उपलब्ध हैं। कृपया पहले लॉगिन करें।</p>
+
+
+    <div class="status-pill locked" id="statusPill">🔒 प्रवेश हेतु लॉगिन आवश्यक</div>
+  </section>
+
+  <section class="downloads-section">
+    <div class="section-title">डाउनलोड सामग्री</div>
+    <div class="section-title-sub">नीचे दी गई सामग्री डाउनलोड करने के लिए लॉगिन करें</div>
+
+    <!-- ============================================================
+         Cards below are rendered dynamically by studymaterial.js logic
+         (see script block near the end of this file).
+         EDIT ZONE: set API_URL there to your real ShivMarg materials endpoint.
+         ============================================================ -->
+    <div class="material-grid" id="materialGrid">
+      <p class="loading-note" id="materialLoading">सामग्री लोड हो रही है…</p>
+    </div>
+
+    <p class="toast-note">डाउनलोड पूर्णतः निःशुल्क है — बस एक बार भक्त-पोर्टल में प्रवेश करें 🙏</p>
+  </section>
+
+  <footer>
+    © 2026 <strong>ShivMarg.live</strong> · जय शिव जय शंकर
+  </footer>
+
+  </div><!-- /#pageContent -->
+
+  <!-- ============================================================
+       AUTH — reuses existing SmAuth (auth.js) from ShivMarg
+       ============================================================ -->
+<script src="/js/auth2.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    var preGate     = document.getElementById('preGate');
+    var pageContent = document.getElementById('pageContent');
+    var gateResolved = false;
+
+    function resolveGate(user){
+      if (gateResolved) return;
+      gateResolved = true;
+      pageContent.classList.add('ready');
+      preGate.classList.add('fade-out');
+      setTimeout(function(){ preGate.remove(); }, 400);
+
+      if (!user){
+        window.SmAuth._switchTab('register');
+        window.SmAuth._openModal();
+        // window.SmAuth._switchTab('register');window.SmAuth._openModal()
+      }
+      // no setUnlockedUI/setLockedUI call needed here anymore —
+      // studymaterial.js's applyLockState() handles card UI via sm-auth-changed
+    }
+
+    document.addEventListener('sm-auth-changed', function(e){
+      resolveGate(e.detail && e.detail.user);
+    });
+
+    SmAuth.init({ apiBase: 'https://www.api.shivmarg.live', noWidget: false });
+
+    setTimeout(function(){ resolveGate(SmAuth.getUser()); }, 6000);
+  });
+</script>
+<script src="/assets/materials/documents/study-material/studymaterial.js"></script>
+</body>
+</html>
