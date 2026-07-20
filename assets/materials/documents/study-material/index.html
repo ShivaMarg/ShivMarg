@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="hi">
 <head>
@@ -278,6 +280,49 @@
   #pageContent{visibility:hidden;}
   #pageContent.ready{visibility:visible;}
 
+  /* ============================================================
+     MATERIAL LOGIN GATE — hides the actual materials list until
+     the user is authenticated. studymaterial.js is still allowed
+     to fetch + render into #studyMaterialContainer in the
+     background; this layer only controls what's visible.
+     ============================================================ */
+  #materialGateNotice{
+    text-align:center;
+    padding:44px 24px;
+    border:1px dashed rgba(212,160,23,0.4);
+    border-radius:14px;
+    background:rgba(255,255,255,0.03);
+  }
+  #materialGateNotice .gate-icon{
+    font-size:2.2rem;margin-bottom:14px;
+  }
+  #materialGateNotice p{
+    font-family:var(--font-hindi);
+    color:var(--cream-dim);
+    font-size:1.05rem;
+    line-height:1.8;
+    max-width:420px;
+    margin:0 auto 20px;
+  }
+  #materialGateNotice .gate-cta{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:11px 26px;border-radius:8px;border:none;cursor:pointer;
+    font-family:var(--font-body);font-weight:600;font-size:0.88rem;letter-spacing:0.3px;
+    background:linear-gradient(135deg,var(--saffron),#C8770B);
+    color:#2B0A0A;
+  }
+  #materialGateNotice .gate-cta:hover{filter:brightness(1.08);}
+
+  /* Hidden state applied to the real grid while gate is active.
+     display:none keeps it out of layout/paint but studymaterial.js
+     can still populate its DOM nodes underneath. */
+  .material-grid.gate-hidden{
+    display:none;
+  }
+  #materialGateNotice.gate-hidden{
+    display:none;
+  }
+
   @media (prefers-reduced-motion: reduce){
     *{transition:none !important;animation:none !important;}
   }
@@ -309,12 +354,22 @@
     <div class="section-title">डाउनलोड सामग्री</div>
     <div class="section-title-sub">नीचे दी गई सामग्री डाउनलोड करने के लिए लॉगिन करें</div>
 
+    <!-- Shown while the user is NOT authenticated. Real material list
+         stays hidden below until login/register succeeds. -->
+    <div id="materialGateNotice">
+      <div class="gate-icon">🔒</div>
+      <p>सामग्री देखने के लिए कृपया लॉगिन या रजिस्टर करें। लॉगिन करते ही सामग्री तुरंत दिखाई देगी।</p>
+      <button type="button" class="gate-cta" id="materialGateCta">लॉगिन / रजिस्टर करें</button>
+    </div>
+
     <!-- ============================================================
          Cards below are rendered dynamically by studymaterial.js logic
-         (see script block near the end of this file).
+         (see script block near the end of this file). It keeps
+         fetching/rendering in the background even while this grid
+         is visually hidden by the login gate above.
          EDIT ZONE: set API_URL there to your real ShivMarg materials endpoint.
          ============================================================ -->
-    <div class="material-grid" id="studyMaterialContainer">
+    <div class="material-grid gate-hidden" id="studyMaterialContainer">
       <p class="loading-note" id="materialLoading">सामग्री लोड हो रही है…</p>
     </div>
     <p><b>Redirect from Saurabhjha.live</b></p>
@@ -333,27 +388,49 @@
 <script src="/js/auth2.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function(){
-    var preGate     = document.getElementById('preGate');
-    var pageContent = document.getElementById('pageContent');
+    var preGate      = document.getElementById('preGate');
+    var pageContent  = document.getElementById('pageContent');
+    var gateNotice   = document.getElementById('materialGateNotice');
+    var materialGrid = document.getElementById('studyMaterialContainer');
+    var statusPill   = document.getElementById('statusPill');
+    var gateCta      = document.getElementById('materialGateCta');
     var gateResolved = false;
 
+    // Toggles visibility of the materials list vs. the login notice.
+    // studymaterial.js keeps fetching/rendering regardless of this state.
+    function applyMaterialGate(user){
+      if (user){
+        gateNotice.classList.add('gate-hidden');
+        materialGrid.classList.remove('gate-hidden');
+        statusPill.textContent = '🔓 प्रवेश स्वीकृत';
+        statusPill.classList.remove('locked');
+        statusPill.classList.add('unlocked');
+      } else {
+        gateNotice.classList.remove('gate-hidden');
+        materialGrid.classList.add('gate-hidden');
+        statusPill.textContent = '🔒 प्रवेश हेतु लॉगिन आवश्यक';
+        statusPill.classList.remove('unlocked');
+        statusPill.classList.add('locked');
+      }
+    }
+
     function resolveGate(user){
+      applyMaterialGate(user);
+
       if (gateResolved) return;
       gateResolved = true;
       pageContent.classList.add('ready');
       preGate.classList.add('fade-out');
       setTimeout(function(){ preGate.remove(); }, 400);
-
-      if (!user){
-        window.SmAuth._switchTab('register');
-        window.SmAuth._openModal();
-        // window.SmAuth._switchTab('register');window.SmAuth._openModal()
-      }
-      // no setUnlockedUI/setLockedUI call needed here anymore —
-      // studymaterial.js's applyLockState() handles card UI via sm-auth-changed
     }
 
+    gateCta.addEventListener('click', function(){
+      window.SmAuth._switchTab('register');
+      window.SmAuth._openModal();
+    });
+
     document.addEventListener('sm-auth-changed', function(e){
+      applyMaterialGate(e.detail && e.detail.user);
       resolveGate(e.detail && e.detail.user);
     });
 
