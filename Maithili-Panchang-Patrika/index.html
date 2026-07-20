@@ -551,6 +551,7 @@
 
   .section-panel { display: none; padding: 0; }
   .section-panel.active { display: block; }
+  .calendar-fixed-section { display: block; padding: 0; margin-top: 1.5rem; }
 
   /* ─── TODAY'S PANCHANG ─── */
   .panchang-hero {
@@ -1292,10 +1293,10 @@
     <span>आइक पञ्चाङ्ग</span>
   </button>
 
-  <button class="nav-tab" onclick="showPanel('calendar',this)">
+  <a href="#panel-calendar" class="nav-tab">
     <span>🗓️</span>
     <span>मासिक पतरा</span>
-  </button>
+  </a>
 
   <button class="nav-tab" onclick="showPanel('muhurat',this)">
     <span>✨</span>
@@ -1774,7 +1775,7 @@
     </div>
 
     <!-- MONTHLY CALENDAR PANEL -->
-    <div class="section-panel" id="panel-calendar">
+    <div class="calendar-fixed-section" id="panel-calendar">
       <div class="month-selector">
         <button class="month-nav-btn" onclick="changeMonth(-1)">◀ पिछला</button>
         <h2 id="cal-month-title">जून 2026 · English Calendar</h2>
@@ -3680,5 +3681,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const SM_API = 'https://www.api.shivmarg.live';
   SmComments.init({ apiBase: SM_API });
 </script>
+<script src="/js/footer.js" defer></script>
 </body>
 </html>
