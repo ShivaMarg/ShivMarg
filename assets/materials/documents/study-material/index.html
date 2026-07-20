@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="hi">
 <head>
@@ -315,9 +313,13 @@
 
   /* Hidden state applied to the real grid while gate is active.
      display:none keeps it out of layout/paint but studymaterial.js
-     can still populate its DOM nodes underneath. */
-  .material-grid.gate-hidden{
-    display:none;
+     can still populate its DOM nodes underneath.
+     NOTE: studymaterial.css sets `#studyMaterialContainer{ display:grid }`
+     via an ID selector, which beats a plain class rule on specificity.
+     We match that specificity (ID + class) here so this always wins,
+     regardless of the order the two stylesheets load in. */
+  #studyMaterialContainer.gate-hidden{
+    display:none !important;
   }
   #materialGateNotice.gate-hidden{
     display:none;
